@@ -1,13 +1,13 @@
-# Digiplan
+# EmPowerPlan
 
 [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg)](https://github.com/pydanny/cookiecutter-django/)
 [![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
-App for Digiplan project. The data pipeline can be found here: [Digipipe](https://github.com/rl-institut/digipipe/)
+App for EmPowerPlan project. The data pipeline can be found here: [epp-pipe](https://github.com/empowerplan/epp-pipe/)
 
 # Getting started
 
-First you have to decide, wether you want to run the application via Docker or simply
+First you have to decide, whether you want to run the application via Docker or simply
 via python.
 For backend developers, I would recommend to install it regulary with python.
 For frontend developers it is simplier to just run docker and not to care about python
@@ -17,7 +17,7 @@ Obviously, you have to clone this repo first.
 
 ## Prepare Data
 
-In both cases, the datapackage from digipipe have to be placed into folder _digiplan/data/_ and renamed into `digipipe`,
+In both cases, the datapackage from digipipe have to be placed into folder _empowerplan/data/_ and renamed into `epp-pipe`,
 so that they can be found by the application and uploaded into database.
 
 ## Using standard python installation

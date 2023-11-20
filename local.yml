@@ -9,7 +9,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
-    image: digiplan_local_django
+    image: empowerplan_local_django
     depends_on:
       - postgres
     volumes:
@@ -18,19 +18,19 @@ services:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
     ports:
-      - "8000:8000"
+      - "9000:8000"
     networks:
-      digiplan:
+      empowerplan:
     command: /start
 
   postgres:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: digiplan_production_postgres
+    image: empowerplan_production_postgres
     command: postgres -N 500
     networks:
-      digiplan:
+      empowerplan:
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
       - local_postgres_data_backups:/backups
@@ -40,12 +40,12 @@ services:
   redis:
     image: redis
     networks:
-      digiplan:
+      empowerplan:
 
   celeryworker:
     <<: *django
-    image: digiplan_local_celeryworker
-    container_name: digiplan_local_celeryworker
+    image: empowerplan_local_celeryworker
+    container_name: empowerplan_local_celeryworker
     depends_on:
       - redis
       - postgres
@@ -54,4 +54,4 @@ services:
 
 
 networks:
-  digiplan:
+  empowerplan:

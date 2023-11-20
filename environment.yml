@@ -1,4 +1,4 @@
-name: digiplan
+name: empowerplan
 channels:
   - conda-forge
 dependencies:

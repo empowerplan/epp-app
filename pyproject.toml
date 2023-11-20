@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "digiplan"
-version = "0.6.0"
-description = "Digiplan"
+name = "empowerplan"
+version = "0.0.0"
+description = "EmPowerPlan"
 authors = [
   "Hendrik Huyskens <hendrik.huyskens@rl-institut.de>",
   "Marie-Claire Gering <marie-claire.gering@rl-institut.de>",

@@ -9,14 +9,14 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
-    image: digiplan_production_django
+    image: empowerplan_production_django
     restart: unless-stopped
     networks:
-      - digiplan_network
+      - empowerplan_network
       - caddy_network
     volumes:
-      - ./digiplan/data:/app/digiplan/data
-      - ./digiplan/static/mvts:/app/staticfiles/mvts
+      - ./empowerplan/data:/app/empowerplan/data
+      - ./empowerplan/static/mvts:/app/staticfiles/mvts
     expose:
       - "5000"
     depends_on:
@@ -30,11 +30,11 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: digiplan_production_postgres
+    image: empowerplan_production_postgres
     command: postgres -N 500
     restart: always
     networks:
-      - digiplan_network
+      - empowerplan_network
     volumes:
       - production_postgres_data:/var/lib/postgresql/data
       - production_postgres_data_backups:/backups
@@ -44,15 +44,15 @@ services:
   redis:
     image: redis
     networks:
-      digiplan_network:
+      empowerplan_network:
 
   celeryworker:
     <<: *django
-    image: digiplan_production_celeryworker
+    image: empowerplan_production_celeryworker
     command: /start-celeryworker
 
 networks:
-  digiplan_network:
+  empowerplan_network:
   caddy_network:
     external:
       name: docker_caddy_network
