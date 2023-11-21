@@ -54,16 +54,21 @@
 
 .view-toggle {
   @extend .position-absolute;
-  @extend .fs-7;
+  @extend .start-50;
+  @extend .translate-middle;
+  @extend .bg-white;
   @extend .rounded;
-  background-color: #EDF1FC;
-  top: 9px;
-  right: $padding-large;
+  @extend .fs-7;
+  top: 2rem;
+  z-index: 10000;
+
+  @include media-breakpoint-down(sm) {
+    font-size: $font-size-xsmall;
+  }
 
   &__nav-tabs {
     @extend .nav;
     @extend .nav-tabs;
-    @extend .border-0;
   }
 
   &__nav-item {
@@ -109,8 +114,8 @@
     &.active {
       @extend .active;
       @extend .border-1;
-      @extend .bg-white;
       @extend .fw-semibold;
+      background-color: #EDF1FC !important;
     }
 
     svg {

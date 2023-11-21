@@ -2,9 +2,30 @@ import {resultsTabs, futureDropdown} from "./elements.js";
 
 const menuNextBtn = document.getElementById("menu_next_btn");
 const menuPreviousBtn = document.getElementById("menu_previous_btn");
-const mapTab = document.getElementById("map-view-tab");
-const chartTab = document.getElementById("chart-view-tab");
 const regionChart = document.getElementById("region_chart_2045");
+
+const menuTabs = [
+    {
+        name: "challenges",
+        event: eventTopics.MENU_CHALLENGES_SELECTED
+    },
+    {
+        name: "today",
+        event: eventTopics.MENU_STATUS_QUO_SELECTED
+    },
+    {
+        name: "scenarios",
+        event: eventTopics.MENU_SCENARIOS_SELECTED
+    },
+    {
+        name: "settings",
+        event: eventTopics.MENU_SETTINGS_SELECTED
+    },
+    {
+        name: "results",
+        event: eventTopics.MENU_RESULTS_SELECTED
+    },
+];
 
 menuNextBtn.addEventListener("click", function () {
     nextMenuTab();
@@ -15,23 +36,18 @@ menuPreviousBtn.addEventListener("click", function() {
     PubSub.publish(eventTopics.MENU_CHANGED);
 });
 
-mapTab.addEventListener("click", function () {
-    PubSub.publish(eventTopics.MAP_VIEW_SELECTED);
-});
-
-chartTab.addEventListener("click", function () {
-    PubSub.publish(eventTopics.CHART_VIEW_SELECTED);
-});
-
+PubSub.subscribe(eventTopics.MENU_CHALLENGES_SELECTED, showEmpowerplanContent);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, setMapChartViewVisibility);
-PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, showMapView);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hidePotentialLayers);
+PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hideEmpowerplanContent);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, setMapChartViewVisibility);
-PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, showMapView);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, deactivateChoropleth);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, terminateSimulation);
+PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, hideEmpowerplanContent);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hidePotentialLayers);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideEmpowerplanContent);
+PubSub.subscribe(eventTopics.MENU_SCENARIOS_SELECTED, showEmpowerplanContent);
 PubSub.subscribe(eventTopics.MAP_VIEW_SELECTED, setResultsView);
 PubSub.subscribe(eventTopics.CHART_VIEW_SELECTED, setResultsView);
 
@@ -39,19 +55,17 @@ PubSub.subscribe(eventTopics.CHART_VIEW_SELECTED, setResultsView);
 function nextMenuTab() {
     const currentTab = getCurrentMenuTab();
     currentTab.classList.toggle("active");
-    const currentStep = `step_${currentTab.id.slice(6)}`;
+    const tabIndex = parseInt(currentTab.id.slice(6, 7));
+    const currentStep = `step_${tabIndex}_${menuTabs[tabIndex - 1].name}`;
     document.getElementById(currentStep).classList.toggle("active");
-    if (currentTab.id === "panel_1_today") {
-        menuPreviousBtn.disabled = false;
-        document.getElementById("panel_2_settings").classList.toggle("active");
-        document.getElementById("step_2_settings").classList.toggle("active");
-        PubSub.publish(eventTopics.MENU_SETTINGS_SELECTED);
-    }
-    if (currentTab.id === "panel_2_settings") {
+    const nextPanel = `panel_${tabIndex + 1}_${menuTabs[tabIndex].name}`;
+    const nextStep = `step_${tabIndex + 1}_${menuTabs[tabIndex].name}`;
+    document.getElementById(nextPanel).classList.toggle("active");
+    document.getElementById(nextStep).classList.toggle("active");
+    PubSub.publish(menuTabs[tabIndex].event);
+    menuPreviousBtn.disabled = false;
+    if (tabIndex >= menuTabs.length - 1) {
         menuNextBtn.disabled = true;
-        document.getElementById("panel_3_results").classList.toggle("active");
-        document.getElementById("step_3_results").classList.toggle("active");
-        PubSub.publish(eventTopics.MENU_RESULTS_SELECTED);
     }
 }
 
@@ -59,31 +73,22 @@ function nextMenuTab() {
 function previousMenuTab() {
     const currentTab = getCurrentMenuTab();
     currentTab.classList.toggle("active");
-    const currentStep = `step_${currentTab.id.slice(6)}`;
+    const tabIndex = parseInt(currentTab.id.slice(6, 7));
+    const currentStep = `step_${tabIndex}_${menuTabs[tabIndex - 1].name}`;
     document.getElementById(currentStep).classList.toggle("active");
-    if (currentTab.id === "panel_2_settings") {
+    const nextPanel = `panel_${tabIndex - 1}_${menuTabs[tabIndex - 2].name}`;
+    const nextStep = `step_${tabIndex - 1}_${menuTabs[tabIndex - 2].name}`;
+    document.getElementById(nextPanel).classList.toggle("active");
+    document.getElementById(nextStep).classList.toggle("active");
+    PubSub.publish(menuTabs[tabIndex - 2].event);
+    menuNextBtn.disabled = false;
+    if (tabIndex === 2) {
         menuPreviousBtn.disabled = true;
-        document.getElementById("panel_1_today").classList.toggle("active");
-        document.getElementById("step_1_today").classList.toggle("active");
-        PubSub.publish(eventTopics.MENU_STATUS_QUO_SELECTED);
-    }
-    if (currentTab.id === "panel_3_results") {
-        menuNextBtn.disabled = false;
-        document.getElementById("panel_2_settings").classList.toggle("active");
-        document.getElementById("step_2_settings").classList.toggle("active");
-        PubSub.publish(eventTopics.MENU_SETTINGS_SELECTED);
     }
 }
 
 function getCurrentMenuTab() {
     return document.querySelector("#js-panel-container > .panel__content > .tab-content > .active");
-}
-
-
-function showMapView(msg) {
-    bootstrap.Tab.getInstance(mapTab).show();
-    PubSub.publish(eventTopics.MAP_VIEW_SELECTED);
-    return logMessage(msg);
 }
 
 function setMapChartViewVisibility(msg) {
@@ -117,5 +122,30 @@ function terminateSimulation(msg) {
         });
         document.getElementById("simulation_spinner").hidden = true;
     }
+    return logMessage(msg);
+}
+
+function showEmpowerplanContent(msg) {
+    const contentID = msg === "MENU_CHALLENGES_SELECTED" ? "challenges" : "scenarios";
+    const content = document.getElementById(contentID);
+    content.hidden = false;
+    content.style.alignItems = "center";
+    content.style.padding = "3rem";
+    document.getElementById("mainTabContent").hidden = true;
+    return logMessage(msg);
+}
+
+function hideEmpowerplanContent(msg) {
+    for (const contentID of ["challenges", "scenarios"]) {
+        const content = document.getElementById(contentID);
+        content.hidden = true;
+        content.style.alignItems = null;
+        content.style.padding = "0rem";
+    }
+    if (msg === "MENU_SETTINGS_SELECTED") {
+        document.getElementById("map-view-tab").click();
+    }
+    document.getElementById("mainTabContent").hidden = false;
+    map.resize();
     return logMessage(msg);
 }
