@@ -47,13 +47,13 @@ MODELS = [
     models.SpecialProtectionArea,
     models.Water,
     # PotentialAreas
-    # models.PotentialareaPVAgricultureLFAOff,
-    # models.PotentialareaPVRoadRailway,
-    # models.PotentialareaWindSTP2018Vreg,
+    models.PotentialareaPVAgricultureLFAOff,
+    models.PotentialareaPVRoadRailway,
+    models.PotentialareaWindSTP2018Vreg,
     # models.PotentialareaWindSTP2027Repowering,
     # models.PotentialareaWindSTP2027SearchAreaForestArea,
     # models.PotentialareaWindSTP2027SearchAreaOpenArea,
-    # models.PotentialareaWindSTP2027VR,
+    models.PotentialareaWindSTP2027VR,
 ]
 
 
