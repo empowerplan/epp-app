@@ -267,9 +267,9 @@ OEMOF_SCENARIO = env.str("OEMOF_SCENARIO", "scenario_2045")
 
 # django-mapengine
 # ------------------------------------------------------------------------------
-MAP_ENGINE_CENTER_AT_STARTUP = [12.537917858911896, 51.80812518969171]
-MAP_ENGINE_ZOOM_AT_STARTUP = 9
-MAP_ENGINE_MAX_BOUNDS = [[11.280733017118229, 51.22918643452503], [13.616574868700604, 52.35515806663738]]
+MAP_ENGINE_CENTER_AT_STARTUP = [14.2, 52.4]
+MAP_ENGINE_ZOOM_AT_STARTUP = 7
+MAP_ENGINE_MAX_BOUNDS = [[12.7, 51.0], [15.7, 53.8]]
 
 MAP_ENGINE_IMAGES = [
     setup.MapImage("wind", "images/icons/map_wind.png"),
