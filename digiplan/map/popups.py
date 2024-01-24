@@ -563,7 +563,7 @@ class NumberWindturbinesPopup(RegionPopup):
 
     lookup = "wind_turbines"
     title = _("Number of wind turbines")
-    description = _("Description for number of wind turbines")
+    description = _("Anzahl der Windenergieanlagen innerhalb der Gemeinde heute.")
     unit = ""
 
     def get_detailed_data(self) -> pd.DataFrame:
@@ -580,7 +580,7 @@ class NumberWindturbines2045Popup(RegionPopup):
 
     lookup = "wind_turbines"
     title = _("Number of wind turbines")
-    description = _("Description for number of wind turbines")
+    description = _("Anzahl der Windenergieanlagen innerhalb der Gemeinde in Deinem Szenario.")
     unit = ""
 
     def get_detailed_data(self) -> pd.DataFrame:

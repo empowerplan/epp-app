@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 11:07+0000\n"
+"POT-Creation-Date: 2024-01-24 11:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -601,9 +601,14 @@ msgstr "Bevölkerungsdichte"
 msgid "Number of wind turbines"
 msgstr "Anzahl Windenergieanlagen"
 
-#: digiplan/map/popups.py:566 digiplan/map/popups.py:583
-msgid "Description for number of wind turbines"
-msgstr "Anzahl Windenergieanlagen je km²"
+#: digiplan/map/popups.py:566
+msgid "Anzahl der Windenergieanlagen innerhalb der Gemeinde heute."
+msgstr ""
+
+#: digiplan/map/popups.py:583
+msgid ""
+"Anzahl der Windenergieanlagen innerhalb der Gemeinde in Deinem Szenario."
+msgstr ""
 
 #: digiplan/map/popups.py:627 digiplan/map/popups.py:660
 msgid "Windturbinen pro km²"
