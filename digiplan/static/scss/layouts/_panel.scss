@@ -299,6 +299,7 @@
       @extend .flex-row;
       @extend .justify-content-between;
       @extend .w-100;
+      @extend .rounded-top;
       @extend .p-1;
       @extend .fw-bold;
       @extend .fs-7;
@@ -309,6 +310,10 @@
     }
 
     &--selected {
+      .panel-card__content {
+        @extend .border-info;
+      }
+
       .panel-card__name {
         @extend .bg-light;
         @extend .text-info;
