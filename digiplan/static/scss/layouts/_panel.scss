@@ -274,6 +274,10 @@
     @extend .w-100;
     @extend .pb-1;
 
+    &:hover {
+      cursor: pointer;
+    }
+
     &__content {
       @extend .border;
       @extend .border-light;
@@ -296,13 +300,19 @@
       @extend .justify-content-between;
       @extend .w-100;
       @extend .p-1;
-      @extend .bg-light;
       @extend .fw-bold;
       @extend .fs-7;
     }
 
     &__evaluation {
       @extend .p-1;
+    }
+
+    &--selected {
+      .panel-card__name {
+        @extend .bg-light;
+        @extend .text-info;
+      }
     }
 
     .scenario-evaluation {
