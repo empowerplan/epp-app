@@ -109,13 +109,13 @@
     height: 1rem;
 
     &--dark {
-      background-color: #4AC29D;
+      background-color: $green-500;
       color: $white;
     }
 
     &--light {
-      background-color: #EBFFF9;
-      color: #13825F;
+      background-color: $green-200;
+      color: $green-700;
     }
   }
 
@@ -133,7 +133,7 @@
   &__values {
     @extend .col-3;
     @extend .fw-bold;
-    color: #4B6678;
+    color: $gray-600;
   }
 
   &__bars {
@@ -150,7 +150,7 @@
     @extend .justify-content-end;
     @extend .fs-8;
     @extend .fw-bold;
-    color: #708696;
+    color: $gray-500;
 
     span {
       @extend .d-inline-block;
@@ -167,7 +167,7 @@
   &__bg {
     @extend .w-100;
     height: 10px;
-    background-color: #E3EAEF;
+    background-color: $gray-200;
   }
 
   &__value {
@@ -177,11 +177,11 @@
     @extend .h-100;
 
     &--wind {
-      background-color: #67B7E3;
+      background-color: $windlight;
     }
 
     &--pv {
-      background-color: #F8D637;
+      background-color: $pvlight;
     }
   }
 }

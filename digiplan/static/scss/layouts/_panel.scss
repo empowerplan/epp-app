@@ -280,8 +280,8 @@
 
     &__content {
       @extend .border;
-      @extend .border-light;
       @extend .rounded-1;
+      border-color: $gray-300;
       flex: 1;
     }
 
@@ -357,13 +357,13 @@
         height: 1rem;
 
         &--dark {
-          background-color: #4AC29D;
+          background-color: $green-500;
           color: $white;
         }
 
         &--light {
-          background-color: #EBFFF9;
-          color: #13825F;
+          background-color: $green-200;
+          color: $green-700;
         }
       }
     }
