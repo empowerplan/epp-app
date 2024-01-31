@@ -1,4 +1,8 @@
 .main-content {
   @extend .container;
   @extend .py-4;
+
+  @include media-breakpoint-down(md) {
+    padding: 0 !important;
+  }
 }
