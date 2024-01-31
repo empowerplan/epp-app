@@ -314,6 +314,9 @@ $text-muted:                  rgba(0, 46, 80, 0.5) !default;
 $btn-font-weight: 400;
 
 // Allows for customizing button radius independently from global border radius
+$btn-border-radius: 100px;
+$btn-border-radius-sm: 100px;
+$btn-border-radius-lg: 100px;
 // scss-docs-end btn-variables
 
 
