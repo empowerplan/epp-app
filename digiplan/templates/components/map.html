@@ -2,23 +2,175 @@
 
 {%  include "components/onboarding.html" %}
 
-<section class="map-wrap">
-  <div class="main-content" id="challenges">
-    <h2>Energiewende in Oderland-Spree</h2>
-    <div class="carousel">
-      <div class="carousel__item">
-        <div class="carousel__image">
-          <img width="320" height="509" src="{% static 'images/oderland_map.png' %}" alt="Karte von Oderland-Spree">
-        </div>
-        <div class="carousel__text">
-          <p>Deutschland soll bis <b>2045</b> klimaneutral werden. Um dieses Ziel zu erreichen muss der Ausbau der Erneuerbaren Energien massiv beschleunigt werden. Bereits bis <b>2030</b> ist das Ziel, mindestens <b>80 Prozent des Stromverbrauchs aus Erneuerbaren Energien</b> – vor allem aus Wind- und Solarenergie zu decken.</p>
-          <p>Den Sektorzielen des Klimaschutzgesetzes folgend hat auch Brandenburg Strategien der Klima- und Energiepolitik erarbeitet und im Rahmen der <b>Energiestrategie 2040</b> entsprechende Leitplanken veröffentlicht.</p>
-          <p>Auch die Region <b>Oderland-Spree</b> steht vor der großen Aufgabe, diese Ziele zu verfolgen und entsprechende Strategien der Energieeinsparung und -erzeugung auf den Weg zu bringen. Diese Strategien sind die Leitplanken für die strategische Ausrichtung der energiebezogenen Aufgaben der Regionalen Planungsgemeinschaft Oderland-Spree (RPG).</p>
-        </div>
+<div class="modal fade" id="goalModal" tabindex="-1" aria-labelledby="goalModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="goalModalLabel">Ziele</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
       </div>
     </div>
-    <div style="display: flex; flex-direction: row; justify-content: center; padding-top: 1rem;">
-      <img width="103" height="53" src="{% static 'images/arrows-placeholder.png' %}" alt="">
+  </div>
+</div>
+
+<div class="modal fade" id="esModal" tabindex="-1" aria-labelledby="esModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="esModalLabel">Energiesystem</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="areaModal" tabindex="-1" aria-labelledby="areaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="areaModalLabel">Flächen und Regionalplanung</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="appModal" tabindex="-1" aria-labelledby="appModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="appModalLabel">Warum das Tool?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="map-wrap">
+  <div class="main-content challenges" id="challenges">
+    <div class="challenges__container">
+      <div class="challenges__row">
+        <div class="challenges__col">
+          <div class="challenges__box">
+            <div class="challenges__box-header">
+              <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#goalModal">
+                Ziele
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2348C3" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+                </svg>
+              </button>
+            </div>
+            <div class="challenges__box-content">
+              <div class="energy-numbers">
+                <div class="energy-numbers__icon" aria-hidden="true">
+                  <svg width="16" height="16" version="1.1" viewBox="0 0 16.933 16.936" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m8.2021 0.025372-5.4677 8.4414h9.5898l-4.9159 8.4665h1.3229l5.4035-9.5251h-9.4609l4.8512-7.3828z" color="#09684A" fill-rule="evenodd" stroke-dashoffset="5.2899"/>
+                   </svg>
+                </div>
+                <div class="energy-numbers__text">
+                  <span><span class="energy-numbers__text--value">80 %</span> des <span class="energy-numbers__text--highlight">Stroms</span> aus erneuerbaren Quellen bis 2030</span>
+                </div>
+              </div>
+              <div class="energy-numbers">
+                <div class="energy-numbers__icon" aria-hidden="true">
+                  <svg width="16" height="16" version="1.1" viewBox="0 0 16.933 16.936" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m8.2021 0.025372-5.4677 8.4414h9.5898l-4.9159 8.4665h1.3229l5.4035-9.5251h-9.4609l4.8512-7.3828z" color="#09684A" fill-rule="evenodd" stroke-dashoffset="5.2899"/>
+                   </svg>
+                </div>
+                <div class="energy-numbers__text">
+                  <span><span class="energy-numbers__text--value">80 %</span> des <span class="energy-numbers__text--highlight">Stroms</span> aus erneuerbaren Quellen bis 2030</span>
+                </div>
+              </div>
+              <div class="energy-numbers">
+                <div class="energy-numbers__icon" aria-hidden="true">
+                  <svg width="16" height="16" version="1.1" viewBox="0 0 16.933 16.936" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m8.2021 0.025372-5.4677 8.4414h9.5898l-4.9159 8.4665h1.3229l5.4035-9.5251h-9.4609l4.8512-7.3828z" color="#09684A" fill-rule="evenodd" stroke-dashoffset="5.2899"/>
+                   </svg>
+                </div>
+                <div class="energy-numbers__text">
+                  <span><span class="energy-numbers__text--value">80 %</span> des <span class="energy-numbers__text--highlight">Stroms</span> aus erneuerbaren Quellen bis 2030</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="challenges__box">
+            <div class="challenges__box-header">
+              <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#esModal">
+                Energiesystem
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2348C3" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+                </svg>
+              </button>
+            </div>
+            <div class="challenges__box-content">
+              <p>Bedarfe der Region</p>
+              <p>Zielkonflikte und Synergien</p>
+            </div>
+          </div>
+        </div>
+        <div class="challenges__col">
+          <div class="challenges__center">
+            <img class="challenges__img" width="249" height="227" src="{% static 'images/oderland_spree_map_illustration.png' %}" alt="Illustrative Ansicht der Region Oderland-Spree">
+            <h2>Energiewende in Oderland-Spree</h2>
+          </div>
+        </div>
+        <div class="challenges__col">
+          <div class="challenges__box">
+            <div class="challenges__box-header">
+              <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#areaModal">
+                Flächen und Regionalplanung
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2348C3" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+                </svg>
+              </button>
+            </div>
+            <div class="challenges__box-content">
+              <p>Was macht die <b>Regionalplanung</b>?</p>
+              <p>Übergeordnete <b>Flächenziele</b> in Deutschland</p>
+              <p>Flächenkulisse/Flächenverfügbarkeit, Flächenplanung und -ausweisung</p>
+            </div>
+          </div>
+          <div class="challenges__box">
+            <div class="challenges__box-header">
+              <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#appModal">
+                Warum das Tool?
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2348C3" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+                </svg>
+              </button>
+            </div>
+            <div class="challenges__box-content">
+              <p>Wie viel Energie kann auf den geplanten Windvorranggebieten "geerntet" werden?</p>
+              <p>Und wie viel mit Photovoltaik?</p>
+              <p>Bis zu welchem Grad kann Oderland-Spree energetisch unabhängig werden?</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="main-content" id="scenarios" hidden>
