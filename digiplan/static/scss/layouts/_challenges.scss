@@ -24,6 +24,14 @@
     background-color: #F6F9FB;
   }
 
+  &__box-header {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .justify-content-between;
+    @extend .align-items-center;
+    @extend .pe-1;
+  }
+
   &__box-content {
     @extend .px-2;
     @extend .py-1;
