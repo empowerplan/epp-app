@@ -87,7 +87,7 @@ function previousMenuTab() {
     }
 }
 
-function getCurrentMenuTab() {
+export function getCurrentMenuTab() {
     return document.querySelector("#js-panel-container > .panel__content > .tab-content > .active");
 }
 
