@@ -6,8 +6,13 @@
   @extend .btn-primary;
 }
 
+button {
+  border-radius: $btn-border-radius;
+}
+
 .button {
   @extend .btn;
+  border-radius: $btn-border-radius;
   letter-spacing: $c-letter-spacing;
 
   &--primary {
