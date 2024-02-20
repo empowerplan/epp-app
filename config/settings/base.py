@@ -498,7 +498,7 @@ MAP_ENGINE_POPUPS = [
         "wind",
         popup_at_default_layer=True,
     ),
-setup.Popup(
+    setup.Popup(
         "pvground",
         popup_at_default_layer=True,
     ),
