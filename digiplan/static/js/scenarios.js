@@ -61,8 +61,8 @@ function selectScenario(msg) {
   return logMessage(msg);
 }
 
-function scenarioCardClicked() {
-    const scenarioCardNumber = parseInt(this.id.slice(-1));
+function scenarioCardClicked(event) {
+    const scenarioCardNumber = parseInt(event.currentTarget.id.slice(-1));
     selectScenarioCard(scenarioCardNumber);
 }
 
