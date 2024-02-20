@@ -10,9 +10,10 @@
   @include flex-column;
   @extend .w-100;
   position: relative;
+  overflow-y: scroll;
 
   @include media-breakpoint-down(md) {
-    order: 1;
+    overflow-y: visible;
     padding: 0 $map-padding-x-small $map-padding-x-small;
   }
 
