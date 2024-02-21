@@ -102,11 +102,29 @@
       </div>
     </section>
 
-    <section class="map-content">
-      {% include 'components/panel.html' %}
-      <pre id="info"></pre>
-      {% include 'components/map.html' %}
-    </section>
+    <div class="main-layout">
+      <section class="map-content">
+        {% include 'components/panel.html' %}
+        <pre id="info"></pre>
+        {% include 'components/map.html' %}
+      </section>
+      <footer class="footer">
+        <div class="footer__links">
+          <ul>
+            <li>
+              <button type="button" data-bs-toggle="modal" data-bs-target="#imprintModal">
+                {% translate "Imprint" %}
+              </button>
+            </li>
+            <li>
+              <button type="button" data-bs-toggle="modal" data-bs-target="#privacyModal">
+                {% translate "Data privacy" %}
+              </button>
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
   </div>
 
   {% include 'offcanvas/documentation.html' %}

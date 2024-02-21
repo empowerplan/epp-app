@@ -9,7 +9,7 @@
 .map-wrap {
   @include flex-column;
   position: relative;
-  overflow-y: scroll;
+  overflow-y: auto;
   width: 100%;
 
   @include media-breakpoint-down(md) {
@@ -57,7 +57,7 @@
     @extend .p-2;
     @extend .overflow-auto;
     width: $map-layers-box-width;
-    height: calc(100vh - #{$top-nav-height} - #{$steps-height} - #{$map-legend-box-height} - #{$map-legend-box-padding-bottom} - (2 * #{$map-items-padding}));
+    height: calc(100vh - #{$top-nav-height} - #{$steps-height} - #{$map-legend-box-height} - #{$map-legend-box-padding-bottom} - (2 * #{$map-items-padding}) - #{$footer-height});
     top: $map-items-padding;
     right: $map-items-padding;
     z-index: $map-layers-box-z-index;

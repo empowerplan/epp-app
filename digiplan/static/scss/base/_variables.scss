@@ -57,8 +57,11 @@ $wizard-height: 3.75rem;
 $steps-height: 3rem;
 $steps-numbers-size: 1.5rem;
 
+// FOOTER
+$footer-height: 1.75rem;
+
 // MAP
-$map-height: calc(100vh - #{$top-nav-height} - #{$wizard-height});
+$map-height: calc(100vh - #{$top-nav-height} - #{$wizard-height} - #{$footer-height});
 $map-padding-x-small: 2rem;
 $map-layers-btn-size: 3rem;
 $map-items-padding: 1rem;
