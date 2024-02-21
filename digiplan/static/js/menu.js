@@ -2,6 +2,8 @@ import {resultsTabs, futureDropdown} from "./elements.js";
 
 const menuNextBtn = document.getElementById("menu_next_btn");
 const menuPreviousBtn = document.getElementById("menu_previous_btn");
+const mapTab = document.getElementById("map-view-tab");
+const chartTab = document.getElementById("chart-view-tab");
 const regionChart = document.getElementById("region_chart_2045");
 
 const menuTabs = [
@@ -34,6 +36,14 @@ menuNextBtn.addEventListener("click", function () {
 menuPreviousBtn.addEventListener("click", function() {
     previousMenuTab();
     PubSub.publish(eventTopics.MENU_CHANGED);
+});
+
+mapTab.addEventListener("click", function () {
+    PubSub.publish(eventTopics.MAP_VIEW_SELECTED);
+});
+
+chartTab.addEventListener("click", function () {
+    PubSub.publish(eventTopics.CHART_VIEW_SELECTED);
 });
 
 PubSub.subscribe(eventTopics.MENU_CHALLENGES_SELECTED, showEmpowerplanContent);
