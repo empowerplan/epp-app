@@ -3,6 +3,7 @@ import {resultsTabs, futureDropdown} from "./elements.js";
 const menuNextBtn = document.getElementById("menu_next_btn");
 const menuPreviousBtn = document.getElementById("menu_previous_btn");
 const regionChart = document.getElementById("region_chart_2045");
+const panel = document.getElementById("js-panel-container");
 
 const menuTabs = [
     {
@@ -36,7 +37,9 @@ menuPreviousBtn.addEventListener("click", function() {
     PubSub.publish(eventTopics.MENU_CHANGED);
 });
 
+PubSub.subscribe(eventTopics.MENU_CHALLENGES_SELECTED, togglePanel);
 PubSub.subscribe(eventTopics.MENU_CHALLENGES_SELECTED, showEmpowerplanContent);
+PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, togglePanel);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hidePotentialLayers);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hideEmpowerplanContent);
@@ -123,6 +126,11 @@ function terminateSimulation(msg) {
         document.getElementById("simulation_spinner").hidden = true;
     }
     return logMessage(msg);
+}
+
+function togglePanel(msg) {
+  panel.hidden = msg === "MENU_CHALLENGES_SELECTED";
+  return logMessage(msg);
 }
 
 function showEmpowerplanContent(msg) {
