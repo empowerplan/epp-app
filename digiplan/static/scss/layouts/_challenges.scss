@@ -1,8 +1,8 @@
 .challenges {
-  @extend .d-flex;
-  @extend .flex-row;
-  @extend .align-items-center;
   @extend .h-100;
+  display: flex; // cannot use utility classes in that case because of !important overwriting hidden attribute
+  flex-direction: row;
+  align-items: center;
 
   &__container {
     @extend .container;

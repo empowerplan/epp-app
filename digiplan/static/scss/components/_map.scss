@@ -8,21 +8,13 @@
 
 .map-wrap {
   @include flex-column;
-  @extend .w-100;
   position: relative;
   overflow-y: scroll;
+  width: 100%;
 
   @include media-breakpoint-down(md) {
     overflow-y: visible;
     padding: 0 $map-padding-x-small $map-padding-x-small;
-  }
-
-  @include media-breakpoint-up(md) {
-    width: calc(100% - #{$panel-width-sm}) !important;
-  }
-
-  @include media-breakpoint-up(lg) {
-    width: calc(100% - #{$panel-width}) !important;
   }
 }
 
