@@ -330,7 +330,7 @@ MAP_ENGINE_API_MVTS = {
 }
 
 MAP_ENGINE_API_CLUSTERS = [
-    setup.ClusterAPI("wind", "map", "WindTurbine", properties=["id"]),
+    setup.ClusterAPI("wind", "map", "WindTurbine", properties=["id", "geometry_approximated"]),
     setup.ClusterAPI("pvroof", "map", "PVroof", properties=["id"]),
     setup.ClusterAPI("pvground", "map", "PVground", properties=["id"]),
     setup.ClusterAPI("hydro", "map", "Hydro", properties=["id"]),

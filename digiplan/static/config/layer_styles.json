@@ -71,7 +71,19 @@
     "type": "symbol",
     "filter": ["!", ["has", "point_count"]],
     "layout": {
-      "icon-image": "wind",
+      "icon-image": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        "wind",
+        "pv"
+      ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
     },
