@@ -20,4 +20,9 @@
   &__text {
     @extend .p-4;
   }
+
+  &-item__content {
+    @extend .rounded-bottom;
+    @extend .rounded-5;
+  }
 }
