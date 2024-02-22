@@ -20,7 +20,7 @@
     @extend .p-1;
     @extend .mb-2;
     @extend .rounded-4;
-    min-height: 13rem;
+    min-height: 14rem;
     background-color: #F6F9FB;
   }
 
@@ -74,13 +74,14 @@
 .energy-numbers {
   @extend .d-flex;
   @extend .flex-row;
+  @extend .pb-1;
 
   &__icon {
     @extend .d-inline-block;
     @extend .rounded-circle;
     @extend .text-center;
     @extend .me-1;
-    background-color: #BDF8E5;
+    flex: none;
     height: 1.75rem;
     width: 1.75rem;
 
@@ -100,6 +101,36 @@
 
     &--highlight {
       @extend .fw-bold;
+    }
+  }
+
+  &--electricity {
+    .energy-numbers__icon {
+      background-color: $green-300;
+    }
+
+    .energy-numbers__text--value {
+      color: $green-800;
+    }
+  }
+
+  &--consumption {
+    .energy-numbers__icon {
+      background-color: $purple-300;
+    }
+
+    .energy-numbers__text--value {
+      color: $purple-800;
+    }
+  }
+
+  &--wind {
+    .energy-numbers__icon {
+      background-color: $cyan-300;
+    }
+
+    .energy-numbers__text--value {
+      color: $cyan-700;
     }
   }
 }
