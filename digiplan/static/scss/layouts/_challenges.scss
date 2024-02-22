@@ -30,6 +30,14 @@
     @extend .justify-content-between;
     @extend .align-items-center;
     @extend .pe-1;
+
+    button .hover-animate-right {
+      transition: transform 0.3s ease;
+    }
+
+    button:hover .hover-animate-right {
+      transform: translateX(4px);
+    }
   }
 
   &__box-content {
