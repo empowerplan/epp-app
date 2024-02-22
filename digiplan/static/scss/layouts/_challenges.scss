@@ -31,12 +31,13 @@
     @extend .align-items-center;
     @extend .pe-1;
 
-    button .hover-animate-right {
-      transition: transform 0.3s ease;
+    button svg {
+      @extend .ms-1;
+      transition: $animation-transition;
     }
 
-    button:hover .hover-animate-right {
-      transform: translateX(4px);
+    button:hover svg {
+      transform: $animation-transform;
     }
   }
 
