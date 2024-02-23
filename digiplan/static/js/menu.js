@@ -39,7 +39,14 @@ menuPreviousBtn.addEventListener("click", function() {
     PubSub.publish(eventTopics.MENU_CHANGED);
 });
 
-PubSub.subscribe(eventTopics.MENU_CHALLENGES_SELECTED, togglePanel);
+mapTab.addEventListener("click", function () {
+    PubSub.publish(eventTopics.MAP_VIEW_SELECTED);
+});
+
+chartTab.addEventListener("click", function () {
+    PubSub.publish(eventTopics.CHART_VIEW_SELECTED);
+});
+
 PubSub.subscribe(eventTopics.MENU_CHALLENGES_SELECTED, showEmpowerplanContent);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, togglePanel);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, setMapChartViewVisibility);
