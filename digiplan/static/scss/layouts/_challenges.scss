@@ -71,6 +71,18 @@
   }
 }
 
+.challenges-modal {
+  @extend .row;
+
+  &__visual {
+    @extend .col-lg-6;
+  }
+
+  &__text {
+    @extend .col-lg-6;
+  }
+}
+
 .energy-numbers {
   @extend .d-flex;
   @extend .flex-row;
