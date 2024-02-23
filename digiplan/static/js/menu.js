@@ -2,6 +2,8 @@ import {resultsTabs, futureDropdown} from "./elements.js";
 
 const menuNextBtn = document.getElementById("menu_next_btn");
 const menuPreviousBtn = document.getElementById("menu_previous_btn");
+const mapTab = document.getElementById("map-view-tab");
+const chartTab = document.getElementById("chart-view-tab");
 const regionChart = document.getElementById("region_chart_2045");
 const panel = document.getElementById("js-panel-container");
 
