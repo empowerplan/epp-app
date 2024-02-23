@@ -77,6 +77,16 @@
 
   &__visual {
     @extend .col-lg-6;
+
+    &--logos {
+      @extend .d-flex;
+      @extend .flex-column;
+      @extend .align-items-center;
+
+      div {
+        @extend .pt-4;
+      }
+    }
   }
 
   &__text {
