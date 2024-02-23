@@ -73,6 +73,7 @@
 
 .challenges-modal {
   @extend .row;
+  @extend .p-2;
 
   &__visual {
     @extend .col-lg-6;
