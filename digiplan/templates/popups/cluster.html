@@ -6,10 +6,10 @@
   </div>
 
   <table>
-<!--    <thead>-->
-<!--      <th scope="col">{% trans 'Parameter' %}</th>-->
-<!--      <th scope="col">{% trans 'Wert' %}</th>-->
-<!--    </thead>-->
+    <tr>
+      <td><b>Anlagenanzahl</b></td>
+      <td><b>{{ unit_count }}</b></td>
+    </tr>
     {% for key, value in data.items %}
       <tr>
         <td>{{ key }}</td>
