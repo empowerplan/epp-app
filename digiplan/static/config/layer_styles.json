@@ -82,7 +82,7 @@
           false
         ],
         "wind",
-        "pv"
+        "wind_plus"
       ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
@@ -120,7 +120,19 @@
     "type": "symbol",
     "filter": ["!", ["has", "point_count"]],
     "layout": {
-      "icon-image": "pv",
+      "icon-image": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        "pv",
+        "pv_plus"
+      ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
     },
@@ -158,7 +170,19 @@
     "type": "symbol",
     "filter": ["!", ["has", "point_count"]],
     "layout": {
-      "icon-image": "pv",
+      "icon-image": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        "pv",
+        "pv_plus"
+      ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
     },
@@ -195,7 +219,19 @@
     "type": "symbol",
     "filter": ["!", ["has", "point_count"]],
     "layout": {
-      "icon-image": "hydro",
+      "icon-image": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        "hydro",
+        "hydro_plus"
+      ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
     },
@@ -232,7 +268,19 @@
     "type": "symbol",
     "filter": ["!", ["has", "point_count"]],
     "layout": {
-      "icon-image": "biomass",
+      "icon-image": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        "biomass",
+        "biomass_plus"
+      ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
     },
@@ -269,7 +317,19 @@
     "type": "symbol",
     "filter": ["!", ["has", "point_count"]],
     "layout": {
-      "icon-image": "gsgk",
+      "icon-image": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        "gsgk",
+        "gsgk_plus"
+      ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
     },
@@ -309,7 +369,19 @@
     "type": "symbol",
     "filter": ["!", ["has", "point_count"]],
     "layout": {
-      "icon-image": "storage",
+      "icon-image": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        "storage",
+        "storage_plus"
+      ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
     },
@@ -349,7 +421,19 @@
     "type": "symbol",
     "filter": ["!", ["has", "point_count"]],
     "layout": {
-      "icon-image": "combustion",
+      "icon-image": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        "combustion",
+        "combustion_plus"
+      ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
     },
