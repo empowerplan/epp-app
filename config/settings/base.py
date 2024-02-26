@@ -337,14 +337,14 @@ MAP_ENGINE_API_MVTS = {
 }
 
 MAP_ENGINE_API_CLUSTERS = [
-    setup.ClusterAPI("wind", "map", "WindTurbine", properties=["id", "geometry_approximated"]),
-    setup.ClusterAPI("pvroof", "map", "PVroof", properties=["id"]),
-    setup.ClusterAPI("pvground", "map", "PVground", properties=["id"]),
-    setup.ClusterAPI("hydro", "map", "Hydro", properties=["id"]),
-    setup.ClusterAPI("biomass", "map", "Biomass", properties=["id"]),
-    setup.ClusterAPI("combustion", "map", "Combustion", properties=["id"]),
-    setup.ClusterAPI("gsgk", "map", "GSGK", properties=["id"]),
-    setup.ClusterAPI("storage", "map", "Storage", properties=["id"]),
+    setup.ClusterAPI("wind", "map", "WindTurbine", properties=["id", "unit_count"]),
+    setup.ClusterAPI("pvroof", "map", "PVroof", properties=["id", "unit_count"]),
+    setup.ClusterAPI("pvground", "map", "PVground", properties=["id", "unit_count"]),
+    setup.ClusterAPI("hydro", "map", "Hydro", properties=["id", "unit_count"]),
+    setup.ClusterAPI("biomass", "map", "Biomass", properties=["id", "unit_count"]),
+    setup.ClusterAPI("combustion", "map", "Combustion", properties=["id", "unit_count"]),
+    setup.ClusterAPI("gsgk", "map", "GSGK", properties=["id", "unit_count"]),
+    setup.ClusterAPI("storage", "map", "Storage", properties=["id", "unit_count"]),
 ]
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
