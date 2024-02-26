@@ -5,6 +5,7 @@ const menuPreviousBtn = document.getElementById("menu_previous_btn");
 const mapTab = document.getElementById("map-view-tab");
 const chartTab = document.getElementById("chart-view-tab");
 const regionChart = document.getElementById("region_chart_2045");
+const panel = document.getElementById("js-panel-container");
 
 const menuTabs = [
     {
@@ -47,6 +48,7 @@ chartTab.addEventListener("click", function () {
 });
 
 PubSub.subscribe(eventTopics.MENU_CHALLENGES_SELECTED, showEmpowerplanContent);
+PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, togglePanel);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hidePotentialLayers);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hideEmpowerplanContent);
@@ -133,6 +135,11 @@ function terminateSimulation(msg) {
         document.getElementById("simulation_spinner").hidden = true;
     }
     return logMessage(msg);
+}
+
+function togglePanel(msg) {
+  panel.hidden = msg === "MENU_CHALLENGES_SELECTED";
+  return logMessage(msg);
 }
 
 function showEmpowerplanContent(msg) {

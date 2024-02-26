@@ -1,0 +1,159 @@
+.challenges {
+  @extend .h-100;
+  display: flex; // cannot use utility classes in that case because of !important overwriting hidden attribute
+  flex-direction: row;
+  align-items: center;
+
+  &__container {
+    @extend .container;
+  }
+
+  &__row {
+    @extend .row;
+  }
+
+  &__col {
+    @extend .col-lg-4;
+  }
+
+  &__box {
+    @extend .p-1;
+    @extend .mb-2;
+    @extend .rounded-4;
+    min-height: 14rem;
+    background-color: #F6F9FB;
+  }
+
+  &__box-header {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .justify-content-between;
+    @extend .align-items-center;
+    @extend .pe-1;
+
+    button svg {
+      @extend .ms-1;
+      transition: $animation-transition;
+    }
+
+    button:hover svg {
+      transform: $animation-transform;
+    }
+  }
+
+  &__box-content {
+    @extend .px-2;
+    @extend .py-1;
+    @extend .fs-7;
+
+    p {
+      @extend .mb-1;
+    }
+  }
+
+  &__center {
+    @extend .d-flex;
+    @extend .flex-column;
+    @extend .justify-content-center;
+    @extend .align-items-center;
+    @extend .h-100;
+    @extend .py-2;
+
+    h2 {
+      @extend .pt-2;
+      @extend .fs-4;
+      color: rgba(15, 71, 255, 0.6);
+    }
+  }
+
+  &__img {
+    opacity: 80%;
+  }
+}
+
+.challenges-modal {
+  @extend .row;
+  @extend .p-2;
+
+  &__visual {
+    @extend .col-lg-6;
+
+    &--logos {
+      @extend .d-flex;
+      @extend .flex-column;
+      @extend .align-items-center;
+
+      div {
+        @extend .pt-4;
+      }
+    }
+  }
+
+  &__text {
+    @extend .col-lg-6;
+  }
+}
+
+.energy-numbers {
+  @extend .d-flex;
+  @extend .flex-row;
+  @extend .pb-1;
+
+  &__icon {
+    @extend .d-inline-block;
+    @extend .rounded-circle;
+    @extend .text-center;
+    @extend .me-1;
+    flex: none;
+    height: 1.75rem;
+    width: 1.75rem;
+
+    svg {
+      vertical-align: bottom;
+    }
+  }
+
+  &__text {
+    @extend .d-inline-block;
+
+    &--value {
+      @extend .fs-6;
+      @extend .fw-bold;
+      color: #09684A;
+    }
+
+    &--highlight {
+      @extend .fw-bold;
+    }
+  }
+
+  &--electricity {
+    .energy-numbers__icon {
+      background-color: $green-300;
+    }
+
+    .energy-numbers__text--value {
+      color: $green-800;
+    }
+  }
+
+  &--consumption {
+    .energy-numbers__icon {
+      background-color: $purple-300;
+    }
+
+    .energy-numbers__text--value {
+      color: $purple-800;
+    }
+  }
+
+  &--wind {
+    .energy-numbers__icon {
+      background-color: $cyan-300;
+    }
+
+    .energy-numbers__text--value {
+      color: $cyan-700;
+    }
+  }
+}

@@ -9,6 +9,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Added
 
 - Rework navbar and add dummy content for steps 1+3
+- Add new challenges step
 
 ### Changed
 

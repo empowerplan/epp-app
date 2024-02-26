@@ -1,7 +1,7 @@
 {% load static i18n %}
 {% load crispy_forms_tags %}
 
-<section class="panel" id="js-panel-container">
+<section class="panel" id="js-panel-container" hidden>
   <section class="panel__content">
     <div class="tab-content">
       <div class="tab-pane active" id="panel_1_challenges" role="tabpanel" aria-labelledby="panel_1_today_tab">
@@ -21,20 +21,4 @@
       </div>
     </div>
   </section>
-  <footer class="footer">
-    <div class="footer__links">
-      <ul>
-        <li>
-          <button type="button" data-bs-toggle="modal" data-bs-target="#imprintModal">
-            {% translate "Imprint" %}
-          </button>
-        </li>
-        <li>
-          <button type="button" data-bs-toggle="modal" data-bs-target="#privacyModal">
-            {% translate "Data privacy" %}
-          </button>
-        </li>
-      </ul>
-    </div>
-  </footer>
 </section>

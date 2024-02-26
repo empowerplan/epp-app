@@ -1,9 +1,9 @@
 .panel {
-  @extend .d-flex;
-  @extend .flex-column;
   @extend .h-auto;
   @extend .shadow;
   @extend .w-100;
+  display: flex; // cannot use utility classes in that case because of !important overwriting hidden attribute
+  flex-direction: column;
 
   @include media-breakpoint-down(md) {
     order: 2;
@@ -11,12 +11,14 @@
 
   @include media-breakpoint-up(md) {
     width: $panel-width-sm !important;
+    min-width: $panel-width-sm !important;
     overflow-y: scroll;
   }
 
   @include media-breakpoint-up(lg) {
     height: 100vh;
     width: $panel-width !important;
+    min-width: $panel-width !important;
   }
 
   .title {
@@ -508,52 +510,4 @@
   }
 }
 
-.footer {
-  @extend .flex-shrink-0;
-  @extend .border-top;
-  @extend .bg-white;
-  @extend .position-sticky;
-  @extend .bottom-0;
-  @extend .w-auto;
-  z-index: 9;
 
-  &__btns {
-    @extend .d-flex;
-    @extend .flex-row;
-    @extend .px-4;
-    @extend .py-2;
-    @extend .border-bottom;
-
-    button {
-      @extend .w-50;
-    }
-  }
-
-  &__links {
-    height: 2.5rem;
-
-    ul {
-      @include ul-horizontal;
-      @extend .h-100;
-      @extend .d-flex;
-      @extend .flex-row;
-      @extend .justify-content-center;
-      @extend .align-items-center;
-    }
-
-    li {
-      @extend .d-inline-block;
-      @extend .fs-7;
-
-      button {
-        @extend .bg-white;
-        @extend .border-0;
-        @extend .link-primary;
-      }
-    }
-
-    li:not(:last-of-type) {
-      @extend .pe-2;
-    }
-  }
-}
