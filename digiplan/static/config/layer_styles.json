@@ -74,15 +74,15 @@
       "icon-image": [
         "case",
         [
-          "boolean",
+          ">",
           [
             "get",
-            "geometry_approximated"
+            "unit_count"
           ],
-          false
+          1
         ],
-        "wind",
-        "wind_plus"
+        "wind_plus",
+        "wind"
       ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
@@ -123,15 +123,15 @@
       "icon-image": [
         "case",
         [
-          "boolean",
+          ">",
           [
             "get",
-            "geometry_approximated"
+            "unit_count"
           ],
-          false
+          1
         ],
-        "pv",
-        "pv_plus"
+        "pv_plus",
+        "pv"
       ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
@@ -173,15 +173,15 @@
       "icon-image": [
         "case",
         [
-          "boolean",
+          ">",
           [
             "get",
-            "geometry_approximated"
+            "unit_count"
           ],
-          false
+          1
         ],
-        "pv",
-        "pv_plus"
+        "pv_plus",
+        "pv"
       ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
@@ -222,15 +222,15 @@
       "icon-image": [
         "case",
         [
-          "boolean",
+          ">",
           [
             "get",
-            "geometry_approximated"
+            "unit_count"
           ],
-          false
+          1
         ],
-        "hydro",
-        "hydro_plus"
+        "hydro_plus",
+        "hydro"
       ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
@@ -271,15 +271,15 @@
       "icon-image": [
         "case",
         [
-          "boolean",
+          ">",
           [
             "get",
-            "geometry_approximated"
+            "unit_count"
           ],
-          false
+          1
         ],
-        "biomass",
-        "biomass_plus"
+        "biomass_plus",
+        "biomass"
       ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
@@ -320,15 +320,15 @@
       "icon-image": [
         "case",
         [
-          "boolean",
+          ">",
           [
             "get",
-            "geometry_approximated"
+            "unit_count"
           ],
-          false
+          1
         ],
-        "gsgk",
-        "gsgk_plus"
+        "gsgk_plus",
+        "gsgk"
       ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
@@ -372,15 +372,15 @@
       "icon-image": [
         "case",
         [
-          "boolean",
+          ">",
           [
             "get",
-            "geometry_approximated"
+            "unit_count"
           ],
-          false
+          1
         ],
-        "storage",
-        "storage_plus"
+        "storage_plus",
+        "storage"
       ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
@@ -424,15 +424,15 @@
       "icon-image": [
         "case",
         [
-          "boolean",
+          ">",
           [
             "get",
-            "geometry_approximated"
+            "unit_count"
           ],
-          false
+          1
         ],
-        "combustion",
-        "combustion_plus"
+        "combustion_plus",
+        "combustion"
       ],
       "icon-size": 0.4,
       "icon-allow-overlap": true
