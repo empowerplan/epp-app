@@ -157,7 +157,6 @@ class ClusterPopup(popups.Popup):
             "name": "Name",
             "mun_name": "Gemeinde",
             "geometry_approximated": "Standort geschätzt",
-            "unit_count": "Anlagenanzahl",
             "capacity_net": "Nettonennleistung (kW)",
             "status": "Betriebsstatus",
             "city": "Ort",
@@ -201,6 +200,7 @@ class ClusterPopup(popups.Popup):
         instance = model.objects.annotate(mun_name=F("mun_id__name")).get(pk=self.selected_id)
         data_dict = {
             "title": model._meta.verbose_name,  # noqa: SLF001
+            "unit_count": instance.unit_count,
             "data": {name: getattr(instance, key) for key, name in default_attributes.items()},
         }
         for key, name in specific_attributes.items():

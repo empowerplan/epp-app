@@ -279,6 +279,13 @@ MAP_ENGINE_IMAGES = [
     setup.MapImage("combustion", "images/icons/map_combustion.png"),
     setup.MapImage("gsgk", "images/icons/map_gsgk.png"),
     setup.MapImage("storage", "images/icons/map_battery.png"),
+    setup.MapImage("wind_plus", "images/icons/map_wind_plus.png"),
+    setup.MapImage("pv_plus", "images/icons/map_pv_plus.png"),
+    setup.MapImage("hydro_plus", "images/icons/map_hydro_plus.png"),
+    setup.MapImage("biomass_plus", "images/icons/map_biomass_plus.png"),
+    setup.MapImage("combustion_plus", "images/icons/map_combustion_plus.png"),
+    setup.MapImage("gsgk_plus", "images/icons/map_gsgk_plus.png"),
+    setup.MapImage("storage_plus", "images/icons/map_battery_plus.png"),
 ]
 
 MAP_ENGINE_API_MVTS = {
@@ -330,14 +337,14 @@ MAP_ENGINE_API_MVTS = {
 }
 
 MAP_ENGINE_API_CLUSTERS = [
-    setup.ClusterAPI("wind", "map", "WindTurbine", properties=["id"]),
-    setup.ClusterAPI("pvroof", "map", "PVroof", properties=["id"]),
-    setup.ClusterAPI("pvground", "map", "PVground", properties=["id"]),
-    setup.ClusterAPI("hydro", "map", "Hydro", properties=["id"]),
-    setup.ClusterAPI("biomass", "map", "Biomass", properties=["id"]),
-    setup.ClusterAPI("combustion", "map", "Combustion", properties=["id"]),
-    setup.ClusterAPI("gsgk", "map", "GSGK", properties=["id"]),
-    setup.ClusterAPI("storage", "map", "Storage", properties=["id"]),
+    setup.ClusterAPI("wind", "map", "WindTurbine", properties=["id", "unit_count"]),
+    setup.ClusterAPI("pvroof", "map", "PVroof", properties=["id", "unit_count"]),
+    setup.ClusterAPI("pvground", "map", "PVground", properties=["id", "unit_count"]),
+    setup.ClusterAPI("hydro", "map", "Hydro", properties=["id", "unit_count"]),
+    setup.ClusterAPI("biomass", "map", "Biomass", properties=["id", "unit_count"]),
+    setup.ClusterAPI("combustion", "map", "Combustion", properties=["id", "unit_count"]),
+    setup.ClusterAPI("gsgk", "map", "GSGK", properties=["id", "unit_count"]),
+    setup.ClusterAPI("storage", "map", "Storage", properties=["id", "unit_count"]),
 ]
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
