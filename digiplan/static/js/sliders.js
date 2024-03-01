@@ -233,9 +233,20 @@ function showOrHideSidepanelsOnMoreLabelClick(msg, moreLabel) {
 }
 
 function showActivePanelSliderOnPanelSliderChange(msg, data) {
-  Array.from(panelSliders).forEach(item => item.parentNode.classList.remove("active", "active-sidepanel"));
-  const sliderLabel = data.input[0].parentNode;
-  sliderLabel.classList.add("active");
+  const changedSlider = data.input[0];
+  const changedSliderLabel = changedSlider.parentNode;
+  const isActivePanel = changedSliderLabel.classList.contains("active");
+
+  if (!isActivePanel) {
+    Array.from(panelSliders).forEach(item => {
+      const itemPanel = item.parentNode;
+      if (itemPanel !== changedSliderLabel) {
+        itemPanel.classList.remove("active", "active-sidepanel");
+      }
+    });
+
+    changedSliderLabel.classList.add("active", "active-sidepanel");
+  }
   return logMessage(msg);
 }
 
