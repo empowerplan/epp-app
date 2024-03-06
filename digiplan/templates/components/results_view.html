@@ -32,7 +32,64 @@
     </div>
   </div>
   -->
-  <div class="tab-pane fade show active" id="results-electricity" role="tabpanel" aria-labelledby="results-electricity-tab">
+  <div class="tab-pane fade show active" id="results-overview" role="tabpanel" aria-labelledby="results-overview-tab">
+    <div class="results__header">
+      <h2>{% translate "Übersicht" %}</h2>
+    </div>
+    <div class="results__row">
+      <div class="results__item">
+        <div class="results__item-title">{% translate "Gesamterzeugung" %}</div>
+        <div class="results__text">
+          {% translate "Bruttostromerzeugung aus Erneuerbaren Energien nach Technologie und Nettostromverbrauch (ohne Wärme) nach Sektor für 2022, Dein Szenario und einem Zielszenario für 2045. Die Ziele für Erzeugung und Verbrauch sind abgeleitet aus den <a href=\"https://langfristszenarien.de/enertile-explorer-de/szenario-explorer/\" target=\"_blank\">BMWK Langfristszenarien</a>, den Ausbauzielen nach <a href=\"https://www.gesetze-im-internet.de/eeg_2014/\" target=\"_blank\">EEG 2023</a> und dem <a href=\"https://www.gesetze-im-internet.de/windbg/\" target=\"_blank\">Windenergieflächenbedarfsgesetz</a> für Sachsen-Anhalt.<br><br>* Für den Import und Export liegen keine Daten für 2022 oder Zielvorgaben für 2045 vor, diese werden daher auf Null gesetzt."  noop %}
+        </div>
+      </div>
+      <div class="results__item">
+        <div class="results__item-title">{% translate "Regionale Unabhängigkeit (ohne Wärme) mittels Erneuerbarer Energien" %}</div>
+        <div class="results__text">
+          {% translate "Relative Eigenversorgung aus EE-Strom (ohne Wärmebedarf) heute und in Deinem Szenario. Hierbei heißt bilanziell der Anteil des Strombedarfs, der bilanziell über 1 Jahr über regionale Erzeuger gedeckt werden kann. Unter zeitgleich wird der Anteil der Stunden im Jahr dargestellt, in denen die Stromerzeugung den Bedarf übersteigt, die Region sich also selbst versorgen kann." noop %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="results-wind" role="tabpanel" aria-labelledby="results-wind-tab">
+    <div class="results__header">
+      <h2>{% translate "Windenergie" %}</h2>
+    </div>
+    <div class="results__row">
+      <div class="results__item">
+        <div class="results__item-title">{% translate "Erzeugung aus Windenergie" %}</div>
+        <div class="results__text">
+          {% translate "Bruttostromerzeugung aus Erneuerbaren Energien nach Technologie und Nettostromverbrauch (ohne Wärme) nach Sektor für 2022, Dein Szenario und einem Zielszenario für 2045. Die Ziele für Erzeugung und Verbrauch sind abgeleitet aus den <a href=\"https://langfristszenarien.de/enertile-explorer-de/szenario-explorer/\" target=\"_blank\">BMWK Langfristszenarien</a>, den Ausbauzielen nach <a href=\"https://www.gesetze-im-internet.de/eeg_2014/\" target=\"_blank\">EEG 2023</a> und dem <a href=\"https://www.gesetze-im-internet.de/windbg/\" target=\"_blank\">Windenergieflächenbedarfsgesetz</a> für Sachsen-Anhalt.<br><br>* Für den Import und Export liegen keine Daten für 2022 oder Zielvorgaben für 2045 vor, diese werden daher auf Null gesetzt."  noop %}
+        </div>
+      </div>
+      <div class="results__item">
+        <div class="results__item-title">{% translate "Regionale Unabhängigkeit (ohne Wärme) mittels Erneuerbarer Energien" %}</div>
+        <div class="results__text">
+          {% translate "Relative Eigenversorgung aus EE-Strom (ohne Wärmebedarf) heute und in Deinem Szenario. Hierbei heißt bilanziell der Anteil des Strombedarfs, der bilanziell über 1 Jahr über regionale Erzeuger gedeckt werden kann. Unter zeitgleich wird der Anteil der Stunden im Jahr dargestellt, in denen die Stromerzeugung den Bedarf übersteigt, die Region sich also selbst versorgen kann." noop %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="results-pv" role="tabpanel" aria-labelledby="results-pv-tab">
+    <div class="results__header">
+      <h2>{% translate "Photovoltaik" %}</h2>
+    </div>
+    <div class="results__row">
+      <div class="results__item">
+        <div class="results__item-title">{% translate "Erzeugung aus Photovoltaik" %}</div>
+        <div class="results__text">
+          {% translate "Bruttostromerzeugung aus Erneuerbaren Energien nach Technologie und Nettostromverbrauch (ohne Wärme) nach Sektor für 2022, Dein Szenario und einem Zielszenario für 2045. Die Ziele für Erzeugung und Verbrauch sind abgeleitet aus den <a href=\"https://langfristszenarien.de/enertile-explorer-de/szenario-explorer/\" target=\"_blank\">BMWK Langfristszenarien</a>, den Ausbauzielen nach <a href=\"https://www.gesetze-im-internet.de/eeg_2014/\" target=\"_blank\">EEG 2023</a> und dem <a href=\"https://www.gesetze-im-internet.de/windbg/\" target=\"_blank\">Windenergieflächenbedarfsgesetz</a> für Sachsen-Anhalt.<br><br>* Für den Import und Export liegen keine Daten für 2022 oder Zielvorgaben für 2045 vor, diese werden daher auf Null gesetzt."  noop %}
+        </div>
+      </div>
+      <div class="results__item">
+        <div class="results__item-title">{% translate "Regionale Unabhängigkeit (ohne Wärme) mittels Erneuerbarer Energien" %}</div>
+        <div class="results__text">
+          {% translate "Relative Eigenversorgung aus EE-Strom (ohne Wärmebedarf) heute und in Deinem Szenario. Hierbei heißt bilanziell der Anteil des Strombedarfs, der bilanziell über 1 Jahr über regionale Erzeuger gedeckt werden kann. Unter zeitgleich wird der Anteil der Stunden im Jahr dargestellt, in denen die Stromerzeugung den Bedarf übersteigt, die Region sich also selbst versorgen kann." noop %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="results-electricity" role="tabpanel" aria-labelledby="results-electricity-tab">
     <div class="results__header">
       <h2>{% translate "Electricity" %}</h2>
     </div>
@@ -68,6 +125,44 @@
       <div class="results__item">
         <div class="results__item-title">{% translate "Erzeugung und Verbrauch in Fernwärmenetzen" %}</div>
         <div id="heat_centralized_chart" class="results__chart"></div>
+        <div class="results__text">
+          {% translate "Wärmeerzeugung in Fernwärmenetzen (Dessau-Roßlau, Bitterfeld-Wolfen, Köthen, Wittenberg) nach Technologie und Wärmeverbrauch nach Sektor für 2022, Dein Szenario und einem Zielszenario für 2045. Der Verbrauch beinhaltet Raumwärme, Warmwasser, Kochen und Prozesswärme. Daten für 2022 sowie Ziele sind abgeleitet aus den <a href=\"https://langfristszenarien.de/enertile-explorer-de/szenario-explorer/\" target=\"_blank\">BMWK Langfristszenarien</a>. Netzverluste werden vernachlässigt." noop %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="results-mobility" role="tabpanel" aria-labelledby="results-mobility-tab">
+    <div class="results__header">
+      <h2>{% translate "Mobilität" %}</h2>
+    </div>
+    <div class="results__row">
+      <div class="results__item">
+        <div class="results__item-title">{% translate "Verbrauch im Mobilitätsektor" %}</div>
+        <div class="results__text">
+          {% translate "Dezentrale Wärmeerzeugung nach Technologie und Wärmeverbrauch nach Sektor für 2022, Dein Szenario und einem Zielszenario für 2045. Der Verbrauch beinhaltet Raumwärme, Warmwasser, Kochen und Prozesswärme. Daten für 2022 sowie Ziele sind abgeleitet aus den <a href=\"https://langfristszenarien.de/enertile-explorer-de/szenario-explorer/\" target=\"_blank\">BMWK Langfristszenarien</a>." noop %}
+        </div>
+      </div>
+      <div class="results__item">
+        <div class="results__item-title">{% translate "Erzeugung und Verbrauch in Fernwärmenetzen" %}</div>
+        <div class="results__text">
+          {% translate "Wärmeerzeugung in Fernwärmenetzen (Dessau-Roßlau, Bitterfeld-Wolfen, Köthen, Wittenberg) nach Technologie und Wärmeverbrauch nach Sektor für 2022, Dein Szenario und einem Zielszenario für 2045. Der Verbrauch beinhaltet Raumwärme, Warmwasser, Kochen und Prozesswärme. Daten für 2022 sowie Ziele sind abgeleitet aus den <a href=\"https://langfristszenarien.de/enertile-explorer-de/szenario-explorer/\" target=\"_blank\">BMWK Langfristszenarien</a>. Netzverluste werden vernachlässigt." noop %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="results-hydrogen" role="tabpanel" aria-labelledby="results-hydrogen-tab">
+    <div class="results__header">
+      <h2>{% translate "Wasserstoff" %}</h2>
+    </div>
+    <div class="results__row">
+      <div class="results__item">
+        <div class="results__item-title">{% translate "Erzeugung von Wasserstoff" %}</div>
+        <div class="results__text">
+          {% translate "Dezentrale Wärmeerzeugung nach Technologie und Wärmeverbrauch nach Sektor für 2022, Dein Szenario und einem Zielszenario für 2045. Der Verbrauch beinhaltet Raumwärme, Warmwasser, Kochen und Prozesswärme. Daten für 2022 sowie Ziele sind abgeleitet aus den <a href=\"https://langfristszenarien.de/enertile-explorer-de/szenario-explorer/\" target=\"_blank\">BMWK Langfristszenarien</a>." noop %}
+        </div>
+      </div>
+      <div class="results__item">
+        <div class="results__item-title">{% translate "Erzeugung und Verbrauch in Fernwärmenetzen" %}</div>
         <div class="results__text">
           {% translate "Wärmeerzeugung in Fernwärmenetzen (Dessau-Roßlau, Bitterfeld-Wolfen, Köthen, Wittenberg) nach Technologie und Wärmeverbrauch nach Sektor für 2022, Dein Szenario und einem Zielszenario für 2045. Der Verbrauch beinhaltet Raumwärme, Warmwasser, Kochen und Prozesswärme. Daten für 2022 sowie Ziele sind abgeleitet aus den <a href=\"https://langfristszenarien.de/enertile-explorer-de/szenario-explorer/\" target=\"_blank\">BMWK Langfristszenarien</a>. Netzverluste werden vernachlässigt." noop %}
         </div>
