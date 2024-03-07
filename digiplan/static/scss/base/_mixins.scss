@@ -98,7 +98,7 @@
 @mixin map-control-legend {
   position: $map-control-position;
   padding: $padding-small;
-  border-radius: $button-border-radius;
+  border-radius: 8px;
   background-color: $map-control-bg-color;
   box-shadow: $box-shadow;
   z-index: $map-control-z-index;
