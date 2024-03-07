@@ -228,6 +228,8 @@
       &-header {
         @extend .fs-7;
         @extend .mb-1;
+        @extend .fw-light;
+        @extend .text-uppercase;
       }
 
       .nav-item {
@@ -235,12 +237,40 @@
         padding-bottom: $panel-results-nav-button-padding;
       }
 
+      .nav-item.results-tab {
+        &--w100 {
+          @extend .w-100;
+        }
+
+        &--header {
+          @extend .pt-3;
+
+          &::before {
+            content: "_";
+            @extend .fw-light;
+            color: transparent;
+            user-select: none;
+            pointer-events: none;
+          }
+        }
+
+        &--technologies::before {
+          content: 'Technologien';
+          color: $body-color;
+        }
+
+        &--sectors::before {
+          content: 'Sektoren';
+          color: $body-color;
+        }
+      }
+
       .nav-item:nth-of-type(odd) {
-        padding-right: calc(#{$panel-results-nav-button-padding} / 2);
+        padding-left: calc(#{$panel-results-nav-button-padding} / 2);
       }
 
       .nav-item:nth-of-type(even) {
-        padding-left: calc(#{$panel-results-nav-button-padding} / 2);
+        padding-right: calc(#{$panel-results-nav-button-padding} / 2);
       }
 
       .nav-link {
@@ -249,7 +279,7 @@
         @extend .text-primary;
         @extend .text-center;
         @include user-select-none;
-        height: 4.25rem;
+        height: 3.25rem;
         border-radius: $button-border-radius;
       }
 
@@ -511,5 +541,3 @@
     }
   }
 }
-
-
