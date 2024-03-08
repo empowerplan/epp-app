@@ -436,8 +436,12 @@
 
   .sidepanel__tabs .sidepanel-tabs {
     @include custom-tabs {
-      @extend .p-0;
-    };
+      
+      .sidepanel-tabs__nav-item .sidepanel-tabs__nav-link {
+        padding-top: 0.25rem !important;
+        padding-bottom: 0.25rem !important;
+      }
+    }
   }
 
   .sidepanel__block {
