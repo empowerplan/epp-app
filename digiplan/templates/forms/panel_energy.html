@@ -22,35 +22,16 @@
     {%  trans "Nutzung von Windpotenzialgebieten:" %}
   </p>
   <div class="sidepanel__img js-wind-svg-container">
-    <svg id="svgWindPast" style="display: block;" width="223" height="64" viewBox="0 0 223 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg id="svgCommonWind" width="223" height="64" viewBox="0 0 223 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
       <rect width="223" height="64" fill="white"/>
       <line x1="18.9505" y1="36.5025" x2="199.951" y2="18.5025" stroke="#708696"/>
       <line x1="20" y1="46.5" x2="200" y2="46.5" stroke="#E5E5E5"/>
-      <circle cx="20.5" cy="35.5" r="5.5" fill="#708696"/>
+      <circle id="circlePast" cx="20.5" cy="35.5" r="5.5" fill="#708696"/>
+      <circle id="circlePresent" cx="110.5" cy="27.5" r="5.5" fill="#708696" style="display: none;"/>
+      <circle id="circleFuture" cx="200.5" cy="18.5" r="5.5" fill="#708696" style="display: none;"/>
       <circle cx="200.5" cy="18.5" r="2.5" fill="#708696"/>
       <circle cx="110.5" cy="27.5" r="2.5" fill="#708696"/>
-      <line x1="20.5" y1="47" x2="20.5" y2="36" stroke="#708696" stroke-dasharray="2 2"/>
-      <line x1="110.5" y1="47" x2="110.5" y2="28" stroke="#708696" stroke-dasharray="2 2"/>
-      <line x1="200.5" y1="47" x2="200.5" y2="18" stroke="#708696" stroke-dasharray="2 2"/>
-    </svg>
-    <svg id="svgWindPresent" style="display: none;" width="223" height="64" viewBox="0 0 223 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="223" height="64" fill="white"/>
-      <line x1="18.9505" y1="36.5025" x2="199.951" y2="18.5025" stroke="#708696"/>
-      <line x1="20" y1="46.5" x2="200" y2="46.5" stroke="#E5E5E5"/>
-      <circle cx="110.5" cy="27.5" r="5.5" fill="#708696"/>
-      <circle cx="200.5" cy="18.5" r="2.5" fill="#708696"/>
       <circle cx="20.5" cy="36.5" r="2.5" fill="#708696"/>
-      <line x1="20.5" y1="47" x2="20.5" y2="36" stroke="#708696" stroke-dasharray="2 2"/>
-      <line x1="110.5" y1="47" x2="110.5" y2="28" stroke="#708696" stroke-dasharray="2 2"/>
-      <line x1="200.5" y1="47" x2="200.5" y2="18" stroke="#708696" stroke-dasharray="2 2"/>
-    </svg>
-    <svg id="svgWindFuture" style="display: none;" width="223" height="64" viewBox="0 0 223 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="223" height="64" fill="white"/>
-      <line x1="18.9505" y1="36.5025" x2="199.951" y2="18.5025" stroke="#708696"/>
-      <line x1="20" y1="46.5" x2="200" y2="46.5" stroke="#E5E5E5"/>
-      <circle cx="200.5" cy="18.5" r="5.5" fill="#708696"/>
-      <circle cx="20.5" cy="36.5" r="2.5" fill="#708696"/>
-      <circle cx="110.5" cy="27.5" r="2.5" fill="#708696"/>
       <line x1="20.5" y1="47" x2="20.5" y2="36" stroke="#708696" stroke-dasharray="2 2"/>
       <line x1="110.5" y1="47" x2="110.5" y2="28" stroke="#708696" stroke-dasharray="2 2"/>
       <line x1="200.5" y1="47" x2="200.5" y2="18" stroke="#708696" stroke-dasharray="2 2"/>
