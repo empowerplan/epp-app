@@ -553,6 +553,22 @@
     }
   }
 
+  &__slider {
+    @extend .pt-3;
+    @extend .pb-2;
+    @extend .border-bottom;
+
+    &-label {
+      @extend .fs-7;
+      @extend .text-secondary;
+    }
+
+    span .c-slider {
+      @extend .px-0;
+      @extend .pb-2;
+    }
+  }
+
   &__results {
     @extend .pt-3;
     @extend .text-secondary;

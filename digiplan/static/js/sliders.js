@@ -95,6 +95,16 @@ $("#id_s_w_5_2").ionRangeSlider({
     }
   }
 );
+$("#id_s_w_6").ionRangeSlider({
+  onChange: function (data) {
+    calculate_max_wind();
+  }
+});
+$("#id_s_w_7").ionRangeSlider({
+  onChange: function (data) {
+    calculate_max_wind();
+  }
+});
 $("#id_s_pv_ff_3").ionRangeSlider({
     onChange: function (data) {
       calculate_max_pv_ff();

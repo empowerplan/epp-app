@@ -43,6 +43,28 @@
     "tooltip": "{% trans 'Hier kann die Nutzung der von der Regionalen Planungsgemeinschaft ermittelten Suchräume frei eingestellt werden.\nDiese Suchräume können jedoch nur zu einem Teil für die Windenergie genutzt werden.' %}",
     "type": "switch"
   },
+  "s_w_6": {
+    "class": "js-slider",
+    "label": "{% trans 'Flächennutzung (%)' %}",
+    "tooltip": "{% trans '' %}",
+    "max": 2,
+    "min": 0,
+    "start": 0,
+    "step": 0.2,
+    "type": "slider",
+    "required": false
+  },
+  "s_w_7": {
+    "class": "js-slider",
+    "label": "{% trans 'Flächennutzung (%)' %}",
+    "tooltip": "{% trans '' %}",
+    "max": 4,
+    "min": 0,
+    "start": 0,
+    "step": 0.2,
+    "type": "slider",
+    "required": false
+  },
     "s_w_5_1": {
     "class": "js-slider",
     "label": "{% trans 'Nutzung Suchraum Offenland' %}",
