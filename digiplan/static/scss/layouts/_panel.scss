@@ -377,7 +377,7 @@
 
   .sidepanel {
     @extend .position-absolute;
-    @extend .bg-light;
+    @extend .bg-white;
     @extend .p-3;
     @extend .overflow-auto;
     width: 20rem;
@@ -385,7 +385,7 @@
     padding-top: $padding-large !important;
 
     @include media-breakpoint-up(md) {
-      height: calc(100% - #{$top-nav-height} - #{$steps-height});
+      height: calc(100% - #{$top-nav-height} - #{$steps-height} - #{$footer-height});
       top: calc(#{$top-nav-height} + #{$steps-height});
       left: $panel-width-sm;
     }
