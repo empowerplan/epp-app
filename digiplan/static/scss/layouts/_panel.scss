@@ -398,9 +398,32 @@
       @extend .d-flex;
       @extend .flex-row;
       @extend .justify-content-between;
-      @extend .fs-6;
-      @extend .fw-bold;
       @extend .mb-1;
+    }
+
+    &__title {
+      @extend .d-flex;
+      @extend .flex-row;
+    }
+
+    &__title-icon {
+      @extend .text-center;
+      @extend .rounded-circle;
+      width: 1.75rem;
+      height: 1.75rem;
+
+      &--wind {
+        background-color: $epp-bg-color-wind;
+      }
+    }
+
+    &__title-text {
+      @extend .d-flex;
+      @extend .flex-row;
+      @extend .align-items-center;
+      @extend .fs-7;
+      @extend .fw-bold;
+      @extend .ps-1;
     }
 
     &__indication {
@@ -432,30 +455,6 @@
         &.s_w_5_1,
         &.s_w_5_2 {
           @extend .d-block;
-        }
-      }
-
-      &--wind-light {
-        .form-check.form-switch .form-check-input:checked,
-        .irs.irs--flat .irs-bar, .irs.irs--flat .irs-handle > i:first-child, .irs.irs--flat .irs-single {
-          background-color: $windlight;
-          border-color: $windlight;
-        }
-
-        .irs.irs--flat .irs-single:before {
-          border-top-color: $windlight;
-        }
-      }
-
-      &--wind-dark {
-        .form-check.form-switch .form-check-input:checked,
-        .irs.irs--flat .irs-bar, .irs.irs--flat .irs-handle > i:first-child, .irs.irs--flat .irs-single {
-          background-color: $winddark;
-          border-color: $winddark;
-        }
-
-        .irs.irs--flat .irs-single:before {
-          border-top-color: $winddark;
         }
       }
 
