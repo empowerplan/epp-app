@@ -502,6 +502,42 @@
     @extend .justify-content-center;
   }
 
+  &__key-numbers {
+    @extend .d-flex;
+    @extend .flex-column;
+    @extend .mt-3;
+  }
+
+  &__key-number {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .mb-2;
+
+    &-value {
+      @extend .d-flex;
+      @extend .flex-row;
+      @extend .align-items-center;
+      @extend .fs-6;
+      @extend .fw-semibold;
+      vertical-align: middle;
+      width: 5rem;
+
+      &--wind {
+        color: $epp-color-wind;
+      }
+    }
+
+    &-description {
+      @extend .d-flex;
+      @extend .flex-column;
+      @extend .justify-content-center;
+      @extend .ps-1;
+      flex: 1;
+      font-size: 13px;
+      vertical-align: middle;
+    }
+  }
+
   &__results {
     @extend .pt-3;
     @extend .text-secondary;
