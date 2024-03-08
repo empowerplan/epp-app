@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 // Prevent continuous cycle of modal carousel
-document.addEventListener("DOMContentLoaded", function() {
+/* document.addEventListener("DOMContentLoaded", function() {
     var carouselEl = document.querySelector('#carouselExampleIndicators');
     var carousel = new bootstrap.Carousel(carouselEl, {
       wrap: false
@@ -43,4 +43,32 @@ document.addEventListener("DOMContentLoaded", function() {
         nextButton.classList.remove('transparent');
       }
     });
+  }); */
+
+// Update svg image above tabs in wind settings details
+document.addEventListener('DOMContentLoaded', function() {
+  const windTab = document.querySelector('#windTab');
+
+  windTab.addEventListener('shown.bs.tab', function(event) {
+    document.querySelectorAll('.js-wind-svg-container svg').forEach(svg => {
+      svg.style.display = 'none';
+    });
+
+    // Get the newly activated tab's ID, e.g., "windPastTab"
+    const activeTabId = event.target.id;
+
+    // Correctly construct the SVG ID
+    let baseId = activeTabId.replace('Tab', ''); // Results in e.g., "windPast"
+    const svgToShowId = 'svg' + baseId.charAt(0).toUpperCase() + baseId.slice(1);
+
+    // Show the corresponding SVG
+    const svgToShow = document.getElementById(svgToShowId);
+    if (svgToShow) {
+      svgToShow.style.display = 'block';
+    } else {
+      console.error(`No SVG found with ID: ${svgToShowId}`);
+    }
   });
+});
+  
+  
