@@ -125,18 +125,9 @@ subscribeToEvents(
   [eventTopics.STATES_INITIALIZED, eventTopics.POWER_PANEL_SLIDER_CHANGE],
   createPercentagesOfPowerSources
 );
-subscribeToEvents(
-  [eventTopics.POWER_PANEL_SLIDER_CHANGE, eventTopics.PANEL_SLIDER_CHANGE],
-  showActivePanelSliderOnPanelSliderChange
-);
-subscribeToEvents(
-  [eventTopics.POWER_PANEL_SLIDER_CHANGE, eventTopics.PANEL_SLIDER_CHANGE],
-  hidePotentialLayers
-);
-subscribeToEvents(
-  [eventTopics.POWER_PANEL_SLIDER_CHANGE, eventTopics.PANEL_SLIDER_CHANGE],
-  checkMainPanelSlider
-);
+PubSub.subscribe(eventTopics.PANEL_SLIDER_CHANGE, showActivePanelSliderOnPanelSliderChange);
+PubSub.subscribe(eventTopics.PANEL_SLIDER_CHANGE, hidePotentialLayers);
+PubSub.subscribe(eventTopics.PANEL_SLIDER_CHANGE, checkMainPanelSlider);
 PubSub.subscribe(eventTopics.MORE_LABEL_CLICK, showOrHideSidepanelsOnMoreLabelClick);
 PubSub.subscribe(eventTopics.MORE_LABEL_CLICK, showOrHidePotentialLayersOnMoreLabelClick);
 PubSub.subscribe(eventTopics.PV_CONTROL_ACTIVATED, showPVLayers);
