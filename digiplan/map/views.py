@@ -64,8 +64,6 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         ]
 
         context["settings_parameters"] = config.ENERGY_SETTINGS_PANEL
-        context["settings_dependency_map"] = config.SETTINGS_DEPENDENCY_MAP
-        context["dependency_parameters"] = config.DEPENDENCY_PARAMETERS
 
         # Categorize sources
         categorized_sources = {
