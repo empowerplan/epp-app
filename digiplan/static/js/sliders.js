@@ -105,13 +105,6 @@ $("#id_s_pv_d_3").ionRangeSlider({
   }
 );
 
-$("#id_v_iv_3").ionRangeSlider({
-    onChange: function (data) {
-      $(`#id_v_iv_1`).data("ionRangeSlider").update({from:data.from});
-    }
-  }
-);
-
 $(".js-slider").ionRangeSlider();
 
 Array.from(sliderMoreLabels).forEach(moreLabel => {
