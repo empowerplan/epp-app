@@ -1,3 +1,16 @@
+@mixin results-upper-boxes-colors ($results-upper-boxes-bg-color, $results-upper-boxes-color) {
+  border-color: $results-upper-boxes-bg-color !important;
+
+  .main-results__box-icon {
+    background-color: $results-upper-boxes-bg-color;
+    color: $results-upper-boxes-color;
+  }
+
+  .main-results__box-value {
+    color: $results-upper-boxes-color;
+  }
+}
+
 .main-results {
   @extend .container;
   @extend .mb-4;
@@ -9,25 +22,58 @@
 
   &__col {
     @extend .col-xl-4;
+    @extend .d-flex;
+    @extend .flex-column;
   }
 
   &__box {
+    @extend .d-flex;
+    @extend .flex-row;
     @extend .bg-white;
     @extend .border-start;
     @extend .border-2;
     @extend .p-2;
     @extend .mb-1;
+    flex-grow: 1;
 
     &--electricity {
-      border-color: $epp-bg-color-electricity !important;
-    }
-
-    &--co2 {
-      border-color: $epp-bg-color-co2 !important;
+      @include results-upper-boxes-colors($epp-bg-color-electricity, $epp-color-electricity);
     }
 
     &--wind {
-      border-color: $epp-bg-color-wind !important;
+      @include results-upper-boxes-colors($epp-bg-color-wind, $epp-color-wind);
+    }
+
+    &--co2 {
+      @include results-upper-boxes-colors($epp-bg-color-co2, $epp-color-co2);
+    }
+  }
+
+  &__box-icon {
+    @extend .rounded-circle;
+    @extend .text-center;
+    min-width: 1.7rem;
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  &__box-content {
+    @extend .d-flex;
+    @extend .flex-column;
+    @extend .ps-2;
+  }
+
+  &__box-value {
+    @extend .fw-semibold;
+    font-size: 1.125rem !important;
+  }
+
+  &__box-text {
+    font-size: 13px !important;
+    line-height: 18px !important;
+
+    span {
+      @extend .fw-bold;
     }
   }
 }
