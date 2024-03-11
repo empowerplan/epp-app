@@ -78,13 +78,13 @@
       }
 
       &.active {
-        @extend .text-info;
+        @extend .text-primary;
         @extend .fw-bold;
 
         .wizard__list-number {
-          @extend .bg-info;
+          @extend .bg-primary;
           @extend .text-white;
-          @extend .border-info;
+          @extend .border-primary;
           @extend .fw-bold;
         }
       }
