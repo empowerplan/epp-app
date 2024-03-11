@@ -90,9 +90,11 @@
     padding-right: 5rem !important;
   }
 
-  &__header {
-    @extend .row;
+  &__container {
+    @extend .container;
+  }
 
+  &__header {
     h2 {
       @extend .fs-6;
       @extend .ps-0;
@@ -102,11 +104,11 @@
   &__row {
     @extend .row;
     @extend .mb-4;
+    @extend .g-4;
   }
 
   &__item {
     @extend .col-xl-6;
-    padding: $padding-large;
 
     @include media-breakpoint-up(xl) {
       &:first-of-type {
