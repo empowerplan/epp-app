@@ -47,26 +47,6 @@ $(sectorSlider).ionRangeSlider({
   }
 );
 
-$(".form-check-input").on(
-    'click', function (data) {
-      toggleFormFields(data.target.id);
-    }
-);
-
-$("#id_s_w_5_1").ionRangeSlider({
-    onChange: function (data) {
-      calculate_max_wind();
-    }
-  }
-);
-
-$("#id_s_w_5_2").ionRangeSlider({
-    onChange: function (data) {
-      calculate_max_wind();
-    }
-  }
-);
-
 $("#id_s_w_6").ionRangeSlider({
   onChange: function (data) {
     calculate_max_wind();
@@ -179,7 +159,6 @@ function showOrHideSidepanelsOnMoreLabelClick(msg, moreLabel) {
     Array.from(panelSliders).forEach(item => item.parentNode.classList.remove(...classes));
     moreLabel.classList.add(...classes);
   }
-
   return logMessage(msg);
 }
 
@@ -294,83 +273,6 @@ function calculate_max_pv_d() {
   let slider = $("#id_s_pv_d_3").data("ionRangeSlider").result.from / 100;
   let new_max = Math.round(slider * store.cold.slider_max.s_pv_d_3);
   $(`#id_s_pv_d_1`).data("ionRangeSlider").update({max:new_max});
-}
-
-function toggleFormFields(formfield_id) {
-  if (formfield_id === "id_s_w_3") {
-    if (document.getElementById("id_s_w_4").checked === false && document.getElementById("id_s_w_5").checked === false) {
-      document.getElementById("id_s_w_3").checked = true;
-    }
-    else {
-      document.getElementById("id_s_w_4").checked = false;
-      document.getElementById("id_s_w_4_1").disabled = true;
-      document.getElementById("id_s_w_4_2").disabled = true;
-      document.getElementById("id_s_w_5").checked = false;
-      $(`#id_s_w_5_1`).data("ionRangeSlider").update({block:true});
-      $(`#id_s_w_5_2`).data("ionRangeSlider").update({block:true});
-      $(`#id_s_w_1`).data("ionRangeSlider").update({max:Math.round(store.cold.slider_max.s_w_3)});
-    }
-  }
-  if (formfield_id === "id_s_w_4") {
-    if (document.getElementById("id_s_w_3").checked === false && document.getElementById("id_s_w_5").checked === false) {
-      document.getElementById("id_s_w_4").checked = true;
-    }
-    else {
-      if (document.getElementById("id_s_w_4_1").checked === true && document.getElementById("id_s_w_4_2").checked === true) {
-        $(`#id_s_w_1`).data("ionRangeSlider").update({max:Math.round(store.cold.slider_max.s_w_4_1) + Math.round(store.cold.slider_max.s_w_4_2)});
-      }
-      if (document.getElementById("id_s_w_4_1").checked === false && document.getElementById("id_s_w_4_2").checked === true) {
-        $(`#id_s_w_1`).data("ionRangeSlider").update({max:Math.round(store.cold.slider_max.s_w_4_2)});
-      }
-      if (document.getElementById("id_s_w_4_1").checked === true && document.getElementById("id_s_w_4_2").checked === false) {
-        $(`#id_s_w_1`).data("ionRangeSlider").update({max:Math.round(store.cold.slider_max.s_w_4_1)});
-      }
-      document.getElementById("id_s_w_3").checked = false;
-      document.getElementById("id_s_w_4_1").disabled = false;
-      document.getElementById("id_s_w_4_2").disabled = false;
-      document.getElementById("id_s_w_5").checked = false;
-      $(`#id_s_w_5_1`).data("ionRangeSlider").update({block: true});
-      $(`#id_s_w_5_2`).data("ionRangeSlider").update({block: true});
-    }
-  }
-  if (formfield_id === "id_s_w_4_1") {
-    if (document.getElementById("id_s_w_4_2").checked === false) {
-      document.getElementById("id_s_w_4_1").checked = true;
-      $(`#id_s_w_1`).data("ionRangeSlider").update({max:Math.round(store.cold.slider_max.s_w_4_1)});
-    }
-    if (document.getElementById("id_s_w_4_1").checked === true && document.getElementById("id_s_w_4_2").checked === true) {
-      $(`#id_s_w_1`).data("ionRangeSlider").update({max:Math.round(store.cold.slider_max.s_w_4_1) + Math.round(store.cold.slider_max.s_w_4_2)});
-    }
-    if (document.getElementById("id_s_w_4_1").checked === false && document.getElementById("id_s_w_4_2").checked === true) {
-      $(`#id_s_w_1`).data("ionRangeSlider").update({max:Math.round(store.cold.slider_max.s_w_4_2)});
-    }
-  }
-  if (formfield_id === "id_s_w_4_2") {
-    if (document.getElementById("id_s_w_4_1").checked === false) {
-      document.getElementById("id_s_w_4_2").checked = true;
-      $(`#id_s_w_1`).data("ionRangeSlider").update({max:Math.round(store.cold.slider_max.s_w_4_2)});
-    }
-    if (document.getElementById("id_s_w_4_1").checked === true && document.getElementById("id_s_w_4_2").checked === true) {
-      $(`#id_s_w_1`).data("ionRangeSlider").update({max:Math.round(store.cold.slider_max.s_w_4_1) + Math.round(store.cold.slider_max.s_w_4_2)});
-    }
-    if (document.getElementById("id_s_w_4_1").checked === true && document.getElementById("id_s_w_4_2").checked === false) {
-      $(`#id_s_w_1`).data("ionRangeSlider").update({max:Math.round(store.cold.slider_max.s_w_4_1)});
-    }
-  }
-  if (formfield_id === "id_s_w_5") {
-    if (document.getElementById("id_s_w_3").checked === false && document.getElementById("id_s_w_4").checked === false) {
-      document.getElementById("id_s_w_5").checked = true;
-    }
-    else {
-      document.getElementById("id_s_w_3").checked = false;
-      document.getElementById("id_s_w_4").checked = false;
-      document.getElementById("id_s_w_4_1").disabled = true;
-      document.getElementById("id_s_w_4_2").disabled = true;
-      $(`#id_s_w_5_1`).data("ionRangeSlider").update({block:false});
-      $(`#id_s_w_5_2`).data("ionRangeSlider").update({block:false});
-      calculate_max_wind();
-    }
-  }
 }
 
 function showWindLayers(msg) {
