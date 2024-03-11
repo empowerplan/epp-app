@@ -42,12 +42,9 @@ $epp-color-co2: $gray-800;
 
 // TYPOGRAPHY
 $c-letter-spacing: 0.03rem;
-$font-size-xlarge: 1.953rem; // 31.25px
-$font-size-large: 1.563rem; // 25px
-$font-size-medium: 1.25rem; // 20px
-$font-size-normal: 1rem; // 16px
 $font-size-small: .875rem; // 14px
-$font-size-xsmall: .75rem; // 12px
+$font-size-xsmall: .8125rem; // 13px
+$font-size-xxsmall: .75rem; // 12px
 
 $letter-spacing-small: 0.01rem;
 $letter-spacing-normal: 0.03rem;
@@ -58,13 +55,6 @@ $panel-width-sm: 22rem;
 $panel-width: 26rem;
 $panel-side-padding: 1.5rem;
 $panel-results-nav-button-padding: 0.5rem;
-
-// Media-breaks
-$small-screen: 576px;
-$medium-screen: 768px;
-$large-screen: 992px;
-$xlarge-screen: 1200px;
-$xxlarge-screen: 1400px;
 
 // TOP-NAV
 $top-nav-height: 3.375rem;

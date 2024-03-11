@@ -63,7 +63,7 @@
   z-index: 10000;
 
   @include media-breakpoint-down(sm) {
-    font-size: $font-size-xsmall;
+    font-size: $font-size-xxsmall;
   }
 
   &__nav-tabs {

@@ -55,7 +55,7 @@
     @extend .rounded;
     @extend .px-1;
     @extend .fw-bold;
-    font-size: 13px;
+    font-size: $font-size-xsmall;
     min-height: 1.5rem;
     line-height: 1.5rem;
     color: #4B6678;
