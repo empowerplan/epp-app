@@ -40,8 +40,24 @@
       @include results-upper-boxes-colors($epp-bg-color-electricity, $epp-color-electricity);
     }
 
+    &--heat {
+      @include results-upper-boxes-colors($epp-bg-color-heat, $epp-color-heat);
+    }
+
+    &--mobility {
+      @include results-upper-boxes-colors($epp-bg-color-mobility, $epp-color-mobility);
+    }
+
+    &--h2 {
+      @include results-upper-boxes-colors($epp-bg-color-h2, $epp-color-h2);
+    }
+
     &--wind {
       @include results-upper-boxes-colors($epp-bg-color-wind, $epp-color-wind);
+    }
+
+    &--pv {
+      @include results-upper-boxes-colors($epp-bg-color-pv, $epp-color-pv);
     }
 
     &--co2 {
@@ -52,7 +68,7 @@
   &__box-icon {
     @extend .rounded-circle;
     @extend .text-center;
-    min-width: 1.7rem;
+    min-width: 1.75rem;
     width: 1.75rem;
     height: 1.75rem;
   }
