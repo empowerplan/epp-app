@@ -42,7 +42,7 @@ $(".js-slider.js-slider-panel").ionRangeSlider({
 
 $(sectorSlider).ionRangeSlider({
     onChange: function (data) {
-      calculate_slider_value(data);
+      adaptMainSlider(data.input[0].id);
     }
   }
 );
@@ -222,8 +222,12 @@ function showPVLayers(msg) {
   return logMessage(msg);
 }
 
-function calculate_slider_value(data) {
-  if (data.input[0].id === "id_s_v_3" || data.input[0].id === "id_s_v_4" || data.input[0].id === "id_s_v_5") {
+/**
+ * Adapts main slider depending on hh/ind/cts percentages from detail sliders
+ * @param {string} slider_id
+ */
+function adaptMainSlider(slider_id) {
+  if (slider_id === "id_s_v_3" || slider_id === "id_s_v_4" || slider_id === "id_s_v_5") {
     let factor_hh = $("#id_s_v_3").data("ionRangeSlider").result.from;
     let factor_ind = $("#id_s_v_5").data("ionRangeSlider").result.from;
     let factor_cts = $("#id_s_v_4").data("ionRangeSlider").result.from;
@@ -233,7 +237,7 @@ function calculate_slider_value(data) {
     let new_val = (factor_hh * demand_hh + factor_ind * demand_ind + factor_cts * demand_cts) / (demand_hh + demand_ind + demand_cts);
     $(`#id_s_v_1`).data("ionRangeSlider").update({from:new_val});
   }
-  if (data.input[0].id === "id_w_d_wp_3" || data.input[0].id === "id_w_d_wp_4" || data.input[0].id === "id_w_d_wp_5") {
+  if (slider_id === "id_w_d_wp_3" || slider_id === "id_w_d_wp_4" || slider_id === "id_w_d_wp_5") {
     let factor_hh = $("#id_w_d_wp_3").data("ionRangeSlider").result.from;
     let factor_ind = $("#id_w_d_wp_5").data("ionRangeSlider").result.from;
     let factor_cts = $("#id_w_d_wp_4").data("ionRangeSlider").result.from;
@@ -243,7 +247,7 @@ function calculate_slider_value(data) {
     let new_val = (factor_hh * demand_hh + factor_ind * demand_ind + factor_cts * demand_cts) / (demand_hh + demand_ind + demand_cts);
     $(`#id_w_d_wp_1`).data("ionRangeSlider").update({from:new_val});
   }
-  if (data.input[0].id === "id_w_v_3" || data.input[0].id === "id_w_v_4" || data.input[0].id === "id_w_v_5") {
+  if (slider_id === "id_w_v_3" || slider_id === "id_w_v_4" || slider_id === "id_w_v_5") {
     let factor_hh = $("#id_w_v_3").data("ionRangeSlider").result.from;
     let factor_ind = $("#id_w_v_5").data("ionRangeSlider").result.from;
     let factor_cts = $("#id_w_v_4").data("ionRangeSlider").result.from;
