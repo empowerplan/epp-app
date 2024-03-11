@@ -33,21 +33,10 @@ $(".js-slider.js-slider-panel.js-power-mix").ionRangeSlider({
     }
   }
 );
+
 $(potentialWindSwitches).on("change", function () {
   PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
 });
-$(".js-slider.js-slider-panel").ionRangeSlider({
-    onChange: function (data) {
-      PubSub.publish(eventTopics.PANEL_SLIDER_CHANGE, data);
-    }
-  }
-);
-$(sectorSlider).ionRangeSlider({
-    onChange: function (data) {
-      calculate_slider_value(data);
-    }
-  }
-);
 
 $(".js-slider.js-slider-panel").ionRangeSlider({
     onChange: function (data) {
@@ -55,51 +44,67 @@ $(".js-slider.js-slider-panel").ionRangeSlider({
     }
   }
 );
+
+$(sectorSlider).ionRangeSlider({
+    onChange: function (data) {
+      calculate_slider_value(data);
+    }
+  }
+);
+
 $(".form-check-input").on(
     'click', function (data) {
       toggleFormFields(data.target.id);
     }
 );
+
 $("#id_s_w_5_1").ionRangeSlider({
     onChange: function (data) {
       calculate_max_wind();
     }
   }
 );
+
 $("#id_s_w_5_2").ionRangeSlider({
     onChange: function (data) {
       calculate_max_wind();
     }
   }
 );
+
 $("#id_s_w_6").ionRangeSlider({
   onChange: function (data) {
     calculate_max_wind();
   }
 });
+
 $("#id_s_w_7").ionRangeSlider({
   onChange: function (data) {
     calculate_max_wind();
   }
 });
+
 $("#id_s_pv_ff_3").ionRangeSlider({
     onChange: function (data) {
       calculate_max_pv_ff();
     }
   }
 );
+
 $("#id_s_pv_ff_4").ionRangeSlider({
     onChange: function (data) {
       calculate_max_pv_ff();
     }
   }
 );
+
 $("#id_s_pv_d_3").ionRangeSlider({
     onChange: function (data) {
       calculate_max_pv_d();
     }
   }
 );
+
 $("#id_v_iv_3").ionRangeSlider({
     onChange: function (data) {
       $(`#id_v_iv_1`).data("ionRangeSlider").update({from:data.from});
