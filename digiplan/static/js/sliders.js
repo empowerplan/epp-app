@@ -25,10 +25,6 @@ const potentialWindSwitches = document.querySelectorAll("#id_s_w_3, #id_s_w_4, #
 
 const sectorSlider = document.querySelectorAll("#id_s_v_3, #id_s_v_4, #id_s_v_5, #id_w_d_wp_3, #id_w_d_wp_4, #id_w_d_wp_5, #id_w_v_3, #id_w_v_4, #id_w_v_5");
 
-const sliderDependencies = {
-  "id_v_iv_1": "id_v_iv_3"
-};
-
 // Setup
 
 $(".js-slider.js-slider-panel.js-power-mix").ionRangeSlider({
@@ -152,11 +148,7 @@ PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, showWindLayers);
 // Subscriber Functions
 
 function checkMainPanelSlider(msg, data) {
-  if (sliderDependencies.hasOwnProperty(data.input[0].id)) {
-    let target = sliderDependencies[data.input[0].id];
-    $('#' + target).data("ionRangeSlider").update({from:data.from});
-  }
-    if (data.input[0].id === "id_s_v_1") {
+  if (data.input[0].id === "id_s_v_1") {
     $(`#id_s_v_3`).data("ionRangeSlider").update({from:data.from});
     $(`#id_s_v_4`).data("ionRangeSlider").update({from:data.from});
     $(`#id_s_v_5`).data("ionRangeSlider").update({from:data.from});
