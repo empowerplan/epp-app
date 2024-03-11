@@ -235,6 +235,12 @@ function showOrHideSidepanelsOnMoreLabelClick(msg, moreLabel) {
 function showActivePanelSliderOnPanelSliderChange(msg, data) {
   const changedSlider = data.input[0];
   const changedSliderLabel = changedSlider.parentNode;
+
+  const sliderForm = changedSliderLabel.parentNode.parentNode.parentNode;
+  // Check if any sidepanel is open, by checking if any slider has an active element
+  if (sliderForm.getElementsByClassName("c-slider active").length === 0) {
+    return logMessage(msg);
+  }
   const isActivePanel = changedSliderLabel.classList.contains("active");
 
   if (!isActivePanel) {
