@@ -21,7 +21,6 @@ const potentialWindLayers = [
   "potentialarea_wind_stp_2027_search_area_open_area",
   "potentialarea_wind_stp_2027_vr"
 ];
-const potentialWindSwitches = document.querySelectorAll("#id_s_w_3, #id_s_w_4, #id_s_w_4_1, #id_s_w_4_2, #id_s_w_5, #id_s_w_5_1, #id_s_w_5_2");
 
 const sectorSlider = document.querySelectorAll("#id_s_v_3, #id_s_v_4, #id_s_v_5, #id_w_d_wp_3, #id_w_d_wp_4, #id_w_d_wp_5, #id_w_v_3, #id_w_v_4, #id_w_v_5");
 
@@ -33,10 +32,6 @@ $(".js-slider.js-slider-panel.js-power-mix").ionRangeSlider({
     }
   }
 );
-
-$(potentialWindSwitches).on("change", function () {
-  PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
-});
 
 $(".js-slider.js-slider-panel").ionRangeSlider({
     onChange: function (data) {
