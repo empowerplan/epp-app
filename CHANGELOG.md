@@ -12,5 +12,6 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - Add new challenges step
 
 ### Changed
+- keep detail panel open on slider value change
 
 ### Fixed
