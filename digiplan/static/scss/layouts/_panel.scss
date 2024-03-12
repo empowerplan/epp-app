@@ -1,7 +1,10 @@
+@import '../components/tabs';
+
 .panel {
   @extend .h-auto;
   @extend .shadow;
   @extend .w-100;
+  @extend .border-end;
   display: flex; // cannot use utility classes in that case because of !important overwriting hidden attribute
   flex-direction: column;
 
@@ -406,138 +409,221 @@
   .js-sidepanel {
     top: 0;
   }
+}
 
-  .sidepanel {
-    @extend .position-absolute;
-    @extend .bg-light;
-    @extend .p-3;
-    @extend .overflow-auto;
-    width: 20rem;
+.sidepanel {
+  @extend .position-absolute;
+  @extend .bg-white;
+  @extend .p-3;
+  @extend .overflow-auto;
+  @extend .border-end;
+  width: 20rem;
+  left: $panel-width-sm;
+  padding-top: $padding-large !important;
+
+  @include media-breakpoint-up(md) {
+    height: calc(100% - #{$top-nav-height} - #{$steps-height} - #{$footer-height});
+    top: calc(#{$top-nav-height} + #{$steps-height});
     left: $panel-width-sm;
-    padding-top: $padding-large !important;
+  }
 
-    @include media-breakpoint-up(md) {
-      height: calc(100% - #{$top-nav-height} - #{$steps-height});
-      top: calc(#{$top-nav-height} + #{$steps-height});
-      left: $panel-width-sm;
+  @include media-breakpoint-up(lg) {
+    left: $panel-width;
+  }
+
+  &__heading {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .justify-content-between;
+    @extend .mb-2;
+  }
+
+  &__title {
+    @extend .d-flex;
+    @extend .flex-row;
+  }
+
+  &__title-icon {
+    @extend .text-center;
+    @extend .rounded-circle;
+    width: 1.75rem;
+    height: 1.75rem;
+
+    &--wind {
+      background-color: $epp-bg-color-wind;
     }
+  }
 
-    @include media-breakpoint-up(lg) {
-      left: $panel-width;
+  &__title-text {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .align-items-center;
+    @extend .fs-7;
+    @extend .fw-bold;
+    @extend .ps-1;
+  }
+
+  &__indication {
+    @extend .text-secondary;
+    @extend .fs-7;
+  }
+
+  .sidepanel__tabs .sidepanel-tabs {
+    @include custom-tabs {
+      
+      .sidepanel-tabs__nav-item .sidepanel-tabs__nav-link {
+        padding-top: 0.25rem !important;
+        padding-bottom: 0.25rem !important;
+      }
     }
+  }
 
-    &__heading {
+  .sidepanel__block {
+    @extend .border-bottom;
+    @extend .pb-2;
+    @extend .pt-2;
+
+    .c-slider {
       @extend .d-flex;
       @extend .flex-row;
       @extend .justify-content-between;
-      @extend .fs-6;
-      @extend .fw-bold;
-      @extend .mb-1;
-    }
+      @extend .pb-0;
 
-    &__indication {
-      @extend .text-secondary;
-      @extend .fs-7;
-    }
-
-    .sidepanel__block {
-      @extend .border-bottom;
-      @extend .pb-2;
-      @extend .pt-2;
-
-      .c-slider {
-        @extend .d-flex;
-        @extend .flex-row;
-        @extend .justify-content-between;
-        @extend .pb-0;
-
-        &:first-of-type .form-switch .form-check-input {
-          width: 2.25rem;
-          height: 1.25rem;
-        }
-
-        &:not(:first-of-type) {
-          @extend .fw-light;
-          @extend .ps-2;
-        }
-
-        &.s_w_5_1,
-        &.s_w_5_2 {
-          @extend .d-block;
-        }
+      &:first-of-type .form-switch .form-check-input {
+        width: 2.25rem;
+        height: 1.25rem;
       }
 
-      &--wind-light {
-        .form-check.form-switch .form-check-input:checked,
-        .irs.irs--flat .irs-bar, .irs.irs--flat .irs-handle > i:first-child, .irs.irs--flat .irs-single {
-          background-color: $windlight;
-          border-color: $windlight;
-        }
-
-        .irs.irs--flat .irs-single:before {
-          border-top-color: $windlight;
-        }
+      &:not(:first-of-type) {
+        @extend .fw-light;
+        @extend .ps-2;
       }
 
-      &--wind-dark {
-        .form-check.form-switch .form-check-input:checked,
-        .irs.irs--flat .irs-bar, .irs.irs--flat .irs-handle > i:first-child, .irs.irs--flat .irs-single {
-          background-color: $winddark;
-          border-color: $winddark;
-        }
-
-        .irs.irs--flat .irs-single:before {
-          border-top-color: $winddark;
-        }
-      }
-
-      &--pv-light {
-        .irs.irs--flat .irs-bar, .irs.irs--flat .irs-handle > i:first-child, .irs.irs--flat .irs-single {
-          background-color: $pvlight;
-          border-color: $pvlight;
-        }
-
-        .irs.irs--flat .irs-single:before {
-          border-top-color: $pvlight;
-        }
-      }
-
-      &--pv-dark {
-        .irs.irs--flat .irs-bar, .irs.irs--flat .irs-handle > i:first-child, .irs.irs--flat .irs-single {
-          background-color: $pvdark;
-          border-color: $pvdark;
-        }
-
-        .irs.irs--flat .irs-single:before {
-          border-top-color: $pvdark;
-        }
-      }
-    }
-
-    .sidepanel__block.sidepanel__block--slider {
-      .c-slider {
+      &.s_w_5_1,
+      &.s_w_5_2 {
         @extend .d-block;
       }
     }
 
-    &__results {
-      @extend .pt-3;
-      @extend .text-secondary;
+    &--pv-light {
+      .irs.irs--flat .irs-bar, .irs.irs--flat .irs-handle > i:first-child, .irs.irs--flat .irs-single {
+        background-color: $pvlight;
+        border-color: $pvlight;
+      }
+
+      .irs.irs--flat .irs-single:before {
+        border-top-color: $pvlight;
+      }
+    }
+
+    &--pv-dark {
+      .irs.irs--flat .irs-bar, .irs.irs--flat .irs-handle > i:first-child, .irs.irs--flat .irs-single {
+        background-color: $pvdark;
+        border-color: $pvdark;
+      }
+
+      .irs.irs--flat .irs-single:before {
+        border-top-color: $pvdark;
+      }
+    }
+  }
+
+  .sidepanel__block.sidepanel__block--slider {
+    .c-slider {
+      @extend .d-block;
+    }
+  }
+
+  &__img {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .justify-content-center;
+  }
+
+  &__key-numbers {
+    @extend .d-flex;
+    @extend .flex-column;
+    @extend .mt-2;
+  }
+
+  &__key-number {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .mb-2;
+
+    &-value {
+      @extend .d-flex;
+      @extend .flex-row;
+      @extend .align-items-center;
+      @extend .fs-6;
+      @extend .fw-semibold;
+      vertical-align: middle;
+      width: 5rem;
+
+      &--wind {
+        color: $epp-color-wind;
+      }
+    }
+
+    &-description {
+      @extend .d-flex;
+      @extend .flex-column;
+      @extend .justify-content-center;
+      @extend .ps-1;
+      flex: 1;
+      font-size: 13px;
+      vertical-align: middle;
+    }
+  }
+
+  &__more {
+    &-btn {
+      @extend .btn;
+      @extend .btn-link;
+      @extend .fw-semibold;
+      @extend .px-0;
       @extend .fs-7;
     }
 
-    &__close {
-      @extend .btn-close;
+    &-collapse {
+      @extend .py-2;
+      @extend .fs-7;
+    }
+  }
+
+  &__slider {
+    @extend .pt-3;
+    @extend .pb-2;
+    @extend .border-bottom;
+
+    &-label {
+      @extend .fs-7;
+      @extend .text-secondary;
     }
 
-    .c-slider {
-      @extend .p-0;
-      @extend .pb-3;
-      @extend .border-0;
+    span .c-slider {
+      @extend .px-0;
+      @extend .pb-2;
+    }
+  }
 
-      &__label {
-        @extend .fs-7;
-      }
+  &__results {
+    @extend .pt-3;
+    @extend .text-secondary;
+    @extend .fs-7;
+  }
+
+  &__close {
+    @extend .btn-close;
+  }
+
+  .c-slider {
+    @extend .p-0;
+    @extend .pb-3;
+    @extend .border-0;
+
+    &__label {
+      @extend .fs-7;
     }
   }
 }

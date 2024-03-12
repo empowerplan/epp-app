@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 // Prevent continuous cycle of modal carousel
-document.addEventListener("DOMContentLoaded", function() {
+/* document.addEventListener("DOMContentLoaded", function() {
     var carouselEl = document.querySelector('#carouselExampleIndicators');
     var carousel = new bootstrap.Carousel(carouselEl, {
       wrap: false
@@ -43,4 +43,38 @@ document.addEventListener("DOMContentLoaded", function() {
         nextButton.classList.remove('transparent');
       }
     });
+  }); */
+
+// Update svg image above tabs in wind settings details
+document.addEventListener('DOMContentLoaded', function() {
+  const windTab = document.querySelector('#windTab');
+
+  windTab.addEventListener('shown.bs.tab', function(event) {
+    document.querySelectorAll('.js-wind-svg-container svg [id^="circle"]').forEach(circle => {
+      circle.style.display = 'none';
+    });
+
+    // Get the newly activated tab's ID
+    const activeTabId = event.target.id;
+    let baseIdSuffix = activeTabId.replace('wind', '').replace('Tab', '');
+    const circleToShowId = 'circle' + baseIdSuffix.charAt(0).toUpperCase() + baseIdSuffix.slice(1);
+
+    // Show the corresponding circle within the SVG
+    const circleToShow = document.getElementById(circleToShowId);
+    if (circleToShow) {
+      circleToShow.style.display = 'block';
+    } else {
+      console.error(`No circle found with ID: ${circleToShowId}`);
+    }
+
+    // Make sure the common SVG container is always displayed
+    const svgContainer = document.querySelector('.js-wind-svg-container svg');
+    if (svgContainer) {
+      svgContainer.style.display = 'block';
+    }
   });
+});
+
+
+  
+  

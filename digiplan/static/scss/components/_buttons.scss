@@ -8,6 +8,7 @@
 
 button {
   border-radius: $btn-border-radius;
+  letter-spacing: $c-letter-spacing;
 }
 
 .button {
@@ -23,7 +24,7 @@ button {
     @extend .btn-info;
   }
 
-  &--ghost {
+  &--outlined {
     @extend .btn-outline-primary;
   }
 
