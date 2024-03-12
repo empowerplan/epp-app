@@ -4,6 +4,7 @@
   @extend .h-auto;
   @extend .shadow;
   @extend .w-100;
+  @extend .border-end;
   display: flex; // cannot use utility classes in that case because of !important overwriting hidden attribute
   flex-direction: column;
 
@@ -230,6 +231,8 @@
       &-header {
         @extend .fs-7;
         @extend .mb-1;
+        @extend .fw-light;
+        @extend .text-uppercase;
       }
 
       .nav-item {
@@ -237,12 +240,40 @@
         padding-bottom: $panel-results-nav-button-padding;
       }
 
+      .nav-item.results-tab {
+        &--w100 {
+          @extend .w-100;
+        }
+
+        &--header {
+          @extend .pt-3;
+
+          &::before {
+            content: "_";
+            @extend .fw-light;
+            color: transparent;
+            user-select: none;
+            pointer-events: none;
+          }
+        }
+
+        &--technologies::before {
+          content: 'Technologien';
+          color: $body-color;
+        }
+
+        &--sectors::before {
+          content: 'Sektoren';
+          color: $body-color;
+        }
+      }
+
       .nav-item:nth-of-type(odd) {
-        padding-right: calc(#{$panel-results-nav-button-padding} / 2);
+        padding-left: calc(#{$panel-results-nav-button-padding} / 2);
       }
 
       .nav-item:nth-of-type(even) {
-        padding-left: calc(#{$panel-results-nav-button-padding} / 2);
+        padding-right: calc(#{$panel-results-nav-button-padding} / 2);
       }
 
       .nav-link {
@@ -251,14 +282,16 @@
         @extend .text-primary;
         @extend .text-center;
         @include user-select-none;
-        height: 4.25rem;
+        height: 3.25rem;
         border-radius: $button-border-radius;
       }
 
       .nav-link.active {
         @extend .border;
-        @extend .border-primary;
         @extend .border-2;
+        border-color: $epp-color-blue !important;
+        background-color: $epp-bg-color-blue !important;
+        color: $epp-color-blue !important;
       }
     }
 
@@ -347,7 +380,7 @@
 
       &__name {
         @extend .d-inline-block;
-        font-size: 13px;
+        font-size: $font-size-xsmall;
       }
 
       &__value {
@@ -383,6 +416,7 @@
   @extend .bg-white;
   @extend .p-3;
   @extend .overflow-auto;
+  @extend .border-end;
   width: 20rem;
   left: $panel-width-sm;
   padding-top: $padding-large !important;

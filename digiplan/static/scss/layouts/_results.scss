@@ -1,3 +1,99 @@
+@mixin results-upper-boxes-colors ($results-upper-boxes-bg-color, $results-upper-boxes-color) {
+  border-color: $results-upper-boxes-bg-color !important;
+
+  .main-results__box-icon {
+    background-color: $results-upper-boxes-bg-color;
+    color: $results-upper-boxes-color;
+  }
+
+  .main-results__box-value {
+    color: $results-upper-boxes-color;
+  }
+}
+
+.main-results {
+  @extend .container;
+  @extend .mb-4;
+
+  &__row {
+    @extend .row;
+    @extend .gx-1;
+  }
+
+  &__col {
+    @extend .col-xl-4;
+    @extend .d-flex;
+    @extend .flex-column;
+  }
+
+  &__box {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .bg-white;
+    @extend .border-start;
+    @extend .border-5;
+    @extend .p-2;
+    @extend .mb-1;
+    flex-grow: 1;
+
+    &--electricity {
+      @include results-upper-boxes-colors($epp-bg-color-electricity, $epp-color-electricity);
+    }
+
+    &--heat {
+      @include results-upper-boxes-colors($epp-bg-color-heat, $epp-color-heat);
+    }
+
+    &--mobility {
+      @include results-upper-boxes-colors($epp-bg-color-mobility, $epp-color-mobility);
+    }
+
+    &--h2 {
+      @include results-upper-boxes-colors($epp-bg-color-h2, $epp-color-h2);
+    }
+
+    &--wind {
+      @include results-upper-boxes-colors($epp-bg-color-wind, $epp-color-wind);
+    }
+
+    &--pv {
+      @include results-upper-boxes-colors($epp-bg-color-pv, $epp-color-pv);
+    }
+
+    &--co2 {
+      @include results-upper-boxes-colors($epp-bg-color-co2, $epp-color-co2);
+    }
+  }
+
+  &__box-icon {
+    @extend .rounded-circle;
+    @extend .text-center;
+    min-width: 1.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  &__box-content {
+    @extend .d-flex;
+    @extend .flex-column;
+    @extend .ps-2;
+  }
+
+  &__box-value {
+    @extend .fw-semibold;
+    font-size: 1.125rem !important;
+  }
+
+  &__box-text {
+    font-size: $font-size-xsmall !important;
+    line-height: 18px !important;
+
+    span {
+      @extend .fw-bold;
+    }
+  }
+}
+
 .results {
   @extend .h-100;
   @extend .w-100;
@@ -10,9 +106,11 @@
     padding-right: 5rem !important;
   }
 
-  &__header {
-    @extend .row;
+  &__container {
+    @extend .container;
+  }
 
+  &__header {
     h2 {
       @extend .fs-6;
       @extend .ps-0;
@@ -22,12 +120,11 @@
   &__row {
     @extend .row;
     @extend .mb-4;
+    @extend .g-4;
   }
 
   &__item {
     @extend .col-xl-6;
-    @extend .bg-white;
-    padding: $padding-large;
 
     @include media-breakpoint-up(xl) {
       &:first-of-type {

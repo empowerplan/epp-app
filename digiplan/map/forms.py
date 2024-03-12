@@ -18,6 +18,19 @@ class TemplateForm(Form):  # noqa: D101
         return super().__str__()
 
 
+class ResultsBox(TemplateForm):
+    """Shows a result summary for a given category in a box."""
+
+    template_name = "widgets/result_box.html"
+
+    def __init__(self, value: str, text: str, category: str) -> None:
+        """Initialize parameters for result box widget."""
+        super().__init__()
+        self.value = value
+        self.text = text
+        self.category = category
+
+
 class StaticLayerForm(TemplateForm):  # noqa: D101
     template_name = "forms/layer.html"
     switch = BooleanField(
