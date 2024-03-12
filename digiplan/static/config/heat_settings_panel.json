@@ -14,7 +14,7 @@
     "sidepanel": true
   },
   "w_d_wp_3": {
-      "class": "js-slider",
+      "class": "js-slider js-slider-detail-panel",
       "label": "{% trans 'Haushalte (%)' %}",
       "max": 100,
       "min": 50,
@@ -26,7 +26,7 @@
       "type": "slider"
   },
   "w_d_wp_4": {
-      "class": "js-slider",
+      "class": "js-slider js-slider-detail-panel",
       "label": "{% trans 'Commercial, Trade, Services (%)' %}",
       "max": 100,
       "min": 50,
@@ -38,7 +38,7 @@
       "type": "slider"
   },
   "w_d_wp_5": {
-      "class": "js-slider",
+      "class": "js-slider js-slider-detail-panel",
       "label": "{% trans 'Industry (%)' %}",
       "max": 100,
       "min": 50,
@@ -76,7 +76,7 @@
     "sidepanel": true
   },
   "w_v_3": {
-      "class": "js-slider",
+      "class": "js-slider js-slider-detail-panel",
       "label": "{% trans 'Households (%)' %}",
       "max": 200,
       "min": 50,
@@ -87,7 +87,7 @@
       "type": "slider"
   },
   "w_v_4": {
-    "class": "js-slider",
+    "class": "js-slider js-slider-detail-panel",
     "label": "{% trans 'Commercial, Trade, Services (%)' %}",
     "max": 200,
     "min": 50,
@@ -98,7 +98,7 @@
     "type": "slider"
   },
   "w_v_5": {
-      "class": "js-slider",
+      "class": "js-slider js-slider-detail-panel",
       "label": "{% trans 'Industry (%)' %}",
       "max": 200,
       "min": 50,
