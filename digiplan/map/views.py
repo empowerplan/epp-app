@@ -88,6 +88,32 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         context["onboarding_pv_ground"] = charts.Chart("onboarding_pv_ground").render()
         context["onboarding_pv_roof"] = charts.Chart("onboarding_pv_roof").render()
 
+        # TODO(Hendrik Huyskens): Replace result boxes with results after simulation run
+        # https://github.com/empowerplan/epp-app/issues/34
+        context["results_electricity"] = forms.ResultsBox(
+            "82,8 %",
+            "des <span>Stroms</span> aus erneuerbaren Quellen in 2040",
+            category="electricity",
+        )
+        context["results_heat"] = forms.ResultsBox("50,0 %", "...", category="heat")
+        context["results_wind"] = forms.ResultsBox(
+            "42,8 %",
+            "der Landesfläche für die <span>Windenergienutzung</span> in 2040",
+            category="wind",
+        )
+        context["results_pv"] = forms.ResultsBox(
+            "35,8 %",
+            "des <span>Stroms</span> aus erneuerbaren Quellen in 2040",
+            category="pv",
+        )
+        context["results_mobility"] = forms.ResultsBox("22,8 %", "...", category="mobility")
+        context["results_h2"] = forms.ResultsBox("33,8 %", "...", category="h2")
+        context["results_co2"] = forms.ResultsBox(
+            "10,8 %",
+            "Reduktion der <span>Treibhausgasemissionen</span> in 2040",
+            category="co2",
+        )
+
         context["app_version"] = str(__version__)
 
         return context
