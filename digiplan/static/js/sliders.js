@@ -22,7 +22,6 @@ const potentialWindLayers = [
   "potentialarea_wind_stp_2027_vr"
 ];
 
-const sectorSlider = document.querySelectorAll("#id_s_v_3, #id_s_v_4, #id_s_v_5, #id_w_d_wp_3, #id_w_d_wp_4, #id_w_d_wp_5, #id_w_v_3, #id_w_v_4, #id_w_v_5");
 
 // Setup
 
@@ -40,42 +39,9 @@ $(".js-slider.js-slider-panel").ionRangeSlider({
   }
 );
 
-$(sectorSlider).ionRangeSlider({
+$(".js-slider.js-slider-detail-panel").ionRangeSlider({
     onChange: function (data) {
-      adaptMainSlider(data.input[0].id);
-    }
-  }
-);
-
-$("#id_s_w_6").ionRangeSlider({
-  onChange: function (data) {
-    calculate_max_wind();
-  }
-});
-
-$("#id_s_w_7").ionRangeSlider({
-  onChange: function (data) {
-    calculate_max_wind();
-  }
-});
-
-$("#id_s_pv_ff_3").ionRangeSlider({
-    onChange: function (data) {
-      calculate_max_pv_ff();
-    }
-  }
-);
-
-$("#id_s_pv_ff_4").ionRangeSlider({
-    onChange: function (data) {
-      calculate_max_pv_ff();
-    }
-  }
-);
-
-$("#id_s_pv_d_3").ionRangeSlider({
-    onChange: function (data) {
-      calculate_max_pv_d();
+      PubSub.publish(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, data);
     }
   }
 );
@@ -102,7 +68,8 @@ subscribeToEvents(
 );
 PubSub.subscribe(eventTopics.PANEL_SLIDER_CHANGE, showActivePanelSliderOnPanelSliderChange);
 PubSub.subscribe(eventTopics.PANEL_SLIDER_CHANGE, hidePotentialLayers);
-PubSub.subscribe(eventTopics.PANEL_SLIDER_CHANGE, checkMainPanelSlider);
+PubSub.subscribe(eventTopics.PANEL_SLIDER_CHANGE, adaptDetailSliders);
+PubSub.subscribe(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, adaptMainSliders);
 PubSub.subscribe(eventTopics.MORE_LABEL_CLICK, showOrHideSidepanelsOnMoreLabelClick);
 PubSub.subscribe(eventTopics.MORE_LABEL_CLICK, showOrHidePotentialLayersOnMoreLabelClick);
 PubSub.subscribe(eventTopics.PV_CONTROL_ACTIVATED, showPVLayers);
@@ -111,7 +78,12 @@ PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, showWindLayers);
 
 // Subscriber Functions
 
-function checkMainPanelSlider(msg, data) {
+/**
+ * Adapt detail sliders depending on related main sliders
+ * @param {string} msg Publisher message
+ * @param {object} data Data from changed ionrangeslider
+ */
+function adaptDetailSliders(msg, data) {
   if (data.input[0].id === "id_s_v_1") {
     $(`#id_s_v_3`).data("ionRangeSlider").update({from:data.from});
     $(`#id_s_v_4`).data("ionRangeSlider").update({from:data.from});
@@ -127,6 +99,56 @@ function checkMainPanelSlider(msg, data) {
     $(`#id_w_v_4`).data("ionRangeSlider").update({from:data.from});
     $(`#id_w_v_5`).data("ionRangeSlider").update({from:data.from});
   }
+  return logMessage(msg);
+}
+
+/**
+ * Adapt main slider depending on related detail sliders
+ * @param {string} msg Publisher message
+ * @param {object} data Data from changed ionrangeslider
+ */
+function adaptMainSliders(msg, data) {
+  const slider_id = data.input[0].id;
+  if (slider_id === "id_s_w_6" || slider_id === "id_s_w_7") {
+    calculate_max_wind();
+  }
+  if (slider_id === "id_s_pv_d_3") {
+    calculate_max_pv_d();
+  }
+  if (slider_id === "id_s_pv_ff_3" || slider_id === "id_s_pv_ff_4") {
+    calculate_max_pv_ff();
+  }
+  if (slider_id === "id_s_v_3" || slider_id === "id_s_v_4" || slider_id === "id_s_v_5") {
+    let factor_hh = $("#id_s_v_3").data("ionRangeSlider").result.from;
+    let factor_ind = $("#id_s_v_5").data("ionRangeSlider").result.from;
+    let factor_cts = $("#id_s_v_4").data("ionRangeSlider").result.from;
+    let demand_hh = store.cold.slider_per_sector.s_v_1.hh;
+    let demand_ind = store.cold.slider_per_sector.s_v_1.ind;
+    let demand_cts = store.cold.slider_per_sector.s_v_1.cts;
+    let new_val = (factor_hh * demand_hh + factor_ind * demand_ind + factor_cts * demand_cts) / (demand_hh + demand_ind + demand_cts);
+    $(`#id_s_v_1`).data("ionRangeSlider").update({from:new_val});
+  }
+  if (slider_id === "id_w_d_wp_3" || slider_id === "id_w_d_wp_4" || slider_id === "id_w_d_wp_5") {
+    let factor_hh = $("#id_w_d_wp_3").data("ionRangeSlider").result.from;
+    let factor_ind = $("#id_w_d_wp_4").data("ionRangeSlider").result.from;
+    let factor_cts = $("#id_w_d_wp_5").data("ionRangeSlider").result.from;
+    let demand_hh = store.cold.slider_per_sector.w_d_wp_1.hh;
+    let demand_ind = store.cold.slider_per_sector.w_d_wp_1.ind;
+    let demand_cts = store.cold.slider_per_sector.w_d_wp_1.cts;
+    let new_val = (factor_hh * demand_hh + factor_ind * demand_ind + factor_cts * demand_cts) / (demand_hh + demand_ind + demand_cts);
+    $(`#id_w_d_wp_1`).data("ionRangeSlider").update({from:new_val});
+  }
+  if (slider_id === "id_w_v_3" || slider_id === "id_w_v_4" || slider_id === "id_w_v_5") {
+    let factor_hh = $("#id_w_v_3").data("ionRangeSlider").result.from;
+    let factor_ind = $("#id_w_v_4").data("ionRangeSlider").result.from;
+    let factor_cts = $("#id_w_v_5").data("ionRangeSlider").result.from;
+    let demand_hh = store.cold.slider_per_sector.w_d_wp_1.hh;
+    let demand_ind = store.cold.slider_per_sector.w_d_wp_1.ind;
+    let demand_cts = store.cold.slider_per_sector.w_d_wp_1.cts;
+    let new_val = (factor_hh * demand_hh + factor_ind * demand_ind + factor_cts * demand_cts) / (demand_hh + demand_ind + demand_cts);
+    $(`#id_w_v_1`).data("ionRangeSlider").update({from:new_val});
+  }
+  return logMessage(msg);
 }
 
 function closeSidepanel(panelCloseBtn) {
@@ -220,43 +242,6 @@ function showPVLayers(msg) {
     map.setLayoutProperty(layer, "visibility", "visible");
   }
   return logMessage(msg);
-}
-
-/**
- * Adapts main slider depending on hh/ind/cts percentages from detail sliders
- * @param {string} slider_id
- */
-function adaptMainSlider(slider_id) {
-  if (slider_id === "id_s_v_3" || slider_id === "id_s_v_4" || slider_id === "id_s_v_5") {
-    let factor_hh = $("#id_s_v_3").data("ionRangeSlider").result.from;
-    let factor_ind = $("#id_s_v_5").data("ionRangeSlider").result.from;
-    let factor_cts = $("#id_s_v_4").data("ionRangeSlider").result.from;
-    let demand_hh = store.cold.slider_per_sector.s_v_1.hh;
-    let demand_ind = store.cold.slider_per_sector.s_v_1.ind;
-    let demand_cts = store.cold.slider_per_sector.s_v_1.cts;
-    let new_val = (factor_hh * demand_hh + factor_ind * demand_ind + factor_cts * demand_cts) / (demand_hh + demand_ind + demand_cts);
-    $(`#id_s_v_1`).data("ionRangeSlider").update({from:new_val});
-  }
-  if (slider_id === "id_w_d_wp_3" || slider_id === "id_w_d_wp_4" || slider_id === "id_w_d_wp_5") {
-    let factor_hh = $("#id_w_d_wp_3").data("ionRangeSlider").result.from;
-    let factor_ind = $("#id_w_d_wp_5").data("ionRangeSlider").result.from;
-    let factor_cts = $("#id_w_d_wp_4").data("ionRangeSlider").result.from;
-    let demand_hh = store.cold.slider_per_sector.w_d_wp_1.hh;
-    let demand_ind = store.cold.slider_per_sector.w_d_wp_1.ind;
-    let demand_cts = store.cold.slider_per_sector.w_d_wp_1.cts;
-    let new_val = (factor_hh * demand_hh + factor_ind * demand_ind + factor_cts * demand_cts) / (demand_hh + demand_ind + demand_cts);
-    $(`#id_w_d_wp_1`).data("ionRangeSlider").update({from:new_val});
-  }
-  if (slider_id === "id_w_v_3" || slider_id === "id_w_v_4" || slider_id === "id_w_v_5") {
-    let factor_hh = $("#id_w_v_3").data("ionRangeSlider").result.from;
-    let factor_ind = $("#id_w_v_5").data("ionRangeSlider").result.from;
-    let factor_cts = $("#id_w_v_4").data("ionRangeSlider").result.from;
-    let demand_hh = store.cold.slider_per_sector.w_d_wp_1.hh;
-    let demand_ind = store.cold.slider_per_sector.w_d_wp_1.ind;
-    let demand_cts = store.cold.slider_per_sector.w_d_wp_1.cts;
-    let new_val = (factor_hh * demand_hh + factor_ind * demand_ind + factor_cts * demand_cts) / (demand_hh + demand_ind + demand_cts);
-    $(`#id_w_v_1`).data("ionRangeSlider").update({from:new_val});
-  }
 }
 
 function calculate_max_wind() {
