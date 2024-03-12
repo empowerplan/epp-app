@@ -43,8 +43,30 @@
     "tooltip": "{% trans 'Hier kann die Nutzung der von der Regionalen Planungsgemeinschaft ermittelten Suchräume frei eingestellt werden.\nDiese Suchräume können jedoch nur zu einem Teil für die Windenergie genutzt werden.' %}",
     "type": "switch"
   },
+  "s_w_6": {
+    "class": "js-slider js-slider-detail-panel",
+    "label": "{% trans 'Flächennutzung (%)' %}",
+    "tooltip": "{% trans '' %}",
+    "max": 2,
+    "min": 0,
+    "start": 0,
+    "step": 0.2,
+    "type": "slider",
+    "required": false
+  },
+  "s_w_7": {
+    "class": "js-slider js-slider-detail-panel",
+    "label": "{% trans 'Flächennutzung (%)' %}",
+    "tooltip": "{% trans '' %}",
+    "max": 4,
+    "min": 0,
+    "start": 0,
+    "step": 0.2,
+    "type": "slider",
+    "required": false
+  },
     "s_w_5_1": {
-    "class": "js-slider",
+    "class": "js-slider js-slider-detail-panel",
     "label": "{% trans 'Nutzung Suchraum Offenland' %}",
     "tooltip": "{% trans 'Hier kann die Nutzung des von der Regionalen Planungsgemeinschaft ermittelten Suchraums im Offenland frei eingestellt werden.\nDieser Suchraum kann jedoch nur zu einem Teil für die Windenergie genutzt werden.' %}",
     "max": 100,
@@ -55,7 +77,7 @@
     "required": false
   },
     "s_w_5_2": {
-    "class": "js-slider",
+    "class": "js-slider js-slider-detail-panel",
     "label": "{% trans 'Nutzung Suchraum Wald' %}",
     "tooltip": "{% trans 'Hier kann die Nutzung des von der Regionalen Planungsgemeinschaft ermittelten Suchraums in Wäldern frei eingestellt werden.\nDieser Suchraum kann jedoch nur zu einem Teil für die Windenergie genutzt werden.' %}",
     "max": 100,
@@ -80,7 +102,7 @@
     "sidepanel": true
   },
   "s_pv_ff_3": {
-    "class": "js-slider",
+    "class": "js-slider js-slider-detail-panel",
     "label": "{% trans 'Flächen entlang Autobahnen und Schienenwegen (%)' %} ",
     "max": 100,
     "min": 0,
@@ -90,7 +112,7 @@
     "type": "slider"
   },
   "s_pv_ff_4": {
-    "class": "js-slider",
+    "class": "js-slider js-slider-detail-panel",
     "label": "{% trans 'Agrar- und Grünlandflächen (%)' %} ",
     "max": 100,
     "min": 0,
@@ -114,7 +136,7 @@
     "sidepanel": true
   },
   "s_pv_d_3": {
-    "class": "js-slider",
+    "class": "js-slider js-slider-detail-panel",
     "label": "{% trans 'Anteil genutzter Dächer (%)' %}",
     "max": 100,
     "min": 0,
@@ -124,7 +146,7 @@
     "type": "slider"
   },
     "s_pv_d_4": {
-    "class": "js-slider",
+    "class": "js-slider js-slider-detail-panel",
     "label": "{% trans 'Anteil Anlagen mit Stromspeicher (%)' %}",
     "max": 100,
     "min": 0,
@@ -159,7 +181,7 @@
     "sidepanel": true
   },
   "s_v_3": {
-    "class": "js-slider",
+    "class": "js-slider js-slider-detail-panel",
     "grid": false,
     "label": "{% trans 'Haushalte (%)' %}",
     "max": 200,
@@ -170,7 +192,7 @@
     "type": "slider"
   },
   "s_v_4": {
-    "class": "js-slider",
+    "class": "js-slider js-slider-detail-panel",
     "label": "{% trans 'Gewerbe, Handel, Dienstleistungen (%)' %}",
     "max": 200,
     "min": 50,
@@ -180,7 +202,7 @@
     "type": "slider"
   },
   "s_v_5": {
-    "class": "js-slider",
+    "class": "js-slider js-slider-detail-panel",
     "label": "{% trans 'Industrie (%)' %}",
     "max": 200,
     "min": 50,

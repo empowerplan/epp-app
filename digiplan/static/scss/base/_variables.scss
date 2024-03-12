@@ -21,6 +21,9 @@ $winddark: #273f73;
 $pvlight: #F8D637;
 $pvdark: #c19800;
 
+$epp-bg-color-wind: $cyan-300;
+$epp-color-wind: $cyan-800;
+
 // TYPOGRAPHY
 $c-letter-spacing: 0.03rem;
 $font-size-xlarge: 1.953rem; // 31.25px
@@ -54,7 +57,7 @@ $top-nav-height: 3.375rem;
 $wizard-height: 3.75rem;
 
 // STEPS
-$steps-height: 3rem;
+$steps-height: 3.75rem;
 $steps-numbers-size: 1.5rem;
 
 // FOOTER

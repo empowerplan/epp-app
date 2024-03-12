@@ -1,8 +1,7 @@
-.c-tabs {
-  @extend .nav;
-  @extend .nav-tabs;
+@mixin custom-tabs {
   @extend .nav-fill;
   @extend .border-0;
+  @extend .p-0;
 
   &__nav-item {
     @extend .nav-item;
@@ -13,6 +12,26 @@
     @extend .fs-7;
     margin-left: 1px;
     margin-right: 1px;
+
+    &:first-of-type {
+      border-top-left-radius: 100px !important;
+      border-bottom-left-radius: 100px !important;
+
+      button {
+        border-top-left-radius: 100px !important;
+        border-bottom-left-radius: 100px !important;
+      }
+    }
+
+    &:last-of-type {
+      border-top-right-radius: 100px !important;
+      border-bottom-right-radius: 100px !important;
+
+      button {
+        border-top-right-radius: 100px !important;
+        border-bottom-right-radius: 100px !important;
+      }
+    }
   }
 
   &__nav-link {
@@ -50,6 +69,12 @@
       @extend .active;
     }
   }
+
+  @content;
+}
+
+.c-tabs {
+  @include custom-tabs;
 }
 
 .view-toggle {
