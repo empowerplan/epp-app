@@ -47,7 +47,7 @@
   .irs-to,
   .irs-bar,
   .irs-single {
-    background-color: $cyan;
+    background-color: #3E5A9A;
   }
 
   .irs-bar,
@@ -58,7 +58,7 @@
   .irs-from:before,
   .irs-to:before,
   .irs-single:before {
-    border-top-color: $cyan;
+    border-top-color: #3E5A9A;
   }
 
   .irs-handle {
@@ -67,7 +67,7 @@
     &>i:first-child,
     &.state_hover>i:first-child,
     &:hover>i:first-child {
-      background-color: $cyan;
+      background-color: #3E5A9A;
     }
   }
 }
