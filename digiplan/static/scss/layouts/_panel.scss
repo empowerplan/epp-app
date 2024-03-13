@@ -1,3 +1,4 @@
+@import '../components/sliders';
 @import '../components/tabs';
 
 .panel {
@@ -510,25 +511,11 @@
     }
 
     &--pv-light {
-      .irs.irs--flat .irs-bar, .irs.irs--flat .irs-handle > i:first-child, .irs.irs--flat .irs-single {
-        background-color: $pvlight;
-        border-color: $pvlight;
-      }
-
-      .irs.irs--flat .irs-single:before {
-        border-top-color: $pvlight;
-      }
+      @include settings-details-slider($pvlight);
     }
 
     &--pv-dark {
-      .irs.irs--flat .irs-bar, .irs.irs--flat .irs-handle > i:first-child, .irs.irs--flat .irs-single {
-        background-color: $pvdark;
-        border-color: $pvdark;
-      }
-
-      .irs.irs--flat .irs-single:before {
-        border-top-color: $pvdark;
-      }
+      @include settings-details-slider($pvdark);
     }
   }
 
@@ -596,18 +583,35 @@
   }
 
   &__slider {
-    @extend .pt-3;
-    @extend .pb-2;
-    @extend .border-bottom;
-
     &-label {
       @extend .fs-7;
       @extend .text-secondary;
     }
 
+    &--wind {
+      @extend .pt-3;
+      @extend .pb-2;
+      @extend .border-bottom;
+    }
+
+    &--pv-low span .c-slider {
+      @include settings-details-slider($epp-color-pv-low);
+    }
+
+    &--pv-medium span .c-slider {
+      @include settings-details-slider($epp-color-pv-medium);
+    }
+
+    &--pv-high span .c-slider {
+      @include settings-details-slider($epp-color-pv-high);
+      @extend .pb-2;
+      @extend .border-bottom;
+    }
+
     span .c-slider {
       @extend .px-0;
       @extend .pb-2;
+      @extend .border-0;
     }
   }
 

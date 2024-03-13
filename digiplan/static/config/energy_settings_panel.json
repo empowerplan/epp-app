@@ -103,7 +103,7 @@
   },
   "s_pv_ff_3": {
     "class": "js-slider js-slider-detail-panel",
-    "label": "{% trans 'Flächen entlang Autobahnen und Schienenwegen (%)' %} ",
+    "label": "{% trans 'Klassische auf Agrarflächen geringer Bodengüte (%)' %} ",
     "max": 100,
     "min": 0,
     "start": 0,
@@ -113,7 +113,17 @@
   },
   "s_pv_ff_4": {
     "class": "js-slider js-slider-detail-panel",
-    "label": "{% trans 'Agrar- und Grünlandflächen (%)' %} ",
+    "label": "{% trans 'Agri-PV (vertikal) auf Agrarflächen mittlerer Bodengüte\nGemeinsame Nutzung mit Landwirtschaft (%)' %} ",
+    "max": 100,
+    "min": 0,
+    "start": 0,
+    "step": 5,
+    "tooltip": "{% trans 'Welcher Flächenanteil auf Agrar- und Grünlandflächen mit geringer Bodengüte (SQR<40) soll durch PV-Freiflächenanlagen genutzt werden? 100 % ist hierbei das maximal zur Verfügung stehende Potenzial (Kartendarstellung), das jedoch nur zu einem Teil genutzt werden kann. Die Potenzialflächen stammen aus dem PV- und Windflächenrechner des RLI.' %} ",
+    "type": "slider"
+  },
+  "s_pv_ff_5": {
+    "class": "js-slider js-slider-detail-panel",
+    "label": "{% trans 'Agri-PV (hoch aufgeständert) über Dauerkulturen\nGemeinsame Nutzung mit Landwirtschaft (%)' %} ",
     "max": 100,
     "min": 0,
     "start": 0,

@@ -1,3 +1,14 @@
+@mixin settings-details-slider($slider-main-color) {
+  .irs.irs--flat .irs-bar, .irs.irs--flat .irs-handle > i:first-child, .irs.irs--flat .irs-single {
+    background-color: $slider-main-color;
+    border-color: $slider-main-color;
+  }
+
+  .irs.irs--flat .irs-single:before {
+    border-top-color: $slider-main-color;
+  }
+}
+
 .showcase__mark {
   @extend .d-block;
   @extend .position-absolute;

@@ -109,7 +109,7 @@
       </div>
     </div>
     <div class="tab-pane fade" id="windPresent" role="tabpanel" aria-labelledby="windPresentTab">
-      <div class="sidepanel__slider">
+      <div class="sidepanel__slider sidepanel__slider--wind">
         <span>
           {% include "widgets/slider.html" with field=form.s_w_6 %}
         </span>
@@ -171,7 +171,7 @@
       </div>
     </div>
     <div class="tab-pane fade" id="windFuture" role="tabpanel" aria-labelledby="windFutureTab">
-      <div class="sidepanel__slider">
+      <div class="sidepanel__slider sidepanel__slider--wind">
         <span>
           {% include "widgets/slider.html" with field=form.s_w_7 %}
         </span>
@@ -280,18 +280,37 @@
   <p class="sidepanel__indication">
     {%  trans "Nutzung von Potenzialgebieten für Freiflächen-PV:" %}
   </p>
-  <div class="sidepanel__block sidepanel__block--slider">
-    <span class="sidepanel__block--pv-light">
+  <div class="sidepanel__slider sidepanel__slider--pv-low">
+    <span>
       {% include "widgets/slider.html" with field=form.s_pv_ff_3 %}
     </span>
   </div>
-  <div class="sidepanel__block sidepanel__block--slider">
-    <span class="sidepanel__block--pv-dark">
+  <div class="sidepanel__slider sidepanel__slider--pv-medium">
+    <span>
       {% include "widgets/slider.html" with field=form.s_pv_ff_4 %}
     </span>
   </div>
-  <div class="sidepanel__results">
-    <p>{%  trans "Rechts siehst Du die Potenzialflächen, links die maximal erreichbare Leistung für deine Einstellung.<br><br>Im Menü rechts in der Karte kannst Du die heute bestehenden Anlagen einblenden." %}</p>
+  <div class="sidepanel__slider sidepanel__slider--pv-high">
+    <span>
+      {% include "widgets/slider.html" with field=form.s_pv_ff_5 %}
+    </span>
+  </div>
+  <div class="sidepanel__block">
+    <div class="sidepanel__more">
+      <div>
+        <button class="sidepanel__more-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWindPastMore" aria-expanded="false" aria-controls="collapseWindPastMore">
+          <svg width="12" height="12" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.936" xmlns="http://www.w3.org/2000/svg">
+            <path d="m6.1387 0.1875-1.4961 1.4961 6.7832 6.7832-6.7832 6.7832 1.4961 1.4961 8.2793-8.2793z"/>
+          </svg>
+          {%  trans "Mehr Details" %}
+        </button>
+      </div>
+      <div class="collapse sidepanel__more-collapse" id="collapseWindPastMore">
+        <div>
+          {%  trans "Hier kommen mehr Details." %}
+        </div>
+      </div>
+    </div>
   </div>
   </p>
 </div>
