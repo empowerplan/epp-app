@@ -582,6 +582,11 @@
     }
   }
 
+  &__sliders {
+    @extend .pb-2;
+    @extend .border-bottom;
+  }
+
   &__slider {
     &-label {
       @extend .fs-7;
@@ -590,8 +595,6 @@
 
     &--wind {
       @extend .pt-3;
-      @extend .pb-2;
-      @extend .border-bottom;
     }
 
     &--pv-low span .c-slider {
@@ -604,8 +607,6 @@
 
     &--pv-high span .c-slider {
       @include settings-details-slider($epp-color-pv-high);
-      @extend .pb-2;
-      @extend .border-bottom;
     }
 
     span .c-slider {
