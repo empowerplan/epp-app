@@ -588,9 +588,14 @@
   }
 
   &__slider {
-    &-label {
-      @extend .fs-7;
-      @extend .text-secondary;
+    span .c-slider {
+      @extend .px-0;
+      @extend .pb-2;
+      @extend .border-0;
+
+      &__label {
+        @extend .justify-content-start;
+      }
     }
 
     &--wind {
@@ -599,20 +604,26 @@
 
     &--pv-low span .c-slider {
       @include settings-details-slider($epp-color-pv-low);
+
+      &__label:before {
+        background-image: url('../../images/icons/pv_low_outlined.svg');
+      }
     }
 
     &--pv-medium span .c-slider {
       @include settings-details-slider($epp-color-pv-medium);
+
+      &__label:before {
+        background-image: url('../../images/icons/pv_medium_outlined.svg');
+      }
     }
 
     &--pv-high span .c-slider {
       @include settings-details-slider($epp-color-pv-high);
-    }
 
-    span .c-slider {
-      @extend .px-0;
-      @extend .pb-2;
-      @extend .border-0;
+      &__label:before {
+        background-image: url('../../images/icons/pv_high_outlined.svg');
+      }
     }
   }
 
