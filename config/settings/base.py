@@ -269,7 +269,7 @@ OEMOF_SCENARIO = env.str("OEMOF_SCENARIO", "scenario_2045")
 # ------------------------------------------------------------------------------
 MAP_ENGINE_CENTER_AT_STARTUP = [14.2, 52.4]
 MAP_ENGINE_ZOOM_AT_STARTUP = 7
-MAP_ENGINE_MAX_BOUNDS = [[12.7, 51.0], [15.7, 53.8]]
+MAP_ENGINE_MAX_BOUNDS = [[10, 40.0], [20, 60]]
 
 MAP_ENGINE_IMAGES = [
     setup.MapImage("wind", "images/icons/map_wind.png"),
@@ -300,7 +300,6 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("forest", "map", "Forest"),
         setup.MVTAPI("special_protection_area", "map", "SpecialProtectionArea"),
         setup.MVTAPI("air_traffic", "map", "AirTraffic"),
-        setup.MVTAPI("aviation", "map", "Aviation"),
         setup.MVTAPI("biosphere_reserve", "map", "BiosphereReserve"),
         setup.MVTAPI("drinking_water_protection_area", "map", "DrinkingWaterArea"),
         setup.MVTAPI("fauna_flora_habitat", "map", "FaunaFloraHabitat"),
@@ -312,9 +311,10 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("nature_conservation_area", "map", "NatureConservationArea"),
         setup.MVTAPI("railway", "map", "Railway"),
         setup.MVTAPI("road_default", "map", "Road"),
-        setup.MVTAPI("road_railway-500m_region", "map", "RoadRailway500m"),
-        setup.MVTAPI("settlement-0m", "map", "Settlement0m"),
         setup.MVTAPI("water", "map", "Water"),
+        setup.MVTAPI("pv_ground_criteria_settlements", "map", "PVGroundCriteriaSettlements"),
+        setup.MVTAPI("pv_ground_criteria_settlements_200m", "map", "PVGroundCriteriaSettlements200m"),
+        setup.MVTAPI("pv_ground_criteria_aviation", "map", "PVGroundCriteriaAviation"),
     ],
     "potential": [
         setup.MVTAPI("potentialarea_pv_agriculture_lfa-off_region", "map", "PotentialareaPVAgricultureLFAOff"),
