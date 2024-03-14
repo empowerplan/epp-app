@@ -67,9 +67,7 @@ class MapGLView(TemplateView, views.MapEngineMixin):
 
         # Categorize sources
         categorized_sources = {
-            category: [
-                config.SOURCES[layer.get_layer_id()] for layer in layers if layer.get_layer_id() in config.SOURCES
-            ]
+            category: [config.SOURCES[layer.layer_id] for layer in layers if layer.layer_id in config.SOURCES]
             for category, layers in map_config.LEGEND.items()
         }
         context["sources"] = categorized_sources

@@ -6,7 +6,7 @@
     <div class="map-layer__legend">
       <div class="map-layer__legend-color{% if form.layer.symbol == 'circle' %} map-layer__legend-color--rounded{%  endif %}" style="background-color: {{ form.layer.get_color }}"></div>
       <div class="map-layer__legend-text">
-        <label class="form-check-label" for="{{ form.layer.get_layer_id }}">{{ form.layer.name }}</label>
+        <label class="form-check-label" for="{{ form.layer.layer_id }}">{{ form.layer.name }}</label>
       </div>
     </div>
 
@@ -16,7 +16,7 @@
       </div>
       <div class="map-layer__control-toggle c-switch">
         <div class="form-check form-switch">
-          <input class="form-check-input layer__switch" type="checkbox" id="{{ form.layer.get_layer_id }}">
+          <input class="form-check-input layer__switch" type="checkbox" id="{{ form.layer.layer_id }}">
         </div>
       </div>
     </div>
