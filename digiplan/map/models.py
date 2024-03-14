@@ -634,26 +634,11 @@ class PotentialareaPVRoadRailway(StaticRegionModel):  # noqa: D101
     layer = "potentialarea_pv_road_railway_region"
 
 
-class PotentialareaWindSTP2018Vreg(StaticRegionModel):  # noqa: D101
-    data_file = "potentialarea_wind_stp_2018_vreg"
-    layer = "potentialarea_wind_stp_2018_vreg"
+class PotentialAreaWindSTP2018EG(StaticRegionModel):  # noqa: D101
+    data_file = "potentialarea_wind_stp_2018_eg"
+    layer = "potentialarea_wind_stp_2018_eg"
 
 
-class PotentialareaWindSTP2027Repowering(StaticRegionModel):  # noqa: D101
-    data_file = "potentialarea_wind_stp_2027_repowering"
-    layer = "potentialarea_wind_stp_2027_repowering"
-
-
-class PotentialareaWindSTP2027SearchAreaForestArea(StaticRegionModel):  # noqa: D101
-    data_file = "potentialarea_wind_stp_2027_search_area_forest_area"
-    layer = "potentialarea_wind_stp_2027_search_area_forest_area"
-
-
-class PotentialareaWindSTP2027SearchAreaOpenArea(StaticRegionModel):  # noqa: D101
-    data_file = "potentialarea_wind_stp_2027_search_area_open_area"
-    layer = "potentialarea_wind_stp_2027_search_area_open_area"
-
-
-class PotentialareaWindSTP2027VR(StaticRegionModel):  # noqa: D101
+class PotentialAreaWindSTP2027VR(StaticRegionModel):  # noqa: D101
     data_file = "potentialarea_wind_stp_2024_vr"
     layer = "potentialarea_wind_stp_2024_vr"
