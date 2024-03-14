@@ -639,6 +639,6 @@ class PotentialAreaWindSTP2018EG(StaticRegionModel):  # noqa: D101
     layer = "potentialarea_wind_stp_2018_eg"
 
 
-class PotentialAreaWindSTP2027VR(StaticRegionModel):  # noqa: D101
+class PotentialAreaWindSTP2024VR(StaticRegionModel):  # noqa: D101
     data_file = "potentialarea_wind_stp_2024_vr"
     layer = "potentialarea_wind_stp_2024_vr"
