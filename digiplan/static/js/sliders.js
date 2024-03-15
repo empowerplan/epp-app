@@ -23,8 +23,9 @@ const powerIcons = {
 };
 
 const potentialPVLayers = [
-  "potentialarea_pv_agriculture_lfa-off_region",
-  "potentialarea_pv_road_railway_region",
+  "potentialarea_pv_ground_soil_quality_low",
+  "potentialarea_pv_ground_soil_quality_medium",
+  "potentialarea_pv_ground_permanent_crops",
 ];
 const potentialWindLayers = [
   "potentialarea_wind_stp_2018_eg",
