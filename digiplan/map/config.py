@@ -1,6 +1,7 @@
 """Configuration for map app."""
 import json
 import pathlib
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -112,15 +113,17 @@ def get_slider_per_sector() -> dict:
 
 
 # STORE
-STORE_COLD_INIT = {
-    "version": __version__,
-    "slider_marks": get_slider_marks(),
-    "potentials": datapackage.get_potential_values(),
-    "slider_per_sector": get_slider_per_sector(),
-    "allowedSwitches": ["wind_distance"],
-    "detailTab": {"showPotentialLayers": True},
-    "staticState": 0,
-}
+# Skip initialization in migrate mode
+if "migrate" not in sys.argv:
+    STORE_COLD_INIT = {
+        "version": __version__,
+        "slider_marks": get_slider_marks(),
+        "potentials": datapackage.get_potential_values(),
+        "slider_per_sector": get_slider_per_sector(),
+        "allowedSwitches": ["wind_distance"],
+        "detailTab": {"showPotentialLayers": True},
+        "staticState": 0,
+    }
 
 
 def init_hot_store() -> str:
