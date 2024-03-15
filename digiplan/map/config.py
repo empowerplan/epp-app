@@ -115,7 +115,7 @@ def get_slider_per_sector() -> dict:
 STORE_COLD_INIT = {
     "version": __version__,
     "slider_marks": get_slider_marks(),
-    "slider_max": datapackage.get_potential_values(),
+    "potentials": datapackage.get_potential_values(),
     "slider_per_sector": get_slider_per_sector(),
     "allowedSwitches": ["wind_distance"],
     "detailTab": {"showPotentialLayers": True},

@@ -10,7 +10,7 @@ from django.conf import settings
 from django_oemof.settings import OEMOF_DIR
 
 from config.settings.base import DATA_DIR
-from digiplan.map import config
+from digiplan.map import config, models
 
 
 def get_employment() -> pd.DataFrame:
@@ -166,40 +166,36 @@ def get_potential_values(*, per_municipality: bool = False) -> dict:
 
     areas = {
         "wind": {
-            "s_w_3": "stp_2018_vreg",
-            "s_w_4_1": "stp_2027_vr",
-            "s_w_4_2": "stp_2027_repowering",
-            "s_w_5_1": "stp_2027_search_area_open_area",
-            "s_w_5_2": "stp_2027_search_area_forest_area",
+            "wind_2018": "stp_2018_eg",
+            "wind_2024": "stp_2024_vr",
+            "wind_2027": area
+            if (area := models.Municipality.objects.all().values("area").aggregate(models.Sum("area"))["area__sum"])
+            else 0,  # to prevent None if regions are empty
         },
         "pv_ground": {"s_pv_ff_3": "road_railway_region", "s_pv_ff_4": "agriculture_lfa-off_region"},
         "pv_roof": {"s_pv_d_3": None},
     }
 
-    tech_data = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "scalars/technology_data.json")))
+    power_density = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "scalars/technology_data.json")))["power_density"]
 
     potentials = {}
     for profile in areas:
+        if profile in ("pv_ground", "pv_roof"):
+            continue
         path = Path(DATA_DIR, "digipipe/scalars", scalars[profile])
         reader = pd.read_csv(path)
         for key, value in areas[profile].items():
-            if key == "s_pv_d_3":
-                pv_roof_potential = reader[
-                    [f"installable_power_{orient}" for orient in ["south", "north", "east", "west", "flat"]]
-                ].sum(axis=1)
-                if per_municipality:
-                    potentials = pv_roof_potential
-                else:
-                    potentials[key] = pv_roof_potential.sum()
+            if key == "wind_2027":
+                potentials[key] = value
             else:
-                if per_municipality:
+                if per_municipality:  # noqa: PLR5501
                     potentials[key] = reader[value]
                 else:
                     potentials[key] = reader[value].sum()
-                if profile == "wind":
-                    potentials[key] = potentials[key] * tech_data["power_density"]["wind"]
-                if profile == "pv_ground":
-                    potentials[key] = potentials[key] * tech_data["power_density"]["pv_ground"]
+            if profile == "wind":
+                potentials[key] = potentials[key] * power_density["wind"]
+            if profile == "pv_ground":
+                potentials[key] = potentials[key] * power_density["pv_ground"]
     return potentials
 
 

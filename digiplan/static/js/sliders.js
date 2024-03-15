@@ -63,6 +63,7 @@ Array.from(sliderMoreLabels).forEach((moreLabel) => {
 
 Array.from(windTabs).forEach((windTab) => {
   windTab.addEventListener("click", () => {
+    calculate_max_wind();
     PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
   });
 });
@@ -302,14 +303,25 @@ function showPVLayers(msg) {
 }
 
 function calculate_max_wind() {
-  let slider_one = $("#id_s_w_5_1").data("ionRangeSlider").result.from / 100;
-  let slider_two = $("#id_s_w_5_2").data("ionRangeSlider").result.from / 100;
-  let new_max =
-    slider_one * Math.round(store.cold.slider_max.s_w_5_1) +
-    slider_two * Math.round(store.cold.slider_max.s_w_5_2);
+  const currentWindTab = document
+    .getElementById("windTab")
+    .getElementsByClassName("active")[0].id;
+  let newWindMax;
+  if (currentWindTab === "windPastTab") {
+    newWindMax = Math.round(store.cold.potentials.wind_2018);
+  } else if (currentWindTab === "windPresentTab") {
+    const slider_value =
+      $("#id_s_w_6").data("ionRangeSlider").result.from /
+      $("#id_s_w_6").data("ionRangeSlider").result.max;
+    newWindMax = Math.round(store.cold.potentials.wind_2024) * slider_value;
+  } else if (currentWindTab === "windFutureTab") {
+    const slider_value =
+      $("#id_s_w_7").data("ionRangeSlider").result.from / 100;
+    newWindMax = Math.round(store.cold.potentials.wind_2027) * slider_value;
+  }
   $(`#id_s_w_1`)
     .data("ionRangeSlider")
-    .update({ max: Math.round(new_max) });
+    .update({ max: Math.round(newWindMax) });
 }
 
 function calculate_max_pv_ff() {
