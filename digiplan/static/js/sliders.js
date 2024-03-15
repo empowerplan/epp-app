@@ -27,6 +27,7 @@ const potentialPVLayers = [
   "potentialarea_pv_ground_soil_quality_medium",
   "potentialarea_pv_ground_permanent_crops",
 ];
+const potentialPVRoofLayers = ["potentialarea_pv_roof"];
 const potentialWindLayers = [
   "potentialarea_wind_stp_2018_eg",
   "potentialarea_wind_stp_2024_vr",
@@ -98,6 +99,7 @@ PubSub.subscribe(
   showOrHidePotentialLayersOnMoreLabelClick,
 );
 PubSub.subscribe(eventTopics.PV_CONTROL_ACTIVATED, showPVLayers);
+PubSub.subscribe(eventTopics.PV_ROOF_CONTROL_ACTIVATED, showPVRoofLayers);
 PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, showWindLayers);
 
 // Subscriber Functions
@@ -220,6 +222,9 @@ function showOrHidePotentialLayersOnMoreLabelClick(msg, moreLabel) {
     if (sliderLabel.id === "id_s_pv_ff_1") {
       PubSub.publish(eventTopics.PV_CONTROL_ACTIVATED);
     }
+    if (sliderLabel.id === "id_s_pv_d_1") {
+      PubSub.publish(eventTopics.PV_ROOF_CONTROL_ACTIVATED);
+    }
     if (sliderLabel.id === "id_s_w_1") {
       PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
     }
@@ -302,6 +307,14 @@ function updateSliderMarks(msg) {
 function showPVLayers(msg) {
   hidePotentialLayers();
   for (const layer of potentialPVLayers) {
+    map.setLayoutProperty(layer, "visibility", "visible");
+  }
+  return logMessage(msg);
+}
+
+function showPVRoofLayers(msg) {
+  hidePotentialLayers();
+  for (const layer of potentialPVRoofLayers) {
     map.setLayoutProperty(layer, "visibility", "visible");
   }
   return logMessage(msg);
@@ -390,7 +403,9 @@ function showWindLayers(msg) {
 }
 
 function hidePotentialLayers(msg) {
-  for (const layer of potentialPVLayers.concat(potentialWindLayers)) {
+  for (const layer of potentialPVLayers
+    .concat(potentialPVRoofLayers)
+    .concat(potentialWindLayers)) {
     map.setLayoutProperty(layer, "visibility", "none");
   }
   return logMessage(msg);

@@ -513,6 +513,12 @@
       "fill-color": "#5F4F03"
     }
   },
+  "potentialarea_pv_roof": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#F8D637"
+    }
+  },
   "potentialarea_wind_stp_2018_eg": {
     "type": "fill",
     "paint": {

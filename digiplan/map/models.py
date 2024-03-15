@@ -639,6 +639,11 @@ class PotentialareaPVGroundPermanentCrops(StaticRegionModel):  # noqa: D101
     layer = "potentialarea_pv_ground_permanent_crops_region"
 
 
+class PotentialareaPVRoof(StaticRegionModel):  # noqa: D101
+    data_file = "potentialarea_pv_roof_region"
+    layer = "potentialarea_pv_roof_region"
+
+
 class PotentialAreaWindSTP2018EG(StaticRegionModel):  # noqa: D101
     data_file = "potentialarea_wind_stp_2018_eg"
     layer = "potentialarea_wind_stp_2018_eg"

@@ -50,6 +50,7 @@ MODELS = [
     models.PotentialareaPVGroundSoilQualityLow,
     models.PotentialareaPVGroundSoilQualityMedium,
     models.PotentialareaPVGroundPermanentCrops,
+    models.PotentialareaPVRoof,
     models.PotentialAreaWindSTP2018EG,
     models.PotentialAreaWindSTP2024VR,
 ]

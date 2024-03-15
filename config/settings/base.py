@@ -328,6 +328,9 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("potentialarea_wind_stp_2024_vr", "map", "PotentialAreaWindSTP2024VR"),
         setup.MVTAPI("potentialarea_wind_stp_2027", "map", "Municipality"),
     ],
+    "potential_roof": [
+        setup.MVTAPI("potentialarea_pv_roof", "map", "PotentialareaPVRoof"),
+    ],
     "results": [setup.MVTAPI("results", "map", "Municipality")],
 }
 
