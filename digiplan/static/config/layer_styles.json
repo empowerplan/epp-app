@@ -495,16 +495,22 @@
       "fill-opacity": 0.8
     }
   },
-  "potentialarea_pv_road_railway_region": {
+  "potentialarea_pv_ground_soil_quality_low": {
     "type": "fill",
     "paint": {
-      "fill-color": "#ffd744"
+      "fill-color": "#F8D637"
     }
   },
-  "potentialarea_pv_agriculture_lfa-off_region": {
+  "potentialarea_pv_ground_soil_quality_medium": {
     "type": "fill",
     "paint": {
-      "fill-color": "#c19800"
+      "fill-color": "#C19800"
+    }
+  },
+  "potentialarea_pv_ground_permanent_crops": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#5F4F03"
     }
   },
   "potentialarea_wind_stp_2018_eg": {

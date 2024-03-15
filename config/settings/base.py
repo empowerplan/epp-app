@@ -321,8 +321,9 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("pv_ground_criteria_aviation", "map", "PVGroundCriteriaAviation"),
     ],
     "potential": [
-        setup.MVTAPI("potentialarea_pv_agriculture_lfa-off_region", "map", "PotentialareaPVAgricultureLFAOff"),
-        setup.MVTAPI("potentialarea_pv_road_railway_region", "map", "PotentialareaPVRoadRailway"),
+        setup.MVTAPI("potentialarea_pv_ground_soil_quality_low", "map", "PotentialareaPVGroundSoilQualityLow"),
+        setup.MVTAPI("potentialarea_pv_ground_soil_quality_medium", "map", "PotentialareaPVGroundSoilQualityMedium"),
+        setup.MVTAPI("potentialarea_pv_ground_permanent_crops", "map", "PotentialareaPVGroundPermanentCrops"),
         setup.MVTAPI("potentialarea_wind_stp_2018_eg", "map", "PotentialAreaWindSTP2018EG"),
         setup.MVTAPI("potentialarea_wind_stp_2024_vr", "map", "PotentialAreaWindSTP2024VR"),
         setup.MVTAPI("potentialarea_wind_stp_2027", "map", "Municipality"),
