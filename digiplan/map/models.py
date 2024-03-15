@@ -624,14 +624,19 @@ class PVGroundCriteriaAviation(StaticRegionModel):  # noqa: D101
     layer = "Landebahnflaechen"
 
 
-class PotentialareaPVAgricultureLFAOff(StaticRegionModel):  # noqa: D101
-    data_file = "potentialarea_pv_agriculture_lfa-off_region"
-    layer = "potentialarea_pv_agriculture_lfa-off_region"
+class PotentialareaPVGroundSoilQualityLow(StaticRegionModel):  # noqa: D101
+    data_file = "potentialarea_pv_ground_soil_quality_low_region"
+    layer = "potentialarea_pv_ground_soil_quality_low_region"
 
 
-class PotentialareaPVRoadRailway(StaticRegionModel):  # noqa: D101
-    data_file = "potentialarea_pv_road_railway_region"
-    layer = "potentialarea_pv_road_railway_region"
+class PotentialareaPVGroundSoilQualityMedium(StaticRegionModel):  # noqa: D101
+    data_file = "potentialarea_pv_ground_soil_quality_medium_region"
+    layer = "potentialarea_pv_ground_soil_quality_medium_region"
+
+
+class PotentialareaPVGroundPermanentCrops(StaticRegionModel):  # noqa: D101
+    data_file = "potentialarea_pv_ground_permanent_crops_region"
+    layer = "potentialarea_pv_ground_permanent_crops_region"
 
 
 class PotentialAreaWindSTP2018EG(StaticRegionModel):  # noqa: D101

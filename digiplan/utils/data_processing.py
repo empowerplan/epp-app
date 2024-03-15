@@ -47,8 +47,9 @@ MODELS = [
     models.SpecialProtectionArea,
     models.Water,
     # PotentialAreas
-    models.PotentialareaPVAgricultureLFAOff,
-    models.PotentialareaPVRoadRailway,
+    models.PotentialareaPVGroundSoilQualityLow,
+    models.PotentialareaPVGroundSoilQualityMedium,
+    models.PotentialareaPVGroundPermanentCrops,
     models.PotentialAreaWindSTP2018EG,
     models.PotentialAreaWindSTP2024VR,
 ]
