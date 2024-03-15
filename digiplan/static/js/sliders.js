@@ -139,7 +139,11 @@ function adaptMainSliders(msg, data) {
   if (slider_id === "id_s_pv_d_3") {
     calculate_max_pv_d();
   }
-  if (slider_id === "id_s_pv_ff_3" || slider_id === "id_s_pv_ff_4") {
+  if (
+    slider_id === "id_s_pv_ff_3" ||
+    slider_id === "id_s_pv_ff_4" ||
+    slider_id === "id_s_pv_ff_5"
+  ) {
     calculate_max_pv_ff();
   }
   if (
@@ -326,14 +330,22 @@ function calculate_max_wind() {
 }
 
 function calculate_max_pv_ff() {
-  let slider_one = $("#id_s_pv_ff_3").data("ionRangeSlider").result.from / 100;
-  let slider_two = $("#id_s_pv_ff_4").data("ionRangeSlider").result.from / 100;
-  let new_max =
-    slider_one * Math.round(store.cold.slider_max.s_pv_ff_3) +
-    slider_two * Math.round(store.cold.slider_max.s_pv_ff_4);
+  const slider_soil_quality_low =
+    $("#id_s_pv_ff_3").data("ionRangeSlider").result.from / 100;
+  const slider_soil_quality_medium =
+    $("#id_s_pv_ff_4").data("ionRangeSlider").result.from / 100;
+  const slider_permanent_crops =
+    $("#id_s_pv_ff_5").data("ionRangeSlider").result.from / 100;
+  const newPVMax =
+    slider_soil_quality_low *
+      Math.round(store.cold.potentials.pv_soil_quality_low) +
+    slider_soil_quality_medium *
+      Math.round(store.cold.potentials.pv_soil_quality_medium) +
+    slider_permanent_crops *
+      Math.round(store.cold.potentials.pv_permanent_crops);
   $(`#id_s_pv_ff_1`)
     .data("ionRangeSlider")
-    .update({ max: Math.round(new_max) });
+    .update({ max: Math.round(newPVMax) });
 }
 
 function calculate_max_pv_d() {

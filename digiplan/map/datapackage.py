@@ -172,7 +172,11 @@ def get_potential_values(*, per_municipality: bool = False) -> dict:
             if (area := models.Municipality.objects.all().values("area").aggregate(models.Sum("area"))["area__sum"])
             else 0,  # to prevent None if regions are empty
         },
-        "pv_ground": {"s_pv_ff_3": "road_railway_region", "s_pv_ff_4": "agriculture_lfa-off_region"},
+        "pv_ground": {
+            "pv_soil_quality_low": "soil_quality_low_region",
+            "pv_soil_quality_medium": "soil_quality_medium_region",
+            "pv_permanent_crops": "permanent_crops_region",
+        },
         "pv_roof": {"s_pv_d_3": None},
     }
 
@@ -180,7 +184,7 @@ def get_potential_values(*, per_municipality: bool = False) -> dict:
 
     potentials = {}
     for profile in areas:
-        if profile in ("pv_ground", "pv_roof"):
+        if profile == "pv_roof":
             continue
         path = Path(DATA_DIR, "digipipe/scalars", scalars[profile])
         reader = pd.read_csv(path)
