@@ -180,6 +180,12 @@ def get_potential_values(*, per_municipality: bool = False) -> dict:
         "pv_roof": {"pv_roof": "installable_power"},
     }
 
+    pv_density = {
+        "pv_soil_quality_low": "pv_ground",
+        "pv_soil_quality_medium": "pv_ground_vertical_bifacial",
+        "pv_permanent_crops": "pv_ground_elevated",
+    }
+
     power_density = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "scalars/technology_data.json")))["power_density"]
 
     potentials = {}
@@ -198,7 +204,7 @@ def get_potential_values(*, per_municipality: bool = False) -> dict:
             if profile == "wind":
                 potentials[key] = potentials[key] * power_density["wind"]
             if profile == "pv_ground":
-                potentials[key] = potentials[key] * power_density["pv_ground"]
+                potentials[key] = potentials[key] * power_density[pv_density[key]]
     return potentials
 
 
