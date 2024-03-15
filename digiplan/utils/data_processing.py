@@ -50,7 +50,7 @@ MODELS = [
     models.PotentialareaPVAgricultureLFAOff,
     models.PotentialareaPVRoadRailway,
     models.PotentialAreaWindSTP2018EG,
-    models.PotentialAreaWindSTP2027VR,
+    models.PotentialAreaWindSTP2024VR,
 ]
 
 
