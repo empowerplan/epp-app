@@ -349,9 +349,10 @@ function calculate_max_pv_ff() {
 }
 
 function calculate_max_pv_d() {
-  let slider = $("#id_s_pv_d_3").data("ionRangeSlider").result.from / 100;
-  let new_max = Math.round(slider * store.cold.slider_max.s_pv_d_3);
-  $(`#id_s_pv_d_1`).data("ionRangeSlider").update({ max: new_max });
+  const slider_value =
+    $("#id_s_pv_d_3").data("ionRangeSlider").result.from / 100;
+  const newPVMax = Math.round(slider_value * store.cold.potentials.pv_roof);
+  $(`#id_s_pv_d_1`).data("ionRangeSlider").update({ max: newPVMax });
 }
 
 function showWindLayers(msg) {

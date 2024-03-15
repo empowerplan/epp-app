@@ -161,7 +161,7 @@ def get_potential_values(*, per_municipality: bool = False) -> dict:
     scalars = {
         "wind": "potentialarea_wind_area_stats_muns.csv",
         "pv_ground": "potentialarea_pv_ground_area_stats_muns.csv",
-        "pv_roof": "potentialarea_pv_roof_wo_historic_area_stats_muns.csv",
+        "pv_roof": "potentialarea_pv_roof_area_stats_muns.csv",
     }
 
     areas = {
@@ -177,19 +177,18 @@ def get_potential_values(*, per_municipality: bool = False) -> dict:
             "pv_soil_quality_medium": "soil_quality_medium_region",
             "pv_permanent_crops": "permanent_crops_region",
         },
-        "pv_roof": {"s_pv_d_3": None},
+        "pv_roof": {"pv_roof": "installable_power"},
     }
 
     power_density = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "scalars/technology_data.json")))["power_density"]
 
     potentials = {}
     for profile in areas:
-        if profile == "pv_roof":
-            continue
         path = Path(DATA_DIR, "digipipe/scalars", scalars[profile])
         reader = pd.read_csv(path)
         for key, value in areas[profile].items():
             if key == "wind_2027":
+                # Value is already calculated from region area (see above)
                 potentials[key] = value
             else:
                 if per_municipality:  # noqa: PLR5501
