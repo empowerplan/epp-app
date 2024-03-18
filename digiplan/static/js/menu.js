@@ -48,7 +48,7 @@ chartTab.addEventListener("click", function () {
 });
 
 PubSub.subscribe(eventTopics.MENU_CHALLENGES_SELECTED, showEmpowerplanContent);
-PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, togglePanel);
+PubSub.subscribe(eventTopics.MENU_CHANGED, togglePanel);
 PubSub.subscribe(
   eventTopics.MENU_STATUS_QUO_SELECTED,
   setMapChartViewVisibility,
@@ -150,7 +150,7 @@ function terminateSimulation(msg) {
 }
 
 function togglePanel(msg) {
-  panel.hidden = msg === "MENU_CHALLENGES_SELECTED";
+  panel.hidden = getCurrentMenuTab().id === "panel_1_challenges";
   return logMessage(msg);
 }
 
