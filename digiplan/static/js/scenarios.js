@@ -25,8 +25,7 @@ function checkIfScenarioIsSelected(msg) {
   const currentTab = getCurrentMenuTab();
   const tabIndex = parseInt(currentTab.id.slice(6, 7));
   if (tabIndex === 3) {
-    document.getElementById("menu_next_btn").disabled =
-      currentScenario === null;
+    document.getElementById("menu_next_btn").hidden = currentScenario === null;
   }
   return logMessage(msg);
 }

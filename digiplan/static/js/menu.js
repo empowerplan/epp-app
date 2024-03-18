@@ -95,14 +95,18 @@ function previousMenuTab() {
 }
 
 function toggleMenuButtons(tabIndex) {
-  menuPreviousBtn.disabled = false;
+  menuPreviousBtn.hidden = false;
+  menuNextBtn.hidden = false;
   menuNextBtn.disabled = false;
   if (tabIndex === 0) {
-    menuPreviousBtn.disabled = true;
+    menuPreviousBtn.hidden = true;
   }
-  // TODO: Currently step 5 shall be inactive, to activate it again, subtract only 1 from length
+  // TODO: Currently step 5 shall be inactive, to activate it again, remove next if-statement
   if (tabIndex >= menuTabs.length - 2) {
     menuNextBtn.disabled = true;
+  }
+  if (tabIndex >= menuTabs.length - 1) {
+    menuNextBtn.hidden = true;
   }
 }
 
