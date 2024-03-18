@@ -8,6 +8,7 @@ from django.conf import settings
 from django.http import HttpRequest, response
 from django.views.generic import TemplateView
 from django_mapengine import views
+from django.utils.translation import gettext_lazy as _
 
 from digiplan import __version__
 from digiplan.map import config
@@ -27,7 +28,7 @@ class MapGLView(TemplateView, views.MapEngineMixin):
             category: [forms.StaticLayerForm(layer) for layer in layers]
             for category, layers in map_config.LEGEND.items()
         },
-        "pv_map_control": "Settlements Infrastructure",
+        "pv_map_control": _("Settlements Infrastructure"),
         "store_hot_init": config.STORE_HOT_INIT,
         "oemof_scenario": settings.OEMOF_SCENARIO,
     }
