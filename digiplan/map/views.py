@@ -27,6 +27,7 @@ class MapGLView(TemplateView, views.MapEngineMixin):
             category: [forms.StaticLayerForm(layer) for layer in layers]
             for category, layers in map_config.LEGEND.items()
         },
+        "pv_map_control": "Settlements Infrastructure",
         "store_hot_init": config.STORE_HOT_INIT,
         "oemof_scenario": settings.OEMOF_SCENARIO,
     }

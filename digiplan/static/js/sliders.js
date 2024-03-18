@@ -34,6 +34,8 @@ const potentialWindLayers = [
   "potentialarea_wind_stp_2027",
 ];
 
+const pvMapControl = document.getElementsByClassName("map__layers-pv")[0];
+
 // Setup
 
 $(".js-slider.js-slider-panel.js-power-mix").ionRangeSlider({
@@ -99,6 +101,7 @@ PubSub.subscribe(
   showOrHidePotentialLayersOnMoreLabelClick,
 );
 PubSub.subscribe(eventTopics.PV_CONTROL_ACTIVATED, showPVLayers);
+PubSub.subscribe(eventTopics.PV_CONTROL_ACTIVATED, highlightPVMapControls);
 PubSub.subscribe(eventTopics.PV_ROOF_CONTROL_ACTIVATED, showPVRoofLayers);
 PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, showWindLayers);
 
@@ -408,6 +411,15 @@ function hidePotentialLayers(msg) {
     .concat(potentialWindLayers)) {
     map.setLayoutProperty(layer, "visibility", "none");
   }
+  return logMessage(msg);
+}
+
+function highlightPVMapControls(msg) {
+  pvMapControl.scrollIntoView();
+  pvMapControl.classList.add("blinking");
+  setTimeout(function () {
+    pvMapControl.classList.remove("blinking");
+  }, 2000);
   return logMessage(msg);
 }
 
