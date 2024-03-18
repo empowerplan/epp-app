@@ -113,7 +113,7 @@
   },
   "s_pv_ff_4": {
     "class": "js-slider js-slider-detail-panel",
-    "label": "{% trans 'Agri-PV (vertikal) auf Agrarflächen mittlerer Bodengüte\nGemeinsame Nutzung mit Landwirtschaft (%)' %} ",
+    "label": "{% trans 'Agri-PV (vertikal) auf Agrarflächen mittlerer Bodengüte<br>Gemeinsame Nutzung mit Landwirtschaft (%)' %} ",
     "max": 100,
     "min": 0,
     "start": 0,
@@ -123,7 +123,7 @@
   },
   "s_pv_ff_5": {
     "class": "js-slider js-slider-detail-panel",
-    "label": "{% trans 'Agri-PV (hoch aufgeständert) über Dauerkulturen\nGemeinsame Nutzung mit Landwirtschaft (%)' %} ",
+    "label": "{% trans 'Agri-PV (hoch aufgeständert) über Dauerkulturen<br>Gemeinsame Nutzung mit Landwirtschaft (%)' %} ",
     "max": 100,
     "min": 0,
     "start": 0,
