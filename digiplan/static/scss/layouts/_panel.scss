@@ -475,7 +475,7 @@
 
   .sidepanel__tabs .sidepanel-tabs {
     @include custom-tabs {
-      
+
       .sidepanel-tabs__nav-item .sidepanel-tabs__nav-link {
         padding-top: 0.25rem !important;
         padding-bottom: 0.25rem !important;
@@ -606,7 +606,7 @@
       @include settings-details-slider($epp-color-pv-low);
 
       &__label:before {
-        background-image: url('../../images/icons/pv_low_outlined.svg');
+        background-image: url('/static/images/icons/pv_low_outlined.svg');
       }
     }
 
@@ -614,7 +614,7 @@
       @include settings-details-slider($epp-color-pv-medium);
 
       &__label:before {
-        background-image: url('../../images/icons/pv_medium_outlined.svg');
+        background-image: url('/static/images/icons/pv_medium_outlined.svg');
       }
     }
 
@@ -622,7 +622,7 @@
       @include settings-details-slider($epp-color-pv-high);
 
       &__label:before {
-        background-image: url('../../images/icons/pv_high_outlined.svg');
+        background-image: url('/static/images/icons/pv_high_outlined.svg');
       }
     }
   }
