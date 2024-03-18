@@ -545,8 +545,8 @@ class Floodplain(StaticRegionModel):  # noqa: D101
 
 
 class Forest(StaticRegionModel):  # noqa: D101
-    data_file = "forest_region"
-    layer = "forest"
+    data_file = "pv_ground_criteria_forest"
+    layer = "Wald"
 
 
 class Grid(StaticRegionModel):  # noqa: D101
@@ -579,6 +579,11 @@ class NatureConservationArea(StaticRegionModel):  # noqa: D101
     layer = "nature_conservation_area"
 
 
+class NaturePark(StaticRegionModel):  # noqa: D101
+    data_file = "nature_park_region"
+    layer = "nature_park"
+
+
 class Railway(StaticRegionModel):  # noqa: D101
     data_file = "railway_region"
     layer = "railway"
@@ -589,24 +594,28 @@ class Road(StaticRegionModel):  # noqa: D101
     layer = "road"
 
 
-class SoilQualityHigh(StaticRegionModel):  # noqa: D101
-    data_file = "soil_quality_high_region"
-    layer = "soil_quality_high"
-
-
-class SoilQualityLow(StaticRegionModel):  # noqa: D101
-    data_file = "soil_quality_low_region"
-    layer = "soil_quality_low"
-
-
 class SpecialProtectionArea(StaticRegionModel):  # noqa: D101
     data_file = "special_protection_area_region"
     layer = "special_protection_area"
 
 
-class Water(StaticRegionModel):  # noqa: D101
-    data_file = "water_region"
-    layer = "water"
+class WaterFirstOrder(StaticRegionModel):  # noqa: D101
+    data_file = "pv_ground_criteria_water_first_order"
+    layer = "Geweasser_1_Ordnung"
+
+    geom = models.MultiLineStringField(srid=4326)
+
+    mapping = {"geom": "MULTILINESTRING"}
+
+
+class WaterBodies(StaticRegionModel):  # noqa: D101
+    data_file = "pv_ground_criteria_water_bodies"
+    layer = "Stillgewaesser_Groesser_5ha"
+
+
+class Moor(StaticRegionModel):  # noqa: D101
+    data_file = "pv_ground_criteria_moor"
+    layer = "Mooregroessernull"
 
 
 class PVGroundCriteriaSettlements(StaticRegionModel):  # noqa: D101
@@ -622,6 +631,36 @@ class PVGroundCriteriaSettlements200m(StaticRegionModel):  # noqa: D101
 class PVGroundCriteriaAviation(StaticRegionModel):  # noqa: D101
     data_file = "pv_ground_criteria_aviation"
     layer = "Landebahnflaechen"
+
+
+class PVGroundCriteriaBiotope(StaticRegionModel):  # noqa: D101
+    data_file = "pv_ground_criteria_biotopes"
+    layer = "Gesetzlich_Geschuetzte_Biotope"
+
+
+class PVGroundCriteriaOpenSpaces(StaticRegionModel):  # noqa: D101
+    data_file = "pv_ground_criteria_linked_open_spaces"
+    layer = "Freiraumverbund_LEP_HR"
+
+
+class PVGroundCriteriaNatureMonuments(StaticRegionModel):  # noqa: D101
+    data_file = "pv_ground_criteria_nature_monuments"
+    layer = "Naturdenkmaeler"
+
+
+class PriorityClimateResistentAgri(StaticRegionModel):  # noqa: D101
+    data_file = "pv_ground_criteria_priority_areas_climate_resistent_agri"
+    layer = "Vorzugsgebiete_Klimarobust_Ackerland"
+
+
+class PriorityPermanentCrops(StaticRegionModel):  # noqa: D101
+    data_file = "pv_ground_criteria_priority_areas_permanent_crops"
+    layer = "Vorzugsgebiete_Dauerkultur"
+
+
+class PriorityGrassland(StaticRegionModel):  # noqa: D101
+    data_file = "pv_ground_criteria_priority_areas_grassland"
+    layer = "Vorzugsgebiete_Gruenland"
 
 
 class PotentialareaPVAgricultureLFAOff(StaticRegionModel):  # noqa: D101
