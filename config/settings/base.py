@@ -271,9 +271,9 @@ OEMOF_SCENARIO = env.str("OEMOF_SCENARIO", "scenario_2045")
 
 # django-mapengine
 # ------------------------------------------------------------------------------
-MAP_ENGINE_CENTER_AT_STARTUP = [14.2, 52.4]
+MAP_ENGINE_CENTER_AT_STARTUP = [14.2, 52.45]
 MAP_ENGINE_ZOOM_AT_STARTUP = 7
-MAP_ENGINE_MAX_BOUNDS = [[10, 40.0], [20, 60]]
+MAP_ENGINE_MAX_BOUNDS = [[12.7, 51.8], [16.2, 53.1]]
 
 MAP_ENGINE_IMAGES = [
     setup.MapImage("wind", "images/icons/map_wind.png"),
@@ -290,6 +290,7 @@ MAP_ENGINE_IMAGES = [
     setup.MapImage("combustion_plus", "images/icons/map_combustion_plus.png"),
     setup.MapImage("gsgk_plus", "images/icons/map_gsgk_plus.png"),
     setup.MapImage("storage_plus", "images/icons/map_battery_plus.png"),
+    setup.MapImage("wind_hatch", "images/map_wind_hatch.png"),
 ]
 
 MAP_ENGINE_API_MVTS = {
@@ -298,6 +299,8 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
     ],
     "static": [
+        setup.MVTAPI("soil_quality_low", "map", "SoilQualityLow"),
+        setup.MVTAPI("soil_quality_high", "map", "SoilQualityHigh"),
         setup.MVTAPI("landscape_protection_area", "map", "LandscapeProtectionArea"),
         setup.MVTAPI("forest", "map", "Forest"),
         setup.MVTAPI("special_protection_area", "map", "SpecialProtectionArea"),
@@ -328,9 +331,15 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("priority_grassland", "map", "PriorityGrassland"),
     ],
     "potential": [
+        setup.MVTAPI("potentialarea_pv_ground_soil_quality_low", "map", "PotentialareaPVGroundSoilQualityLow"),
+        setup.MVTAPI("potentialarea_pv_ground_soil_quality_medium", "map", "PotentialareaPVGroundSoilQualityMedium"),
+        setup.MVTAPI("potentialarea_pv_ground_permanent_crops", "map", "PotentialareaPVGroundPermanentCrops"),
         setup.MVTAPI("potentialarea_wind_stp_2018_eg", "map", "PotentialAreaWindSTP2018EG"),
         setup.MVTAPI("potentialarea_wind_stp_2024_vr", "map", "PotentialAreaWindSTP2024VR"),
         setup.MVTAPI("potentialarea_wind_stp_2027", "map", "Municipality"),
+    ],
+    "potential_roof": [
+        setup.MVTAPI("potentialarea_pv_roof", "map", "PotentialareaPVRoof"),
     ],
     "results": [setup.MVTAPI("results", "map", "Municipality")],
 }

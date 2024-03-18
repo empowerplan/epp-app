@@ -50,10 +50,16 @@ MODELS = [
     models.PVGroundCriteriaNatureMonuments,
     models.Railway,
     models.Road,
+    models.SoilQualityLow,
+    models.SoilQualityHigh,
     models.SpecialProtectionArea,
     models.WaterBodies,
     models.WaterFirstOrder,
     # PotentialAreas
+    models.PotentialareaPVGroundSoilQualityLow,
+    models.PotentialareaPVGroundSoilQualityMedium,
+    models.PotentialareaPVGroundPermanentCrops,
+    models.PotentialareaPVRoof,
     models.PotentialAreaWindSTP2018EG,
     models.PotentialAreaWindSTP2024VR,
 ]

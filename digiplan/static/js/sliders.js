@@ -23,9 +23,11 @@ const powerIcons = {
 };
 
 const potentialPVLayers = [
-  "potentialarea_pv_agriculture_lfa-off_region",
-  "potentialarea_pv_road_railway_region",
+  "potentialarea_pv_ground_soil_quality_low",
+  "potentialarea_pv_ground_soil_quality_medium",
+  "potentialarea_pv_ground_permanent_crops",
 ];
+const potentialPVRoofLayers = ["potentialarea_pv_roof"];
 const potentialWindLayers = [
   "potentialarea_wind_stp_2018_eg",
   "potentialarea_wind_stp_2024_vr",
@@ -97,6 +99,7 @@ PubSub.subscribe(
   showOrHidePotentialLayersOnMoreLabelClick,
 );
 PubSub.subscribe(eventTopics.PV_CONTROL_ACTIVATED, showPVLayers);
+PubSub.subscribe(eventTopics.PV_ROOF_CONTROL_ACTIVATED, showPVRoofLayers);
 PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, showWindLayers);
 
 // Subscriber Functions
@@ -138,7 +141,11 @@ function adaptMainSliders(msg, data) {
   if (slider_id === "id_s_pv_d_3") {
     calculate_max_pv_d();
   }
-  if (slider_id === "id_s_pv_ff_3" || slider_id === "id_s_pv_ff_4") {
+  if (
+    slider_id === "id_s_pv_ff_3" ||
+    slider_id === "id_s_pv_ff_4" ||
+    slider_id === "id_s_pv_ff_5"
+  ) {
     calculate_max_pv_ff();
   }
   if (
@@ -214,6 +221,9 @@ function showOrHidePotentialLayersOnMoreLabelClick(msg, moreLabel) {
     const sliderLabel = moreLabel.getElementsByTagName("input")[0];
     if (sliderLabel.id === "id_s_pv_ff_1") {
       PubSub.publish(eventTopics.PV_CONTROL_ACTIVATED);
+    }
+    if (sliderLabel.id === "id_s_pv_d_1") {
+      PubSub.publish(eventTopics.PV_ROOF_CONTROL_ACTIVATED);
     }
     if (sliderLabel.id === "id_s_w_1") {
       PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
@@ -302,6 +312,14 @@ function showPVLayers(msg) {
   return logMessage(msg);
 }
 
+function showPVRoofLayers(msg) {
+  hidePotentialLayers();
+  for (const layer of potentialPVRoofLayers) {
+    map.setLayoutProperty(layer, "visibility", "visible");
+  }
+  return logMessage(msg);
+}
+
 function calculate_max_wind() {
   const currentWindTab = document
     .getElementById("windTab")
@@ -325,20 +343,29 @@ function calculate_max_wind() {
 }
 
 function calculate_max_pv_ff() {
-  let slider_one = $("#id_s_pv_ff_3").data("ionRangeSlider").result.from / 100;
-  let slider_two = $("#id_s_pv_ff_4").data("ionRangeSlider").result.from / 100;
-  let new_max =
-    slider_one * Math.round(store.cold.slider_max.s_pv_ff_3) +
-    slider_two * Math.round(store.cold.slider_max.s_pv_ff_4);
+  const slider_soil_quality_low =
+    $("#id_s_pv_ff_3").data("ionRangeSlider").result.from / 100;
+  const slider_soil_quality_medium =
+    $("#id_s_pv_ff_4").data("ionRangeSlider").result.from / 100;
+  const slider_permanent_crops =
+    $("#id_s_pv_ff_5").data("ionRangeSlider").result.from / 100;
+  const newPVMax =
+    slider_soil_quality_low *
+      Math.round(store.cold.potentials.pv_soil_quality_low) +
+    slider_soil_quality_medium *
+      Math.round(store.cold.potentials.pv_soil_quality_medium) +
+    slider_permanent_crops *
+      Math.round(store.cold.potentials.pv_permanent_crops);
   $(`#id_s_pv_ff_1`)
     .data("ionRangeSlider")
-    .update({ max: Math.round(new_max) });
+    .update({ max: Math.round(newPVMax) });
 }
 
 function calculate_max_pv_d() {
-  let slider = $("#id_s_pv_d_3").data("ionRangeSlider").result.from / 100;
-  let new_max = Math.round(slider * store.cold.slider_max.s_pv_d_3);
-  $(`#id_s_pv_d_1`).data("ionRangeSlider").update({ max: new_max });
+  const slider_value =
+    $("#id_s_pv_d_3").data("ionRangeSlider").result.from / 100;
+  const newPVMax = Math.round(slider_value * store.cold.potentials.pv_roof);
+  $(`#id_s_pv_d_1`).data("ionRangeSlider").update({ max: newPVMax });
 }
 
 function showWindLayers(msg) {
@@ -376,7 +403,9 @@ function showWindLayers(msg) {
 }
 
 function hidePotentialLayers(msg) {
-  for (const layer of potentialPVLayers.concat(potentialWindLayers)) {
+  for (const layer of potentialPVLayers
+    .concat(potentialPVRoofLayers)
+    .concat(potentialWindLayers)) {
     map.setLayoutProperty(layer, "visibility", "none");
   }
   return logMessage(msg);

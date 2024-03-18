@@ -663,6 +663,26 @@ class PriorityGrassland(StaticRegionModel):  # noqa: D101
     layer = "Vorzugsgebiete_Gruenland"
 
 
+class PotentialareaPVGroundSoilQualityLow(StaticRegionModel):  # noqa: D101
+    data_file = "potentialarea_pv_ground_soil_quality_low_region"
+    layer = "potentialarea_pv_ground_soil_quality_low_region"
+
+
+class PotentialareaPVGroundSoilQualityMedium(StaticRegionModel):  # noqa: D101
+    data_file = "potentialarea_pv_ground_soil_quality_medium_region"
+    layer = "potentialarea_pv_ground_soil_quality_medium_region"
+
+
+class PotentialareaPVGroundPermanentCrops(StaticRegionModel):  # noqa: D101
+    data_file = "potentialarea_pv_ground_permanent_crops_region"
+    layer = "potentialarea_pv_ground_permanent_crops_region"
+
+
+class PotentialareaPVRoof(StaticRegionModel):  # noqa: D101
+    data_file = "potentialarea_pv_roof_region"
+    layer = "potentialarea_pv_roof_region"
+
+
 class PotentialAreaWindSTP2018EG(StaticRegionModel):  # noqa: D101
     data_file = "potentialarea_wind_stp_2018_eg"
     layer = "potentialarea_wind_stp_2018_eg"

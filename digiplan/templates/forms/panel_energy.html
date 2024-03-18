@@ -40,10 +40,10 @@
   <div class="sidepanel__tabs">
     <ul class="nav nav-tabs sidepanel-tabs" id="windTab" role="tablist">
       <li class="sidepanel-tabs__nav-item" role="presentation">
-        <button class="sidepanel-tabs__nav-link active" id="windPastTab" data-bs-toggle="tab" data-bs-target="#windPast" type="button" role="tab" aria-controls="windPast" aria-selected="true">2018</button>
+        <button class="sidepanel-tabs__nav-link" id="windPastTab" data-bs-toggle="tab" data-bs-target="#windPast" type="button" role="tab" aria-controls="windPast" aria-selected="true">2018</button>
       </li>
       <li class="sidepanel-tabs__nav-item" role="presentation">
-        <button class="sidepanel-tabs__nav-link" id="windPresentTab" data-bs-toggle="tab" data-bs-target="#windPresent" type="button" role="tab" aria-controls="windPresent" aria-selected="false">2024</button>
+        <button class="sidepanel-tabs__nav-link active" id="windPresentTab" data-bs-toggle="tab" data-bs-target="#windPresent" type="button" role="tab" aria-controls="windPresent" aria-selected="false">2024</button>
       </li>
       <li class="sidepanel-tabs__nav-item" role="presentation">
         <button class="sidepanel-tabs__nav-link" id="windFutureTab" data-bs-toggle="tab" data-bs-target="#windFuture" type="button" role="tab" aria-controls="windFuture" aria-selected="false">2027+</button>
@@ -51,7 +51,7 @@
     </ul>
   </div>
   <div class="tab-content" id="windTabContent">
-    <div class="tab-pane fade show active" id="windPast" role="tabpanel" aria-labelledby="windPastTab">
+    <div class="tab-pane fade" id="windPast" role="tabpanel" aria-labelledby="windPastTab">
       <div class="sidepanel__block">
         <div class="sidepanel__key-numbers">
           <div class="sidepanel__key-number">
@@ -97,7 +97,7 @@
               <svg width="12" height="12" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.936" xmlns="http://www.w3.org/2000/svg">
                 <path d="m6.1387 0.1875-1.4961 1.4961 6.7832 6.7832-6.7832 6.7832 1.4961 1.4961 8.2793-8.2793z"/>
               </svg>
-              {%  trans "Mehr Details" %}
+              {%  trans "Mehr Informationen" %}
             </button>
           </div>
           <div class="collapse sidepanel__more-collapse" id="collapseWindPastMore">
@@ -108,11 +108,13 @@
         </div>
       </div>
     </div>
-    <div class="tab-pane fade" id="windPresent" role="tabpanel" aria-labelledby="windPresentTab">
-      <div class="sidepanel__slider">
-        <span>
-          {% include "widgets/slider.html" with field=form.s_w_6 %}
-        </span>
+    <div class="tab-pane fade show active" id="windPresent" role="tabpanel" aria-labelledby="windPresentTab">
+      <div class="sidepanel__sliders">
+        <div class="sidepanel__slider sidepanel__slider--wind">
+          <span>
+            {% include "widgets/slider.html" with field=form.s_w_6 %}
+          </span>
+        </div>
       </div>
       <div class="sidepanel__block">
         <div class="sidepanel__key-numbers">
@@ -159,7 +161,7 @@
               <svg width="12" height="12" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.936" xmlns="http://www.w3.org/2000/svg">
                 <path d="m6.1387 0.1875-1.4961 1.4961 6.7832 6.7832-6.7832 6.7832 1.4961 1.4961 8.2793-8.2793z"/>
               </svg>
-              {%  trans "Mehr Details" %}
+              {%  trans "Mehr Informationen" %}
             </button>
           </div>
           <div class="collapse sidepanel__more-collapse" id="collapseWindPresentMore">
@@ -171,10 +173,12 @@
       </div>
     </div>
     <div class="tab-pane fade" id="windFuture" role="tabpanel" aria-labelledby="windFutureTab">
-      <div class="sidepanel__slider">
-        <span>
-          {% include "widgets/slider.html" with field=form.s_w_7 %}
-        </span>
+      <div class="sidepanel__sliders">
+        <div class="sidepanel__slider sidepanel__slider--wind">
+          <span>
+            {% include "widgets/slider.html" with field=form.s_w_7 %}
+          </span>
+        </div>
       </div>
       <div class="sidepanel__block">
         <div class="sidepanel__key-numbers">
@@ -221,7 +225,7 @@
               <svg width="12" height="12" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.936" xmlns="http://www.w3.org/2000/svg">
                 <path d="m6.1387 0.1875-1.4961 1.4961 6.7832 6.7832-6.7832 6.7832 1.4961 1.4961 8.2793-8.2793z"/>
               </svg>
-              {%  trans "Mehr Details" %}
+              {%  trans "Mehr Informationen" %}
             </button>
           </div>
           <div class="collapse sidepanel__more-collapse" id="collapseWindFutureMore">
@@ -232,12 +236,12 @@
         </div>
       </div>
     </div>
-  </div> 
+  </div>
 <!--   <div class="sidepanel__block">
     <span class="sidepanel__block--wind-light">
       {% include "widgets/slider.html" with field=form.s_w_3 %}
     </span>
-  </div> 
+  </div>
   <div class="sidepanel__block">
     <span class="sidepanel__block--wind-light">
       {% include "widgets/slider.html" with field=form.s_w_4 %}
@@ -265,24 +269,54 @@
 {% include "widgets/slider.html" with field=form.s_pv_ff_1 %}
 <div class="sidepanel sidepanel--pv-outdoor">
   <div class="sidepanel__heading">
-    {%  trans "Detail settings" %}
+    <div class="sidepanel__title">
+      <div class="sidepanel__title-icon sidepanel__title-icon--pv">
+        <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.936" xmlns="http://www.w3.org/2000/svg">
+          <path d="m4.3692 1.0589-3.4923 11.64h0.71107 2.6443v3.176h1.0589v-3.176h6.3516v3.176h1.0563v-3.176h3.3574l-3.4918-11.64h-8.1954zm0.78703 1.0583h2.7812v2.1151h-3.4163l0.6351-2.1151zm3.8401 0h2.7812l0.6351 2.1151h-3.4163v-2.1151zm-4.793 3.174h3.7341v2.1172h-4.3692l0.6351-2.1172zm4.793 0h3.7341l0.6351 2.1172h-4.3692v-2.1172zm-5.7459 3.1755h4.6871v3.176h-5.6405l0.95343-3.176zm5.7459 0h4.6871l0.95343 3.176h-5.6405v-3.176z" color="#000000" fill-rule="evenodd" stroke-dashoffset="5.2899"/>
+        </svg>
+      </div>
+      <div class="sidepanel__title-text">
+        {%  trans "Details" %}
+      </div>
+    </div>
     {% include "widgets/sidepanel_close_btn.html" %}
   </div>
   <p class="sidepanel__indication">
-    {%  trans "Stelle die Nutzung von Potenzialgebieten für Freiflächen-PV ein:" %}
+    {%  trans "Nutzung von Potenzialgebieten für Freiflächen-PV:" %}
   </p>
-  <div class="sidepanel__block sidepanel__block--slider">
-    <span class="sidepanel__block--pv-light">
-      {% include "widgets/slider.html" with field=form.s_pv_ff_3 %}
-    </span>
+  <div class="sidepanel__sliders">
+    <div class="sidepanel__slider sidepanel__slider--pv-low">
+      <span>
+        {% include "widgets/slider.html" with field=form.s_pv_ff_3 %}
+      </span>
+    </div>
+    <div class="sidepanel__slider sidepanel__slider--pv-medium">
+      <span>
+        {% include "widgets/slider.html" with field=form.s_pv_ff_4 %}
+      </span>
+    </div>
+    <div class="sidepanel__slider sidepanel__slider--pv-high">
+      <span>
+        {% include "widgets/slider.html" with field=form.s_pv_ff_5 %}
+      </span>
+    </div>
   </div>
-  <div class="sidepanel__block sidepanel__block--slider">
-    <span class="sidepanel__block--pv-dark">
-      {% include "widgets/slider.html" with field=form.s_pv_ff_4 %}
-    </span>
-  </div>
-  <div class="sidepanel__results">
-    <p>{%  trans "Rechts siehst Du die Potenzialflächen, links die maximal erreichbare Leistung für deine Einstellung.<br><br>Im Menü rechts in der Karte kannst Du die heute bestehenden Anlagen einblenden." %}</p>
+  <div class="sidepanel__block">
+    <div class="sidepanel__more">
+      <div>
+        <button class="sidepanel__more-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWindPastMore" aria-expanded="false" aria-controls="collapseWindPastMore">
+          <svg width="12" height="12" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.936" xmlns="http://www.w3.org/2000/svg">
+            <path d="m6.1387 0.1875-1.4961 1.4961 6.7832 6.7832-6.7832 6.7832 1.4961 1.4961 8.2793-8.2793z"/>
+          </svg>
+          {%  trans "Mehr Informationen" %}
+        </button>
+      </div>
+      <div class="collapse sidepanel__more-collapse" id="collapseWindPastMore">
+        <div>
+          {%  trans "Hier kommen mehr Details." %}
+        </div>
+      </div>
+    </div>
   </div>
   </p>
 </div>
