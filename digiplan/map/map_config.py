@@ -75,12 +75,20 @@ LEGEND = {
     ],
     _("Settlements Infrastructure"): [
         legend.LegendLayer(
-            _("Settlement 0m"),
+            _("PV ground criteria settlement 0m"),
             _(
                 "Eine Siedlung ist ein Gebiet, welches die menschliche Niederlassung in beliebiger Form der "
                 "gruppierten Behausung beschreibt. Sie beinhaltet überwiegend Wohngebiete.",
             ),
-            layer_id="settlement-0m",
+            layer_id="pv_ground_criteria_settlements",
+        ),
+        legend.LegendLayer(
+            _("PV ground criteria settlement 200m"),
+            _(
+                "Eine Siedlung ist ein Gebiet, welches die menschliche Niederlassung in beliebiger Form der "
+                "gruppierten Behausung beschreibt. Sie beinhaltet überwiegend Wohngebiete.",
+            ),
+            layer_id="pv_ground_criteria_settlements_200m",
         ),
         legend.LegendLayer(
             _("Industry"),
@@ -89,14 +97,6 @@ LEGEND = {
                 "Geruch oder Gefahren auf Wohnbebauung zu vermeiden.",
             ),
             layer_id="industry",
-        ),
-        legend.LegendLayer(
-            _("Road Railway 500m"),
-            _(
-                "Die Flächen längs von Autobahnen oder Schienenwegen werden durch Erstellen einer 500 m breiten "
-                "Pufferzone abzüglich einer 15 m breiten Pufferzone gebildet.",
-            ),
-            layer_id="road_railway-500m_region",
         ),
         legend.LegendLayer(
             _("Road"),
@@ -112,12 +112,12 @@ LEGEND = {
             layer_id="railway",
         ),
         legend.LegendLayer(
-            _("Aviation"),
+            _("PV ground criteria aviation"),
             _(
                 "Zur Infrastruktur des Luftverkehrs gehören neben Start- und Landebahnen die "
                 "Flughafengebäude und Hangars.",
             ),
-            layer_id="aviation",
+            layer_id="pv_ground_criteria_aviation",
         ),
         legend.LegendLayer(
             _("Air Traffic"),

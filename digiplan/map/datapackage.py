@@ -10,7 +10,7 @@ from django.conf import settings
 from django_oemof.settings import OEMOF_DIR
 
 from config.settings.base import DATA_DIR
-from digiplan.map import config
+from digiplan.map import config, models
 
 
 def get_employment() -> pd.DataFrame:
@@ -161,45 +161,50 @@ def get_potential_values(*, per_municipality: bool = False) -> dict:
     scalars = {
         "wind": "potentialarea_wind_area_stats_muns.csv",
         "pv_ground": "potentialarea_pv_ground_area_stats_muns.csv",
-        "pv_roof": "potentialarea_pv_roof_wo_historic_area_stats_muns.csv",
+        "pv_roof": "potentialarea_pv_roof_area_stats_muns.csv",
     }
 
     areas = {
         "wind": {
-            "s_w_3": "stp_2018_vreg",
-            "s_w_4_1": "stp_2027_vr",
-            "s_w_4_2": "stp_2027_repowering",
-            "s_w_5_1": "stp_2027_search_area_open_area",
-            "s_w_5_2": "stp_2027_search_area_forest_area",
+            "wind_2018": "stp_2018_eg",
+            "wind_2024": "stp_2024_vr",
+            "wind_2027": area
+            if (area := models.Municipality.objects.all().values("area").aggregate(models.Sum("area"))["area__sum"])
+            else 0,  # to prevent None if regions are empty
         },
-        "pv_ground": {"s_pv_ff_3": "road_railway_region", "s_pv_ff_4": "agriculture_lfa-off_region"},
-        "pv_roof": {"s_pv_d_3": None},
+        "pv_ground": {
+            "pv_soil_quality_low": "soil_quality_low_region",
+            "pv_soil_quality_medium": "soil_quality_medium_region",
+            "pv_permanent_crops": "permanent_crops_region",
+        },
+        "pv_roof": {"pv_roof": "installable_power"},
     }
 
-    tech_data = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "scalars/technology_data.json")))
+    pv_density = {
+        "pv_soil_quality_low": "pv_ground",
+        "pv_soil_quality_medium": "pv_ground_vertical_bifacial",
+        "pv_permanent_crops": "pv_ground_elevated",
+    }
+
+    power_density = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "scalars/technology_data.json")))["power_density"]
 
     potentials = {}
     for profile in areas:
         path = Path(DATA_DIR, "digipipe/scalars", scalars[profile])
         reader = pd.read_csv(path)
         for key, value in areas[profile].items():
-            if key == "s_pv_d_3":
-                pv_roof_potential = reader[
-                    [f"installable_power_{orient}" for orient in ["south", "north", "east", "west", "flat"]]
-                ].sum(axis=1)
-                if per_municipality:
-                    potentials = pv_roof_potential
-                else:
-                    potentials[key] = pv_roof_potential.sum()
+            if key == "wind_2027":
+                # Value is already calculated from region area (see above)
+                potentials[key] = value
             else:
-                if per_municipality:
+                if per_municipality:  # noqa: PLR5501
                     potentials[key] = reader[value]
                 else:
                     potentials[key] = reader[value].sum()
-                if profile == "wind":
-                    potentials[key] = potentials[key] * tech_data["power_density"]["wind"]
-                if profile == "pv_ground":
-                    potentials[key] = potentials[key] * tech_data["power_density"]["pv_ground"]
+            if profile == "wind":
+                potentials[key] = potentials[key] * power_density["wind"]
+            if profile == "pv_ground":
+                potentials[key] = potentials[key] * power_density[pv_density[key]]
     return potentials
 
 

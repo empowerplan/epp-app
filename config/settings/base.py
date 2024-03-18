@@ -76,6 +76,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 # ------------------------------------------------------------------------------
 DJANGO_APPS = [
     "django.contrib.auth",
+    "django.contrib.admin",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.sites",
@@ -83,6 +84,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
     "django.forms",
+    "django.contrib.gis",
 ]
 
 THIRD_PARTY_APPS = [
@@ -109,6 +111,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -153,6 +156,7 @@ TEMPLATES = [
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
             "context_processors": [
                 "django.template.context_processors.debug",
+                "django.contrib.auth.context_processors.auth",
                 "django.template.context_processors.request",
                 "django.template.context_processors.i18n",
                 "django.template.context_processors.media",
@@ -267,9 +271,9 @@ OEMOF_SCENARIO = env.str("OEMOF_SCENARIO", "scenario_2045")
 
 # django-mapengine
 # ------------------------------------------------------------------------------
-MAP_ENGINE_CENTER_AT_STARTUP = [14.2, 52.4]
+MAP_ENGINE_CENTER_AT_STARTUP = [14.2, 52.45]
 MAP_ENGINE_ZOOM_AT_STARTUP = 7
-MAP_ENGINE_MAX_BOUNDS = [[12.7, 51.0], [15.7, 53.8]]
+MAP_ENGINE_MAX_BOUNDS = [[12.7, 51.8], [16.2, 53.1]]
 
 MAP_ENGINE_IMAGES = [
     setup.MapImage("wind", "images/icons/map_wind.png"),
@@ -286,6 +290,7 @@ MAP_ENGINE_IMAGES = [
     setup.MapImage("combustion_plus", "images/icons/map_combustion_plus.png"),
     setup.MapImage("gsgk_plus", "images/icons/map_gsgk_plus.png"),
     setup.MapImage("storage_plus", "images/icons/map_battery_plus.png"),
+    setup.MapImage("wind_hatch", "images/map_wind_hatch.png"),
 ]
 
 MAP_ENGINE_API_MVTS = {
@@ -300,7 +305,6 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("forest", "map", "Forest"),
         setup.MVTAPI("special_protection_area", "map", "SpecialProtectionArea"),
         setup.MVTAPI("air_traffic", "map", "AirTraffic"),
-        setup.MVTAPI("aviation", "map", "Aviation"),
         setup.MVTAPI("biosphere_reserve", "map", "BiosphereReserve"),
         setup.MVTAPI("drinking_water_protection_area", "map", "DrinkingWaterArea"),
         setup.MVTAPI("fauna_flora_habitat", "map", "FaunaFloraHabitat"),
@@ -312,26 +316,21 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("nature_conservation_area", "map", "NatureConservationArea"),
         setup.MVTAPI("railway", "map", "Railway"),
         setup.MVTAPI("road_default", "map", "Road"),
-        setup.MVTAPI("road_railway-500m_region", "map", "RoadRailway500m"),
-        setup.MVTAPI("settlement-0m", "map", "Settlement0m"),
         setup.MVTAPI("water", "map", "Water"),
+        setup.MVTAPI("pv_ground_criteria_settlements", "map", "PVGroundCriteriaSettlements"),
+        setup.MVTAPI("pv_ground_criteria_settlements_200m", "map", "PVGroundCriteriaSettlements200m"),
+        setup.MVTAPI("pv_ground_criteria_aviation", "map", "PVGroundCriteriaAviation"),
     ],
     "potential": [
-        setup.MVTAPI("potentialarea_pv_agriculture_lfa-off_region", "map", "PotentialareaPVAgricultureLFAOff"),
-        setup.MVTAPI("potentialarea_pv_road_railway_region", "map", "PotentialareaPVRoadRailway"),
-        setup.MVTAPI("potentialarea_wind_stp_2018_vreg", "map", "PotentialareaWindSTP2018Vreg"),
-        setup.MVTAPI("potentialarea_wind_stp_2027_repowering", "map", "PotentialareaWindSTP2027Repowering"),
-        setup.MVTAPI(
-            "potentialarea_wind_stp_2027_search_area_forest_area",
-            "map",
-            "PotentialareaWindSTP2027SearchAreaForestArea",
-        ),
-        setup.MVTAPI(
-            "potentialarea_wind_stp_2027_search_area_open_area",
-            "map",
-            "PotentialareaWindSTP2027SearchAreaOpenArea",
-        ),
-        setup.MVTAPI("potentialarea_wind_stp_2027_vr", "map", "PotentialareaWindSTP2027VR"),
+        setup.MVTAPI("potentialarea_pv_ground_soil_quality_low", "map", "PotentialareaPVGroundSoilQualityLow"),
+        setup.MVTAPI("potentialarea_pv_ground_soil_quality_medium", "map", "PotentialareaPVGroundSoilQualityMedium"),
+        setup.MVTAPI("potentialarea_pv_ground_permanent_crops", "map", "PotentialareaPVGroundPermanentCrops"),
+        setup.MVTAPI("potentialarea_wind_stp_2018_eg", "map", "PotentialAreaWindSTP2018EG"),
+        setup.MVTAPI("potentialarea_wind_stp_2024_vr", "map", "PotentialAreaWindSTP2024VR"),
+        setup.MVTAPI("potentialarea_wind_stp_2027", "map", "Municipality"),
+    ],
+    "potential_roof": [
+        setup.MVTAPI("potentialarea_pv_roof", "map", "PotentialareaPVRoof"),
     ],
     "results": [setup.MVTAPI("results", "map", "Municipality")],
 }

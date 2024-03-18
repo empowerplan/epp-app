@@ -524,11 +524,6 @@ class AirTraffic(StaticRegionModel):  # noqa: D101
     layer = "air_traffic_control_system"
 
 
-class Aviation(StaticRegionModel):  # noqa: D101
-    data_file = "aviation_region"
-    layer = "aviation"
-
-
 class BiosphereReserve(StaticRegionModel):  # noqa: D101
     data_file = "biosphere_reserve_region"
     layer = "biosphere_reserve"
@@ -589,19 +584,9 @@ class Railway(StaticRegionModel):  # noqa: D101
     layer = "railway"
 
 
-class RoadRailway500m(StaticRegionModel):  # noqa: D101
-    data_file = "road_railway-500m_region"
-    layer = "road_railway-500m"
-
-
 class Road(StaticRegionModel):  # noqa: D101
     data_file = "road_region"
     layer = "road"
-
-
-class Settlement0m(StaticRegionModel):  # noqa: D101
-    data_file = "settlement-0m_region"
-    layer = "settlement-0m"
 
 
 class SoilQualityHigh(StaticRegionModel):  # noqa: D101
@@ -624,36 +609,46 @@ class Water(StaticRegionModel):  # noqa: D101
     layer = "water"
 
 
-class PotentialareaPVAgricultureLFAOff(StaticRegionModel):  # noqa: D101
-    data_file = "potentialarea_pv_agriculture_lfa-off_region"
-    layer = "potentialarea_pv_agriculture_lfa-off"
+class PVGroundCriteriaSettlements(StaticRegionModel):  # noqa: D101
+    data_file = "pv_ground_criteria_settlements"
+    layer = "Wohnbauflaechen"
 
 
-class PotentialareaPVRoadRailway(StaticRegionModel):  # noqa: D101
-    data_file = "potentialarea_pv_road_railway_region"
-    layer = "potentialarea_pv_road_railway"
+class PVGroundCriteriaSettlements200m(StaticRegionModel):  # noqa: D101
+    data_file = "pv_ground_criteria_settlements_200m"
+    layer = "Wohnpuffer_200m"
 
 
-class PotentialareaWindSTP2018Vreg(StaticRegionModel):  # noqa: D101
-    data_file = "potentialarea_wind_stp_2018_vreg"
-    layer = "potentialarea_wind_stp_2018_vreg"
+class PVGroundCriteriaAviation(StaticRegionModel):  # noqa: D101
+    data_file = "pv_ground_criteria_aviation"
+    layer = "Landebahnflaechen"
 
 
-class PotentialareaWindSTP2027Repowering(StaticRegionModel):  # noqa: D101
-    data_file = "potentialarea_wind_stp_2027_repowering"
-    layer = "potentialarea_wind_stp_2027_repowering"
+class PotentialareaPVGroundSoilQualityLow(StaticRegionModel):  # noqa: D101
+    data_file = "potentialarea_pv_ground_soil_quality_low_region"
+    layer = "potentialarea_pv_ground_soil_quality_low_region"
 
 
-class PotentialareaWindSTP2027SearchAreaForestArea(StaticRegionModel):  # noqa: D101
-    data_file = "potentialarea_wind_stp_2027_search_area_forest_area"
-    layer = "potentialarea_wind_stp_2027_search_area_forest_area"
+class PotentialareaPVGroundSoilQualityMedium(StaticRegionModel):  # noqa: D101
+    data_file = "potentialarea_pv_ground_soil_quality_medium_region"
+    layer = "potentialarea_pv_ground_soil_quality_medium_region"
 
 
-class PotentialareaWindSTP2027SearchAreaOpenArea(StaticRegionModel):  # noqa: D101
-    data_file = "potentialarea_wind_stp_2027_search_area_open_area"
-    layer = "potentialarea_wind_stp_2027_search_area_open_area"
+class PotentialareaPVGroundPermanentCrops(StaticRegionModel):  # noqa: D101
+    data_file = "potentialarea_pv_ground_permanent_crops_region"
+    layer = "potentialarea_pv_ground_permanent_crops_region"
 
 
-class PotentialareaWindSTP2027VR(StaticRegionModel):  # noqa: D101
+class PotentialareaPVRoof(StaticRegionModel):  # noqa: D101
+    data_file = "potentialarea_pv_roof_region"
+    layer = "potentialarea_pv_roof_region"
+
+
+class PotentialAreaWindSTP2018EG(StaticRegionModel):  # noqa: D101
+    data_file = "potentialarea_wind_stp_2018_eg"
+    layer = "potentialarea_wind_stp_2018_eg"
+
+
+class PotentialAreaWindSTP2024VR(StaticRegionModel):  # noqa: D101
     data_file = "potentialarea_wind_stp_2024_vr"
     layer = "potentialarea_wind_stp_2024_vr"
