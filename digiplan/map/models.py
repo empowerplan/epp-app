@@ -663,16 +663,6 @@ class PriorityGrassland(StaticRegionModel):  # noqa: D101
     layer = "Vorzugsgebiete_Gruenland"
 
 
-class PotentialareaPVAgricultureLFAOff(StaticRegionModel):  # noqa: D101
-    data_file = "potentialarea_pv_agriculture_lfa-off_region"
-    layer = "potentialarea_pv_agriculture_lfa-off_region"
-
-
-class PotentialareaPVRoadRailway(StaticRegionModel):  # noqa: D101
-    data_file = "potentialarea_pv_road_railway_region"
-    layer = "potentialarea_pv_road_railway_region"
-
-
 class PotentialAreaWindSTP2018EG(StaticRegionModel):  # noqa: D101
     data_file = "potentialarea_wind_stp_2018_eg"
     layer = "potentialarea_wind_stp_2018_eg"

@@ -54,8 +54,6 @@ MODELS = [
     models.WaterBodies,
     models.WaterFirstOrder,
     # PotentialAreas
-    models.PotentialareaPVAgricultureLFAOff,
-    models.PotentialareaPVRoadRailway,
     models.PotentialAreaWindSTP2018EG,
     models.PotentialAreaWindSTP2024VR,
 ]
