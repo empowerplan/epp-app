@@ -299,8 +299,6 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
     ],
     "static": [
-        setup.MVTAPI("soil_quality_low", "map", "SoilQualityLow"),
-        setup.MVTAPI("soil_quality_high", "map", "SoilQualityHigh"),
         setup.MVTAPI("landscape_protection_area", "map", "LandscapeProtectionArea"),
         setup.MVTAPI("forest", "map", "Forest"),
         setup.MVTAPI("special_protection_area", "map", "SpecialProtectionArea"),

@@ -50,8 +50,6 @@ MODELS = [
     models.PVGroundCriteriaNatureMonuments,
     models.Railway,
     models.Road,
-    models.SoilQualityLow,
-    models.SoilQualityHigh,
     models.SpecialProtectionArea,
     models.WaterBodies,
     models.WaterFirstOrder,
