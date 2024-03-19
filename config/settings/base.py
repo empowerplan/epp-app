@@ -275,6 +275,12 @@ MAP_ENGINE_CENTER_AT_STARTUP = [14.2, 52.45]
 MAP_ENGINE_ZOOM_AT_STARTUP = 7
 MAP_ENGINE_MAX_BOUNDS = [[12.6, 51.8], [16.1, 53.1]]
 
+# distill
+MAP_ENGINE_X_AT_MIN_Z = 137
+MAP_ENGINE_Y_AT_MIN_Z = 83
+MAP_ENGINE_X_OFFSET = 2  # Defines how many tiles to the right are added at first level
+MAP_ENGINE_Y_OFFSET = 3  # Defines how many tiles to the bottom are added at first level
+
 MAP_ENGINE_IMAGES = [
     setup.MapImage("wind", "images/icons/map_wind.png"),
     setup.MapImage("pv", "images/icons/map_pv.png"),
@@ -299,8 +305,6 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
     ],
     "static": [
-        setup.MVTAPI("soil_quality_low", "map", "SoilQualityLow"),
-        setup.MVTAPI("soil_quality_high", "map", "SoilQualityHigh"),
         setup.MVTAPI("landscape_protection_area", "map", "LandscapeProtectionArea"),
         setup.MVTAPI("forest", "map", "Forest"),
         setup.MVTAPI("special_protection_area", "map", "SpecialProtectionArea"),
@@ -313,13 +317,22 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("industry", "map", "Industry"),
         setup.MVTAPI("less_favoured_areas_agricultural", "map", "LessFavouredAreasAgricultural"),
         setup.MVTAPI("military", "map", "Military"),
+        setup.MVTAPI("moor", "map", "Moor"),
         setup.MVTAPI("nature_conservation_area", "map", "NatureConservationArea"),
+        setup.MVTAPI("nature_park", "map", "NaturePark"),
         setup.MVTAPI("railway", "map", "Railway"),
         setup.MVTAPI("road_default", "map", "Road"),
-        setup.MVTAPI("water", "map", "Water"),
+        setup.MVTAPI("water_bodies", "map", "WaterBodies"),
+        setup.MVTAPI("water_first_order", "map", "WaterFirstOrder"),
         setup.MVTAPI("pv_ground_criteria_settlements", "map", "PVGroundCriteriaSettlements"),
         setup.MVTAPI("pv_ground_criteria_settlements_200m", "map", "PVGroundCriteriaSettlements200m"),
         setup.MVTAPI("pv_ground_criteria_aviation", "map", "PVGroundCriteriaAviation"),
+        setup.MVTAPI("pv_ground_criteria_biotope", "map", "PVGroundCriteriaBiotope"),
+        setup.MVTAPI("pv_ground_criteria_open_spaces", "map", "PVGroundCriteriaOpenSpaces"),
+        setup.MVTAPI("pv_ground_criteria_nature_monuments", "map", "PVGroundCriteriaNatureMonuments"),
+        setup.MVTAPI("priority_climate_resistent_agri", "map", "PriorityClimateResistentAgri"),
+        setup.MVTAPI("priority_permanent_crops", "map", "PriorityPermanentCrops"),
+        setup.MVTAPI("priority_grassland", "map", "PriorityGrassland"),
     ],
     "potential": [
         setup.MVTAPI("potentialarea_pv_ground_soil_quality_low", "map", "PotentialareaPVGroundSoilQualityLow"),
