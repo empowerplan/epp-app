@@ -1,7 +1,8 @@
 import { getCurrentMenuTab } from "./menu.js";
 
 let currentScenario = null;
-const scenarioPanels = ["panelCard1", "panelCard2", "panelCard3", "panelCard4"];
+//const scenarioPanels = ["panelCard1", "panelCard2", "panelCard3", "panelCard4"];
+const scenarioPanels = ["panelCard1", "panelCard2", "panelCard3"];
 
 for (const scenarioPanel of scenarioPanels) {
   document
