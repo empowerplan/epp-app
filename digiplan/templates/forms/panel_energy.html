@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load static %}
 <h2 class="panel__title title">{%  trans "Generation" %}</h2>
 
 <div id="js-power-mix" class="power-mix"></div>
@@ -54,6 +55,18 @@
     <div class="tab-pane fade" id="windPast" role="tabpanel" aria-labelledby="windPastTab">
       <div class="sidepanel__text">
         <p>{%  trans "Flächen nach dem Regionalplan 2018" %}</p>
+      </div>
+      <div class="sidepanel__block">
+          <div class="sidepanel__key-number">
+            <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
+              <div style="background-color: #6A89CC; height: 25px; width: 25px;"></div>
+            </div>
+            <div class="sidepanel__key-number-description">
+              <span>
+                {%  trans "Vorranggebiete Windenergie 2018" %}
+              </span>
+            </div>
+          </div>
       </div>
       <div class="sidepanel__block">
         <div class="sidepanel__key-numbers">
@@ -114,6 +127,18 @@
     <div class="tab-pane fade show active" id="windPresent" role="tabpanel" aria-labelledby="windPresentTab">
       <div class="sidepanel__text">
         <p>{%  trans "Flächen nach dem Regionalplan 2024" %}</p>
+      </div>
+      <div class="sidepanel__block">
+          <div class="sidepanel__key-number">
+            <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
+              <div style="background-color: #6A89CC; height: 25px; width: 25px;"></div>
+            </div>
+            <div class="sidepanel__key-number-description">
+              <span>
+                {%  trans "Vorranggebiete Windenergie 2024" %}
+              </span>
+            </div>
+          </div>
       </div>
       <div class="sidepanel__sliders">
         <div class="sidepanel__slider sidepanel__slider--wind">
@@ -181,6 +206,30 @@
     <div class="tab-pane fade" id="windFuture" role="tabpanel" aria-labelledby="windFutureTab">
       <div class="sidepanel__text">
         <p>{%  trans "Flächen nach dem Regionalplan 2024 und darüber hinaus" %}</p>
+      </div>
+      <div class="sidepanel__block">
+          <div class="sidepanel__key-number">
+            <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
+              <div style="background-color: #6A89CC; height: 25px; width: 25px;"></div>
+            </div>
+            <div class="sidepanel__key-number-description">
+              <span>
+                {%  trans "Vorranggebiete Windenergie 2024" %}
+              </span>
+            </div>
+          </div>
+          <div class="sidepanel__key-number">
+            <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
+              <span>
+                <img src="{% static 'images/map_wind_hatch.svg' %}" width="25" height="25" alt="Windenergie">
+              </span>
+            </div>
+            <div class="sidepanel__key-number-description">
+              <span>
+                {%  trans "Suchraum für Windflächen nach 2027" %}
+              </span>
+            </div>
+          </div>
       </div>
       <div class="sidepanel__sliders">
         <div class="sidepanel__slider sidepanel__slider--wind">
