@@ -75,7 +75,7 @@ LEGEND = {
     ],
     _("Settlements Infrastructure"): [
         legend.LegendLayer(
-            _("PV ground criteria settlement 0m"),
+            _("Siedlungen"),
             _(
                 "Eine Siedlung ist ein Gebiet, welches die menschliche Niederlassung in beliebiger Form der "
                 "gruppierten Behausung beschreibt. Sie beinhaltet überwiegend Wohngebiete.",
@@ -83,7 +83,7 @@ LEGEND = {
             layer_id="pv_ground_criteria_settlements",
         ),
         legend.LegendLayer(
-            _("PV ground criteria settlement 200m"),
+            _("Siedlungen (200m Puffer)"),
             _(
                 "Eine Siedlung ist ein Gebiet, welches die menschliche Niederlassung in beliebiger Form der "
                 "gruppierten Behausung beschreibt. Sie beinhaltet überwiegend Wohngebiete.",
@@ -112,7 +112,7 @@ LEGEND = {
             layer_id="railway",
         ),
         legend.LegendLayer(
-            _("PV ground criteria aviation"),
+            _("Luftverkehr"),
             _(
                 "Zur Infrastruktur des Luftverkehrs gehören neben Start- und Landebahnen die "
                 "Flughafengebäude und Hangars.",
@@ -158,7 +158,7 @@ LEGEND = {
             layer_id="drinking_water_protection_area",
         ),
         legend.LegendLayer(
-            _("Fauna Flora Habitat"),
+            _("Fauna-Flora-Habitate"),
             _(
                 "Die Fauna-Flora-Habitat-Richtlinie ist eine Naturschutz-Richtlinie der Europäischen Union (EU), die "
                 "seltene oder bedrohte Arten und Lebensräume schützt. Sie gehört zum Schutzgebietsnetz Natura 2000.",
@@ -187,14 +187,14 @@ LEGEND = {
             layer_id="biosphere_reserve",
         ),
         legend.LegendLayer(
-            _("Nature Park Region"),
+            _("Naturparke"),
             _(
                 "text about nature parks.",
             ),
             layer_id="nature_park",
         ),
         legend.LegendLayer(
-            _("PV ground criteria biotope"),
+            _("Biotope"),
             _(
                 "text for biotopes",
             ),
@@ -211,7 +211,7 @@ LEGEND = {
             layer_id="forest",
         ),
         legend.LegendLayer(
-            _("Water First Order"),
+            _("Gewässer 1. Ordnung"),
             _(
                 "Ein Gewässer ist in der Natur fließendes oder stehendes Wasser. "
                 "Dazu gehören der Wasserkörper, das Gewässerbett und der Grundwasserleiter.",
@@ -219,7 +219,7 @@ LEGEND = {
             layer_id="water_first_order",
         ),
         legend.LegendLayer(
-            _("Water Bodies"),
+            _("Stillgewässer"),
             _(
                 "Ein Gewässer ist in der Natur fließendes oder stehendes Wasser. "
                 "Dazu gehören der Wasserkörper, das Gewässerbett und der Grundwasserleiter.",
@@ -234,7 +234,7 @@ LEGEND = {
             layer_id="moor",
         ),
         legend.LegendLayer(
-            _("Floodplain"),
+            _("Überschwemmungsgeb."),
             _(
                 "Bei Überschwemmungsgebieten handelt es sich um die Flächen, "
                 "die statistisch gesehen mindestens einmal in hundert Jahren überflutet sein können.",
@@ -242,7 +242,7 @@ LEGEND = {
             layer_id="floodplain",
         ),
         legend.LegendLayer(
-            _("Landscape Protection Area"),
+            _("Landschaftsschutzgeb."),
             _(
                 "Landschaftsschutzgebiete sind oft großflächiger angelegt und zielen auf den Erhalt des "
                 "Landschaftscharakters, das allgemeine Erscheinungsbild der Landschaft und dessen Schönheit ab. "
@@ -252,7 +252,7 @@ LEGEND = {
             layer_id="landscape_protection_area",
         ),
         legend.LegendLayer(
-            _("PV ground criteria open spaces"),
+            _("Freiraumverbund"),
             _(
                 "text for open spaces",
             ),
@@ -261,7 +261,7 @@ LEGEND = {
     ],
     _("Negativkriterien PV"): [
         legend.LegendLayer(
-            _("PV ground criteria settlement 0m"),
+            _("Siedlungen"),
             _(
                 "Eine Siedlung ist ein Gebiet, welches die menschliche Niederlassung in beliebiger Form der "
                 "gruppierten Behausung beschreibt. Sie beinhaltet überwiegend Wohngebiete.",
@@ -269,7 +269,7 @@ LEGEND = {
             layer_id="pv_ground_criteria_settlements",
         ),
         legend.LegendLayer(
-            _("PV ground criteria settlement 200m"),
+            _("Siedlungen (200m Puffer)"),
             _(
                 "Eine Siedlung ist ein Gebiet, welches die menschliche Niederlassung in beliebiger Form der "
                 "gruppierten Behausung beschreibt. Sie beinhaltet überwiegend Wohngebiete.",
@@ -277,7 +277,7 @@ LEGEND = {
             layer_id="pv_ground_criteria_settlements_200m",
         ),
         legend.LegendLayer(
-            _("Floodplain"),
+            _("Überschwemmungsgeb."),
             _(
                 "Bei Überschwemmungsgebieten handelt es sich um die Flächen, "
                 "die statistisch gesehen mindestens einmal in hundert Jahren überflutet sein können.",
@@ -285,7 +285,7 @@ LEGEND = {
             layer_id="floodplain",
         ),
         legend.LegendLayer(
-            _("PV ground criteria open spaces"),
+            _("Freiraumverbund"),
             _(
                 "text for open spaces",
             ),
@@ -302,7 +302,7 @@ LEGEND = {
             layer_id="nature_conservation_area",
         ),
         legend.LegendLayer(
-            _("Fauna Flora Habitat"),
+            _("Fauna-Flora-Habitate"),
             _(
                 "Die Fauna-Flora-Habitat-Richtlinie ist eine Naturschutz-Richtlinie der Europäischen Union (EU), die "
                 "seltene oder bedrohte Arten und Lebensräume schützt. Sie gehört zum Schutzgebietsnetz Natura 2000.",
@@ -310,7 +310,7 @@ LEGEND = {
             layer_id="fauna_flora_habitat",
         ),
         legend.LegendLayer(
-            _("PV ground criteria biotope"),
+            _("Biotope"),
             _(
                 "text for biotopes",
             ),
@@ -332,7 +332,7 @@ LEGEND = {
             layer_id="drinking_water_protection_area",
         ),
         legend.LegendLayer(
-            _("Water First Order"),
+            _("Gewässer 1. Ordnung"),
             _(
                 "Ein Gewässer ist in der Natur fließendes oder stehendes Wasser. "
                 "Dazu gehören der Wasserkörper, das Gewässerbett und der Grundwasserleiter.",
@@ -340,7 +340,7 @@ LEGEND = {
             layer_id="water_first_order",
         ),
         legend.LegendLayer(
-            _("Water Bodies"),
+            _("Stillgewässer"),
             _(
                 "Ein Gewässer ist in der Natur fließendes oder stehendes Wasser. "
                 "Dazu gehören der Wasserkörper, das Gewässerbett und der Grundwasserleiter.",
@@ -358,43 +358,55 @@ LEGEND = {
             layer_id="forest",
         ),
         legend.LegendLayer(
-            _("PV ground criteria nature Monuments"),
+            _("Flächennaturdenkmale"),
             _(
-                "Text for Nature Monuments.",
+                "[N 12] aus Kriteriengerüst PV-Freiflächenanlagen. Naturdenkmale sind gemäß § 28 BNatSchG bundesweit "
+                "geschützt. Sie dürfen nicht verändert werden (Veränderungsverbot). Eine Bebauung ist auszuschließen. "
+                "Der Schutz begründet sich durch die Seltenheit, Eigenart oder Schönheit des Naturdenkmals sowie "
+                "seinen Wert für Wissenschaft, Heimatkunde und Naturverständnis.",
             ),
             layer_id="pv_ground_criteria_nature_monuments",
         ),
         legend.LegendLayer(
-            _("PV ground criteria aviation"),
+            _("Luftverkehr"),
             _(
-                "Zur Infrastruktur des Luftverkehrs gehören neben Start- und Landebahnen die "
-                "Flughafengebäude und Hangars.",
+                "[N 13] aus Kriteriengerüst PV-Freiflächenanlagen. Zur Infrastruktur des Luftverkehrs gehören neben "
+                "Start- und Landebahnen die Flughafengebäude und Hangars.",
             ),
             layer_id="pv_ground_criteria_aviation",
         ),
         legend.LegendLayer(
             _("Military"),
-            _("Zu den militärisch genutzten Flächen gehören militärische Sperrgebiete und Liegenschaften."),
+            _(
+                "[N 14] aus Kriteriengerüst PV-Freiflächenanlagen. Zu den militärisch genutzten Flächen gehören "
+                "militärische Sperrgebiete und Liegenschaften.",
+            ),
             layer_id="military",
         ),
         legend.LegendLayer(
-            _("PV ground criteria priority areas climate resistent agriculture"),
+            _("Vorzug klimarobustes Ackerland"),
             _(
-                "Text for priority areas climate resistent agriculture.",
+                "[N 15] aus Kriteriengerüst PV-Freiflächenanlagen. Vorzugsgebiete beonders klimarobuste Böden, Aus: "
+                "Wissenschaftliche Kurzstudie zur Ausweisung von Vorbehaltsgebieten für die Landwirtschaft im "
+                "integrierten Regionalplan Oderland-Spree (ZALF)",
             ),
             layer_id="priority_climate_resistent_agri",
         ),
         legend.LegendLayer(
-            _("PV ground criteria priority areas permanent crops"),
+            _("Vorzug Dauerkultur"),
             _(
-                "Text for priority areas permanent crops.",
+                "[N 15] aus Kriteriengerüst PV-Freiflächenanlagen. Vorzugsgebiete Dauerkulturen, Aus: "
+                "Wissenschaftliche Kurzstudie zur Ausweisung von Vorbehaltsgebieten für die Landwirtschaft im "
+                "integrierten Regionalplan Oderland-Spree (ZALF)",
             ),
             layer_id="priority_permanent_crops",
         ),
         legend.LegendLayer(
-            _("PV ground criteria priority areas grassland"),
+            _("Vorzug Grünland"),
             _(
-                "Text for priority areas grassland.",
+                "[N 15] aus Kriteriengerüst PV-Freiflächenanlagen. Vorzugsgebiete Grünland, Aus: Wissenschaftliche "
+                "Kurzstudie zur Ausweisung von Vorbehaltsgebieten für die Landwirtschaft im integrierten Regionalplan "
+                "Oderland-Spree (ZALF)",
             ),
             layer_id="priority_grassland",
         ),
