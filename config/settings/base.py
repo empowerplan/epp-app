@@ -278,8 +278,8 @@ MAP_ENGINE_MAX_BOUNDS = [[12.6, 51.8], [16.1, 53.1]]
 # distill
 MAP_ENGINE_X_AT_MIN_Z = 137
 MAP_ENGINE_Y_AT_MIN_Z = 83
-MAP_ENGINE_X_OFFSET = 1  # Defines how many tiles to the right are added at first level
-MAP_ENGINE_Y_OFFSET = 1  # Defines how many tiles to the bottom are added at first level
+MAP_ENGINE_X_OFFSET = 2  # Defines how many tiles to the right are added at first level
+MAP_ENGINE_Y_OFFSET = 3  # Defines how many tiles to the bottom are added at first level
 
 MAP_ENGINE_IMAGES = [
     setup.MapImage("wind", "images/icons/map_wind.png"),
@@ -324,8 +324,6 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("road_default", "map", "Road"),
         setup.MVTAPI("water_bodies", "map", "WaterBodies"),
         setup.MVTAPI("water_first_order", "map", "WaterFirstOrder"),
-    ],
-    "pv_criteria": [
         setup.MVTAPI("pv_ground_criteria_settlements", "map", "PVGroundCriteriaSettlements"),
         setup.MVTAPI("pv_ground_criteria_settlements_200m", "map", "PVGroundCriteriaSettlements200m"),
         setup.MVTAPI("pv_ground_criteria_aviation", "map", "PVGroundCriteriaAviation"),
