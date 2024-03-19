@@ -318,6 +318,8 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("road_default", "map", "Road"),
         setup.MVTAPI("water_bodies", "map", "WaterBodies"),
         setup.MVTAPI("water_first_order", "map", "WaterFirstOrder"),
+    ],
+    "pv_criteria": [
         setup.MVTAPI("pv_ground_criteria_settlements", "map", "PVGroundCriteriaSettlements"),
         setup.MVTAPI("pv_ground_criteria_settlements_200m", "map", "PVGroundCriteriaSettlements200m"),
         setup.MVTAPI("pv_ground_criteria_aviation", "map", "PVGroundCriteriaAviation"),
