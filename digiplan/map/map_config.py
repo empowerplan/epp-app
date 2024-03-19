@@ -150,6 +150,14 @@ LEGEND = {
             layer_id="nature_conservation_area",
         ),
         legend.LegendLayer(
+            _("Drinking Water Protection Area"),
+            _(
+                "Wasserschutzgebiete stellen die öffentliche Wasserversorgung durch die Vermeidung "
+                "schädlicher Eintragungen in die Gewässer (Grundwasser, oberirdische Gewässer, Küstengewässer) sicher.",
+            ),
+            layer_id="drinking_water_protection_area",
+        ),
+        legend.LegendLayer(
             _("Fauna Flora Habitat"),
             _(
                 "Die Fauna-Flora-Habitat-Richtlinie ist eine Naturschutz-Richtlinie der Europäischen Union (EU), die "
@@ -179,14 +187,18 @@ LEGEND = {
             layer_id="biosphere_reserve",
         ),
         legend.LegendLayer(
-            _("Landscape Protection Area"),
+            _("Nature Park Region"),
             _(
-                "Landschaftsschutzgebiete sind oft großflächiger angelegt und zielen auf den Erhalt des "
-                "Landschaftscharakters, das allgemeine Erscheinungsbild der Landschaft und dessen Schönheit ab. "
-                "Sie haben einen geringeren Schutzstatus als etwa Naturschutzgebiete oder Nationalparke und "
-                "unterliegen daher weniger strengen Nutzungsbeschränkungen.",
+                "text about nature parks.",
             ),
-            layer_id="landscape_protection_area",
+            layer_id="nature_park",
+        ),
+        legend.LegendLayer(
+            _("PV ground criteria biotope"),
+            _(
+                "text for biotopes",
+            ),
+            layer_id="pv_ground_criteria_biotope",
         ),
         legend.LegendLayer(
             _("Forest"),
@@ -199,20 +211,27 @@ LEGEND = {
             layer_id="forest",
         ),
         legend.LegendLayer(
-            _("Drinking Water Protection Area"),
-            _(
-                "Wasserschutzgebiete stellen die öffentliche Wasserversorgung durch die Vermeidung "
-                "schädlicher Eintragungen in die Gewässer (Grundwasser, oberirdische Gewässer, Küstengewässer) sicher.",
-            ),
-            layer_id="drinking_water_protection_area",
-        ),
-        legend.LegendLayer(
-            _("Water"),
+            _("Water First Order"),
             _(
                 "Ein Gewässer ist in der Natur fließendes oder stehendes Wasser. "
                 "Dazu gehören der Wasserkörper, das Gewässerbett und der Grundwasserleiter.",
             ),
-            layer_id="water",
+            layer_id="water_first_order",
+        ),
+        legend.LegendLayer(
+            _("Water Bodies"),
+            _(
+                "Ein Gewässer ist in der Natur fließendes oder stehendes Wasser. "
+                "Dazu gehören der Wasserkörper, das Gewässerbett und der Grundwasserleiter.",
+            ),
+            layer_id="water_bodies",
+        ),
+        legend.LegendLayer(
+            _("Moor"),
+            _(
+                "text for moors",
+            ),
+            layer_id="moor",
         ),
         legend.LegendLayer(
             _("Floodplain"),
@@ -223,26 +242,161 @@ LEGEND = {
             layer_id="floodplain",
         ),
         legend.LegendLayer(
-            _("Soil Quality High"),
+            _("Landscape Protection Area"),
             _(
-                "Acker- und Grünlandflächen mit hoher Bodenqualität (Soil Quality Rating (SQR) >= 40). Um die "
-                "Flächenkonkurrenz zwischen landwirtschaftlicher Nutzung und Energiegewinnung zu minimieren, wird bei "
-                "den links einstellbaren PV-Freiflächenpotenzialen als Grenzwert ein SQR von 40 angenommen, es werden "
-                "also lediglich Flächen mit sehr geringer und geringer Ertragsfähigkeit als potenzielle "
-                "Standorte berücksichtigt.",
+                "Landschaftsschutzgebiete sind oft großflächiger angelegt und zielen auf den Erhalt des "
+                "Landschaftscharakters, das allgemeine Erscheinungsbild der Landschaft und dessen Schönheit ab. "
+                "Sie haben einen geringeren Schutzstatus als etwa Naturschutzgebiete oder Nationalparke und "
+                "unterliegen daher weniger strengen Nutzungsbeschränkungen.",
             ),
-            layer_id="soil_quality_high",
+            layer_id="landscape_protection_area",
         ),
         legend.LegendLayer(
-            _("Soil Quality Low"),
+            _("PV ground criteria open spaces"),
             _(
-                "Acker- und Grünlandflächen inner- und außerhalb benachteiligter Gebiete mit geringer Bodenqualität "
-                "(Soil Quality Rating (SQR) < 40). Um die Flächenkonkurrenz zwischen landwirtschaftlicher Nutzung und "
-                "Energiegewinnung zu minimieren, wird bei den links einstellbaren PV-Freiflächenpotenzialen als "
-                "Grenzwert ein SQR von 40 angenommen, es werden also lediglich Flächen mit sehr geringer und geringer "
-                "Ertragsfähigkeit als potenzielle Standorte berücksichtigt.",
+                "text for open spaces",
             ),
-            layer_id="soil_quality_low",
+            layer_id="pv_ground_criteria_open_spaces",
+        ),
+    ],
+    _("pv_ground_neg_criteria"): [
+        legend.LegendLayer(
+            _("PV ground criteria settlement 0m"),
+            _(
+                "Eine Siedlung ist ein Gebiet, welches die menschliche Niederlassung in beliebiger Form der "
+                "gruppierten Behausung beschreibt. Sie beinhaltet überwiegend Wohngebiete.",
+            ),
+            layer_id="pv_ground_criteria_settlements",
+        ),
+        legend.LegendLayer(
+            _("PV ground criteria settlement 200m"),
+            _(
+                "Eine Siedlung ist ein Gebiet, welches die menschliche Niederlassung in beliebiger Form der "
+                "gruppierten Behausung beschreibt. Sie beinhaltet überwiegend Wohngebiete.",
+            ),
+            layer_id="pv_ground_criteria_settlements_200m",
+        ),
+        legend.LegendLayer(
+            _("Floodplain"),
+            _(
+                "Bei Überschwemmungsgebieten handelt es sich um die Flächen, "
+                "die statistisch gesehen mindestens einmal in hundert Jahren überflutet sein können.",
+            ),
+            layer_id="floodplain",
+        ),
+        legend.LegendLayer(
+            _("PV ground criteria open spaces"),
+            _(
+                "text for open spaces",
+            ),
+            layer_id="pv_ground_criteria_open_spaces",
+        ),
+        legend.LegendLayer(
+            _("Nature Conservation Area"),
+            _(
+                "Naturschutzgebiete dienen dem Schutz der Natur und Landschaft. Sie tragen zur Erhaltung, Entwicklung "
+                "und Wiederherstellung der Lebensstätte für bestimmte wild lebende Tier- und Pflanzenarten bei. Aber "
+                "auch aus wissenschaftlichen, naturgeschichtlichen und ästhetischen Gründen werden Teile oder die "
+                "Gesamtheit der Natur in Schutz genommen.",
+            ),
+            layer_id="nature_conservation_area",
+        ),
+        legend.LegendLayer(
+            _("Fauna Flora Habitat"),
+            _(
+                "Die Fauna-Flora-Habitat-Richtlinie ist eine Naturschutz-Richtlinie der Europäischen Union (EU), die "
+                "seltene oder bedrohte Arten und Lebensräume schützt. Sie gehört zum Schutzgebietsnetz Natura 2000.",
+            ),
+            layer_id="fauna_flora_habitat",
+        ),
+        legend.LegendLayer(
+            _("PV ground criteria biotope"),
+            _(
+                "text for biotopes",
+            ),
+            layer_id="pv_ground_criteria_biotope",
+        ),
+        legend.LegendLayer(
+            _("Moor"),
+            _(
+                "text for moors",
+            ),
+            layer_id="moor",
+        ),
+        legend.LegendLayer(
+            _("Drinking Water Protection Area"),
+            _(
+                "Wasserschutzgebiete stellen die öffentliche Wasserversorgung durch die Vermeidung "
+                "schädlicher Eintragungen in die Gewässer (Grundwasser, oberirdische Gewässer, Küstengewässer) sicher.",
+            ),
+            layer_id="drinking_water_protection_area",
+        ),
+        legend.LegendLayer(
+            _("Water First Order"),
+            _(
+                "Ein Gewässer ist in der Natur fließendes oder stehendes Wasser. "
+                "Dazu gehören der Wasserkörper, das Gewässerbett und der Grundwasserleiter.",
+            ),
+            layer_id="water_first_order",
+        ),
+        legend.LegendLayer(
+            _("Water Bodies"),
+            _(
+                "Ein Gewässer ist in der Natur fließendes oder stehendes Wasser. "
+                "Dazu gehören der Wasserkörper, das Gewässerbett und der Grundwasserleiter.",
+            ),
+            layer_id="water_bodies",
+        ),
+        legend.LegendLayer(
+            _("Forest"),
+            _(
+                "Wald umfasst eine Vielzahl an mit Bäumen und anderer Vegetation bedeckten Fläche "
+                "mit unterschiedlicher forstwirtschaftlicher Nutzung und ökologischer Bedeutung. Wälder können in "
+                "Nadel-, Laub- und Mischwald sowie anhand der Waldfunktionen (z. B. Schutzwald, Erholungswald) "
+                "unterschieden werden.",
+            ),
+            layer_id="forest",
+        ),
+        legend.LegendLayer(
+            _("PV ground criteria nature Monuments"),
+            _(
+                "Text for Nature Monuments.",
+            ),
+            layer_id="pv_ground_criteria_nature_monuments",
+        ),
+        legend.LegendLayer(
+            _("PV ground criteria aviation"),
+            _(
+                "Zur Infrastruktur des Luftverkehrs gehören neben Start- und Landebahnen die "
+                "Flughafengebäude und Hangars.",
+            ),
+            layer_id="pv_ground_criteria_aviation",
+        ),
+        legend.LegendLayer(
+            _("Military"),
+            _("Zu den militärisch genutzten Flächen gehören militärische Sperrgebiete und Liegenschaften."),
+            layer_id="military",
+        ),
+        legend.LegendLayer(
+            _("PV ground criteria priority areas climate resistent agriculture"),
+            _(
+                "Text for priority areas climate resistent agriculture.",
+            ),
+            layer_id="priority_climate_resistent_agri",
+        ),
+        legend.LegendLayer(
+            _("PV ground criteria priority areas permanent crops"),
+            _(
+                "Text for priority areas permanent crops.",
+            ),
+            layer_id="priority_permanent_crops",
+        ),
+        legend.LegendLayer(
+            _("PV ground criteria priority areas grassland"),
+            _(
+                "Text for priority areas grassland.",
+            ),
+            layer_id="priority_grassland",
         ),
     ],
 }

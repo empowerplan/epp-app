@@ -36,16 +36,23 @@ MODELS = [
     models.LandscapeProtectionArea,
     models.LessFavouredAreasAgricultural,
     models.Military,
+    models.Moor,
     models.NatureConservationArea,
+    models.NaturePark,
+    models.PriorityClimateResistentAgri,
+    models.PriorityGrassland,
+    models.PriorityPermanentCrops,
     models.PVGroundCriteriaAviation,
     models.PVGroundCriteriaSettlements,
     models.PVGroundCriteriaSettlements200m,
+    models.PVGroundCriteriaBiotope,
+    models.PVGroundCriteriaOpenSpaces,
+    models.PVGroundCriteriaNatureMonuments,
     models.Railway,
     models.Road,
-    models.SoilQualityLow,
-    models.SoilQualityHigh,
     models.SpecialProtectionArea,
-    models.Water,
+    models.WaterBodies,
+    models.WaterFirstOrder,
     # PotentialAreas
     models.PotentialareaPVGroundSoilQualityLow,
     models.PotentialareaPVGroundSoilQualityMedium,
@@ -115,7 +122,7 @@ def load_population() -> None:
     municipalities = models.Municipality.objects.all()
     dataframe = pd.read_csv(path, header=[0, 1], index_col=0)
     years = dataframe.columns.get_level_values(0)
-
+    models.Population.objects.all().delete()
     for municipality in municipalities:
         for year in years:
             series = dataframe.loc[municipality.id, year]
