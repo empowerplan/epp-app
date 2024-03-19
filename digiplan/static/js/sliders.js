@@ -310,7 +310,7 @@ function updateSliderMarks(msg) {
 function showPVLayers(msg) {
   hidePotentialLayers();
   for (const layer of potentialPVLayers) {
-    map.setLayoutProperty(layer, "visibility", "visible");
+    turn_on_layer(layer);
   }
   return logMessage(msg);
 }
@@ -318,7 +318,7 @@ function showPVLayers(msg) {
 function showPVRoofLayers(msg) {
   hidePotentialLayers();
   for (const layer of potentialPVRoofLayers) {
-    map.setLayoutProperty(layer, "visibility", "visible");
+    turn_on_layer(layer);
   }
   return logMessage(msg);
 }
@@ -377,28 +377,12 @@ function showWindLayers(msg) {
     .getElementById("windTab")
     .getElementsByClassName("active")[0].id;
   if (currentWindTab === "windPastTab") {
-    map.setLayoutProperty(
-      "potentialarea_wind_stp_2018_eg",
-      "visibility",
-      "visible",
-    );
+    turn_on_layer("potentialarea_wind_stp_2018_eg");
   } else if (currentWindTab === "windPresentTab") {
-    map.setLayoutProperty(
-      "potentialarea_wind_stp_2024_vr",
-      "visibility",
-      "visible",
-    );
+    turn_on_layer("potentialarea_wind_stp_2024_vr");
   } else if (currentWindTab === "windFutureTab") {
-    map.setLayoutProperty(
-      "potentialarea_wind_stp_2024_vr",
-      "visibility",
-      "visible",
-    );
-    map.setLayoutProperty(
-      "potentialarea_wind_stp_2027",
-      "visibility",
-      "visible",
-    );
+    turn_on_layer("potentialarea_wind_stp_2024_vr");
+    turn_on_layer("potentialarea_wind_stp_2027");
   } else {
     throw Error(`Unknown wind tab '${currentWindTab}' found.`);
   }
@@ -409,7 +393,7 @@ function hidePotentialLayers(msg) {
   for (const layer of potentialPVLayers
     .concat(potentialPVRoofLayers)
     .concat(potentialWindLayers)) {
-    map.setLayoutProperty(layer, "visibility", "none");
+    turn_off_layer(layer);
   }
   return logMessage(msg);
 }

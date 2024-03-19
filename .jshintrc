@@ -21,6 +21,8 @@
     "layerInputClass": true,
     "logMessage": false,
     "map": false,
+    "turn_on_layer": false,
+    "turn_off_layer": false,
     "maplibregl": false,
     "requestAnimationFrame": false,
     "setTimeout": false,
