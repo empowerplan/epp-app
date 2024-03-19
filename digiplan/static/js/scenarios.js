@@ -1,7 +1,8 @@
 import { getCurrentMenuTab } from "./menu.js";
 
 let currentScenario = null;
-const scenarioPanels = ["panelCard1", "panelCard2", "panelCard3", "panelCard4"];
+//const scenarioPanels = ["panelCard1", "panelCard2", "panelCard3", "panelCard4"];
+const scenarioPanels = ["panelCard1", "panelCard2", "panelCard3"];
 
 for (const scenarioPanel of scenarioPanels) {
   document
@@ -24,9 +25,9 @@ PubSub.subscribe(eventTopics.SCENARIO_SELECTED, checkIfScenarioIsSelected);
 function checkIfScenarioIsSelected(msg) {
   const currentTab = getCurrentMenuTab();
   const tabIndex = parseInt(currentTab.id.slice(6, 7));
-  if (tabIndex === 3) {
-    document.getElementById("menu_next_btn").hidden = currentScenario === null;
-  }
+  // if (tabIndex === 3) {
+  //   document.getElementById("menu_next_btn").hidden = currentScenario === null;
+  // }
   return logMessage(msg);
 }
 

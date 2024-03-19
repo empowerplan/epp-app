@@ -625,6 +625,10 @@
         background-image: url('../../images/icons/pv_high_outlined.svg');
       }
     }
+
+    &--pv-light span .c-slider {
+      @include settings-details-slider($pvlight);
+    }
   }
 
   &__results {
