@@ -259,7 +259,7 @@ LEGEND = {
             layer_id="pv_ground_criteria_open_spaces",
         ),
     ],
-    _("pv_ground_neg_criteria"): [
+    _("Negativkriterien PV"): [
         legend.LegendLayer(
             _("PV ground criteria settlement 0m"),
             _(
