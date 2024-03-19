@@ -50,7 +50,7 @@
     "max": 1.97,
     "min": 0,
     "start": 0,
-    "step": 0.2,
+    "step": 0.1,
     "type": "slider",
     "required": false
   },
@@ -58,10 +58,10 @@
     "class": "js-slider js-slider-detail-panel",
     "label": "{% trans 'Flächennutzung (%)' %}",
     "tooltip": "{% trans '' %}",
-    "max": 4,
+    "max": 2.2,
     "min": 1.97,
     "start": 0,
-    "step": 0.2,
+    "step": 0.1,
     "type": "slider",
     "required": false
   },
