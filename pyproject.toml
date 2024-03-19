@@ -33,14 +33,13 @@ django-foundation-formtags = "^0.1.0"
 django-compressor = "^2.4.1"  # https://github.com/django-compressor/django-compressor
 django-libsass = "^0.8"
 django-redis = "^4.12.1"  # https://github.com/niwinz/django-redis
-django-distill = "^2.6"
 django-crispy-forms = "^1.11.2"
 django-geojson = "^3.1.0"
 
 # Custom apps
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------poetry-
 django-oemof = {git = "https://github.com/rl-institut/django-oemof.git", tag="v0.17.0"}
-django-mapengine = "1.1.0"
+django-mapengine = "1.2.1"
 geojson = "^3.0.1"
 oemof-network = "0.5.0a1"
 
