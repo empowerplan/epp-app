@@ -57,12 +57,12 @@
           <div class="sidepanel__key-number">
             <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
               <span>
-                0,9 %
+                0,9 ha
               </span>
             </div>
             <div class="sidepanel__key-number-description">
               <span>
-                {%  trans "der Landesfläche für die Windenergie ausgewiesen" %}
+                {%  trans "für die Windenergie ausgewiesen" %}
               </span>
             </div>
           </div>
@@ -121,12 +121,12 @@
           <div class="sidepanel__key-number">
             <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
               <span>
-                1,4 %
+                1,4 ha
               </span>
             </div>
             <div class="sidepanel__key-number-description">
               <span>
-                {%  trans "der Landesfläche für die Windenergie ausgewiesen" %}
+                {%  trans "für die Windenergie ausgewiesen" %}
               </span>
             </div>
           </div>
@@ -185,12 +185,12 @@
           <div class="sidepanel__key-number">
             <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
               <span>
-                2,1 %
+                2,1 ha
               </span>
             </div>
             <div class="sidepanel__key-number-description">
               <span>
-                {%  trans "der Landesfläche für die Windenergie ausgewiesen" %}
+                {%  trans "für die Windenergie ausgewiesen" %}
               </span>
             </div>
           </div>
@@ -282,7 +282,7 @@
     {% include "widgets/sidepanel_close_btn.html" %}
   </div>
   <p class="sidepanel__indication">
-    {%  trans "Nutzung von Potenzialgebieten für Freiflächen-PV:" %}
+    {%  trans "Nutzung von PV-Potenzialgebieten:" %}
   </p>
   <div class="sidepanel__sliders">
     <div class="sidepanel__slider sidepanel__slider--pv-low">
@@ -302,23 +302,50 @@
     </div>
   </div>
   <div class="sidepanel__block">
+    <div class="sidepanel__key-numbers">
+      <div class="sidepanel__key-number">
+        <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
+          <span>
+            0,9 ha
+          </span>
+        </div>
+        <div class="sidepanel__key-number-description">
+          <span>
+            {%  trans "für Freiflächen-PV verwendet" %}
+          </span>
+        </div>
+      </div>
+      <div class="sidepanel__key-number">
+        <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
+          <span>
+            1,2 TWh
+          </span>
+        </div>
+        <div class="sidepanel__key-number-description">
+          <span>
+            {%  trans "gewonnen" %}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sidepanel__block">
     <div class="sidepanel__more">
       <div>
-        <button class="sidepanel__more-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWindPastMore" aria-expanded="false" aria-controls="collapseWindPastMore">
+        <button class="sidepanel__more-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePVgroundPastMore" aria-expanded="false" aria-controls="collapsePVgroundPastMore">
           <svg width="12" height="12" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.936" xmlns="http://www.w3.org/2000/svg">
             <path d="m6.1387 0.1875-1.4961 1.4961 6.7832 6.7832-6.7832 6.7832 1.4961 1.4961 8.2793-8.2793z"/>
           </svg>
           {%  trans "Mehr Informationen" %}
         </button>
       </div>
-      <div class="collapse sidepanel__more-collapse" id="collapseWindPastMore">
+      <div class="collapse sidepanel__more-collapse" id="collapsePVgroundPastMore">
         <div>
           {%  trans "Hier kommen mehr Details." %}
         </div>
       </div>
     </div>
   </div>
-  </p>
 </div>
 
 {% include "widgets/slider.html" with field=form.s_pv_d_1 %}
@@ -330,18 +357,62 @@
   <p class="sidepanel__indication">
     {%  trans "Stelle ein, wieviel Dachfläche für Photovoltaik genutzt werden soll:" %}
   </p>
-  <div class="sidepanel__block sidepanel__block--slider">
-    <span class="sidepanel__block--pv-light">
-      {% include "widgets/slider.html" with field=form.s_pv_d_3 %}
-    </span>
+  <div class="sidepanel__sliders">
+    <div class="sidepanel__slider sidepanel__slider--pv-light">
+      <span>
+        {% include "widgets/slider.html" with field=form.s_pv_d_3 %}
+      </span>
+    </div>
+    <div class="sidepanel__slider sidepanel__slider--pv-light">
+      <span>
+        {% include "widgets/slider.html" with field=form.s_pv_d_4 %}
+      </span>
+    </div>
   </div>
-  <div class="sidepanel__block sidepanel__block--slider">
-    <span class="sidepanel__block--pv-light">
-      {% include "widgets/slider.html" with field=form.s_pv_d_4 %}
-    </span>
+  <div class="sidepanel__block">
+    <div class="sidepanel__key-numbers">
+      <div class="sidepanel__key-number">
+        <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
+          <span>
+            0,9 ha
+          </span>
+        </div>
+        <div class="sidepanel__key-number-description">
+          <span>
+            {%  trans "für Aufdach-PV verwendet" %}
+          </span>
+        </div>
+      </div>
+      <div class="sidepanel__key-number">
+        <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
+          <span>
+            1,2 TWh
+          </span>
+        </div>
+        <div class="sidepanel__key-number-description">
+          <span>
+            {%  trans "gewonnen" %}
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="sidepanel__results">
-    <p>{%  trans "Links siehst Du die für deine Einstellung maximal erreichbare Leistung.<br><br>Im Menü rechts in der Karte kannst Du die heute bestehenden Anlagen einblenden." %}</p>
+  <div class="sidepanel__block">
+    <div class="sidepanel__more">
+      <div>
+        <button class="sidepanel__more-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePVroofPastMore" aria-expanded="false" aria-controls="collapsePVroofPastMore">
+          <svg width="12" height="12" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.936" xmlns="http://www.w3.org/2000/svg">
+            <path d="m6.1387 0.1875-1.4961 1.4961 6.7832 6.7832-6.7832 6.7832 1.4961 1.4961 8.2793-8.2793z"/>
+          </svg>
+          {%  trans "Mehr Informationen" %}
+        </button>
+      </div>
+      <div class="collapse sidepanel__more-collapse" id="collapsePVroofPastMore">
+        <div>
+          {%  trans "Hier kommen mehr Details." %}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

@@ -475,7 +475,7 @@
 
   .sidepanel__tabs .sidepanel-tabs {
     @include custom-tabs {
-      
+
       .sidepanel-tabs__nav-item .sidepanel-tabs__nav-link {
         padding-top: 0.25rem !important;
         padding-bottom: 0.25rem !important;
@@ -624,6 +624,10 @@
       &__label:before {
         background-image: url('../../images/icons/pv_high_outlined.svg');
       }
+    }
+
+    &--pv-light span .c-slider {
+      @include settings-details-slider($pvlight);
     }
   }
 

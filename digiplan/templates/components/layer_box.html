@@ -10,7 +10,7 @@
   </div>
 
   {% for category, layers in area_switches.items %}
-    <p class="map__layers-heading">{{ category }}</p>
+    <p class="map__layers-heading {% if category == pv_map_control %}map__layers-pv{% endif %}">{{ category }}</p>
 
     {% for layer in layers %}
       {{ layer }}
