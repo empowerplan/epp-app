@@ -637,6 +637,12 @@
     @extend .fs-7;
   }
 
+  &__text {
+    @extend .pt-2;
+    @extend .text-secondary;
+    @extend .fs-7;
+  }
+
   &__close {
     @extend .btn-close;
   }
