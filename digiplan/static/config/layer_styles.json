@@ -549,7 +549,7 @@
   "pv_ground_criteria_aviation": {
     "type": "fill",
     "paint": {
-      "fill-color": "#FF0000"
+      "fill-color": "#CCCCCC"
     }
   },
   "biosphere_reserve": {
@@ -615,7 +615,7 @@
   "moor": {
     "type": "fill",
     "paint": {
-      "fill-color": "#FF0000"
+      "fill-color": "#002B19"
     }
   },
   "nature_conservation_area": {
@@ -627,7 +627,7 @@
   "nature_park": {
     "type": "fill",
     "paint": {
-      "fill-color": "#FF0000"
+      "fill-color": "#115F2B"
     }
   },
   "railway": {
@@ -645,19 +645,19 @@
   "priority_climate_resistent_agri": {
     "type": "fill",
     "paint": {
-      "fill-color": "#FF0000"
+      "fill-color": "#c8008a"
     }
   },
   "priority_permanent_crops": {
     "type": "fill",
     "paint": {
-      "fill-color": "#FF0000"
+      "fill-color": "#a1006f"
     }
   },
   "priority_grassland": {
     "type": "fill",
     "paint": {
-      "fill-color": "#FF0000"
+      "fill-color": "#71004e"
     }
   },
   "pv_ground_criteria_settlements": {
@@ -675,19 +675,19 @@
   "pv_ground_criteria_biotope": {
     "type": "fill",
     "paint": {
-      "fill-color": "#FF0000"
+      "fill-color": "#115F2B"
     }
   },
   "pv_ground_criteria_open_spaces": {
     "type": "fill",
     "paint": {
-      "fill-color": "#FF0000"
+      "fill-color": "#CCCCCC"
     }
   },
   "pv_ground_criteria_nature_monuments": {
     "type": "fill",
     "paint": {
-      "fill-color": "#FF0000"
+      "fill-color": "#115F2B"
     }
   },
   "special_protection_area": {
@@ -699,13 +699,13 @@
   "water_bodies": {
     "type": "fill",
     "paint": {
-      "fill-color": "#FF0000"
+      "fill-color": "#2171B5"
     }
   },
   "water_first_order": {
     "type": "fill",
     "paint": {
-      "fill-color": "#FF0000"
+      "fill-color": "#2171B5"
     }
   }
 }
