@@ -10,6 +10,7 @@ authors = [
   "Finn Hees <finn.hees@rl-institut.de>",
   "Jonathan Amme <jonathan.amme@rl-institut.de>",
 ]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.12"
