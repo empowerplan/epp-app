@@ -115,7 +115,7 @@ def load_population() -> None:
     municipalities = models.Municipality.objects.all()
     dataframe = pd.read_csv(path, header=[0, 1], index_col=0)
     years = dataframe.columns.get_level_values(0)
-
+    models.Population.objects.all().delete()
     for municipality in municipalities:
         for year in years:
             series = dataframe.loc[municipality.id, year]
