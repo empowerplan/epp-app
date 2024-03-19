@@ -272,7 +272,9 @@ OEMOF_SCENARIO = env.str("OEMOF_SCENARIO", "scenario_2045")
 # django-mapengine
 # ------------------------------------------------------------------------------
 MAP_ENGINE_CENTER_AT_STARTUP = [14.2, 52.45]
-MAP_ENGINE_ZOOM_AT_STARTUP = 7
+MAP_ENGINE_ZOOM_AT_STARTUP = 8
+MAP_ENGINE_MIN_ZOOM = 8
+MAP_ENGINE_MAX_ZOOM = 12
 MAP_ENGINE_MAX_BOUNDS = [[12.6, 51.8], [16.1, 53.1]]
 
 # distill
@@ -280,6 +282,7 @@ MAP_ENGINE_X_AT_MIN_Z = 137
 MAP_ENGINE_Y_AT_MIN_Z = 83
 MAP_ENGINE_X_OFFSET = 2  # Defines how many tiles to the right are added at first level
 MAP_ENGINE_Y_OFFSET = 3  # Defines how many tiles to the bottom are added at first level
+MAP_ENGINE_MAX_DISTILLED_ZOOM = 12
 
 MAP_ENGINE_IMAGES = [
     setup.MapImage("wind", "images/icons/map_wind.png"),
@@ -361,7 +364,7 @@ MAP_ENGINE_API_CLUSTERS = [
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
 MAP_ENGINE_ZOOM_LEVELS = {
-    "municipality": setup.Zoom(8, 12),
+    "municipality": setup.Zoom(8, 13),
 }
 
 MAP_ENGINE_CHOROPLETHS = [
