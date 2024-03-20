@@ -364,7 +364,7 @@ MAP_ENGINE_API_CLUSTERS = [
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
 MAP_ENGINE_ZOOM_LEVELS = {
-    "municipality": setup.Zoom(8, 13),
+    "municipality": setup.Zoom(8, 14),
 }
 
 MAP_ENGINE_CHOROPLETHS = [
