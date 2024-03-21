@@ -1,7 +1,7 @@
 
 .PHONY : load_regions load_data empty_data dump_fixtures load_fixtures distill check_distill_coordinates
 
-DISTILL=True
+MAP_ENGINE_DISTILL=True
 export
 
 load_regions:
