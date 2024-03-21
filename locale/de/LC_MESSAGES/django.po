@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: config/settings/base.py:360
+#: config/settings/base.py:376
 #: digiplan/static/config/energy_settings_panel.json:49
 #: digiplan/static/config/energy_settings_panel.json:60
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-19 11:17+0000\n"
+"POT-Creation-Date: 2024-03-21 08:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,60 +24,60 @@ msgstr ""
 msgid "German"
 msgstr "Deutsch"
 
-#: config/settings/base.py:355
+#: config/settings/base.py:371
 msgid "EinwohnerInnenzahl"
 msgstr ""
 
-#: config/settings/base.py:355
+#: config/settings/base.py:371
 msgid "EW"
 msgstr ""
 
-#: config/settings/base.py:359
+#: config/settings/base.py:375
 msgid "EinwohnerInnenzahl pro km²"
 msgstr ""
 
-#: config/settings/base.py:362 digiplan/map/popups.py:521
+#: config/settings/base.py:378 digiplan/map/popups.py:521
 #: digiplan/map/popups.py:533
 #: digiplan/templates/components/panel_2_today.html:45
 msgid "Beschäftigte"
 msgstr ""
 
-#: config/settings/base.py:363 digiplan/map/popups.py:543
+#: config/settings/base.py:379 digiplan/map/popups.py:543
 #: digiplan/map/popups.py:555
 #: digiplan/templates/components/panel_2_today.html:46
 msgid "Betriebe"
 msgstr ""
 
-#: config/settings/base.py:364 config/settings/base.py:365
-#: config/settings/base.py:369 config/settings/base.py:375
+#: config/settings/base.py:380 config/settings/base.py:381
+#: config/settings/base.py:385 config/settings/base.py:391
 msgid "Installierte Leistung"
 msgstr ""
 
-#: config/settings/base.py:364 config/settings/base.py:365
+#: config/settings/base.py:380 config/settings/base.py:381
 #: digiplan/map/charts.py:414 digiplan/map/charts.py:446
 msgid "MW"
 msgstr ""
 
-#: config/settings/base.py:370 config/settings/base.py:376
+#: config/settings/base.py:386 config/settings/base.py:392
 #: digiplan/map/popups.py:261 digiplan/map/popups.py:280
 msgid "MW/km²"
 msgstr ""
 
-#: config/settings/base.py:378 config/settings/base.py:379
+#: config/settings/base.py:394 config/settings/base.py:395
 msgid "Anzahl Windturbinen"
 msgstr ""
 
-#: config/settings/base.py:383 config/settings/base.py:389
+#: config/settings/base.py:399 config/settings/base.py:405
 msgid "Anzahl Windturbinen pro km²"
 msgstr ""
 
-#: config/settings/base.py:395 config/settings/base.py:401
+#: config/settings/base.py:411 config/settings/base.py:417
 msgid "Energie Erneuerbare"
 msgstr ""
 
-#: config/settings/base.py:396 config/settings/base.py:402
-#: config/settings/base.py:444 config/settings/base.py:450
-#: config/settings/base.py:468 config/settings/base.py:474
+#: config/settings/base.py:412 config/settings/base.py:418
+#: config/settings/base.py:460 config/settings/base.py:466
+#: config/settings/base.py:484 config/settings/base.py:490
 #: digiplan/map/charts.py:464 digiplan/map/charts.py:484
 #: digiplan/map/charts.py:746 digiplan/map/charts.py:767
 #: digiplan/map/charts.py:843 digiplan/map/charts.py:862
@@ -87,17 +87,17 @@ msgstr ""
 msgid "GWh"
 msgstr ""
 
-#: config/settings/base.py:407 config/settings/base.py:413
+#: config/settings/base.py:423 config/settings/base.py:429
 msgid "Anteil Erneuerbare Energien am Strombedarf"
 msgstr ""
 
-#: config/settings/base.py:419 config/settings/base.py:425
+#: config/settings/base.py:435 config/settings/base.py:441
 msgid "Gewonnene Energie aus EE je EW"
 msgstr ""
 
-#: config/settings/base.py:420 config/settings/base.py:426
-#: config/settings/base.py:432 config/settings/base.py:438
-#: config/settings/base.py:498 digiplan/map/charts.py:544
+#: config/settings/base.py:436 config/settings/base.py:442
+#: config/settings/base.py:448 config/settings/base.py:454
+#: config/settings/base.py:514 digiplan/map/charts.py:544
 #: digiplan/map/charts.py:577 digiplan/map/charts.py:600
 #: digiplan/map/charts.py:633 digiplan/map/charts.py:956
 #: digiplan/map/popups.py:390 digiplan/map/popups.py:409
@@ -106,22 +106,22 @@ msgstr ""
 msgid "MWh"
 msgstr ""
 
-#: config/settings/base.py:431 config/settings/base.py:437
+#: config/settings/base.py:447 config/settings/base.py:453
 msgid "Gewonnene Energie aus EE je km²"
 msgstr ""
 
-#: config/settings/base.py:443 config/settings/base.py:449
+#: config/settings/base.py:459 config/settings/base.py:465
 #: digiplan/map/popups.py:680 digiplan/map/popups.py:688
 #: digiplan/map/popups.py:697 digiplan/map/popups.py:711
 msgid "Strombedarf"
 msgstr ""
 
-#: config/settings/base.py:455 config/settings/base.py:461
+#: config/settings/base.py:471 config/settings/base.py:477
 msgid "Strombedarf pro EinwohnerIn"
 msgstr ""
 
-#: config/settings/base.py:456 config/settings/base.py:462
-#: config/settings/base.py:480 config/settings/base.py:486
+#: config/settings/base.py:472 config/settings/base.py:478
+#: config/settings/base.py:496 config/settings/base.py:502
 #: digiplan/map/charts.py:790 digiplan/map/charts.py:825
 #: digiplan/map/charts.py:885 digiplan/map/charts.py:920
 #: digiplan/map/popups.py:735 digiplan/map/popups.py:768
@@ -129,40 +129,40 @@ msgstr ""
 msgid "kWh"
 msgstr ""
 
-#: config/settings/base.py:467 config/settings/base.py:473
+#: config/settings/base.py:483 config/settings/base.py:489
 #: digiplan/map/popups.py:777 digiplan/map/popups.py:785
 #: digiplan/map/popups.py:794 digiplan/map/popups.py:808
 msgid "Wärmebedarf"
 msgstr ""
 
-#: config/settings/base.py:479 config/settings/base.py:485
+#: config/settings/base.py:495 config/settings/base.py:501
 msgid "Wärmebedarf pro EinwohnerIn"
 msgstr ""
 
-#: config/settings/base.py:491 digiplan/map/popups.py:874
+#: config/settings/base.py:507 digiplan/map/popups.py:874
 #: digiplan/map/popups.py:886
 #: digiplan/templates/components/panel_2_today.html:98
 msgid "Anzahl Batteriespeicher"
 msgstr ""
 
-#: config/settings/base.py:497 digiplan/map/popups.py:896
+#: config/settings/base.py:513 digiplan/map/popups.py:896
 #: digiplan/map/popups.py:908
 #: digiplan/templates/components/panel_2_today.html:99
 msgid "Kapazität Batteriespeicher"
 msgstr ""
 
 #: digiplan/map/calculations.py:234 digiplan/map/calculations.py:326
-#: digiplan/map/config.py:179
+#: digiplan/map/config.py:182
 msgid "Electricity Household Demand"
 msgstr "Strombedarf Haushalte"
 
 #: digiplan/map/calculations.py:235 digiplan/map/calculations.py:327
-#: digiplan/map/config.py:180
+#: digiplan/map/config.py:183
 msgid "Electricity CTS Demand"
 msgstr "Strombedarf GDP"
 
 #: digiplan/map/calculations.py:236 digiplan/map/calculations.py:328
-#: digiplan/map/config.py:181
+#: digiplan/map/config.py:184
 msgid "Electricity Industry Demand"
 msgstr "Strombedarf Industrie"
 
@@ -179,52 +179,52 @@ msgstr ""
 msgid "Anzahl"
 msgstr ""
 
-#: digiplan/map/config.py:170 digiplan/map/map_config.py:34
+#: digiplan/map/config.py:173 digiplan/map/map_config.py:34
 #: digiplan/map/models.py:304 digiplan/map/models.py:305
 msgid "Ground-mounted PV"
 msgstr "Freiflächen-PV"
 
-#: digiplan/map/config.py:171 digiplan/map/map_config.py:27
+#: digiplan/map/config.py:174 digiplan/map/map_config.py:27
 #: digiplan/map/models.py:248
 msgid "Roof-mounted PV"
 msgstr "Aufdach-PV"
 
-#: digiplan/map/config.py:172 digiplan/map/map_config.py:20
+#: digiplan/map/config.py:175 digiplan/map/map_config.py:20
 #: digiplan/map/models.py:178
 msgid "Wind turbine"
 msgstr "Windenergie"
 
-#: digiplan/map/config.py:173 digiplan/map/map_config.py:41
+#: digiplan/map/config.py:176 digiplan/map/map_config.py:41
 #: digiplan/map/models.py:342 digiplan/map/models.py:343
 msgid "Hydro"
 msgstr "Wasserkraft"
 
-#: digiplan/map/config.py:174 digiplan/map/map_config.py:48
+#: digiplan/map/config.py:177 digiplan/map/map_config.py:48
 #: digiplan/map/models.py:388 digiplan/map/models.py:389
 msgid "Biomass"
 msgstr "Biomasse"
 
-#: digiplan/map/config.py:182
+#: digiplan/map/config.py:185
 msgid "Electricity Household Heat Demand"
 msgstr "Strombedarf"
 
-#: digiplan/map/config.py:183
+#: digiplan/map/config.py:186
 msgid "Electricity CTS Heat Demand"
 msgstr "Strombedarf"
 
-#: digiplan/map/config.py:184
+#: digiplan/map/config.py:187
 msgid "Electricity Industry Heat Demand"
 msgstr "Strombedarf"
 
-#: digiplan/map/config.py:186
+#: digiplan/map/config.py:189
 msgid "CTS Heat Demand"
 msgstr "Wärmebedarf (GWh)"
 
-#: digiplan/map/config.py:187
+#: digiplan/map/config.py:190
 msgid "Household Heat Demand"
 msgstr ""
 
-#: digiplan/map/config.py:188
+#: digiplan/map/config.py:191
 msgid "Industry Heat Demand"
 msgstr "Strombedarf"
 
@@ -278,23 +278,24 @@ msgstr ""
 msgid "Batteriespeicher"
 msgstr "Batterien"
 
-#: digiplan/map/map_config.py:76 digiplan/map/views.py:31
+#: digiplan/map/map_config.py:76
 msgid "Settlements Infrastructure"
 msgstr "Siedlungen und Infrastruktur"
 
-#: digiplan/map/map_config.py:78
-msgid "PV ground criteria settlement 0m"
+#: digiplan/map/map_config.py:78 digiplan/map/map_config.py:264
+msgid "Siedlungen"
 msgstr ""
 
 #: digiplan/map/map_config.py:80 digiplan/map/map_config.py:88
+#: digiplan/map/map_config.py:266 digiplan/map/map_config.py:274
 msgid ""
 "Eine Siedlung ist ein Gebiet, welches die menschliche Niederlassung in "
 "beliebiger Form der gruppierten Behausung beschreibt. Sie beinhaltet "
 "überwiegend Wohngebiete."
 msgstr ""
 
-#: digiplan/map/map_config.py:86
-msgid "PV ground criteria settlement 200m"
+#: digiplan/map/map_config.py:86 digiplan/map/map_config.py:272
+msgid "Siedlungen (200m Puffer)"
 msgstr ""
 
 #: digiplan/map/map_config.py:94
@@ -328,8 +329,8 @@ msgid ""
 "Bahnen."
 msgstr ""
 
-#: digiplan/map/map_config.py:115
-msgid "PV ground criteria aviation"
+#: digiplan/map/map_config.py:115 digiplan/map/map_config.py:371
+msgid "Luftverkehr"
 msgstr ""
 
 #: digiplan/map/map_config.py:117
@@ -346,7 +347,7 @@ msgstr "Drehfunkfeuer"
 msgid "Ein Drehfunkfeuer ist ein Funkfeuer für die Luftfahrtnavigation."
 msgstr ""
 
-#: digiplan/map/map_config.py:128
+#: digiplan/map/map_config.py:128 digiplan/map/map_config.py:379
 msgid "Military"
 msgstr "Militär"
 
@@ -371,11 +372,11 @@ msgstr ""
 msgid "Nature Landscape"
 msgstr "Natur und Landschaft"
 
-#: digiplan/map/map_config.py:143
+#: digiplan/map/map_config.py:143 digiplan/map/map_config.py:295
 msgid "Nature Conservation Area"
 msgstr "Naturschutzgebiete"
 
-#: digiplan/map/map_config.py:145
+#: digiplan/map/map_config.py:145 digiplan/map/map_config.py:297
 msgid ""
 "Naturschutzgebiete dienen dem Schutz der Natur und Landschaft. Sie tragen "
 "zur Erhaltung, Entwicklung und Wiederherstellung der Lebensstätte für "
@@ -384,22 +385,35 @@ msgid ""
 "Teile oder die Gesamtheit der Natur in Schutz genommen."
 msgstr ""
 
-#: digiplan/map/map_config.py:153
-msgid "Fauna Flora Habitat"
+#: digiplan/map/map_config.py:153 digiplan/map/map_config.py:327
+msgid "Drinking Water Protection Area"
+msgstr "Wasserschutzgebiete"
+
+#: digiplan/map/map_config.py:155 digiplan/map/map_config.py:329
+msgid ""
+"Wasserschutzgebiete stellen die öffentliche Wasserversorgung durch die "
+"Vermeidung schädlicher Eintragungen in die Gewässer (Grundwasser, "
+"oberirdische Gewässer, Küstengewässer) sicher."
+msgstr ""
+
+#: digiplan/map/map_config.py:161 digiplan/map/map_config.py:305
+#, fuzzy
+#| msgid "Fauna Flora Habitat"
+msgid "Fauna-Flora-Habitate"
 msgstr "Fauna Flora Habitat"
 
-#: digiplan/map/map_config.py:155
+#: digiplan/map/map_config.py:163 digiplan/map/map_config.py:307
 msgid ""
 "Die Fauna-Flora-Habitat-Richtlinie ist eine Naturschutz-Richtlinie der "
 "Europäischen Union (EU), die seltene oder bedrohte Arten und Lebensräume "
 "schützt. Sie gehört zum Schutzgebietsnetz Natura 2000."
 msgstr ""
 
-#: digiplan/map/map_config.py:161
+#: digiplan/map/map_config.py:169
 msgid "Special Protection Area"
 msgstr "Vogelschutzgebiete"
 
-#: digiplan/map/map_config.py:163
+#: digiplan/map/map_config.py:171
 msgid ""
 "Die Vogelschutzrichtlinie der Europäischen Union (EU) dient der Erhaltung "
 "der wild lebenden, heimischen Vogelarten. Sie regelt den Schutz dieser "
@@ -408,11 +422,11 @@ msgid ""
 "Natura 2000."
 msgstr ""
 
-#: digiplan/map/map_config.py:170
+#: digiplan/map/map_config.py:178
 msgid "Biosphere Reserve"
 msgstr "Biosphärenreservate"
 
-#: digiplan/map/map_config.py:172
+#: digiplan/map/map_config.py:180
 msgid ""
 "Biosphärenreservate sind großräumige und für bestimmte Landschaftstypen "
 "charakteristische Gebiete mit interdisziplinärem Ansatz. In diesen von der "
@@ -424,11 +438,72 @@ msgid ""
 "sozioökonomisch orientierte Entwicklungszone (Entwicklungsfunktion)."
 msgstr ""
 
-#: digiplan/map/map_config.py:182
-msgid "Landscape Protection Area"
-msgstr "Landschaftsschutzgebiete"
+#: digiplan/map/map_config.py:190
+msgid "Naturparke"
+msgstr ""
 
-#: digiplan/map/map_config.py:184
+#: digiplan/map/map_config.py:192
+msgid "text about nature parks."
+msgstr ""
+
+#: digiplan/map/map_config.py:197 digiplan/map/map_config.py:313
+msgid "Biotope"
+msgstr ""
+
+#: digiplan/map/map_config.py:199 digiplan/map/map_config.py:315
+msgid "text for biotopes"
+msgstr ""
+
+#: digiplan/map/map_config.py:204 digiplan/map/map_config.py:351
+msgid "Forest"
+msgstr "Wälder"
+
+#: digiplan/map/map_config.py:206 digiplan/map/map_config.py:353
+msgid ""
+"Wald umfasst eine Vielzahl an mit Bäumen und anderer Vegetation bedeckten "
+"Fläche mit unterschiedlicher forstwirtschaftlicher Nutzung und ökologischer "
+"Bedeutung. Wälder können in Nadel-, Laub- und Mischwald sowie anhand der "
+"Waldfunktionen (z. B. Schutzwald, Erholungswald) unterschieden werden."
+msgstr ""
+
+#: digiplan/map/map_config.py:214 digiplan/map/map_config.py:335
+msgid "Gewässer 1. Ordnung"
+msgstr ""
+
+#: digiplan/map/map_config.py:216 digiplan/map/map_config.py:224
+#: digiplan/map/map_config.py:337 digiplan/map/map_config.py:345
+msgid ""
+"Ein Gewässer ist in der Natur fließendes oder stehendes Wasser. Dazu gehören "
+"der Wasserkörper, das Gewässerbett und der Grundwasserleiter."
+msgstr ""
+
+#: digiplan/map/map_config.py:222 digiplan/map/map_config.py:343
+msgid "Stillgewässer"
+msgstr ""
+
+#: digiplan/map/map_config.py:230 digiplan/map/map_config.py:320
+msgid "Moor"
+msgstr ""
+
+#: digiplan/map/map_config.py:232 digiplan/map/map_config.py:322
+msgid "text for moors"
+msgstr ""
+
+#: digiplan/map/map_config.py:237 digiplan/map/map_config.py:280
+msgid "Überschwemmungsgeb."
+msgstr ""
+
+#: digiplan/map/map_config.py:239 digiplan/map/map_config.py:282
+msgid ""
+"Bei Überschwemmungsgebieten handelt es sich um die Flächen, die statistisch "
+"gesehen mindestens einmal in hundert Jahren überflutet sein können."
+msgstr ""
+
+#: digiplan/map/map_config.py:245
+msgid "Landschaftsschutzgeb."
+msgstr ""
+
+#: digiplan/map/map_config.py:247
 msgid ""
 "Landschaftsschutzgebiete sind oft großflächiger angelegt und zielen auf den "
 "Erhalt des Landschaftscharakters, das allgemeine Erscheinungsbild der "
@@ -437,76 +512,77 @@ msgid ""
 "strengen Nutzungsbeschränkungen."
 msgstr ""
 
-#: digiplan/map/map_config.py:192
-msgid "Forest"
-msgstr "Wälder"
-
-#: digiplan/map/map_config.py:194
-msgid ""
-"Wald umfasst eine Vielzahl an mit Bäumen und anderer Vegetation bedeckten "
-"Fläche mit unterschiedlicher forstwirtschaftlicher Nutzung und ökologischer "
-"Bedeutung. Wälder können in Nadel-, Laub- und Mischwald sowie anhand der "
-"Waldfunktionen (z. B. Schutzwald, Erholungswald) unterschieden werden."
+#: digiplan/map/map_config.py:255 digiplan/map/map_config.py:288
+msgid "Freiraumverbund"
 msgstr ""
 
-#: digiplan/map/map_config.py:202
-msgid "Drinking Water Protection Area"
-msgstr "Wasserschutzgebiete"
-
-#: digiplan/map/map_config.py:204
-msgid ""
-"Wasserschutzgebiete stellen die öffentliche Wasserversorgung durch die "
-"Vermeidung schädlicher Eintragungen in die Gewässer (Grundwasser, "
-"oberirdische Gewässer, Küstengewässer) sicher."
+#: digiplan/map/map_config.py:257 digiplan/map/map_config.py:290
+msgid "text for open spaces"
 msgstr ""
 
-#: digiplan/map/map_config.py:210
-msgid "Water"
-msgstr "Gewässser"
-
-#: digiplan/map/map_config.py:212
-msgid ""
-"Ein Gewässer ist in der Natur fließendes oder stehendes Wasser. Dazu gehören "
-"der Wasserkörper, das Gewässerbett und der Grundwasserleiter."
+#: digiplan/map/map_config.py:262 digiplan/map/views.py:31
+msgid "Negativkriterien PV"
 msgstr ""
 
-#: digiplan/map/map_config.py:218
-msgid "Floodplain"
-msgstr "Überschwemmungsgebiete"
-
-#: digiplan/map/map_config.py:220
-msgid ""
-"Bei Überschwemmungsgebieten handelt es sich um die Flächen, die statistisch "
-"gesehen mindestens einmal in hundert Jahren überflutet sein können."
+#: digiplan/map/map_config.py:361
+msgid "Flächennaturdenkmale"
 msgstr ""
 
-#: digiplan/map/map_config.py:226
-msgid "Soil Quality High"
-msgstr "Ackerflächen mit hoher Bodenqualität"
-
-#: digiplan/map/map_config.py:228
+#: digiplan/map/map_config.py:363
 msgid ""
-"Acker- und Grünlandflächen mit hoher Bodenqualität (Soil Quality Rating "
-"(SQR) >= 40). Um die Flächenkonkurrenz zwischen landwirtschaftlicher Nutzung "
-"und Energiegewinnung zu minimieren, wird bei den links einstellbaren PV-"
-"Freiflächenpotenzialen als Grenzwert ein SQR von 40 angenommen, es werden "
-"also lediglich Flächen mit sehr geringer und geringer Ertragsfähigkeit als "
-"potenzielle Standorte berücksichtigt."
+"[N 12] aus Kriteriengerüst PV-Freiflächenanlagen. Naturdenkmale sind gemäß § "
+"28 BNatSchG bundesweit geschützt. Sie dürfen nicht verändert werden "
+"(Veränderungsverbot). Eine Bebauung ist auszuschließen. Der Schutz begründet "
+"sich durch die Seltenheit, Eigenart oder Schönheit des Naturdenkmals sowie "
+"seinen Wert für Wissenschaft, Heimatkunde und Naturverständnis."
 msgstr ""
 
-#: digiplan/map/map_config.py:237
-msgid "Soil Quality Low"
-msgstr "Ackerflächen mit geringer Bodenqualität"
-
-#: digiplan/map/map_config.py:239
+#: digiplan/map/map_config.py:373
 msgid ""
-"Acker- und Grünlandflächen inner- und außerhalb benachteiligter Gebiete mit "
-"geringer Bodenqualität (Soil Quality Rating (SQR) < 40). Um die "
-"Flächenkonkurrenz zwischen landwirtschaftlicher Nutzung und Energiegewinnung "
-"zu minimieren, wird bei den links einstellbaren PV-Freiflächenpotenzialen "
-"als Grenzwert ein SQR von 40 angenommen, es werden also lediglich Flächen "
-"mit sehr geringer und geringer Ertragsfähigkeit als potenzielle Standorte "
-"berücksichtigt."
+"[N 13] aus Kriteriengerüst PV-Freiflächenanlagen. Zur Infrastruktur des "
+"Luftverkehrs gehören neben Start- und Landebahnen die Flughafengebäude und "
+"Hangars."
+msgstr ""
+
+#: digiplan/map/map_config.py:381
+msgid ""
+"[N 14] aus Kriteriengerüst PV-Freiflächenanlagen. Zu den militärisch "
+"genutzten Flächen gehören militärische Sperrgebiete und Liegenschaften."
+msgstr ""
+
+#: digiplan/map/map_config.py:387
+msgid "Vorzug klimarobustes Ackerland"
+msgstr ""
+
+#: digiplan/map/map_config.py:389
+msgid ""
+"[N 15] aus Kriteriengerüst PV-Freiflächenanlagen. Vorzugsgebiete beonders "
+"klimarobuste Böden, Aus: Wissenschaftliche Kurzstudie zur Ausweisung von "
+"Vorbehaltsgebieten für die Landwirtschaft im integrierten Regionalplan "
+"Oderland-Spree (ZALF)"
+msgstr ""
+
+#: digiplan/map/map_config.py:396
+msgid "Vorzug Dauerkultur"
+msgstr ""
+
+#: digiplan/map/map_config.py:398
+msgid ""
+"[N 15] aus Kriteriengerüst PV-Freiflächenanlagen. Vorzugsgebiete "
+"Dauerkulturen, Aus: Wissenschaftliche Kurzstudie zur Ausweisung von "
+"Vorbehaltsgebieten für die Landwirtschaft im integrierten Regionalplan "
+"Oderland-Spree (ZALF)"
+msgstr ""
+
+#: digiplan/map/map_config.py:405
+msgid "Vorzug Grünland"
+msgstr ""
+
+#: digiplan/map/map_config.py:407
+msgid ""
+"[N 15] aus Kriteriengerüst PV-Freiflächenanlagen. Vorzugsgebiete Grünland, "
+"Aus: Wissenschaftliche Kurzstudie zur Ausweisung von Vorbehaltsgebieten für "
+"die Landwirtschaft im integrierten Regionalplan Oderland-Spree (ZALF)"
 msgstr ""
 
 #: digiplan/map/models.py:20
@@ -632,8 +708,8 @@ msgstr ""
 msgid ""
 "Nennleistung der in der Region installierten Windenergieanlagen in Megawatt. "
 "Die dargestellten Ziele für 2045 sind abgeleitet aus den im "
-"Windenergieflächenbedarfsgesetz festgesetzten Zielen für Sachsen-Anhalt (2,2 "
-"%% bis 2032).\\n\\nHinweis: Da sich die Einstellung immer auf zukünftige, "
+"Windenergieflächenbedarfsgesetz festgesetzten Zielen für Brandenburg (2,2 %% "
+"bis 2032).\\n\\nHinweis: Da sich die Einstellung immer auf zukünftige, "
 "ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen "
 "Anlagenkapazität zu Ertragssteigerungen."
 msgstr ""
@@ -754,8 +830,8 @@ msgstr ""
 #: digiplan/static/config/energy_settings_panel.json:116
 #, python-format
 msgid ""
-"Agri-PV (vertikal) auf Agrarflächen mittlerer Bodengüte\\nGemeinsame Nutzung "
-"mit Landwirtschaft (%%)"
+"Agri-PV (vertikal) auf Agrarflächen mittlerer Bodengüte<br>Gemeinsame "
+"Nutzung mit Landwirtschaft (%%)"
 msgstr ""
 
 #: digiplan/static/config/energy_settings_panel.json:121
@@ -772,7 +848,7 @@ msgstr ""
 #: digiplan/static/config/energy_settings_panel.json:126
 #, python-format
 msgid ""
-"Agri-PV (hoch aufgeständert) über Dauerkulturen\\nGemeinsame Nutzung mit "
+"Agri-PV (hoch aufgeständert) über Dauerkulturen<br>Gemeinsame Nutzung mit "
 "Landwirtschaft (%%)"
 msgstr ""
 
@@ -1046,7 +1122,7 @@ msgstr ""
 #: digiplan/templates/components/panel_2_today.html:42
 msgid ""
 "Bevölkerung im Jahr 2022 in EinwohnerInnen je km². 2021 betrug die "
-"Bevölkerungsdichte in Deutschland 238 und in Sachsen-Anhalt 106."
+"Bevölkerungsdichte in Deutschland 238."
 msgstr ""
 
 #: digiplan/templates/components/panel_2_today.html:43
@@ -1453,102 +1529,127 @@ msgstr "Karte"
 msgid "Charts"
 msgstr "Diagramme"
 
-#: digiplan/templates/forms/panel_energy.html:2
+#: digiplan/templates/forms/panel_energy.html:3
 #: digiplan/templates/forms/panel_heat.html:2
 msgid "Generation"
 msgstr "Erzeugung"
 
-#: digiplan/templates/forms/panel_energy.html:16
-#: digiplan/templates/forms/panel_energy.html:279
+#: digiplan/templates/forms/panel_energy.html:17
+#: digiplan/templates/forms/panel_energy.html:337
 #, fuzzy
 #| msgid "Detail settings"
 msgid "Details"
 msgstr "Detaileinstellungen"
 
-#: digiplan/templates/forms/panel_energy.html:22
+#: digiplan/templates/forms/panel_energy.html:23
 msgid "Nutzung von Windpotenzialgebieten:"
 msgstr ""
 
-#: digiplan/templates/forms/panel_energy.html:65
-#: digiplan/templates/forms/panel_energy.html:129
-#: digiplan/templates/forms/panel_energy.html:193
-#: digiplan/templates/forms/panel_energy.html:314
-#: digiplan/templates/forms/panel_energy.html:382
+#: digiplan/templates/forms/panel_energy.html:57
+msgid "Flächen nach dem Regionalplan 2018"
+msgstr ""
+
+#: digiplan/templates/forms/panel_energy.html:66
+msgid "Vorranggebiete Windenergie 2018"
+msgstr ""
+
+#: digiplan/templates/forms/panel_energy.html:81
+#: digiplan/templates/forms/panel_energy.html:160
+#: digiplan/templates/forms/panel_energy.html:251
+#: digiplan/templates/forms/panel_energy.html:372
+#: digiplan/templates/forms/panel_energy.html:440
 msgid "werden genutzt"
 msgstr ""
 
-#: digiplan/templates/forms/panel_energy.html:76
-#: digiplan/templates/forms/panel_energy.html:140
-#: digiplan/templates/forms/panel_energy.html:204
+#: digiplan/templates/forms/panel_energy.html:92
+#: digiplan/templates/forms/panel_energy.html:171
+#: digiplan/templates/forms/panel_energy.html:262
 msgid "Anlagen werden errichtet"
 msgstr ""
 
-#: digiplan/templates/forms/panel_energy.html:87
-#: digiplan/templates/forms/panel_energy.html:151
-#: digiplan/templates/forms/panel_energy.html:215
-#: digiplan/templates/forms/panel_energy.html:326
-#: digiplan/templates/forms/panel_energy.html:394
+#: digiplan/templates/forms/panel_energy.html:103
+#: digiplan/templates/forms/panel_energy.html:182
+#: digiplan/templates/forms/panel_energy.html:273
+#: digiplan/templates/forms/panel_energy.html:384
+#: digiplan/templates/forms/panel_energy.html:452
 msgid "können gewonnen werden"
 msgstr ""
 
-#: digiplan/templates/forms/panel_energy.html:100
-#: digiplan/templates/forms/panel_energy.html:164
-#: digiplan/templates/forms/panel_energy.html:228
-#: digiplan/templates/forms/panel_energy.html:339
-#: digiplan/templates/forms/panel_energy.html:407
+#: digiplan/templates/forms/panel_energy.html:116
+#: digiplan/templates/forms/panel_energy.html:195
+#: digiplan/templates/forms/panel_energy.html:286
+#: digiplan/templates/forms/panel_energy.html:397
+#: digiplan/templates/forms/panel_energy.html:465
 msgid "Mehr Informationen"
 msgstr ""
 
-#: digiplan/templates/forms/panel_energy.html:105
+#: digiplan/templates/forms/panel_energy.html:121
 msgid "Hier kommen mehr Details (2018)."
 msgstr ""
 
-#: digiplan/templates/forms/panel_energy.html:169
+#: digiplan/templates/forms/panel_energy.html:129
+msgid "Flächen nach dem Regionalplan 2024"
+msgstr ""
+
+#: digiplan/templates/forms/panel_energy.html:138
+#: digiplan/templates/forms/panel_energy.html:217
+msgid "Vorranggebiete Windenergie 2024"
+msgstr ""
+
+#: digiplan/templates/forms/panel_energy.html:200
 msgid "Hier kommen mehr Details (2024)."
 msgstr ""
 
-#: digiplan/templates/forms/panel_energy.html:233
+#: digiplan/templates/forms/panel_energy.html:208
+msgid "Flächen nach dem Regionalplan 2024 und darüber hinaus"
+msgstr ""
+
+#: digiplan/templates/forms/panel_energy.html:229
+msgid "Suchraum für Windflächen nach 2027"
+msgstr ""
+
+#: digiplan/templates/forms/panel_energy.html:291
 msgid "Hier kommen mehr Details (2027)."
 msgstr ""
 
-#: digiplan/templates/forms/panel_energy.html:285
+#: digiplan/templates/forms/panel_energy.html:343
 msgid "Nutzung von PV-Potenzialgebieten:"
 msgstr ""
 
-#: digiplan/templates/forms/panel_energy.html:344
-#: digiplan/templates/forms/panel_energy.html:412
+#: digiplan/templates/forms/panel_energy.html:402
+#: digiplan/templates/forms/panel_energy.html:470
 msgid "Hier kommen mehr Details."
 msgstr ""
 
-#: digiplan/templates/forms/panel_energy.html:354
-#: digiplan/templates/forms/panel_energy.html:427
+#: digiplan/templates/forms/panel_energy.html:412
+#: digiplan/templates/forms/panel_energy.html:485
 #: digiplan/templates/forms/panel_heat.html:6
 #: digiplan/templates/forms/panel_heat.html:40
 #: digiplan/templates/forms/panel_traffic.html:6
 msgid "Detail settings"
 msgstr "Detaileinstellungen"
 
-#: digiplan/templates/forms/panel_energy.html:358
+#: digiplan/templates/forms/panel_energy.html:416
 msgid "Stelle ein, wieviel Dachfläche für Photovoltaik genutzt werden soll:"
 msgstr ""
 
-#: digiplan/templates/forms/panel_energy.html:423
+#: digiplan/templates/forms/panel_energy.html:481
 #: digiplan/templates/forms/panel_heat.html:36
 msgid "Consumption"
 msgstr "Verbrauch"
 
-#: digiplan/templates/forms/panel_energy.html:431
+#: digiplan/templates/forms/panel_energy.html:489
 msgid "Stelle den zukünftigen Stromverbrauch je Sektor ein:"
 msgstr ""
 
-#: digiplan/templates/forms/panel_energy.html:449
+#: digiplan/templates/forms/panel_energy.html:507
 #: digiplan/templates/forms/panel_heat.html:62
 msgid ""
 "Links siehst Du die Änderung über alle Sektoren für deine Einstellung "
 "(gewichtetes Mittel)."
 msgstr ""
 
-#: digiplan/templates/forms/panel_energy.html:455
+#: digiplan/templates/forms/panel_energy.html:513
 msgid "Batteries"
 msgstr "Batterien"
 
@@ -1628,3 +1729,18 @@ msgstr ""
 #: digiplan/templates/widgets/slider.html:18
 msgid "more"
 msgstr "mehr"
+
+#~ msgid "Landscape Protection Area"
+#~ msgstr "Landschaftsschutzgebiete"
+
+#~ msgid "Water"
+#~ msgstr "Gewässser"
+
+#~ msgid "Floodplain"
+#~ msgstr "Überschwemmungsgebiete"
+
+#~ msgid "Soil Quality High"
+#~ msgstr "Ackerflächen mit hoher Bodenqualität"
+
+#~ msgid "Soil Quality Low"
+#~ msgstr "Ackerflächen mit geringer Bodenqualität"
