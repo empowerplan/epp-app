@@ -10,6 +10,7 @@ const powerPanelSliders = document.querySelectorAll(
 const sliderMoreLabels = document.querySelectorAll(
   ".c-slider__label--more > .button",
 );
+const detailSliders = document.querySelectorAll(".js-slider.js-slider-detail-panel");
 const powerMixInfoBanner = document.getElementById("js-power-mix");
 const windTabs = document.querySelectorAll(
   "#windTab .sidepanel-tabs__nav-link",
@@ -81,6 +82,7 @@ panelContainer.addEventListener("scroll", (e) => {
 
 // Subscriptions
 PubSub.subscribe(eventTopics.STATES_INITIALIZED, updateSliderMarks);
+//PubSub.subscribe(eventTopics.STATES_INITIALIZED, adaptSlidersScenario);
 subscribeToEvents(
   [eventTopics.STATES_INITIALIZED, eventTopics.POWER_PANEL_SLIDER_CHANGE],
   createPercentagesOfPowerSources,
@@ -106,6 +108,53 @@ PubSub.subscribe(eventTopics.PV_ROOF_CONTROL_ACTIVATED, showPVRoofLayers);
 PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, showWindLayers);
 
 // Subscriber Functions
+
+/**
+ * Adapt detail and main sliders depending on scenario selection
+ * @param {string} msg Publisher message
+ * @param {string} scenario Name of scenario
+ */
+function adaptSlidersScenario(msg, scenario) {
+  return fetch('/static/config/scenarios.json')
+  .then(response => response.json())
+  .then(scenarioSettings => {
+      try {
+        // Update DetailSliders first
+        for (const slider of detailSliders) {
+          // Check if the slider is defined in scenario settings
+          if (!scenarioSettings[scenario].hasOwnProperty(slider.id)) {
+              continue;
+          }
+          const sliderValue = scenarioSettings[scenario][slider.id];
+          $(`#${slider.id}`).data("ionRangeSlider").update({ from: sliderValue });
+          const data = {
+            input: [{ id: slider.id }],
+            from: sliderValue
+          };
+          PubSub.publish(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, data);
+        }
+        // update main panel Sliders afterwards
+        for (const slider of panelSliders) {
+          // Check if the slider is defined in scenario settings
+          if (!scenarioSettings[scenario].hasOwnProperty(slider.id)) {
+              continue;
+          }
+          const sliderValue = scenarioSettings[scenario][slider.id];
+          $(`#${slider.id}`).data("ionRangeSlider").update({ from: sliderValue });
+        }
+        console.log('Sliders updated succesfully');
+      } catch (error) {
+        console.error('Error updating sliders:', error);
+        throw error;
+      }
+  })
+  .catch(error => {
+    console.error('Error fetching scenario settings:', error);
+    throw error;
+  });
+}
+
+
 
 /**
  * Adapt detail sliders depending on related main sliders

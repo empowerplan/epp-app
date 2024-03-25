@@ -1,4 +1,5 @@
 import { getCurrentMenuTab } from "./menu.js";
+import { adaptSlidersScenario } from "./sliders.js";
 
 let currentScenario = null;
 //const scenarioPanels = ["panelCard1", "panelCard2", "panelCard3", "panelCard4"];
@@ -36,8 +37,9 @@ function selectScenario(msg) {
   const selectedPanel = document.getElementsByClassName(
     "panel-card--selected",
   )[0].id;
-  // Set current scenario and enable next button
+  // Set current scenario and enable next button (outputs 1, 2 or 3)
   currentScenario = parseInt(selectedPanel.slice(-1));
+  adaptSlidersScenario(msg, currentScenario);
 
   // Style all scenario buttons according to current selection
   Array.from(document.getElementsByClassName("scenarios")).forEach(
