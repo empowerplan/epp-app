@@ -108,11 +108,20 @@
       @extend .px-3;
     }
 
+    &__top {
+      @extend .ps-3;
+      @extend .pe-2;
+      @extend .d-flex;
+      @extend .flex-row;
+      @extend .justify-content-between;
+      @extend .align-items-center;
+    }
+
     &__heading {
-      @extend .px-3;
       @extend .fs-7;
       @extend .fw-light;
       @extend .text-uppercase;
+      @extend .mb-0;
 
       svg {
         @include translateY(-2px);
@@ -122,6 +131,13 @@
 
     &__heading.panel-item__heading--nopadding {
       @extend .px-0;
+    }
+
+    &__explanation {
+      @extend .btn;
+      @extend .btn-link;
+      @extend .btn-sm;
+      @extend .text-decoration-underline;
     }
 
     &__tabs {
