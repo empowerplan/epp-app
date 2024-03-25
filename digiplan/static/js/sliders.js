@@ -114,7 +114,7 @@ PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, showWindLayers);
  * @param {string} msg Publisher message
  * @param {string} scenario Name of scenario
  */
-function adaptSlidersScenario(msg, scenario) {
+export function adaptSlidersScenario(msg, scenario) {
   return fetch('/static/config/scenarios.json')
   .then(response => response.json())
   .then(scenarioSettings => {
@@ -142,6 +142,7 @@ function adaptSlidersScenario(msg, scenario) {
           const sliderValue = scenarioSettings[scenario][slider.id];
           $(`#${slider.id}`).data("ionRangeSlider").update({ from: sliderValue });
         }
+        PubSub.publish(eventTopics.POWER_PANEL_SLIDER_CHANGE);
         console.log('Sliders updated succesfully');
       } catch (error) {
         console.error('Error updating sliders:', error);
@@ -153,8 +154,6 @@ function adaptSlidersScenario(msg, scenario) {
     throw error;
   });
 }
-
-
 
 /**
  * Adapt detail sliders depending on related main sliders
@@ -438,7 +437,7 @@ function showWindLayers(msg) {
   return logMessage(msg);
 }
 
-function hidePotentialLayers(msg) {
+export function hidePotentialLayers(msg) {
   for (const layer of potentialPVLayers
     .concat(potentialPVRoofLayers)
     .concat(potentialWindLayers)) {
