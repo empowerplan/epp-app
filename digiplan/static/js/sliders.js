@@ -119,6 +119,16 @@ export function adaptSlidersScenario(msg, scenario) {
   .then(response => response.json())
   .then(scenarioSettings => {
       try {
+        if(scenarioSettings[scenario].hasOwnProperty("windTab")) {
+            // Manually activate/initialize a tab for chosen scenario
+            var scenarioTab = scenarioSettings[scenario].windTab;
+            var triggerEl = document.getElementById(scenarioTab);
+            if (triggerEl) {
+              var tabTrigger = new bootstrap.Tab(triggerEl);
+              tabTrigger.show();
+            }
+
+        }
         // Update DetailSliders first
         for (const slider of detailSliders) {
           // Check if the slider is defined in scenario settings

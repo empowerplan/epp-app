@@ -1,7 +1,8 @@
 {
     "1": {
+        "windTab": "windFutureTab",
         "id_s_w_1": 720,
-        "id_s_w_6": 0.8,
+        "id_s_w_7": 2.1,
         "id_s_pv_ff_1": 1050,
         "id_s_pv_ff_3": 10,
         "id_s_pv_ff_4": 20,
@@ -27,6 +28,7 @@
         "id_w_z_s_1": 70
     },
     "2": {
+        "windTab": "windPresentTab",
         "id_s_w_1": 180,
         "id_s_w_6": 0.2,
         "id_s_pv_ff_1": 4330,
@@ -54,8 +56,8 @@
         "id_w_z_s_1": 45
     },
     "3": {
+        "windTab": "windPastTab",
         "id_s_w_1": 500,
-        "id_s_w_6": 0.6,
         "id_s_pv_ff_1": 6400,
         "id_s_pv_ff_3": 15,
         "id_s_pv_ff_4": 10,
