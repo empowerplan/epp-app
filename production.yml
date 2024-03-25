@@ -15,8 +15,8 @@ services:
       - empowerplan_network
       - caddy_network
     volumes:
-      - ./empowerplan/data:/app/empowerplan/data
-      - ./empowerplan/static/mvts:/app/staticfiles/mvts
+      - ./digiplan/data:/app/digiplan/data
+      - ./digiplan/static/mvts:/app/staticfiles/mvts
     expose:
       - "5000"
     depends_on:
