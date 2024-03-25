@@ -1,6 +1,13 @@
 @import '../components/sliders';
 @import '../components/tabs';
 
+@mixin explanation-btn {
+  @extend .btn;
+  @extend .btn-link;
+  @extend .btn-sm;
+  @extend .text-decoration-underline;
+}
+
 .panel {
   @extend .h-auto;
   @extend .shadow;
@@ -448,6 +455,14 @@
     left: $panel-width;
   }
 
+  &__close-btn {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .justify-content-end;
+    @extend .w-100;
+    @extend .pb-3;
+  }
+
   &__heading {
     @extend .d-flex;
     @extend .flex-row;
@@ -482,6 +497,10 @@
     @extend .fs-7;
     @extend .fw-bold;
     @extend .ps-1;
+  }
+
+  &__explanation {
+    @include explanation-btn;
   }
 
   &__indication {

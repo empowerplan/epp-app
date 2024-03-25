@@ -6,18 +6,27 @@
 
 {% include "widgets/slider.html" with field=form.s_w_1 %}
 <div class="sidepanel">
+  <div class="sidepanel__close-btn">
+    {% include "widgets/sidepanel_close_btn.html" %}
+  </div>
   <div class="sidepanel__heading">
     <div class="sidepanel__title">
       <div class="sidepanel__title-icon sidepanel__title-icon--wind">
         <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.936" xmlns="http://www.w3.org/2000/svg">
           <path d="m8.4667 0.025321v4.2762c-0.89922 0.23858-1.5663 1.0686-1.5663 2.0423 0 0.1682 0.019787 0.33204 0.057361 0.48938l-3.3874 1.956 0.52917 0.91571 3.3548-1.9358c0.26835 0.29432 0.61807 0.51241 1.0123 0.61702v7.4889h-6.35v1.0583h6.35v5.17e-4h1.0589v-5.17e-4h6.3495v-1.0583h-6.3495v-7.4889c0.41594-0.11036 0.7822-0.34745 1.0557-0.66663l3.4422 1.9854 0.52917-0.91571-3.5037-2.0226c3.4e-5 -1.65e-4 -3.4e-5 -3.517e-4 0-5.168e-4 0.027938-0.13666 0.042891-0.27777 0.042891-0.4222 0-0.97361-0.66709-1.8037-1.5663-2.0423v-4.2762h-1.0589zm0.52968 5.2658c0.5765 2e-7 1.0366 0.46232 1.0366 1.0526s-0.46013 1.0526-1.0366 1.0526c-0.5765 0-1.0371-0.46232-1.0371-1.0526-1e-7 -0.59033 0.46065-1.0526 1.0371-1.0526z"/>
-         </svg>
+          </svg>
       </div>
       <div class="sidepanel__title-text">
         {%  trans "Details" %}
       </div>
     </div>
-    {% include "widgets/sidepanel_close_btn.html" %}
+    <button type="button" class="sidepanel__explanation">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"/>
+      </svg>
+      {% translate "Erkläre mir das" %}
+    </button>
   </div>
   <p class="sidepanel__indication">
     {%  trans "Nutzung von Windpotenzialgebieten:" %}
@@ -326,6 +335,9 @@
 
 {% include "widgets/slider.html" with field=form.s_pv_ff_1 %}
 <div class="sidepanel sidepanel--pv-outdoor">
+  <div class="sidepanel__close-btn">
+    {% include "widgets/sidepanel_close_btn.html" %}
+  </div>
   <div class="sidepanel__heading">
     <div class="sidepanel__title">
       <div class="sidepanel__title-icon sidepanel__title-icon--pv">
@@ -337,7 +349,13 @@
         {%  trans "Details" %}
       </div>
     </div>
-    {% include "widgets/sidepanel_close_btn.html" %}
+    <button type="button" class="sidepanel__explanation">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"/>
+      </svg>
+      {% translate "Erkläre mir das" %}
+    </button>
   </div>
   <p class="sidepanel__indication">
     {%  trans "Nutzung von PV-Potenzialgebieten:" %}
@@ -408,10 +426,28 @@
 
 {% include "widgets/slider.html" with field=form.s_pv_d_1 %}
 <div class="sidepanel sidepanel--pv-roof">
-  <div class="sidepanel__heading">
-    {%  trans "Detail settings" %}
+  <div class="sidepanel__close-btn">
     {% include "widgets/sidepanel_close_btn.html" %}
   </div>
+  <div class="sidepanel__heading">
+    <div class="sidepanel__title">
+      <div class="sidepanel__title-icon sidepanel__title-icon--pv">
+        <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.936" xmlns="http://www.w3.org/2000/svg">
+          <path d="m4.3692 1.0589-3.4923 11.64h0.71107 2.6443v3.176h1.0589v-3.176h6.3516v3.176h1.0563v-3.176h3.3574l-3.4918-11.64h-8.1954zm0.78703 1.0583h2.7812v2.1151h-3.4163l0.6351-2.1151zm3.8401 0h2.7812l0.6351 2.1151h-3.4163v-2.1151zm-4.793 3.174h3.7341v2.1172h-4.3692l0.6351-2.1172zm4.793 0h3.7341l0.6351 2.1172h-4.3692v-2.1172zm-5.7459 3.1755h4.6871v3.176h-5.6405l0.95343-3.176zm5.7459 0h4.6871l0.95343 3.176h-5.6405v-3.176z" color="#000000" fill-rule="evenodd" stroke-dashoffset="5.2899"/>
+        </svg>
+      </div>
+      <div class="sidepanel__title-text">
+        {%  trans "Details" %}
+      </div>
+    </div>
+    <button type="button" class="sidepanel__explanation">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"/>
+      </svg>
+      {% translate "Erkläre mir das" %}
+    </button>
+  </div>‚‚
   <p class="sidepanel__indication">
     {%  trans "Stelle ein, wieviel Dachfläche für Photovoltaik genutzt werden soll:" %}
   </p>
