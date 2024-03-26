@@ -4,7 +4,7 @@ from django.forms import BooleanField, Form, IntegerField, TextInput, renderers
 from django.utils.safestring import mark_safe
 from django_mapengine import legend
 
-from . import charts
+from . import charts, menu
 from .widgets import SwitchWidget
 
 
@@ -49,7 +49,19 @@ class StaticLayerForm(TemplateForm):  # noqa: D101
         self.layer = layer
 
 
-class PanelForm(TemplateForm):  # noqa: D101
+class TemplateExtraContentForm(TemplateForm):
+    """Add extra content to template form."""
+
+    extra_content = {}
+
+    def __str__(self) -> str:  # noqa: D105
+        if self.template_name:
+            renderer = renderers.get_default_renderer()
+            return mark_safe(renderer.render(self.template_name, {"form": self, **self.extra_content}))  # noqa: S308
+        return super().__str__()
+
+
+class PanelForm(TemplateExtraContentForm):  # noqa: D101
     def __init__(self, parameters, additional_parameters=None, **kwargs) -> None:  # noqa: D107, ANN001
         super().__init__(**kwargs)
         self.fields = {item["name"]: item["field"] for item in self.generate_fields(parameters, additional_parameters)}
@@ -102,6 +114,13 @@ class PanelForm(TemplateForm):  # noqa: D101
 
 class EnergyPanelForm(PanelForm):  # noqa: D101
     template_name = "forms/panel_energy.html"
+
+    def __init__(self, parameters, additional_parameters=None, **kwargs) -> None:  # noqa: D107, ANN001
+        super().__init__(parameters, additional_parameters, **kwargs)
+        for technology in ("wind_2018", "wind_2024", "wind_2027", "pv_ground", "pv_roof"):
+            key_results = menu.detail_key_results(technology)
+            for key, value in key_results.items():
+                self.extra_content[f"{technology}_key_result_{key}"] = value
 
 
 class HeatPanelForm(PanelForm):  # noqa: D101
