@@ -1176,6 +1176,24 @@ Django = ">=2.2"
 redis = ">=3.0.0"
 
 [[package]]
+name = "django-template-partials"
+version = "23.4"
+description = "django-template-partials"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-template-partials-23.4.tar.gz", hash = "sha256:f762b0b7b2222462df0845f0556792640b769eb832eae218a0e7dadd4e5606cc"},
+    {file = "django_template_partials-23.4-py2.py3-none-any.whl", hash = "sha256:d83d9c2d2836be769919e9aaf394d5feb1ac86e1187083030398308070122fca"},
+]
+
+[package.dependencies]
+Django = "*"
+
+[package.extras]
+docs = ["Sphinx"]
+tests = ["coverage", "django_coverage_plugin"]
+
+[[package]]
 name = "djangorestframework"
 version = "3.15.1"
 description = "Web APIs for Django, made easy."
