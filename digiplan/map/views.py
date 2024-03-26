@@ -11,7 +11,7 @@ from django.views.generic import TemplateView
 from django_mapengine import views
 
 from digiplan import __version__
-from digiplan.map import config
+from digiplan.map import config, menu
 
 from . import charts, choropleths, forms, map_config, popups, utils
 
@@ -185,3 +185,16 @@ def get_charts(request: HttpRequest) -> response.JsonResponse:
     return response.JsonResponse(
         {lookup: charts.CHARTS[lookup](simulation_id=simulation_id).render() for lookup in lookups},
     )
+
+
+class DetailKeyResultsView(TemplateView):
+    """Return HTMX-partial for requested detail key results."""
+
+    template_name = "forms/panel_energy.html#key_results"
+
+    def get_context_data(self, **kwargs) -> dict:  # noqa: ARG002
+        """Get detail key results for requested technology."""
+        technology = self.request.GET["technology"]
+        return {
+            f"key_result_{key}": value for key, value in menu.detail_key_results(technology, **self.request.GET).items()
+        }
