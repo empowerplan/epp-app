@@ -1,5 +1,76 @@
 {% load i18n %}
 {% load static %}
+{% load partials %}
+
+{% partialdef wind_key_results %}
+  <div class="sidepanel__key-numbers">
+    <div class="sidepanel__key-number">
+      <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
+        <span>
+          {{ wind_key_result_area }} ha
+        </span>
+      </div>
+      <div class="sidepanel__key-number-description">
+        <span>
+          {%  trans "werden genutzt" %}
+        </span>
+      </div>
+    </div>
+    <div class="sidepanel__key-number">
+      <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
+        <span>
+          {{ wind_key_result_turbines }}
+        </span>
+      </div>
+      <div class="sidepanel__key-number-description">
+        {%  trans "Anlagen werden errichtet" %}
+      </div>
+    </div>
+    <div class="sidepanel__key-number">
+      <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
+        <span>
+          {{ wind_key_result_energy }}
+        </span>
+      </div>
+      <div class="sidepanel__key-number-description">
+        <span>
+          {%  trans "können gewonnen werden" %}
+        </span>
+      </div>
+    </div>
+  </div>
+{% endpartialdef %}
+
+{% partialdef pv_key_results %}
+  <div class="sidepanel__key-numbers">
+    <div class="sidepanel__key-number">
+      <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
+        <span>
+          ... ha
+        </span>
+      </div>
+      <div class="sidepanel__key-number-description">
+        <span>
+          {%  trans "werden genutzt" %}
+        </span>
+      </div>
+    </div>
+    <div class="sidepanel__key-number">
+      <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
+        <span>
+          ... TWh
+        </span>
+      </div>
+      <div class="sidepanel__key-number-description">
+        <span>
+          {%  trans "können gewonnen werden" %}
+        </span>
+      </div>
+    </div>
+  </div>
+{% endpartialdef %}
+
+
 <h2 class="panel__title title">{%  trans "Generation" %}</h2>
 
 <div id="js-power-mix" class="power-mix"></div>
@@ -68,43 +139,8 @@
             </div>
           </div>
       </div>
-      <div class="sidepanel__block">
-        <div class="sidepanel__key-numbers">
-          <div class="sidepanel__key-number">
-            <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
-              <span>
-                ... ha
-              </span>
-            </div>
-            <div class="sidepanel__key-number-description">
-              <span>
-                {%  trans "werden genutzt" %}
-              </span>
-            </div>
-          </div>
-          <div class="sidepanel__key-number">
-            <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
-              <span>
-                ...
-              </span>
-            </div>
-            <div class="sidepanel__key-number-description">
-              {%  trans "Anlagen werden errichtet" %}
-            </div>
-          </div>
-          <div class="sidepanel__key-number">
-            <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
-              <span>
-                ...
-              </span>
-            </div>
-            <div class="sidepanel__key-number-description">
-              <span>
-                {%  trans "können gewonnen werden" %}
-              </span>
-            </div>
-          </div>
-        </div>
+      <div class="sidepanel__block" id="wind_key_results_2018">
+        {% partial wind_key_results %}
       </div>
       <div class="sidepanel__block">
         <div class="sidepanel__more">
@@ -147,43 +183,8 @@
           </span>
         </div>
       </div>
-      <div class="sidepanel__block">
-        <div class="sidepanel__key-numbers">
-          <div class="sidepanel__key-number">
-            <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
-              <span>
-                ... ha
-              </span>
-            </div>
-            <div class="sidepanel__key-number-description">
-              <span>
-                {%  trans "werden genutzt" %}
-              </span>
-            </div>
-          </div>
-          <div class="sidepanel__key-number">
-            <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
-              <span>
-                ...
-              </span>
-            </div>
-            <div class="sidepanel__key-number-description">
-              {%  trans "Anlagen werden errichtet" %}
-            </div>
-          </div>
-          <div class="sidepanel__key-number">
-            <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
-              <span>
-                ... TWh
-              </span>
-            </div>
-            <div class="sidepanel__key-number-description">
-              <span>
-                {%  trans "können gewonnen werden" %}
-              </span>
-            </div>
-          </div>
-        </div>
+      <div class="sidepanel__block" id="wind_key_results_2024">
+        {% partial wind_key_results %}
       </div>
       <div class="sidepanel__block">
         <div class="sidepanel__more">
@@ -238,43 +239,8 @@
           </span>
         </div>
       </div>
-      <div class="sidepanel__block">
-        <div class="sidepanel__key-numbers">
-          <div class="sidepanel__key-number">
-            <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
-              <span>
-                ... ha
-              </span>
-            </div>
-            <div class="sidepanel__key-number-description">
-              <span>
-                {%  trans "werden genutzt" %}
-              </span>
-            </div>
-          </div>
-          <div class="sidepanel__key-number">
-            <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
-              <span>
-                ...
-              </span>
-            </div>
-            <div class="sidepanel__key-number-description">
-              {%  trans "Anlagen werden errichtet" %}
-            </div>
-          </div>
-          <div class="sidepanel__key-number">
-            <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
-              <span>
-                ... TWh
-              </span>
-            </div>
-            <div class="sidepanel__key-number-description">
-              <span>
-                {%  trans "können gewonnen werden" %}
-              </span>
-            </div>
-          </div>
-        </div>
+      <div class="sidepanel__block" id="wind_key_results_2027">
+        {% partial wind_key_results %}
       </div>
       <div class="sidepanel__block">
         <div class="sidepanel__more">
@@ -359,33 +325,8 @@
       </span>
     </div>
   </div>
-  <div class="sidepanel__block">
-    <div class="sidepanel__key-numbers">
-      <div class="sidepanel__key-number">
-        <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
-          <span>
-            ... ha
-          </span>
-        </div>
-        <div class="sidepanel__key-number-description">
-          <span>
-            {%  trans "werden genutzt" %}
-          </span>
-        </div>
-      </div>
-      <div class="sidepanel__key-number">
-        <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
-          <span>
-            ... TWh
-          </span>
-        </div>
-        <div class="sidepanel__key-number-description">
-          <span>
-            {%  trans "können gewonnen werden" %}
-          </span>
-        </div>
-      </div>
-    </div>
+  <div class="sidepanel__block" id="pv_ground_key_results">
+    {% partial pv_key_results %}
   </div>
   <div class="sidepanel__block">
     <div class="sidepanel__more">
@@ -427,33 +368,8 @@
       </span>
     </div>
   </div>
-  <div class="sidepanel__block">
-    <div class="sidepanel__key-numbers">
-      <div class="sidepanel__key-number">
-        <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
-          <span>
-            ... ha
-          </span>
-        </div>
-        <div class="sidepanel__key-number-description">
-          <span>
-            {%  trans "werden genutzt" %}
-          </span>
-        </div>
-      </div>
-      <div class="sidepanel__key-number">
-        <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
-          <span>
-            ... TWh
-          </span>
-        </div>
-        <div class="sidepanel__key-number-description">
-          <span>
-            {%  trans "können gewonnen werden" %}
-          </span>
-        </div>
-      </div>
-    </div>
+  <div class="sidepanel__block" id="pv_roof_key_results">
+    {% partial pv_key_results %}
   </div>
   <div class="sidepanel__block">
     <div class="sidepanel__more">
