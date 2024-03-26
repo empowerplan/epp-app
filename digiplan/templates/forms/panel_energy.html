@@ -46,7 +46,7 @@
     <div class="sidepanel__key-number">
       <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
         <span>
-          ... ha
+          {{ pv_key_result_area }} ha
         </span>
       </div>
       <div class="sidepanel__key-number-description">
@@ -58,7 +58,7 @@
     <div class="sidepanel__key-number">
       <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
         <span>
-          ... TWh
+          {{ pv_key_result_energy }} TWh
         </span>
       </div>
       <div class="sidepanel__key-number-description">
@@ -140,7 +140,7 @@
           </div>
       </div>
       <div class="sidepanel__block" id="wind_key_results_2018">
-        {% partial wind_key_results %}
+        {% partial wind_key_results with wind_key_result_area=wind_key_result_area_2018 wind_key_result_turbines=wind_key_result_turbines_2018 wind_key_result_energy=wind_key_result_energy_2018 %}
       </div>
       <div class="sidepanel__block">
         <div class="sidepanel__more">
@@ -184,7 +184,7 @@
         </div>
       </div>
       <div class="sidepanel__block" id="wind_key_results_2024">
-        {% partial wind_key_results %}
+        {% partial wind_key_results with wind_key_result_area=wind_key_result_area_2024 wind_key_result_turbines=wind_key_result_turbines_2024 wind_key_result_energy=wind_key_result_energy_2024 %}
       </div>
       <div class="sidepanel__block">
         <div class="sidepanel__more">
@@ -240,7 +240,7 @@
         </div>
       </div>
       <div class="sidepanel__block" id="wind_key_results_2027">
-        {% partial wind_key_results %}
+        {% partial wind_key_results with wind_key_result_area=wind_key_result_area_2027 wind_key_result_turbines=wind_key_result_turbines_2027 wind_key_result_energy=wind_key_result_energy_2027 %}
       </div>
       <div class="sidepanel__block">
         <div class="sidepanel__more">
@@ -326,7 +326,7 @@
     </div>
   </div>
   <div class="sidepanel__block" id="pv_ground_key_results">
-    {% partial pv_key_results %}
+    {% partial pv_key_results with pv_key_result_area=pv_ground_key_result_area pv_key_result_energy=pv_ground_key_result_energy %}
   </div>
   <div class="sidepanel__block">
     <div class="sidepanel__more">
@@ -369,7 +369,7 @@
     </div>
   </div>
   <div class="sidepanel__block" id="pv_roof_key_results">
-    {% partial pv_key_results %}
+    {% partial pv_key_results with pv_key_result_area=pv_roof_key_result_area pv_key_result_energy=pv_roof_key_result_energy %}
   </div>
   <div class="sidepanel__block">
     <div class="sidepanel__more">
