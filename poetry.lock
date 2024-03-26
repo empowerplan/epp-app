@@ -1205,6 +1205,24 @@ Django = ">=2.2"
 redis = ">=3.0.0"
 
 [[package]]
+name = "django-template-partials"
+version = "23.4"
+description = "django-template-partials"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-template-partials-23.4.tar.gz", hash = "sha256:f762b0b7b2222462df0845f0556792640b769eb832eae218a0e7dadd4e5606cc"},
+    {file = "django_template_partials-23.4-py2.py3-none-any.whl", hash = "sha256:d83d9c2d2836be769919e9aaf394d5feb1ac86e1187083030398308070122fca"},
+]
+
+[package.dependencies]
+Django = "*"
+
+[package.extras]
+docs = ["Sphinx"]
+tests = ["coverage", "django_coverage_plugin"]
+
+[[package]]
 name = "djangorestframework"
 version = "3.15.0"
 description = "Web APIs for Django, made easy."
@@ -3740,4 +3758,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "fb02befe0fdbdc91ec8ba128622358e0c779e283a46ef94e698d2c87f2a17946"
+content-hash = "3c654e622fa424cdd38b0549d1a28f3f28745e4bc2ee18761b6e11295d22cf27"
