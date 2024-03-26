@@ -1,16 +1,34 @@
 """Read functionality for digipipe datapackage."""
 import csv
 import json
-from collections import defaultdict
+from collections import defaultdict, namedtuple
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 
 import pandas as pd
 from django.conf import settings
 from django_oemof.settings import OEMOF_DIR
 
-from config.settings.base import DATA_DIR
+from config.settings.base import DIGIPIPE_DIR
 from digiplan.map import config, models
+
+Source = namedtuple("Source", ["csv_file", "column"])
+
+
+def get_data_from_sources(sources: Union[Source, list[Source]]) -> pd.DataFrame:
+    """Extract data from single or multiple sources and merge into dataframe."""
+    source_files = defaultdict(list)
+    if isinstance(sources, Source):
+        source_files[sources.csv_file].append(sources.column)
+    else:
+        for source in sources:
+            source_files[source.csv_file].append(source.column)
+
+    dfs = []
+    for source_file, columns in source_files.items():
+        source_path = Path(DIGIPIPE_DIR, "scalars", source_file)
+        dfs.append(pd.read_csv(source_path, usecols=columns))
+    return pd.concat(dfs)
 
 
 def get_employment() -> pd.DataFrame:
@@ -144,68 +162,77 @@ def get_thermal_efficiency(component: str) -> float:
     return pd.read_csv(sequence_filename, sep=";").iloc[:, 1]
 
 
-def get_potential_values(*, per_municipality: bool = False) -> dict:
+def get_potential_values() -> dict:
     """
     Calculate max_values for sliders.
-
-    Parameters
-    ----------
-    per_municipality: bool
-        If set to True, potentials are not aggregated, but given per municipality
 
     Returns
     -------
     dict
         dictionary with each slider / switch and respective max_value
     """
-    scalars = {
-        "wind": "potentialarea_wind_area_stats_muns.csv",
-        "pv_ground": "potentialarea_pv_ground_area_stats_muns.csv",
-        "pv_roof": "potentialarea_pv_roof_area_stats_muns.csv",
-    }
-
-    areas = {
-        "wind": {
-            "wind_2018": "stp_2018_eg",
-            "wind_2024": "stp_2024_vr",
-            "wind_2027": area
-            if (area := models.Municipality.objects.all().values("area").aggregate(models.Sum("area"))["area__sum"])
-            else 0,  # to prevent None if regions are empty
-        },
-        "pv_ground": {
-            "pv_soil_quality_low": "soil_quality_low_region",
-            "pv_soil_quality_medium": "soil_quality_medium_region",
-            "pv_permanent_crops": "permanent_crops_region",
-        },
-        "pv_roof": {"pv_roof": "installable_power"},
-    }
-
+    areas = get_potential_areas()
     pv_density = {
         "pv_soil_quality_low": "pv_ground",
         "pv_soil_quality_medium": "pv_ground_vertical_bifacial",
         "pv_permanent_crops": "pv_ground_elevated",
+        "pv_roof": "pv_roof",
     }
 
     power_density = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "scalars/technology_data.json")))["power_density"]
 
     potentials = {}
-    for profile in areas:
-        path = Path(DATA_DIR, "digipipe/scalars", scalars[profile])
-        reader = pd.read_csv(path)
-        for key, value in areas[profile].items():
-            if key == "wind_2027":
-                # Value is already calculated from region area (see above)
-                potentials[key] = value
-            else:
-                if per_municipality:  # noqa: PLR5501
-                    potentials[key] = reader[value]
-                else:
-                    potentials[key] = reader[value].sum()
-            if profile == "wind":
-                potentials[key] = potentials[key] * power_density["wind"]
-            if profile == "pv_ground":
-                potentials[key] = potentials[key] * power_density[pv_density[key]]
+    for key in areas:
+        if key.startswith("wind"):
+            potentials[key] = areas[key] * power_density["wind"]
+        if key.startswith("pv"):
+            potentials[key] = areas[key] * power_density[pv_density[key]]
     return potentials
+
+
+def get_potential_areas(technology: Optional[str] = None) -> dict:
+    """
+    Return potential areas.
+
+    Parameters
+    ----------
+    technology: str
+        If given, potential area only for this technology is returned
+
+    Returns
+    -------
+    dict
+        Potential areas of all technologies or specified one
+    """
+    sources = {
+        "wind_2018": Source("potentialarea_wind_area_stats_muns.csv", "stp_2018_eg"),
+        "wind_2024": Source("potentialarea_wind_area_stats_muns.csv", "stp_2024_vr"),
+        "pv_soil_quality_low": Source("potentialarea_pv_ground_area_stats_muns.csv", "soil_quality_low_region"),
+        "pv_soil_quality_medium": Source("potentialarea_pv_ground_area_stats_muns.csv", "soil_quality_medium_region"),
+        "pv_permanent_crops": Source("potentialarea_pv_ground_area_stats_muns.csv", "permanent_crops_region"),
+        "pv_roof": Source("potentialarea_pv_roof_area_stats_muns.csv", "installable_power"),
+    }
+
+    # Add wind for 2027 directly from model data, as it is not included in datapackage
+    areas = {
+        "wind_2027": area
+        if (area := models.Municipality.objects.all().values("area").aggregate(models.Sum("area"))["area__sum"])
+        else 0,
+    }
+    if technology is not None:
+        if technology == "wind_2027":
+            return areas["wind_2027"]
+        sources = {technology: sources[technology]}
+
+    data = get_data_from_sources(sources.values())
+    data = data.sum()
+    for index in data.index:
+        # Add extracted data to areas and map source columns to keys accordingly
+        areas[next(key for key, source in sources.items() if source.column == index)] = data[index]
+
+    if technology is not None:
+        return areas[technology]
+    return areas
 
 
 def get_full_load_hours(year: int) -> pd.Series:
