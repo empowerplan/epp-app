@@ -1,5 +1,12 @@
 import { getCurrentMenuTab } from "./menu.js";
-import { adaptSlidersScenario } from "./sliders.js";
+import { detailSliders, panelSliders } from "./sliders.js";
+
+/* jshint ignore:start */
+/*globals scenarioSettings */
+const scenarioSettings = await fetch("/static/config/scenarios.json").then(
+  (response) => response.json(),
+);
+/* jshint ignore:end */
 
 let currentScenario = null;
 //const scenarioPanels = ["panelCard1", "panelCard2", "panelCard3", "panelCard4"];
@@ -104,4 +111,46 @@ function selectScenarioCard(scenarioCardNumber) {
       arrowIcon.innerHTML = rightArrowSVG;
     }
   }
+}
+
+/**
+ * Adapt detail and main sliders depending on scenario selection
+ * @param {string} msg Publisher message
+ * @param {string} scenario Name of scenario
+ */
+function adaptSlidersScenario(msg, scenario) {
+  if (scenarioSettings[scenario].hasOwnProperty("windTab")) {
+    // Manually activate/initialize a tab for chosen scenario
+    const scenarioTab = scenarioSettings[scenario].windTab;
+    const triggerEl = document.getElementById(scenarioTab);
+    if (triggerEl) {
+      const tabTrigger = new bootstrap.Tab(triggerEl);
+      tabTrigger.show();
+    }
+  }
+  // Update DetailSliders first
+  for (const slider of detailSliders) {
+    // Check if the slider is defined in scenario settings
+    if (!scenarioSettings[scenario].hasOwnProperty(slider.id)) {
+      continue;
+    }
+    const sliderValue = scenarioSettings[scenario][slider.id];
+    $(`#${slider.id}`).data("ionRangeSlider").update({ from: sliderValue });
+    const data = {
+      input: [{ id: slider.id }],
+      from: sliderValue,
+    };
+    PubSub.publish(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, data);
+  }
+  // update main panel Sliders afterwards
+  for (const slider of panelSliders) {
+    // Check if the slider is defined in scenario settings
+    if (!scenarioSettings[scenario].hasOwnProperty(slider.id)) {
+      continue;
+    }
+    const sliderValue = scenarioSettings[scenario][slider.id];
+    $(`#${slider.id}`).data("ionRangeSlider").update({ from: sliderValue });
+  }
+  PubSub.publish(eventTopics.POWER_PANEL_SLIDER_CHANGE);
+  return logMessage(msg);
 }

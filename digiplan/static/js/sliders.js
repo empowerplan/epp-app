@@ -3,14 +3,18 @@ const SETTINGS_PARAMETERS = JSON.parse(
   document.getElementById("settings_parameters").textContent,
 );
 const panelContainer = document.getElementById("js-panel-container");
-const panelSliders = document.querySelectorAll(".js-slider.js-slider-panel");
+export const panelSliders = document.querySelectorAll(
+  ".js-slider.js-slider-panel",
+);
 const powerPanelSliders = document.querySelectorAll(
   ".js-slider.js-slider-panel.js-power-mix",
 );
 const sliderMoreLabels = document.querySelectorAll(
   ".c-slider__label--more > .button",
 );
-const detailSliders = document.querySelectorAll(".js-slider.js-slider-detail-panel");
+export const detailSliders = document.querySelectorAll(
+  ".js-slider.js-slider-detail-panel",
+);
 const powerMixInfoBanner = document.getElementById("js-power-mix");
 const windTabs = document.querySelectorAll(
   "#windTab .sidepanel-tabs__nav-link",
@@ -108,63 +112,6 @@ PubSub.subscribe(eventTopics.PV_ROOF_CONTROL_ACTIVATED, showPVRoofLayers);
 PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, showWindLayers);
 
 // Subscriber Functions
-
-/**
- * Adapt detail and main sliders depending on scenario selection
- * @param {string} msg Publisher message
- * @param {string} scenario Name of scenario
- */
-export function adaptSlidersScenario(msg, scenario) {
-  return fetch('/static/config/scenarios.json')
-  .then(response => response.json())
-  .then(scenarioSettings => {
-      try {
-        if(scenarioSettings[scenario].hasOwnProperty("windTab")) {
-            // Manually activate/initialize a tab for chosen scenario
-            var scenarioTab = scenarioSettings[scenario].windTab;
-            var triggerEl = document.getElementById(scenarioTab);
-            if (triggerEl) {
-              var tabTrigger = new bootstrap.Tab(triggerEl);
-              tabTrigger.show();
-            }
-
-        }
-        // Update DetailSliders first
-        for (const slider of detailSliders) {
-          // Check if the slider is defined in scenario settings
-          if (!scenarioSettings[scenario].hasOwnProperty(slider.id)) {
-              continue;
-          }
-          const sliderValue = scenarioSettings[scenario][slider.id];
-          $(`#${slider.id}`).data("ionRangeSlider").update({ from: sliderValue });
-          const data = {
-            input: [{ id: slider.id }],
-            from: sliderValue
-          };
-          PubSub.publish(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, data);
-        }
-        // update main panel Sliders afterwards
-        for (const slider of panelSliders) {
-          // Check if the slider is defined in scenario settings
-          if (!scenarioSettings[scenario].hasOwnProperty(slider.id)) {
-              continue;
-          }
-          const sliderValue = scenarioSettings[scenario][slider.id];
-          $(`#${slider.id}`).data("ionRangeSlider").update({ from: sliderValue });
-        }
-        PubSub.publish(eventTopics.POWER_PANEL_SLIDER_CHANGE);
-        console.log('Sliders updated succesfully');
-      } catch (error) {
-        console.error('Error updating sliders:', error);
-        throw error;
-      }
-  })
-  .catch(error => {
-    console.error('Error fetching scenario settings:', error);
-    throw error;
-  });
-}
-
 /**
  * Adapt detail sliders depending on related main sliders
  * @param {string} msg Publisher message
