@@ -229,7 +229,7 @@
 			<g id="g126" style="clip-path:url(#SVGID_00000072251326856338908470000007005385826690665128_);">
 				<g id="g132">
 					<g id="g134">
-						
+
 							<linearGradient id="path148_00000060012969691140755170000012484366142187382718_" gradientUnits="userSpaceOnUse" x1="465.891" y1="268.029" x2="466.891" y2="268.029" gradientTransform="matrix(-202.9998 -142.142 -142.142 202.9998 133446.375 12619.9199)">
 							<stop  offset="0" style="stop-color:#15304E"/>
 							<stop  offset="0.1872" style="stop-color:#15304E"/>
@@ -237,7 +237,7 @@
 							<stop  offset="0.8436" style="stop-color:#15304E"/>
 							<stop  offset="1" style="stop-color:#15304E"/>
 						</linearGradient>
-						
+
 							<path id="path148" inkscape:connector-curvature="0" style="fill:url(#path148_00000060012969691140755170000012484366142187382718_);" d="
 							M576,874.9l43.8-22.4c-0.8,7.9-1.3,16-1.5,24.2l0,0c-0.1,8-0.1,15.9,0.6,23.9l0,0L567,933.8C567,933.8,568.5,910,576,874.9
 							 M630.9,876.9c0-10.5,0.4-20.7,1.3-30.7l0,0l29.2-14.9c-1.1,10.4-1.6,20.9-1.6,31.3l0,0c0,3.9,0.1,7.6,0.5,11.6l0,0
