@@ -22,7 +22,28 @@ def detail_key_results(technology: str, **kwargs: dict) -> dict:
             "energy": potential_capacities[technology] * full_load_hours["wind"] * percentage * 1e-6,
         }
     if technology == "pv_ground":
-        return {"area": 33, "energy": 2001}
+        percentages = {
+            "pv_soil_quality_low": int(kwargs["id_s_pv_ff_3"]) / 100,
+            "pv_soil_quality_medium": int(kwargs["id_s_pv_ff_4"]) / 100,
+            "pv_permanent_crops": int(kwargs["id_s_pv_ff_5"]) / 100,
+        }
+        flh_mapping = {
+            "pv_soil_quality_low": "pv_ground",
+            "pv_soil_quality_medium": "pv_ground_elevated",
+            "pv_permanent_crops": "pv_ground_vertical_bifacial",
+        }
+        return {
+            "area": sum(areas[pv_type] * percentages[pv_type] for pv_type in percentages),
+            "energy": sum(
+                potential_capacities[pv_type] * full_load_hours[flh_mapping[pv_type]] * percentages[pv_type]
+                for pv_type in percentages
+            )
+            * 1e-6,
+        }
     if technology == "pv_roof":
-        return {"area": 34, "energy": 2002}
+        percentage = int(kwargs["id_s_pv_d_3"]) / 100
+        return {
+            "area": areas[technology] * percentage,
+            "energy": potential_capacities[technology] * full_load_hours[technology] * percentage * 1e-6,
+        }
     raise KeyError(f"Unknown technology '{technology}'.")
