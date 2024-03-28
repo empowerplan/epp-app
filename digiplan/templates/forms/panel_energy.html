@@ -7,7 +7,7 @@
     <div class="sidepanel__key-number">
       <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
         <span>
-          {{ key_result_area }} ha
+          {{ key_result_area | floatformat:2 }} ha
         </span>
       </div>
       <div class="sidepanel__key-number-description">
@@ -20,7 +20,7 @@
       <div class="sidepanel__key-number">
         <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
           <span>
-            {{ key_result_turbines }}
+            {{ key_result_turbines | floatformat:0 }}
           </span>
         </div>
         <div class="sidepanel__key-number-description">
@@ -31,7 +31,7 @@
     <div class="sidepanel__key-number">
       <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
         <span>
-          {{ key_result_energy }}
+          {{ key_result_energy | floatformat:2 }}
         </span>
       </div>
       <div class="sidepanel__key-number-description">

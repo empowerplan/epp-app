@@ -1,14 +1,26 @@
 """Add calculations for menu items."""
 
+from . import config, datapackage
 
-def detail_key_results(technology: str, **kwargs: dict) -> dict:  # noqa: ARG001
+
+def detail_key_results(technology: str, **kwargs: dict) -> dict:
     """Calculate detail key results for given technology."""
-    if technology == "wind_2018":
-        return {"area": 300, "turbines": 20, "energy": 2000}
-    if technology == "wind_2024":
-        return {"area": 400, "turbines": 30, "energy": 3000}
-    if technology == "wind_2027":
-        return {"area": 500, "turbines": 50, "energy": 4000}
+    areas = datapackage.get_potential_areas()
+    potential_capacities = datapackage.get_potential_values()  # in MW
+    full_load_hours = datapackage.get_full_load_hours(2045)
+    nominal_power_per_unit = config.TECHNOLOGY_DATA["nominal_power_per_unit"]["wind"]
+
+    if technology.startswith("wind"):
+        percentage = 1
+        if technology == "wind_2024":
+            percentage = int(kwargs["id_s_w_6"]) / 100
+        if technology == "wind_2027":
+            percentage = int(kwargs["id_s_w_7"]) / 100
+        return {
+            "area": areas[technology] / 100 * percentage,
+            "turbines": potential_capacities[technology] / nominal_power_per_unit * percentage,
+            "energy": potential_capacities[technology] * full_load_hours["wind"] * percentage * 1e-6,
+        }
     if technology == "pv_ground":
         return {"area": 33, "energy": 2001}
     if technology == "pv_roof":

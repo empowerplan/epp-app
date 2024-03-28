@@ -123,7 +123,12 @@ class EnergyPanelForm(PanelForm):  # noqa: D101
         """Overwrite init function to add initial key results for detail panels."""
         super().__init__(parameters, additional_parameters, **kwargs)
         for technology in ("wind_2018", "wind_2024", "wind_2027", "pv_ground", "pv_roof"):
-            key_results = menu.detail_key_results(technology)
+            # get initial slider values for wind and pv:
+            key_results = menu.detail_key_results(
+                technology,
+                id_s_w_6=parameters["s_w_6"]["start"],
+                id_s_w_7=parameters["s_w_7"]["start"],
+            )
             for key, value in key_results.items():
                 self.extra_content[f"{technology}_key_result_{key}"] = value
 
