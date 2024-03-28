@@ -176,7 +176,6 @@ def get_potential_values() -> dict:
         "pv_soil_quality_low": "pv_ground",
         "pv_soil_quality_medium": "pv_ground_vertical_bifacial",
         "pv_permanent_crops": "pv_ground_elevated",
-        "pv_roof": "pv_roof",
     }
 
     power_density = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "scalars/technology_data.json")))["power_density"]
@@ -185,6 +184,9 @@ def get_potential_values() -> dict:
     for key in areas:
         if key.startswith("wind"):
             potentials[key] = areas[key] * power_density["wind"]
+        if key == "pv_roof":
+            potentials[key] = areas[key]
+            continue
         if key.startswith("pv"):
             potentials[key] = areas[key] * power_density[pv_density[key]]
     return potentials
