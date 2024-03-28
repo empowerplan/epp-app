@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Optional, Union
 
 import pandas as pd
+from cache_memoize import cache_memoize
 from django.conf import settings
 from django_oemof.settings import OEMOF_DIR
 
@@ -162,6 +163,7 @@ def get_thermal_efficiency(component: str) -> float:
     return pd.read_csv(sequence_filename, sep=";").iloc[:, 1]
 
 
+@cache_memoize(timeout=None)
 def get_potential_values() -> dict:
     """
     Calculate max_values for sliders.
@@ -192,6 +194,7 @@ def get_potential_values() -> dict:
     return potentials
 
 
+@cache_memoize(timeout=None)
 def get_potential_areas(technology: Optional[str] = None) -> dict:
     """
     Return potential areas.
@@ -237,6 +240,7 @@ def get_potential_areas(technology: Optional[str] = None) -> dict:
     return areas
 
 
+@cache_memoize(timeout=None)
 def get_full_load_hours(year: int) -> pd.Series:
     """Return full load hours for given year."""
     full_load_hours = pd.Series(
@@ -246,6 +250,7 @@ def get_full_load_hours(year: int) -> pd.Series:
     return full_load_hours
 
 
+@cache_memoize(timeout=None)
 def get_capacities_from_datapackage() -> pd.DataFrame:
     """Return renewable capacities for given year from datapackage."""
     capacities = pd.concat(
@@ -285,6 +290,7 @@ def get_capacities_from_sliders(year: int) -> pd.Series:
     return slider_settings
 
 
+@cache_memoize(timeout=None)
 def get_power_density(technology: Optional[str] = None) -> dict:
     """Return power density for technology."""
     if technology:
