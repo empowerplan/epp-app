@@ -67,6 +67,13 @@
       ]
     }
   },
+  "region_boundaries": {
+    "type": "line",
+    "paint": {
+      "line-color": "rgb(250, 174, 29)",
+      "line-width": 3
+    }
+  },
   "wind": {
     "type": "symbol",
     "filter": ["!", ["has", "point_count"]],
