@@ -1,12 +1,18 @@
-from itertools import count  # noqa: D100
+"""Module containing django forms."""
+from __future__ import annotations
+
+from itertools import count
+from typing import TYPE_CHECKING
 
 from django.forms import BooleanField, Form, IntegerField, TextInput, renderers
 from django.shortcuts import reverse
 from django.utils.safestring import mark_safe
-from django_mapengine import legend
 
 from . import charts, menu
 from .widgets import SwitchWidget
+
+if TYPE_CHECKING:
+    from django_mapengine import legend
 
 
 class TemplateForm(Form):  # noqa: D101
