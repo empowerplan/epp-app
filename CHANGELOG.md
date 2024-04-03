@@ -8,6 +8,9 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Added
 - coupling of duplicated map panel controls
 
+### Fixed
+- duplicate loading of JS modules due to missing module support in django staticfile storage
+
 ## [0.1.0] - 2024-03-19
 ### Added
 - new detail settings for wind and pv
