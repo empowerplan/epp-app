@@ -7,6 +7,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ## [Unreleased]
 ### Added
 - coupling of duplicated map panel controls
+- dependabot
 
 ### Fixed
 - duplicate loading of JS modules due to missing module support in django staticfile storage
