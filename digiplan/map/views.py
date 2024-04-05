@@ -6,9 +6,9 @@ As map app is SPA, this module contains main view and various API points.
 
 from django.conf import settings
 from django.http import HttpRequest, response
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 from django_mapengine import views
-from django.utils.translation import gettext_lazy as _
 
 from digiplan import __version__
 from digiplan.map import config

@@ -7,7 +7,7 @@
   .main-content {
     @extend .container;
     @extend .py-4;
-  
+
     @include media-breakpoint-down(md) {
       padding: 0 !important;
     }
@@ -23,19 +23,19 @@
     width: 100%;
     height: $footer-height;
     z-index: 9;
-  
+
     &__btns {
       @extend .d-flex;
       @extend .flex-row;
       @extend .px-4;
       @extend .py-2;
       @extend .border-bottom;
-  
+
       button {
         @extend .w-50;
       }
     }
-  
+
     &__links {
       @extend .d-flex;
       @extend .flex-row;
@@ -50,22 +50,21 @@
         @extend .justify-content-center;
         @extend .align-items-center;
       }
-  
+
       li {
         @extend .d-inline-block;
         @extend .fs-7;
-  
+
         button {
           @extend .bg-white;
           @extend .border-0;
           @extend .link-primary;
         }
       }
-  
+
       li:not(:last-of-type) {
         @extend .pe-2;
       }
     }
   }
 }
-
