@@ -55,3 +55,5 @@ updates:
     # Every weekday
     schedule:
       interval: 'daily'
+    ignore:
+      - dependency-name: "oemof-netwok"
