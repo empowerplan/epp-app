@@ -1916,6 +1916,7 @@ files = [
     {file = "lxml-5.2.1-cp36-cp36m-manylinux_2_12_i686.manylinux2010_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:c38d7b9a690b090de999835f0443d8aa93ce5f2064035dfc48f27f02b4afc3d0"},
     {file = "lxml-5.2.1-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5670fb70a828663cc37552a2a85bf2ac38475572b0e9b91283dc09efb52c41d1"},
     {file = "lxml-5.2.1-cp36-cp36m-manylinux_2_28_x86_64.whl", hash = "sha256:958244ad566c3ffc385f47dddde4145088a0ab893504b54b52c041987a8c1863"},
+    {file = "lxml-5.2.1-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:b6241d4eee5f89453307c2f2bfa03b50362052ca0af1efecf9fef9a41a22bb4f"},
     {file = "lxml-5.2.1-cp36-cp36m-musllinux_1_1_aarch64.whl", hash = "sha256:2a66bf12fbd4666dd023b6f51223aed3d9f3b40fef06ce404cb75bafd3d89536"},
     {file = "lxml-5.2.1-cp36-cp36m-musllinux_1_1_ppc64le.whl", hash = "sha256:9123716666e25b7b71c4e1789ec829ed18663152008b58544d95b008ed9e21e9"},
     {file = "lxml-5.2.1-cp36-cp36m-musllinux_1_1_s390x.whl", hash = "sha256:0c3f67e2aeda739d1cc0b1102c9a9129f7dc83901226cc24dd72ba275ced4218"},
@@ -2238,19 +2239,20 @@ signedtoken = ["cryptography (>=3.0.0)", "pyjwt (>=2.0.0,<3)"]
 
 [[package]]
 name = "oemof-network"
-version = "0.5.0a1"
+version = "0.5.0"
 description = "The network/graph submodules of oemof."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "oemof.network-0.5.0a1-py2.py3-none-any.whl", hash = "sha256:43fad16fdf82634e037d22d9bf66c4bae7f75b1069ef059f0b457b6992045e61"},
-    {file = "oemof.network-0.5.0a1.tar.gz", hash = "sha256:ea701d901bc1a87a5bfe31f2f117dbd841a04ad5f2a2af122212f90a92170715"},
+    {file = "oemof.network-0.5.0-py2.py3-none-any.whl", hash = "sha256:bde212ef993f5c9da198768ccd038b1d3c3b36b6bb2798e0a6821e1056c78633"},
+    {file = "oemof.network-0.5.0.tar.gz", hash = "sha256:aea331d15a8d1a3d343253783560ec45311a8587f3354ed1134d8b062ddfdb0d"},
 ]
 
 [package.dependencies]
 blinker = "*"
 dill = "*"
 networkx = "*"
+"oemof.tools" = "*"
 pandas = "*"
 
 [package.extras]
@@ -3818,4 +3820,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "57d29bee98485de39d6f9fc885fcd47f2da0cb14a6c8a45df80159ff81c19097"
+content-hash = "d1b93e955ba76aa18ee0cb0c6bf594046334fec9e9fb3302a2728807dfbdf9f9"
