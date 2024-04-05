@@ -30,7 +30,7 @@ django-environ = "^0.10.0"  # https://github.com/joke2k/django-environ
 django-allauth = "^0.44.0"  # https://github.com/pennersr/django-allauth
 django-foundation-formtags = "^0.1.0"
 django-compressor = "4.4"  # https://github.com/django-compressor/django-compressor
-django-libsass = "^0.8"
+django-libsass = "^0.9"
 django-redis = "^4.12.1"  # https://github.com/niwinz/django-redis
 django-geojson = "^3.1.0"
 
