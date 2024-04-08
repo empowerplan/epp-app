@@ -80,4 +80,13 @@ update_vendor_assets:
 	rm -r digiplan/static/vendors/pubsub/js/*
 	cp node_modules/pubsub-js/src/pubsub.js digiplan/static/vendors/pubsub/js/
 
+	# Popper https://www.npmjs.com/package/@popperjs/core
+	rm -r digiplan/static/vendors/popper/js/*
+	cp node_modules/@popperjs/core/dist/umd/popper-lite.* digiplan/static/vendors/popper/js/
+
+	# Shepherd https://www.npmjs.com/package/shepherd.js
+	rm -r digiplan/static/vendors/shepherd/*
+	cp node_modules/shepherd.js/dist/js/shepherd.* digiplan/static/vendors/shepherd/
+	cp node_modules/shepherd.js/dist/css/shepherd.css digiplan/static/vendors/shepherd/
+
 	# Done
