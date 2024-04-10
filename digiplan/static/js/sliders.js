@@ -39,19 +39,19 @@ const pvMapControl = document.getElementsByClassName("map__layers-pv")[0];
 // Setup
 
 $(".js-slider.js-slider-panel.js-power-mix").ionRangeSlider({
-  onChange: function (data) {
+  onFinish: function (data) {
     PubSub.publish(eventTopics.POWER_PANEL_SLIDER_CHANGE, data);
   },
 });
 
 $(".js-slider.js-slider-panel").ionRangeSlider({
-  onChange: function (data) {
+  onFinish: function (data) {
     PubSub.publish(eventTopics.PANEL_SLIDER_CHANGE, data);
   },
 });
 
 $(".js-slider.js-slider-detail-panel").ionRangeSlider({
-  onChange: function (data) {
+  onFinish: function (data) {
     PubSub.publish(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, data);
   },
 });
