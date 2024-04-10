@@ -17,11 +17,12 @@ if TYPE_CHECKING:
 
 class TemplateForm(Form):  # noqa: D101
     template_name = None
+    extra_content = {}
 
     def __str__(self) -> str:  # noqa: D105
         if self.template_name:
             renderer = renderers.get_default_renderer()
-            return mark_safe(renderer.render(self.template_name, {"form": self}))  # noqa: S308
+            return mark_safe(renderer.render(self.template_name, {"form": self, **self.extra_content}))  # noqa: S308
         return super().__str__()
 
 
@@ -56,19 +57,7 @@ class StaticLayerForm(TemplateForm):  # noqa: D101
         self.layer = layer
 
 
-class TemplateExtraContentForm(TemplateForm):
-    """Add extra content to template form."""
-
-    extra_content = {}
-
-    def __str__(self) -> str:  # noqa: D105
-        if self.template_name:
-            renderer = renderers.get_default_renderer()
-            return mark_safe(renderer.render(self.template_name, {"form": self, **self.extra_content}))  # noqa: S308
-        return super().__str__()
-
-
-class PanelForm(TemplateExtraContentForm):  # noqa: D101
+class PanelForm(TemplateForm):  # noqa: D101
     def __init__(self, parameters, additional_parameters=None, **kwargs) -> None:  # noqa: D107, ANN001
         super().__init__(**kwargs)
         self.fields = {item["name"]: item["field"] for item in self.generate_fields(parameters, additional_parameters)}
