@@ -92,6 +92,7 @@ PubSub.subscribe(
 PubSub.subscribe(eventTopics.PANEL_SLIDER_CHANGE, hidePotentialLayers);
 PubSub.subscribe(eventTopics.PANEL_SLIDER_CHANGE, adaptDetailSliders);
 PubSub.subscribe(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, adaptMainSliders);
+PubSub.subscribe(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, adaptDetailKeyResults);
 PubSub.subscribe(
   eventTopics.MORE_LABEL_CLICK,
   showOrHideSidepanelsOnMoreLabelClick,
@@ -404,6 +405,65 @@ function highlightPVMapControls(msg) {
   setTimeout(function () {
     pvMapControl.classList.remove("blinking");
   }, 2000);
+  return logMessage(msg);
+}
+
+function adaptDetailKeyResults(msg, data) {
+  const slider_id = data.input[0].id;
+  let technology;
+  let target;
+  let url_data = {};
+
+  if (slider_id === "id_s_w_6") {
+    technology = "wind_2024";
+    url_data.id_s_w_6 = data.from;
+    target = "wind_key_results_2024";
+  } else if (slider_id === "id_s_w_7") {
+    technology = "wind_2027";
+    url_data.id_s_w_7 = data.from;
+    target = "wind_key_results_2027";
+  } else if (
+    ["id_s_pv_ff_3", "id_s_pv_ff_4", "id_s_pv_ff_5"].includes(slider_id)
+  ) {
+    technology = "pv_ground";
+    url_data.id_s_pv_ff_3 =
+      $("#id_s_pv_ff_3").data("ionRangeSlider").result.from;
+    url_data.id_s_pv_ff_4 =
+      $("#id_s_pv_ff_4").data("ionRangeSlider").result.from;
+    url_data.id_s_pv_ff_5 =
+      $("#id_s_pv_ff_5").data("ionRangeSlider").result.from;
+    target = "pv_ground_key_results";
+  } else if (slider_id === "id_s_pv_d_3") {
+    technology = "pv_roof";
+    url_data.id_s_pv_d_3 = data.from;
+    target = "pv_roof_key_results";
+  } else {
+    return logMessage(msg);
+  }
+
+  const query = new URLSearchParams(url_data).toString();
+  let url = `/detail_key_results?technology=${technology}&${query}`;
+  fetch(url)
+    .then((response) => {
+      // Check if the response is successful
+      if (!response.ok) {
+        throw new Error(
+          `Error requesting detail key results for slider ${slider_id}`,
+        );
+      }
+      // Return the response as HTML
+      return response.text();
+    })
+    .then((html) => {
+      // Insert the HTML into the DOM
+      document.getElementById(target).innerHTML = html;
+    })
+    .catch((error) => {
+      console.error(
+        `Error requesting detail key results for slider ${slider_id}:`,
+        error,
+      );
+    });
   return logMessage(msg);
 }
 
