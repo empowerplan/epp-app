@@ -2,6 +2,7 @@
 .PHONY : load_regions load_data empty_data dump_fixtures load_fixtures distill check_distill_coordinates
 
 MAP_ENGINE_DISTILL=True
+DJANGO_READ_DOT_ENV_FILE=True
 export
 
 load_regions:
@@ -39,6 +40,9 @@ check_distill_coordinates:
 
 local_env_file:
 	python merge_local_dotenvs_in_dotenv.py
+
+celery:
+	redis-server --port 6379 & celery -A config.celery worker -l INFO
 
 update_vendor_assets:
 	# Note: call this command from the same folder your Makefile is located
