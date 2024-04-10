@@ -13,9 +13,9 @@ def detail_key_results(technology: str, **kwargs: dict) -> dict:
     if technology.startswith("wind"):
         percentage = 1
         if technology == "wind_2024":
-            percentage = int(kwargs["id_s_w_6"]) / 100
+            percentage = float(kwargs["id_s_w_6"]) / 100
         if technology == "wind_2027":
-            percentage = int(kwargs["id_s_w_7"]) / 100
+            percentage = float(kwargs["id_s_w_7"]) / 100
         return {
             "area": areas[technology] / 100 * percentage,
             "turbines": potential_capacities[technology] / nominal_power_per_unit * percentage,
