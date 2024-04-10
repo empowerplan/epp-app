@@ -194,7 +194,4 @@ class DetailKeyResultsView(TemplateView):
 
     def get_context_data(self, **kwargs) -> dict:  # noqa: ARG002
         """Get detail key results for requested technology."""
-        technology = self.request.GET["technology"]
-        return {
-            f"key_result_{key}": value for key, value in menu.detail_key_results(technology, **self.request.GET).items()
-        }
+        return {f"key_result_{key}": value for key, value in menu.detail_key_results(**self.request.GET.dict()).items()}
