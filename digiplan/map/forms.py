@@ -1,6 +1,6 @@
 from itertools import count  # noqa: D100
 
-from django.forms import BooleanField, Form, IntegerField, TextInput, renderers
+from django.forms import BooleanField, FloatField, Form, TextInput, renderers
 from django.utils.safestring import mark_safe
 from django_mapengine import legend
 
@@ -78,7 +78,7 @@ class PanelForm(TemplateForm):  # noqa: D101
                 if "from-max" in item:
                     attrs["data-from-max"] = item["from-max"]
 
-                field = IntegerField(
+                field = FloatField(
                     label=item["label"],
                     widget=TextInput(attrs=attrs),
                     help_text=item["tooltip"],
