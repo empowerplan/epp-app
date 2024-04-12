@@ -691,3 +691,10 @@ class PotentialAreaWindSTP2018EG(StaticRegionModel):  # noqa: D101
 class PotentialAreaWindSTP2024VR(StaticRegionModel):  # noqa: D101
     data_file = "potentialarea_wind_stp_2024_vr"
     layer = "potentialarea_wind_stp_2024_vr"
+
+
+class PreResults(models.Model):
+    """Model to store pre results ID related to given parameters."""
+
+    scenario = models.CharField(max_length=255)
+    parameters = models.JSONField()

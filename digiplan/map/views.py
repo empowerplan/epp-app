@@ -3,6 +3,7 @@ Views for map app.
 
 As map app is SPA, this module contains main view and various API points.
 """
+import json
 
 from django.conf import settings
 from django.http import HttpRequest, response
@@ -13,7 +14,7 @@ from django_mapengine import views
 from digiplan import __version__
 from digiplan.map import config
 
-from . import charts, choropleths, forms, map_config, popups, utils
+from . import charts, choropleths, forms, hooks, map_config, models, popups, utils
 
 
 class MapGLView(TemplateView, views.MapEngineMixin):
@@ -185,3 +186,29 @@ def get_charts(request: HttpRequest) -> response.JsonResponse:
     return response.JsonResponse(
         {lookup: charts.CHARTS[lookup](simulation_id=simulation_id).render() for lookup in lookups},
     )
+
+
+def store_pre_result(request: HttpRequest) -> response.JsonResponse:
+    """
+    Store simulation parameters for pre-results.
+
+    Parameters
+    ----------
+    request: HttpRequest
+        request holding scenario and parameters for selected settings
+
+    Returns
+    -------
+    JsonResponse
+        holding pre result ID which links to selected scenario and parameter settings.
+    """
+    scenario = request.POST["scenario"]
+    parameters_raw = request.POST.get("parameters")
+    parameters = json.loads(parameters_raw) if parameters_raw else {}
+    parameters = hooks.read_parameters(scenario, parameters, request)
+    try:
+        pre_result = models.PreResults.objects.get(scenario=scenario, parameters=parameters)
+    except models.PreResults.DoesNotExist:
+        pre_result = models.PreResults.objects.create(scenario=scenario, parameters=parameters)
+        pre_result.save()
+    return response.JsonResponse({"pre_result_id": pre_result.id})
