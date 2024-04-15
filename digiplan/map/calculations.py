@@ -308,7 +308,7 @@ def electricity_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame
     return demand.astype(float)
 
 
-def heat_demand_per_municipality() -> pd.DataFrame:
+def heat_demand_per_municipality(year: int) -> pd.DataFrame:
     """
     Calculate heat demand per sector per municipality in GWh.
 
@@ -319,7 +319,7 @@ def heat_demand_per_municipality() -> pd.DataFrame:
     """
     demands_raw = datapackage.get_summed_heat_demand_per_municipality()
     demands_per_sector = pd.concat(
-        [distributions["cen"]["2022"] + distributions["dec"]["2022"] for distributions in demands_raw.values()],
+        [distributions["cen"][str(year)] + distributions["dec"][str(year)] for distributions in demands_raw.values()],
         axis=1,
     )
     demands_per_sector.columns = [
@@ -330,7 +330,7 @@ def heat_demand_per_municipality() -> pd.DataFrame:
     return demands_per_sector.astype(float) * 1e-3
 
 
-def heat_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+def heat_demand_per_municipality_2045(pre_result_id: int) -> pd.DataFrame:
     """
     Calculate heat demand per sector per municipality in GWh in 2045.
 
@@ -339,29 +339,10 @@ def heat_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
     pd.DataFrame
         Heat demand per municipality (index) and sector (column)
     """
-    results = get_results(
-        simulation_id,
-        {
-            "heat_demand": heat_demand,
-        },
-    )
-    demand = results["heat_demand"]
-    demand.index = demand.index.map(lambda ind: f"heat-demand-{ind[1].split('_')[2]}")
-    demand = demand.groupby(level=0).sum()
-    demands_per_sector = datapackage.get_heat_demand()
-    mappings = {
-        "hh": "heat-demand-hh",
-        "cts": "heat-demand-cts",
-        "ind": "heat-demand-ind",
-    }
-    demand = demand.reindex(mappings.values())
-    sector_shares = pd.DataFrame(
-        {sector: demands_per_sector[sector]["2022"] / demands_per_sector[sector]["2022"].sum() for sector in mappings},
-    )
-    demand = sector_shares * demand.values
-    demand.columns = demand.columns.map(lambda column: config.SIMULATION_DEMANDS[mappings[column]])
-    demand = demand * 1e-3
-    return demand.astype(float)
+    demand = heat_demand_per_municipality(year=2022)
+    pre_results = models.PreResults.objects.get(pk=pre_result_id)
+    shares = [pre_results.parameters[key] / 100 for key in ("s_v_3", "s_v_4", "s_v_5")]
+    return demand.iloc[:] * shares
 
 
 def ghg_reduction(simulation_id: int) -> pd.Series:

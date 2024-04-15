@@ -181,10 +181,18 @@ def get_charts(request: HttpRequest) -> response.JsonResponse:
     """
     lookups = request.GET.getlist("charts[]")
     simulation_id = None
+    pre_result_id = None
     if "map_state[simulation_id]" in request.GET.dict():
         simulation_id = int(request.GET.dict()["map_state[simulation_id]"])
+    if "map_state[pre_result_id]" in request.GET.dict():
+        pre_result_id = int(request.GET.dict()["map_state[pre_result_id]"])
     return response.JsonResponse(
-        {lookup: charts.CHARTS[lookup](simulation_id=simulation_id).render() for lookup in lookups},
+        {
+            lookup: charts.CHARTS[lookup](
+                simulation_id=pre_result_id if lookup in charts.PRE_RESULTS else simulation_id,
+            ).render()
+            for lookup in lookups
+        },
     )
 
 

@@ -232,18 +232,19 @@ class ElectricityDemandCapita2045Choropleth(Choropleth):  # noqa: D101
 
 class HeatDemandChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return calculations.heat_demand_per_municipality().sum(axis=1).to_dict()
+        return calculations.heat_demand_per_municipality(year=2022).sum(axis=1).to_dict()
 
 
 class HeatDemand2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return calculations.heat_demand_per_municipality_2045(self.map_state["simulation_id"]).sum(axis=1).to_dict()
+        return calculations.heat_demand_per_municipality_2045(self.map_state["pre_result_id"]).sum(axis=1).to_dict()
 
 
 class HeatDemandCapitaChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         capita_demand = (
-            calculations.calculate_capita_for_value(calculations.heat_demand_per_municipality().sum(axis=1)) * 1e6
+            calculations.calculate_capita_for_value(calculations.heat_demand_per_municipality(year=2022).sum(axis=1))
+            * 1e6
         )
         return capita_demand.to_dict()
 

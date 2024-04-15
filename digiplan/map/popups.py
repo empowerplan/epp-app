@@ -777,7 +777,7 @@ class HeatDemandPopup(RegionPopup):
     title = _("Wärmebedarf")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.heat_demand_per_municipality().round(1)
+        return calculations.heat_demand_per_municipality(year=2022).round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -794,11 +794,11 @@ class HeatDemand2045Popup(RegionPopup):
     title = _("Wärmebedarf")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.heat_demand_per_municipality_2045(self.map_state["simulation_id"])
+        return calculations.heat_demand_per_municipality_2045(self.map_state["pre_result_id"])
 
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
-        status_quo_data = calculations.heat_demand_per_municipality().loc[self.selected_id].round(1)
+        status_quo_data = calculations.heat_demand_per_municipality(year=2022).loc[self.selected_id].round(1)
         future_data = super().get_chart_data().round(1)
         return list(zip(status_quo_data, future_data))
 
@@ -818,7 +818,9 @@ class HeatDemandCapitaPopup(RegionPopup):
     title = _("Wärmebedarf je EinwohnerIn")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return (calculations.calculate_capita_for_value(calculations.heat_demand_per_municipality()) * 1e6).round(1)
+        return (
+            calculations.calculate_capita_for_value(calculations.heat_demand_per_municipality(year=2022)) * 1e6
+        ).round(1)
 
     def get_region_value(self) -> float:  # noqa: D102
         return self.detailed_data.sum(axis=1).mean()
@@ -849,7 +851,7 @@ class HeatDemandCapita2045Popup(RegionPopup):
         """Create capacity chart data for SQ and future scenario."""
         status_quo_data = (
             calculations.calculate_capita_for_value(
-                calculations.heat_demand_per_municipality(),
+                calculations.heat_demand_per_municipality(year=2022),
             )
             .loc[self.selected_id]
             .mul(1e6)

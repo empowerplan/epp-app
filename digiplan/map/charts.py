@@ -834,7 +834,7 @@ class HeatDemandRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.heat_demand_per_municipality().sum().round(1)
+        return calculations.heat_demand_per_municipality(year=2022).sum().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -851,7 +851,7 @@ class HeatDemand2045RegionChart(SimulationChart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        status_quo_data = calculations.heat_demand_per_municipality().sum().round(1)
+        status_quo_data = calculations.heat_demand_per_municipality(year=2022).sum().round(1)
         future_data = calculations.heat_demand_per_municipality_2045(self.simulation_id).sum().astype(float).round(1)
         return list(zip(status_quo_data, future_data))
 
@@ -873,7 +873,7 @@ class HeatDemandCapitaRegionChart(Chart):
         """Calculate capacities for whole region."""
         return (
             calculations.calculate_capita_for_value(
-                pd.DataFrame(calculations.heat_demand_per_municipality().sum()).transpose(),
+                pd.DataFrame(calculations.heat_demand_per_municipality(year=2022).sum()).transpose(),
             ).sum()
             * 1e6
         ).round(1)
@@ -895,7 +895,7 @@ class HeatDemandCapita2045RegionChart(SimulationChart):
         """Calculate capacities for whole region."""
         status_quo_data = (
             calculations.calculate_capita_for_value(
-                pd.DataFrame(calculations.heat_demand_per_municipality().sum()).transpose(),
+                pd.DataFrame(calculations.heat_demand_per_municipality(year=2022).sum()).transpose(),
             ).sum()
             * 1e6
         ).round(1)
@@ -996,6 +996,13 @@ CHARTS: dict[str, type[Chart]] = {
     "batteries_statusquo_region": BatteriesRegionChart,
     "batteries_capacity_statusquo_region": BatteriesCapacityRegionChart,
 }
+
+PRE_RESULTS = (
+    "electricity_demand_2045_region",
+    "electricity_demand_capita_2045_region",
+    "heat_demand_2045_region",
+    "heat_demand_capita_2045_region",
+)
 
 
 def create_chart(lookup: str, chart_data: Optional[Any] = None) -> dict:
