@@ -300,6 +300,7 @@ MAP_ENGINE_IMAGES = [
 ]
 
 MAP_ENGINE_API_MVTS = {
+    "region": [setup.MVTAPI("region_boundaries", "map", "RegionBoundaries")],
     "municipality": [
         setup.MVTAPI("municipality", "map", "Municipality"),
         setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
@@ -316,7 +317,6 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("potentialarea_pv_roof", "map", "PotentialareaPVRoof"),
     ],
     "static": [
-        setup.MVTAPI("region_boundaries", "map", "RegionBoundaries"),
         setup.MVTAPI("landscape_protection_area", "map", "LandscapeProtectionArea"),
         setup.MVTAPI("forest", "map", "Forest"),
         setup.MVTAPI("special_protection_area", "map", "SpecialProtectionArea"),
@@ -360,7 +360,7 @@ MAP_ENGINE_API_CLUSTERS = [
     setup.ClusterAPI("storage", "map", "Storage", properties=["id", "unit_count"]),
 ]
 
-MAP_ENGINE_LAYERS_AT_STARTUP = [("region_boundaries", "map", "RegionBoundaries")]
+MAP_ENGINE_LAYERS_AT_STARTUP = ["region_boundaries"]
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
 MAP_ENGINE_ZOOM_LEVELS = {
