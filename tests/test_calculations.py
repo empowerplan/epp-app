@@ -2,6 +2,7 @@
 import os
 
 import pandas as pd
+import pytest
 from django.test import SimpleTestCase
 from django_oemof import models
 from django_oemof import results as oemof_results
@@ -10,6 +11,7 @@ from oemof.tabular.postprocessing import calculations as oc
 from oemof.tabular.postprocessing import core
 
 from digiplan.map import calculations, charts
+from digiplan.map import models as dm
 
 
 class SimulationTest(SimpleTestCase):
@@ -55,6 +57,61 @@ class SimulationTest(SimpleTestCase):
         self.simulation_id = simulation.simulate_scenario("scenario_2045", self.parameters)
         if os.environ.get("TEST_SHOW_SIMULATION_RESULTS", "False") == "True":
             self.results = models.Simulation.objects.get(pk=self.simulation_id).dataset.restore_results()
+
+    def tearDown(self) -> None:  # noqa: D102 Needed to keep results in test DB
+        pass
+
+    @classmethod
+    def tearDownClass(cls):  # noqa: D102, ANN206 Needed to keep results in test DB
+        pass
+
+
+class PreResultTest(SimpleTestCase):
+    """Base class for pre result tests."""
+
+    databases = ("default",)  # Needed, as otherwise django complains about tests using "default" DB
+    parameters = {
+        "s_v_1": 100,
+        "s_v_3": 10,
+        "s_v_4": 20,
+        "s_v_5": 30,
+        "s_w_1": 714,
+        "w_v_1": 100,
+        "w_v_3": 100,
+        "w_v_4": 100,
+        "w_v_5": 100,
+        "s_pv_ff_1": 388,
+        "s_pv_d_1": 298,
+        "s_h_1": 5,
+        "s_s_g_1": 1,
+        "w_d_wp_3": 50,
+        "w_d_wp_4": 50,
+        "w_d_wp_5": 50,
+        "w_z_wp_1": 50,
+        "w_d_s_1": 100,
+        "w_z_s_1": 100,
+        "w_d_wp_1": True,
+        "s_w_3": True,
+        "s_w_4": True,
+        "s_w_4_1": True,
+        "s_w_4_2": True,
+        "s_w_5": False,
+        "s_w_5_1": 50,
+        "s_w_5_2": 50,
+        "s_pv_ff_3": 11,
+        "s_pv_ff_4": 11,
+        "s_pv_d_3": 5,
+        "s_pv_d_4": 13,
+    }
+
+    def setUp(self) -> None:
+        """Starts/loads oemof simulation for given parameters."""
+        try:
+            pre_result = dm.PreResults.objects.get(scenario="scenario_2045", parameters=self.parameters)
+        except dm.PreResults.DoesNotExist:
+            pre_result = dm.PreResults.objects.create(scenario="scenario_2045", parameters=self.parameters)
+            pre_result.save()
+        self.pre_result_id = pre_result.id
 
     def tearDown(self) -> None:  # noqa: D102 Needed to keep results in test DB
         pass
@@ -199,13 +256,21 @@ class HeatDemandTest(SimulationTest):
         assert list(results.values())[0].iloc[0] > 0
 
 
-class HeatDemand2045Test(SimulationTest):
+class HeatDemand2045Test(PreResultTest):
     """Test heat demand calculation in 2045."""
 
     def test_electricity_demand(self):  # noqa: D102
-        results = calculations.heat_demand_per_municipality_2045(self.simulation_id)
+        results = calculations.heat_demand_per_municipality_2045(self.pre_result_id)
         assert len(results) == 20
         assert len(results.columns) == 3
+
+        municipality_id = 9
+        hh = 171353.1535566939
+        cts = 71958.67546243734
+        ind = 280765.29433642636
+        assert results.iloc[municipality_id, 0] == pytest.approx(hh * 0.1 * 1e-3)
+        assert results.iloc[municipality_id, 1] == pytest.approx(cts * 0.2 * 1e-3)
+        assert results.iloc[municipality_id, 2] == pytest.approx(ind * 0.3 * 1e-3)
 
 
 class RegionalIndependency(SimulationTest):
