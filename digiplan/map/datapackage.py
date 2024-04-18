@@ -207,7 +207,7 @@ def get_potential_areas(technology: Optional[str] = None) -> dict:
     Returns
     -------
     dict
-        Potential areas of all technologies or specified one
+        Potential areas of all technologies or specified one (in sqkm)
     """
     sources = {
         "wind_2018": Source("potentialarea_wind_area_stats_muns.csv", "stp_2018_eg"),
