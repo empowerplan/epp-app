@@ -341,7 +341,7 @@ def heat_demand_per_municipality_2045(pre_result_id: int) -> pd.DataFrame:
     """
     demand = heat_demand_per_municipality(year=2022)
     pre_results = models.PreResults.objects.get(pk=pre_result_id)
-    shares = [pre_results.parameters[key] / 100 for key in ("s_v_3", "s_v_4", "s_v_5")]
+    shares = [pre_results.parameters[key] / 100 for key in ("w_v_3", "w_v_4", "w_v_5")]
     return demand.iloc[:] * shares
 
 
