@@ -50,6 +50,16 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         # Add unique session ID
         context = super().get_context_data(**kwargs)
 
+        # Move region_boundaries layer to bottom:
+        context["mapengine_layers"].insert(
+            0,
+            context["mapengine_layers"].pop(
+                next(
+                    i for i, element in enumerate(context["mapengine_layers"]) if element["id"] == "region_boundaries"
+                ),
+            ),
+        )
+
         context["panels"] = [
             forms.EnergyPanelForm(
                 utils.get_translated_json_from_file(config.ENERGY_SETTINGS_PANEL_FILE, self.request),

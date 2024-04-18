@@ -2,6 +2,7 @@
 .PHONY : load_regions load_data empty_data dump_fixtures load_fixtures distill check_distill_coordinates
 
 MAP_ENGINE_DISTILL=True
+DJANGO_READ_DOT_ENV_FILE=True
 export
 
 load_regions:

@@ -15,6 +15,7 @@ from digiplan.utils.ogr_layer_mapping import RelatedModelLayerMapping
 REGIONS = [models.Municipality]
 
 MODELS = [
+    models.RegionBoundaries,
     # Clusters
     models.WindTurbine,
     models.PVroof,
