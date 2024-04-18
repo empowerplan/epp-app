@@ -72,9 +72,9 @@ class PreResultTest(SimpleTestCase):
     databases = ("default",)  # Needed, as otherwise django complains about tests using "default" DB
     parameters = {
         "s_v_1": 100,
-        "s_v_3": 10,
-        "s_v_4": 20,
-        "s_v_5": 30,
+        "s_v_3": 11,
+        "s_v_4": 22,
+        "s_v_5": 33,
         "s_w_1": 714,
         "w_v_1": 100,
         "w_v_3": 10,
@@ -222,13 +222,21 @@ class ElectricityDemandTest(SimulationTest):
         assert list(results.values())[0].iloc[1] > 0
 
 
-class ElectricityDemand2045Test(SimulationTest):
+class ElectricityDemand2045Test(PreResultTest):
     """Test electricity demand calculation."""
 
     def test_electricity_demand(self):  # noqa: D102
-        results = calculations.electricity_demand_per_municipality_2045(self.simulation_id)
+        results = calculations.electricity_demand_per_municipality_2045(self.pre_result_id)
         assert len(results) == 20
-        assert len(results.columns) == 4
+        assert len(results.columns) == 3
+
+        municipality_id = 13
+        hh = 15368.324510202196
+        cts = 15885.55560626756
+        ind = 79900.92318810655
+        assert results.iloc[municipality_id, 0] == pytest.approx(hh * 0.11 * 1e-3)
+        assert results.iloc[municipality_id, 1] == pytest.approx(cts * 0.22 * 1e-3)
+        assert results.iloc[municipality_id, 2] == pytest.approx(ind * 0.33 * 1e-3)
 
 
 class HeatDemandTest(SimulationTest):

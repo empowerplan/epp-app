@@ -273,7 +273,7 @@ def energy_shares_2045_region(simulation_id: int) -> pd.DataFrame:
     return energy_shares.astype(float).mul(1e2)
 
 
-def electricity_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+def electricity_demand_per_municipality_2045(pre_result_id: int) -> pd.DataFrame:
     """
     Calculate electricity demand per sector per municipality in GWh in 2045.
 
@@ -282,30 +282,10 @@ def electricity_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame
     pd.DataFrame
         Electricity demand per municipality (index) and sector (column)
     """
-    results = get_results(
-        simulation_id,
-        {
-            "electricity_demand": electricity_demand,
-        },
-    )
-    demand = results["electricity_demand"][
-        results["electricity_demand"].index.get_level_values(1).isin(config.SIMULATION_DEMANDS)
-    ]
-    demand = demand.droplevel([0, 2])
-    demands_per_sector = datapackage.get_power_demand()
-    mappings = {
-        "hh": "ABW-electricity-demand_hh",
-        "cts": "ABW-electricity-demand_cts",
-        "ind": "ABW-electricity-demand_ind",
-    }
-    demand = demand.reindex(mappings.values())
-    sector_shares = pd.DataFrame(
-        {sector: demands_per_sector[sector]["2022"] / demands_per_sector[sector]["2022"].sum() for sector in mappings},
-    )
-    demand = sector_shares * demand.values
-    demand.columns = demand.columns.map(lambda column: config.SIMULATION_DEMANDS[mappings[column]])
-    demand = demand * 1e-3
-    return demand.astype(float)
+    demand = electricity_demand_per_municipality(year=2022)
+    pre_results = models.PreResults.objects.get(pk=pre_result_id)
+    shares = [pre_results.parameters[key] / 100 for key in ("s_v_3", "s_v_4", "s_v_5")]
+    return demand.iloc[:] * shares
 
 
 def heat_demand_per_municipality(year: int) -> pd.DataFrame:

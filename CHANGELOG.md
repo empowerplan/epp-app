@@ -9,6 +9,9 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - coupling of duplicated map panel controls
 - dependabot
 
+### Changed
+- pre results can be shown before simulation has finished
+
 ### Fixed
 - duplicate loading of JS modules due to missing module support in django staticfile storage
 - settlement 200m layer is coupled to settlement layer (de)-activation
