@@ -43,7 +43,7 @@ def detail_key_results(technology: str, **kwargs: dict) -> dict:
     if technology == "pv_roof":
         percentage = int(kwargs["id_s_pv_d_3"]) / 100
         return {
-            "area": areas[technology] * percentage,
+            "area": areas[technology] * 100 * percentage,
             "energy": potential_capacities[technology] * full_load_hours[technology] * percentage * 1e-6,
         }
     raise KeyError(f"Unknown technology '{technology}'.")
