@@ -21,6 +21,15 @@
   "region-label": {
     "type": "symbol",
     "layout": {
+      "text-size": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        8,
+        10,
+        14,
+        30
+      ],
       "text-field": "{name}",
       "text-letter-spacing": 0.04,
       "text-radial-offset": 2,
