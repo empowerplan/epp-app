@@ -29,11 +29,11 @@ def detail_key_results(technology: str, **kwargs: dict) -> dict:
         }
         flh_mapping = {
             "pv_soil_quality_low": "pv_ground",
-            "pv_soil_quality_medium": "pv_ground_elevated",
-            "pv_permanent_crops": "pv_ground_vertical_bifacial",
+            "pv_soil_quality_medium": "pv_ground_vertical_bifacial",
+            "pv_permanent_crops": "pv_ground_elevated",
         }
         return {
-            "area": sum(areas[pv_type] * percentages[pv_type] for pv_type in percentages),
+            "area": sum(areas[pv_type] * 100 * percentages[pv_type] for pv_type in percentages),
             "energy": sum(
                 potential_capacities[pv_type] * full_load_hours[flh_mapping[pv_type]] * percentages[pv_type]
                 for pv_type in percentages
