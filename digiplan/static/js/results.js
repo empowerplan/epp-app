@@ -1,7 +1,6 @@
 import { statusquoDropdown, futureDropdown } from "./elements.js";
 
 const imageResults = document.getElementById("info_tooltip_results");
-const simulation_spinner = document.getElementById("simulation_spinner");
 const chartViewTab = document.getElementById("chart-view-tab");
 const mapViewTab = document.getElementById("map-view-tab");
 const resultSimNote = document.getElementById("result_simnote");
@@ -51,16 +50,13 @@ futureDropdown.addEventListener("change", function () {
 // Subscriptions
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, storePreResults);
-PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSimulationSpinner);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, disableResultButtons);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideRegionChart);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, resetResultDropdown);
 PubSub.subscribe(eventTopics.PRE_RESULTS_READY, enableResultButton);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
-PubSub.subscribe(eventTopics.SIMULATION_FINISHED, enableChartButton);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, enableFutureResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
-PubSub.subscribe(eventTopics.SIMULATION_FINISHED, hideSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultCharts);
 PubSub.subscribe(mapEvent.CHOROPLETH_SELECTED, showRegionChart);
 PubSub.subscribe(eventTopics.CHOROPLETH_DEACTIVATED, hideRegionChart);
@@ -83,7 +79,6 @@ function simulate(msg) {
   $.ajax({
     url: "/oemof/simulate",
     type: "POST",
-    async: false,
     processData: false,
     contentType: false,
     data: formData,
@@ -154,28 +149,13 @@ function showResults(msg, simulation_id) {
   return logMessage(msg);
 }
 
-function showSimulationSpinner(msg) {
-  simulation_spinner.hidden = false;
-  return logMessage(msg);
-}
-
-function hideSimulationSpinner(msg) {
-  simulation_spinner.hidden = true;
-  return logMessage(msg);
-}
-
 function enableResultButton(msg) {
   futureDropdown.disabled = false;
   return logMessage(msg);
 }
 
-function enableChartButton(msg) {
-  chartViewTab.classList.remove("disabled");
-  mapViewTab.classList.remove("disabled");
-  return logMessage(msg);
-}
-
 function enableFutureResults(msg) {
+  resultSimNote.innerText = "";
   const options = futureDropdown.querySelectorAll("option");
   for (const option of options) {
     option.disabled = false;
@@ -184,8 +164,7 @@ function enableFutureResults(msg) {
 }
 
 function disableResultButtons(msg) {
-  chartViewTab.classList.add("disabled");
-  mapViewTab.classList.add("disabled");
+  resultSimNote.innerText = "Berechnung läuft ...";
   futureDropdown.disabled = true;
   const options = futureDropdown.querySelectorAll("option");
   for (const option of options) {
@@ -211,13 +190,11 @@ function showRegionChart(msg, lookup) {
 function hideRegionChart(msg) {
   clearChart("region_chart_statusquo");
   clearChart("region_chart_2045");
-  resultSimNote.innerText = "Berechnung läuft ...";
   return logMessage(msg);
 }
 
 function showResultCharts(msg) {
   showCharts(resultCharts);
-  resultSimNote.innerText = "";
   return logMessage(msg);
 }
 
