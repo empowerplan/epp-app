@@ -1,0 +1,9 @@
+.animate-icon-right svg {
+  margin-right: 8px;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+.animate-icon-right:hover svg {
+  transform: translateX(8px);
+}
