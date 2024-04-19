@@ -1,5 +1,21 @@
 {% load static i18n %}
 
+<div class="panel-accordion" id="useCasesAccordion">
+  <div class="panel-accordion__item">
+    <h2 class="panel-accordion__header" id="useCasesHeading">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#useCasesCollapse" aria-expanded="false" aria-controls="useCasesCollapse">
+        {% translate "Schnelleinstieg" %}
+      </button>
+    </h2>
+    <div id="useCasesCollapse" class="accordion-collapse collapse" aria-labelledby="useCasesHeading" data-bs-parent="#useCasesAccordion">
+      <div class="panel-accordion__body">
+        <button type="button" class="btn btn-link">{% translate "PV-Freiflächen finden" %}</button>
+        <button type="button" class="btn btn-link">{% translate "Windflächen finden" %}</button>
+        <button type="button" class="btn btn-link">{% translate "PV-Freiflächen finden" %}</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="panel__settings">
   <div class="panel-item">
     <h2 class="panel-item__heading">

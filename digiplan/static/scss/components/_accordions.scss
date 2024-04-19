@@ -1,0 +1,37 @@
+.panel-accordion {
+  @extend .accordion;
+  @extend .accordion-flush;
+
+  &__item {
+    @extend .accordion-item;
+  }
+
+  &__header {
+    @extend .accordion-header;
+
+    button {
+      @extend .fw-semibold;
+      @extend .fs-7;
+      padding-top: 0.75rem !important;
+      padding-bottom: 0.75rem !important;
+      color: $epp-color-blue;
+      background-color: #EDF1FD;
+      border-bottom: 1px solid $epp-color-blue;
+
+      &:not(.collapsed) {
+        color: $epp-color-blue;
+        background-color: #EDF1FD;
+      }
+    }
+  }
+
+  &__body {
+    @extend .accordion-body;
+    @extend .border-bottom;
+
+    button {
+      @extend .fs-7;
+      @extend .fw-semibold;
+    }
+  }
+}
