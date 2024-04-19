@@ -4,6 +4,9 @@
   <div class="panel-accordion__item">
     <h2 class="panel-accordion__header" id="useCasesHeading">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#useCasesCollapse" aria-expanded="false" aria-controls="useCasesCollapse">
+        <svg width="14" height="14" fill="currentColor" version="1.1" viewBox="0 0 16.933 16.936" xmlns="http://www.w3.org/2000/svg">
+          <path d="m6.1387 0.1875-1.4961 1.4961 6.7832 6.7832-6.7832 6.7832 1.4961 1.4961 8.2793-8.2793z">
+         </svg>
         {% translate "Schnelleinstieg" %}
       </button>
     </h2>
@@ -90,10 +93,14 @@
 </div>
 
 <script>
-  const useCasesHeading = document.getElementById('useCasesCollapse');
+  const useCasesHeading = document.querySelector('#useCasesHeading svg');
   const useCasesCollapse = document.getElementById('useCasesCollapse');
 
-  useCasesCollapse.addEventListener('hidden.bs.collapse', function () {
-    // do something...
+  useCasesCollapse.addEventListener('show.bs.collapse', function () {
+    useCasesHeading.classList.add('rotate-90');
+  });
+
+  useCasesCollapse.addEventListener('hide.bs.collapse', function () {
+    useCasesHeading.classList.remove('rotate-90');
   });
 </script>
