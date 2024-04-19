@@ -22,6 +22,15 @@
         color: $epp-color-blue;
         background-color: #EDF1FD;
       }
+
+      &::after {
+        display: none;
+      }
+
+      svg {
+        @extend .me-1;
+        transition: transform 0.3s ease-in-out;
+      }
     }
   }
 

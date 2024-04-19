@@ -1,9 +1,14 @@
 .animate-icon-right svg {
-  margin-right: 8px;
+  @extend .me-1;
   transform: translateX(0);
   transition: transform 0.3s ease;
 }
 
 .animate-icon-right:hover svg {
   transform: translateX(8px);
+}
+
+.rotate-90 {
+  transform: rotate(-90deg);
+  transition: transform 0.3s ease-in-out;
 }
