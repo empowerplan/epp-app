@@ -41,6 +41,10 @@
     }
   }
 
+  &__box-title {
+    padding: 6px 12px;
+  }
+
   &__box-content {
     @extend .px-2;
     @extend .py-1;
@@ -48,6 +52,17 @@
 
     p {
       @extend .mb-1;
+    }
+  }
+
+  &__box-btn {
+    @extend .pb-2;
+
+    a {
+      @extend .btn;
+      @extend .btn-outline-info;
+      @extend .btn-sm;
+      @extend .w-100;
     }
   }
 
