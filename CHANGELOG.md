@@ -8,6 +8,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Added
 - coupling of duplicated map panel controls
 - dependabot
+- key results for wind, pv ground and pv roof settings panels
 
 ### Changed
 - Adapt municipality label font size according to zoom level
