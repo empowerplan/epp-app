@@ -98,6 +98,23 @@ class Population(models.Model):
         return population_per_year
 
 
+class RegionBoundaries(models.Model):
+    """Region Boundaries model."""
+
+    geom = models.MultiPolygonField(srid=4326)
+
+    objects = models.Manager()
+    vector_tiles = StaticMVTManager(columns=[])
+
+    data_file = "bkg_vg250_region"
+    layer = "bkg_vg250_region"
+    mapping = {"geom": "MULTIPOLYGON"}
+
+    class Meta:  # noqa: D106
+        verbose_name = _("RegionBoundaries")
+        verbose_name_plural = _("RegionBoundaries")
+
+
 class RenewableModel(models.Model):
     """Base class for renewable cluster models."""
 

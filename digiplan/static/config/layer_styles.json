@@ -2,7 +2,7 @@
   "region-fill": {
     "type": "fill",
     "paint": {
-      "fill-color": "rgb(250,174,29)",
+      "fill-color": "rgb(250, 174, 29)",
       "fill-opacity": [
         "case",
         [
@@ -21,6 +21,15 @@
   "region-label": {
     "type": "symbol",
     "layout": {
+      "text-size": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        8,
+        10,
+        14,
+        30
+      ],
       "text-field": "{name}",
       "text-letter-spacing": 0.04,
       "text-radial-offset": 2,
@@ -51,7 +60,7 @@
   "region-line": {
     "type": "line",
     "paint": {
-      "line-color": "rgb(250, 174,29)",
+      "line-color": "rgb(250, 174, 29)",
       "line-width": [
         "case",
         [
@@ -65,6 +74,13 @@
         3,
         0.5
       ]
+    }
+  },
+  "region_boundaries": {
+    "type": "line",
+    "paint": {
+      "line-color": "rgb(250, 174, 29)",
+      "line-width": 2
     }
   },
   "wind": {

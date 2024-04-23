@@ -12,7 +12,7 @@ from django.views.generic import TemplateView
 from django_mapengine import views
 
 from digiplan import __version__
-from digiplan.map import config
+from digiplan.map import config, menu
 
 from . import charts, choropleths, forms, hooks, map_config, models, popups, utils
 
@@ -50,6 +50,16 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         """
         # Add unique session ID
         context = super().get_context_data(**kwargs)
+
+        # Move region_boundaries layer to bottom:
+        context["mapengine_layers"].insert(
+            0,
+            context["mapengine_layers"].pop(
+                next(
+                    i for i, element in enumerate(context["mapengine_layers"]) if element["id"] == "region_boundaries"
+                ),
+            ),
+        )
 
         context["panels"] = [
             forms.EnergyPanelForm(
@@ -220,3 +230,13 @@ def store_pre_result(request: HttpRequest) -> response.JsonResponse:
         pre_result = models.PreResults.objects.create(scenario=scenario, parameters=parameters)
         pre_result.save()
     return response.JsonResponse({"pre_result_id": pre_result.id})
+
+
+class DetailKeyResultsView(TemplateView):
+    """Return HTMX-partial for requested detail key results."""
+
+    template_name = "forms/panel_energy.html#key_results"
+
+    def get_context_data(self, **kwargs) -> dict:  # noqa: ARG002
+        """Get detail key results for requested technology."""
+        return {f"key_result_{key}": value for key, value in menu.detail_key_results(**self.request.GET.dict()).items()}
