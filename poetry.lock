@@ -964,6 +964,20 @@ files = [
 django = "*"
 
 [[package]]
+name = "django-cache-memoize"
+version = "0.2.0"
+description = "Django utility for a memoization decorator that uses the Django cache framework."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django-cache-memoize-0.2.0.tar.gz", hash = "sha256:79950a027ba40e4aff4efed587b76036bf5ba1f59329d7b158797b832be72ca6"},
+    {file = "django_cache_memoize-0.2.0-py3-none-any.whl", hash = "sha256:a6bfd112da699d1fa85955a1e15b7c48ee25e58044398958e269678db10736f3"},
+]
+
+[package.extras]
+dev = ["black", "flake8", "therapist", "tox", "twine"]
+
+[[package]]
 name = "django-compressor"
 version = "4.4"
 description = "('Compresses linked and inline JavaScript or CSS into single cached files.',)"
@@ -1174,6 +1188,24 @@ files = [
 [package.dependencies]
 Django = ">=2.2"
 redis = ">=3.0.0"
+
+[[package]]
+name = "django-template-partials"
+version = "23.4"
+description = "django-template-partials"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-template-partials-23.4.tar.gz", hash = "sha256:f762b0b7b2222462df0845f0556792640b769eb832eae218a0e7dadd4e5606cc"},
+    {file = "django_template_partials-23.4-py2.py3-none-any.whl", hash = "sha256:d83d9c2d2836be769919e9aaf394d5feb1ac86e1187083030398308070122fca"},
+]
+
+[package.dependencies]
+Django = "*"
+
+[package.extras]
+docs = ["Sphinx"]
+tests = ["coverage", "django_coverage_plugin"]
 
 [[package]]
 name = "djangorestframework"
@@ -3788,4 +3820,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "79ed8b7549efce9000f41b17c4a28f561f047d842f8960642727018b151b834d"
+content-hash = "c598d0d2ed1130eb6716ea03611be35d3c849a30041ea0c283b4fa25cbb06af8"
