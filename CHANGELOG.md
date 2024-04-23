@@ -12,6 +12,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ### Changed
 - Adapt municipality label font size according to zoom level
+- update mapengine to v1.4.1
 
 ### Fixed
 - duplicate loading of JS modules due to missing module support in django staticfile storage
