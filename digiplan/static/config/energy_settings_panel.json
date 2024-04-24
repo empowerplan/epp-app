@@ -9,7 +9,7 @@
     "start": 30,
     "status_quo": 50,
     "step": 5,
-    "tooltip": "{% trans 'Nennleistung der in der Region installierten Windenergieanlagen in Megawatt. Die dargestellten Ziele für 2045 sind abgeleitet aus den im Windenergieflächenbedarfsgesetz festgesetzten Zielen für Sachsen-Anhalt (2,2 % bis 2032).\n\nHinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität zu Ertragssteigerungen.' %} ",
+    "tooltip": "{% trans 'Nennleistung der in der Region installierten Windenergieanlagen in Megawatt. Die dargestellten Ziele für 2045 sind abgeleitet aus den im Windenergieflächenbedarfsgesetz festgesetzten Zielen für Brandenburg (2,2 % bis 2032).\n\nHinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität zu Ertragssteigerungen.' %} ",
     "type": "slider",
     "sidepanel": true
   },

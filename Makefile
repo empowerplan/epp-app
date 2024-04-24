@@ -1,7 +1,8 @@
 
 .PHONY : load_regions load_data empty_data dump_fixtures load_fixtures distill check_distill_coordinates
 
-DISTILL=True
+MAP_ENGINE_DISTILL=True
+DJANGO_READ_DOT_ENV_FILE=True
 export
 
 load_regions:
@@ -79,5 +80,18 @@ update_vendor_assets:
 	# PubSubJS https://github.com/mroderick/PubSubJS
 	rm -r digiplan/static/vendors/pubsub/js/*
 	cp node_modules/pubsub-js/src/pubsub.js digiplan/static/vendors/pubsub/js/
+
+	# Popper https://www.npmjs.com/package/@popperjs/core
+	rm -r digiplan/static/vendors/popper/js/*
+	cp node_modules/@popperjs/core/dist/umd/popper-lite.* digiplan/static/vendors/popper/js/
+
+	# Shepherd https://www.npmjs.com/package/shepherd.js
+	rm -r digiplan/static/vendors/shepherd/*
+	cp node_modules/shepherd.js/dist/js/shepherd.* digiplan/static/vendors/shepherd/
+	cp node_modules/shepherd.js/dist/css/shepherd.css digiplan/static/vendors/shepherd/
+
+	# HTMX https://htmx.org/
+	rm -r digiplan/static/vendors/htmx/js/*
+	cp node_modules/htmx.org/dist/htmx.min.js digiplan/static/vendors/htmx/js/
 
 	# Done

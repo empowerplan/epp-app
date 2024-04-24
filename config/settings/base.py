@@ -88,11 +88,9 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    "foundation_formtags",  # Form layouts
     "rest_framework",
-    "crispy_forms",
-    "crispy_bootstrap5",
     "django_distill",
+    "template_partials",
 ]
 
 LOCAL_APPS = ["digiplan.map.apps.MapConfig", "django_oemof", "django_mapengine"]
@@ -274,15 +272,33 @@ OEMOF_SCENARIO = env.str("OEMOF_SCENARIO", "scenario_2045")
 MAP_ENGINE_CENTER_AT_STARTUP = [14.2, 52.45]
 MAP_ENGINE_ZOOM_AT_STARTUP = 8
 MAP_ENGINE_MIN_ZOOM = 8
-MAP_ENGINE_MAX_ZOOM = 12
+MAP_ENGINE_MAX_ZOOM = 13
 MAP_ENGINE_MAX_BOUNDS = [[12.6, 51.8], [16.1, 53.1]]
 
 # distill
 MAP_ENGINE_X_AT_MIN_Z = 137
 MAP_ENGINE_Y_AT_MIN_Z = 83
-MAP_ENGINE_X_OFFSET = 8  # Defines how many tiles to the right are added at first level
-MAP_ENGINE_Y_OFFSET = 9  # Defines how many tiles to the bottom are added at first level
-MAP_ENGINE_MAX_DISTILLED_ZOOM = 12
+MAP_ENGINE_X_OFFSET = 1  # Defines how many tiles to the right are added at first level
+MAP_ENGINE_Y_OFFSET = 1  # Defines how many tiles to the bottom are added at first level
+MAP_ENGINE_MAX_DISTILLED_ZOOM = 13
+
+MAP_ENGINE_BASEMAPS = [
+    setup.MaptilerBasemap(
+        "satellite",
+        source_id="satellite",
+        type="raster",
+        description="Satellite basemap view",
+        image="django_mapengine/images/layer_ctrl_satellite.svg",
+    ),
+    setup.MaptilerBasemap(
+        "dataviz",
+        source_id="dataviz",
+        type="raster",
+        format="png",
+        description="Data visualization view",
+        image="django_mapengine/images/layer_ctrl_default.svg",
+    ),
+]
 
 MAP_ENGINE_IMAGES = [
     setup.MapImage("wind", "images/icons/map_wind.png"),
@@ -303,6 +319,7 @@ MAP_ENGINE_IMAGES = [
 ]
 
 MAP_ENGINE_API_MVTS = {
+    "region": [setup.MVTAPI("region_boundaries", "map", "RegionBoundaries")],
     "municipality": [
         setup.MVTAPI("municipality", "map", "Municipality"),
         setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
@@ -362,9 +379,11 @@ MAP_ENGINE_API_CLUSTERS = [
     setup.ClusterAPI("storage", "map", "Storage", properties=["id", "unit_count"]),
 ]
 
+MAP_ENGINE_LAYERS_AT_STARTUP = ["region_boundaries"]
+
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
 MAP_ENGINE_ZOOM_LEVELS = {
-    "municipality": setup.Zoom(8, 13),
+    "municipality": setup.Zoom(8, 14),
 }
 
 MAP_ENGINE_CHOROPLETHS = [

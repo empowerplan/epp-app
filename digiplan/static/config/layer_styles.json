@@ -2,7 +2,7 @@
   "region-fill": {
     "type": "fill",
     "paint": {
-      "fill-color": "rgb(250,174,29)",
+      "fill-color": "rgb(250, 174, 29)",
       "fill-opacity": [
         "case",
         [
@@ -21,6 +21,15 @@
   "region-label": {
     "type": "symbol",
     "layout": {
+      "text-size": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        8,
+        10,
+        14,
+        30
+      ],
       "text-field": "{name}",
       "text-letter-spacing": 0.04,
       "text-radial-offset": 2,
@@ -51,7 +60,7 @@
   "region-line": {
     "type": "line",
     "paint": {
-      "line-color": "rgb(250, 174,29)",
+      "line-color": "rgb(250, 174, 29)",
       "line-width": [
         "case",
         [
@@ -63,8 +72,15 @@
           false
         ],
         3,
-        0.25
+        0.5
       ]
+    }
+  },
+  "region_boundaries": {
+    "type": "line",
+    "paint": {
+      "line-color": "rgb(250, 174, 29)",
+      "line-width": 2
     }
   },
   "wind": {
@@ -498,19 +514,22 @@
   "potentialarea_pv_ground_soil_quality_low": {
     "type": "fill",
     "paint": {
-      "fill-color": "#F8D637"
+      "fill-color": "#F8D637",
+      "fill-opacity": 0.8
     }
   },
   "potentialarea_pv_ground_soil_quality_medium": {
     "type": "fill",
     "paint": {
-      "fill-color": "#C19800"
+      "fill-color": "#C19800",
+      "fill-opacity": 0.8
     }
   },
   "potentialarea_pv_ground_permanent_crops": {
     "type": "fill",
     "paint": {
-      "fill-color": "#5F4F03"
+      "fill-color": "#5F4F03",
+      "fill-opacity": 0.8
     }
   },
   "potentialarea_pv_roof": {
@@ -543,169 +562,197 @@
   "air_traffic": {
     "type": "fill",
     "paint": {
-      "fill-color": "#969696"
+      "fill-color": "#969696",
+      "fill-opacity": 0.8
     }
   },
   "pv_ground_criteria_aviation": {
     "type": "fill",
     "paint": {
-      "fill-color": "#CCCCCC"
+      "fill-color": "#CCCCCC",
+      "fill-opacity": 0.8
     }
   },
   "biosphere_reserve": {
     "type": "fill",
     "paint": {
-      "fill-color": "#238443"
+      "fill-color": "#238443",
+      "fill-opacity": 0.8
     }
   },
   "drinking_water_protection_area": {
     "type": "fill",
     "paint": {
-      "fill-color": "#6BAED6"
+      "fill-color": "#6BAED6",
+      "fill-opacity": 0.8
     }
   },
   "fauna_flora_habitat": {
     "type": "fill",
     "paint": {
-      "fill-color": "#78C679"
+      "fill-color": "#78C679",
+      "fill-opacity": 0.8
     }
   },
   "floodplain": {
     "type": "fill",
     "paint": {
-      "fill-color": "#08306B"
+      "fill-color": "#08306B",
+      "fill-opacity": 0.8
     }
   },
   "forest": {
     "type": "fill",
     "paint": {
-      "fill-color": "#004529"
+      "fill-color": "#004529",
+      "fill-opacity": 0.8
     }
   },
   "grid": {
     "type": "fill",
     "paint": {
-      "fill-color": "#252525"
+      "fill-color": "#252525",
+      "fill-opacity": 0.8
     }
   },
   "industry": {
     "type": "fill",
     "paint": {
-      "fill-color": "#BCBDDC"
+      "fill-color": "#BCBDDC",
+      "fill-opacity": 0.8
     }
   },
   "landscape_protection_area": {
     "type": "fill",
     "paint": {
-      "fill-color": "#006837"
+      "fill-color": "#006837",
+      "fill-opacity": 0.8
     }
   },
   "less_favoured_areas_agricultural": {
     "type": "fill",
     "paint": {
-      "fill-color": "#66c2a4"
+      "fill-color": "#66c2a4",
+      "fill-opacity": 0.8
     }
   },
   "military": {
     "type": "fill",
     "paint": {
-      "fill-color": "#636363"
+      "fill-color": "#636363",
+      "fill-opacity": 0.8
     }
   },
   "moor": {
     "type": "fill",
     "paint": {
-      "fill-color": "#002B19"
+      "fill-color": "#002B19",
+      "fill-opacity": 0.8
     }
   },
   "nature_conservation_area": {
     "type": "fill",
     "paint": {
-      "fill-color": "#ADDD8E"
+      "fill-color": "#ADDD8E",
+      "fill-opacity": 0.8
     }
   },
   "nature_park": {
     "type": "fill",
     "paint": {
-      "fill-color": "#115F2B"
+      "fill-color": "#115F2B",
+      "fill-opacity": 0.8
     }
   },
   "railway": {
     "type": "fill",
     "paint": {
-      "fill-color": "#54278F"
+      "fill-color": "#54278F",
+      "fill-opacity": 0.8
     }
   },
   "road_default": {
     "type": "fill",
     "paint": {
-      "fill-color": "#756BB1"
+      "fill-color": "#756BB1",
+      "fill-opacity": 0.8
     }
   },
   "priority_climate_resistent_agri": {
     "type": "fill",
     "paint": {
-      "fill-color": "#c8008a"
+      "fill-color": "#c8008a",
+      "fill-opacity": 0.8
     }
   },
   "priority_permanent_crops": {
     "type": "fill",
     "paint": {
-      "fill-color": "#a1006f"
+      "fill-color": "#a1006f",
+      "fill-opacity": 0.8
     }
   },
   "priority_grassland": {
     "type": "fill",
     "paint": {
-      "fill-color": "#71004e"
+      "fill-color": "#71004e",
+      "fill-opacity": 0.8
     }
   },
   "pv_ground_criteria_settlements": {
     "type": "fill",
     "paint": {
-      "fill-color": "#DADAEB"
+      "fill-color": "#DADAEB",
+      "fill-opacity": 0.8
     }
   },
   "pv_ground_criteria_settlements_200m": {
     "type": "fill",
     "paint": {
-      "fill-color": "#DADAEB"
+      "fill-color": "#DADAEB",
+      "fill-opacity": 0.8
     }
   },
   "pv_ground_criteria_biotope": {
     "type": "fill",
     "paint": {
-      "fill-color": "#115F2B"
+      "fill-color": "#115F2B",
+      "fill-opacity": 0.8
     }
   },
   "pv_ground_criteria_open_spaces": {
     "type": "fill",
     "paint": {
-      "fill-color": "#CCCCCC"
+      "fill-color": "#CCCCCC",
+      "fill-opacity": 0.8
     }
   },
   "pv_ground_criteria_nature_monuments": {
     "type": "fill",
     "paint": {
-      "fill-color": "#115F2B"
+      "fill-color": "#115F2B",
+      "fill-opacity": 0.8
     }
   },
   "special_protection_area": {
     "type": "fill",
     "paint": {
-      "fill-color": "#41AB5D"
+      "fill-color": "#41AB5D",
+      "fill-opacity": 0.8
     }
   },
   "water_bodies": {
     "type": "fill",
     "paint": {
-      "fill-color": "#2171B5"
+      "fill-color": "#2171B5",
+      "fill-opacity": 0.8
     }
   },
   "water_first_order": {
     "type": "fill",
     "paint": {
-      "fill-color": "#2171B5"
+      "fill-color": "#2171B5",
+      "fill-opacity": 0.8
     }
   }
 }

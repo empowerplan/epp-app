@@ -36,7 +36,8 @@
     "subscribeToEvents": false,
     "createChart": false,
     "clearChart": false,
-    "hidePotentialLayers": false
+    "hidePotentialLayers": false,
+    "URLSearchParams": false
   },
   "strict": "implied"
 }

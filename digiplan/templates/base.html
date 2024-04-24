@@ -58,16 +58,16 @@
 
       {% compress js %}
         <script src="{% static 'vendors/echarts/js/echarts.min.js' %}"></script>
-        <script src="{% static 'vendors/popper/js/popper.min.js' %}"></script>
+        <script src="{% static 'vendors/popper/js/popper-lite.min.js' %}"></script>
         <script src="{% static 'vendors/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'vendors/jquery/js/jquery.min.js' %}"></script>
         <script src="{% static 'vendors/pubsub/js/pubsub.js' %}"></script>
         <script src="{% static 'vendors/ionrangeslider/js/ion.rangeSlider.min.js' %}"></script>
+        <script src="{% static 'vendors/htmx/js/htmx.min.js' %}"></script>
       {% endcompress %}
 
       {% compress js %}
         <script src="{% static 'js/event-topics.js' %}"></script>
-        <script src="{% static 'js/layers-box.js' %}"></script>
         <script src="{% static 'js/offcanvas.js' %}"></script>
       {% endcompress %}
       <script type="module" src="{% static 'js/menu.js' %}"></script>

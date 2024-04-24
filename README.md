@@ -83,11 +83,11 @@ environment variables (for database, redis, etc.).
 Environment variables have to be set using the following structure:
 
 - `DATABASE_URL=postgis://<user>:<password>@<host>:<port>/<database>`
-- `TILING_SERVICE_STYLE_ID=<URL to mapbox style>`
-- `TILING_SERVICE_TOKEN=<token>`
+- `MAP_ENGINE_TILING_SERVICE_STYLE_ID=<URL to mapbox style>`
+- `MAP_ENGINE_TILING_SERVICE_TOKEN=<token>`
 - `PROJ_LIB=<path to folder _proj/_, needed for GDAL>`
 - `REDIS_URL=redis://<host>:<port>` (if REDIS is used)
-- `USE_DISTILLED_MVTS=<True/False>` (should be set to False at first)
+- `MAP_ENGINE_USE_DISTILLED_MVTS=<True/False>` (should be set to False at first)
 - `USE_DOCKER=<True/False>`
 
 You can set up environment variables either by using your IDE, or by setting them via
@@ -144,7 +144,7 @@ You may have to put `sudo` in front of the commands.
 While using the following commands, exchange _production.yml_ (production server) and _
 local.yml_ (local development) accordingly to your needs!
 
-`USE_DISTILLED_MVTS` should be set to False at first in the env file.
+`MAP_ENGINE_USE_DISTILLED_MVTS` should be set to False at first in the env file.
 
 ### Start container
 
@@ -181,10 +181,10 @@ You can create those vector tiles by using the following commands:
 see changes on the map)
 
 ```
-docker-compose -f production.yml run --name digiplan_distill -e DISTILL=True django /bin/bash -c "python manage.py collectstatic --noinput; python manage.py distill-local --force --exclude-staticfiles ./distill"
+docker-compose -f production.yml run --name epp_distill -e MAP_ENGINE_DISTILL=True django /bin/bash -c "python manage.py collectstatic --noinput; python manage.py distill-local --force --exclude-staticfiles ./distill"
 docker cp digiplan_distill:/app/distill/ ./digiplan/static/mvts/
 # commit and push, afterwards remove temp container:
-docker rm -f digiplan_distill
+docker rm -f epp_distill
 ```
 
 # Adding new (static) layers
