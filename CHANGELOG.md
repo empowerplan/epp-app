@@ -8,13 +8,16 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Added
 - coupling of duplicated map panel controls
 - dependabot
+- key results for wind, pv ground and pv roof settings panels
 
 ### Changed
 - Adapt municipality label font size according to zoom level
+- update mapengine to v1.4.1
 
 ### Fixed
 - duplicate loading of JS modules due to missing module support in django staticfile storage
 - settlement 200m layer is coupled to settlement layer (de)-activation
+- basemap controls
 
 ## [0.1.0] - 2024-03-19
 ### Added
