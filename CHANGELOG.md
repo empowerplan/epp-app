@@ -6,6 +6,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+- basemap for data visualization
 - coupling of duplicated map panel controls
 - dependabot
 - key results for wind, pv ground and pv roof settings panels
