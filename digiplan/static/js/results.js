@@ -7,6 +7,14 @@ const resultSimNote = document.getElementById("result_simnote");
 
 const SIMULATION_CHECK_TIME = 5000;
 const PRE_RESULTS = [
+  "energy_share_2045",
+  "energy_2045",
+  "energy_capita_2045",
+  "energy_square_2045",
+  "capacity_2045",
+  "capacity_square_2045",
+  "wind_turbines_2045",
+  "wind_turbines_square_2045",
   "electricity_demand_2045",
   "electricity_demand_capita_2045",
   "heat_demand_2045",
