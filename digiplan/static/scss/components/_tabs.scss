@@ -124,8 +124,7 @@
     @extend .fw-normal;
     @extend .py-0;
     padding: 0.25rem 0.75rem !important;
-
-    width: 8rem;
+    width: 10rem;
     height: 2rem;
 
     @include media-breakpoint-down(xl) {
