@@ -84,6 +84,9 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         }
         context["sources"] = categorized_sources
         context["store_cold_init"] = config.STORE_COLD_INIT
+
+        context["wind_capacity"] = charts.Chart("wind_capacity").render()
+        context["wind_areas"] = charts.Chart("wind_areas").render()
         context["detailed_overview"] = charts.Chart("detailed_overview").render()
         context["electricity_overview"] = charts.Chart("electricity_overview").render()
         context["electricity_autarky"] = charts.Chart("electricity_autarky").render()

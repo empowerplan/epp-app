@@ -1,0 +1,112 @@
+{
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    }
+  },
+  "legend": {
+    "data": ["Leistung", "Anlagenanzahl"]
+  },
+  "grid": {
+    "top": "10%",
+    "left": "3%",
+    "right": "3%",
+    "bottom": "10%",
+    "containLabel": true
+  },
+  "xAxis": {
+    "type": "category",
+    "data": ["2010", "2015", "2020", "2023", "Dein\nSzenario"]
+  },
+  "yAxis": [
+    {
+      "type": "value",
+      "max": 2500,
+      "axisLabel": {
+        "formatter": "{value} MW"
+      }
+    },
+    {
+      "type": "value",
+      "max": 1500,
+      "name": "Anzahl"
+    }
+  ],
+  "series": [
+    {
+      "name": "Leistung",
+      "type": "bar",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 90,
+        "color": "#fff"
+      },
+      "color": "#6A89CC",
+      "data": [
+        519,
+        601,
+        752,
+        1070,
+        {
+          "value": 2000,
+          "itemStyle": {
+            "color": "#BAE1F6"
+          }
+        }
+      ],
+      "yAxisIndex": 0,
+      "markLine": {
+        "symbol": "none",
+        "lineStyle": {
+          "color": "#6A89CC",
+          "type": "dashed",
+          "width": 2
+        },
+        "data": [
+          {
+            "yAxis": 1769,
+            "label": {
+              "formatter": "Ziel Brandenburg 2030",
+              "color": "#6A89CC",
+              "position": "middle"
+            }
+          },
+          {
+            "yAxis": 2308,
+            "label": {
+              "formatter": "Ziel Brandenburg 2040",
+              "color": "#6A89CC",
+              "position": "middle"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Anlagenanzahl",
+      "type": "bar",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 90,
+        "color": "#fff"
+      },
+      "color": "#b6caf3",
+      "data": [
+        303,
+        340,
+        386,
+        458,
+        {
+          "value": 500,
+          "itemStyle": {
+            "color": "#BAE1F6"
+          }
+        }
+      ],
+      "yAxisIndex": 1
+    }
+  ]
+}
