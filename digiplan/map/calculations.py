@@ -364,34 +364,6 @@ def heat_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
     return demand.astype(float)
 
 
-def ghg_reduction(simulation_id: int) -> pd.Series:
-    """
-    Calculate data for GHG reduction chart from simulation ID.
-
-    Parameters
-    ----------
-    simulation_id: int
-        Simulation ID to calculate results from
-
-    Returns
-    -------
-    pandas.Series
-        holding data for GHG reduction chart
-    """
-    renewables = renewable_electricity_production(simulation_id).sum()
-
-    results = get_results(
-        simulation_id,
-        {
-            "electricity_production": electricity_production,
-        },
-    )
-    electricity_import = results["electricity_production"].loc[["ABW-electricity-import"]]
-    electricity_import.index = electricity_import.index.get_level_values(0)
-    electricity_import["ABW-renewables"] = renewables
-    return electricity_import * 1e-3
-
-
 def electricity_from_from_biomass(simulation_id: int) -> pd.Series:
     """
     Calculate electricity from biomass.

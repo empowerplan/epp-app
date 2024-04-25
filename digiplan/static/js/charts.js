@@ -1,24 +1,13 @@
 // Goals & scenarios, initioalize charts
-// const renewable_share_goal_div = document.getElementById("renewable_share_goal_chart");
-// const renewable_share_goal_chart = echarts.init(renewable_share_goal_div);
-// const co2_emissions_goal_div = document.getElementById("co2_emissions_goal_chart");
-// const co2_emissions_goal_chart = echarts.init(co2_emissions_goal_div);
-// const renewable_share_scenario_div = document.getElementById("renewable_share_scenario_chart");
-// const renewable_share_scenario_chart = echarts.init(renewable_share_scenario_div);
-// const co2_emissions_scenario_div = document.getElementById("co2_emissions_scenario_chart");
-// const co2_emissions_scenario_chart = echarts.init(co2_emissions_scenario_div);
 
 // Results view, initiliaze charts
 // const detailed_overview_chart = echarts.init(document.getElementById("detailed_overview_chart"));
-// const ghg_overview_chart = echarts.init(document.getElementById("ghg_overview_chart"));
 const electricity_overview_chart = echarts.init(document.getElementById("electricity_overview_chart"));
 const electricity_autarky_chart = echarts.init(document.getElementById("electricity_autarky_chart"));
 // const mobility_overview_chart = echarts.init(document.getElementById("mobility_overview_chart"));
 // const mobility_THG_chart = echarts.init(document.getElementById("mobility_THG_chart"));
 const heat_decentralized_chart = echarts.init(document.getElementById("heat_decentralized_chart"));
 const heat_centralized_chart = echarts.init(document.getElementById("heat_centralized_chart"));
-const ghg_history_chart = echarts.init(document.getElementById("ghg_history_chart"));
-const ghg_reduction_chart = echarts.init(document.getElementById("ghg_reduction_chart"));
 
 // Onboarding Charts
 const onboarding_wind_div = document.getElementById("onboarding_wind_chart");
@@ -66,23 +55,16 @@ const chart_legend = {
   itemHeight: 10
 };
 
-// Goal variables
-// const renewable_share_goal_value = 90;
-// const co2_emissions_goal_value = 30;
-
 // CHARTS -> defined in /map/charts/
 
 // get options for result view charts
 // const detailed_overview_option = JSON.parse(document.getElementById("detailed_overview").textContent);
-// const ghg_overview_option = JSON.parse(document.getElementById("ghg_overview").textContent);
 const electricity_overview_option = JSON.parse(document.getElementById("electricity_overview").textContent);
 const electricity_autarky_option = JSON.parse(document.getElementById("electricity_autarky").textContent);
 // const mobility_overview_option = JSON.parse(document.getElementById("mobility_overview").textContent);
 // const mobility_ghg_option = JSON.parse(document.getElementById("mobility_ghg").textContent);
 const heat_decentralized_option = JSON.parse(document.getElementById("heat_decentralized").textContent);
 const heat_centralized_option = JSON.parse(document.getElementById("heat_centralized").textContent);
-const ghg_history_option = JSON.parse(document.getElementById("ghg_history").textContent);
-const ghg_reduction_option = JSON.parse(document.getElementById("ghg_reduction").textContent);
 
 // get options for onboarding charts
 const onboarding_wind_option = JSON.parse(document.getElementById("onboarding_wind").textContent);
@@ -91,43 +73,27 @@ const onboarding_pv_roof_option = JSON.parse(document.getElementById("onboarding
 
 function resizeCharts() {
   setTimeout(function () {
-    // renewable_share_goal_chart.resize();
-    // co2_emissions_goal_chart.resize();
-    // renewable_share_scenario_chart.resize();
-    // co2_emissions_scenario_chart.resize();
     // detailed_overview_chart.resize();
-    // ghg_overview_chart.resize();
     electricity_overview_chart.resize();
     electricity_autarky_chart.resize();
     // mobility_overview_chart.resize();
     // mobility_THG_chart.resize();
     heat_decentralized_chart.resize();
     heat_centralized_chart.resize();
-    ghg_history_chart.resize();
-    ghg_reduction_chart.resize();
     onboarding_wind_chart.resize();
     onboarding_pv_ground_chart.resize();
     onboarding_pv_roof_chart.resize();
   }, 200);
 }
 
-// Goals & scenarios, setOptions
-// renewable_share_goal_chart.setOption(renewable_share_goal);
-// co2_emissions_goal_chart.setOption(co2_emissions_goal);
-// renewable_share_scenario_chart.setOption(renewable_share_scenario);
-// co2_emissions_scenario_chart.setOption(co2_emissions_scenario);
-
 // Results, setOptions
 // detailed_overview_chart.setOption(detailed_overview_option);
-// ghg_overview_chart.setOption(ghg_overview_option);
 electricity_overview_chart.setOption(electricity_overview_option);
 electricity_autarky_chart.setOption(electricity_autarky_option);
 // mobility_overview_chart.setOption(mobility_overview_option);
 // mobility_THG_chart.setOption(mobility_ghg_option);
 heat_decentralized_chart.setOption(heat_decentralized_option);
 heat_centralized_chart.setOption(heat_centralized_option);
-ghg_history_chart.setOption(ghg_history_option);
-ghg_reduction_chart.setOption(ghg_reduction_option);
 
 // onboarding Charts
 onboarding_wind_chart.setOption(onboarding_wind_option);
