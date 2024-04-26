@@ -282,24 +282,6 @@ MAP_ENGINE_X_OFFSET = 1  # Defines how many tiles to the right are added at firs
 MAP_ENGINE_Y_OFFSET = 1  # Defines how many tiles to the bottom are added at first level
 MAP_ENGINE_MAX_DISTILLED_ZOOM = 13
 
-MAP_ENGINE_BASEMAPS = [
-    setup.MaptilerBasemap(
-        "satellite",
-        source_id="satellite",
-        type="raster",
-        description="Satellite basemap view",
-        image="django_mapengine/images/layer_ctrl_satellite.svg",
-    ),
-    setup.MaptilerBasemap(
-        "dataviz",
-        source_id="dataviz",
-        type="raster",
-        format="png",
-        description="Data visualization view",
-        image="django_mapengine/images/layer_ctrl_default.svg",
-    ),
-]
-
 MAP_ENGINE_IMAGES = [
     setup.MapImage("wind", "images/icons/map_wind.png"),
     setup.MapImage("pv", "images/icons/map_pv.png"),
