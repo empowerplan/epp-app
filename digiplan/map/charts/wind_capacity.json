@@ -60,7 +60,7 @@
       "markLine": {
         "symbol": "none",
         "lineStyle": {
-          "color": "#6A89CC",
+          "color": "#495e8a",
           "type": "dashed",
           "width": 2
         },
@@ -69,16 +69,16 @@
             "yAxis": 1769,
             "label": {
               "formatter": "Ziel Brandenburg 2030",
-              "color": "#6A89CC",
-              "position": "middle"
+              "color": "#495e8a",
+              "position": "insideStartTop"
             }
           },
           {
             "yAxis": 2308,
             "label": {
               "formatter": "Ziel Brandenburg 2040",
-              "color": "#6A89CC",
-              "position": "middle"
+              "color": "#495e8a",
+              "position": "insideStartTop"
             }
           }
         ]

@@ -82,7 +82,7 @@
       "markLine": {
         "symbol": "none",
         "lineStyle": {
-          "color": "#6A89CC",
+          "color": "#495e8a",
           "type": "dashed",
           "width": 2
         },
@@ -90,18 +90,17 @@
           {
             "yAxis": 1.8,
             "label": {
-              "formatter": "Vorgabe 2027*",
-              "color": "#BAE1F6",
-              "position": "middle",
-              "distance": 0
+              "formatter": "Ziel WindBG 2027",
+              "color": "#495e8a",
+              "position": "insideStartTop"
             }
           },
           {
             "yAxis": 2.2,
             "label": {
-              "formatter": "Vorgabe 2032*",
-              "color": "#BAE1F6",
-              "position": "right"
+              "formatter": "Ziel WindBG 2032",
+              "color": "#495e8a",
+              "position": "insideStartTop"
             }
           }
         ]
