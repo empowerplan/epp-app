@@ -199,7 +199,7 @@ function showCharts(charts = {}) {
     type: "GET",
     data: {
       charts: Object.keys(charts),
-      map_state: map_store.cold.state,
+      map_state: JSON.stringify(map_store.cold.state),
     },
     success: function (chart_options) {
       for (const chart in charts) {
