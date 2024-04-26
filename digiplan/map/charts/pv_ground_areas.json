@@ -1,0 +1,110 @@
+{
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    }
+  },
+  "legend": {
+    "data": ["Fläche (ha)", "% der Regionsfläche"]
+  },
+  "grid": {
+    "top": "10%",
+    "left": "3%",
+    "right": "3%",
+    "bottom": "10%",
+    "containLabel": true
+  },
+  "xAxis": {
+    "type": "category",
+    "data": ["2018", "Entwurf 2024", "Dein\nSzenario"]
+  },
+  "yAxis": [
+    {
+      "type": "value",
+      "max": 12000,
+      "axisLabel": {
+        "formatter": "{value} ha"
+      }
+    },
+    {
+      "type": "value",
+      "max": 3,
+      "axisLabel": {
+        "formatter": "{value} %"
+      }
+    }
+  ],
+  "series": [
+    {
+      "name": "Fläche (ha)",
+      "type": "bar",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 90,
+        "color": "#333"
+      },
+      "color": "#efad25",
+      "data": [
+        7391,
+        8988,
+        {
+          "value": 10000,
+          "itemStyle": {
+            "color": "#FBEEAE"
+          }
+        }
+      ],
+      "yAxisIndex": 0
+    },
+    {
+      "name": "% der Regionsfläche",
+      "type": "bar",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 90,
+        "color": "#333"
+      },
+      "color": "#ffd660",
+      "data": [
+        1.62,
+        1.97,
+        {
+          "value": 2,
+          "itemStyle": {
+            "color": "#FBEEAE"
+          }
+        }
+      ],
+      "yAxisIndex": 1,
+      "markLine": {
+        "symbol": "none",
+        "lineStyle": {
+          "color": "#7f5a0f",
+          "type": "dashed",
+          "width": 2
+        },
+        "data": [
+          {
+            "yAxis": 1.8,
+            "label": {
+              "formatter": "Ziel WindBG 2027",
+              "color": "#7f5a0f",
+              "position": "insideStartTop"
+            }
+          },
+          {
+            "yAxis": 2.2,
+            "label": {
+              "formatter": "Ziel WindBG 2032",
+              "color": "#7f5a0f",
+              "position": "insideStartTop"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

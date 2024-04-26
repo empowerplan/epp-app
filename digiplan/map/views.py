@@ -87,6 +87,10 @@ class MapGLView(TemplateView, views.MapEngineMixin):
 
         context["wind_capacity"] = charts.Chart("wind_capacity").render()
         context["wind_areas"] = charts.Chart("wind_areas").render()
+        context["pv_ground_capacity"] = charts.Chart("pv_ground_capacity").render()
+        context["pv_ground_areas"] = charts.Chart("pv_ground_areas").render()
+        context["pv_roof_capacity"] = charts.Chart("pv_roof_capacity").render()
+        context["pv_roof_areas"] = charts.Chart("pv_roof_areas").render()
         context["detailed_overview"] = charts.Chart("detailed_overview").render()
         context["electricity_overview"] = charts.Chart("electricity_overview").render()
         context["electricity_autarky"] = charts.Chart("electricity_autarky").render()

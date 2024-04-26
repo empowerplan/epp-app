@@ -1,0 +1,112 @@
+{
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    }
+  },
+  "legend": {
+    "data": ["Leistung", "Anlagenanzahl"]
+  },
+  "grid": {
+    "top": "10%",
+    "left": "3%",
+    "right": "3%",
+    "bottom": "10%",
+    "containLabel": true
+  },
+  "xAxis": {
+    "type": "category",
+    "data": ["2010", "2015", "2020", "2023", "Dein\nSzenario**"]
+  },
+  "yAxis": [
+    {
+      "type": "value",
+      "max": 3000,
+      "axisLabel": {
+        "formatter": "{value} MW"
+      }
+    },
+    {
+      "type": "value",
+      "max": 30000,
+      "name": "Anzahl"
+    }
+  ],
+  "series": [
+    {
+      "name": "Leistung",
+      "type": "bar",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 90,
+        "color": "#333"
+      },
+      "color": "#efad25",
+      "data": [
+        43,
+        126,
+        278,
+        374,
+        {
+          "value": 2000,
+          "itemStyle": {
+            "color": "#FBEEAE"
+          }
+        }
+      ],
+      "yAxisIndex": 0,
+      "markLine": {
+        "symbol": "none",
+        "lineStyle": {
+          "color": "#7f5a0f",
+          "type": "dashed",
+          "width": 2
+        },
+        "data": [
+          {
+            "yAxis": 1440,
+            "label": {
+              "formatter": "Leistungsziel Brandenburg 2030 *",
+              "color": "#7f5a0f",
+              "position": "insideStartTop"
+            }
+          },
+          {
+            "yAxis": 2640,
+            "label": {
+              "formatter": "Leistungsziel Brandenburg 2040 *",
+              "color": "#7f5a0f",
+              "position": "insideStartTop"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Anlagenanzahl",
+      "type": "bar",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 90,
+        "color": "#333"
+      },
+      "color": "#ffd660",
+      "data": [
+        2713,
+        5377,
+        8106,
+        15625,
+        {
+          "value": 0,
+          "itemStyle": {
+            "color": "#FBEEAE"
+          }
+        }
+      ],
+      "yAxisIndex": 1
+    }
+  ]
+}

@@ -4,6 +4,10 @@
 // const detailed_overview_chart = echarts.init(document.getElementById("detailed_overview_chart"));
 const wind_capacity_chart = echarts.init(document.getElementById("wind_capacity_chart"));
 const wind_areas_chart = echarts.init(document.getElementById("wind_areas_chart"));
+const pv_ground_capacity_chart = echarts.init(document.getElementById("pv_ground_capacity_chart"));
+const pv_ground_areas_chart = echarts.init(document.getElementById("pv_ground_areas_chart"));
+const pv_roof_capacity_chart = echarts.init(document.getElementById("pv_roof_capacity_chart"));
+const pv_roof_areas_chart = echarts.init(document.getElementById("pv_roof_areas_chart"));
 
 const electricity_overview_chart = echarts.init(document.getElementById("electricity_overview_chart"));
 const electricity_autarky_chart = echarts.init(document.getElementById("electricity_autarky_chart"));
@@ -64,6 +68,10 @@ const chart_legend = {
 // const detailed_overview_option = JSON.parse(document.getElementById("detailed_overview").textContent);
 const wind_capacity_option = JSON.parse(document.getElementById("wind_capacity").textContent);
 const wind_areas_option = JSON.parse(document.getElementById("wind_areas").textContent);
+const pv_ground_capacity_option = JSON.parse(document.getElementById("pv_ground_capacity").textContent);
+const pv_ground_areas_option = JSON.parse(document.getElementById("pv_ground_areas").textContent);
+const pv_roof_capacity_option = JSON.parse(document.getElementById("pv_roof_capacity").textContent);
+const pv_roof_areas_option = JSON.parse(document.getElementById("pv_roof_areas").textContent);
 
 const electricity_overview_option = JSON.parse(document.getElementById("electricity_overview").textContent);
 const electricity_autarky_option = JSON.parse(document.getElementById("electricity_autarky").textContent);
@@ -82,6 +90,10 @@ function resizeCharts() {
     // detailed_overview_chart.resize();
     wind_capacity_chart.resize();
     wind_areas_chart.resize();
+    pv_ground_capacity_chart.resize();
+    pv_ground_areas_chart.resize();
+    pv_roof_capacity_chart.resize();
+    pv_roof_areas_chart.resize();
     electricity_overview_chart.resize();
     electricity_autarky_chart.resize();
     // mobility_overview_chart.resize();
@@ -98,6 +110,10 @@ function resizeCharts() {
 // detailed_overview_chart.setOption(detailed_overview_option);
 wind_capacity_chart.setOption(wind_capacity_option);
 wind_areas_chart.setOption(wind_areas_option);
+pv_ground_capacity_chart.setOption(pv_ground_capacity_option);
+pv_ground_areas_chart.setOption(pv_ground_areas_option);
+pv_roof_capacity_chart.setOption(pv_roof_capacity_option);
+pv_roof_areas_chart.setOption(pv_roof_areas_option);
 electricity_overview_chart.setOption(electricity_overview_option);
 electricity_autarky_chart.setOption(electricity_autarky_option);
 // mobility_overview_chart.setOption(mobility_overview_option);
