@@ -13,5 +13,4 @@ urlpatterns = [
     path("popup/<str:lookup>/<int:region>", views.get_popup, name="popup"),
     path("charts", views.get_charts, name="charts"),
     path("detail_key_results", views.DetailKeyResultsView.as_view(), name="detail_key_results"),
-    path("pre_result", views.store_pre_result, name="pre_result"),
 ]

@@ -1,8 +1,6 @@
 import { statusquoDropdown, futureDropdown } from "./elements.js";
 
 const imageResults = document.getElementById("info_tooltip_results");
-const chartViewTab = document.getElementById("chart-view-tab");
-const mapViewTab = document.getElementById("map-view-tab");
 const resultSimNote = document.getElementById("result_simnote");
 
 const SIMULATION_CHECK_TIME = 5000;
@@ -61,7 +59,6 @@ PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, storePreResults);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, disableResultButtons);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideRegionChart);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, resetResultDropdown);
-PubSub.subscribe(eventTopics.PRE_RESULTS_READY, enableResultButton);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, enableFutureResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
@@ -101,17 +98,8 @@ function simulate(msg) {
 function storePreResults(msg) {
   const settings = document.getElementById("settings");
   const formData = new FormData(settings); // jshint ignore:line
-  $.ajax({
-    url: "pre_result",
-    type: "POST",
-    processData: false,
-    contentType: false,
-    data: formData,
-    success: function (json) {
-      map_store.cold.state.pre_result_id = json.pre_result_id;
-      PubSub.publish(eventTopics.PRE_RESULTS_READY);
-    },
-  });
+  const userSettings = Object.fromEntries(formData.entries());
+  Object.assign(map_store.cold.state, userSettings);
   return logMessage(msg);
 }
 
@@ -157,11 +145,6 @@ function showResults(msg, simulation_id) {
   return logMessage(msg);
 }
 
-function enableResultButton(msg) {
-  futureDropdown.disabled = false;
-  return logMessage(msg);
-}
-
 function enableFutureResults(msg) {
   resultSimNote.innerText = "";
   const options = futureDropdown.querySelectorAll("option");
@@ -173,7 +156,6 @@ function enableFutureResults(msg) {
 
 function disableResultButtons(msg) {
   resultSimNote.innerText = "Berechnung läuft ...";
-  futureDropdown.disabled = true;
   const options = futureDropdown.querySelectorAll("option");
   for (const option of options) {
     if (!PRE_RESULTS.includes(option.value)) {

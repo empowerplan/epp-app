@@ -697,7 +697,7 @@ class ElectricityDemand2045Popup(RegionPopup):
     title = _("Strombedarf")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.electricity_demand_per_municipality_2045(self.map_state["pre_result_id"])
+        return calculations.electricity_demand_per_municipality_2045(self.map_state)
 
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
@@ -744,7 +744,7 @@ class ElectricityDemandCapita2045Popup(RegionPopup):
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
         return calculations.calculate_capita_for_value(
-            calculations.electricity_demand_per_municipality_2045(self.map_state["pre_result_id"]),
+            calculations.electricity_demand_per_municipality_2045(self.map_state),
         )
 
     def get_region_value(self) -> float:  # noqa: D102
@@ -794,7 +794,7 @@ class HeatDemand2045Popup(RegionPopup):
     title = _("Wärmebedarf")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.heat_demand_per_municipality_2045(self.map_state["pre_result_id"])
+        return calculations.heat_demand_per_municipality_2045(self.map_state)
 
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
@@ -841,7 +841,7 @@ class HeatDemandCapita2045Popup(RegionPopup):
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
         return calculations.calculate_capita_for_value(
-            calculations.heat_demand_per_municipality_2045(self.map_state["pre_result_id"]),
+            calculations.heat_demand_per_municipality_2045(self.map_state),
         ).mul(1e6)
 
     def get_region_value(self) -> float:  # noqa: D102

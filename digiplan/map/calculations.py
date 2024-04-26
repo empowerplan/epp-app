@@ -273,7 +273,7 @@ def energy_shares_2045_region(simulation_id: int) -> pd.DataFrame:
     return energy_shares.astype(float).mul(1e2)
 
 
-def electricity_demand_per_municipality_2045(pre_result_id: int) -> pd.DataFrame:
+def electricity_demand_per_municipality_2045(user_settings: dict) -> pd.DataFrame:
     """
     Calculate electricity demand per sector per municipality in GWh in 2045.
 
@@ -283,8 +283,7 @@ def electricity_demand_per_municipality_2045(pre_result_id: int) -> pd.DataFrame
         Electricity demand per municipality (index) and sector (column)
     """
     demand = electricity_demand_per_municipality(year=2022)
-    pre_results = models.PreResults.objects.get(pk=pre_result_id)
-    shares = [pre_results.parameters[key] / 100 for key in ("s_v_3", "s_v_4", "s_v_5")]
+    shares = [int(user_settings[key]) / 100 for key in ("s_v_3", "s_v_4", "s_v_5")]
     return demand.iloc[:] * shares
 
 
@@ -310,7 +309,7 @@ def heat_demand_per_municipality(year: int) -> pd.DataFrame:
     return demands_per_sector.astype(float) * 1e-3
 
 
-def heat_demand_per_municipality_2045(pre_result_id: int) -> pd.DataFrame:
+def heat_demand_per_municipality_2045(user_settings: dict) -> pd.DataFrame:
     """
     Calculate heat demand per sector per municipality in GWh in 2045.
 
@@ -320,8 +319,7 @@ def heat_demand_per_municipality_2045(pre_result_id: int) -> pd.DataFrame:
         Heat demand per municipality (index) and sector (column)
     """
     demand = heat_demand_per_municipality(year=2022)
-    pre_results = models.PreResults.objects.get(pk=pre_result_id)
-    shares = [pre_results.parameters[key] / 100 for key in ("w_v_3", "w_v_4", "w_v_5")]
+    shares = [int(user_settings[key]) / 100 for key in ("w_v_3", "w_v_4", "w_v_5")]
     return demand.iloc[:] * shares
 
 
