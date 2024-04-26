@@ -68,7 +68,7 @@
           {
             "yAxis": 1769,
             "label": {
-              "formatter": "Ziel Brandenburg 2030",
+              "formatter": "Leistungsziel Brandenburg 2030",
               "color": "#495e8a",
               "position": "insideStartTop"
             }
@@ -76,7 +76,7 @@
           {
             "yAxis": 2308,
             "label": {
-              "formatter": "Ziel Brandenburg 2040",
+              "formatter": "Leistungsziel Brandenburg 2040",
               "color": "#495e8a",
               "position": "insideStartTop"
             }
