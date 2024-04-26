@@ -1,12 +1,9 @@
 import { getCurrentMenuTab } from "./menu.js";
 import { detailSliders, panelSliders } from "./sliders.js";
 
-/* jshint ignore:start */
-/*globals scenarioSettings */
-const scenarioSettings = await fetch("/static/config/scenarios.json").then(
-  (response) => response.json(),
+const scenarioSettings = JSON.parse(
+  document.getElementById("scenario_settings").textContent,
 );
-/* jshint ignore:end */
 
 let currentScenario = null;
 //const scenarioPanels = ["panelCard1", "panelCard2", "panelCard3", "panelCard4"];

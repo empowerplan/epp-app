@@ -76,6 +76,7 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         ]
 
         context["settings_parameters"] = config.ENERGY_SETTINGS_PANEL
+        context["scenario_settings"] = config.SCENARIO_SETTINGS
 
         # Categorize sources
         categorized_sources = {
