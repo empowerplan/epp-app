@@ -41,6 +41,9 @@ const potentialWindLayers = [
 
 const pvMapControl = document.getElementsByClassName("map__layers-pv")[0];
 
+const sidepanelCloseButtons =
+  document.getElementsByClassName("sidepanel__close");
+
 // Setup
 
 $(".js-slider.js-slider-panel.js-power-mix").ionRangeSlider({
@@ -82,6 +85,12 @@ panelContainer.addEventListener("scroll", (e) => {
     "--scrollPosition",
     panelContainer.scrollTop + "px",
   );
+});
+
+Array.from(sidepanelCloseButtons).forEach((closeBtn) => {
+  closeBtn.addEventListener("click", (event) => {
+    closeSidepanel(event.target);
+  });
 });
 
 // Subscriptions
