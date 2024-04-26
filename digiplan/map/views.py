@@ -104,9 +104,19 @@ class MapGLView(TemplateView, views.MapEngineMixin):
             category="electricity",
         )
         context["results_heat"] = forms.ResultsBox("50,0 %", "...", category="heat")
-        context["results_wind"] = forms.ResultsBox(
-            "42,8 %",
-            "der Landesfläche für die <span>Windenergienutzung</span> in 2040",
+        context["results_wind_capacity"] = forms.ResultsBox(
+            "2000 MW",
+            "<span>Windleistung</span> werden installiert",
+            category="wind",
+        )
+        context["results_wind_area"] = forms.ResultsBox(
+            "2,5 %",
+            "der <span>Regionsfläche</span> werden für die Windenergie verwendet",
+            category="wind",
+        )
+        context["results_wind_demand_share"] = forms.ResultsBox(
+            "80 %",
+            "des <span>Strombedarfs</span> werden durch Windstrom gedeckt",
             category="wind",
         )
         context["results_pv"] = forms.ResultsBox(
