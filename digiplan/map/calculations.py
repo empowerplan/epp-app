@@ -3,7 +3,6 @@
 from typing import Optional
 
 import pandas as pd
-from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django_oemof.models import Simulation
 from django_oemof.results import get_results
@@ -112,32 +111,11 @@ def capacities_per_municipality() -> pd.DataFrame:
     return datapackage.get_capacities_from_datapackage()
 
 
-def capacities_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+def capacities_per_municipality_2045(parameters: dict) -> pd.DataFrame:
     """Calculate capacities from 2045 scenario per municipality."""
-    results = get_results(
-        simulation_id,
-        {
-            "capacities": Capacities,
-        },
-    )
-    renewables = results["capacities"][
-        results["capacities"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
-    ]
-    mapping = {
-        "ABW-solar-pv_ground": "pv_ground",
-        "ABW-solar-pv_rooftop": "pv_roof",
-        "ABW-wind-onshore": "wind",
-        "ABW-hydro-ror": "hydro",
-        "ABW-biomass": "biomass",
-    }
-    renewables.index = renewables.index.droplevel(1).map(mapping)
-    renewables = renewables.reindex(["wind", "pv_roof", "pv_ground", "hydro"])
-
-    parameters = Simulation.objects.get(pk=simulation_id).parameters
-    renewables = renewables * calculate_potential_shares(parameters)
-    renewables["bioenergy"] = 0.0
-    renewables["st"] = 0.0
-    return renewables.astype(float)
+    shares = calculate_potential_shares(parameters)
+    potential_capacities = datapackage.get_potential_values()  # in MW
+    return potential_capacities * shares
 
 
 def energies_per_municipality() -> pd.DataFrame:
@@ -471,61 +449,27 @@ def electricity_heat_demand(simulation_id: int) -> pd.Series:
     return electricity_for_heat_sum
 
 
-def calculate_potential_shares(parameters: dict) -> pd.DataFrame:
+def calculate_potential_shares(parameters: dict) -> dict[str, float]:
     """Calculate potential shares depending on user settings."""
-    # DISAGGREGATION
-    # Wind
-    wind_areas = pd.read_csv(
-        settings.DIGIPIPE_DIR.path("scalars").path("potentialarea_wind_area_stats_muns.csv"),
-        index_col=0,
-    )
-    if parameters["s_w_3"]:
-        wind_area_per_mun = wind_areas["stp_2018_vreg"]
-    elif parameters["s_w_4_1"]:
-        wind_area_per_mun = wind_areas["stp_2027_vr"]
-    elif parameters["s_w_4_2"]:
-        wind_area_per_mun = wind_areas["stp_2027_repowering"]
-    elif parameters["s_w_5"]:
-        wind_area_per_mun = (
-            wind_areas["stp_2027_search_area_open_area"] * parameters["s_w_5_1"] / 100
-            + wind_areas["stp_2027_search_area_forest_area"] * parameters["s_w_5_2"] / 100
+    shares = {}
+    if "wind_year" in parameters:
+        wind_year = parameters["wind_year"]
+        share = 1
+        if wind_year == "wind_2024":
+            share = float(parameters["id_s_w_6"]) / float(config.ENERGY_SETTINGS_PANEL["s_w_6"]["max"])
+        if wind_year == "wind_2027":
+            share = float(parameters["id_s_w_7"]) / 100
+        shares["wind"] = share
+    if "id_s_pv_ff_3" in parameters:
+        shares.update(
+            {
+                "pv_soil_quality_low": int(parameters["id_s_pv_ff_3"]) / 100,
+                "pv_soil_quality_medium": int(parameters["id_s_pv_ff_4"]) / 100,
+                "pv_permanent_crops": int(parameters["id_s_pv_ff_5"]) / 100,
+            },
         )
-    else:
-        msg = "No wind switch set"
-        raise KeyError(msg)
-    wind_share_per_mun = wind_area_per_mun / wind_area_per_mun.sum()
-
-    # PV ground
-    pv_ground_areas = pd.read_csv(
-        settings.DIGIPIPE_DIR.path("scalars").path("potentialarea_pv_ground_area_stats_muns.csv", index_col=0),
-    )
-    pv_ground_area_per_mun = (
-        pv_ground_areas["agriculture_lfa-off_region"] * parameters["s_pv_ff_3"] / 100
-        + pv_ground_areas["road_railway_region"] * parameters["s_pv_ff_4"] / 100
-    )
-    pv_ground_share_per_mun = pv_ground_area_per_mun / pv_ground_area_per_mun.sum()
-
-    # PV roof
-    pv_roof_areas = pd.read_csv(
-        settings.DIGIPIPE_DIR.path("scalars").path("potentialarea_pv_roof_area_stats_muns.csv"),
-        index_col=0,
-    )
-    pv_roof_area_per_mun = pv_roof_areas["installable_power_total"]
-    pv_roof_share_per_mun = pv_roof_area_per_mun / pv_roof_area_per_mun.sum()
-
-    # Hydro
-    hydro_areas = pd.read_csv(
-        settings.DIGIPIPE_DIR.path("scalars").path("bnetza_mastr_hydro_stats_muns.csv"),
-        index_col=0,
-    )
-    hydro_area_per_mun = hydro_areas["capacity_net"]
-    hydro_share_per_mun = hydro_area_per_mun / hydro_area_per_mun.sum()
-
-    shares = pd.concat(
-        [wind_share_per_mun, pv_roof_share_per_mun, pv_ground_share_per_mun, hydro_share_per_mun],
-        axis=1,
-    )
-    shares.columns = ["wind", "pv_roof", "pv_ground", "hydro"]
+    if "id_s_pv_d_3" in parameters:
+        shares["pv_roof"] = int(parameters["id_s_pv_d_3"]) / 100
     return shares
 
 

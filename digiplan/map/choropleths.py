@@ -134,7 +134,7 @@ class CapacityChoropleth(Choropleth):  # noqa: D101
 
 class Capacity2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> pd.DataFrame:  # noqa: D102
-        capacities = calculations.capacities_per_municipality_2045(self.map_state["simulation_id"]).sum(axis=1)
+        capacities = calculations.capacities_per_municipality_2045(self.map_state).sum(axis=1)
         return capacities.to_dict()
 
 

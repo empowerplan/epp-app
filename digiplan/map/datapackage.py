@@ -29,7 +29,7 @@ def get_data_from_sources(sources: Union[Source, list[Source]]) -> pd.DataFrame:
     for source_file, columns in source_files.items():
         source_path = Path(DIGIPIPE_DIR, "scalars", source_file)
         dfs.append(pd.read_csv(source_path, usecols=columns))
-    return pd.concat(dfs)
+    return pd.concat(dfs, axis=1)
 
 
 def get_employment() -> pd.DataFrame:
@@ -164,7 +164,7 @@ def get_thermal_efficiency(component: str) -> float:
 
 
 @cache_memoize(timeout=None)
-def get_potential_values() -> dict:
+def get_potential_values() -> pd.DataFrame:
     """
     Calculate max_values for sliders.
 
@@ -180,20 +180,16 @@ def get_potential_values() -> dict:
         "pv_permanent_crops": "pv_ground_elevated",
         "pv_roof": "pv_roof",
     }
-
     power_density = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "scalars/technology_data.json")))["power_density"]
-
-    potentials = {}
-    for key in areas:
-        if key.startswith("wind"):
-            potentials[key] = areas[key] * power_density["wind"]
-        if key.startswith("pv"):
-            potentials[key] = areas[key] * power_density[pv_density[key]]
-    return potentials
+    densities = [
+        power_density["wind"] if technology.startswith("wind") else power_density[pv_density[technology]]
+        for technology in areas
+    ]
+    return areas * densities
 
 
 @cache_memoize(timeout=None)
-def get_potential_areas(technology: Optional[str] = None) -> dict:
+def get_potential_areas(technology: Optional[str] = None) -> pd.DataFrame:
     """
     Return potential areas.
 
@@ -216,23 +212,20 @@ def get_potential_areas(technology: Optional[str] = None) -> dict:
         "pv_roof": Source("potentialarea_pv_roof_area_stats_muns.csv", "roof_area_pv_potential_sqkm"),
     }
 
+    column_mapping = {source.column: new_column for new_column, source in sources.items()}
+    column_mapping["wind_2027"] = "wind_2027"
+
     # Add wind for 2027 directly from model data, as it is not included in datapackage
-    areas = {
-        "wind_2027": area
-        if (area := models.Municipality.objects.all().values("area").aggregate(models.Sum("area"))["area__sum"])
-        else 0,
-    }
+    wind_2027 = pd.DataFrame(models.Municipality.objects.all().values("id", "area")).set_index("id")
+    wind_2027.columns = ["wind_2027"]
     if technology is not None:
         if technology == "wind_2027":
-            return areas["wind_2027"]
+            return wind_2027
         sources = {technology: sources[technology]}
 
-    data = get_data_from_sources(sources.values())
-    data = data.sum()
-    for index in data.index:
-        # Add extracted data to areas and map source columns to keys accordingly
-        areas[next(key for key, source in sources.items() if source.column == index)] = data[index]
-
+    areas = get_data_from_sources(sources.values())
+    areas = pd.concat([areas, wind_2027], axis=1)
+    areas.columns = [column_mapping[column] for column in areas.columns]
     if technology is not None:
         return areas[technology]
     return areas

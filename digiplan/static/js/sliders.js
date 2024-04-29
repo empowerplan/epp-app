@@ -410,22 +410,21 @@ function highlightPVMapControls(msg) {
 
 function adaptDetailKeyResults(msg, data) {
   const slider_id = data.input[0].id;
-  let technology;
+  let wind_year;
   let target;
   let url_data = {};
 
   if (slider_id === "id_s_w_6") {
-    technology = "wind_2024";
+    wind_year = "wind_2024";
     url_data.id_s_w_6 = data.from;
     target = "wind_key_results_2024";
   } else if (slider_id === "id_s_w_7") {
-    technology = "wind_2027";
+    wind_year = "wind_2027";
     url_data.id_s_w_7 = data.from;
     target = "wind_key_results_2027";
   } else if (
     ["id_s_pv_ff_3", "id_s_pv_ff_4", "id_s_pv_ff_5"].includes(slider_id)
   ) {
-    technology = "pv_ground";
     url_data.id_s_pv_ff_3 =
       $("#id_s_pv_ff_3").data("ionRangeSlider").result.from;
     url_data.id_s_pv_ff_4 =
@@ -434,7 +433,6 @@ function adaptDetailKeyResults(msg, data) {
       $("#id_s_pv_ff_5").data("ionRangeSlider").result.from;
     target = "pv_ground_key_results";
   } else if (slider_id === "id_s_pv_d_3") {
-    technology = "pv_roof";
     url_data.id_s_pv_d_3 = data.from;
     target = "pv_roof_key_results";
   } else {
@@ -442,7 +440,10 @@ function adaptDetailKeyResults(msg, data) {
   }
 
   const query = new URLSearchParams(url_data).toString();
-  let url = `/detail_key_results?technology=${technology}&${query}`;
+  let url = `/detail_key_results?${query}`;
+  if (wind_year !== undefined) {
+    url += "&wind_year=" + wind_year;
+  }
   fetch(url)
     .then((response) => {
       // Check if the response is successful
