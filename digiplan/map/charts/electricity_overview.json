@@ -1,17 +1,4 @@
 {
-  "brush": {
-    "toolbox": ["rect", "polygon", "lineX", "lineY", "keep", "clear"],
-    "xAxisIndex": 0
-  },
-  "toolbox": {
-    "feature": {
-      "magicType": {
-        "type": ["stack"]
-      },
-      "dataView": {}
-    }
-  },
-  "tooltip": {},
   "grid": {
     "top": "10%",
     "left": "3%",
@@ -20,7 +7,7 @@
     "containLabel": true
   },
   "yAxis": {
-    "data": ["Ziel 2045", "Dein Szenario", "2022"],
+    "data": ["Ziel Brandenburg 2040", "Ziel Brandenburg 2030", "Dein Szenario", "2023"],
     "axisLine": { "onZero": true },
     "splitLine": { "show": false },
     "splitArea": { "show": false }
@@ -49,7 +36,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [0, 0, 0]
+      "data": [0, 0, 0, 0]
     },
     {
       "name": "Freiflächen-PV",
@@ -62,7 +49,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [0, 0, 0]
+      "data": [0, 0, 0, 0]
     },
     {
       "name": "Aufdach-PV",
@@ -75,7 +62,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [0, 0, 0]
+      "data": [0, 0, 0, 0]
     },
     {
       "name": "Bioenergie",
@@ -88,7 +75,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [0, 0, 0]
+      "data": [0, 0, 0, 0]
     },
     {
       "name": "Wasserkraft",
@@ -102,7 +89,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [0, 0, 0]
+      "data": [0, 0, 0, 0]
     },
     {
       "name": "Verbrauch Haushalte",
@@ -116,7 +103,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [0, 0, 0]
+      "data": [0, 0, 0, 0]
     },
     {
       "name": "Verbrauch GHD",
@@ -129,7 +116,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [0, 0, 0]
+      "data": [0, 0, 0, 0]
     },
     {
       "name": "Verbrauch Industrie",
@@ -143,7 +130,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [0, 0, 0]
+      "data": [0, 0, 0, 0]
     },
     {
       "name": "Import*",
@@ -157,7 +144,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [0, 0, 0]
+      "data": [0, 0, 0, 0]
     },
     {
       "name": "Export*",
@@ -171,7 +158,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [0, 0, 0]
+      "data": [0, 0, 0, 0]
     }
   ]
 }
