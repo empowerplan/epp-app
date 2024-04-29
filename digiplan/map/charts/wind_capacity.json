@@ -17,7 +17,7 @@
   },
   "xAxis": {
     "type": "category",
-    "data": ["2010", "2015", "2020", "2023", "Dein\nSzenario"]
+    "data": ["2010", "2015", "2020", "2023", "Dein\nSzenario*"]
   },
   "yAxis": [
     {
@@ -100,7 +100,7 @@
         386,
         458,
         {
-          "value": 500,
+          "value": 308,
           "itemStyle": {
             "color": "#BAE1F6"
           }

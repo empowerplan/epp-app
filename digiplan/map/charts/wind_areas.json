@@ -17,7 +17,7 @@
   },
   "xAxis": {
     "type": "category",
-    "data": ["2018", "Entwurf 2024", "Dein\nSzenario"]
+    "data": ["Regionalplan\n2018", "Entwurf\n2024", "Dein\nSzenario*"]
   },
   "yAxis": [
     {
