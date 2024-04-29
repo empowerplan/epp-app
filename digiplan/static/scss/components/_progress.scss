@@ -1,0 +1,8 @@
+.progress {
+  .progress-bar {
+    @extend .progress-bar-striped;
+    @extend .progress-bar-animated;
+    @extend .bg-success;
+    background-color: rgba(74, 194, 157, var(--bs-bg-opacity)) !important;
+  }
+}

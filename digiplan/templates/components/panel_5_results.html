@@ -2,6 +2,17 @@
 
 <div class="panel__settings panel__settings--padding">
   <div class="panel-item">
+    <div class="panel-item__calc-alert">
+      <div class="panel-item__calc-alert-message">{% translate "Detailergebnisse werden berechnet" %}</div>
+      <div class="panel-item__calc-alert-explanation">
+        <button type="button" class="btn btn-link btn-sm" data-bs-toggle="tooltip" data-bs-placement="right" title="Text hinzufügen">
+          {% translate "Warum?" %}
+        </button>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%"></div>
+      </div>
+    </div>
     <div class="panel-item__form">
       <select id="result_views" class="form-select" aria-label="Default select example">
         <option value="" title="{% translate "Keine Auswahl" %}" selected>{% translate "Keine Auswahl" %}</option>
