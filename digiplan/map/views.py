@@ -103,9 +103,19 @@ class MapGLView(TemplateView, views.MapEngineMixin):
 
         # TODO(Hendrik Huyskens): Replace result boxes with results after simulation run
         # https://github.com/empowerplan/epp-app/issues/34
-        context["results_electricity"] = forms.ResultsBox(
-            "82,8 %",
-            "des <span>Stroms</span> aus erneuerbaren Quellen in 2040",
+        context["results_electricity_energy"] = forms.ResultsBox(
+            "4 TWh",
+            "<span>Strom</span> werden aus Wind und Photovoltaik erzeugt",
+            category="electricity",
+        )
+        context["results_electricity_autarky"] = forms.ResultsBox(
+            "50 %",
+            "<span>der Zeit wird der Strombedarf</span> komplett aus regionalen erneuerbaren Quellen gedeckt",
+            category="electricity",
+        )
+        context["results_electricity_area"] = forms.ResultsBox(
+            "4 %",
+            "der <span>Regionsfläche</span> werden für Windenergie und Photovoltaik verwendet",
             category="electricity",
         )
         context["results_heat"] = forms.ResultsBox("50,0 %", "...", category="heat")
