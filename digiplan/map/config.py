@@ -81,11 +81,16 @@ def get_slider_marks() -> dict:
                 slider_marks[param_name].append(("Heute", param_data["status_quo"]))
             else:
                 slider_marks[param_name] = [("Heute", param_data["status_quo"])]
-        if "future_scenario" in param_data:
+        if "future_scenario_2030" in param_data:
             if param_name in slider_marks:
-                slider_marks[param_name].append(("BB2040", param_data["future_scenario"]))
+                slider_marks[param_name].append(("BB2030", param_data["future_scenario_2030"]))
             else:
-                slider_marks[param_name] = [("BB2040", param_data["future_scenario"])]
+                slider_marks[param_name] = [("BB2030", param_data["future_scenario_2030"])]
+        if "future_scenario_2040" in param_data:
+            if param_name in slider_marks:
+                slider_marks[param_name].append(("BB2040", param_data["future_scenario_2040"]))
+            else:
+                slider_marks[param_name] = [("BB2040", param_data["future_scenario_2040"])]
     return slider_marks
 
 
