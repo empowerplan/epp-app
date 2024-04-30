@@ -84,7 +84,7 @@ class EnergyShareChoropleth(Choropleth):  # noqa: D101
 
 class EnergyShare2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return calculations.energy_shares_2045_per_municipality(self.map_state["simulation_id"]).sum(axis=1).to_dict()
+        return calculations.energy_shares_2045_per_municipality(self.map_state).sum(axis=1).to_dict()
 
 
 class EnergyChoropleth(Choropleth):  # noqa: D101

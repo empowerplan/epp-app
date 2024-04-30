@@ -519,7 +519,7 @@ class EnergyShareRegionChart(Chart):
         return chart_options
 
 
-class EnergyShare2045RegionChart(SimulationChart):
+class EnergyShare2045RegionChart(PreResultsChart):
     """Chart for regional energy shares."""
 
     lookup = "capacity"
@@ -527,7 +527,7 @@ class EnergyShare2045RegionChart(SimulationChart):
     def get_chart_data(self) -> None:
         """Calculate RES energy shares for whole region."""
         status_quo_data = calculations.energy_shares_region().round(1)
-        future_data = calculations.energy_shares_2045_region(self.simulation_id).round(1)
+        future_data = calculations.energy_shares_2045_region(self.user_settings).round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
