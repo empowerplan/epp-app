@@ -140,7 +140,7 @@ class Capacity2045Choropleth(Choropleth):  # noqa: D101
 
 class CapacitySquare2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        capacities = calculations.capacities_per_municipality_2045(self.map_state["simulation_id"])
+        capacities = calculations.capacities_per_municipality_2045(self.map_state)
         capacities_per_square = calculations.calculate_square_for_value(capacities)
         return capacities_per_square.sum(axis=1).to_dict()
 
