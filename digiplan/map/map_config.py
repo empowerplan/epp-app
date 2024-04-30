@@ -17,57 +17,81 @@ class SymbolLegendLayer(legend.LegendLayer):
 LEGEND = {
     _("Renewables"): [
         SymbolLegendLayer(
-            _("Wind turbine"),
-            _("Windenergieanlagen"),
+            _("Windenergie"),
+            _(
+                "Windenergieanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
+                "Marktstammdatenregister",
+            ),
             layer_id="wind",
             color="#6A89CC",
             symbol="circle",
         ),
         SymbolLegendLayer(
-            _("Roof-mounted PV"),
-            _("PV-Aufdachanlagen"),
+            _("Aufdach-PV"),
+            _(
+                "PV-Aufdachanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
+                "Marktstammdatenregister",
+            ),
             layer_id="pvroof",
             color="#FFD660",
             symbol="circle",
         ),
         SymbolLegendLayer(
-            _("Ground-mounted PV"),
-            _("PV-Freiflächenanlagen"),
+            _("Freiflächen-PV (Punkte)"),
+            _(
+                "PV-Freiflächenanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
+                "Marktstammdatenregister",
+            ),
             layer_id="pvground",
             color="#EFAD25",
             symbol="circle",
         ),
         SymbolLegendLayer(
-            _("Hydro"),
-            _("Wasserkraftanlagen"),
+            _("Wasserkraft"),
+            _(
+                "Wasserkraftanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
+                "Marktstammdatenregister",
+            ),
             layer_id="hydro",
             color="#A9BDE8",
             symbol="circle",
         ),
         SymbolLegendLayer(
-            _("Biomass"),
-            _("Biomasseanlagen"),
+            _("Biomasse"),
+            _(
+                "Biomasseanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
+                "Marktstammdatenregister",
+            ),
             layer_id="biomass",
             color="#52C41A",
             symbol="circle",
         ),
         SymbolLegendLayer(
-            _("Combustion"),
-            _("Verbrennungskraftwerke"),
+            _("Verbrennungskraftwerk"),
+            _(
+                "Verbrennungskraftwerke - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
+                "Marktstammdatenregister",
+            ),
             layer_id="combustion",
             color="#E6772E",
             symbol="circle",
         ),
         SymbolLegendLayer(
-            _("GSGK"),
             _("Geo- oder Solarthermie-, Grubengas- und Klärschlamm-Anlagen"),
+            _(
+                "Geo- oder Solarthermie-, Grubengas- und Klärschlamm-Anlagen - Punktdaten realisierter oder in "
+                "Betrieb befindlicher Anlagen aus dem Marktstammdatenregister",
+            ),
             layer_id="gsgk",
             color="#C27BA0",
             symbol="circle",
         ),
         SymbolLegendLayer(
             _("Batteriespeicher"),
-            _("Batteriespeicher"),
+            _(
+                "Batteriespeicher - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
+                "Marktstammdatenregister",
+            ),
             layer_id="storage",
             color="#8D2D5F",
             symbol="circle",
