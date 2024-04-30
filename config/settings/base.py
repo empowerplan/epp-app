@@ -346,7 +346,9 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("priority_climate_resistent_agri", "map", "PriorityClimateResistentAgri"),
         setup.MVTAPI("priority_permanent_crops", "map", "PriorityPermanentCrops"),
         setup.MVTAPI("priority_grassland", "map", "PriorityGrassland"),
-        setup.MVTAPI("rpg_ols_pv_ground_all", "map", "PVgroundAreas"),
+        setup.MVTAPI("rpg_ols_pv_ground_approved", "map", "PVgroundAreasApproved"),
+        setup.MVTAPI("rpg_ols_pv_ground_operating", "map", "PVgroundAreasOperating"),
+        setup.MVTAPI("rpg_ols_pv_ground_planned", "map", "PVgroundAreasPlanned"),
     ],
     "results": [setup.MVTAPI("results", "map", "Municipality")],
 }

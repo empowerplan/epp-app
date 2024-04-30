@@ -231,10 +231,24 @@
       "text-size": 12
     }
   },
-  "rpg_ols_pv_ground_all": {
+  "rpg_ols_pv_ground_operating": {
     "type": "fill",
     "paint": {
-      "fill-color": "#EFAD25",
+      "fill-color": "#ff0000",
+      "fill-opacity": 0.8
+    }
+  },
+  "rpg_ols_pv_ground_approved": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#00ff00",
+      "fill-opacity": 0.8
+    }
+  },
+  "rpg_ols_pv_ground_planned": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#0000ff",
       "fill-opacity": 0.8
     }
   },

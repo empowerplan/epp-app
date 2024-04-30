@@ -724,9 +724,6 @@ class PVgroundAreas(StaticRegionModel):
 
     mun_id = models.ForeignKey(Municipality, on_delete=models.DO_NOTHING, null=True)
 
-    data_file = "rpg_ols_pv_ground_all"
-    layer = "rpg_ols_pv_ground_all"
-
     mapping = {
         "geom": "MULTIPOLYGON",
         "name": "name",
@@ -741,5 +738,64 @@ class PVgroundAreas(StaticRegionModel):
     }
 
     class Meta:  # noqa: D106
-        verbose_name = _("Ground-mounted PV Area")
-        verbose_name_plural = _("Ground-mounted PV Areas")
+        abstract = True
+
+
+class PVgroundAreasApprovedModelManager(models.Manager):
+    """Manager for PV ground (dataset by RPG with areas): Approved units."""
+
+    def get_queryset(self):
+        return super().get_queryset().filter(status="genehmigt")
+
+
+class PVgroundAreasApproved(PVgroundAreas):
+    """Model holding PV on ground (dataset by RPG with areas): Approved units."""
+
+    objects = PVgroundAreasApprovedModelManager()
+
+    data_file = "rpg_ols_pv_ground_approved"
+    layer = "rpg_ols_pv_ground_approved"
+
+    class Meta:  # noqa: D106
+        verbose_name = _("Ground-mounted PV units (approved)")
+        verbose_name_plural = _("Ground-mounted PV units (approved)")
+
+
+class PVgroundAreasOperatingModelManager(models.Manager):
+    """Manager for PV ground (dataset by RPG with areas): Operating units."""
+
+    def get_queryset(self):
+        return super().get_queryset().filter(status="realisiert")
+
+
+class PVgroundAreasOperating(PVgroundAreas):
+    """Model holding PV on ground (dataset by RPG with areas): Operating units."""
+
+    objects = PVgroundAreasOperatingModelManager()
+
+    data_file = "rpg_ols_pv_ground_operating"
+    layer = "rpg_ols_pv_ground_operating"
+
+    class Meta:  # noqa: D106
+        verbose_name = _("Ground-mounted PV units (operating)")
+        verbose_name_plural = _("Ground-mounted PV units (operating)")
+
+
+class PVgroundAreasPlannedModelManager(models.Manager):
+    """Manager for PV ground (dataset by RPG with areas): Planned units."""
+
+    def get_queryset(self):
+        return super().get_queryset().filter(status="Planung")
+
+
+class PVgroundAreasPlanned(PVgroundAreas):
+    """Model holding PV on ground (dataset by RPG with areas): Planned units."""
+
+    objects = PVgroundAreasPlannedModelManager()
+
+    data_file = "rpg_ols_pv_ground_planned"
+    layer = "rpg_ols_pv_ground_planned"
+
+    class Meta:  # noqa: D106
+        verbose_name = _("Ground-mounted PV units (planned)")
+        verbose_name_plural = _("Ground-mounted PV units (planned)")

@@ -37,17 +37,24 @@ LEGEND = {
             symbol="circle",
         ),
         legend.LegendLayer(
-            _("Freiflächen-PV (Flächen)"),
-            _(
-                "PV-Freiflächenanlagen - Flächendaten geplanter, genehmigter oder in Betrieb befindlicher Anlagen der "
-                "Regionalen Planungsstelle",
-            ),
-            layer_id="rpg_ols_pv_ground_all",
+            _("Freiflächen-PV (in Betrieb)"),
+            _("PV-Freiflächenanlagen - Flächendaten in Betrieb befindlicher Anlagen der Regionalen Planungsstelle"),
+            layer_id="rpg_ols_pv_ground_operating",
+        ),
+        legend.LegendLayer(
+            _("Freiflächen-PV (genehmigt)"),
+            _("PV-Freiflächenanlagen - Flächendaten genehmigter Anlagen der Regionalen Planungsstelle"),
+            layer_id="rpg_ols_pv_ground_approved",
+        ),
+        legend.LegendLayer(
+            _("Freiflächen-PV (geplant)"),
+            _("PV-Freiflächenanlagen - Flächendaten geplanter Anlagen der Regionalen Planungsstelle"),
+            layer_id="rpg_ols_pv_ground_planned",
         ),
         SymbolLegendLayer(
-            _("Freiflächen-PV (Punkte)"),
+            _("Freiflächen-PV (MaStR)"),
             _(
-                "PV-Freiflächenanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
+                "PV-Freiflächenanlagen - Punktdaten in Betrieb befindlicher oder geplanter Anlagen aus dem "
                 "Marktstammdatenregister",
             ),
             layer_id="pvground",
