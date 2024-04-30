@@ -54,6 +54,7 @@ MODELS = [
     models.SpecialProtectionArea,
     models.WaterBodies,
     models.WaterFirstOrder,
+    models.PVgroundAreas,
     # PotentialAreas
     models.PotentialareaPVGroundSoilQualityLow,
     models.PotentialareaPVGroundSoilQualityMedium,

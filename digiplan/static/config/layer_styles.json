@@ -231,6 +231,13 @@
       "text-size": 12
     }
   },
+  "rpg_ols_pv_ground_all": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#EFAD25",
+      "fill-opacity": 0.8
+    }
+  },
   "hydro": {
     "type": "symbol",
     "filter": ["!", ["has", "point_count"]],

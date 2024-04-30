@@ -708,3 +708,38 @@ class PotentialAreaWindSTP2018EG(StaticRegionModel):  # noqa: D101
 class PotentialAreaWindSTP2024VR(StaticRegionModel):  # noqa: D101
     data_file = "potentialarea_wind_stp_2024_vr"
     layer = "potentialarea_wind_stp_2024_vr"
+
+
+class PVgroundAreas(StaticRegionModel):
+    """Model holding PV on ground (dataset by RPG with areas)."""
+
+    name = models.CharField(max_length=255, null=True)
+    plan_type = models.CharField(max_length=255, null=True)
+    plan_status = models.CharField(max_length=255, null=True)
+    status = models.CharField(max_length=10, null=True)
+    capacity_net = models.FloatField(null=True)
+    year = models.BigIntegerField(null=True)
+    construction_start_date = models.CharField(max_length=10, null=True)
+    construction_end_date = models.CharField(max_length=10, null=True)
+
+    mun_id = models.ForeignKey(Municipality, on_delete=models.DO_NOTHING, null=True)
+
+    data_file = "rpg_ols_pv_ground_all"
+    layer = "rpg_ols_pv_ground_all"
+
+    mapping = {
+        "geom": "MULTIPOLYGON",
+        "name": "name",
+        "plan_type": "plan_type",
+        "plan_status": "plan_status",
+        "status": "status",
+        "capacity_net": "capacity_net",
+        "year": "year",
+        "construction_start_date": "construction_start_date",
+        "construction_end_date": "construction_end_date",
+        "mun_id": {"id": "municipality_id"},
+    }
+
+    class Meta:  # noqa: D106
+        verbose_name = _("Ground-mounted PV Area")
+        verbose_name_plural = _("Ground-mounted PV Areas")

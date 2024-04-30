@@ -36,6 +36,14 @@ LEGEND = {
             color="#FFD660",
             symbol="circle",
         ),
+        legend.LegendLayer(
+            _("Freiflächen-PV (Flächen)"),
+            _(
+                "PV-Freiflächenanlagen - Flächendaten geplanter, genehmigter oder in Betrieb befindlicher Anlagen der "
+                "Regionalen Planungsstelle",
+            ),
+            layer_id="rpg_ols_pv_ground_all",
+        ),
         SymbolLegendLayer(
             _("Freiflächen-PV (Punkte)"),
             _(
