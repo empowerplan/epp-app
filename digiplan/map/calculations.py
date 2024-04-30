@@ -132,6 +132,12 @@ def capacities_per_municipality_2045(parameters: dict) -> pd.DataFrame:
     potential_capacities["pv_ground"] = potential_capacities[pv_ground_columns].sum(axis=1)
     potential_capacities = potential_capacities.drop(pv_ground_columns, axis=1)
 
+    # Set biomass potential to zero
+    potential_capacities["biomass"] = 0
+
+    # Correct order (for charts)
+    potential_capacities = potential_capacities[["wind", "pv_roof", "pv_ground", "hydro", "biomass"]]
+
     return potential_capacities
 
 
@@ -487,6 +493,8 @@ def calculate_potential_shares(parameters: dict) -> dict[str, float]:
         )
     if "s_pv_d_3" in parameters:
         shares["pv_roof"] = int(parameters["s_pv_d_3"]) / 100
+    if "s_h_1" in parameters:
+        shares["hydro"] = int(parameters["s_h_1"]) / 100
     return shares
 
 

@@ -389,7 +389,7 @@ class CapacityRegionChart(Chart):
         return chart_options
 
 
-class Capacity2045RegionChart(SimulationChart):
+class Capacity2045RegionChart(PreResultsChart):
     """Chart for regional capacities in 2045."""
 
     lookup = "capacity"
@@ -397,7 +397,7 @@ class Capacity2045RegionChart(SimulationChart):
     def get_chart_data(self) -> list:
         """Calculate capacities for whole region."""
         status_quo_data = calculations.capacities_per_municipality().sum().round(1)
-        future_data = calculations.capacities_per_municipality_2045(self.simulation_id).sum().astype(float).round(1)
+        future_data = calculations.capacities_per_municipality_2045(self.user_settings).sum().astype(float).round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -431,7 +431,7 @@ class CapacitySquareRegionChart(Chart):
         return chart_options
 
 
-class CapacitySquare2045RegionChart(SimulationChart):
+class CapacitySquare2045RegionChart(PreResultsChart):
     """Chart for regional capacities in 2045."""
 
     lookup = "capacity"
@@ -447,7 +447,7 @@ class CapacitySquare2045RegionChart(SimulationChart):
         )
         future_data = (
             calculations.calculate_square_for_value(
-                pd.DataFrame(calculations.capacities_per_municipality_2045(self.simulation_id).sum()).transpose(),
+                pd.DataFrame(calculations.capacities_per_municipality_2045(self.user_settings).sum()).transpose(),
             )
             .sum()
             .astype(float)

@@ -185,7 +185,10 @@ def get_potential_values() -> pd.DataFrame:
         power_density["wind"] if technology.startswith("wind") else power_density[pv_density[technology]]
         for technology in areas
     ]
-    return areas * densities
+    hydro = get_data_from_sources(Source("bnetza_mastr_hydro_stats_muns.csv", "capacity_net"))
+    potential_values = areas * densities
+    potential_values["hydro"] = hydro
+    return potential_values
 
 
 @cache_memoize(timeout=None)

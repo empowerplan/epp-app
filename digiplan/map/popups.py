@@ -228,7 +228,7 @@ class Capacity2045Popup(RegionPopup):
     title = "Installierte Leistung EE"
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.capacities_per_municipality_2045(self.map_state["simulation_id"])
+        return calculations.capacities_per_municipality_2045(self.map_state)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -270,7 +270,7 @@ class CapacitySquare2045Popup(RegionPopup):
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
         return calculations.calculate_square_for_value(
-            calculations.capacities_per_municipality_2045(self.map_state["simulation_id"]),
+            calculations.capacities_per_municipality_2045(self.map_state),
         )
 
     def get_chart_options(self) -> dict:
