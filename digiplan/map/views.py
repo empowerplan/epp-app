@@ -203,4 +203,8 @@ class DetailKeyResultsView(TemplateView):
 
     def get_context_data(self, **kwargs) -> dict:  # noqa: ARG002
         """Get detail key results for requested technology."""
-        return {f"key_result_{key}": value for key, value in menu.detail_key_results(**self.request.GET.dict()).items()}
+        # Cut off leading "id_" from form field id
+        parameters = {
+            key[3:] if key.startswith("id_") else key: value for key, value in self.request.GET.dict().items()
+        }
+        return {f"key_result_{key}": value for key, value in menu.detail_key_results(**parameters).items()}

@@ -19,7 +19,7 @@ def detail_key_results(**kwargs: dict) -> dict:
             "turbines": potential_capacities[wind_year] / nominal_power_per_unit * share,
             "energy": potential_capacities[wind_year] * full_load_hours["wind"] * share * 1e-6,
         }
-    if "id_s_pv_ff_3" in kwargs:
+    if "s_pv_ff_3" in kwargs:
         flh_mapping = {
             "pv_soil_quality_low": "pv_ground",
             "pv_soil_quality_medium": "pv_ground_vertical_bifacial",
@@ -33,7 +33,7 @@ def detail_key_results(**kwargs: dict) -> dict:
             )
             * 1e-6,
         }
-    if "id_s_pv_d_3" in kwargs:
+    if "s_pv_d_3" in kwargs:
         return {
             "area": areas["pv_roof"] * 100 * shares["pv_roof"],
             "energy": potential_capacities["pv_roof"] * full_load_hours["pv_roof"] * shares["pv_roof"] * 1e-6,

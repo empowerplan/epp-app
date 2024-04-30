@@ -134,15 +134,15 @@ class EnergyPanelForm(PanelForm):  # noqa: D101
             # get initial slider values for wind and pv:
             key_results[wind_year] = menu.detail_key_results(
                 wind_year=wind_year,
-                id_s_w_6=parameters["s_w_6"]["start"],
-                id_s_w_7=parameters["s_w_7"]["start"],
+                s_w_6=parameters["s_w_6"]["start"],
+                s_w_7=parameters["s_w_7"]["start"],
             )
         key_results["pv_ground"] = menu.detail_key_results(
-            id_s_pv_ff_3=parameters["s_pv_ff_3"]["start"],
-            id_s_pv_ff_4=parameters["s_pv_ff_4"]["start"],
-            id_s_pv_ff_5=parameters["s_pv_ff_5"]["start"],
+            s_pv_ff_3=parameters["s_pv_ff_3"]["start"],
+            s_pv_ff_4=parameters["s_pv_ff_4"]["start"],
+            s_pv_ff_5=parameters["s_pv_ff_5"]["start"],
         )
-        key_results["pv_roof"] = menu.detail_key_results(id_s_pv_d_3=parameters["s_pv_d_3"]["start"])
+        key_results["pv_roof"] = menu.detail_key_results(s_pv_d_3=parameters["s_pv_d_3"]["start"])
         for technology, key_result in key_results.items():
             for key, value in key_result.items():
                 self.extra_content[f"{technology}_key_result_{key}"] = value
