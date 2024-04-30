@@ -1,4 +1,9 @@
 import { getCurrentMenuTab } from "./menu.js";
+import { detailSliders, panelSliders } from "./sliders.js";
+
+const scenarioSettings = JSON.parse(
+  document.getElementById("scenario_settings").textContent,
+);
 
 let currentScenario = null;
 //const scenarioPanels = ["panelCard1", "panelCard2", "panelCard3", "panelCard4"];
@@ -36,8 +41,9 @@ function selectScenario(msg) {
   const selectedPanel = document.getElementsByClassName(
     "panel-card--selected",
   )[0].id;
-  // Set current scenario and enable next button
+  // Set current scenario and enable next button (outputs 1, 2 or 3)
   currentScenario = parseInt(selectedPanel.slice(-1));
+  adaptSlidersScenario(msg, currentScenario);
 
   // Style all scenario buttons according to current selection
   Array.from(document.getElementsByClassName("scenarios")).forEach(
@@ -82,7 +88,7 @@ function selectScenarioCard(scenarioCardNumber) {
   <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
 </svg>`;
 
-  for (let i = 1; i <= 4; i++) {
+  for (let i = 1; i <= 3; i++) {
     const card = document.getElementById("panelCard" + i);
     const selectedScenario = document.getElementById("selectedScenario" + i);
     const arrowIcon = card.querySelector(".arrow-icon");
@@ -102,4 +108,46 @@ function selectScenarioCard(scenarioCardNumber) {
       arrowIcon.innerHTML = rightArrowSVG;
     }
   }
+}
+
+/**
+ * Adapt detail and main sliders depending on scenario selection
+ * @param {string} msg Publisher message
+ * @param {string} scenario Name of scenario
+ */
+function adaptSlidersScenario(msg, scenario) {
+  if (scenarioSettings[scenario].hasOwnProperty("windTab")) {
+    // Manually activate/initialize a tab for chosen scenario
+    const scenarioTab = scenarioSettings[scenario].windTab;
+    const triggerEl = document.getElementById(scenarioTab);
+    if (triggerEl) {
+      const tabTrigger = new bootstrap.Tab(triggerEl);
+      tabTrigger.show();
+    }
+  }
+  // Update DetailSliders first
+  for (const slider of detailSliders) {
+    // Check if the slider is defined in scenario settings
+    if (!scenarioSettings[scenario].hasOwnProperty(slider.id)) {
+      continue;
+    }
+    const sliderValue = scenarioSettings[scenario][slider.id];
+    $(`#${slider.id}`).data("ionRangeSlider").update({ from: sliderValue });
+    const data = {
+      input: [{ id: slider.id }],
+      from: sliderValue,
+    };
+    PubSub.publish(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, data);
+  }
+  // update main panel Sliders afterwards
+  for (const slider of panelSliders) {
+    // Check if the slider is defined in scenario settings
+    if (!scenarioSettings[scenario].hasOwnProperty(slider.id)) {
+      continue;
+    }
+    const sliderValue = scenarioSettings[scenario][slider.id];
+    $(`#${slider.id}`).data("ionRangeSlider").update({ from: sliderValue });
+  }
+  PubSub.publish(eventTopics.POWER_PANEL_SLIDER_CHANGE);
+  return logMessage(msg);
 }

@@ -1,4 +1,5 @@
-{%  load i18n %}
+{% load static %}
+{% load i18n %}
 
 <div class="view-toggle" hidden>
   <ul class="view-toggle__nav-tabs nav nav-tabs" id="myTab" role="tablist">
@@ -23,6 +24,7 @@
 <div class="tab-content" id="mainTabContent" hidden>
   <div class="map tab-pane fade show active" id="map-view" role="tabpanel" aria-labelledby="map-view-tab">
     {% include './layer_box.html' %}
+    {% include 'django_mapengine/map_basemaps.html' %}
     {% include 'django_mapengine/map.html' %}
   </div>
   <div class="results tab-pane fade" id="chart-view" role="tabpanel" aria-labelledby="chart-view-tab">
