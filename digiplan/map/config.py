@@ -120,7 +120,7 @@ if "migrate" not in sys.argv:
     STORE_COLD_INIT = {
         "version": __version__,
         "slider_marks": get_slider_marks(),
-        "potentials": datapackage.get_potential_values(),
+        "potentials": datapackage.get_potential_values().sum().to_dict(),
         "slider_per_sector": get_slider_per_sector(),
         "allowedSwitches": ["wind_distance"],
         "detailTab": {"showPotentialLayers": True},

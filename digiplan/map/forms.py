@@ -4,7 +4,15 @@ from __future__ import annotations
 from itertools import count
 from typing import TYPE_CHECKING
 
-from django.forms import BooleanField, Form, IntegerField, TextInput, renderers
+from django.forms import (
+    BooleanField,
+    CharField,
+    FloatField,
+    Form,
+    HiddenInput,
+    TextInput,
+    renderers,
+)
 from django.shortcuts import reverse
 from django.utils.safestring import mark_safe
 
@@ -60,7 +68,9 @@ class StaticLayerForm(TemplateForm):  # noqa: D101
 class PanelForm(TemplateForm):  # noqa: D101
     def __init__(self, parameters, additional_parameters=None, **kwargs) -> None:  # noqa: D107, ANN001
         super().__init__(**kwargs)
-        self.fields = {item["name"]: item["field"] for item in self.generate_fields(parameters, additional_parameters)}
+        self.fields.update(
+            {item["name"]: item["field"] for item in self.generate_fields(parameters, additional_parameters)},
+        )
 
     def get_field_attrs(self, name: str, parameters: dict) -> dict:  # noqa: ARG002
         """Set up field attributes from parameters."""
@@ -89,7 +99,7 @@ class PanelForm(TemplateForm):  # noqa: D101
             charts.merge_dicts(parameters, additional_parameters)
         for name, item in parameters.items():
             if item["type"] == "slider":
-                field = IntegerField(
+                field = FloatField(
                     label=item["label"],
                     widget=TextInput(attrs=self.get_field_attrs(name, item)),
                     help_text=item["tooltip"],
@@ -114,21 +124,27 @@ class PanelForm(TemplateForm):  # noqa: D101
 class EnergyPanelForm(PanelForm):  # noqa: D101
     template_name = "forms/panel_energy.html"
 
+    wind_year = CharField(initial="wind_2024", max_length=9, widget=HiddenInput)
+
     def __init__(self, parameters, additional_parameters=None, **kwargs) -> None:  # noqa: ANN001
         """Overwrite init function to add initial key results for detail panels."""
         super().__init__(parameters, additional_parameters, **kwargs)
-        for technology in ("wind_2018", "wind_2024", "wind_2027", "pv_ground", "pv_roof"):
+        key_results = {}
+        for wind_year in ("wind_2018", "wind_2024", "wind_2027"):
             # get initial slider values for wind and pv:
-            key_results = menu.detail_key_results(
-                technology,
-                id_s_w_6=parameters["s_w_6"]["start"],
-                id_s_w_7=parameters["s_w_7"]["start"],
-                id_s_pv_ff_3=parameters["s_pv_ff_3"]["start"],
-                id_s_pv_ff_4=parameters["s_pv_ff_4"]["start"],
-                id_s_pv_ff_5=parameters["s_pv_ff_5"]["start"],
-                id_s_pv_d_3=parameters["s_pv_d_3"]["start"],
+            key_results[wind_year] = menu.detail_key_results(
+                wind_year=wind_year,
+                s_w_6=parameters["s_w_6"]["start"],
+                s_w_7=parameters["s_w_7"]["start"],
             )
-            for key, value in key_results.items():
+        key_results["pv_ground"] = menu.detail_key_results(
+            s_pv_ff_3=parameters["s_pv_ff_3"]["start"],
+            s_pv_ff_4=parameters["s_pv_ff_4"]["start"],
+            s_pv_ff_5=parameters["s_pv_ff_5"]["start"],
+        )
+        key_results["pv_roof"] = menu.detail_key_results(s_pv_d_3=parameters["s_pv_d_3"]["start"])
+        for technology, key_result in key_results.items():
+            for key, value in key_result.items():
                 self.extra_content[f"{technology}_key_result_{key}"] = value
 
     def get_field_attrs(self, name: str, parameters: dict) -> dict:
