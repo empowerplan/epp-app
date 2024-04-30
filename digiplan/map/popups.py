@@ -585,7 +585,7 @@ class NumberWindturbines2045Popup(RegionPopup):
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return quantity of wind turbines per municipality (index)."""
-        return calculations.wind_turbines_per_municipality_2045(self.map_state["simulation_id"])
+        return calculations.wind_turbines_per_municipality_2045(self.map_state)
 
     def get_region_value(self) -> float:
         """Return aggregated data of all municipalities and technologies."""
@@ -641,7 +641,7 @@ class NumberWindturbinesSquare2045Popup(RegionPopup):
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return quantity of wind turbines per municipality (index)."""
-        wind_turbines = calculations.wind_turbines_per_municipality_2045(self.map_state["simulation_id"])
+        wind_turbines = calculations.wind_turbines_per_municipality_2045(self.map_state)
         return calculations.calculate_square_for_value(wind_turbines)
 
     def get_region_value(self) -> float:

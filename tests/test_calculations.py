@@ -174,11 +174,11 @@ class Capacities2045Test(SimulationTest):
         calculations.capacities_per_municipality_2045(self.parameters)
 
 
-class WindTurbines2045Test(SimulationTest):
+class WindTurbines2045Test(PreResultTest):
     """Test wind turbine calculation."""
 
     def test_wind_turbines_2045(self):  # noqa: D102
-        result = calculations.wind_turbines_per_municipality_2045(self.simulation_id)
+        result = calculations.wind_turbines_per_municipality_2045(self.parameters)
         assert len(result) == 20
 
 

@@ -396,9 +396,9 @@ def electricity_from_from_biomass(simulation_id: int) -> pd.Series:
     return biomass.sum()
 
 
-def wind_turbines_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+def wind_turbines_per_municipality_2045(parameters: dict) -> pd.DataFrame:
     """Calculate number of wind turbines from 2045 scenario per municipality."""
-    capacities = capacities_per_municipality_2045(simulation_id)
+    capacities = capacities_per_municipality_2045(parameters)
     return capacities["wind"] / config.TECHNOLOGY_DATA["nominal_power_per_unit"]["wind"]
 
 

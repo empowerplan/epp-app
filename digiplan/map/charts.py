@@ -667,7 +667,7 @@ class WindTurbinesRegionChart(Chart):
         return chart_options
 
 
-class WindTurbines2045RegionChart(SimulationChart):
+class WindTurbines2045RegionChart(PreResultsChart):
     """Chart for regional wind turbines in 2045."""
 
     lookup = "wind_turbines"
@@ -675,7 +675,7 @@ class WindTurbines2045RegionChart(SimulationChart):
     def get_chart_data(self) -> list[int]:
         """Calculate population for whole region."""
         status_quo_data = models.WindTurbine.quantity_per_municipality().sum()
-        future_data = calculations.wind_turbines_per_municipality_2045(self.simulation_id).sum()
+        future_data = calculations.wind_turbines_per_municipality_2045(self.user_settings).sum()
         return [int(status_quo_data), int(future_data)]
 
     def get_chart_options(self) -> dict:
@@ -711,7 +711,7 @@ class WindTurbinesSquareRegionChart(Chart):
         return chart_options
 
 
-class WindTurbinesSquare2045RegionChart(SimulationChart):
+class WindTurbinesSquare2045RegionChart(PreResultsChart):
     """Chart for regional wind turbines per square meter in 2045."""
 
     lookup = "wind_turbines"
@@ -728,7 +728,7 @@ class WindTurbinesSquare2045RegionChart(SimulationChart):
         future_data = (
             calculations.calculate_square_for_value(
                 pd.DataFrame(
-                    {"turbines": calculations.wind_turbines_per_municipality_2045(self.simulation_id).sum()},
+                    {"turbines": calculations.wind_turbines_per_municipality_2045(self.user_settings).sum()},
                     index=[1],
                 ),
             )

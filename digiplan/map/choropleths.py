@@ -181,7 +181,7 @@ class WindTurbinesChoropleth(Choropleth):  # noqa: D101
 
 class WindTurbines2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return calculations.wind_turbines_per_municipality_2045(simulation_id=self.map_state["simulation_id"]).to_dict()
+        return calculations.wind_turbines_per_municipality_2045(self.map_state).to_dict()
 
 
 class WindTurbinesSquareChoropleth(Choropleth):  # noqa: D101
@@ -193,7 +193,7 @@ class WindTurbinesSquareChoropleth(Choropleth):  # noqa: D101
 
 class WindTurbinesSquare2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        wind_turbines = calculations.wind_turbines_per_municipality_2045(self.map_state["simulation_id"])
+        wind_turbines = calculations.wind_turbines_per_municipality_2045(self.map_state)
         wind_turbines_square = calculations.calculate_square_for_value(wind_turbines)
         return wind_turbines_square.to_dict()
 
