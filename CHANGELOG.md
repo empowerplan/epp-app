@@ -15,6 +15,8 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Changed
 - Adapt municipality label font size according to zoom level
 - update mapengine to v1.4.1
+- django-oemof to v0.18.0
+- oemof.tabular to support TSAM
 
 ### Changed
 - pre results can be shown before simulation has finished
