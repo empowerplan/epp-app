@@ -115,7 +115,24 @@ def capacities_per_municipality_2045(parameters: dict) -> pd.DataFrame:
     """Calculate capacities from 2045 scenario per municipality."""
     shares = calculate_potential_shares(parameters)
     potential_capacities = datapackage.get_potential_values()  # in MW
-    return potential_capacities * shares
+
+    # Use wind profile for selected wind year
+    potential_capacities = potential_capacities.drop(
+        columns=[
+            column for column in potential_capacities if column.startswith("wind") and column != parameters["wind_year"]
+        ],
+    )
+    potential_capacities = potential_capacities.rename(columns={parameters["wind_year"]: "wind"})
+
+    # Apply shares from user selection
+    potential_capacities = potential_capacities * shares
+
+    # Aggregate pv ground profiles
+    pv_ground_columns = ["pv_soil_quality_low", "pv_soil_quality_medium", "pv_permanent_crops"]
+    potential_capacities["pv_ground"] = potential_capacities[pv_ground_columns].sum(axis=1)
+    potential_capacities = potential_capacities.drop(pv_ground_columns, axis=1)
+
+    return potential_capacities
 
 
 def energies_per_municipality() -> pd.DataFrame:
@@ -456,20 +473,20 @@ def calculate_potential_shares(parameters: dict) -> dict[str, float]:
         wind_year = parameters["wind_year"]
         share = 1
         if wind_year == "wind_2024":
-            share = float(parameters["id_s_w_6"]) / float(config.ENERGY_SETTINGS_PANEL["s_w_6"]["max"])
+            share = float(parameters["s_w_6"]) / float(config.ENERGY_SETTINGS_PANEL["s_w_6"]["max"])
         if wind_year == "wind_2027":
-            share = float(parameters["id_s_w_7"]) / 100
+            share = float(parameters["s_w_7"]) / 100
         shares["wind"] = share
-    if "id_s_pv_ff_3" in parameters:
+    if "s_pv_ff_3" in parameters:
         shares.update(
             {
-                "pv_soil_quality_low": int(parameters["id_s_pv_ff_3"]) / 100,
-                "pv_soil_quality_medium": int(parameters["id_s_pv_ff_4"]) / 100,
-                "pv_permanent_crops": int(parameters["id_s_pv_ff_5"]) / 100,
+                "pv_soil_quality_low": int(parameters["s_pv_ff_3"]) / 100,
+                "pv_soil_quality_medium": int(parameters["s_pv_ff_4"]) / 100,
+                "pv_permanent_crops": int(parameters["s_pv_ff_5"]) / 100,
             },
         )
-    if "id_s_pv_d_3" in parameters:
-        shares["pv_roof"] = int(parameters["id_s_pv_d_3"]) / 100
+    if "s_pv_d_3" in parameters:
+        shares["pv_roof"] = int(parameters["s_pv_d_3"]) / 100
     return shares
 
 
