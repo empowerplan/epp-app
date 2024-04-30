@@ -1,0 +1,99 @@
+$skeleton-height-text: 0.875rem;
+$skeleton-bg-color: #C3D1DB;
+$skeleton-bg-color-light: #d8e2e9;
+$skeleton-border-radius: 4px;
+$skeleton-border-radius-none: 0;
+
+@mixin skeleton-style($skeleton-element-height, $skeleton-element-width, $skeleton-element-bg-color, $skeleton-element-border-radius) {
+  height: $skeleton-element-height;
+  width: $skeleton-element-width;
+  background-color: $skeleton-element-bg-color;
+  border-radius: $skeleton-element-border-radius;
+}
+
+.skeleton.skeleton--chart {
+  @extend .mt-2;
+  @extend .mb-4;
+
+  .skeleton {
+    &__title {
+      @extend .mb-1;
+      @include skeleton-style($skeleton-height-text, 8rem, $skeleton-bg-color-light, $skeleton-border-radius);
+    }
+
+    &__chart {
+      @extend .row;
+      @extend .mb-3;
+      height: 12rem;
+    }
+
+    &__chart-yaxis {
+      @extend .col-3;
+      @extend .d-flex;
+      @extend .flex-column;
+      @extend .justify-content-around;
+      @extend .pe-1;
+      @extend .pt-2;
+    }
+
+    &__chart-yaxis-value {
+      @include skeleton-style($skeleton-height-text, 100%, $skeleton-bg-color-light, $skeleton-border-radius);
+    }
+
+    &__chart-bars {
+      @extend .col-6;
+      @extend .d-flex;
+      @extend .flex-column;
+      @extend .justify-content-around;
+      @extend .ps-1;
+      @extend .pt-2;
+      @extend .border-bottom;
+      @extend .border-start;
+    }
+
+    &__chart-bar {
+      @include skeleton-style(1.5rem, 66%, $skeleton-bg-color, $skeleton-border-radius-none);
+    }
+
+    &__chart-bar:first-of-type {
+      width: 33%;
+    }
+
+    &__chart-bar:last-of-type {
+      width: 100%;
+    }
+
+    &__chart-xaxis-legend {
+      @extend .col-3;
+      @extend .d-flex;
+      @extend .flex-column;
+      @extend .justify-content-end;
+      @extend .ps-1;
+
+      & > div {
+        @include skeleton-style($skeleton-height-text, 100%, $skeleton-bg-color-light, $skeleton-border-radius);
+      }
+    }
+
+    &__legend {
+      @extend .row;
+    }
+
+    &__legend-item {
+      @extend .col-4;
+      @extend .d-flex;
+      @extend .flex-row;
+      @extend .pe-3;
+      @extend .mb-1;
+    }
+
+    &__legend-color {
+      @include skeleton-style($skeleton-height-text, $skeleton-height-text, $skeleton-bg-color, 100px);
+    }
+
+    &__legend-description {
+      @extend .ms-1;
+      @include skeleton-style($skeleton-height-text, 100%, $skeleton-bg-color-light, $skeleton-border-radius);
+    }
+  }
+}
