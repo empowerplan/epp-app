@@ -6,3 +6,10 @@
     background-color: rgba(74, 194, 157, var(--bs-bg-opacity)) !important;
   }
 }
+
+.progress--error {
+  .progress-bar {
+    @extend .bg-danger;
+    background-color: rgba(229, 112, 127, var(--bs-bg-opacity)) !important;
+  }
+}

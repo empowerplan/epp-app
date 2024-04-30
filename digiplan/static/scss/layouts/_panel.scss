@@ -143,6 +143,15 @@
       }
     }
 
+    &__calc-alert.panel-item__calc-alert--error {
+      @extend .border-danger;
+      background-color: $red-100;
+
+      .progress {
+        @extend .progress--error;
+      }
+    }
+
     &__tabs {
       .nav-tabs {
         @extend .pt-2;
