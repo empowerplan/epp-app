@@ -134,8 +134,9 @@
         padding-bottom: 0.75rem;
       }
 
-      &-explanation {
+      &-explanation button {
         @extend .fs-7;
+        @extend .ps-0;
         @extend .fw-semibold;
         @extend .text-info;
         padding-bottom: 0.75rem;
