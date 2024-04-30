@@ -4,7 +4,15 @@ from __future__ import annotations
 from itertools import count
 from typing import TYPE_CHECKING
 
-from django.forms import BooleanField, FloatField, Form, TextInput, renderers
+from django.forms import (
+    BooleanField,
+    CharField,
+    FloatField,
+    Form,
+    HiddenInput,
+    TextInput,
+    renderers,
+)
 from django.shortcuts import reverse
 from django.utils.safestring import mark_safe
 
@@ -60,7 +68,9 @@ class StaticLayerForm(TemplateForm):  # noqa: D101
 class PanelForm(TemplateForm):  # noqa: D101
     def __init__(self, parameters, additional_parameters=None, **kwargs) -> None:  # noqa: D107, ANN001
         super().__init__(**kwargs)
-        self.fields = {item["name"]: item["field"] for item in self.generate_fields(parameters, additional_parameters)}
+        self.fields.update(
+            {item["name"]: item["field"] for item in self.generate_fields(parameters, additional_parameters)},
+        )
 
     def get_field_attrs(self, name: str, parameters: dict) -> dict:  # noqa: ARG002
         """Set up field attributes from parameters."""
@@ -113,6 +123,8 @@ class PanelForm(TemplateForm):  # noqa: D101
 
 class EnergyPanelForm(PanelForm):  # noqa: D101
     template_name = "forms/panel_energy.html"
+
+    wind_year = CharField(initial="wind_2024", max_length=9, widget=HiddenInput)
 
     def __init__(self, parameters, additional_parameters=None, **kwargs) -> None:  # noqa: ANN001
         """Overwrite init function to add initial key results for detail panels."""

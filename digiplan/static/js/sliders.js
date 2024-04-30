@@ -104,6 +104,7 @@ PubSub.subscribe(
 PubSub.subscribe(eventTopics.PV_CONTROL_ACTIVATED, showPVLayers);
 PubSub.subscribe(eventTopics.PV_CONTROL_ACTIVATED, highlightPVMapControls);
 PubSub.subscribe(eventTopics.PV_ROOF_CONTROL_ACTIVATED, showPVRoofLayers);
+PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, updateWindSelection);
 PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, showWindLayers);
 
 // Subscriber Functions
@@ -384,6 +385,23 @@ function showWindLayers(msg) {
   } else if (currentWindTab === "windFutureTab") {
     turn_on_layer("potentialarea_wind_stp_2024_vr");
     turn_on_layer("potentialarea_wind_stp_2027");
+  } else {
+    throw Error(`Unknown wind tab '${currentWindTab}' found.`);
+  }
+  return logMessage(msg);
+}
+
+function updateWindSelection(msg) {
+  const windInput = document.getElementById("id_wind_year");
+  const currentWindTab = document
+    .getElementById("windTab")
+    .getElementsByClassName("active")[0].id;
+  if (currentWindTab === "windPastTab") {
+    windInput.value = "wind_2018";
+  } else if (currentWindTab === "windPresentTab") {
+    windInput.value = "wind_2024";
+  } else if (currentWindTab === "windFutureTab") {
+    windInput.value = "wind_2027";
   } else {
     throw Error(`Unknown wind tab '${currentWindTab}' found.`);
   }
