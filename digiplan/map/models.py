@@ -741,17 +741,8 @@ class PVgroundAreas(StaticRegionModel):
         abstract = True
 
 
-class PVgroundAreasApprovedModelManager(models.Manager):
-    """Manager for PV ground (dataset by RPG with areas): Approved units."""
-
-    def get_queryset(self):
-        return super().get_queryset().filter(status="genehmigt")
-
-
 class PVgroundAreasApproved(PVgroundAreas):
     """Model holding PV on ground (dataset by RPG with areas): Approved units."""
-
-    objects = PVgroundAreasApprovedModelManager()
 
     data_file = "rpg_ols_pv_ground_approved"
     layer = "rpg_ols_pv_ground_approved"
@@ -761,17 +752,8 @@ class PVgroundAreasApproved(PVgroundAreas):
         verbose_name_plural = _("Ground-mounted PV units (approved)")
 
 
-class PVgroundAreasOperatingModelManager(models.Manager):
-    """Manager for PV ground (dataset by RPG with areas): Operating units."""
-
-    def get_queryset(self):
-        return super().get_queryset().filter(status="realisiert")
-
-
 class PVgroundAreasOperating(PVgroundAreas):
     """Model holding PV on ground (dataset by RPG with areas): Operating units."""
-
-    objects = PVgroundAreasOperatingModelManager()
 
     data_file = "rpg_ols_pv_ground_operating"
     layer = "rpg_ols_pv_ground_operating"
@@ -781,17 +763,8 @@ class PVgroundAreasOperating(PVgroundAreas):
         verbose_name_plural = _("Ground-mounted PV units (operating)")
 
 
-class PVgroundAreasPlannedModelManager(models.Manager):
-    """Manager for PV ground (dataset by RPG with areas): Planned units."""
-
-    def get_queryset(self):
-        return super().get_queryset().filter(status="Planung")
-
-
 class PVgroundAreasPlanned(PVgroundAreas):
     """Model holding PV on ground (dataset by RPG with areas): Planned units."""
-
-    objects = PVgroundAreasPlannedModelManager()
 
     data_file = "rpg_ols_pv_ground_planned"
     layer = "rpg_ols_pv_ground_planned"
