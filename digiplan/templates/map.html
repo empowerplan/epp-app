@@ -204,7 +204,7 @@
     <script src="{% static 'js/sliders.js' %}" type="module"></script>
     <script type="text/javascript">
       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl, {html: true}))
     </script>
 
 {% endblock js_body %}
