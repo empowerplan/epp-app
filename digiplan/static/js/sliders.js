@@ -3,12 +3,17 @@ const SETTINGS_PARAMETERS = JSON.parse(
   document.getElementById("settings_parameters").textContent,
 );
 const panelContainer = document.getElementById("js-panel-container");
-const panelSliders = document.querySelectorAll(".js-slider.js-slider-panel");
+export const panelSliders = document.querySelectorAll(
+  ".js-slider.js-slider-panel",
+);
 const powerPanelSliders = document.querySelectorAll(
   ".js-slider.js-slider-panel.js-power-mix",
 );
 const sliderMoreLabels = document.querySelectorAll(
   ".c-slider__label--more > .button",
+);
+export const detailSliders = document.querySelectorAll(
+  ".js-slider.js-slider-detail-panel",
 );
 const powerMixInfoBanner = document.getElementById("js-power-mix");
 const windTabs = document.querySelectorAll(
@@ -35,6 +40,9 @@ const potentialWindLayers = [
 ];
 
 const pvMapControl = document.getElementsByClassName("map__layers-pv")[0];
+
+const sidepanelCloseButtons =
+  document.getElementsByClassName("sidepanel__close");
 
 // Setup
 
@@ -79,8 +87,15 @@ panelContainer.addEventListener("scroll", (e) => {
   );
 });
 
+Array.from(sidepanelCloseButtons).forEach((closeBtn) => {
+  closeBtn.addEventListener("click", (event) => {
+    closeSidepanel(event.target);
+  });
+});
+
 // Subscriptions
 PubSub.subscribe(eventTopics.STATES_INITIALIZED, updateSliderMarks);
+//PubSub.subscribe(eventTopics.STATES_INITIALIZED, adaptSlidersScenario);
 subscribeToEvents(
   [eventTopics.STATES_INITIALIZED, eventTopics.POWER_PANEL_SLIDER_CHANGE],
   createPercentagesOfPowerSources,
@@ -108,7 +123,6 @@ PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, updateWindSelection);
 PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, showWindLayers);
 
 // Subscriber Functions
-
 /**
  * Adapt detail sliders depending on related main sliders
  * @param {string} msg Publisher message
@@ -408,7 +422,7 @@ function updateWindSelection(msg) {
   return logMessage(msg);
 }
 
-function hidePotentialLayers(msg) {
+export function hidePotentialLayers(msg) {
   for (const layer of potentialPVLayers
     .concat(potentialPVRoofLayers)
     .concat(potentialWindLayers)) {

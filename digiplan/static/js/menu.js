@@ -1,4 +1,5 @@
 import { resultsTabs, futureDropdown } from "./elements.js";
+import { hidePotentialLayers } from "./sliders.js";
 
 const menuNextBtn = document.getElementById("menu_next_btn");
 const menuPreviousBtn = document.getElementById("menu_previous_btn");
