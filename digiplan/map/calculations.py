@@ -4,7 +4,6 @@ from typing import Optional
 
 import pandas as pd
 from django.utils.translation import gettext_lazy as _
-from django_oemof.models import Simulation
 from django_oemof.results import get_results
 from oemof.tabular.postprocessing import calculations, core, helper
 
@@ -112,7 +111,7 @@ def capacities_per_municipality() -> pd.DataFrame:
 
 
 def capacities_per_municipality_2045(parameters: dict) -> pd.DataFrame:
-    """Calculate capacities from 2045 scenario per municipality."""
+    """Calculate capacities from 2045 scenario per municipality in MW."""
     shares = calculate_potential_shares(parameters)
     potential_capacities = datapackage.get_potential_values()  # in MW
 
@@ -133,10 +132,10 @@ def capacities_per_municipality_2045(parameters: dict) -> pd.DataFrame:
     potential_capacities = potential_capacities.drop(pv_ground_columns, axis=1)
 
     # Set biomass potential to zero
-    potential_capacities["biomass"] = 0
+    potential_capacities["bioenergy"] = 0
 
     # Correct order (for charts)
-    potential_capacities = potential_capacities[["wind", "pv_roof", "pv_ground", "hydro", "biomass"]]
+    potential_capacities = potential_capacities[["wind", "pv_roof", "pv_ground", "hydro", "bioenergy"]]
 
     return potential_capacities
 
@@ -156,32 +155,13 @@ def energies_per_municipality() -> pd.DataFrame:
     return capacities * full_load_hours.values / 1e3
 
 
-def energies_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
-    """Calculate energies from 2045 scenario per municipality."""
-    results = get_results(
-        simulation_id,
-        {
-            "electricity_production": electricity_production,
-        },
-    )
-    renewables = results["electricity_production"][
-        results["electricity_production"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
-    ]
-    mapping = {
-        "ABW-solar-pv_ground": "pv_ground",
-        "ABW-solar-pv_rooftop": "pv_roof",
-        "ABW-wind-onshore": "wind",
-        "ABW-hydro-ror": "hydro",
-        "ABW-biomass": "biomass",
-    }
-    renewables.index = renewables.index.droplevel([1, 2]).map(mapping)
-    renewables = renewables.reindex(["wind", "pv_roof", "pv_ground", "hydro"])
-
-    parameters = Simulation.objects.get(pk=simulation_id).parameters
-    renewables = renewables * calculate_potential_shares(parameters)
-    renewables["bioenergy"] = 0.0
-    renewables["st"] = 0.0
-    return renewables.astype(float)
+def energies_per_municipality_2045(parameters: dict) -> pd.DataFrame:
+    """Calculate energies from 2045 scenario per municipality in MWh."""
+    capacities = capacities_per_municipality_2045(parameters)  # in MW
+    full_load_hours = datapackage.get_full_load_hours(year=2045).drop("st").rename({"ror": "hydro"})
+    full_load_hours = full_load_hours.reindex(index=["wind", "pv_roof", "pv_ground", "hydro", "bioenergy"])
+    energies = capacities * full_load_hours.values
+    return energies.fillna(0.0)
 
 
 def energy_shares_per_municipality() -> pd.DataFrame:
@@ -239,7 +219,7 @@ def electricity_demand_per_municipality(year: int = 2022) -> pd.DataFrame:
     return demands_per_sector.astype(float) * 1e-3
 
 
-def energy_shares_2045_per_municipality(simulation_id: int) -> pd.DataFrame:
+def energy_shares_2045_per_municipality(parameters: dict) -> pd.DataFrame:
     """
     Calculate energy shares of renewables from electric demand per municipality in 2045.
 
@@ -248,13 +228,13 @@ def energy_shares_2045_per_municipality(simulation_id: int) -> pd.DataFrame:
     pd.DataFrame
         Energy share per municipality (index) and technology (column)
     """
-    energies = energies_per_municipality_2045(simulation_id).mul(1e-3)
-    demands = electricity_demand_per_municipality_2045(simulation_id).sum(axis=1)
+    energies = energies_per_municipality_2045(parameters).mul(1e-3)
+    demands = electricity_demand_per_municipality_2045(parameters).sum(axis=1)
     energy_shares = energies.div(demands, axis=0)
     return energy_shares.astype(float).mul(1e2)
 
 
-def energy_shares_2045_region(simulation_id: int) -> pd.DataFrame:
+def energy_shares_2045_region(parameters: dict) -> pd.DataFrame:
     """
     Calculate energy shares of renewables from electric demand for region in 2045.
 
@@ -266,8 +246,8 @@ def energy_shares_2045_region(simulation_id: int) -> pd.DataFrame:
     pd.DataFrame
         Energy share per municipality (index) and technology (column)
     """
-    energies = energies_per_municipality_2045(simulation_id)
-    demands = electricity_demand_per_municipality_2045(simulation_id).sum(axis=1).mul(1e3)
+    energies = energies_per_municipality_2045(parameters)
+    demands = electricity_demand_per_municipality_2045(parameters).sum(axis=1).mul(1e3)
 
     demand_share = demands / demands.sum()
     energy_shares = energies.div(demands, axis=0).mul(demand_share, axis=0).sum(axis=0)

@@ -316,7 +316,7 @@ class Energy2045Popup(RegionPopup):
     title = _("Gewonnene Energie aus EE")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.energies_per_municipality_2045(self.map_state["simulation_id"])
+        return calculations.energies_per_municipality_2045(self.map_state)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -399,7 +399,7 @@ class EnergyCapita2045Popup(RegionPopup):
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
         return calculations.calculate_capita_for_value(
-            calculations.energies_per_municipality_2045(self.map_state["simulation_id"]),
+            calculations.energies_per_municipality_2045(self.map_state),
         )
 
     def get_chart_options(self) -> dict:
@@ -445,7 +445,7 @@ class EnergySquare2045Popup(RegionPopup):
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
         return calculations.calculate_square_for_value(
-            calculations.energies_per_municipality_2045(self.map_state["simulation_id"]),
+            calculations.energies_per_municipality_2045(self.map_state),
         )
 
     def get_chart_options(self) -> dict:

@@ -481,7 +481,7 @@ class EnergyRegionChart(Chart):
         return chart_options
 
 
-class Energy2045RegionChart(SimulationChart):
+class Energy2045RegionChart(PreResultsChart):
     """Chart for regional energy."""
 
     lookup = "capacity"
@@ -489,7 +489,7 @@ class Energy2045RegionChart(SimulationChart):
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
         status_quo_data = calculations.energies_per_municipality().sum().round(1)
-        future_data = calculations.energies_per_municipality_2045(self.simulation_id).sum().astype(float) * 1e-3
+        future_data = calculations.energies_per_municipality_2045(self.user_settings).sum().astype(float) * 1e-3
         future_data = future_data.round(1)
         return list(zip(status_quo_data, future_data))
 
@@ -561,7 +561,7 @@ class EnergyCapitaRegionChart(Chart):
         return chart_options
 
 
-class EnergyCapita2045RegionChart(SimulationChart):
+class EnergyCapita2045RegionChart(PreResultsChart):
     """Chart for regional energy."""
 
     lookup = "capacity"
@@ -577,7 +577,7 @@ class EnergyCapita2045RegionChart(SimulationChart):
         future_data = (
             (
                 calculations.calculate_capita_for_value(
-                    pd.DataFrame(calculations.energies_per_municipality_2045(self.simulation_id).sum()).transpose(),
+                    pd.DataFrame(calculations.energies_per_municipality_2045(self.user_settings).sum()).transpose(),
                 ).sum()
             )
             .astype(float)
@@ -617,7 +617,7 @@ class EnergySquareRegionChart(Chart):
         return chart_options
 
 
-class EnergySquare2045RegionChart(SimulationChart):
+class EnergySquare2045RegionChart(PreResultsChart):
     """Chart for regional energy shares per square meter."""
 
     lookup = "capacity"
@@ -633,7 +633,7 @@ class EnergySquare2045RegionChart(SimulationChart):
         future_data = (
             (
                 calculations.calculate_square_for_value(
-                    pd.DataFrame(calculations.energies_per_municipality_2045(self.simulation_id).sum()).transpose(),
+                    pd.DataFrame(calculations.energies_per_municipality_2045(self.user_settings).sum()).transpose(),
                 ).sum()
             )
             .astype(float)

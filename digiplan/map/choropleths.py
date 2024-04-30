@@ -94,7 +94,7 @@ class EnergyChoropleth(Choropleth):  # noqa: D101
 
 class Energy2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        energies = calculations.energies_per_municipality_2045(self.map_state["simulation_id"]).sum(axis=1) * 1e-3
+        energies = calculations.energies_per_municipality_2045(self.map_state).sum(axis=1) * 1e-3
         return energies.to_dict()
 
 
@@ -107,7 +107,7 @@ class EnergyCapitaChoropleth(Choropleth):  # noqa: D101
 
 class EnergyCapita2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        energies = calculations.energies_per_municipality_2045(self.map_state["simulation_id"])
+        energies = calculations.energies_per_municipality_2045(self.map_state)
         energies_per_capita = calculations.calculate_capita_for_value(energies)
         return energies_per_capita.sum(axis=1).to_dict()
 
@@ -121,7 +121,7 @@ class EnergySquareChoropleth(Choropleth):  # noqa: D101
 
 class EnergySquare2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        energies = calculations.energies_per_municipality_2045(self.map_state["simulation_id"])
+        energies = calculations.energies_per_municipality_2045(self.map_state)
         energies_per_square = calculations.calculate_square_for_value(energies)
         return energies_per_square.sum(axis=1).to_dict()
 

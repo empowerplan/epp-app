@@ -11,7 +11,6 @@ from oemof.tabular.postprocessing import calculations as oc
 from oemof.tabular.postprocessing import core
 
 from digiplan.map import calculations, charts
-from digiplan.map import models as dm
 
 
 class SimulationTest(SimpleTestCase):
@@ -69,7 +68,6 @@ class SimulationTest(SimpleTestCase):
 class PreResultTest(SimpleTestCase):
     """Base class for pre result tests."""
 
-    databases = ("default",)  # Needed, as otherwise django complains about tests using "default" DB
     parameters = {
         "s_v_1": 100,
         "s_v_3": 11,
@@ -103,22 +101,6 @@ class PreResultTest(SimpleTestCase):
         "s_pv_d_3": 5,
         "s_pv_d_4": 13,
     }
-
-    def setUp(self) -> None:
-        """Starts/loads oemof simulation for given parameters."""
-        try:
-            pre_result = dm.PreResults.objects.get(scenario="scenario_2045", parameters=self.parameters)
-        except dm.PreResults.DoesNotExist:
-            pre_result = dm.PreResults.objects.create(scenario="scenario_2045", parameters=self.parameters)
-            pre_result.save()
-        self.pre_result_id = pre_result.id
-
-    def tearDown(self) -> None:  # noqa: D102 Needed to keep results in test DB
-        pass
-
-    @classmethod
-    def tearDownClass(cls):  # noqa: D102, ANN206 Needed to keep results in test DB
-        pass
 
 
 class EnergySharePerMunicipalityTest(SimpleTestCase):
@@ -178,18 +160,18 @@ class ElectricityProductionTest(SimulationTest):
         assert list(results.values())[0].iloc[0] > 0
 
 
-class Energies2045Test(SimulationTest):
+class Energies2045Test(PreResultTest):
     """Test electricity production calculation."""
 
     def test_electricity_production(self):  # noqa: D102
-        calculations.energies_per_municipality_2045(self.simulation_id)
+        calculations.energies_per_municipality_2045(self.parameters)
 
 
 class Capacities2045Test(SimulationTest):
     """Test electricity production calculation."""
 
     def test_capacities_2045(self):  # noqa: D102
-        calculations.capacities_per_municipality_2045(self.simulation_id)
+        calculations.capacities_per_municipality_2045(self.parameters)
 
 
 class WindTurbines2045Test(SimulationTest):
