@@ -748,8 +748,8 @@ class PVgroundAreasApproved(PVgroundAreas):
     layer = "rpg_ols_pv_ground_approved"
 
     class Meta:  # noqa: D106
-        verbose_name = _("Ground-mounted PV units (approved)")
-        verbose_name_plural = _("Ground-mounted PV units (approved)")
+        verbose_name = _("Freiflächen-PV (genehmigt)")
+        verbose_name_plural = _("Freiflächen-PV (genehmigt)")
 
 
 class PVgroundAreasOperating(PVgroundAreas):
@@ -759,8 +759,8 @@ class PVgroundAreasOperating(PVgroundAreas):
     layer = "rpg_ols_pv_ground_operating"
 
     class Meta:  # noqa: D106
-        verbose_name = _("Ground-mounted PV units (operating)")
-        verbose_name_plural = _("Ground-mounted PV units (operating)")
+        verbose_name = _("Freiflächen-PV (in Betrieb)")
+        verbose_name_plural = _("Freiflächen-PV (in Betrieb)")
 
 
 class PVgroundAreasPlanned(PVgroundAreas):
@@ -770,5 +770,5 @@ class PVgroundAreasPlanned(PVgroundAreas):
     layer = "rpg_ols_pv_ground_planned"
 
     class Meta:  # noqa: D106
-        verbose_name = _("Ground-mounted PV units (planned)")
-        verbose_name_plural = _("Ground-mounted PV units (planned)")
+        verbose_name = _("Freiflächen-PV (geplant)")
+        verbose_name_plural = _("Freiflächen-PV (geplant)")

@@ -26,16 +26,6 @@ LEGEND = {
             color="#6A89CC",
             symbol="circle",
         ),
-        SymbolLegendLayer(
-            _("Aufdach-PV"),
-            _(
-                "PV-Aufdachanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
-                "Marktstammdatenregister",
-            ),
-            layer_id="pvroof",
-            color="#FFD660",
-            symbol="circle",
-        ),
         legend.LegendLayer(
             _("Freiflächen-PV (in Betrieb)"),
             _("PV-Freiflächenanlagen - Flächendaten in Betrieb befindlicher Anlagen der Regionalen Planungsstelle"),
@@ -59,6 +49,15 @@ LEGEND = {
             ),
             layer_id="pvground",
             color="#EFAD25",
+            symbol="circle",
+        ), SymbolLegendLayer(
+            _("Aufdach-PV"),
+            _(
+                "PV-Aufdachanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
+                "Marktstammdatenregister",
+            ),
+            layer_id="pvroof",
+            color="#FFD660",
             symbol="circle",
         ),
         SymbolLegendLayer(

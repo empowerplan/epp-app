@@ -234,22 +234,25 @@
   "rpg_ols_pv_ground_operating": {
     "type": "fill",
     "paint": {
-      "fill-color": "#ff0000",
-      "fill-opacity": 0.8
+      "fill-color": "#EFAD25",
+      "fill-opacity": 0.8,
+      "fill-outline-color": "#ad7f1e"
     }
   },
   "rpg_ols_pv_ground_approved": {
     "type": "fill",
     "paint": {
-      "fill-color": "#00ff00",
-      "fill-opacity": 0.8
+      "fill-color": "#ad7f1e",
+      "fill-opacity": 0.6,
+      "fill-outline-color": "#ad7f1e"
     }
   },
   "rpg_ols_pv_ground_planned": {
     "type": "fill",
     "paint": {
-      "fill-color": "#0000ff",
-      "fill-opacity": 0.8
+      "fill-color": "#5F4F03",
+      "fill-opacity": 0.6,
+      "fill-outline-color": "#5F4F03"
     }
   },
   "hydro": {
