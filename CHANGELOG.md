@@ -11,6 +11,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - dependabot
 - key results for wind, pv ground and pv roof settings panels
 - scenario settings
+- additional slider marker
 
 ### Changed
 - Adapt municipality label font size according to zoom level

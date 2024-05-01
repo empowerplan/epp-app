@@ -268,7 +268,7 @@ def get_capacities_from_sliders(year: int) -> pd.Series:
         lookup = "status_quo"
         bioenergy_power = 55.7  # Workaround for bioenergy as there's no slider
     elif year == 2045:  # noqa: PLR2004
-        lookup = "future_scenario"
+        lookup = "future_scenario_2040"
         bioenergy_power = 0
     else:
         msg = "Unknown year"

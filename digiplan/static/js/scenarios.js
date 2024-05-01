@@ -1,5 +1,5 @@
 import { getCurrentMenuTab } from "./menu.js";
-import { detailSliders, panelSliders } from "./sliders.js";
+import { detailSliders, panelSliders, updateSliderMarks } from "./sliders.js";
 
 const scenarioSettings = JSON.parse(
   document.getElementById("scenario_settings").textContent,
@@ -148,6 +148,7 @@ function adaptSlidersScenario(msg, scenario) {
     const sliderValue = scenarioSettings[scenario][slider.id];
     $(`#${slider.id}`).data("ionRangeSlider").update({ from: sliderValue });
   }
+  updateSliderMarks();
   PubSub.publish(eventTopics.POWER_PANEL_SLIDER_CHANGE);
   return logMessage(msg);
 }
