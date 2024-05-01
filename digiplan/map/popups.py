@@ -169,7 +169,7 @@ class ClusterPopup(popups.Popup):
             "citizens_unit": "Bürgerenergieanlage",
             "technology": "Technologie",
             "feedin_type": "Einspeisungsart",
-            "th_capacity": "Thermische Nutzleistung",
+            "th_capacity": "Thermische Nutzleistung (kW)",
             # Wind Turbines
             "hub_height": "Nabenhöhe",
             "rotor_diameter": "Rotordurchmesser",
