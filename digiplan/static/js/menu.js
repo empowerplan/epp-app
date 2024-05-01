@@ -67,6 +67,19 @@ PubSub.subscribe(eventTopics.MENU_SCENARIOS_SELECTED, showEmpowerplanContent);
 PubSub.subscribe(eventTopics.MAP_VIEW_SELECTED, setResultsView);
 PubSub.subscribe(eventTopics.CHART_VIEW_SELECTED, setResultsView);
 
+function updateWizardStyles(activeTabIndex) {
+  const lines = document.querySelectorAll('.wizard__line');
+  const steps = document.querySelectorAll('.wizard__list-item');
+  lines.forEach(line => line.classList.remove('active-line'));
+  steps.forEach(step => step.querySelector('.wizard__list-number').classList.remove('completed'));
+  for (let i = 0; i < activeTabIndex - 1; i++) {
+    if (lines[i]) {
+      lines[i].classList.add('active-line');
+    }
+    steps[i].querySelector('.wizard__list-number').classList.add('completed');
+  }
+}
+
 function nextMenuTab() {
   const currentTab = getCurrentMenuTab();
   currentTab.classList.toggle("active");
@@ -79,6 +92,7 @@ function nextMenuTab() {
   document.getElementById(nextPanel).classList.toggle("active");
   document.getElementById(nextStep).classList.toggle("active");
   document.getElementById(nextStep).setAttribute('aria-current', 'step');
+  updateWizardStyles(tabIndex + 1);
   PubSub.publish(menuTabs[tabIndex].event);
   toggleMenuButtons(tabIndex);
 }
@@ -95,6 +109,7 @@ function previousMenuTab() {
   document.getElementById(nextPanel).classList.toggle("active");
   document.getElementById(nextStep).classList.toggle("active");
   document.getElementById(nextStep).setAttribute('aria-current', 'step');
+  updateWizardStyles(tabIndex - 1);
   PubSub.publish(menuTabs[tabIndex - 2].event);
   toggleMenuButtons(tabIndex - 2);
 }
