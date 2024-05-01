@@ -37,17 +37,17 @@ LEGEND = {
             color="#526ba2",
             symbol="circle",
         ),
-        SymbolLegendLayer(
-            _("Windenergie (MaStR)"),
-            _(
-                "Windenergieanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen (Daten: "
-                "Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung "
-                "kann dieser Datensatz unvollständig sein.",
-            ),
-            layer_id="wind",
-            color="#6A89CC",
-            symbol="circle",
-        ),
+        # SymbolLegendLayer(
+        #     _("Windenergie (MaStR)"),
+        #     _(
+        #         "Windenergieanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen (Daten: "
+        #         "Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung "
+        #         "kann dieser Datensatz unvollständig sein.",
+        #     ),
+        #     layer_id="wind",
+        #     color="#6A89CC",
+        #     symbol="circle",
+        # ),
         legend.LegendLayer(
             _("FF-PV (in Betrieb)"),
             _(
@@ -69,17 +69,17 @@ LEGEND = {
             _("Geplante Photovoltaik-Freiflächenanlagen, Flächendaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"),
             layer_id="rpg_ols_pv_ground_planned",
         ),
-        SymbolLegendLayer(
-            _("FF-PV (MaStR)"),
-            _(
-                "Photovoltaik-Freiflächenanlagen in Betrieb oder geplant, Punktdaten (Daten: Marktstammdatenregister, "
-                "Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung kann dieser Datensatz "
-                "unvollständig sein.",
-            ),
-            layer_id="pvground",
-            color="#EFAD25",
-            symbol="circle",
-        ),
+        # SymbolLegendLayer(
+        #     _("FF-PV (MaStR)"),
+        #     _(
+        #         "Photovoltaik-Freiflächenanlagen in Betrieb oder geplant, Punktdaten (Daten: Marktstammdatenregister, "
+        #         "Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung kann dieser Datensatz "
+        #         "unvollständig sein.",
+        #     ),
+        #     layer_id="pvground",
+        #     color="#EFAD25",
+        #     symbol="circle",
+        # ),
         SymbolLegendLayer(
             _("Aufdach-PV"),
             _(
