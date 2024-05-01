@@ -211,6 +211,47 @@ class ClusterPopup(popups.Popup):
         return data_dict
 
 
+class PVgroundAreaPopup(popups.Popup):
+    """Popup for any entity showing table with attributes."""
+
+    description: str = None
+
+    def __init__(self, lookup: str, selected_id: int, **kwargs) -> None:  # noqa: ARG002
+        """Initialize popup with default cluster template."""
+        self.model_lookup = lookup
+        super().__init__(lookup="base", selected_id=selected_id)
+
+    def get_context_data(self) -> dict:
+        """Return cluster data as context data."""
+        model = {
+            "rpg_ols_pv_ground_operating": models.PVgroundAreasOperating,
+            "rpg_ols_pv_ground_approved": models.PVgroundAreasApproved,
+            "rpg_ols_pv_ground_planned": models.PVgroundAreasPlanned,
+        }[self.model_lookup]
+        default_attributes = {
+            "name": "Name",
+            "capacity_net": "Nettonennleistung (MW)",
+            "status": "Betriebsstatus",
+            "plan_type": "Planart",
+            "year": "Jahr",
+            "construction_start_date": "Baubeginn",
+            "construction_end_date": "Fertigstellung",
+        }
+        specific_attributes = {}
+        instance = model.objects.annotate(mun_name=F("mun_id__name")).get(pk=self.selected_id)
+        data_dict = {
+            "title": model._meta.verbose_name,  # noqa: SLF001
+            "description": self.description,
+            "data": {name: getattr(instance, key) for key, name in default_attributes.items()},
+        }
+        for key, name in specific_attributes.items():
+            if hasattr(instance, key):
+                value = getattr(instance, key)
+                data_dict["data"][name] = value
+
+        return data_dict
+
+
 class CapacityPopup(RegionPopup):
     """Popup to show capacities."""
 
@@ -911,6 +952,24 @@ class BatteriesCapacityPopup(RegionPopup):
         return chart_options
 
 
+class PVgroundAreasOperating(PVgroundAreaPopup):
+    """Popup for operating PV ground units (dataset by RPG with areas)."""
+
+    description = _("Photovoltaik-Freiflächenanlagen in Betrieb (Daten: RPG Oderland-Spree, Stand: 31.12.2023)")
+
+
+class PVgroundAreasApproved(PVgroundAreaPopup):
+    """Popup for approved PV ground units (dataset by RPG with areas)."""
+
+    description = _("Genehmigte Photovoltaik-Freiflächenanlagen (Daten: RPG Oderland-Spree, Stand: 31.12.2023)")
+
+
+class PVgroundAreasPlanned(PVgroundAreaPopup):
+    """Popup for planned PV ground units (dataset by RPG with areas)."""
+
+    description = _("Geplante Photovoltaik-Freiflächenanlagen (Daten: RPG Oderland-Spree, Stand: 31.12.2023)")
+
+
 POPUPS: dict[str, type(popups.Popup)] = {
     "wind": ClusterPopup,
     "pvroof": ClusterPopup,
@@ -950,4 +1009,7 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "heat_demand_capita_2045": HeatDemandCapita2045Popup,
     "batteries_statusquo": BatteriesPopup,
     "batteries_capacity_statusquo": BatteriesCapacityPopup,
+    "rpg_ols_pv_ground_operating": PVgroundAreasOperating,
+    "rpg_ols_pv_ground_approved": PVgroundAreasApproved,
+    "rpg_ols_pv_ground_planned": PVgroundAreasPlanned,
 }

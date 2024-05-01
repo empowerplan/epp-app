@@ -526,6 +526,18 @@ MAP_ENGINE_POPUPS = [
         popup_at_default_layer=True,
     ),
     setup.Popup(
+        "rpg_ols_pv_ground_operating",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "rpg_ols_pv_ground_approved",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "rpg_ols_pv_ground_planned",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
         "pvground",
         popup_at_default_layer=True,
     ),
