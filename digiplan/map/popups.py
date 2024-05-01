@@ -211,13 +211,52 @@ class ClusterPopup(popups.Popup):
         return data_dict
 
 
-class PVgroundAreaPopup(popups.Popup):
+class WindTurbine2ClusterPopup(popups.Popup):
     """Popup for any entity showing table with attributes."""
 
     description: str = None
 
     def __init__(self, lookup: str, selected_id: int, **kwargs) -> None:  # noqa: ARG002
         """Initialize popup with default cluster template."""
+        self.model_lookup = lookup
+        super().__init__(lookup="cluster", selected_id=selected_id)
+
+    def get_context_data(self) -> dict:
+        """Return cluster data as context data."""
+        model = {
+            "rpg_ols_wind_operating": models.WindTurbine2Operating,
+            "rpg_ols_wind_approved": models.WindTurbine2Approved,
+            "rpg_ols_wind_planned": models.WindTurbine2Planned,
+        }[self.model_lookup]
+        default_attributes = {
+            "name": "Name",
+            "capacity_net": "Nettonennleistung (MW)",
+            "commissioning_date": "Inbetriebnahmedatum",
+            "hub_height": "Nabenhöhe",
+            "rotor_diameter": "Rotordurchmesser",
+        }
+        specific_attributes = {}
+        instance = model.objects.annotate(mun_name=F("mun_id__name")).get(pk=self.selected_id)
+        data_dict = {
+            "title": model._meta.verbose_name,  # noqa: SLF001
+            "description": self.description,
+            "data": {name: getattr(instance, key) for key, name in default_attributes.items()},
+        }
+        for key, name in specific_attributes.items():
+            if hasattr(instance, key):
+                value = getattr(instance, key)
+                data_dict["data"][name] = value
+
+        return data_dict
+
+
+class PVgroundAreaPopup(popups.Popup):
+    """Popup for any entity showing table with attributes."""
+
+    description: str = None
+
+    def __init__(self, lookup: str, selected_id: int, **kwargs) -> None:  # noqa: ARG002
+        """Initialize popup with table template."""
         self.model_lookup = lookup
         super().__init__(lookup="base", selected_id=selected_id)
 
@@ -954,22 +993,40 @@ class BatteriesCapacityPopup(RegionPopup):
         return chart_options
 
 
-class PVgroundAreasOperating(PVgroundAreaPopup):
+class PVgroundAreasOperatingPopup(PVgroundAreaPopup):
     """Popup for operating PV ground units (dataset by RPG with areas)."""
 
     description = _("Photovoltaik-Freiflächenanlagen in Betrieb (Daten: RPG Oderland-Spree, Stand: 31.12.2023)")
 
 
-class PVgroundAreasApproved(PVgroundAreaPopup):
+class PVgroundAreasApprovedPopup(PVgroundAreaPopup):
     """Popup for approved PV ground units (dataset by RPG with areas)."""
 
     description = _("Genehmigte Photovoltaik-Freiflächenanlagen (Daten: RPG Oderland-Spree, Stand: 31.12.2023)")
 
 
-class PVgroundAreasPlanned(PVgroundAreaPopup):
+class PVgroundAreasPlannedPopup(PVgroundAreaPopup):
     """Popup for planned PV ground units (dataset by RPG with areas)."""
 
     description = _("Geplante Photovoltaik-Freiflächenanlagen (Daten: RPG Oderland-Spree, Stand: 31.12.2023)")
+
+
+class WindTurbine2OperatingPopup(WindTurbine2ClusterPopup):
+    """Popup for operating wind turbines (dataset by RPG with areas)."""
+
+    description = _("Windenergieanlagen in Betrieb (Daten: RPG Oderland-Spree, Stand: 31.12.2023)")
+
+
+class WindTurbine2ApprovedPopup(WindTurbine2ClusterPopup):
+    """Popup for approved wind turbines (dataset by RPG with areas)."""
+
+    description = _("Genehmigte Windenergieanlagen (Daten: RPG Oderland-Spree, Stand: 31.12.2023)")
+
+
+class WindTurbine2PlannedPopup(WindTurbine2ClusterPopup):
+    """Popup for planned wind turbines (dataset by RPG with areas)."""
+
+    description = _("Geplante Windenergieanlagen (Daten: RPG Oderland-Spree, Stand: 31.12.2023)")
 
 
 POPUPS: dict[str, type(popups.Popup)] = {
@@ -1011,7 +1068,10 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "heat_demand_capita_2045": HeatDemandCapita2045Popup,
     "batteries_statusquo": BatteriesPopup,
     "batteries_capacity_statusquo": BatteriesCapacityPopup,
-    "rpg_ols_pv_ground_operating": PVgroundAreasOperating,
-    "rpg_ols_pv_ground_approved": PVgroundAreasApproved,
-    "rpg_ols_pv_ground_planned": PVgroundAreasPlanned,
+    "rpg_ols_pv_ground_operating": PVgroundAreasOperatingPopup,
+    "rpg_ols_pv_ground_approved": PVgroundAreasApprovedPopup,
+    "rpg_ols_pv_ground_planned": PVgroundAreasPlannedPopup,
+    "rpg_ols_wind_approved": WindTurbine2ApprovedPopup,
+    "rpg_ols_wind_operating": WindTurbine2OperatingPopup,
+    "rpg_ols_wind_planned": WindTurbine2PlannedPopup,
 }

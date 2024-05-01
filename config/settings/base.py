@@ -363,6 +363,9 @@ MAP_ENGINE_API_CLUSTERS = [
     setup.ClusterAPI("combustion", "map", "Combustion", properties=["id", "unit_count"]),
     setup.ClusterAPI("gsgk", "map", "GSGK", properties=["id", "unit_count"]),
     setup.ClusterAPI("storage", "map", "Storage", properties=["id", "unit_count"]),
+    setup.ClusterAPI("rpg_ols_wind_approved", "map", "WindTurbine2Approved", properties=["id", "unit_count"]),
+    setup.ClusterAPI("rpg_ols_wind_operating", "map", "WindTurbine2Operating", properties=["id", "unit_count"]),
+    setup.ClusterAPI("rpg_ols_wind_planned", "map", "WindTurbine2Planned", properties=["id", "unit_count"]),
 ]
 
 MAP_ENGINE_LAYERS_AT_STARTUP = ["region_boundaries"]
@@ -521,6 +524,18 @@ MAP_ENGINE_CHOROPLETHS = [
 ]
 
 MAP_ENGINE_POPUPS = [
+    setup.Popup(
+        "rpg_ols_wind_approved",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "rpg_ols_wind_operating",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "rpg_ols_wind_planned",
+        popup_at_default_layer=True,
+    ),
     setup.Popup(
         "wind",
         popup_at_default_layer=True,

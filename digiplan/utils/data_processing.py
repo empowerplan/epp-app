@@ -57,6 +57,9 @@ MODELS = [
     models.PVgroundAreasApproved,
     models.PVgroundAreasOperating,
     models.PVgroundAreasPlanned,
+    models.WindTurbine2Approved,
+    models.WindTurbine2Operating,
+    models.WindTurbine2Planned,
     # PotentialAreas
     models.PotentialareaPVGroundSoilQualityLow,
     models.PotentialareaPVGroundSoilQualityMedium,

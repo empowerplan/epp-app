@@ -772,3 +772,72 @@ class PVgroundAreasPlanned(PVgroundAreas):
     class Meta:  # noqa: D106
         verbose_name = _("Freiflächen-PV (geplant)")
         verbose_name_plural = _("Freiflächen-PV (geplant)")
+
+
+class WindTurbine2(models.Model):
+    """Model holding wind turbines."""
+
+    name = models.CharField(max_length=255, null=True)
+    operator = models.CharField(max_length=255, null=True)
+    city = models.CharField(max_length=50, null=True)
+    zip_code = models.CharField(max_length=50, null=True)
+    commissioning_date = models.CharField(max_length=50, null=True)
+    capacity_net = models.FloatField(null=True)
+    hub_height = models.FloatField(null=True)
+    rotor_diameter = models.FloatField(null=True)
+    status = models.CharField(max_length=50, null=True)
+    geom = models.PointField(srid=4326)
+
+    mun_id = models.ForeignKey(Municipality, on_delete=models.DO_NOTHING, null=True)
+
+    objects = models.Manager()
+    vector_tiles = StaticMVTManager(columns=[])
+
+    mapping = {
+        "geom": "POINT",
+        "name": "name",
+        "operator": "operator",
+        "city": "city",
+        "zip_code": "zip_code",
+        "commissioning_date": "commissioning_date",
+        "capacity_net": "capacity_net",
+        "hub_height": "hub_height",
+        "rotor_diameter": "rotor_diameter",
+        "mun_id": {"id": "municipality_id"},
+    }
+
+    class Meta:  # noqa: D106
+        abstract = True
+
+
+class WindTurbine2Approved(WindTurbine2):
+    """Model holding PV on ground (dataset by RPG with areas): Approved units."""
+
+    data_file = "rpg_ols_wind_approved"
+    layer = "rpg_ols_wind_approved"
+
+    class Meta:  # noqa: D106
+        verbose_name = _("Windenergieanlage (genehmigt)")
+        verbose_name_plural = _("Windenergieanlagen (genehmigt)")
+
+
+class WindTurbine2Operating(WindTurbine2):
+    """Model holding PV on ground (dataset by RPG with areas): Operating units."""
+
+    data_file = "rpg_ols_wind_operating"
+    layer = "rpg_ols_wind_operating"
+
+    class Meta:  # noqa: D106
+        verbose_name = _("Windenergieanlage (in Betrieb)")
+        verbose_name_plural = _("Windenergieanlagen (in Betrieb)")
+
+
+class WindTurbine2Planned(WindTurbine2):
+    """Model holding PV on ground (dataset by RPG with areas): Planned units."""
+
+    data_file = "rpg_ols_wind_planned"
+    layer = "rpg_ols_wind_planned"
+
+    class Meta:  # noqa: D106
+        verbose_name = _("Windenergieanlage (geplant)")
+        verbose_name_plural = _("Windenergieanlagen (geplant)")

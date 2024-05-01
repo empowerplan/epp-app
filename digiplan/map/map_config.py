@@ -17,7 +17,28 @@ class SymbolLegendLayer(legend.LegendLayer):
 LEGEND = {
     _("Renewables"): [
         SymbolLegendLayer(
-            _("Windenergie"),
+            _("Windenergie (in Betrieb)"),
+            _("Windenergieanlagen in Betrieb, Punktdaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"),
+            layer_id="rpg_ols_wind_operating",
+            color="#7a9ce7",
+            symbol="circle",
+        ),
+        SymbolLegendLayer(
+            _("Windenergie genehmigt)"),
+            _("Genehmigte Windenergieanlagen, Punktdaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"),
+            layer_id="rpg_ols_wind_approved",
+            color="#6A89CC",
+            symbol="circle",
+        ),
+        SymbolLegendLayer(
+            _("Windenergie (geplant)"),
+            _("Geplante Windenergieanlagen, Punktdaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"),
+            layer_id="rpg_ols_wind_planned",
+            color="#526ba2",
+            symbol="circle",
+        ),
+        SymbolLegendLayer(
+            _("Windenergie (MaStR)"),
             _(
                 "Windenergieanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen (Daten: "
                 "Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung "
