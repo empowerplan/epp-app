@@ -11,10 +11,14 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - dependabot
 - key results for wind, pv ground and pv roof settings panels
 - scenario settings
+- additional slider marker
 
 ### Changed
 - Adapt municipality label font size according to zoom level
 - update mapengine to v1.4.1
+
+### Changed
+- pre results can be shown before simulation has finished
 
 ### Fixed
 - duplicate loading of JS modules due to missing module support in django staticfile storage

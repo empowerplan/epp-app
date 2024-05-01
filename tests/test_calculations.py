@@ -2,6 +2,7 @@
 import os
 
 import pandas as pd
+import pytest
 from django.test import SimpleTestCase
 from django_oemof import models
 from django_oemof import results as oemof_results
@@ -64,6 +65,44 @@ class SimulationTest(SimpleTestCase):
         pass
 
 
+class PreResultTest(SimpleTestCase):
+    """Base class for pre result tests."""
+
+    parameters = {
+        "s_v_1": 100,
+        "s_v_3": 11,
+        "s_v_4": 22,
+        "s_v_5": 33,
+        "s_w_1": 714,
+        "w_v_1": 100,
+        "w_v_3": 10,
+        "w_v_4": 20,
+        "w_v_5": 30,
+        "s_pv_ff_1": 388,
+        "s_pv_d_1": 298,
+        "s_h_1": 5,
+        "s_s_g_1": 1,
+        "w_d_wp_3": 50,
+        "w_d_wp_4": 50,
+        "w_d_wp_5": 50,
+        "w_z_wp_1": 50,
+        "w_d_s_1": 100,
+        "w_z_s_1": 100,
+        "w_d_wp_1": True,
+        "s_w_3": True,
+        "s_w_4": True,
+        "s_w_4_1": True,
+        "s_w_4_2": True,
+        "s_w_5": False,
+        "s_w_5_1": 50,
+        "s_w_5_2": 50,
+        "s_pv_ff_3": 11,
+        "s_pv_ff_4": 11,
+        "s_pv_d_3": 5,
+        "s_pv_d_4": 13,
+    }
+
+
 class EnergySharePerMunicipalityTest(SimpleTestCase):
     """Test energy shares per municipality calculation."""
 
@@ -121,25 +160,25 @@ class ElectricityProductionTest(SimulationTest):
         assert list(results.values())[0].iloc[0] > 0
 
 
-class Energies2045Test(SimulationTest):
+class Energies2045Test(PreResultTest):
     """Test electricity production calculation."""
 
     def test_electricity_production(self):  # noqa: D102
-        calculations.energies_per_municipality_2045(self.simulation_id)
+        calculations.energies_per_municipality_2045(self.parameters)
 
 
 class Capacities2045Test(SimulationTest):
     """Test electricity production calculation."""
 
     def test_capacities_2045(self):  # noqa: D102
-        calculations.capacities_per_municipality_2045(self.simulation_id)
+        calculations.capacities_per_municipality_2045(self.parameters)
 
 
-class WindTurbines2045Test(SimulationTest):
+class WindTurbines2045Test(PreResultTest):
     """Test wind turbine calculation."""
 
     def test_wind_turbines_2045(self):  # noqa: D102
-        result = calculations.wind_turbines_per_municipality_2045(self.simulation_id)
+        result = calculations.wind_turbines_per_municipality_2045(self.parameters)
         assert len(result) == 20
 
 
@@ -165,13 +204,21 @@ class ElectricityDemandTest(SimulationTest):
         assert list(results.values())[0].iloc[1] > 0
 
 
-class ElectricityDemand2045Test(SimulationTest):
+class ElectricityDemand2045Test(PreResultTest):
     """Test electricity demand calculation."""
 
     def test_electricity_demand(self):  # noqa: D102
-        results = calculations.electricity_demand_per_municipality_2045(self.simulation_id)
+        results = calculations.electricity_demand_per_municipality_2045(self.pre_result_id)
         assert len(results) == 20
-        assert len(results.columns) == 4
+        assert len(results.columns) == 3
+
+        municipality_id = 13
+        hh = 15368.324510202196
+        cts = 15885.55560626756
+        ind = 79900.92318810655
+        assert results.iloc[municipality_id, 0] == pytest.approx(hh * 0.11 * 1e-3)
+        assert results.iloc[municipality_id, 1] == pytest.approx(cts * 0.22 * 1e-3)
+        assert results.iloc[municipality_id, 2] == pytest.approx(ind * 0.33 * 1e-3)
 
 
 class HeatDemandTest(SimulationTest):
@@ -199,13 +246,21 @@ class HeatDemandTest(SimulationTest):
         assert list(results.values())[0].iloc[0] > 0
 
 
-class HeatDemand2045Test(SimulationTest):
+class HeatDemand2045Test(PreResultTest):
     """Test heat demand calculation in 2045."""
 
     def test_electricity_demand(self):  # noqa: D102
-        results = calculations.heat_demand_per_municipality_2045(self.simulation_id)
+        results = calculations.heat_demand_per_municipality_2045(self.pre_result_id)
         assert len(results) == 20
         assert len(results.columns) == 3
+
+        municipality_id = 9
+        hh = 171353.1535566939
+        cts = 71958.67546243734
+        ind = 280765.29433642636
+        assert results.iloc[municipality_id, 0] == pytest.approx(hh * 0.1 * 1e-3)
+        assert results.iloc[municipality_id, 1] == pytest.approx(cts * 0.2 * 1e-3)
+        assert results.iloc[municipality_id, 2] == pytest.approx(ind * 0.3 * 1e-3)
 
 
 class RegionalIndependency(SimulationTest):
