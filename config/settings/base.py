@@ -298,6 +298,7 @@ MAP_ENGINE_IMAGES = [
     setup.MapImage("gsgk_plus", "images/icons/map_gsgk_plus.png"),
     setup.MapImage("storage_plus", "images/icons/map_battery_plus.png"),
     setup.MapImage("wind_hatch", "images/map_wind_hatch.png"),
+    setup.MapImage("pv_ground_hatch", "images/map_pv_ground_hatch.png"),
 ]
 
 MAP_ENGINE_API_MVTS = {
