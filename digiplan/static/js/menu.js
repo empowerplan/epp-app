@@ -73,10 +73,12 @@ function nextMenuTab() {
   const tabIndex = parseInt(currentTab.id.slice(6, 7));
   const currentStep = `step_${tabIndex}_${menuTabs[tabIndex - 1].name}`;
   document.getElementById(currentStep).classList.toggle("active");
+  document.getElementById(currentStep).removeAttribute('aria-current', 'step');
   const nextPanel = `panel_${tabIndex + 1}_${menuTabs[tabIndex].name}`;
   const nextStep = `step_${tabIndex + 1}_${menuTabs[tabIndex].name}`;
   document.getElementById(nextPanel).classList.toggle("active");
   document.getElementById(nextStep).classList.toggle("active");
+  document.getElementById(nextStep).setAttribute('aria-current', 'step');
   PubSub.publish(menuTabs[tabIndex].event);
   toggleMenuButtons(tabIndex);
 }
@@ -87,10 +89,12 @@ function previousMenuTab() {
   const tabIndex = parseInt(currentTab.id.slice(6, 7));
   const currentStep = `step_${tabIndex}_${menuTabs[tabIndex - 1].name}`;
   document.getElementById(currentStep).classList.toggle("active");
+  document.getElementById(currentStep).removeAttribute('aria-current', 'step');
   const nextPanel = `panel_${tabIndex - 1}_${menuTabs[tabIndex - 2].name}`;
   const nextStep = `step_${tabIndex - 1}_${menuTabs[tabIndex - 2].name}`;
   document.getElementById(nextPanel).classList.toggle("active");
   document.getElementById(nextStep).classList.toggle("active");
+  document.getElementById(nextStep).setAttribute('aria-current', 'step');
   PubSub.publish(menuTabs[tabIndex - 2].event);
   toggleMenuButtons(tabIndex - 2);
 }
