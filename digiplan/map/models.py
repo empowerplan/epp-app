@@ -3,7 +3,7 @@
 
 import pandas as pd
 from django.contrib.gis.db import models
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from django.utils.translation import gettext_lazy as _
 
 from .managers import LabelMVTManager, RegionMVTManager, StaticMVTManager
@@ -808,6 +808,20 @@ class WindTurbine2(models.Model):
 
     class Meta:  # noqa: D106
         abstract = True
+
+    @classmethod
+    def quantity_per_municipality(cls) -> pd.DataFrame:
+        """
+        Calculate number of wind turbines per municipality.
+
+        Returns
+        -------
+        dpd.DataFrame
+            wind turbines per municipality
+        """
+        queryset = cls.objects.values("mun_id").annotate(units=Count("name")).values("mun_id", "units")
+        wind_turbines = pd.DataFrame.from_records(queryset).set_index("mun_id")
+        return wind_turbines["units"].reindex(Municipality.objects.all().values_list("id", flat=True), fill_value=0)
 
 
 class WindTurbine2Approved(WindTurbine2):

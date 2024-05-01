@@ -648,7 +648,7 @@ class NumberWindturbinesPopup(RegionPopup):
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return quantity of wind turbines per municipality (index)."""
-        return models.WindTurbine.quantity_per_municipality()
+        return models.WindTurbine2Operating.quantity_per_municipality()
 
     def get_chart_data(self) -> Iterable:
         """Return single value for wind turbines in current municipality."""
@@ -685,7 +685,7 @@ class NumberWindturbines2045Popup(RegionPopup):
 
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
-        status_quo_data = models.WindTurbine.quantity_per_municipality().loc[self.selected_id]
+        status_quo_data = models.WindTurbine2Operating.quantity_per_municipality().loc[self.selected_id]
         future_data = super().get_chart_data()
         return [int(status_quo_data), int(future_data)]
 
@@ -698,7 +698,7 @@ class NumberWindturbinesSquarePopup(RegionPopup):
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return quantity of wind turbines per municipality (index)."""
-        wind_turbines = models.WindTurbine.quantity_per_municipality()
+        wind_turbines = models.WindTurbine2Operating.quantity_per_municipality()
         return calculations.calculate_square_for_value(wind_turbines)
 
     def get_chart_options(self) -> dict:
@@ -745,7 +745,7 @@ class NumberWindturbinesSquare2045Popup(RegionPopup):
     def get_chart_data(self) -> Iterable:
         """Return single value for wind turbines in current municipality."""
         status_quo_data = (
-            calculations.calculate_square_for_value(models.WindTurbine.quantity_per_municipality())
+            calculations.calculate_square_for_value(models.WindTurbine2Operating.quantity_per_municipality())
             .loc[self.selected_id]
             .round(1)
         )
