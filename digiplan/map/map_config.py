@@ -19,42 +19,52 @@ LEGEND = {
         SymbolLegendLayer(
             _("Windenergie"),
             _(
-                "Windenergieanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
-                "Marktstammdatenregister",
+                "Windenergieanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen (Daten: "
+                "Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung "
+                "kann dieser Datensatz unvollständig sein.",
             ),
             layer_id="wind",
             color="#6A89CC",
             symbol="circle",
         ),
         legend.LegendLayer(
-            _("Freiflächen-PV (in Betrieb)"),
-            _("PV-Freiflächenanlagen - Flächendaten in Betrieb befindlicher Anlagen der Regionalen Planungsstelle"),
+            _("FF-PV (in Betrieb)"),
+            _(
+                "Photovoltaik-Freiflächenanlagen in Betrieb, Flächendaten (Daten: RPG Oderland-Spree, Stand: "
+                "31.12.2023)",
+            ),
             layer_id="rpg_ols_pv_ground_operating",
         ),
         legend.LegendLayer(
-            _("Freiflächen-PV (genehmigt)"),
-            _("PV-Freiflächenanlagen - Flächendaten genehmigter Anlagen der Regionalen Planungsstelle"),
+            _("FF-PV (genehmigt)"),
+            _(
+                "Genehmigte Photovoltaik-Freiflächenanlagen, Flächendaten (Daten: RPG Oderland-Spree, Stand: "
+                "31.12.2023)",
+            ),
             layer_id="rpg_ols_pv_ground_approved",
         ),
         legend.LegendLayer(
-            _("Freiflächen-PV (geplant)"),
-            _("PV-Freiflächenanlagen - Flächendaten geplanter Anlagen der Regionalen Planungsstelle"),
+            _("FF-PV (geplant)"),
+            _("Geplante Photovoltaik-Freiflächenanlagen, Flächendaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"),
             layer_id="rpg_ols_pv_ground_planned",
         ),
         SymbolLegendLayer(
-            _("Freiflächen-PV (MaStR)"),
+            _("FF-PV (MaStR)"),
             _(
-                "PV-Freiflächenanlagen - Punktdaten in Betrieb befindlicher oder geplanter Anlagen aus dem "
-                "Marktstammdatenregister",
+                "Photovoltaik-Freiflächenanlagen in Betrieb oder geplant, Punktdaten (Daten: Marktstammdatenregister, "
+                "Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung kann dieser Datensatz "
+                "unvollständig sein.",
             ),
             layer_id="pvground",
             color="#EFAD25",
             symbol="circle",
-        ), SymbolLegendLayer(
+        ),
+        SymbolLegendLayer(
             _("Aufdach-PV"),
             _(
-                "PV-Aufdachanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
-                "Marktstammdatenregister",
+                "PV-Aufdachanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen(Daten: "
+                "Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung "
+                "kann dieser Datensatz unvollständig sein.",
             ),
             layer_id="pvroof",
             color="#FFD660",
@@ -63,8 +73,9 @@ LEGEND = {
         SymbolLegendLayer(
             _("Wasserkraft"),
             _(
-                "Wasserkraftanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
-                "Marktstammdatenregister",
+                "Wasserkraftanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen (Daten: "
+                "Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung "
+                "kann dieser Datensatz unvollständig sein.",
             ),
             layer_id="hydro",
             color="#A9BDE8",
@@ -73,8 +84,9 @@ LEGEND = {
         SymbolLegendLayer(
             _("Biomasse"),
             _(
-                "Biomasseanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
-                "Marktstammdatenregister",
+                "Biomasseanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen (Daten: "
+                "Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung "
+                "kann dieser Datensatz unvollständig sein.",
             ),
             layer_id="biomass",
             color="#52C41A",
@@ -83,8 +95,9 @@ LEGEND = {
         SymbolLegendLayer(
             _("Verbrennungskraftwerk"),
             _(
-                "Verbrennungskraftwerke - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
-                "Marktstammdatenregister",
+                "Verbrennungskraftwerke - Punktdaten realisierter oder in Betrieb befindlicher Anlagen (Daten: "
+                "Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung "
+                "kann dieser Datensatz unvollständig sein.",
             ),
             layer_id="combustion",
             color="#E6772E",
@@ -94,7 +107,8 @@ LEGEND = {
             _("Geo- oder Solarthermie-, Grubengas- und Klärschlamm-Anlagen"),
             _(
                 "Geo- oder Solarthermie-, Grubengas- und Klärschlamm-Anlagen - Punktdaten realisierter oder in "
-                "Betrieb befindlicher Anlagen aus dem Marktstammdatenregister",
+                "Betrieb befindlicher Anlagen (Daten: Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund "
+                "der Verzögerung bei der Datenmeldung kann dieser Datensatz unvollständig sein.",
             ),
             layer_id="gsgk",
             color="#C27BA0",
@@ -103,8 +117,9 @@ LEGEND = {
         SymbolLegendLayer(
             _("Batteriespeicher"),
             _(
-                "Batteriespeicher - Punktdaten realisierter oder in Betrieb befindlicher Anlagen aus dem "
-                "Marktstammdatenregister",
+                "Batteriespeicher - Punktdaten realisierter oder in Betrieb befindlicher Anlagen (Daten: "
+                "Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung "
+                "kann dieser Datensatz unvollständig sein.",
             ),
             layer_id="storage",
             color="#8D2D5F",
