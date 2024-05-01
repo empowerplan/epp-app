@@ -18,5 +18,7 @@
     {% endfor %}
   </table>
 
+  {% block chart %}{% endblock chart %}
+
   {% if description %}<div id="js-popup__description" class="popup__description">{{ description }}</div>{%  endif %}
 </div>
