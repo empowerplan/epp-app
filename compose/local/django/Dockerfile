@@ -60,6 +60,9 @@ SHELL ["/bin/bash", "-c"]
 COPY ./pyproject.toml ./poetry.lock ./
 RUN source /venv/bin/activate && python -m pip install --upgrade pip && pip install --no-cache-dir poetry && poetry install --no-root
 
+# Install oemof.tabular manually as there is a problem with poetry
+RUN source /venv/bin/activate && python -m pip install git+https://github.com/oemof/oemof-tabular@features/add-tsam-to-datapackage
+
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
 RUN chmod +x /entrypoint
