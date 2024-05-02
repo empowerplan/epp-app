@@ -20,11 +20,12 @@ const PRE_RESULTS = [
 ];
 
 const resultCharts = {
-  electricity_overview: "electricity_overview_chart",
-  electricity_autarky: "electricity_autarky_chart",
-  ghg_reduction: "ghg_reduction_chart",
-  heat_centralized: "heat_centralized_chart",
-  heat_decentralized: "heat_decentralized_chart",
+    "wind_capacity": "wind_capacity_chart",
+    "wind_areas": "wind_areas_chart",
+    "pv_ground_capacity": "pv_ground_capacity_chart",
+    "pv_ground_areas": "pv_ground_areas_chart",
+    "pv_roof_capacity": "pv_roof_capacity_chart",
+    "pv_roof_areas": "pv_roof_areas_chart",
 };
 
 // Setup
