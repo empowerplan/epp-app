@@ -5,6 +5,7 @@ import pathlib
 from typing import Any, Optional, Union
 
 import pandas as pd
+from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
 
 from digiplan.map import calculations, config, models
@@ -942,6 +943,44 @@ class BatteriesCapacityRegionChart(Chart):
         return chart_options
 
 
+class WindCapacityChart(PreResultsChart):
+    """Chart for wind capacity shown on diagram results page."""
+
+    lookup = "wind_capacity"
+
+    def get_chart_data(self) -> dict:
+        """Calculate population for whole region."""
+        return {
+            "capacity": calculations.capacities_per_municipality_2045(self.user_settings)["wind"].sum().round(),
+            "turbines": calculations.wind_turbines_per_municipality_2045(self.user_settings).sum().round(),
+        }
+
+    def render(self) -> dict:
+        """Place results from user settings into related chart entries."""
+        self.chart_options["series"][0]["data"][4]["value"] = self.chart_data["capacity"]
+        self.chart_options["series"][1]["data"][4]["value"] = self.chart_data["turbines"]
+        return self.chart_options
+
+
+class WindAreasChart(PreResultsChart):
+    """Chart for wind capacity shown on diagram results page."""
+
+    lookup = "wind_areas"
+
+    def get_chart_data(self) -> dict:
+        """Calculate population for whole region."""
+        area = calculations.areas_per_municipality_2045(self.user_settings)["wind"].sum().round()
+        region_area = models.Municipality.objects.values("area").aggregate(Sum("area"))["area__sum"]
+        area_percentage = area / region_area * 100
+        return {"area": area.round(), "area_percentage": area_percentage.round()}
+
+    def render(self) -> dict:
+        """Place results from user settings into related chart entries."""
+        self.chart_options["series"][0]["data"][2]["value"] = self.chart_data["area"]
+        self.chart_options["series"][1]["data"][2]["value"] = self.chart_data["area_percentage"]
+        return self.chart_options
+
+
 CHARTS: dict[str, Union[type[PreResultsChart], type[SimulationChart]]] = {
     "detailed_overview": DetailedOverviewChart,
     "electricity_overview": ElectricityOverviewChart,
@@ -964,6 +1003,8 @@ CHARTS: dict[str, Union[type[PreResultsChart], type[SimulationChart]]] = {
     "energy_capita_2045_region": EnergyCapita2045RegionChart,
     "energy_square_statusquo_region": EnergySquareRegionChart,
     "energy_square_2045_region": EnergySquare2045RegionChart,
+    "wind_areas": WindAreasChart,
+    "wind_capacity": WindCapacityChart,
     "wind_turbines_statusquo_region": WindTurbinesRegionChart,
     "wind_turbines_2045_region": WindTurbines2045RegionChart,
     "wind_turbines_square_statusquo_region": WindTurbinesSquareRegionChart,

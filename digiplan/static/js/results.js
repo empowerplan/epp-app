@@ -19,14 +19,16 @@ const PRE_RESULTS = [
   "heat_demand_capita_2045",
 ];
 
-const resultCharts = {
-    "wind_capacity": "wind_capacity_chart",
-    "wind_areas": "wind_areas_chart",
-    "pv_ground_capacity": "pv_ground_capacity_chart",
-    "pv_ground_areas": "pv_ground_areas_chart",
-    "pv_roof_capacity": "pv_roof_capacity_chart",
-    "pv_roof_areas": "pv_roof_areas_chart",
+const preResultCharts = {
+  wind_capacity: "wind_capacity_chart",
+  wind_areas: "wind_areas_chart",
+  // pv_ground_capacity: "pv_ground_capacity_chart",
+  // pv_ground_areas: "pv_ground_areas_chart",
+  // pv_roof_capacity: "pv_roof_capacity_chart",
+  // pv_roof_areas: "pv_roof_areas_chart",
 };
+
+const resultCharts = {};
 
 // Setup
 
@@ -56,6 +58,7 @@ futureDropdown.addEventListener("change", function () {
 
 // Subscriptions
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showPreResultCharts);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, storePreResults);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, disableResultButtons);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideRegionChart);
@@ -181,6 +184,11 @@ function showRegionChart(msg, lookup) {
 function hideRegionChart(msg) {
   clearChart("region_chart_statusquo");
   clearChart("region_chart_2045");
+  return logMessage(msg);
+}
+
+function showPreResultCharts(msg) {
+  showCharts(preResultCharts);
   return logMessage(msg);
 }
 
