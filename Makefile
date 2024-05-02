@@ -41,6 +41,9 @@ check_distill_coordinates:
 local_env_file:
 	python merge_local_dotenvs_in_dotenv.py
 
+celery:
+	redis-server --port 6379 & celery -A config.celery worker -l INFO
+
 update_vendor_assets:
 	# Note: call this command from the same folder your Makefile is located
 	# Note: this run only update minor versions.

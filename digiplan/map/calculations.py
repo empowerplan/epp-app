@@ -3,9 +3,7 @@
 from typing import Optional
 
 import pandas as pd
-from django.conf import settings
 from django.utils.translation import gettext_lazy as _
-from django_oemof.models import Simulation
 from django_oemof.results import get_results
 from oemof.tabular.postprocessing import calculations, core, helper
 
@@ -112,32 +110,34 @@ def capacities_per_municipality() -> pd.DataFrame:
     return datapackage.get_capacities_from_datapackage()
 
 
-def capacities_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
-    """Calculate capacities from 2045 scenario per municipality."""
-    results = get_results(
-        simulation_id,
-        {
-            "capacities": Capacities,
-        },
-    )
-    renewables = results["capacities"][
-        results["capacities"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
-    ]
-    mapping = {
-        "ABW-solar-pv_ground": "pv_ground",
-        "ABW-solar-pv_rooftop": "pv_roof",
-        "ABW-wind-onshore": "wind",
-        "ABW-hydro-ror": "hydro",
-        "ABW-biomass": "biomass",
-    }
-    renewables.index = renewables.index.droplevel(1).map(mapping)
-    renewables = renewables.reindex(["wind", "pv_roof", "pv_ground", "hydro"])
+def capacities_per_municipality_2045(parameters: dict) -> pd.DataFrame:
+    """Calculate capacities from 2045 scenario per municipality in MW."""
+    shares = calculate_potential_shares(parameters)
+    potential_capacities = datapackage.get_potential_values()  # in MW
 
-    parameters = Simulation.objects.get(pk=simulation_id).parameters
-    renewables = renewables * calculate_potential_shares(parameters)
-    renewables["bioenergy"] = 0.0
-    renewables["st"] = 0.0
-    return renewables.astype(float)
+    # Use wind profile for selected wind year
+    potential_capacities = potential_capacities.drop(
+        columns=[
+            column for column in potential_capacities if column.startswith("wind") and column != parameters["wind_year"]
+        ],
+    )
+    potential_capacities = potential_capacities.rename(columns={parameters["wind_year"]: "wind"})
+
+    # Apply shares from user selection
+    potential_capacities = potential_capacities * shares
+
+    # Aggregate pv ground profiles
+    pv_ground_columns = ["pv_soil_quality_low", "pv_soil_quality_medium", "pv_permanent_crops"]
+    potential_capacities["pv_ground"] = potential_capacities[pv_ground_columns].sum(axis=1)
+    potential_capacities = potential_capacities.drop(pv_ground_columns, axis=1)
+
+    # Set biomass potential to zero
+    potential_capacities["bioenergy"] = 0
+
+    # Correct order (for charts)
+    potential_capacities = potential_capacities[["wind", "pv_roof", "pv_ground", "hydro", "bioenergy"]]
+
+    return potential_capacities
 
 
 def energies_per_municipality() -> pd.DataFrame:
@@ -155,32 +155,13 @@ def energies_per_municipality() -> pd.DataFrame:
     return capacities * full_load_hours.values / 1e3
 
 
-def energies_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
-    """Calculate energies from 2045 scenario per municipality."""
-    results = get_results(
-        simulation_id,
-        {
-            "electricity_production": electricity_production,
-        },
-    )
-    renewables = results["electricity_production"][
-        results["electricity_production"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
-    ]
-    mapping = {
-        "ABW-solar-pv_ground": "pv_ground",
-        "ABW-solar-pv_rooftop": "pv_roof",
-        "ABW-wind-onshore": "wind",
-        "ABW-hydro-ror": "hydro",
-        "ABW-biomass": "biomass",
-    }
-    renewables.index = renewables.index.droplevel([1, 2]).map(mapping)
-    renewables = renewables.reindex(["wind", "pv_roof", "pv_ground", "hydro"])
-
-    parameters = Simulation.objects.get(pk=simulation_id).parameters
-    renewables = renewables * calculate_potential_shares(parameters)
-    renewables["bioenergy"] = 0.0
-    renewables["st"] = 0.0
-    return renewables.astype(float)
+def energies_per_municipality_2045(parameters: dict) -> pd.DataFrame:
+    """Calculate energies from 2045 scenario per municipality in MWh."""
+    capacities = capacities_per_municipality_2045(parameters)  # in MW
+    full_load_hours = datapackage.get_full_load_hours(year=2045).drop("st").rename({"ror": "hydro"})
+    full_load_hours = full_load_hours.reindex(index=["wind", "pv_roof", "pv_ground", "hydro", "bioenergy"])
+    energies = capacities * full_load_hours.values
+    return energies.fillna(0.0)
 
 
 def energy_shares_per_municipality() -> pd.DataFrame:
@@ -238,7 +219,7 @@ def electricity_demand_per_municipality(year: int = 2022) -> pd.DataFrame:
     return demands_per_sector.astype(float) * 1e-3
 
 
-def energy_shares_2045_per_municipality(simulation_id: int) -> pd.DataFrame:
+def energy_shares_2045_per_municipality(parameters: dict) -> pd.DataFrame:
     """
     Calculate energy shares of renewables from electric demand per municipality in 2045.
 
@@ -247,13 +228,13 @@ def energy_shares_2045_per_municipality(simulation_id: int) -> pd.DataFrame:
     pd.DataFrame
         Energy share per municipality (index) and technology (column)
     """
-    energies = energies_per_municipality_2045(simulation_id).mul(1e-3)
-    demands = electricity_demand_per_municipality_2045(simulation_id).sum(axis=1)
+    energies = energies_per_municipality_2045(parameters).mul(1e-3)
+    demands = electricity_demand_per_municipality_2045(parameters).sum(axis=1)
     energy_shares = energies.div(demands, axis=0)
     return energy_shares.astype(float).mul(1e2)
 
 
-def energy_shares_2045_region(simulation_id: int) -> pd.DataFrame:
+def energy_shares_2045_region(parameters: dict) -> pd.DataFrame:
     """
     Calculate energy shares of renewables from electric demand for region in 2045.
 
@@ -265,15 +246,15 @@ def energy_shares_2045_region(simulation_id: int) -> pd.DataFrame:
     pd.DataFrame
         Energy share per municipality (index) and technology (column)
     """
-    energies = energies_per_municipality_2045(simulation_id)
-    demands = electricity_demand_per_municipality_2045(simulation_id).sum(axis=1).mul(1e3)
+    energies = energies_per_municipality_2045(parameters)
+    demands = electricity_demand_per_municipality_2045(parameters).sum(axis=1).mul(1e3)
 
     demand_share = demands / demands.sum()
     energy_shares = energies.div(demands, axis=0).mul(demand_share, axis=0).sum(axis=0)
     return energy_shares.astype(float).mul(1e2)
 
 
-def electricity_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+def electricity_demand_per_municipality_2045(user_settings: dict) -> pd.DataFrame:
     """
     Calculate electricity demand per sector per municipality in GWh in 2045.
 
@@ -282,33 +263,12 @@ def electricity_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame
     pd.DataFrame
         Electricity demand per municipality (index) and sector (column)
     """
-    results = get_results(
-        simulation_id,
-        {
-            "electricity_demand": electricity_demand,
-        },
-    )
-    demand = results["electricity_demand"][
-        results["electricity_demand"].index.get_level_values(1).isin(config.SIMULATION_DEMANDS)
-    ]
-    demand = demand.droplevel([0, 2])
-    demands_per_sector = datapackage.get_power_demand()
-    mappings = {
-        "hh": "ABW-electricity-demand_hh",
-        "cts": "ABW-electricity-demand_cts",
-        "ind": "ABW-electricity-demand_ind",
-    }
-    demand = demand.reindex(mappings.values())
-    sector_shares = pd.DataFrame(
-        {sector: demands_per_sector[sector]["2022"] / demands_per_sector[sector]["2022"].sum() for sector in mappings},
-    )
-    demand = sector_shares * demand.values
-    demand.columns = demand.columns.map(lambda column: config.SIMULATION_DEMANDS[mappings[column]])
-    demand = demand * 1e-3
-    return demand.astype(float)
+    demand = electricity_demand_per_municipality(year=2022)
+    shares = [int(user_settings[key]) / 100 for key in ("s_v_3", "s_v_4", "s_v_5")]
+    return demand.iloc[:] * shares
 
 
-def heat_demand_per_municipality() -> pd.DataFrame:
+def heat_demand_per_municipality(year: int) -> pd.DataFrame:
     """
     Calculate heat demand per sector per municipality in GWh.
 
@@ -319,7 +279,7 @@ def heat_demand_per_municipality() -> pd.DataFrame:
     """
     demands_raw = datapackage.get_summed_heat_demand_per_municipality()
     demands_per_sector = pd.concat(
-        [distributions["cen"]["2022"] + distributions["dec"]["2022"] for distributions in demands_raw.values()],
+        [distributions["cen"][str(year)] + distributions["dec"][str(year)] for distributions in demands_raw.values()],
         axis=1,
     )
     demands_per_sector.columns = [
@@ -330,7 +290,7 @@ def heat_demand_per_municipality() -> pd.DataFrame:
     return demands_per_sector.astype(float) * 1e-3
 
 
-def heat_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+def heat_demand_per_municipality_2045(user_settings: dict) -> pd.DataFrame:
     """
     Calculate heat demand per sector per municipality in GWh in 2045.
 
@@ -339,29 +299,9 @@ def heat_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
     pd.DataFrame
         Heat demand per municipality (index) and sector (column)
     """
-    results = get_results(
-        simulation_id,
-        {
-            "heat_demand": heat_demand,
-        },
-    )
-    demand = results["heat_demand"]
-    demand.index = demand.index.map(lambda ind: f"heat-demand-{ind[1].split('_')[2]}")
-    demand = demand.groupby(level=0).sum()
-    demands_per_sector = datapackage.get_heat_demand()
-    mappings = {
-        "hh": "heat-demand-hh",
-        "cts": "heat-demand-cts",
-        "ind": "heat-demand-ind",
-    }
-    demand = demand.reindex(mappings.values())
-    sector_shares = pd.DataFrame(
-        {sector: demands_per_sector[sector]["2022"] / demands_per_sector[sector]["2022"].sum() for sector in mappings},
-    )
-    demand = sector_shares * demand.values
-    demand.columns = demand.columns.map(lambda column: config.SIMULATION_DEMANDS[mappings[column]])
-    demand = demand * 1e-3
-    return demand.astype(float)
+    demand = heat_demand_per_municipality(year=2022)
+    shares = [int(user_settings[key]) / 100 for key in ("w_v_3", "w_v_4", "w_v_5")]
+    return demand.iloc[:] * shares
 
 
 def electricity_from_from_biomass(simulation_id: int) -> pd.Series:
@@ -428,9 +368,9 @@ def electricity_from_from_biomass(simulation_id: int) -> pd.Series:
     return biomass.sum()
 
 
-def wind_turbines_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+def wind_turbines_per_municipality_2045(parameters: dict) -> pd.DataFrame:
     """Calculate number of wind turbines from 2045 scenario per municipality."""
-    capacities = capacities_per_municipality_2045(simulation_id)
+    capacities = capacities_per_municipality_2045(parameters)
     return capacities["wind"] / config.TECHNOLOGY_DATA["nominal_power_per_unit"]["wind"]
 
 
@@ -484,61 +424,29 @@ def electricity_heat_demand(simulation_id: int) -> pd.Series:
     return electricity_for_heat_sum
 
 
-def calculate_potential_shares(parameters: dict) -> pd.DataFrame:
+def calculate_potential_shares(parameters: dict) -> dict[str, float]:
     """Calculate potential shares depending on user settings."""
-    # DISAGGREGATION
-    # Wind
-    wind_areas = pd.read_csv(
-        settings.DIGIPIPE_DIR.path("scalars").path("potentialarea_wind_area_stats_muns.csv"),
-        index_col=0,
-    )
-    if parameters["s_w_3"]:
-        wind_area_per_mun = wind_areas["stp_2018_vreg"]
-    elif parameters["s_w_4_1"]:
-        wind_area_per_mun = wind_areas["stp_2027_vr"]
-    elif parameters["s_w_4_2"]:
-        wind_area_per_mun = wind_areas["stp_2027_repowering"]
-    elif parameters["s_w_5"]:
-        wind_area_per_mun = (
-            wind_areas["stp_2027_search_area_open_area"] * parameters["s_w_5_1"] / 100
-            + wind_areas["stp_2027_search_area_forest_area"] * parameters["s_w_5_2"] / 100
+    shares = {}
+    if "wind_year" in parameters:
+        wind_year = parameters["wind_year"]
+        share = 1
+        if wind_year == "wind_2024":
+            share = float(parameters["s_w_6"]) / float(config.ENERGY_SETTINGS_PANEL["s_w_6"]["max"])
+        if wind_year == "wind_2027":
+            share = float(parameters["s_w_7"]) / 100
+        shares["wind"] = share
+    if "s_pv_ff_3" in parameters:
+        shares.update(
+            {
+                "pv_soil_quality_low": int(parameters["s_pv_ff_3"]) / 100,
+                "pv_soil_quality_medium": int(parameters["s_pv_ff_4"]) / 100,
+                "pv_permanent_crops": int(parameters["s_pv_ff_5"]) / 100,
+            },
         )
-    else:
-        msg = "No wind switch set"
-        raise KeyError(msg)
-    wind_share_per_mun = wind_area_per_mun / wind_area_per_mun.sum()
-
-    # PV ground
-    pv_ground_areas = pd.read_csv(
-        settings.DIGIPIPE_DIR.path("scalars").path("potentialarea_pv_ground_area_stats_muns.csv", index_col=0),
-    )
-    pv_ground_area_per_mun = (
-        pv_ground_areas["agriculture_lfa-off_region"] * parameters["s_pv_ff_3"] / 100
-        + pv_ground_areas["road_railway_region"] * parameters["s_pv_ff_4"] / 100
-    )
-    pv_ground_share_per_mun = pv_ground_area_per_mun / pv_ground_area_per_mun.sum()
-
-    # PV roof
-    pv_roof_areas = pd.read_csv(
-        settings.DIGIPIPE_DIR.path("scalars").path("potentialarea_pv_roof_area_stats_muns.csv"),
-        index_col=0,
-    )
-    pv_roof_area_per_mun = pv_roof_areas["installable_power_total"]
-    pv_roof_share_per_mun = pv_roof_area_per_mun / pv_roof_area_per_mun.sum()
-
-    # Hydro
-    hydro_areas = pd.read_csv(
-        settings.DIGIPIPE_DIR.path("scalars").path("bnetza_mastr_hydro_stats_muns.csv"),
-        index_col=0,
-    )
-    hydro_area_per_mun = hydro_areas["capacity_net"]
-    hydro_share_per_mun = hydro_area_per_mun / hydro_area_per_mun.sum()
-
-    shares = pd.concat(
-        [wind_share_per_mun, pv_roof_share_per_mun, pv_ground_share_per_mun, hydro_share_per_mun],
-        axis=1,
-    )
-    shares.columns = ["wind", "pv_roof", "pv_ground", "hydro"]
+    if "s_pv_d_3" in parameters:
+        shares["pv_roof"] = int(parameters["s_pv_d_3"]) / 100
+    if "s_h_1" in parameters:
+        shares["hydro"] = int(parameters["s_h_1"]) / 100
     return shares
 
 

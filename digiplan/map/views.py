@@ -3,6 +3,7 @@ Views for map app.
 
 As map app is SPA, this module contains main view and various API points.
 """
+import json
 
 from django.conf import settings
 from django.http import HttpRequest, response
@@ -224,11 +225,9 @@ def get_charts(request: HttpRequest) -> response.JsonResponse:
         `div_id` is used in frontend to detect chart container.
     """
     lookups = request.GET.getlist("charts[]")
-    simulation_id = None
-    if "map_state[simulation_id]" in request.GET.dict():
-        simulation_id = int(request.GET.dict()["map_state[simulation_id]"])
+    map_state = json.loads(request.GET.get("map_state", "{}"))
     return response.JsonResponse(
-        {lookup: charts.CHARTS[lookup](simulation_id=simulation_id).render() for lookup in lookups},
+        {lookup: charts.CHARTS[lookup](user_settings=map_state).render() for lookup in lookups},
     )
 
 
@@ -239,4 +238,8 @@ class DetailKeyResultsView(TemplateView):
 
     def get_context_data(self, **kwargs) -> dict:  # noqa: ARG002
         """Get detail key results for requested technology."""
-        return {f"key_result_{key}": value for key, value in menu.detail_key_results(**self.request.GET.dict()).items()}
+        # Cut off leading "id_" from form field id
+        parameters = {
+            key[3:] if key.startswith("id_") else key: value for key, value in self.request.GET.dict().items()
+        }
+        return {f"key_result_{key}": value for key, value in menu.detail_key_results(**parameters).items()}

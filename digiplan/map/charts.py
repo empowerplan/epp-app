@@ -2,7 +2,7 @@
 
 import json
 import pathlib
-from typing import Any, Optional
+from typing import Any, Optional, Union
 
 import pandas as pd
 from django.utils.translation import gettext_lazy as _
@@ -101,19 +101,35 @@ class Chart:
         return
 
 
-class SimulationChart(Chart):
-    """For charts based on simulations."""
+class PreResultsChart(Chart):
+    """For charts based on user settings."""
 
-    def __init__(self, simulation_id: int) -> None:
+    def __init__(self, user_settings: dict) -> None:
         """
-        Init Detailed Overview Chart.
+        Init Chart.
 
         Parameters
         ----------
-        simulation_id: any
-            id of used Simulation
+        user_settings: dict
+            User settings coming from map
         """
-        self.simulation_id = simulation_id
+        self.user_settings = user_settings
+        super().__init__()
+
+
+class SimulationChart(Chart):
+    """For charts based on simulations."""
+
+    def __init__(self, user_settings: dict) -> None:
+        """
+        Init Chart.
+
+        Parameters
+        ----------
+        user_settings: dict
+            User settings coming from map
+        """
+        self.simulation_id = user_settings["simulation_id"]
         super().__init__()
 
 
@@ -338,7 +354,7 @@ class CapacityRegionChart(Chart):
         return chart_options
 
 
-class Capacity2045RegionChart(SimulationChart):
+class Capacity2045RegionChart(PreResultsChart):
     """Chart for regional capacities in 2045."""
 
     lookup = "capacity"
@@ -346,7 +362,7 @@ class Capacity2045RegionChart(SimulationChart):
     def get_chart_data(self) -> list:
         """Calculate capacities for whole region."""
         status_quo_data = calculations.capacities_per_municipality().sum().round(1)
-        future_data = calculations.capacities_per_municipality_2045(self.simulation_id).sum().astype(float).round(1)
+        future_data = calculations.capacities_per_municipality_2045(self.user_settings).sum().astype(float).round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -380,7 +396,7 @@ class CapacitySquareRegionChart(Chart):
         return chart_options
 
 
-class CapacitySquare2045RegionChart(SimulationChart):
+class CapacitySquare2045RegionChart(PreResultsChart):
     """Chart for regional capacities in 2045."""
 
     lookup = "capacity"
@@ -396,7 +412,7 @@ class CapacitySquare2045RegionChart(SimulationChart):
         )
         future_data = (
             calculations.calculate_square_for_value(
-                pd.DataFrame(calculations.capacities_per_municipality_2045(self.simulation_id).sum()).transpose(),
+                pd.DataFrame(calculations.capacities_per_municipality_2045(self.user_settings).sum()).transpose(),
             )
             .sum()
             .astype(float)
@@ -430,7 +446,7 @@ class EnergyRegionChart(Chart):
         return chart_options
 
 
-class Energy2045RegionChart(SimulationChart):
+class Energy2045RegionChart(PreResultsChart):
     """Chart for regional energy."""
 
     lookup = "capacity"
@@ -438,7 +454,7 @@ class Energy2045RegionChart(SimulationChart):
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
         status_quo_data = calculations.energies_per_municipality().sum().round(1)
-        future_data = calculations.energies_per_municipality_2045(self.simulation_id).sum().astype(float) * 1e-3
+        future_data = calculations.energies_per_municipality_2045(self.user_settings).sum().astype(float) * 1e-3
         future_data = future_data.round(1)
         return list(zip(status_quo_data, future_data))
 
@@ -468,7 +484,7 @@ class EnergyShareRegionChart(Chart):
         return chart_options
 
 
-class EnergyShare2045RegionChart(SimulationChart):
+class EnergyShare2045RegionChart(PreResultsChart):
     """Chart for regional energy shares."""
 
     lookup = "capacity"
@@ -476,7 +492,7 @@ class EnergyShare2045RegionChart(SimulationChart):
     def get_chart_data(self) -> None:
         """Calculate RES energy shares for whole region."""
         status_quo_data = calculations.energy_shares_region().round(1)
-        future_data = calculations.energy_shares_2045_region(self.simulation_id).round(1)
+        future_data = calculations.energy_shares_2045_region(self.user_settings).round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -510,7 +526,7 @@ class EnergyCapitaRegionChart(Chart):
         return chart_options
 
 
-class EnergyCapita2045RegionChart(SimulationChart):
+class EnergyCapita2045RegionChart(PreResultsChart):
     """Chart for regional energy."""
 
     lookup = "capacity"
@@ -526,7 +542,7 @@ class EnergyCapita2045RegionChart(SimulationChart):
         future_data = (
             (
                 calculations.calculate_capita_for_value(
-                    pd.DataFrame(calculations.energies_per_municipality_2045(self.simulation_id).sum()).transpose(),
+                    pd.DataFrame(calculations.energies_per_municipality_2045(self.user_settings).sum()).transpose(),
                 ).sum()
             )
             .astype(float)
@@ -566,7 +582,7 @@ class EnergySquareRegionChart(Chart):
         return chart_options
 
 
-class EnergySquare2045RegionChart(SimulationChart):
+class EnergySquare2045RegionChart(PreResultsChart):
     """Chart for regional energy shares per square meter."""
 
     lookup = "capacity"
@@ -582,7 +598,7 @@ class EnergySquare2045RegionChart(SimulationChart):
         future_data = (
             (
                 calculations.calculate_square_for_value(
-                    pd.DataFrame(calculations.energies_per_municipality_2045(self.simulation_id).sum()).transpose(),
+                    pd.DataFrame(calculations.energies_per_municipality_2045(self.user_settings).sum()).transpose(),
                 ).sum()
             )
             .astype(float)
@@ -616,7 +632,7 @@ class WindTurbinesRegionChart(Chart):
         return chart_options
 
 
-class WindTurbines2045RegionChart(SimulationChart):
+class WindTurbines2045RegionChart(PreResultsChart):
     """Chart for regional wind turbines in 2045."""
 
     lookup = "wind_turbines"
@@ -624,7 +640,7 @@ class WindTurbines2045RegionChart(SimulationChart):
     def get_chart_data(self) -> list[int]:
         """Calculate population for whole region."""
         status_quo_data = models.WindTurbine.quantity_per_municipality().sum()
-        future_data = calculations.wind_turbines_per_municipality_2045(self.simulation_id).sum()
+        future_data = calculations.wind_turbines_per_municipality_2045(self.user_settings).sum()
         return [int(status_quo_data), int(future_data)]
 
     def get_chart_options(self) -> dict:
@@ -660,7 +676,7 @@ class WindTurbinesSquareRegionChart(Chart):
         return chart_options
 
 
-class WindTurbinesSquare2045RegionChart(SimulationChart):
+class WindTurbinesSquare2045RegionChart(PreResultsChart):
     """Chart for regional wind turbines per square meter in 2045."""
 
     lookup = "wind_turbines"
@@ -677,7 +693,7 @@ class WindTurbinesSquare2045RegionChart(SimulationChart):
         future_data = (
             calculations.calculate_square_for_value(
                 pd.DataFrame(
-                    {"turbines": calculations.wind_turbines_per_municipality_2045(self.simulation_id).sum()},
+                    {"turbines": calculations.wind_turbines_per_municipality_2045(self.user_settings).sum()},
                     index=[1],
                 ),
             )
@@ -712,7 +728,7 @@ class ElectricityDemandRegionChart(Chart):
         return chart_options
 
 
-class ElectricityDemand2045RegionChart(SimulationChart):
+class ElectricityDemand2045RegionChart(PreResultsChart):
     """Chart for regional electricity demand."""
 
     lookup = "electricity_demand"
@@ -721,7 +737,7 @@ class ElectricityDemand2045RegionChart(SimulationChart):
         """Calculate capacities for whole region."""
         status_quo_data = calculations.electricity_demand_per_municipality().sum().round(1)
         future_data = (
-            calculations.electricity_demand_per_municipality_2045(self.simulation_id).sum().astype(float).round(1)
+            calculations.electricity_demand_per_municipality_2045(self.user_settings).sum().astype(float).round(1)
         )
         return list(zip(status_quo_data, future_data))
 
@@ -756,7 +772,7 @@ class ElectricityDemandCapitaRegionChart(Chart):
         return chart_options
 
 
-class ElectricityDemandCapita2045RegionChart(SimulationChart):
+class ElectricityDemandCapita2045RegionChart(PreResultsChart):
     """Chart for regional electricity demand per population in 2045."""
 
     lookup = "electricity_demand"
@@ -773,7 +789,7 @@ class ElectricityDemandCapita2045RegionChart(SimulationChart):
             (
                 calculations.calculate_capita_for_value(
                     pd.DataFrame(
-                        calculations.electricity_demand_per_municipality_2045(self.simulation_id).sum(),
+                        calculations.electricity_demand_per_municipality_2045(self.user_settings).sum(),
                     ).transpose(),
                 ).sum()
                 * 1e6
@@ -799,7 +815,7 @@ class HeatDemandRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.heat_demand_per_municipality().sum().round(1)
+        return calculations.heat_demand_per_municipality(year=2022).sum().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -809,15 +825,15 @@ class HeatDemandRegionChart(Chart):
         return chart_options
 
 
-class HeatDemand2045RegionChart(SimulationChart):
+class HeatDemand2045RegionChart(PreResultsChart):
     """Chart for regional heat demand in 2045."""
 
     lookup = "heat_demand"
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        status_quo_data = calculations.heat_demand_per_municipality().sum().round(1)
-        future_data = calculations.heat_demand_per_municipality_2045(self.simulation_id).sum().astype(float).round(1)
+        status_quo_data = calculations.heat_demand_per_municipality(year=2022).sum().round(1)
+        future_data = calculations.heat_demand_per_municipality_2045(self.user_settings).sum().astype(float).round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -838,7 +854,7 @@ class HeatDemandCapitaRegionChart(Chart):
         """Calculate capacities for whole region."""
         return (
             calculations.calculate_capita_for_value(
-                pd.DataFrame(calculations.heat_demand_per_municipality().sum()).transpose(),
+                pd.DataFrame(calculations.heat_demand_per_municipality(year=2022).sum()).transpose(),
             ).sum()
             * 1e6
         ).round(1)
@@ -851,7 +867,7 @@ class HeatDemandCapitaRegionChart(Chart):
         return chart_options
 
 
-class HeatDemandCapita2045RegionChart(SimulationChart):
+class HeatDemandCapita2045RegionChart(PreResultsChart):
     """Chart for regional heat demand per population in 2045."""
 
     lookup = "heat_demand"
@@ -860,7 +876,7 @@ class HeatDemandCapita2045RegionChart(SimulationChart):
         """Calculate capacities for whole region."""
         status_quo_data = (
             calculations.calculate_capita_for_value(
-                pd.DataFrame(calculations.heat_demand_per_municipality().sum()).transpose(),
+                pd.DataFrame(calculations.heat_demand_per_municipality(year=2022).sum()).transpose(),
             ).sum()
             * 1e6
         ).round(1)
@@ -868,7 +884,7 @@ class HeatDemandCapita2045RegionChart(SimulationChart):
             (
                 calculations.calculate_capita_for_value(
                     pd.DataFrame(
-                        calculations.heat_demand_per_municipality_2045(self.simulation_id).sum(),
+                        calculations.heat_demand_per_municipality_2045(self.user_settings).sum(),
                     ).transpose(),
                 ).sum()
                 * 1e6
@@ -923,7 +939,7 @@ class BatteriesCapacityRegionChart(Chart):
         return chart_options
 
 
-CHARTS: dict[str, type[Chart]] = {
+CHARTS: dict[str, Union[type[PreResultsChart], type[SimulationChart]]] = {
     "detailed_overview": DetailedOverviewChart,
     "electricity_overview": ElectricityOverviewChart,
     "electricity_autarky": ElectricityAutarkyChart,
@@ -960,6 +976,13 @@ CHARTS: dict[str, type[Chart]] = {
     "batteries_statusquo_region": BatteriesRegionChart,
     "batteries_capacity_statusquo_region": BatteriesCapacityRegionChart,
 }
+
+PRE_RESULTS = (
+    "electricity_demand_2045_region",
+    "electricity_demand_capita_2045_region",
+    "heat_demand_2045_region",
+    "heat_demand_capita_2045_region",
+)
 
 
 def create_chart(lookup: str, chart_data: Optional[Any] = None) -> dict:
