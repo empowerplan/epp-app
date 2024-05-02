@@ -22,10 +22,10 @@ const PRE_RESULTS = [
 const preResultCharts = {
   wind_capacity: "wind_capacity_chart",
   wind_areas: "wind_areas_chart",
-  // pv_ground_capacity: "pv_ground_capacity_chart",
-  // pv_ground_areas: "pv_ground_areas_chart",
-  // pv_roof_capacity: "pv_roof_capacity_chart",
-  // pv_roof_areas: "pv_roof_areas_chart",
+  pv_ground_capacity: "pv_ground_capacity_chart",
+  pv_ground_areas: "pv_ground_areas_chart",
+  pv_roof_capacity: "pv_roof_capacity_chart",
+  pv_roof_areas: "pv_roof_areas_chart",
 };
 
 const resultCharts = {};
