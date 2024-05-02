@@ -10,6 +10,7 @@
         "GHD",
         "Industrie"
       ],
+      "itemGap": 15,
       "orient": "vertical",
       "right": "1%",
       "bottom": "35%"

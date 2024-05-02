@@ -6,13 +6,14 @@
     }
   },
   "legend": {
-    "data": ["Fläche (ha)", "% der Regionsfläche"]
+    "data": ["Fläche (ha)", "% der Regionsfläche"],
+    "itemGap": 15
   },
   "grid": {
     "top": "10%",
     "left": "3%",
     "right": "3%",
-    "bottom": "10%",
+    "bottom": "18%",
     "containLabel": true
   },
   "xAxis": {
