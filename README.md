@@ -41,6 +41,12 @@ curl -sSL https://install.python-poetry.org | python3 -
 poetry install
 ```
 
+Install oemof.tabular manually, as there is currently a problem with poetry:
+
+```
+pip install git+https://github.com/oemof/oemof-tabular@features/add-tsam-to-datapackage
+```
+
 The project uses [pre-commit](https://pre-commit.com/) in order to check for errors and
 linting bugs before commits.
 To activate pre-commit simply run:
