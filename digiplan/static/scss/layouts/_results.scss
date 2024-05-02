@@ -13,7 +13,7 @@
 
 .main-results {
   @extend .container;
-  @extend .mb-4;
+  @extend .mb-2;
 
   &__row {
     @extend .row;
@@ -116,7 +116,7 @@
   }
 
   &__header {
-    @extend .pt-4;
+    @extend .pt-3;
 
     h2 {
       @extend .fs-6;
@@ -138,11 +138,11 @@
     @extend .col-xl-6;
 
     &:nth-of-type(odd) {
-      padding: 1rem 5rem 2rem 1rem;
+      padding: 1rem 3rem 2rem 1rem;
     }
 
     &:nth-of-type(even) {
-      padding: 1rem 1rem 2rem 5rem;
+      padding: 1rem 1rem 2rem 3rem;
     }
 
     @include media-breakpoint-up(xl) {
