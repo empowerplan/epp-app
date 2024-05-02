@@ -110,9 +110,8 @@ def capacities_per_municipality() -> pd.DataFrame:
     return datapackage.get_capacities_from_datapackage()
 
 
-def capacities_per_municipality_2045(parameters: dict) -> pd.DataFrame:
+def capacities_per_municipality_2045(parameters: dict, *, aggregate_pv_ground: bool = True) -> pd.DataFrame:
     """Calculate capacities from 2045 scenario per municipality in MW."""
-    shares = calculate_potential_shares(parameters)
     potential_capacities = datapackage.get_potential_values()  # in MW
 
     # Use wind profile for selected wind year
@@ -123,19 +122,35 @@ def capacities_per_municipality_2045(parameters: dict) -> pd.DataFrame:
     )
     potential_capacities = potential_capacities.rename(columns={parameters["wind_year"]: "wind"})
 
-    # Apply shares from user selection
-    potential_capacities = potential_capacities * shares
+    # Apply wind capacity from user selection
+    wind_capacity = int(parameters["s_w_1"])
+    potential_capacities["wind"] = potential_capacities["wind"] / potential_capacities["wind"].sum() * wind_capacity
 
-    # Aggregate pv ground profiles
+    # Apply pv_ground capacity
+    pv_ground_capacity = int(parameters["s_pv_ff_1"])
     pv_ground_columns = ["pv_soil_quality_low", "pv_soil_quality_medium", "pv_permanent_crops"]
-    potential_capacities["pv_ground"] = potential_capacities[pv_ground_columns].sum(axis=1)
-    potential_capacities = potential_capacities.drop(pv_ground_columns, axis=1)
+    pv_ground_sums = potential_capacities[pv_ground_columns].sum()
+    pv_ground_shares = pv_ground_sums / pv_ground_sums.sum()
+    potential_capacities[pv_ground_columns] = (
+        potential_capacities[pv_ground_columns] / pv_ground_sums * pv_ground_shares * pv_ground_capacity
+    )
+
+    if aggregate_pv_ground:
+        potential_capacities["pv_ground"] = potential_capacities[pv_ground_columns].sum(axis=1)
+        potential_capacities = potential_capacities.drop(pv_ground_columns, axis=1)
+
+    # Apply pv_roof capacity
+    pv_roof_capacity = int(parameters["s_pv_d_1"])
+    potential_capacities["pv_roof"] = (
+        potential_capacities["pv_roof"] / potential_capacities["pv_roof"].sum() * pv_roof_capacity
+    )
 
     # Set biomass potential to zero
     potential_capacities["bioenergy"] = 0
 
     # Correct order (for charts)
-    potential_capacities = potential_capacities[["wind", "pv_roof", "pv_ground", "hydro", "bioenergy"]]
+    if not aggregate_pv_ground:
+        potential_capacities = potential_capacities[["wind", "pv_roof", "pv_ground", "hydro", "bioenergy"]]
 
     return potential_capacities
 
