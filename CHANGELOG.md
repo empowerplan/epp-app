@@ -16,6 +16,8 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Changed
 - Adapt municipality label font size according to zoom level
 - update mapengine to v1.4.1
+- Update layer list and replace wind and pv ground model data from MaStR with
+  data from RPG
 
 ### Changed
 - pre results can be shown before simulation has finished
