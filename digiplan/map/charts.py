@@ -696,7 +696,10 @@ class WindTurbinesSquareRegionChart(Chart):
         return [
             float(
                 calculations.calculate_square_for_value(
-                    pd.DataFrame({"turbines": models.WindTurbine2Operating.quantity_per_municipality().sum()}, index=[1]),
+                    pd.DataFrame(
+                        {"turbines": models.WindTurbine2Operating.quantity_per_municipality().sum()},
+                        index=[1],
+                    ),
                 )
                 .sum()
                 .round(2),

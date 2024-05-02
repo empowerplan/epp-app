@@ -257,7 +257,8 @@ def get_capacities_from_datapackage() -> pd.DataFrame:
             pd.read_csv(
                 settings.DIGIPIPE_DIR.path("scalars").path(
                     f"bnetza_mastr_{tech}_stats_muns.csv"
-                    if tech not in ["wind", "pv_ground"] else filenames_rpg_data.get(tech)
+                    if tech not in ["wind", "pv_ground"]
+                    else filenames_rpg_data.get(tech),
                 ),
                 index_col="municipality_id",
                 usecols=["municipality_id", "capacity_net"],

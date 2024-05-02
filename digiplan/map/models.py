@@ -3,7 +3,7 @@
 
 import pandas as pd
 from django.contrib.gis.db import models
-from django.db.models import Sum, Count
+from django.db.models import Count, Sum
 from django.utils.translation import gettext_lazy as _
 
 from .managers import LabelMVTManager, RegionMVTManager, StaticMVTManager
