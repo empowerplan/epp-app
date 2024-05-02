@@ -85,10 +85,8 @@ document.addEventListener('DOMContentLoaded', function() {
       mutations.forEach(mutation => {
         if (mutation.attributeName === 'class' && !arrowDisplayed) {
           if (resultTab.classList.contains('active')) {
-            setTimeout(() => {
-              arrow.classList.add('show');
-              arrowDisplayed = true;
-            }, 1000);
+            arrow.classList.add('show');
+            arrowDisplayed = true;
           }
         }
       });
