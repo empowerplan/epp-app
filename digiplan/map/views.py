@@ -86,34 +86,68 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         }
         context["sources"] = categorized_sources
         context["store_cold_init"] = config.STORE_COLD_INIT
+
+        context["wind_capacity"] = charts.Chart("wind_capacity").render()
+        context["wind_areas"] = charts.Chart("wind_areas").render()
+        context["pv_ground_capacity"] = charts.Chart("pv_ground_capacity").render()
+        context["pv_ground_areas"] = charts.Chart("pv_ground_areas").render()
+        context["pv_roof_capacity"] = charts.Chart("pv_roof_capacity").render()
+        context["pv_roof_areas"] = charts.Chart("pv_roof_areas").render()
         context["detailed_overview"] = charts.Chart("detailed_overview").render()
-        context["ghg_overview"] = charts.Chart("ghg_overview").render()
         context["electricity_overview"] = charts.Chart("electricity_overview").render()
         context["electricity_autarky"] = charts.Chart("electricity_autarky").render()
         context["heat_decentralized"] = charts.Chart("heat_decentralized").render()
         context["heat_centralized"] = charts.Chart("heat_centralized").render()
-        context["ghg_history"] = charts.Chart("ghg_history").render()
-        context["ghg_reduction"] = charts.Chart("ghg_reduction").render()
         context["onboarding_wind"] = charts.Chart("onboarding_wind").render()
         context["onboarding_pv_ground"] = charts.Chart("onboarding_pv_ground").render()
         context["onboarding_pv_roof"] = charts.Chart("onboarding_pv_roof").render()
 
         # TODO(Hendrik Huyskens): Replace result boxes with results after simulation run
         # https://github.com/empowerplan/epp-app/issues/34
-        context["results_electricity"] = forms.ResultsBox(
-            "82,8 %",
-            "des <span>Stroms</span> aus erneuerbaren Quellen in 2040",
+        context["results_electricity_energy"] = forms.ResultsBox(
+            "4 TWh",
+            "<span>Strom</span> werden aus Wind und Photovoltaik erzeugt",
+            category="electricity",
+        )
+        context["results_electricity_autarky"] = forms.ResultsBox(
+            "50 %",
+            "<span>der Zeit wird der Strombedarf</span> komplett aus regionalen erneuerbaren Quellen gedeckt",
+            category="electricity",
+        )
+        context["results_electricity_area"] = forms.ResultsBox(
+            "4 %",
+            "der <span>Regionsfläche</span> werden für Windenergie und Photovoltaik verwendet",
             category="electricity",
         )
         context["results_heat"] = forms.ResultsBox("50,0 %", "...", category="heat")
-        context["results_wind"] = forms.ResultsBox(
-            "42,8 %",
-            "der Landesfläche für die <span>Windenergienutzung</span> in 2040",
+        context["results_wind_goal"] = forms.ResultsBox(
+            "80 %",
+            "der <span>Brandenburger Ausbauziele 2040</span> werden erreicht",
             category="wind",
         )
-        context["results_pv"] = forms.ResultsBox(
-            "35,8 %",
-            "des <span>Stroms</span> aus erneuerbaren Quellen in 2040",
+        context["results_wind_area"] = forms.ResultsBox(
+            "2,5 %",
+            "der <span>Regionsfläche</span> werden für die Windenergie verwendet",
+            category="wind",
+        )
+        context["results_wind_demand_share"] = forms.ResultsBox(
+            "50 %",
+            "des <span>Strombedarfs</span> werden durch Windstrom gedeckt",
+            category="wind",
+        )
+        context["results_pv_goal"] = forms.ResultsBox(
+            "80 %",
+            "der <span>Brandenburger Ausbauziele 2040</span> werden erreicht",
+            category="pv",
+        )
+        context["results_pv_area"] = forms.ResultsBox(
+            "1,1 %",
+            "der <span>Regionsfläche</span> werden für Freiflächen-PV verwendet",
+            category="pv",
+        )
+        context["results_pv_demand_share"] = forms.ResultsBox(
+            "30 %",
+            "des <span>Strombedarfs</span> werden durch PV-Strom gedeckt",
             category="pv",
         )
         context["results_mobility"] = forms.ResultsBox("22,8 %", "...", category="mobility")

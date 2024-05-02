@@ -1,0 +1,74 @@
+{
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    }
+  },
+  "legend": {
+    "data": ["Fläche (ha)", "% der Regionsfläche"]
+  },
+  "grid": {
+    "top": "10%",
+    "left": "3%",
+    "right": "3%",
+    "bottom": "10%",
+    "containLabel": true
+  },
+  "xAxis": {
+    "type": "category",
+    "data": ["Klassische PV", "Agri-PV\n(vertikal)", "Agri-PV\n(Dauerkulturen)"]
+  },
+  "yAxis": [
+    {
+      "type": "value",
+      "max": 6000,
+      "axisLabel": {
+        "formatter": "{value} ha"
+      }
+    },
+    {
+      "type": "value",
+      "max": 3,
+      "axisLabel": {
+        "formatter": "{value} %"
+      }
+    }
+  ],
+  "series": [
+    {
+      "name": "Fläche (ha)",
+      "type": "bar",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 90,
+        "color": "#333"
+      },
+      "color": "#efad25",
+      "data": [
+        2084,
+        2603,
+        377
+      ],
+      "yAxisIndex": 0
+    },
+    {
+      "name": "% der Regionsfläche",
+      "type": "bar",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 90,
+        "color": "#333"
+      },
+      "color": "#ffd660",
+      "data": [
+        0.5,
+        0.6,
+        0.1
+      ],
+      "yAxisIndex": 1
+    }
+  ]
+}

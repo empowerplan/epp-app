@@ -11,10 +11,13 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - dependabot
 - key results for wind, pv ground and pv roof settings panels
 - scenario settings
+- additional slider marker
 
 ### Changed
 - Adapt municipality label font size according to zoom level
 - update mapengine to v1.4.1
+- Update layer list and replace wind and pv ground model data from MaStR with
+  data from RPG
 - django-oemof to v0.18.0
 - oemof.tabular to support TSAM
 
@@ -25,6 +28,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - duplicate loading of JS modules due to missing module support in django staticfile storage
 - settlement 200m layer is coupled to settlement layer (de)-activation
 - basemap controls
+- top wizard layout
 
 ## [0.1.0] - 2024-03-19
 ### Added

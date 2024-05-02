@@ -1,0 +1,110 @@
+{
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    }
+  },
+  "legend": {
+    "data": ["Fläche (ha)", "% der Regionsfläche"]
+  },
+  "grid": {
+    "top": "10%",
+    "left": "3%",
+    "right": "3%",
+    "bottom": "10%",
+    "containLabel": true
+  },
+  "xAxis": {
+    "type": "category",
+    "data": ["Regionalplan\n2018", "Entwurf\n2024", "Dein\nSzenario*"]
+  },
+  "yAxis": [
+    {
+      "type": "value",
+      "max": 12000,
+      "axisLabel": {
+        "formatter": "{value} ha"
+      }
+    },
+    {
+      "type": "value",
+      "max": 3,
+      "axisLabel": {
+        "formatter": "{value} %"
+      }
+    }
+  ],
+  "series": [
+    {
+      "name": "Fläche (ha)",
+      "type": "bar",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 90,
+        "color": "#fff"
+      },
+      "color": "#6A89CC",
+      "data": [
+        7391,
+        8988,
+        {
+          "value": 10000,
+          "itemStyle": {
+            "color": "#BAE1F6"
+          }
+        }
+      ],
+      "yAxisIndex": 0
+    },
+    {
+      "name": "% der Regionsfläche",
+      "type": "bar",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 90,
+        "color": "#fff"
+      },
+      "color": "#b6caf3",
+      "data": [
+        1.62,
+        1.97,
+        {
+          "value": 2,
+          "itemStyle": {
+            "color": "#BAE1F6"
+          }
+        }
+      ],
+      "yAxisIndex": 1,
+      "markLine": {
+        "symbol": "none",
+        "lineStyle": {
+          "color": "#495e8a",
+          "type": "dashed",
+          "width": 2
+        },
+        "data": [
+          {
+            "yAxis": 1.8,
+            "label": {
+              "formatter": "Ziel WindBG 2027",
+              "color": "#495e8a",
+              "position": "insideStartTop"
+            }
+          },
+          {
+            "yAxis": 2.2,
+            "label": {
+              "formatter": "Ziel WindBG 2032",
+              "color": "#495e8a",
+              "position": "insideStartTop"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

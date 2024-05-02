@@ -307,7 +307,7 @@ function createPercentagesOfPowerSources(msg) {
 }
 
 /* when the other forms get Status Quo marks, there needs to be an iteration over the forms! (line 117)*/
-function updateSliderMarks(msg) {
+export function updateSliderMarks(msg) {
   for (let [slider_name, slider_marks] of Object.entries(
     store.cold.slider_marks,
   )) {

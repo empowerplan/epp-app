@@ -147,24 +147,6 @@ class DetailedOverviewChart(SimulationChart):
         return self.chart_options
 
 
-class GHGReductionChart(SimulationChart):
-    """GHG Reduction Chart. Shows greenhouse gas emissions."""
-
-    lookup = "ghg_reduction"
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.get_reduction(simulation_id=self.simulation_id)
-
-    def render(self) -> dict:  # noqa: D102
-        # Enter import and energy from renewables
-        for i, item in enumerate(self.chart_options["series"][7:9]):
-            item["data"][1] = self.chart_data[i]
-        # Calculate emission offset
-        summed_emissions_2019 = sum(item["data"][0] for item in self.chart_options["series"][:7])
-        self.chart_options["series"][0]["data"][1] = summed_emissions_2019 - sum(self.chart_data)
-        return self.chart_options
-
-
 class ElectricityOverviewChart(SimulationChart):
     """Chart for electricity overview."""
 
@@ -283,23 +265,6 @@ class HeatStructureDecentralChart(HeatStructureChart):
 
     def get_chart_data(self):  # noqa: D102, ANN201
         return calculations.heat_overview(simulation_id=self.simulation_id, distribution="decentral")
-
-
-class GhgHistoryChart(SimulationChart):
-    """GHG history chart."""
-
-    lookup = "ghg_history"
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        # TODO(Hendrik): Get static data from digipipe datapackage  # noqa: TD003
-        return pd.DataFrame()
-
-    def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
-        return self.chart_options
 
 
 class PopulationRegionChart(Chart):
@@ -658,7 +623,7 @@ class WindTurbinesRegionChart(Chart):
 
     def get_chart_data(self) -> list[int]:
         """Calculate population for whole region."""
-        return [int(models.WindTurbine.quantity_per_municipality().sum())]
+        return [int(models.WindTurbine2Operating.quantity_per_municipality().sum())]
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -674,7 +639,7 @@ class WindTurbines2045RegionChart(PreResultsChart):
 
     def get_chart_data(self) -> list[int]:
         """Calculate population for whole region."""
-        status_quo_data = models.WindTurbine.quantity_per_municipality().sum()
+        status_quo_data = models.WindTurbine2Operating.quantity_per_municipality().sum()
         future_data = calculations.wind_turbines_per_municipality_2045(self.user_settings).sum()
         return [int(status_quo_data), int(future_data)]
 
@@ -696,7 +661,10 @@ class WindTurbinesSquareRegionChart(Chart):
         return [
             float(
                 calculations.calculate_square_for_value(
-                    pd.DataFrame({"turbines": models.WindTurbine.quantity_per_municipality().sum()}, index=[1]),
+                    pd.DataFrame(
+                        {"turbines": models.WindTurbine2Operating.quantity_per_municipality().sum()},
+                        index=[1],
+                    ),
                 )
                 .sum()
                 .round(2),
@@ -720,7 +688,7 @@ class WindTurbinesSquare2045RegionChart(PreResultsChart):
         """Calculate population for whole region."""
         status_quo_data = (
             calculations.calculate_square_for_value(
-                pd.DataFrame({"turbines": models.WindTurbine.quantity_per_municipality().sum()}, index=[1]),
+                pd.DataFrame({"turbines": models.WindTurbine2Operating.quantity_per_municipality().sum()}, index=[1]),
             )
             .sum()
             .round(2)
@@ -976,7 +944,6 @@ class BatteriesCapacityRegionChart(Chart):
 
 CHARTS: dict[str, Union[type[PreResultsChart], type[SimulationChart]]] = {
     "detailed_overview": DetailedOverviewChart,
-    "ghg_reduction": GHGReductionChart,
     "electricity_overview": ElectricityOverviewChart,
     "electricity_autarky": ElectricityAutarkyChart,
     "heat_decentralized": HeatStructureDecentralChart,

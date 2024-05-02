@@ -105,6 +105,13 @@
           color: #2348C3;
           @extend .fw-semibold;
         }
+
+        .disclaimer {
+          @extend .text-center;
+          @extend .fs-6;
+          color: #E6772E;
+          @extend .fw-semibold;
+        }
       }
     }
 

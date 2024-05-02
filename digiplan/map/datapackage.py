@@ -247,10 +247,19 @@ def get_full_load_hours(year: int) -> pd.Series:
 @cache_memoize(timeout=None)
 def get_capacities_from_datapackage() -> pd.DataFrame:
     """Return renewable capacities for given year from datapackage."""
+    # Override MaStR data manually
+    filenames_rpg_data = {
+        "wind": "rpg_ols_wind_stats_muns_operating.csv",
+        "pv_ground": "rpg_ols_pv_ground_stats_muns_operating.csv",
+    }
     capacities = pd.concat(
         [
             pd.read_csv(
-                settings.DIGIPIPE_DIR.path("scalars").path(f"bnetza_mastr_{tech}_stats_muns.csv"),
+                settings.DIGIPIPE_DIR.path("scalars").path(
+                    f"bnetza_mastr_{tech}_stats_muns.csv"
+                    if tech not in ["wind", "pv_ground"]
+                    else filenames_rpg_data.get(tech),
+                ),
                 index_col="municipality_id",
                 usecols=["municipality_id", "capacity_net"],
             ).rename(columns={"capacity_net": tech})
@@ -266,9 +275,9 @@ def get_capacities_from_sliders(year: int) -> pd.Series:
     """Return renewable capacities for given year from slider settings (totals for each technology)."""
     if year == 2022:  # noqa: PLR2004
         lookup = "status_quo"
-        bioenergy_power = 55.7  # Workaround for bioenergy as there's no slider
+        bioenergy_power = 98.476  # Workaround for bioenergy as there's no slider
     elif year == 2045:  # noqa: PLR2004
-        lookup = "future_scenario"
+        lookup = "future_scenario_2040"
         bioenergy_power = 0
     else:
         msg = "Unknown year"
