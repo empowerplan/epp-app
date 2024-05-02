@@ -1,5 +1,37 @@
 {% load static i18n %}
 
+<div class="panel-accordion" id="useCasesAccordion">
+  <div class="panel-accordion__item">
+    <h2 class="panel-accordion__header" id="useCasesHeading">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#useCasesCollapse" aria-expanded="false" aria-controls="useCasesCollapse">
+        <svg width="14" height="14" fill="currentColor" version="1.1" viewBox="0 0 16.933 16.936" xmlns="http://www.w3.org/2000/svg">
+          <path d="m6.1387 0.1875-1.4961 1.4961 6.7832 6.7832-6.7832 6.7832 1.4961 1.4961 8.2793-8.2793z">
+         </svg>
+        {% translate "Schnelleinstieg nach Anwendungsfall" %}
+      </button>
+    </h2>
+    <div id="useCasesCollapse" class="accordion-collapse collapse" aria-labelledby="useCasesHeading" data-bs-parent="#useCasesAccordion">
+      <div class="panel-accordion__body">
+        <div>
+          <button type="button" class="btn btn-link animate-icon-right">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+              <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+            </svg>
+            {% translate "PV-Freiflächen finden" %}
+          </button>
+        </div>
+        <div>
+          <button type="button" class="btn btn-link animate-icon-right">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+              <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+            </svg>
+            {% translate "Windflächen finden" %}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="panel__settings">
   <div class="panel-item">
     <h2 class="panel-item__heading">
@@ -51,3 +83,16 @@
     </div>
   </div>
 </div>
+
+<script>
+  const useCasesHeading = document.querySelector('#useCasesHeading svg');
+  const useCasesCollapse = document.getElementById('useCasesCollapse');
+
+  useCasesCollapse.addEventListener('show.bs.collapse', function () {
+    useCasesHeading.classList.add('rotate-90');
+  });
+
+  useCasesCollapse.addEventListener('hide.bs.collapse', function () {
+    useCasesHeading.classList.remove('rotate-90');
+  });
+</script>
