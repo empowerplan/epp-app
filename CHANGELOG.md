@@ -29,6 +29,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - settlement 200m layer is coupled to settlement layer (de)-activation
 - basemap controls
 - top wizard layout
+- municipality borders and labels
 
 ## [0.1.0] - 2024-03-19
 ### Added
