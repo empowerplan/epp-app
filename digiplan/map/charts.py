@@ -623,7 +623,7 @@ class WindTurbinesRegionChart(Chart):
 
     def get_chart_data(self) -> list[int]:
         """Calculate population for whole region."""
-        return [int(models.WindTurbine.quantity_per_municipality().sum())]
+        return [int(models.WindTurbine2Operating.quantity_per_municipality().sum())]
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -639,7 +639,7 @@ class WindTurbines2045RegionChart(PreResultsChart):
 
     def get_chart_data(self) -> list[int]:
         """Calculate population for whole region."""
-        status_quo_data = models.WindTurbine.quantity_per_municipality().sum()
+        status_quo_data = models.WindTurbine2Operating.quantity_per_municipality().sum()
         future_data = calculations.wind_turbines_per_municipality_2045(self.user_settings).sum()
         return [int(status_quo_data), int(future_data)]
 
@@ -661,7 +661,10 @@ class WindTurbinesSquareRegionChart(Chart):
         return [
             float(
                 calculations.calculate_square_for_value(
-                    pd.DataFrame({"turbines": models.WindTurbine.quantity_per_municipality().sum()}, index=[1]),
+                    pd.DataFrame(
+                        {"turbines": models.WindTurbine2Operating.quantity_per_municipality().sum()},
+                        index=[1],
+                    ),
                 )
                 .sum()
                 .round(2),
@@ -685,7 +688,7 @@ class WindTurbinesSquare2045RegionChart(PreResultsChart):
         """Calculate population for whole region."""
         status_quo_data = (
             calculations.calculate_square_for_value(
-                pd.DataFrame({"turbines": models.WindTurbine.quantity_per_municipality().sum()}, index=[1]),
+                pd.DataFrame({"turbines": models.WindTurbine2Operating.quantity_per_municipality().sum()}, index=[1]),
             )
             .sum()
             .round(2)

@@ -132,6 +132,117 @@
       "text-size": 12
     }
   },
+  "rpg_ols_wind_approved": {
+    "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
+    "layout": {
+      "icon-image": "wind",
+      "icon-size": 0.4,
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "blue"
+    }
+  },
+  "rpg_ols_wind_approved_cluster": {
+    "type": "circle",
+    "filter": ["has", "point_count"],
+    "paint": {
+      "circle-color": "#6A89CC",
+      "circle-radius": [
+        "step",
+        ["get", "point_count"],
+        20,
+        15,
+        30,
+        50,
+        40
+      ]
+    }
+  },
+  "rpg_ols_wind_approved_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
+    }
+  },
+  "rpg_ols_wind_operating": {
+    "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
+    "layout": {
+      "icon-image": "wind",
+      "icon-size": 0.4,
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "blue"
+    }
+  },
+  "rpg_ols_wind_operating_cluster": {
+    "type": "circle",
+    "filter": ["has", "point_count"],
+    "paint": {
+      "circle-color": "#A9BDE8",
+      "circle-radius": [
+        "step",
+        ["get", "point_count"],
+        20,
+        15,
+        30,
+        50,
+        40
+      ]
+    }
+  },
+  "rpg_ols_wind_operating_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
+    }
+  },
+  "rpg_ols_wind_planned": {
+    "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
+    "layout": {
+      "icon-image": "wind",
+      "icon-size": 0.4,
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "blue"
+    }
+  },
+  "rpg_ols_wind_planned_cluster": {
+    "type": "circle",
+    "filter": ["has", "point_count"],
+    "paint": {
+      "circle-color": "#526ba2",
+      "circle-radius": [
+        "step",
+        ["get", "point_count"],
+        20,
+        15,
+        30,
+        50,
+        40
+      ]
+    }
+  },
+  "rpg_ols_wind_planned_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
+    }
+  },
   "pvroof": {
     "type": "symbol",
     "filter": ["!", ["has", "point_count"]],
@@ -229,6 +340,30 @@
       "text-field": "{point_count_abbreviated}",
       "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
       "text-size": 12
+    }
+  },
+  "rpg_ols_pv_ground_operating": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#EFAD25",
+      "fill-opacity": 0.8,
+      "fill-outline-color": "#ad7f1e"
+    }
+  },
+  "rpg_ols_pv_ground_approved": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#ad7f1e",
+      "fill-opacity": 0.6,
+      "fill-outline-color": "#ad7f1e"
+    }
+  },
+  "rpg_ols_pv_ground_planned": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#5F4F03",
+      "fill-opacity": 0.6,
+      "fill-outline-color": "#5F4F03"
     }
   },
   "hydro": {
