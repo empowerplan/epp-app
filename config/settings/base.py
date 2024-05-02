@@ -298,6 +298,7 @@ MAP_ENGINE_IMAGES = [
     setup.MapImage("gsgk_plus", "images/icons/map_gsgk_plus.png"),
     setup.MapImage("storage_plus", "images/icons/map_battery_plus.png"),
     setup.MapImage("wind_hatch", "images/map_wind_hatch.png"),
+    setup.MapImage("pv_ground_hatch", "images/map_pv_ground_hatch.png"),
 ]
 
 MAP_ENGINE_API_MVTS = {
@@ -346,6 +347,9 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("priority_climate_resistent_agri", "map", "PriorityClimateResistentAgri"),
         setup.MVTAPI("priority_permanent_crops", "map", "PriorityPermanentCrops"),
         setup.MVTAPI("priority_grassland", "map", "PriorityGrassland"),
+        setup.MVTAPI("rpg_ols_pv_ground_approved", "map", "PVgroundAreasApproved"),
+        setup.MVTAPI("rpg_ols_pv_ground_operating", "map", "PVgroundAreasOperating"),
+        setup.MVTAPI("rpg_ols_pv_ground_planned", "map", "PVgroundAreasPlanned"),
     ],
     "results": [setup.MVTAPI("results", "map", "Municipality")],
 }
@@ -359,6 +363,9 @@ MAP_ENGINE_API_CLUSTERS = [
     setup.ClusterAPI("combustion", "map", "Combustion", properties=["id", "unit_count"]),
     setup.ClusterAPI("gsgk", "map", "GSGK", properties=["id", "unit_count"]),
     setup.ClusterAPI("storage", "map", "Storage", properties=["id", "unit_count"]),
+    setup.ClusterAPI("rpg_ols_wind_approved", "map", "WindTurbine2Approved", properties=["id", "unit_count"]),
+    setup.ClusterAPI("rpg_ols_wind_operating", "map", "WindTurbine2Operating", properties=["id", "unit_count"]),
+    setup.ClusterAPI("rpg_ols_wind_planned", "map", "WindTurbine2Planned", properties=["id", "unit_count"]),
 ]
 
 MAP_ENGINE_LAYERS_AT_STARTUP = ["region_boundaries"]
@@ -518,7 +525,31 @@ MAP_ENGINE_CHOROPLETHS = [
 
 MAP_ENGINE_POPUPS = [
     setup.Popup(
+        "rpg_ols_wind_approved",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "rpg_ols_wind_operating",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "rpg_ols_wind_planned",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
         "wind",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "rpg_ols_pv_ground_operating",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "rpg_ols_pv_ground_approved",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "rpg_ols_pv_ground_planned",
         popup_at_default_layer=True,
     ),
     setup.Popup(
