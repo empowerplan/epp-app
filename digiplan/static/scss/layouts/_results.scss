@@ -119,12 +119,20 @@
 
   &__row {
     @extend .row;
+    @extend .pb-4;
     @extend .mb-4;
-    @extend .g-4;
   }
 
   &__item {
     @extend .col-xl-6;
+
+    &:nth-of-type(odd) {
+      padding: 1rem 5rem 2rem 1rem;
+    }
+
+    &:nth-of-type(even) {
+      padding: 1rem 1rem 2rem 5rem;
+    }
 
     @include media-breakpoint-up(xl) {
       &:first-of-type {
@@ -139,7 +147,7 @@
   }
 
   &__chart {
-    height: 400px;
+    height: 300px;
     width: 100%;
   }
 
