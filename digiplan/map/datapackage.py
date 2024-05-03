@@ -171,14 +171,14 @@ def get_thermal_efficiency(component: str) -> float:
 
 
 @cache_memoize(timeout=None)
-def get_potential_values() -> pd.DataFrame:
+def get_potential_capacities() -> pd.DataFrame:
     """
-    Calculate max_values for sliders.
+    Calculate maximum potential capacities in MW.
 
     Returns
     -------
-    dict
-        dictionary with each slider / switch and respective max_value
+    pd.DataFrame
+        holding potential capacities for all technologies in MW
     """
     areas = get_potential_areas()
     # TODO (Hendrik Huyskens): Could be refactored using datapackage.get_power_density

@@ -138,7 +138,7 @@ def capacities_per_municipality() -> pd.DataFrame:
 
 def capacities_per_municipality_2045(parameters: dict, *, aggregate_pv_ground: bool = True) -> pd.DataFrame:
     """Calculate capacities from 2045 scenario per municipality in MW."""
-    potential_capacities = datapackage.get_potential_values()  # in MW
+    potential_capacities = datapackage.get_potential_capacities()  # in MW
     potential_capacities = select_wind_year(potential_capacities, parameters["wind_year"])
     capacities = {
         "wind": int(parameters["s_w_1"]),
@@ -163,7 +163,7 @@ def capacities_per_municipality_2045(parameters: dict, *, aggregate_pv_ground: b
 def areas_per_municipality_2045(parameters: dict, *, aggregate_pv_ground: bool = True) -> pd.DataFrame:
     """Calculate areas for each municipality depending on capacities in user settings."""
     capacities = capacities_per_municipality_2045(parameters, aggregate_pv_ground=False)
-    densities = datapackage.get_power_density()
+    densities = datapackage.get_power_density()  # in MW/km2
     densities["bioenergy"] = 1
     areas = capacities * densities
 
