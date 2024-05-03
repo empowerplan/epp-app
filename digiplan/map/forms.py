@@ -1,6 +1,7 @@
 """Module containing django forms."""
 from __future__ import annotations
 
+from abc import abstractmethod
 from itertools import count
 from typing import TYPE_CHECKING
 
@@ -16,7 +17,7 @@ from django.forms import (
 from django.shortcuts import reverse
 from django.utils.safestring import mark_safe
 
-from . import charts, menu
+from . import calculations, charts, config, menu
 from .widgets import SwitchWidget
 
 if TYPE_CHECKING:
@@ -32,19 +33,6 @@ class TemplateForm(Form):  # noqa: D101
             renderer = renderers.get_default_renderer()
             return mark_safe(renderer.render(self.template_name, {"form": self, **self.extra_content}))  # noqa: S308
         return super().__str__()
-
-
-class ResultsBox(TemplateForm):
-    """Shows a result summary for a given category in a box."""
-
-    template_name = "widgets/result_box.html"
-
-    def __init__(self, value: str, text: str, category: str) -> None:
-        """Initialize parameters for result box widget."""
-        super().__init__()
-        self.value = value
-        self.text = text
-        self.category = category
 
 
 class StaticLayerForm(TemplateForm):  # noqa: D101
@@ -163,3 +151,145 @@ class HeatPanelForm(PanelForm):  # noqa: D101
 
 class TrafficPanelForm(PanelForm):  # noqa: D101
     template_name = "forms/panel_traffic.html"
+
+
+class ResultsBox(TemplateForm):
+    """Shows a result summary for a given category in a box."""
+
+    template_name = "widgets/result_box.html"
+    category: str = ""
+    text: str = ""
+    unit: str = ""
+
+    def __init__(self, parameters: dict) -> None:
+        """Initialize parameters for result box widget."""
+        super().__init__()
+        self.value = self.calculate_value(parameters)
+
+    @abstractmethod
+    def calculate_value(self, parameters: dict) -> float:
+        """Calculate result based on parameters. Abstract."""
+        msg = "Please implement value calculation."
+        raise NotImplementedError(msg)
+
+
+class ElectricityWindPVResultsBox(ResultsBox):  # noqa: D101
+    category = "electricity"
+    text = "<span>Strom</span> werden aus Wind und Photovoltaik erzeugt"
+    unit = "TWh"
+
+    def calculate_value(self, parameters: dict) -> float:  # noqa: D102
+        pass
+
+
+class ElectricityAutarkyResultsBox(ResultsBox):  # noqa: D101
+    category = "electricity"
+    text = "<span>der Zeit wird der Strombedarf</span> komplett aus regionalen erneuerbaren Quellen gedeckt"
+    unit = "%"
+
+    def calculate_value(self, parameters: dict) -> float:  # noqa: D102
+        pass
+
+
+class ElectricityAreaResultsBox(ResultsBox):  # noqa: D101
+    category = "electricity"
+    text = "der <span>Regionsfläche</span> werden für Windenergie und Photovoltaik verwendet"
+    unit = "%"
+
+    def calculate_value(self, parameters: dict) -> float:  # noqa: D102
+        pass
+
+
+class HeatResultsBox(ResultsBox):  # noqa: D101
+    category = "heat"
+    text = "..."
+    unit = "%"
+
+    def calculate_value(self, parameters: dict) -> float:  # noqa: D102
+        pass
+
+
+class WindGoalResultsBox(ResultsBox):  # noqa: D101
+    category = "wind"
+    text = "der <span>Brandenburger Ausbauziele 2040</span> werden erreicht"
+    unit = "%"
+
+    def calculate_value(self, parameters: dict) -> float:  # noqa: D102
+        goal = config.ADDITIONAL_ENERGY_SETTINGS["s_w_1"]["future_scenario"]
+        wind_capacity = calculations.capacities_per_municipality_2045(parameters)["wind"].sum()
+        return (wind_capacity / goal * 100).round(1)
+
+
+class WindAreaResultsBox(ResultsBox):  # noqa: D101
+    category = "wind"
+    text = "der <span>Regionsfläche</span> werden für die Windenergie verwendet"
+    unit = "%"
+
+    def calculate_value(self, parameters: dict) -> float:  # noqa: D102
+        pass
+
+
+class WindDemandShareResultsBox(ResultsBox):  # noqa: D101
+    category = "wind"
+    text = "des <span>Strombedarfs</span> werden durch Windstrom gedeckt"
+    unit = "%"
+
+    def calculate_value(self, parameters: dict) -> float:  # noqa: D102
+        pass
+
+
+class PVGoalResultsBox(ResultsBox):  # noqa: D101
+    category = "pv"
+    text = "der <span>Brandenburger Ausbauziele 2040</span> werden erreicht"
+    unit = "%"
+
+    def calculate_value(self, parameters: dict) -> float:  # noqa: D102
+        pass
+
+
+class PVAreaResultsBox(ResultsBox):  # noqa: D101
+    category = "pv"
+    text = "der <span>Regionsfläche</span> werden für Freiflächen-PV verwendet"
+    unit = "%"
+
+    def calculate_value(self, parameters: dict) -> float:  # noqa: D102
+        pass
+
+
+class PVDemandShareResultsBox(ResultsBox):  # noqa: D101
+    category = "pv"
+    text = "des <span>Strombedarfs</span> werden durch PV-Strom gedeckt"
+    unit = "%"
+
+    def calculate_value(self, parameters: dict) -> float:  # noqa: D102
+        pass
+
+
+class MobilityResultsBox(ResultsBox):  # noqa: D101
+    category = "mobility"
+    text = "..."
+    unit = "%"
+
+    def calculate_value(self, parameters: dict) -> float:  # noqa: D102
+        pass
+
+
+class H2ResultsBox(ResultsBox):  # noqa: D101
+    category = "h2"
+    text = "..."
+    unit = "%"
+
+    def calculate_value(self, parameters: dict) -> float:  # noqa: D102
+        pass
+
+
+class CO2ResultsBox(ResultsBox):  # noqa: D101
+    category = "co2"
+    text = "Reduktion der <span>Treibhausgasemissionen</span> in 2040"
+    unit = "%"
+
+    def calculate_value(self, parameters: dict) -> float:  # noqa: D102
+        pass
+
+
+SUMMARY_RESULTS = {"summary_wind_goal": WindGoalResultsBox}

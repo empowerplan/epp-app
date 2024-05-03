@@ -8,6 +8,7 @@ from typing import Optional, Union
 import pandas as pd
 from cache_memoize import cache_memoize
 from django.conf import settings
+from django.db.models import Sum
 from django_oemof.settings import OEMOF_DIR
 
 from config.settings.base import DIGIPIPE_DIR
@@ -30,6 +31,12 @@ def get_data_from_sources(sources: Union[Source, list[Source]]) -> pd.DataFrame:
         source_path = Path(DIGIPIPE_DIR, "scalars", source_file)
         dfs.append(pd.read_csv(source_path, usecols=columns))
     return pd.concat(dfs, axis=1)
+
+
+@cache_memoize(timeout=None)
+def get_region_area() -> float:
+    """Return total region area in ?."""
+    return models.Municipality.objects.values("area").aggregate(Sum("area"))["area__sum"]
 
 
 def get_employment() -> pd.DataFrame:

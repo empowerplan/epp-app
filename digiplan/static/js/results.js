@@ -20,13 +20,15 @@ const PRE_RESULTS = [
 ];
 
 const resultCharts = {
-    "wind_capacity": "wind_capacity_chart",
-    "wind_areas": "wind_areas_chart",
-    "pv_ground_capacity": "pv_ground_capacity_chart",
-    "pv_ground_areas": "pv_ground_areas_chart",
-    "pv_roof_capacity": "pv_roof_capacity_chart",
-    "pv_roof_areas": "pv_roof_areas_chart",
+  wind_capacity: "wind_capacity_chart",
+  wind_areas: "wind_areas_chart",
+  pv_ground_capacity: "pv_ground_capacity_chart",
+  pv_ground_areas: "pv_ground_areas_chart",
+  pv_roof_capacity: "pv_roof_capacity_chart",
+  pv_roof_areas: "pv_roof_areas_chart",
 };
+
+const SUMMARY_PRE_RESULTS = ["summary_wind_goal"];
 
 // Setup
 
@@ -55,11 +57,11 @@ futureDropdown.addEventListener("change", function () {
 });
 
 // Subscriptions
-PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, storePreResults);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSummaryPreResults);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, disableResultButtons);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideRegionChart);
-PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, resetResultDropdown);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, enableFutureResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
@@ -157,6 +159,7 @@ function enableFutureResults(msg) {
 
 function disableResultButtons(msg) {
   resultSimNote.innerText = "Berechnung läuft ...";
+  futureDropdown.selectedIndex = 0;
   const options = futureDropdown.querySelectorAll("option");
   for (const option of options) {
     if (!PRE_RESULTS.includes(option.value)) {
@@ -189,8 +192,8 @@ function showResultCharts(msg) {
   return logMessage(msg);
 }
 
-function resetResultDropdown(msg) {
-  futureDropdown.selectedIndex = 0;
+function showSummaryPreResults(msg) {
+  showSummaryResults(SUMMARY_PRE_RESULTS);
   return logMessage(msg);
 }
 
@@ -205,6 +208,23 @@ function showCharts(charts = {}) {
     success: function (chart_options) {
       for (const chart in charts) {
         createChart(charts[chart], chart_options[chart]);
+      }
+    },
+  });
+}
+
+function showSummaryResults(summaries = []) {
+  $.ajax({
+    url: "/summary_results",
+    type: "GET",
+    data: {
+      summaries: summaries,
+      map_state: JSON.stringify(map_store.cold.state),
+    },
+    success: function (summaryResults) {
+      for (const [div_id, summary] of Object.entries(summaryResults)) {
+        const summaryDiv = document.getElementById(div_id);
+        summaryDiv.innerHTML = summary;
       }
     },
   });
