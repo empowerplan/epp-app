@@ -38,12 +38,8 @@
     <div class="main-results">
       <div class="main-results__row">
         <div id="summary_wind_goal" class="main-results__col d-flex flex-column"></div>
-        <div class="main-results__col d-flex flex-column">
-          {{ results_wind_area }}
-        </div>
-        <div class="main-results__col d-flex flex-column">
-          {{ results_wind_demand_share }}
-        </div>
+        <div id="summary_wind_area" class="main-results__col d-flex flex-column"></div>
+        <div id="summary_wind_demand_share" class="main-results__col d-flex flex-column"></div>
       </div>
     </div>
     <div class="results__container">
@@ -71,15 +67,9 @@
   <div class="tab-pane fade" id="results-pv" role="tabpanel" aria-labelledby="results-pv-tab">
     <div class="main-results">
       <div class="main-results__row">
-        <div class="main-results__col d-flex flex-column">
-          {{ results_pv_goal }}
-        </div>
-        <div class="main-results__col d-flex flex-column">
-          {{  results_pv_area }}
-        </div>
-        <div class="main-results__col d-flex flex-column">
-          {{ results_pv_demand_share }}
-        </div>
+        <div id="summary_pv_goal" class="main-results__col d-flex flex-column"></div>
+        <div id="summary_pv_area" class="main-results__col d-flex flex-column"></div>
+        <div id="summary_pv_demand_share" class="main-results__col d-flex flex-column"></div>
       </div>
     </div>
     <div class="results__container">
@@ -126,15 +116,9 @@
   <div class="tab-pane fade" id="results-electricity" role="tabpanel" aria-labelledby="results-electricity-tab">
     <div class="main-results">
       <div class="main-results__row">
-        <div class="main-results__col d-flex flex-column">
-          {{ results_electricity_energy }}
-        </div>
-        <div class="main-results__col d-flex flex-column">
-          {{ results_electricity_autarky }}
-        </div>
-        <div class="main-results__col d-flex flex-column">
-          {{ results_electricity_area }}
-        </div>
+        <div id="summary_electricity_wind_pv" class="main-results__col d-flex flex-column"></div>
+         <div id="summary_electricity_area" class="main-results__col d-flex flex-column"></div>
+        <div id="summary_electricity_autarky" class="main-results__col d-flex flex-column"></div>
       </div>
     </div>
     <div class="results__container">

@@ -1020,7 +1020,7 @@ class PVGroundAreaChart(PreResultsChart):
 
     def get_chart_data(self) -> dict:
         """Calculate population for whole region."""
-        areas = calculations.areas_per_municipality_2045(self.user_settings).sum()
+        areas = calculations.areas_per_municipality_2045(self.user_settings, aggregate_pv_ground=False).sum()
         region_area = models.Municipality.objects.values("area").aggregate(Sum("area"))["area__sum"]
         areas_percentage = areas / region_area * 100
         return {"areas": areas.round(), "areas_percentage": areas_percentage.round()}
@@ -1040,7 +1040,7 @@ class PVRoofAreaChart(PreResultsChart):
 
     def get_chart_data(self) -> dict:
         """Calculate population for whole region."""
-        area = calculations.areas_per_municipality_2045(self.user_settings)["pv_roof"].sum()
+        area = calculations.areas_per_municipality_2045(self.user_settings, aggregate_pv_ground=False)["pv_roof"].sum()
         potential_area = datapackage.get_potential_areas("pv_roof").sum() * 1e6
         area_percentage = area / potential_area * 100
         return {"area": area.round(), "area_percentage": area_percentage.round()}

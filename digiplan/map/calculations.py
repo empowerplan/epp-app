@@ -160,12 +160,17 @@ def capacities_per_municipality_2045(parameters: dict, *, aggregate_pv_ground: b
     return potential_capacities
 
 
-def areas_per_municipality_2045(parameters: dict) -> pd.DataFrame:
+def areas_per_municipality_2045(parameters: dict, *, aggregate_pv_ground: bool = True) -> pd.DataFrame:
     """Calculate areas for each municipality depending on capacities in user settings."""
     capacities = capacities_per_municipality_2045(parameters, aggregate_pv_ground=False)
     densities = datapackage.get_power_density()
     densities["bioenergy"] = 1
     areas = capacities * densities
+
+    if aggregate_pv_ground:
+        areas["pv_ground"] = areas[PV_GROUND_COLUMNS].sum(axis=1)
+        areas = areas.drop(PV_GROUND_COLUMNS, axis=1)
+
     return areas
 
 

@@ -17,7 +17,7 @@ from django.forms import (
 from django.shortcuts import reverse
 from django.utils.safestring import mark_safe
 
-from . import calculations, charts, config, menu
+from . import calculations, charts, config, datapackage, menu
 from .widgets import SwitchWidget
 
 if TYPE_CHECKING:
@@ -179,7 +179,10 @@ class ElectricityWindPVResultsBox(ResultsBox):  # noqa: D101
     unit = "TWh"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
-        pass
+        energies = (
+            calculations.energies_per_municipality_2045(parameters)[["wind", "pv_ground", "pv_roof"]].sum().sum() * 1e-6
+        )
+        return energies.round(1)
 
 
 class ElectricityAutarkyResultsBox(ResultsBox):  # noqa: D101
@@ -197,7 +200,11 @@ class ElectricityAreaResultsBox(ResultsBox):  # noqa: D101
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
-        pass
+        region_area = datapackage.get_region_area()
+        wind_pv_area = (
+            calculations.areas_per_municipality_2045(parameters)[["wind", "pv_ground", "pv_roof"]].sum().sum()
+        )
+        return (wind_pv_area / region_area * 100).round(1)
 
 
 class HeatResultsBox(ResultsBox):  # noqa: D101
@@ -226,7 +233,9 @@ class WindAreaResultsBox(ResultsBox):  # noqa: D101
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
-        pass
+        region_area = datapackage.get_region_area()
+        wind_area = calculations.areas_per_municipality_2045(parameters)["wind"].sum()
+        return (wind_area / region_area * 100).round(1)
 
 
 class WindDemandShareResultsBox(ResultsBox):  # noqa: D101
@@ -235,7 +244,9 @@ class WindDemandShareResultsBox(ResultsBox):  # noqa: D101
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
-        pass
+        electricity_demand = calculations.electricity_demand_per_municipality_2045(parameters).sum().sum()
+        wind_energy = calculations.energies_per_municipality_2045(parameters)["wind"].sum()
+        return (wind_energy / electricity_demand * 100).round(1)
 
 
 class PVGoalResultsBox(ResultsBox):  # noqa: D101
@@ -244,7 +255,11 @@ class PVGoalResultsBox(ResultsBox):  # noqa: D101
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
-        pass
+        goal_pf_ground = config.ADDITIONAL_ENERGY_SETTINGS["s_pv_ff_1"]["future_scenario"]
+        goal_pf_roof = config.ADDITIONAL_ENERGY_SETTINGS["s_pv_d_1"]["future_scenario"]
+        goal = goal_pf_ground + goal_pf_roof
+        pv_capacity = calculations.capacities_per_municipality_2045(parameters)[["pv_ground", "pv_roof"]].sum().sum()
+        return (pv_capacity / goal * 100).round(1)
 
 
 class PVAreaResultsBox(ResultsBox):  # noqa: D101
@@ -253,7 +268,9 @@ class PVAreaResultsBox(ResultsBox):  # noqa: D101
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
-        pass
+        region_area = datapackage.get_region_area()
+        pv_area = calculations.areas_per_municipality_2045(parameters)[["pv_ground", "pv_roof"]].sum().sum()
+        return (pv_area / region_area * 100).round(1)
 
 
 class PVDemandShareResultsBox(ResultsBox):  # noqa: D101
@@ -262,7 +279,9 @@ class PVDemandShareResultsBox(ResultsBox):  # noqa: D101
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
-        pass
+        electricity_demand = calculations.electricity_demand_per_municipality_2045(parameters).sum().sum()
+        pv_energy = calculations.energies_per_municipality_2045(parameters)[["pv_ground", "pv_roof"]].sum().sum()
+        return (pv_energy / electricity_demand * 100).round(1)
 
 
 class MobilityResultsBox(ResultsBox):  # noqa: D101
@@ -292,4 +311,13 @@ class CO2ResultsBox(ResultsBox):  # noqa: D101
         pass
 
 
-SUMMARY_RESULTS = {"summary_wind_goal": WindGoalResultsBox}
+SUMMARY_RESULTS = {
+    "summary_electricity_wind_pv": ElectricityWindPVResultsBox,
+    "summary_electricity_area": ElectricityAreaResultsBox,
+    "summary_wind_goal": WindGoalResultsBox,
+    "summary_wind_area": WindAreaResultsBox,
+    "summary_wind_demand_share": WindDemandShareResultsBox,
+    "summary_pv_goal": PVGoalResultsBox,
+    "summary_pv_area": PVAreaResultsBox,
+    "summary_pv_demand_share": PVDemandShareResultsBox,
+}

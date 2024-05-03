@@ -30,7 +30,16 @@ const preResultCharts = {
 
 const resultCharts = {};
 
-const SUMMARY_PRE_RESULTS = ["summary_wind_goal"];
+const SUMMARY_PRE_RESULTS = [
+  "summary_electricity_wind_pv",
+  "summary_electricity_area",
+  "summary_wind_goal",
+  "summary_wind_area",
+  "summary_wind_demand_share",
+  "summary_pv_goal",
+  "summary_pv_area",
+  "summary_pv_demand_share",
+];
 
 // Setup
 
@@ -67,7 +76,6 @@ PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideRegionChart);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, enableFutureResults);
-PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultCharts);
 PubSub.subscribe(mapEvent.CHOROPLETH_SELECTED, showRegionChart);
 PubSub.subscribe(eventTopics.CHOROPLETH_DEACTIVATED, hideRegionChart);
@@ -128,27 +136,12 @@ function checkResults() {
         PubSub.publish(eventTopics.SIMULATION_FINISHED);
       }
     },
-    error: function (json) {
+    error: function () {
       store.cold.task_id = null;
       map_store.cold.state.simulation_id = null;
       PubSub.publish(eventTopics.SIMULATION_FINISHED);
     },
   });
-}
-
-function showResults(msg, simulation_id) {
-  $.ajax({
-    url: "/visualization",
-    type: "GET",
-    data: {
-      simulation_ids: simulation_id,
-      visualization: "total_system_costs",
-    },
-    success: function (json) {
-      console.log(json);
-    },
-  });
-  return logMessage(msg);
 }
 
 function enableFutureResults(msg) {
