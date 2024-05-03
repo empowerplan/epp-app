@@ -22,17 +22,19 @@ def select_wind_year(technology_df: pd.DataFrame, wind_year: str) -> pd.DataFram
 
 def calculate_wind_and_pv_distribution(df: pd.DataFrame, parameters: dict) -> pd.DataFrame:
     """Calculate wind and pv distribution based on parameters."""
-    # Apply wind capacity from user selection
-    df["wind"] = df["wind"] / df["wind"].sum() * parameters["wind"]
+    no_pv_columns = [key for key in parameters if key not in PV_GROUND_COLUMNS]
+    if "pv_soil_quality_low" in df:
+        df[PV_GROUND_COLUMNS] = df[PV_GROUND_COLUMNS] * {
+            key: value / 100 for key, value in parameters.items() if key in PV_GROUND_COLUMNS
+        }
+        df[PV_GROUND_COLUMNS] = df[PV_GROUND_COLUMNS] / df[PV_GROUND_COLUMNS].sum().sum() * parameters["pv_ground"]
+        no_pv_columns.remove("pv_ground")
 
-    # Apply pv_ground capacity
-    pv_ground_sums = df[PV_GROUND_COLUMNS].sum()
-    pv_ground_shares = pv_ground_sums / pv_ground_sums.sum()
-    df[PV_GROUND_COLUMNS] = df[PV_GROUND_COLUMNS] / pv_ground_sums * pv_ground_shares * parameters["pv_ground"]
-
-    # Apply pv_roof capacity
-    df["pv_roof"] = df["pv_roof"] / df["pv_roof"].sum() * parameters["pv_roof"]
-
+    df[no_pv_columns] = (
+        df[no_pv_columns]
+        / df[no_pv_columns].sum()
+        * {key: value for key, value in parameters.items() if key in no_pv_columns}
+    )
     return df
 
 
@@ -144,16 +146,21 @@ def capacities_per_municipality_2045(parameters: dict, *, aggregate_pv_ground: b
         "wind": int(parameters["s_w_1"]),
         "pv_ground": int(parameters["s_pv_ff_1"]),
         "pv_roof": int(parameters["s_pv_d_1"]),
+        "hydro": 0,
     }
+    if aggregate_pv_ground:
+        potential_capacities["pv_ground"] = potential_capacities[PV_GROUND_COLUMNS].sum(axis=1)
+        potential_capacities = potential_capacities.drop(PV_GROUND_COLUMNS, axis=1)
+    else:
+        capacity_settings["pv_soil_quality_low"] = int(parameters["s_pv_ff_3"])
+        capacity_settings["pv_soil_quality_medium"] = int(parameters["s_pv_ff_4"])
+        capacity_settings["pv_permanent_crops"] = int(parameters["s_pv_ff_5"])
     capacities = calculate_wind_and_pv_distribution(potential_capacities, capacity_settings)
 
     # Set biomass potential to zero
     capacities["bioenergy"] = 0
 
     if aggregate_pv_ground:
-        capacities["pv_ground"] = capacities[PV_GROUND_COLUMNS].sum(axis=1)
-        capacities = capacities.drop(PV_GROUND_COLUMNS, axis=1)
-
         # Correct order (for charts)
         capacities = capacities[["wind", "pv_roof", "pv_ground", "hydro", "bioenergy"]]
 
