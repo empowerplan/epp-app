@@ -21,8 +21,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
   data from RPG
 - django-oemof to v0.18.0
 - oemof.tabular to support TSAM
-
-### Changed
+- map boolean values in popup templates to Ja/Nein
 - pre results can be shown before simulation has finished
 
 ### Fixed
