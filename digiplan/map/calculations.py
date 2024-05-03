@@ -9,6 +9,32 @@ from oemof.tabular.postprocessing import calculations, core, helper
 
 from digiplan.map import config, datapackage, models
 
+PV_GROUND_COLUMNS = ["pv_soil_quality_low", "pv_soil_quality_medium", "pv_permanent_crops"]
+
+
+def select_wind_year(technology_df: pd.DataFrame, wind_year: str) -> pd.DataFrame:
+    """Select corresponding wind year based on wind year. Drop non-corresponding wind years."""
+    technology_df = technology_df.drop(
+        columns=[column for column in technology_df if column.startswith("wind") and column != wind_year],
+    )
+    return technology_df.rename(columns={wind_year: "wind"})
+
+
+def calculate_wind_and_pv_distribution(df: pd.DataFrame, parameters: dict) -> pd.DataFrame:
+    """Calculate wind and pv distribution based on parameters."""
+    # Apply wind capacity from user selection
+    df["wind"] = df["wind"] / df["wind"].sum() * parameters["wind"]
+
+    # Apply pv_ground capacity
+    pv_ground_sums = df[PV_GROUND_COLUMNS].sum()
+    pv_ground_shares = pv_ground_sums / pv_ground_sums.sum()
+    df[PV_GROUND_COLUMNS] = df[PV_GROUND_COLUMNS] / pv_ground_sums * pv_ground_shares * parameters["pv_ground"]
+
+    # Apply pv_roof capacity
+    df["pv_roof"] = df["pv_roof"] / df["pv_roof"].sum() * parameters["pv_roof"]
+
+    return df
+
 
 def calculate_square_for_value(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -110,34 +136,37 @@ def capacities_per_municipality() -> pd.DataFrame:
     return datapackage.get_capacities_from_datapackage()
 
 
-def capacities_per_municipality_2045(parameters: dict) -> pd.DataFrame:
+def capacities_per_municipality_2045(parameters: dict, *, aggregate_pv_ground: bool = True) -> pd.DataFrame:
     """Calculate capacities from 2045 scenario per municipality in MW."""
-    shares = calculate_potential_shares(parameters)
     potential_capacities = datapackage.get_potential_values()  # in MW
-
-    # Use wind profile for selected wind year
-    potential_capacities = potential_capacities.drop(
-        columns=[
-            column for column in potential_capacities if column.startswith("wind") and column != parameters["wind_year"]
-        ],
-    )
-    potential_capacities = potential_capacities.rename(columns={parameters["wind_year"]: "wind"})
-
-    # Apply shares from user selection
-    potential_capacities = potential_capacities * shares
-
-    # Aggregate pv ground profiles
-    pv_ground_columns = ["pv_soil_quality_low", "pv_soil_quality_medium", "pv_permanent_crops"]
-    potential_capacities["pv_ground"] = potential_capacities[pv_ground_columns].sum(axis=1)
-    potential_capacities = potential_capacities.drop(pv_ground_columns, axis=1)
+    potential_capacities = select_wind_year(potential_capacities, parameters["wind_year"])
+    capacities = {
+        "wind": int(parameters["s_w_1"]),
+        "pv_ground": int(parameters["s_pv_ff_1"]),
+        "pv_roof": int(parameters["s_pv_d_1"]),
+    }
+    potential_capacities = calculate_wind_and_pv_distribution(potential_capacities, capacities)
 
     # Set biomass potential to zero
     potential_capacities["bioenergy"] = 0
 
-    # Correct order (for charts)
-    potential_capacities = potential_capacities[["wind", "pv_roof", "pv_ground", "hydro", "bioenergy"]]
+    if aggregate_pv_ground:
+        potential_capacities["pv_ground"] = potential_capacities[PV_GROUND_COLUMNS].sum(axis=1)
+        potential_capacities = potential_capacities.drop(PV_GROUND_COLUMNS, axis=1)
+
+        # Correct order (for charts)
+        potential_capacities = potential_capacities[["wind", "pv_roof", "pv_ground", "hydro", "bioenergy"]]
 
     return potential_capacities
+
+
+def areas_per_municipality_2045(parameters: dict) -> pd.DataFrame:
+    """Calculate areas for each municipality depending on capacities in user settings."""
+    capacities = capacities_per_municipality_2045(parameters, aggregate_pv_ground=False)
+    densities = datapackage.get_power_density()
+    densities["bioenergy"] = 1
+    areas = capacities * densities
+    return areas
 
 
 def energies_per_municipality() -> pd.DataFrame:

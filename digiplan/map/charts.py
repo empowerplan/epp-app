@@ -5,9 +5,10 @@ import pathlib
 from typing import Any, Optional, Union
 
 import pandas as pd
+from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
 
-from digiplan.map import calculations, config, models
+from digiplan.map import calculations, config, datapackage, models
 from digiplan.map.utils import merge_dicts
 
 
@@ -942,6 +943,115 @@ class BatteriesCapacityRegionChart(Chart):
         return chart_options
 
 
+class WindCapacityChart(PreResultsChart):
+    """Chart for wind capacity shown on diagram results page."""
+
+    lookup = "wind_capacity"
+
+    def get_chart_data(self) -> dict:
+        """Calculate population for whole region."""
+        return {
+            "capacity": calculations.capacities_per_municipality_2045(self.user_settings)["wind"].sum(),
+            "turbines": calculations.wind_turbines_per_municipality_2045(self.user_settings).sum(),
+        }
+
+    def render(self) -> dict:
+        """Place results from user settings into related chart entries."""
+        self.chart_options["series"][0]["data"][4]["value"] = self.chart_data["capacity"].round()
+        self.chart_options["series"][1]["data"][4]["value"] = self.chart_data["turbines"].round()
+        return self.chart_options
+
+
+class PVGroundCapacityChart(PreResultsChart):
+    """Chart for pv ground capacity shown on diagram results page."""
+
+    lookup = "pv_ground_capacity"
+
+    def get_chart_data(self) -> dict:
+        """Calculate population for whole region."""
+        return calculations.capacities_per_municipality_2045(self.user_settings, aggregate_pv_ground=True)[
+            "pv_ground"
+        ].sum()
+
+    def render(self) -> dict:
+        """Place results from user settings into related chart entries."""
+        self.chart_options["series"][0]["data"][4]["value"] = self.chart_data.round()
+        return self.chart_options
+
+
+class PVRoofCapacityChart(PreResultsChart):
+    """Chart for pv roof capacity shown on diagram results page."""
+
+    lookup = "pv_ground_capacity"
+
+    def get_chart_data(self) -> dict:
+        """Calculate population for whole region."""
+        return calculations.capacities_per_municipality_2045(self.user_settings)["pv_roof"].sum()
+
+    def render(self) -> dict:
+        """Place results from user settings into related chart entries."""
+        self.chart_options["series"][0]["data"][4]["value"] = self.chart_data.round()
+        return self.chart_options
+
+
+class WindAreaChart(PreResultsChart):
+    """Chart for wind capacity shown on diagram results page."""
+
+    lookup = "wind_areas"
+
+    def get_chart_data(self) -> dict:
+        """Calculate population for whole region."""
+        area = calculations.areas_per_municipality_2045(self.user_settings)["wind"].sum()
+        region_area = models.Municipality.objects.values("area").aggregate(Sum("area"))["area__sum"]
+        area_percentage = area / region_area * 100
+        return {"area": area.round(), "area_percentage": area_percentage.round()}
+
+    def render(self) -> dict:
+        """Place results from user settings into related chart entries."""
+        self.chart_options["series"][0]["data"][2]["value"] = self.chart_data["area"]
+        self.chart_options["series"][1]["data"][2]["value"] = self.chart_data["area_percentage"]
+        return self.chart_options
+
+
+class PVGroundAreaChart(PreResultsChart):
+    """Chart for pv ground areas shown on diagram results page."""
+
+    lookup = "pv_ground_areas"
+
+    def get_chart_data(self) -> dict:
+        """Calculate population for whole region."""
+        areas = calculations.areas_per_municipality_2045(self.user_settings).sum()
+        region_area = models.Municipality.objects.values("area").aggregate(Sum("area"))["area__sum"]
+        areas_percentage = areas / region_area * 100
+        return {"areas": areas.round(), "areas_percentage": areas_percentage.round()}
+
+    def render(self) -> dict:
+        """Place results from user settings into related chart entries."""
+        for i, area in enumerate(("pv_soil_quality_low", "pv_soil_quality_medium", "pv_permanent_crops")):
+            self.chart_options["series"][0]["data"][i] = self.chart_data["areas"][area]
+            self.chart_options["series"][1]["data"][i] = self.chart_data["areas_percentage"][area]
+        return self.chart_options
+
+
+class PVRoofAreaChart(PreResultsChart):
+    """Chart for pv roof capacity shown on diagram results page."""
+
+    lookup = "pv_roof_areas"
+
+    def get_chart_data(self) -> dict:
+        """Calculate population for whole region."""
+        area = calculations.areas_per_municipality_2045(self.user_settings)["pv_roof"].sum()
+        potential_area = datapackage.get_potential_areas("pv_roof").sum() * 1e6
+        area_percentage = area / potential_area * 100
+        return {"area": area.round(), "area_percentage": area_percentage.round()}
+
+    def render(self) -> dict:
+        """Place results from user settings into related chart entries."""
+        self.chart_options["series"][0]["data"][0] = self.chart_data["area"]
+        self.chart_options["series"][1]["data"][0] = self.chart_data["area_percentage"]
+        return self.chart_options
+
+
 CHARTS: dict[str, Union[type[PreResultsChart], type[SimulationChart]]] = {
     "detailed_overview": DetailedOverviewChart,
     "electricity_overview": ElectricityOverviewChart,
@@ -964,6 +1074,12 @@ CHARTS: dict[str, Union[type[PreResultsChart], type[SimulationChart]]] = {
     "energy_capita_2045_region": EnergyCapita2045RegionChart,
     "energy_square_statusquo_region": EnergySquareRegionChart,
     "energy_square_2045_region": EnergySquare2045RegionChart,
+    "wind_areas": WindAreaChart,
+    "wind_capacity": WindCapacityChart,
+    "pv_ground_capacity": PVGroundCapacityChart,
+    "pv_ground_areas": PVGroundAreaChart,
+    "pv_roof_capacity": PVRoofCapacityChart,
+    "pv_roof_areas": PVRoofAreaChart,
     "wind_turbines_statusquo_region": WindTurbinesRegionChart,
     "wind_turbines_2045_region": WindTurbines2045RegionChart,
     "wind_turbines_square_statusquo_region": WindTurbinesSquareRegionChart,
