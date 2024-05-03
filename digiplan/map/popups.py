@@ -269,7 +269,7 @@ class PVgroundAreaPopup(popups.Popup):
         }[self.model_lookup]
         default_attributes = {
             "name": "Name",
-            "capacity_net": "Nettonennleistung (MW)",
+            "capacity_net": "Nettonennleistung (kW)",
             "capacity_net_inferred": "Leistung geschätzt",
             "status": "Betriebsstatus",
             "plan_type": "Planart",
