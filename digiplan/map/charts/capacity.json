@@ -12,6 +12,7 @@
       "Wasserkraft",
       "Bioenergie"
     ],
+    "itemGap": 15,
     "orient": "vertical",
     "right": "-5%",
     "bottom": "15%"

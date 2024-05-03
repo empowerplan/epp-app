@@ -3,7 +3,8 @@
     "bottom": "28%"
   },
   "legend": {
-    "bottom": "0"
+    "bottom": "0",
+    "itemGap": 15
   },
   "brush": {
     "toolbox": ["rect", "polygon", "lineX", "lineY", "keep", "clear"],

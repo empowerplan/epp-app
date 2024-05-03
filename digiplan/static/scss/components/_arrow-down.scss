@@ -1,0 +1,28 @@
+.arrow-container {
+  position: absolute;
+  left: 49.5%;
+  bottom: 5rem;
+  transform: translateX(-50%) translateY(0);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s ease-in-out;
+  animation: none;
+}
+
+.arrow-container.show {
+  visibility: visible;
+  opacity: 1;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+      transform: translateX(-50%) translateY(0);
+  }
+  40% {
+      transform: translateX(-50%) translateY(-15px);
+  }
+  60% {
+      transform: translateX(-50%) translateY(-7px);
+  }
+}

@@ -27,7 +27,7 @@ const onboarding_pv_roof_chart = echarts.init(onboarding_pv_roof_div);
 PubSub.subscribe(eventTopics.MENU_CHANGED, resizeCharts);
 
 // Styling variables
-const chart_tooltip = {
+/* const chart_tooltip = {
   trigger: 'axis',
   axisPointer: {
   type: 'shadow'
@@ -60,7 +60,7 @@ const chart_legend = {
   bottom: '0',
   itemWidth: 10,
   itemHeight: 10
-};
+}; */
 
 // CHARTS -> defined in /map/charts/
 
