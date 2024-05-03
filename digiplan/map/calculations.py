@@ -297,7 +297,7 @@ def electricity_demand_per_municipality_2045(user_settings: dict) -> pd.DataFram
     pd.DataFrame
         Electricity demand per municipality (index) and sector (column)
     """
-    demand = electricity_demand_per_municipality(year=2022)
+    demand = electricity_demand_per_municipality(year=2045)
     shares = [int(user_settings[key]) / 100 for key in ("s_v_3", "s_v_4", "s_v_5")]
     return demand.iloc[:] * shares
 

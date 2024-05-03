@@ -244,9 +244,9 @@ class WindDemandShareResultsBox(ResultsBox):  # noqa: D101
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
-        electricity_demand = calculations.electricity_demand_per_municipality_2045(parameters).sum().sum()
-        wind_energy = calculations.energies_per_municipality_2045(parameters)["wind"].sum()
-        return (wind_energy / electricity_demand * 100).round(1)
+        electricity_demand = calculations.electricity_demand_per_municipality_2045(parameters).sum().sum()  # in GWh
+        wind_energy = calculations.energies_per_municipality_2045(parameters)["wind"].sum()  # in MWh
+        return (wind_energy * 1e-3 / electricity_demand * 100).round(1)
 
 
 class PVGoalResultsBox(ResultsBox):  # noqa: D101
@@ -279,9 +279,11 @@ class PVDemandShareResultsBox(ResultsBox):  # noqa: D101
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
-        electricity_demand = calculations.electricity_demand_per_municipality_2045(parameters).sum().sum()
-        pv_energy = calculations.energies_per_municipality_2045(parameters)[["pv_ground", "pv_roof"]].sum().sum()
-        return (pv_energy / electricity_demand * 100).round(1)
+        electricity_demand = calculations.electricity_demand_per_municipality_2045(parameters).sum().sum()  # in GWh
+        pv_energy = (
+            calculations.energies_per_municipality_2045(parameters)[["pv_ground", "pv_roof"]].sum().sum()
+        )  # in MWh
+        return (pv_energy * 1e-3 / electricity_demand * 100).round(1)
 
 
 class MobilityResultsBox(ResultsBox):  # noqa: D101
