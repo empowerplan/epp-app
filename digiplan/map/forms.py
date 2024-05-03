@@ -240,7 +240,7 @@ class WindAreaResultsBox(ResultsBox):  # noqa: D101
 
 class WindDemandShareResultsBox(ResultsBox):  # noqa: D101
     category = "wind"
-    text = "des <span>Strombedarfs</span> werden durch Windstrom gedeckt"
+    text = "des <span>Strombedarfs</span> werden bilanziell durch Windstrom gedeckt"
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
@@ -251,7 +251,7 @@ class WindDemandShareResultsBox(ResultsBox):  # noqa: D101
 
 class PVGoalResultsBox(ResultsBox):  # noqa: D101
     category = "pv"
-    text = "der <span>Brandenburger Ausbauziele 2040</span> werden erreicht"
+    text = "der <span>Brandenburger Ausbauziele 2040</span> für Photovoltaik werden erreicht"
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
@@ -275,7 +275,7 @@ class PVAreaResultsBox(ResultsBox):  # noqa: D101
 
 class PVDemandShareResultsBox(ResultsBox):  # noqa: D101
     category = "pv"
-    text = "des <span>Strombedarfs</span> werden durch PV-Strom gedeckt"
+    text = "des <span>Strombedarfs</span> werden bilanziell durch PV-Strom gedeckt"
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
