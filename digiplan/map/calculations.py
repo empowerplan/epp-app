@@ -140,32 +140,32 @@ def capacities_per_municipality_2045(parameters: dict, *, aggregate_pv_ground: b
     """Calculate capacities from 2045 scenario per municipality in MW."""
     potential_capacities = datapackage.get_potential_capacities()  # in MW
     potential_capacities = select_wind_year(potential_capacities, parameters["wind_year"])
-    capacities = {
+    capacity_settings = {
         "wind": int(parameters["s_w_1"]),
         "pv_ground": int(parameters["s_pv_ff_1"]),
         "pv_roof": int(parameters["s_pv_d_1"]),
     }
-    potential_capacities = calculate_wind_and_pv_distribution(potential_capacities, capacities)
+    capacities = calculate_wind_and_pv_distribution(potential_capacities, capacity_settings)
 
     # Set biomass potential to zero
-    potential_capacities["bioenergy"] = 0
+    capacities["bioenergy"] = 0
 
     if aggregate_pv_ground:
-        potential_capacities["pv_ground"] = potential_capacities[PV_GROUND_COLUMNS].sum(axis=1)
-        potential_capacities = potential_capacities.drop(PV_GROUND_COLUMNS, axis=1)
+        capacities["pv_ground"] = capacities[PV_GROUND_COLUMNS].sum(axis=1)
+        capacities = capacities.drop(PV_GROUND_COLUMNS, axis=1)
 
         # Correct order (for charts)
-        potential_capacities = potential_capacities[["wind", "pv_roof", "pv_ground", "hydro", "bioenergy"]]
+        capacities = capacities[["wind", "pv_roof", "pv_ground", "hydro", "bioenergy"]]
 
-    return potential_capacities
+    return capacities
 
 
 def areas_per_municipality_2045(parameters: dict, *, aggregate_pv_ground: bool = True) -> pd.DataFrame:
     """Calculate areas for each municipality depending on capacities in user settings."""
-    capacities = capacities_per_municipality_2045(parameters, aggregate_pv_ground=False)
+    capacities = capacities_per_municipality_2045(parameters, aggregate_pv_ground=False)  # in MW
     densities = datapackage.get_power_density()  # in MW/km2
     densities["bioenergy"] = 1
-    areas = capacities * densities
+    areas = capacities / densities
 
     if aggregate_pv_ground:
         areas["pv_ground"] = areas[PV_GROUND_COLUMNS].sum(axis=1)
