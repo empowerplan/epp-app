@@ -222,7 +222,7 @@ class WindGoalResultsBox(ResultsBox):  # noqa: D101
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
-        goal = config.ADDITIONAL_ENERGY_SETTINGS["s_w_1"]["future_scenario"]
+        goal = config.ADDITIONAL_ENERGY_SETTINGS["s_w_1"]["future_scenario_2040"]
         wind_capacity = calculations.capacities_per_municipality_2045(parameters)["wind"].sum()
         return (wind_capacity / goal * 100).round(1)
 
@@ -255,8 +255,8 @@ class PVGoalResultsBox(ResultsBox):  # noqa: D101
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
-        goal_pf_ground = config.ADDITIONAL_ENERGY_SETTINGS["s_pv_ff_1"]["future_scenario"]
-        goal_pf_roof = config.ADDITIONAL_ENERGY_SETTINGS["s_pv_d_1"]["future_scenario"]
+        goal_pf_ground = config.ADDITIONAL_ENERGY_SETTINGS["s_pv_ff_1"]["future_scenario_2040"]
+        goal_pf_roof = config.ADDITIONAL_ENERGY_SETTINGS["s_pv_d_1"]["future_scenario_2040"]
         goal = goal_pf_ground + goal_pf_roof
         pv_capacity = calculations.capacities_per_municipality_2045(parameters)[["pv_ground", "pv_roof"]].sum().sum()
         return (pv_capacity / goal * 100).round(1)
