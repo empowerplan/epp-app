@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let arrowDisplayed = false;
 
   if (resultTab && mainTabContent) {
-    const observer = new MutationObserver(function(mutations) {
+    const observer = new MutationObserver(function(mutations) { //jshint ignore:line
       mutations.forEach(mutation => {
         if (mutation.attributeName === 'class' && !arrowDisplayed) {
           if (resultTab.classList.contains('active')) {
