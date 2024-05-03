@@ -13,7 +13,7 @@
 
 .main-results {
   @extend .container;
-  @extend .mb-4;
+  @extend .mb-2;
 
   &__row {
     @extend .row;
@@ -106,25 +106,44 @@
     padding-right: 5rem !important;
   }
 
+  a {
+    @extend .fw-semibold;
+  }
+
   &__container {
     @extend .container;
+    @extend .mb-4;
   }
 
   &__header {
+    @extend .pt-3;
+
     h2 {
       @extend .fs-6;
       @extend .ps-0;
+      @extend .text-center;
     }
   }
 
   &__row {
     @extend .row;
-    @extend .mb-4;
-    @extend .g-4;
+    @extend .pb-4;
+
+    &:not(:last-of-type) {
+      @extend .border-bottom;
+    }
   }
 
   &__item {
     @extend .col-xl-6;
+
+    &:nth-of-type(odd) {
+      padding: 1rem 3rem 2rem 1rem;
+    }
+
+    &:nth-of-type(even) {
+      padding: 1rem 1rem 2rem 3rem;
+    }
 
     @include media-breakpoint-up(xl) {
       &:first-of-type {
@@ -139,7 +158,7 @@
   }
 
   &__chart {
-    height: 400px;
+    height: 340px;
     width: 100%;
   }
 

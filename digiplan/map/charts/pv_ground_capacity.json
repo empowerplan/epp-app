@@ -6,13 +6,14 @@
     }
   },
   "legend": {
-    "data": ["Leistung", "Anlagenanzahl"]
+    "data": ["Leistung", "Anlagenanzahl"],
+    "itemGap": 15
   },
   "grid": {
     "top": "10%",
     "left": "3%",
     "right": "3%",
-    "bottom": "10%",
+    "bottom": "14%",
     "containLabel": true
   },
   "xAxis": {

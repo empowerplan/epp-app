@@ -22,6 +22,7 @@
     "show": true,
     "bottom": "12",
     "itemWidth": 14,
-    "itemHeight": 14
+    "itemHeight": 14,
+    "itemGap": 15
   }
 }
