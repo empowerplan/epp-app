@@ -23,14 +23,12 @@
   "yAxis": [
     {
       "type": "value",
-      "max": 3000,
       "axisLabel": {
         "formatter": "{value} MW"
       }
     },
     {
       "type": "value",
-      "max": 300,
       "name": "Anzahl"
     }
   ],
