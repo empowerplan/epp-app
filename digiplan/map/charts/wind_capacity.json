@@ -23,14 +23,12 @@
   "yAxis": [
     {
       "type": "value",
-      "max": 2500,
       "axisLabel": {
         "formatter": "{value} MW"
       }
     },
     {
       "type": "value",
-      "max": 1500,
       "name": "Anzahl"
     }
   ],
@@ -51,9 +49,12 @@
         752,
         1070,
         {
-          "value": 2000,
+          "value": 0,
           "itemStyle": {
             "color": "#BAE1F6"
+          },
+          "label": {
+            "color": "#333"
           }
         }
       ],
@@ -101,9 +102,12 @@
         386,
         458,
         {
-          "value": 308,
+          "value": 0,
           "itemStyle": {
             "color": "#BAE1F6"
+          },
+          "label": {
+            "color": "#333"
           }
         }
       ],

@@ -19,14 +19,27 @@ const PRE_RESULTS = [
   "heat_demand_capita_2045",
 ];
 
-const resultCharts = {
-    "wind_capacity": "wind_capacity_chart",
-    "wind_areas": "wind_areas_chart",
-    "pv_ground_capacity": "pv_ground_capacity_chart",
-    "pv_ground_areas": "pv_ground_areas_chart",
-    "pv_roof_capacity": "pv_roof_capacity_chart",
-    "pv_roof_areas": "pv_roof_areas_chart",
+const preResultCharts = {
+  wind_capacity: "wind_capacity_chart",
+  wind_areas: "wind_areas_chart",
+  pv_ground_capacity: "pv_ground_capacity_chart",
+  pv_ground_areas: "pv_ground_areas_chart",
+  pv_roof_capacity: "pv_roof_capacity_chart",
+  pv_roof_areas: "pv_roof_areas_chart",
 };
+
+const resultCharts = {};
+
+const SUMMARY_PRE_RESULTS = [
+  "summary_electricity_wind_pv",
+  "summary_electricity_area",
+  "summary_wind_goal",
+  "summary_wind_area",
+  "summary_wind_demand_share",
+  "summary_pv_goal",
+  "summary_pv_area",
+  "summary_pv_demand_share",
+];
 
 // Setup
 
@@ -55,14 +68,14 @@ futureDropdown.addEventListener("change", function () {
 });
 
 // Subscriptions
-PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, storePreResults);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showPreResultCharts);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSummaryPreResults);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, disableResultButtons);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideRegionChart);
-PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, resetResultDropdown);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, enableFutureResults);
-PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultCharts);
 PubSub.subscribe(mapEvent.CHOROPLETH_SELECTED, showRegionChart);
 PubSub.subscribe(eventTopics.CHOROPLETH_DEACTIVATED, hideRegionChart);
@@ -123,27 +136,12 @@ function checkResults() {
         PubSub.publish(eventTopics.SIMULATION_FINISHED);
       }
     },
-    error: function (json) {
+    error: function () {
       store.cold.task_id = null;
       map_store.cold.state.simulation_id = null;
       PubSub.publish(eventTopics.SIMULATION_FINISHED);
     },
   });
-}
-
-function showResults(msg, simulation_id) {
-  $.ajax({
-    url: "/visualization",
-    type: "GET",
-    data: {
-      simulation_ids: simulation_id,
-      visualization: "total_system_costs",
-    },
-    success: function (json) {
-      console.log(json);
-    },
-  });
-  return logMessage(msg);
 }
 
 function enableFutureResults(msg) {
@@ -157,6 +155,7 @@ function enableFutureResults(msg) {
 
 function disableResultButtons(msg) {
   resultSimNote.innerText = "Berechnung läuft ...";
+  futureDropdown.selectedIndex = 0;
   const options = futureDropdown.querySelectorAll("option");
   for (const option of options) {
     if (!PRE_RESULTS.includes(option.value)) {
@@ -184,13 +183,18 @@ function hideRegionChart(msg) {
   return logMessage(msg);
 }
 
+function showPreResultCharts(msg) {
+  showCharts(preResultCharts);
+  return logMessage(msg);
+}
+
 function showResultCharts(msg) {
   showCharts(resultCharts);
   return logMessage(msg);
 }
 
-function resetResultDropdown(msg) {
-  futureDropdown.selectedIndex = 0;
+function showSummaryPreResults(msg) {
+  showSummaryResults(SUMMARY_PRE_RESULTS);
   return logMessage(msg);
 }
 
@@ -205,6 +209,23 @@ function showCharts(charts = {}) {
     success: function (chart_options) {
       for (const chart in charts) {
         createChart(charts[chart], chart_options[chart]);
+      }
+    },
+  });
+}
+
+function showSummaryResults(summaries = []) {
+  $.ajax({
+    url: "/summary_results",
+    type: "GET",
+    data: {
+      summaries: summaries,
+      map_state: JSON.stringify(map_store.cold.state),
+    },
+    success: function (summaryResults) {
+      for (const [div_id, summary] of Object.entries(summaryResults)) {
+        const summaryDiv = document.getElementById(div_id);
+        summaryDiv.innerHTML = summary;
       }
     },
   });

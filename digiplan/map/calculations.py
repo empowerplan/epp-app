@@ -9,6 +9,34 @@ from oemof.tabular.postprocessing import calculations, core, helper
 
 from digiplan.map import config, datapackage, models
 
+PV_GROUND_COLUMNS = ["pv_soil_quality_low", "pv_soil_quality_medium", "pv_permanent_crops"]
+
+
+def select_wind_year(technology_df: pd.DataFrame, wind_year: str) -> pd.DataFrame:
+    """Select corresponding wind year based on wind year. Drop non-corresponding wind years."""
+    technology_df = technology_df.drop(
+        columns=[column for column in technology_df if column.startswith("wind") and column != wind_year],
+    )
+    return technology_df.rename(columns={wind_year: "wind"})
+
+
+def calculate_wind_and_pv_distribution(df: pd.DataFrame, parameters: dict) -> pd.DataFrame:
+    """Calculate wind and pv distribution based on parameters."""
+    no_pv_columns = [key for key in parameters if key not in PV_GROUND_COLUMNS]
+    if "pv_soil_quality_low" in df:
+        df[PV_GROUND_COLUMNS] = df[PV_GROUND_COLUMNS] * {
+            key: value / 100 for key, value in parameters.items() if key in PV_GROUND_COLUMNS
+        }
+        df[PV_GROUND_COLUMNS] = df[PV_GROUND_COLUMNS] / df[PV_GROUND_COLUMNS].sum().sum() * parameters["pv_ground"]
+        no_pv_columns.remove("pv_ground")
+
+    df[no_pv_columns] = (
+        df[no_pv_columns]
+        / df[no_pv_columns].sum()
+        * {key: value for key, value in parameters.items() if key in no_pv_columns}
+    )
+    return df
+
 
 def calculate_square_for_value(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -110,34 +138,47 @@ def capacities_per_municipality() -> pd.DataFrame:
     return datapackage.get_capacities_from_datapackage()
 
 
-def capacities_per_municipality_2045(parameters: dict) -> pd.DataFrame:
+def capacities_per_municipality_2045(parameters: dict, *, aggregate_pv_ground: bool = True) -> pd.DataFrame:
     """Calculate capacities from 2045 scenario per municipality in MW."""
-    shares = calculate_potential_shares(parameters)
-    potential_capacities = datapackage.get_potential_values()  # in MW
-
-    # Use wind profile for selected wind year
-    potential_capacities = potential_capacities.drop(
-        columns=[
-            column for column in potential_capacities if column.startswith("wind") and column != parameters["wind_year"]
-        ],
-    )
-    potential_capacities = potential_capacities.rename(columns={parameters["wind_year"]: "wind"})
-
-    # Apply shares from user selection
-    potential_capacities = potential_capacities * shares
-
-    # Aggregate pv ground profiles
-    pv_ground_columns = ["pv_soil_quality_low", "pv_soil_quality_medium", "pv_permanent_crops"]
-    potential_capacities["pv_ground"] = potential_capacities[pv_ground_columns].sum(axis=1)
-    potential_capacities = potential_capacities.drop(pv_ground_columns, axis=1)
+    potential_capacities = datapackage.get_potential_capacities()  # in MW
+    potential_capacities = select_wind_year(potential_capacities, parameters["wind_year"])
+    capacity_settings = {
+        "wind": int(parameters["s_w_1"]),
+        "pv_ground": int(parameters["s_pv_ff_1"]),
+        "pv_roof": int(parameters["s_pv_d_1"]),
+        "hydro": 0,
+    }
+    if aggregate_pv_ground:
+        potential_capacities["pv_ground"] = potential_capacities[PV_GROUND_COLUMNS].sum(axis=1)
+        potential_capacities = potential_capacities.drop(PV_GROUND_COLUMNS, axis=1)
+    else:
+        capacity_settings["pv_soil_quality_low"] = int(parameters["s_pv_ff_3"])
+        capacity_settings["pv_soil_quality_medium"] = int(parameters["s_pv_ff_4"])
+        capacity_settings["pv_permanent_crops"] = int(parameters["s_pv_ff_5"])
+    capacities = calculate_wind_and_pv_distribution(potential_capacities, capacity_settings)
 
     # Set biomass potential to zero
-    potential_capacities["bioenergy"] = 0
+    capacities["bioenergy"] = 0
 
-    # Correct order (for charts)
-    potential_capacities = potential_capacities[["wind", "pv_roof", "pv_ground", "hydro", "bioenergy"]]
+    if aggregate_pv_ground:
+        # Correct order (for charts)
+        capacities = capacities[["wind", "pv_roof", "pv_ground", "hydro", "bioenergy"]]
 
-    return potential_capacities
+    return capacities
+
+
+def areas_per_municipality_2045(parameters: dict, *, aggregate_pv_ground: bool = True) -> pd.DataFrame:
+    """Calculate areas for each municipality depending on capacities in user settings."""
+    capacities = capacities_per_municipality_2045(parameters, aggregate_pv_ground=False)  # in MW
+    densities = datapackage.get_power_density()  # in MW/km2
+    densities["bioenergy"] = 1
+    areas = capacities / densities
+
+    if aggregate_pv_ground:
+        areas["pv_ground"] = areas[PV_GROUND_COLUMNS].sum(axis=1)
+        areas = areas.drop(PV_GROUND_COLUMNS, axis=1)
+
+    return areas
 
 
 def energies_per_municipality() -> pd.DataFrame:
@@ -263,7 +304,7 @@ def electricity_demand_per_municipality_2045(user_settings: dict) -> pd.DataFram
     pd.DataFrame
         Electricity demand per municipality (index) and sector (column)
     """
-    demand = electricity_demand_per_municipality(year=2022)
+    demand = electricity_demand_per_municipality(year=2045)
     shares = [int(user_settings[key]) / 100 for key in ("s_v_3", "s_v_4", "s_v_5")]
     return demand.iloc[:] * shares
 

@@ -6,8 +6,8 @@ from . import calculations, config, datapackage
 def detail_key_results(**kwargs: dict) -> dict:
     """Calculate detail key results for given technology."""
     shares = calculations.calculate_potential_shares(kwargs)
-    areas = datapackage.get_potential_areas().sum()
-    potential_capacities = datapackage.get_potential_values().sum()  # in MW
+    areas = datapackage.get_potential_areas().sum()  # in km2
+    potential_capacities = datapackage.get_potential_capacities().sum()  # in MW
     full_load_hours = datapackage.get_full_load_hours(2045)
     nominal_power_per_unit = config.TECHNOLOGY_DATA["nominal_power_per_unit"]["wind"]
 

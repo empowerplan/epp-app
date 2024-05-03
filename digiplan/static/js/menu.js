@@ -68,15 +68,17 @@ PubSub.subscribe(eventTopics.MAP_VIEW_SELECTED, setResultsView);
 PubSub.subscribe(eventTopics.CHART_VIEW_SELECTED, setResultsView);
 
 function updateWizardStyles(activeTabIndex) {
-  const lines = document.querySelectorAll('.wizard__line');
-  const steps = document.querySelectorAll('.wizard__list-item');
-  lines.forEach(line => line.classList.remove('active-line'));
-  steps.forEach(step => step.querySelector('.wizard__list-number').classList.remove('completed'));
+  const lines = document.querySelectorAll(".wizard__line");
+  const steps = document.querySelectorAll(".wizard__list-item");
+  lines.forEach((line) => line.classList.remove("active-line"));
+  steps.forEach((step) =>
+    step.querySelector(".wizard__list-number").classList.remove("completed"),
+  );
   for (let i = 0; i < activeTabIndex - 1; i++) {
     if (lines[i]) {
-      lines[i].classList.add('active-line');
+      lines[i].classList.add("active-line");
     }
-    steps[i].querySelector('.wizard__list-number').classList.add('completed');
+    steps[i].querySelector(".wizard__list-number").classList.add("completed");
   }
 }
 
@@ -86,12 +88,12 @@ function nextMenuTab() {
   const tabIndex = parseInt(currentTab.id.slice(6, 7));
   const currentStep = `step_${tabIndex}_${menuTabs[tabIndex - 1].name}`;
   document.getElementById(currentStep).classList.toggle("active");
-  document.getElementById(currentStep).removeAttribute('aria-current', 'step');
+  document.getElementById(currentStep).removeAttribute("aria-current", "step");
   const nextPanel = `panel_${tabIndex + 1}_${menuTabs[tabIndex].name}`;
   const nextStep = `step_${tabIndex + 1}_${menuTabs[tabIndex].name}`;
   document.getElementById(nextPanel).classList.toggle("active");
   document.getElementById(nextStep).classList.toggle("active");
-  document.getElementById(nextStep).setAttribute('aria-current', 'step');
+  document.getElementById(nextStep).setAttribute("aria-current", "step");
   updateWizardStyles(tabIndex + 1);
   PubSub.publish(menuTabs[tabIndex].event);
   toggleMenuButtons(tabIndex);
@@ -103,12 +105,12 @@ function previousMenuTab() {
   const tabIndex = parseInt(currentTab.id.slice(6, 7));
   const currentStep = `step_${tabIndex}_${menuTabs[tabIndex - 1].name}`;
   document.getElementById(currentStep).classList.toggle("active");
-  document.getElementById(currentStep).removeAttribute('aria-current', 'step');
+  document.getElementById(currentStep).removeAttribute("aria-current", "step");
   const nextPanel = `panel_${tabIndex - 1}_${menuTabs[tabIndex - 2].name}`;
   const nextStep = `step_${tabIndex - 1}_${menuTabs[tabIndex - 2].name}`;
   document.getElementById(nextPanel).classList.toggle("active");
   document.getElementById(nextStep).classList.toggle("active");
-  document.getElementById(nextStep).setAttribute('aria-current', 'step');
+  document.getElementById(nextStep).setAttribute("aria-current", "step");
   updateWizardStyles(tabIndex - 1);
   PubSub.publish(menuTabs[tabIndex - 2].event);
   toggleMenuButtons(tabIndex - 2);
@@ -164,7 +166,6 @@ function terminateSimulation(msg) {
         store.cold.task_id = null;
       },
     });
-    document.getElementById("simulation_spinner").hidden = true;
   }
   return logMessage(msg);
 }

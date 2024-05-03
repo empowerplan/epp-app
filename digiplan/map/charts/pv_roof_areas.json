@@ -23,14 +23,12 @@
   "yAxis": [
     {
       "type": "value",
-      "max": 5000,
       "axisLabel": {
         "formatter": "{value} ha"
       }
     },
     {
       "type": "value",
-      "max": 100,
       "axisLabel": {
         "formatter": "{value} %"
       }

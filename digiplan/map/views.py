@@ -102,62 +102,6 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         context["onboarding_pv_ground"] = charts.Chart("onboarding_pv_ground").render()
         context["onboarding_pv_roof"] = charts.Chart("onboarding_pv_roof").render()
 
-        # TODO(Hendrik Huyskens): Replace result boxes with results after simulation run
-        # https://github.com/empowerplan/epp-app/issues/34
-        context["results_electricity_energy"] = forms.ResultsBox(
-            "4 TWh",
-            "<span>Strom</span> werden aus Wind und Photovoltaik erzeugt",
-            category="electricity",
-        )
-        context["results_electricity_autarky"] = forms.ResultsBox(
-            "50 %",
-            "<span>der Zeit wird der Strombedarf</span> komplett aus regionalen erneuerbaren Quellen gedeckt",
-            category="electricity",
-        )
-        context["results_electricity_area"] = forms.ResultsBox(
-            "4 %",
-            "der <span>Regionsfläche</span> werden für Windenergie und Photovoltaik verwendet",
-            category="electricity",
-        )
-        context["results_heat"] = forms.ResultsBox("50,0 %", "...", category="heat")
-        context["results_wind_goal"] = forms.ResultsBox(
-            "80 %",
-            "der <span>Brandenburger Ausbauziele 2040</span> werden erreicht",
-            category="wind",
-        )
-        context["results_wind_area"] = forms.ResultsBox(
-            "2,5 %",
-            "der <span>Regionsfläche</span> werden für die Windenergie verwendet",
-            category="wind",
-        )
-        context["results_wind_demand_share"] = forms.ResultsBox(
-            "50 %",
-            "des <span>Strombedarfs</span> werden durch Windstrom gedeckt",
-            category="wind",
-        )
-        context["results_pv_goal"] = forms.ResultsBox(
-            "80 %",
-            "der <span>Brandenburger Ausbauziele 2040</span> werden erreicht",
-            category="pv",
-        )
-        context["results_pv_area"] = forms.ResultsBox(
-            "1,1 %",
-            "der <span>Regionsfläche</span> werden für Freiflächen-PV verwendet",
-            category="pv",
-        )
-        context["results_pv_demand_share"] = forms.ResultsBox(
-            "30 %",
-            "des <span>Strombedarfs</span> werden durch PV-Strom gedeckt",
-            category="pv",
-        )
-        context["results_mobility"] = forms.ResultsBox("22,8 %", "...", category="mobility")
-        context["results_h2"] = forms.ResultsBox("33,8 %", "...", category="h2")
-        context["results_co2"] = forms.ResultsBox(
-            "10,8 %",
-            "Reduktion der <span>Treibhausgasemissionen</span> in 2040",
-            category="co2",
-        )
-
         context["app_version"] = str(__version__)
 
         return context
@@ -228,6 +172,27 @@ def get_charts(request: HttpRequest) -> response.JsonResponse:
     map_state = json.loads(request.GET.get("map_state", "{}"))
     return response.JsonResponse(
         {lookup: charts.CHARTS[lookup](user_settings=map_state).render() for lookup in lookups},
+    )
+
+
+def get_summary_results(request: HttpRequest) -> response.JsonResponse:
+    """
+    Return all summary results as HTMLs with related div ID.
+
+    Parameters
+    ----------
+    request: HttpRequest
+        holding user settings
+
+    Returns
+    -------
+    JsonResponse
+        holding dict containing div IDs as key and summary results as HTML as values
+    """
+    lookups = request.GET.getlist("summaries[]")
+    map_state = json.loads(request.GET.get("map_state", "{}"))
+    return response.JsonResponse(
+        {lookup: forms.SUMMARY_RESULTS[lookup](parameters=map_state).render() for lookup in lookups},
     )
 
 

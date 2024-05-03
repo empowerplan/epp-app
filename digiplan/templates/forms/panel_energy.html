@@ -3,6 +3,9 @@
 {% load partials %}
 
 {% partialdef key_results %}
+  <p class="sidepanel__indication">
+    {%  trans "Mit den obigen Einstellungen können" %}
+  </p>
   <div class="sidepanel__key-numbers">
     <div class="sidepanel__key-number">
       <div class="sidepanel__key-number-value sidepanel__key-number-value--wind">
@@ -12,7 +15,7 @@
       </div>
       <div class="sidepanel__key-number-description">
         <span>
-          {%  trans "werden genutzt" %}
+          {%  trans "genutzt werden" %}
         </span>
       </div>
     </div>
@@ -24,7 +27,7 @@
           </span>
         </div>
         <div class="sidepanel__key-number-description">
-          {%  trans "Anlagen werden errichtet" %}
+          {%  trans "Anlagen errichtet werden" %}
         </div>
       </div>
     {% endif %}
@@ -36,7 +39,7 @@
       </div>
       <div class="sidepanel__key-number-description">
         <span>
-          {%  trans "können gewonnen werden" %}
+          {%  trans "gewonnen werden" %}
         </span>
       </div>
     </div>
@@ -119,6 +122,9 @@
         {% endwith %}
       </div>
       <div class="sidepanel__block">
+        <p class="sidepanel__indication">
+          {%  trans "Stelle links ein, wie viel Leistung installiert werden soll." %}
+        </p>
         <div class="sidepanel__more">
           <div>
             <button class="sidepanel__more-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWindPastMore" aria-expanded="false" aria-controls="collapseWindPastMore">
@@ -130,7 +136,7 @@
           </div>
           <div class="collapse sidepanel__more-collapse" id="collapseWindPastMore">
             <div>
-              {%  trans "Hier kommen mehr Details (2018)." %}
+              {%  trans "Mit dem Regler links kannst Du die Leistung einstellen. Deine obigen Einstellungen der Flächennutzung beeinflusst den maximalen Wert - auf mehr Fläche kannst Du mehr Leistung installieren.<br>Für die Umrechnung werden 24 MW/km² Windleistung angenommen." %}
             </div>
           </div>
         </div>
@@ -165,6 +171,9 @@
         {% endwith %}
       </div>
       <div class="sidepanel__block">
+        <p class="sidepanel__indication">
+          {%  trans "Stelle links ein, wie viel Leistung installiert werden soll." %}
+        </p>
         <div class="sidepanel__more">
           <div>
             <button class="sidepanel__more-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWindPresentMore" aria-expanded="false" aria-controls="collapseWindPresentMore">
@@ -176,7 +185,7 @@
           </div>
           <div class="collapse sidepanel__more-collapse" id="collapseWindPresentMore">
             <div>
-              {%  trans "Hier kommen mehr Details (2024)." %}
+              {%  trans "Mit dem Regler links kannst Du die Leistung einstellen. Deine obigen Einstellungen der Flächennutzung beeinflusst den maximalen Wert - auf mehr Fläche kannst Du mehr Leistung installieren.<br>Für die Umrechnung werden 24 MW/km² Windleistung angenommen." %}
             </div>
           </div>
         </div>
@@ -223,6 +232,9 @@
         {% endwith %}
       </div>
       <div class="sidepanel__block">
+        <p class="sidepanel__indication">
+          {%  trans "Stelle links ein, wie viel Leistung installiert werden soll." %}
+        </p>
         <div class="sidepanel__more">
           <div>
             <button class="sidepanel__more-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWindFutureMore" aria-expanded="false" aria-controls="collapseWindFutureMore">
@@ -234,7 +246,7 @@
           </div>
           <div class="collapse sidepanel__more-collapse" id="collapseWindFutureMore">
             <div>
-              {%  trans "Hier kommen mehr Details (2027)." %}
+              {%  trans "Mit dem Regler links kannst Du die Leistung einstellen. Deine obigen Einstellungen der Flächennutzung beeinflusst den maximalen Wert - auf mehr Fläche kannst Du mehr Leistung installieren.<br>Für die Umrechnung werden 24 MW/km² Windleistung angenommen." %}
             </div>
           </div>
         </div>
@@ -311,6 +323,9 @@
     {% endwith %}
   </div>
   <div class="sidepanel__block">
+    <p class="sidepanel__indication">
+      {%  trans "Stelle links ein, wie viel Leistung installiert werden soll." %}
+    </p>
     <div class="sidepanel__more">
       <div>
         <button class="sidepanel__more-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePVgroundPastMore" aria-expanded="false" aria-controls="collapsePVgroundPastMore">
@@ -322,7 +337,7 @@
       </div>
       <div class="collapse sidepanel__more-collapse" id="collapsePVgroundPastMore">
         <div>
-          {%  trans "Hier kommen mehr Details." %}
+          {%  trans "Mit dem Regler links kannst Du die Leistung einstellen. Deine obigen Einstellungen der Flächennutzung beeinflusst den maximalen Wert - auf mehr Fläche kannst Du mehr Leistung installieren. Wie viel von welcher Technologie installiert wird, wird aus den Verhältnissen der obigen Flächennutzung ermittelt (gewichtetes Mittel).<br>Für die Umrechnung werden 100 (niedrig aufgeständert), 29 (Agri-PV vertikal) und 74 (Agri-PV Dauerkulturen) MW/km² PV-Leistung angenommen." %}
         </div>
       </div>
     </div>
@@ -336,7 +351,7 @@
     {% include "widgets/sidepanel_close_btn.html" %}
   </div>
   <p class="sidepanel__indication">
-    {%  trans "Stelle ein, wieviel Dachfläche für Photovoltaik genutzt werden soll:" %}
+    {%  trans "Nutzung von Dachflächen für Photovoltaik:" %}
   </p>
   <div class="sidepanel__sliders">
     <div class="sidepanel__slider sidepanel__slider--pv-light">
@@ -356,6 +371,9 @@
     {% endwith %}
   </div>
   <div class="sidepanel__block">
+    <p class="sidepanel__indication">
+      {%  trans "Stelle links ein, wie viel Leistung installiert werden soll." %}
+    </p>
     <div class="sidepanel__more">
       <div>
         <button class="sidepanel__more-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePVroofPastMore" aria-expanded="false" aria-controls="collapsePVroofPastMore">
@@ -367,7 +385,7 @@
       </div>
       <div class="collapse sidepanel__more-collapse" id="collapsePVroofPastMore">
         <div>
-          {%  trans "Hier kommen mehr Details." %}
+          {%  trans "Mit dem Regler links kannst Du die Leistung einstellen. Deine obigen Einstellungen der Flächennutzung beeinflusst den maximalen Wert - auf mehr Fläche kannst Du mehr Leistung installieren.<br>Für die Umrechnung werden 140 MW/km² PV-Leistung angenommen." %}
         </div>
       </div>
     </div>
