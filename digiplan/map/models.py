@@ -718,6 +718,7 @@ class PVgroundAreas(StaticRegionModel):
     plan_status = models.CharField(max_length=255, null=True)
     status = models.CharField(max_length=10, null=True)
     capacity_net = models.FloatField(null=True)
+    capacity_net_inferred = models.BooleanField(null=True)
     year = models.BigIntegerField(null=True)
     construction_start_date = models.CharField(max_length=10, null=True)
     construction_end_date = models.CharField(max_length=10, null=True)
@@ -731,6 +732,7 @@ class PVgroundAreas(StaticRegionModel):
         "plan_status": "plan_status",
         "status": "status",
         "capacity_net": "capacity_net",
+        "capacity_net_inferred": "capacity_net_inferred",
         "year": "year",
         "construction_start_date": "construction_start_date",
         "construction_end_date": "construction_end_date",
