@@ -218,7 +218,7 @@ class HeatResultsBox(ResultsBox):  # noqa: D101
 
 class WindGoalResultsBox(ResultsBox):  # noqa: D101
     category = "wind"
-    text = "der <span>Brandenburger Ausbauziele 2040</span> werden erreicht"
+    text = "der <span>Brandenburger Leistungsziele für 2040</span> werden erreicht"
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
@@ -229,7 +229,7 @@ class WindGoalResultsBox(ResultsBox):  # noqa: D101
 
 class WindAreaResultsBox(ResultsBox):  # noqa: D101
     category = "wind"
-    text = "der <span>Regionsfläche</span> werden für die Windenergie verwendet"
+    text = "der <span>Regionsfläche</span> werden in Deinem Szenario verwendet"
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
@@ -251,7 +251,7 @@ class WindDemandShareResultsBox(ResultsBox):  # noqa: D101
 
 class PVGoalResultsBox(ResultsBox):  # noqa: D101
     category = "pv"
-    text = "der <span>Brandenburger Ausbauziele 2040</span> für Photovoltaik werden erreicht"
+    text = "der <span>Brandenburger Leistungsziele für 2040</span> für Photovoltaik werden erreicht"
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
@@ -264,7 +264,7 @@ class PVGoalResultsBox(ResultsBox):  # noqa: D101
 
 class PVAreaResultsBox(ResultsBox):  # noqa: D101
     category = "pv"
-    text = "der <span>Regionsfläche</span> werden für Freiflächen-PV verwendet"
+    text = "der <span>Regionsfläche</span> werden in Deinem Szenario für Freiflächen-PV verwendet"
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102

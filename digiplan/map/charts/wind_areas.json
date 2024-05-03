@@ -51,9 +51,12 @@
         7391,
         8988,
         {
-          "value": 10000,
+          "value": 0,
           "itemStyle": {
             "color": "#BAE1F6"
+          },
+          "label": {
+            "color": "#333"
           }
         }
       ],
@@ -73,9 +76,12 @@
         1.62,
         1.97,
         {
-          "value": 2,
+          "value": 0,
           "itemStyle": {
             "color": "#BAE1F6"
+          },
+          "label": {
+            "color": "#333"
           }
         }
       ],
