@@ -68,8 +68,8 @@ futureDropdown.addEventListener("change", function () {
 });
 
 // Subscriptions
-PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showPreResultCharts);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, storePreResults);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showPreResultCharts);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSummaryPreResults);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, disableResultButtons);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideRegionChart);
