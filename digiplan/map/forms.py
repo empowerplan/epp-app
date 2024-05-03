@@ -269,7 +269,7 @@ class PVAreaResultsBox(ResultsBox):  # noqa: D101
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
         region_area = datapackage.get_region_area()
-        pv_area = calculations.areas_per_municipality_2045(parameters)[["pv_ground", "pv_roof"]].sum().sum()
+        pv_area = calculations.areas_per_municipality_2045(parameters)["pv_ground"].sum()
         return (pv_area / region_area * 100).round(1)
 
 

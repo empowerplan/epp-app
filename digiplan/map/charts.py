@@ -1001,10 +1001,10 @@ class WindAreaChart(PreResultsChart):
 
     def get_chart_data(self) -> dict:
         """Calculate population for whole region."""
-        area = calculations.areas_per_municipality_2045(self.user_settings)["wind"].sum()
-        region_area = models.Municipality.objects.values("area").aggregate(Sum("area"))["area__sum"]
+        area = calculations.areas_per_municipality_2045(self.user_settings)["wind"].sum()  # in km2
+        region_area = models.Municipality.objects.values("area").aggregate(Sum("area"))["area__sum"]  # in km2
         area_percentage = area / region_area * 100
-        return {"area": area.round(), "area_percentage": area_percentage.round()}
+        return {"area": (area * 100).round(), "area_percentage": area_percentage.round(2)}  # in ha
 
     def render(self) -> dict:
         """Place results from user settings into related chart entries."""
@@ -1023,7 +1023,7 @@ class PVGroundAreaChart(PreResultsChart):
         areas = calculations.areas_per_municipality_2045(self.user_settings, aggregate_pv_ground=False).sum()
         region_area = models.Municipality.objects.values("area").aggregate(Sum("area"))["area__sum"]
         areas_percentage = areas / region_area * 100
-        return {"areas": areas.round(), "areas_percentage": areas_percentage.round()}
+        return {"areas": (areas * 100).round(), "areas_percentage": areas_percentage.round(2)}  # in ha
 
     def render(self) -> dict:
         """Place results from user settings into related chart entries."""
@@ -1041,9 +1041,9 @@ class PVRoofAreaChart(PreResultsChart):
     def get_chart_data(self) -> dict:
         """Calculate population for whole region."""
         area = calculations.areas_per_municipality_2045(self.user_settings, aggregate_pv_ground=False)["pv_roof"].sum()
-        potential_area = datapackage.get_potential_areas("pv_roof").sum() * 1e6
+        potential_area = datapackage.get_potential_areas("pv_roof").sum()
         area_percentage = area / potential_area * 100
-        return {"area": area.round(), "area_percentage": area_percentage.round()}
+        return {"area": (area * 100).round(), "area_percentage": area_percentage.round(2)}  # in ha
 
     def render(self) -> dict:
         """Place results from user settings into related chart entries."""
