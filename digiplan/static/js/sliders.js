@@ -422,6 +422,24 @@ function updateWindSelection(msg) {
   return logMessage(msg);
 }
 
+export function showPotentialLayers(msg) {
+  const activeSidepanels = document.getElementsByClassName("active-sidepanel");
+  if (activeSidepanels.length > 0) {
+    const activeSlider =
+      document.getElementsByClassName("active-sidepanel")[0].classList[1];
+    if (activeSlider === "s_w_1") {
+      showWindLayers(msg);
+    }
+    if (activeSlider === "s_pv_ff_1") {
+      showPVLayers(msg);
+    }
+    if (activeSlider === "s_pv_d_1") {
+      showPVRoofLayers(msg);
+    }
+  }
+  return logMessage(msg);
+}
+
 export function hidePotentialLayers(msg) {
   for (const layer of potentialPVLayers
     .concat(potentialPVRoofLayers)
