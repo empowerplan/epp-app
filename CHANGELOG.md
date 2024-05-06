@@ -31,6 +31,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - basemap controls
 - top wizard layout
 - municipality borders and labels
+- show potential layers if detail panel is open when revisiting settings menu
 
 ## [0.1.0] - 2024-03-19
 ### Added
