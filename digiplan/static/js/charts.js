@@ -1,4 +1,4 @@
-export const preResultCharts = {
+const preResultCharts = {
   wind_capacity: "wind_capacity_chart",
   wind_areas: "wind_areas_chart",
   pv_ground_capacity: "pv_ground_capacity_chart",
@@ -55,7 +55,7 @@ resizeCharts();
 window.addEventListener("resize", resizeCharts);
 document.addEventListener("show.bs.tab", resizeCharts);
 
-export function createChart(div_id, options) {
+function createChart(div_id, options) {
   const chartElement = document.getElementById(div_id);
   chartElement.innerHTML = "";
   let chart;
@@ -69,7 +69,7 @@ export function createChart(div_id, options) {
   chart.resize();
 }
 
-export function clearChart(div_id) {
+function clearChart(div_id) {
   const chartElement = document.getElementById(div_id);
   if (echarts.getInstanceByDom(chartElement)) {
     const chart = echarts.getInstanceByDom(chartElement);
