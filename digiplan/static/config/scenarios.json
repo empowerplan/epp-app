@@ -2,7 +2,7 @@
     "1": {
         "windTab": "windPresentTab",
         "id_s_w_1": 1769,
-        "id_s_w_7": 1.7,
+        "id_s_w_6": 1.7,
         "id_s_pv_ff_1": 1330,
         "id_s_pv_ff_3": 5,
         "id_s_pv_ff_4": 5,
@@ -27,7 +27,7 @@
     "2": {
         "windTab": "windFutureTab",
         "id_s_w_1": 2308,
-        "id_s_w_6": 2.2,
+        "id_s_w_7": 2.2,
         "id_s_pv_ff_1": 2437,
         "id_s_pv_ff_3": 3,
         "id_s_pv_ff_4": 3,
