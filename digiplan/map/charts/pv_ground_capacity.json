@@ -18,7 +18,7 @@
   },
   "xAxis": {
     "type": "category",
-    "data": ["2010", "2015", "2020", "2023", "Dein\nSzenario**"],
+    "data": ["2010", "2015", "2020", "2023**", "Dein\nSzenario***"],
     "axisLabel": {
       "rotate": 45
     }
@@ -120,7 +120,7 @@
       "yAxisIndex": 0
     },
     {
-      "name": "Leistung in Planung (2023)",
+      "name": "Leistung in Planung (2023)**",
       "type": "bar",
       "stack": "power",
       "label": {
