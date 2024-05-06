@@ -430,6 +430,6 @@ tour.addStep({
 });
 
 
-onbaordingCloseBtn.addEventListener("click", function() {
-  tour.start();
-});
+// onbaordingCloseBtn.addEventListener("click", function() {
+//   tour.start();
+// });
