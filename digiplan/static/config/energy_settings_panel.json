@@ -169,10 +169,10 @@
     "class": "js-slider js-slider-panel js-power-mix",
     "color": "#A9BDE8",
     "label": "{% trans 'Wasserkraft (MW)' %}",
-    "max": 30,
+    "max": 5,
     "min": 0,
-    "start": 5,
-    "status_quo": 15,
+    "start": 0,
+    "status_quo": 0,
     "step": 1,
     "tooltip": "{% trans 'Nennleistung der in der Region installierten Laufwasserkraftwerke in Megawatt. Da das Potenzial hier als ausgeschöpft gilt, werden nur bestehende Anlagen berücksichtigt.' %}",
     "type": "slider"

@@ -23,6 +23,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - oemof.tabular to support TSAM
 - map boolean values in popup templates to Ja/Nein
 - pre results can be shown before simulation has finished
+- scenario page and scenario parameters
 
 ### Fixed
 - duplicate loading of JS modules due to missing module support in django staticfile storage
