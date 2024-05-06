@@ -958,7 +958,7 @@ class WindCapacityChart(PreResultsChart):
     def render(self) -> dict:
         """Place results from user settings into related chart entries."""
         self.chart_options["series"][0]["data"][4]["value"] = self.chart_data["capacity"].round()
-        self.chart_options["series"][1]["data"][4]["value"] = self.chart_data["turbines"].round()
+        self.chart_options["series"][3]["data"][4]["value"] = self.chart_data["turbines"].round()
         return self.chart_options
 
 

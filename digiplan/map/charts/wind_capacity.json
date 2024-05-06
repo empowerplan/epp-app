@@ -36,10 +36,11 @@
     {
       "name": "Leistung",
       "type": "bar",
+      "stack": "power",
       "label": {
         "show": true,
         "position": "inside",
-        "rotate": 90,
+        "rotate": 0,
         "color": "#fff"
       },
       "color": "#6A89CC",
@@ -87,12 +88,77 @@
       }
     },
     {
+      "name": "Leistung genehmigt (2023)",
+      "type": "bar",
+      "stack": "power",
+      "label": {
+        "show": false,
+        "position": "inside",
+        "rotate": 0,
+        "color": "#333"
+      },
+      "color": "#99b5f1",
+      "data": [
+        0,
+        0,
+        0,
+        {
+          "value": 166,
+          "itemStyle": {
+            "borderWidth": 2,
+            "borderColor": "#6A89CC",
+            "borderType": "dotted"
+          },
+          "label": {
+            "show": true,
+            "rotate": 0,
+            "fontSize": 10
+          }
+        },
+        0
+      ],
+      "yAxisIndex": 0
+    },
+    {
+      "name": "Leistung in Planung (2023)",
+      "type": "bar",
+      "stack": "power",
+      "label": {
+        "show": false,
+        "position": "inside",
+        "rotate": 0,
+        "color": "#333"
+      },
+      "color": "#ffffff",
+      "data": [
+        0,
+        0,
+        0,
+        {
+          "value": 764,
+          "itemStyle": {
+            "borderWidth": 2,
+            "borderColor": "#6A89CC",
+            "borderType": "dotted"
+          },
+          "label": {
+            "show": true,
+            "rotate": 0,
+            "fontSize": 10
+          }
+        },
+        0
+      ],
+      "yAxisIndex": 0
+    },
+    {
       "name": "Anlagenanzahl",
       "type": "bar",
+      "stack": "count",
       "label": {
         "show": true,
         "position": "inside",
-        "rotate": 90,
+        "rotate": 0,
         "color": "#fff"
       },
       "color": "#b6caf3",

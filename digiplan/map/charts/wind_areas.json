@@ -41,7 +41,7 @@
       "label": {
         "show": true,
         "position": "inside",
-        "rotate": 90,
+        "rotate": 0,
         "color": "#fff"
       },
       "color": "#6A89CC",
@@ -66,7 +66,7 @@
       "label": {
         "show": true,
         "position": "inside",
-        "rotate": 90,
+        "rotate": 0,
         "color": "#fff"
       },
       "color": "#b6caf3",
