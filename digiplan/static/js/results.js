@@ -1,4 +1,5 @@
 import { statusquoDropdown, futureDropdown } from "./elements.js";
+import { preResultCharts, createChart, clearChart } from "./charts.js";
 
 const imageResults = document.getElementById("info_tooltip_results");
 const resultSimNote = document.getElementById("result_simnote");
@@ -18,15 +19,6 @@ const PRE_RESULTS = [
   "heat_demand_2045",
   "heat_demand_capita_2045",
 ];
-
-const preResultCharts = {
-  wind_capacity: "wind_capacity_chart",
-  wind_areas: "wind_areas_chart",
-  pv_ground_capacity: "pv_ground_capacity_chart",
-  pv_ground_areas: "pv_ground_areas_chart",
-  pv_roof_capacity: "pv_roof_capacity_chart",
-  pv_roof_areas: "pv_roof_areas_chart",
-};
 
 const resultCharts = {};
 
@@ -68,6 +60,7 @@ futureDropdown.addEventListener("change", function () {
 });
 
 // Subscriptions
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showResultSkeletons);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, storePreResults);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showPreResultCharts);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSummaryPreResults);
@@ -229,4 +222,18 @@ function showSummaryResults(summaries = []) {
       }
     },
   });
+}
+
+function showResultSkeletons(msg) {
+  const skeleton_template = document.getElementById("result_skeleton");
+  for (const chart_div_id of Object.values(preResultCharts)) {
+    const chart_div = document.getElementById(chart_div_id);
+    const chart = echarts.getInstanceByDom(chart_div);
+    if (chart !== undefined) {
+      chart.dispose();
+    }
+    const skeleton = skeleton_template.content.cloneNode(true);
+    chart_div.appendChild(skeleton);
+  }
+  return logMessage(msg);
 }

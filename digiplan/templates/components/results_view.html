@@ -1,4 +1,48 @@
 {% load i18n %}
+
+<template id="result_skeleton">
+  <div class="skeleton skeleton--chart">
+    <div class="skeleton__title"></div>
+    <div class="skeleton__chart">
+      <div class="skeleton__chart-yaxis">
+        <div class="skeleton__chart-yaxis-value"></div>
+        <div class="skeleton__chart-yaxis-value"></div>
+        <div class="skeleton__chart-yaxis-value"></div>
+      </div>
+      <div class="skeleton__chart-bars">
+        <div class="skeleton__chart-bar"></div>
+        <div class="skeleton__chart-bar"></div>
+        <div class="skeleton__chart-bar"></div>
+      </div>
+      <div class="skeleton__chart-xaxis-legend">
+        <div></div>
+      </div>
+    </div>
+    <div class="skeleton__legend">
+      <div class="skeleton__legend-item">
+        <div class="skeleton__legend-color"></div>
+        <div class="skeleton__legend-description"></div>
+      </div>
+      <div class="skeleton__legend-item">
+        <div class="skeleton__legend-color"></div>
+        <div class="skeleton__legend-description"></div>
+      </div>
+      <div class="skeleton__legend-item">
+        <div class="skeleton__legend-color"></div>
+        <div class="skeleton__legend-description"></div>
+      </div>
+      <div class="skeleton__legend-item">
+        <div class="skeleton__legend-color"></div>
+        <div class="skeleton__legend-description"></div>
+      </div>
+      <div class="skeleton__legend-item">
+        <div class="skeleton__legend-color"></div>
+        <div class="skeleton__legend-description"></div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <div class="tab-content" id="results-content">
   <div class="tab-pane fade" id="results-overview" role="tabpanel" aria-labelledby="results-overview-tab">
     <div class="main-results">
@@ -38,90 +82,8 @@
         <h2>{% translate "Detailergebnisse" %}</h2>
       </div>
       <div class="results__row">
-        <div class="results__item">
-          <div class="skeleton skeleton--chart">
-            <div class="skeleton__title"></div>
-            <div class="skeleton__chart">
-              <div class="skeleton__chart-yaxis">
-                <div class="skeleton__chart-yaxis-value"></div>
-                <div class="skeleton__chart-yaxis-value"></div>
-                <div class="skeleton__chart-yaxis-value"></div>
-              </div>
-              <div class="skeleton__chart-bars">
-                <div class="skeleton__chart-bar"></div>
-                <div class="skeleton__chart-bar"></div>
-                <div class="skeleton__chart-bar"></div>
-              </div>
-              <div class="skeleton__chart-xaxis-legend">
-                <div></div>
-              </div>
-            </div>
-            <div class="skeleton__legend">
-              <div class="skeleton__legend-item">
-                <div class="skeleton__legend-color"></div>
-                <div class="skeleton__legend-description"></div>
-              </div>
-              <div class="skeleton__legend-item">
-                <div class="skeleton__legend-color"></div>
-                <div class="skeleton__legend-description"></div>
-              </div>
-              <div class="skeleton__legend-item">
-                <div class="skeleton__legend-color"></div>
-                <div class="skeleton__legend-description"></div>
-              </div>
-              <div class="skeleton__legend-item">
-                <div class="skeleton__legend-color"></div>
-                <div class="skeleton__legend-description"></div>
-              </div>
-              <div class="skeleton__legend-item">
-                <div class="skeleton__legend-color"></div>
-                <div class="skeleton__legend-description"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="results__item">
-          <div class="skeleton skeleton--chart">
-            <div class="skeleton__title"></div>
-            <div class="skeleton__chart">
-              <div class="skeleton__chart-yaxis">
-                <div class="skeleton__chart-yaxis-value"></div>
-                <div class="skeleton__chart-yaxis-value"></div>
-                <div class="skeleton__chart-yaxis-value"></div>
-              </div>
-              <div class="skeleton__chart-bars">
-                <div class="skeleton__chart-bar"></div>
-                <div class="skeleton__chart-bar"></div>
-                <div class="skeleton__chart-bar"></div>
-              </div>
-              <div class="skeleton__chart-xaxis-legend">
-                <div></div>
-              </div>
-            </div>
-            <div class="skeleton__legend">
-              <div class="skeleton__legend-item">
-                <div class="skeleton__legend-color"></div>
-                <div class="skeleton__legend-description"></div>
-              </div>
-              <div class="skeleton__legend-item">
-                <div class="skeleton__legend-color"></div>
-                <div class="skeleton__legend-description"></div>
-              </div>
-              <div class="skeleton__legend-item">
-                <div class="skeleton__legend-color"></div>
-                <div class="skeleton__legend-description"></div>
-              </div>
-              <div class="skeleton__legend-item">
-                <div class="skeleton__legend-color"></div>
-                <div class="skeleton__legend-description"></div>
-              </div>
-              <div class="skeleton__legend-item">
-                <div class="skeleton__legend-color"></div>
-                <div class="skeleton__legend-description"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="results__item"></div>
+        <div class="results__item"></div>
       </div>
     </div>
   </div>
