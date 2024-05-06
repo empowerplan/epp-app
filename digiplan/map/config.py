@@ -131,6 +131,7 @@ if "migrate" not in sys.argv and os.environ.get("MAKE", "False") != "True":
         "allowedSwitches": ["wind_distance"],
         "detailTab": {"showPotentialLayers": True},
         "staticState": 0,
+        "distill": settings.MAP_ENGINE_USE_DISTILLED_MVTS,
     }
 
 

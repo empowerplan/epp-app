@@ -325,7 +325,10 @@ export function updateSliderMarks(msg) {
 
 function showPVLayers(msg) {
   hidePotentialLayers();
-  for (const layer of potentialPVLayers) {
+  for (let layer of potentialPVLayers) {
+    if (store.cold.distill) {
+      layer = `${layer}_distilled`;
+    }
     turn_on_layer(layer);
   }
   return logMessage(msg);
@@ -333,7 +336,10 @@ function showPVLayers(msg) {
 
 function showPVRoofLayers(msg) {
   hidePotentialLayers();
-  for (const layer of potentialPVRoofLayers) {
+  for (let layer of potentialPVRoofLayers) {
+    if (store.cold.distill) {
+      layer = `${layer}_distilled`;
+    }
     turn_on_layer(layer);
   }
   return logMessage(msg);
@@ -392,15 +398,22 @@ function showWindLayers(msg) {
   const currentWindTab = document
     .getElementById("windTab")
     .getElementsByClassName("active")[0].id;
+  let layers = [];
   if (currentWindTab === "windPastTab") {
-    turn_on_layer("potentialarea_wind_stp_2018_eg");
+    layers.push("potentialarea_wind_stp_2018_eg");
   } else if (currentWindTab === "windPresentTab") {
-    turn_on_layer("potentialarea_wind_stp_2024_vr");
+    layers.push("potentialarea_wind_stp_2024_vr");
   } else if (currentWindTab === "windFutureTab") {
-    turn_on_layer("potentialarea_wind_stp_2024_vr");
-    turn_on_layer("potentialarea_wind_stp_2027");
+    layers.push("potentialarea_wind_stp_2024_vr");
+    layers.push("potentialarea_wind_stp_2027");
   } else {
     throw Error(`Unknown wind tab '${currentWindTab}' found.`);
+  }
+  for (let layer of layers) {
+    if (store.cold.distill) {
+      layer = `${layer}_distilled`;
+    }
+    turn_on_layer(layer);
   }
   return logMessage(msg);
 }
@@ -441,9 +454,12 @@ export function showPotentialLayers(msg) {
 }
 
 export function hidePotentialLayers(msg) {
-  for (const layer of potentialPVLayers
+  for (let layer of potentialPVLayers
     .concat(potentialPVRoofLayers)
     .concat(potentialWindLayers)) {
+    if (store.cold.distill) {
+      layer = `${layer}_distilled`;
+    }
     turn_off_layer(layer);
   }
   return logMessage(msg);
