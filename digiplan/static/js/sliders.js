@@ -152,7 +152,7 @@ function adaptDetailSliders(msg, data) {
  * @param {string} msg Publisher message
  * @param {object} data Data from changed ionrangeslider
  */
-function adaptMainSliders(msg, data) {
+export function adaptMainSliders(msg, data) {
   const slider_id = data.input[0].id;
   if (slider_id === "id_s_w_6" || slider_id === "id_s_w_7") {
     calculate_max_wind();
