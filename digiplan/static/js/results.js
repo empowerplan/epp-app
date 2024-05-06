@@ -1,5 +1,4 @@
 import { statusquoDropdown, futureDropdown } from "./elements.js";
-import { preResultCharts, createChart, clearChart } from "./charts.js";
 
 const imageResults = document.getElementById("info_tooltip_results");
 const resultSimNote = document.getElementById("result_simnote");
