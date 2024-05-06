@@ -2,13 +2,28 @@
 
 <div class="panel__settings panel__settings--padding">
   <div class="panel-item">
+    <!--<div class="panel-item__calc-alert">
+      <div class="panel-item__calc-alert-message">{% translate "Detailergebnisse werden berechnet" %}</div>
+      <div class="panel-item__calc-alert-explanation">
+        <button type="button"
+                class="btn btn-link btn-sm"
+                data-bs-toggle="tooltip"
+                data-bs-placement="right"
+                title="{% translate "Es werden komplexe Modelle verwendet, um Ihre Daten präzise zu analysieren.<br>Diese tiefgehenden Berechnungen benötigen Zeit, um Ihnen zuverlässige und genaue Ergebnisse zu liefern." %}">
+                {% translate "Warum?" %}
+        </button>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%"></div>
+      </div>
+    </div>-->
     <div class="panel-item__form">
       <select id="result_views" class="form-select" aria-label="Default select example">
         <option value="" title="{% translate "Keine Auswahl" %}" selected>{% translate "Keine Auswahl" %}</option>
         <optgroup label="{% translate "Renewable Energies (RE)" %}">
           <option value="energy_share_2045"
                   title="{% translate "Annual balance sheet share of renewable energy (wind energy, photovoltaic, hydroelectric power) in the electricity demand of the sectors agriculture, GHG (trade, commerce, services), households and industry in percent. The demand is the net electricity consumption, i.e. transmission losses and power plant consumption are not taken into account. 49.7% of the electricity demand in Germany was covered by renewable energies in 2022." %}">
-                  {% translate "Renewable Energy Share of Demand" %} (%)
+                  {% translate "Renewable Energy Share of Demand (%)" %}
           </option>
           <option value="energy_2045"
                   title="{% translate "Annual amount of energy fed into the grid from renewable plants in gigawatt hours (wind energy, photovoltaic, hydro power)." %}">

@@ -197,14 +197,14 @@
       <script src="{% static 'js/intro_tour.js' %}" type="text/javascript"></script>
     {% endif %}
     <script src="{% static 'js/state.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/charts.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/layers-box.js' %}"></script>
   {% endcompress %}
+    <script src="{% static 'js/charts.js' %}" type="module"></script>
     <script src="{% static 'js/results.js' %}" type="module"></script>
     <script src="{% static 'js/sliders.js' %}" type="module"></script>
     <script type="text/javascript">
       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl, {html: true}))
     </script>
 
 {% endblock js_body %}

@@ -13,6 +13,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - scenario settings
 - additional slider marker
 - result chart arrow indicator
+- feedback during simulation: results progress bar and chart placeholders
 
 ### Changed
 - Adapt municipality label font size according to zoom level
