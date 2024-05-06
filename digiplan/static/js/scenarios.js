@@ -1,5 +1,10 @@
 import { getCurrentMenuTab } from "./menu.js";
-import { detailSliders, panelSliders, updateSliderMarks } from "./sliders.js";
+import {
+  detailSliders,
+  panelSliders,
+  updateSliderMarks,
+  adaptMainSliders,
+} from "./sliders.js";
 
 const scenarioSettings = JSON.parse(
   document.getElementById("scenario_settings").textContent,
@@ -137,8 +142,11 @@ function adaptSlidersScenario(msg, scenario) {
       input: [{ id: slider.id }],
       from: sliderValue,
     };
+    // Has to be called manually, as otherwise main slider is not ready for scenario data update
+    adaptMainSliders(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, data);
     PubSub.publish(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, data);
   }
+  console.log("Start adapting main sliders");
   // update main panel Sliders afterwards
   for (const slider of panelSliders) {
     // Check if the slider is defined in scenario settings
