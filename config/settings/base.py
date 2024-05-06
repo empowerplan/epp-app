@@ -281,6 +281,7 @@ MAP_ENGINE_Y_AT_MIN_Z = 83
 MAP_ENGINE_X_OFFSET = 1  # Defines how many tiles to the right are added at first level
 MAP_ENGINE_Y_OFFSET = 1  # Defines how many tiles to the bottom are added at first level
 MAP_ENGINE_MAX_DISTILLED_ZOOM = 13
+DISTILL = env.bool("MAP_ENGINE_USE_DISTILLED_MVTS", False)
 
 MAP_ENGINE_IMAGES = [
     setup.MapImage("wind", "images/icons/map_wind.png"),
@@ -541,15 +542,15 @@ MAP_ENGINE_POPUPS = [
         popup_at_default_layer=True,
     ),
     setup.Popup(
-        "rpg_ols_pv_ground_operating",
+        f"rpg_ols_pv_ground_operating{'_distilled' if DISTILL else ''}",
         popup_at_default_layer=True,
     ),
     setup.Popup(
-        "rpg_ols_pv_ground_approved",
+        f"rpg_ols_pv_ground_approved{'_distilled' if DISTILL else ''}",
         popup_at_default_layer=True,
     ),
     setup.Popup(
-        "rpg_ols_pv_ground_planned",
+        f"rpg_ols_pv_ground_planned{'_distilled' if DISTILL else ''}",
         popup_at_default_layer=True,
     ),
     setup.Popup(
