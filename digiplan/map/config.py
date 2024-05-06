@@ -1,5 +1,6 @@
 """Configuration for map app."""
 import json
+import os
 import pathlib
 import sys
 from pathlib import Path
@@ -121,7 +122,7 @@ def get_slider_per_sector() -> dict:
 
 # STORE
 # Skip initialization in migrate mode
-if "migrate" not in sys.argv:
+if "migrate" not in sys.argv and os.environ.get("MAKE", "False") != "True":
     STORE_COLD_INIT = {
         "version": __version__,
         "slider_marks": get_slider_marks(),

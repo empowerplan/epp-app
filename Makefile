@@ -2,6 +2,7 @@
 .PHONY : load_regions load_data empty_data dump_fixtures load_fixtures distill check_distill_coordinates
 
 MAP_ENGINE_DISTILL=True
+MAKE=True
 DJANGO_READ_DOT_ENV_FILE=True
 export
 
@@ -25,6 +26,9 @@ empty_regions:
 
 empty_data:
 	python manage.py shell --command="from digiplan.utils import data_processing; data_processing.empty_data()"
+
+empty_population:
+	python manage.py shell --command="from digiplan.map.models import Population; Population.objects.all().delete()"
 
 empty_raster:
 	python manage.py shell --command="from digiplan.utils import data_processing; data_processing.empty_raster()"
