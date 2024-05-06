@@ -982,7 +982,7 @@ class PVGroundCapacityChart(PreResultsChart):
 class PVRoofCapacityChart(PreResultsChart):
     """Chart for pv roof capacity shown on diagram results page."""
 
-    lookup = "pv_ground_capacity"
+    lookup = "pv_roof_capacity"
 
     def get_chart_data(self) -> dict:
         """Calculate population for whole region."""
