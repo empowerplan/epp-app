@@ -36,20 +36,21 @@
     {
       "name": "Leistung",
       "type": "bar",
+      "stack": "power",
       "label": {
         "show": true,
         "position": "inside",
-        "rotate": 90,
+        "rotate": 0,
         "color": "#333"
       },
       "color": "#efad25",
       "data": [
-        1,
+        3,
         296,
-        376,
-        762,
+        392,
+        873,
         {
-          "value": 2000,
+          "value": 0,
           "itemStyle": {
             "color": "#FBEEAE"
           }
@@ -84,20 +85,85 @@
       }
     },
     {
+      "name": "Leistung genehmigt (2023)",
+      "type": "bar",
+      "stack": "power",
+      "label": {
+        "show": false,
+        "position": "inside",
+        "rotate": 0,
+        "color": "#333"
+      },
+      "color": "#f1ce86",
+      "data": [
+        0,
+        0,
+        0,
+        {
+          "value": 203,
+          "itemStyle": {
+            "borderWidth": 2,
+            "borderColor": "#efad25",
+            "borderType": "dotted"
+          },
+          "label": {
+            "show": true,
+            "rotate": 0,
+            "fontSize": 10
+          }
+        },
+        0
+      ],
+      "yAxisIndex": 0
+    },
+    {
+      "name": "Leistung in Planung (2023)",
+      "type": "bar",
+      "stack": "power",
+      "label": {
+        "show": false,
+        "position": "inside",
+        "rotate": 0,
+        "color": "#333"
+      },
+      "color": "#ffffff",
+      "data": [
+        0,
+        0,
+        0,
+        {
+          "value": 1049,
+          "itemStyle": {
+            "borderWidth": 2,
+            "borderColor": "#efad25",
+            "borderType": "dotted"
+          },
+          "label": {
+            "show": true,
+            "rotate": 0,
+            "fontSize": 10
+          }
+        },
+        0
+      ],
+      "yAxisIndex": 0
+    },
+    {
       "name": "Anlagenanzahl",
       "type": "bar",
+      "stack": "count",
       "label": {
         "show": true,
         "position": "inside",
-        "rotate": 90,
+        "rotate": 0,
         "color": "#333"
       },
       "color": "#ffd660",
       "data": [
-        7,
-        74,
-        123,
-        183,
+        5,
+        63,
+        94,
+        95,
         {
           "value": 0,
           "itemStyle": {

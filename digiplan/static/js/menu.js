@@ -1,5 +1,5 @@
 import { resultsTabs, futureDropdown } from "./elements.js";
-import { hidePotentialLayers } from "./sliders.js";
+import { hidePotentialLayers, showPotentialLayers } from "./sliders.js";
 
 const menuNextBtn = document.getElementById("menu_next_btn");
 const menuPreviousBtn = document.getElementById("menu_previous_btn");
@@ -60,6 +60,7 @@ PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, deactivateChoropleth);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, terminateSimulation);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, hideEmpowerplanContent);
+PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, showPotentialLayers);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hidePotentialLayers);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideEmpowerplanContent);

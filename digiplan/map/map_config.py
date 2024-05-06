@@ -1,8 +1,9 @@
 """Actual map setup is done here."""
 import dataclasses
 
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
-from django_mapengine import legend
+from django_mapengine import legend, utils
 
 
 @dataclasses.dataclass
@@ -10,6 +11,31 @@ class SymbolLegendLayer(legend.LegendLayer):
     """Adds symbol field."""
 
     symbol: str = "rectangle"
+
+
+@dataclasses.dataclass
+class DistillableLegendLayer(legend.LegendLayer):
+    """Adds symbol field."""
+
+    def get_color(self) -> str:
+        """Return color of underlying style for given layer ID."""
+        if self.color:
+            return self.color
+        layer_id = self.layer_id.removesuffix("_distilled")
+        return utils.get_color(layer_id)
+
+    @property
+    def style(self) -> dict:
+        """
+        Return layer style.
+
+        Returns
+        -------
+        dict
+            layer style
+        """
+        layer_id = self.layer_id.removesuffix("_distilled")
+        return utils.get_layer_style(layer_id)
 
 
 # TODO(Josi): Add real descriptions for layer info buttons
@@ -43,26 +69,26 @@ LEGEND = {
         #     ),
         #     color="#6A89CC",
         # ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("FF-PV (in Betrieb)"),
             _(
                 "Photovoltaik-Freiflächenanlagen in Betrieb, Flächendaten (Daten: RPG Oderland-Spree, Stand: "
                 "31.12.2023)",
             ),
-            layer_id="rpg_ols_pv_ground_operating",
+            layer_id=f"rpg_ols_pv_ground_operating{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("FF-PV (genehmigt)"),
             _(
                 "Genehmigte Photovoltaik-Freiflächenanlagen, Flächendaten (Daten: RPG Oderland-Spree, Stand: "
                 "31.12.2023)",
             ),
-            layer_id="rpg_ols_pv_ground_approved",
+            layer_id=f"rpg_ols_pv_ground_approved{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("FF-PV (geplant)"),
             _("Geplante Photovoltaik-Freiflächenanlagen, Flächendaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"),
-            layer_id="rpg_ols_pv_ground_planned",
+            layer_id=f"rpg_ols_pv_ground_planned{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
         # SymbolLegendLayer(
         #     _(
@@ -137,72 +163,73 @@ LEGEND = {
         ),
     ],
     _("Settlements Infrastructure"): [
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Siedlungsgebiete"),
             _(
                 "Eine Siedlung ist ein Gebiet, welches die menschliche Niederlassung in beliebiger Form der "
                 "gruppierten Behausung beschreibt. Sie beinhaltet überwiegend Wohngebiete.",
             ),
-            layer_id="pv_ground_criteria_settlements",
+            layer_id=f"pv_ground_criteria_settlements{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Siedlungsgebiete (200m Puffer)"),
             _(
                 "Eine Siedlung ist ein Gebiet, welches die menschliche Niederlassung in beliebiger Form der "
                 "gruppierten Behausung beschreibt. Sie beinhaltet überwiegend Wohngebiete.",
             ),
-            layer_id="pv_ground_criteria_settlements_200m",
+            layer_id=f"pv_ground_criteria_settlements_200m"
+            f"{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Industry"),
             _(
                 "Industrie- und Gewerbegebiete werden ausgewiesen, um störende Einwirkungen von Betrieben wie Lärm, "
                 "Geruch oder Gefahren auf Wohnbebauung zu vermeiden.",
             ),
-            layer_id="industry",
+            layer_id=f"industry{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Road"),
             _("Zu den Straßen gehören unter anderem Bundesautobahnen, Bundesfern-, Landes- und Kreisstraßen."),
-            layer_id="road_default",
+            layer_id=f"road_default{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Railway"),
             _(
                 "Der Bahnverkehr ist ein wichtiger Bestandteil der Verkehrsinfrastruktur. Berücksichtigt "
                 "werden Fernverkehrsbahnen, Regionalverkehrsbahnen und S-Bahnen.",
             ),
-            layer_id="railway",
+            layer_id=f"railway{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Luftverkehr"),
             _(
                 "Zur Infrastruktur des Luftverkehrs gehören neben Start- und Landebahnen die "
                 "Flughafengebäude und Hangars.",
             ),
-            layer_id="pv_ground_criteria_aviation",
+            layer_id=f"pv_ground_criteria_aviation{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Air Traffic"),
             _("Ein Drehfunkfeuer ist ein Funkfeuer für die Luftfahrtnavigation."),
-            layer_id="air_traffic",
+            layer_id=f"air_traffic{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Militärgebiete"),
             _("Zu den militärisch genutzten Flächen gehören militärische Sperrgebiete und Liegenschaften."),
-            layer_id="military",
+            layer_id=f"military{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Grid"),
             _(
                 "Zum Übertragungsnetz zählen die elektrischen Leitungen sowie die dazugehörigen Einrichtungen "
                 "wie Schalt- und Umspannwerke der Höchst- und Hochspannungsebenen.",
             ),
-            layer_id="grid",
+            layer_id=f"grid{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
     ],
     _("Nature Landscape"): [
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Naturschutzgebiete"),
             _(
                 "Naturschutzgebiete dienen dem Schutz der Natur und Landschaft. Sie tragen zur Erhaltung, Entwicklung "
@@ -210,34 +237,34 @@ LEGEND = {
                 "auch aus wissenschaftlichen, naturgeschichtlichen und ästhetischen Gründen werden Teile oder die "
                 "Gesamtheit der Natur in Schutz genommen.",
             ),
-            layer_id="nature_conservation_area",
+            layer_id=f"nature_conservation_area{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Trinkwasserschutzgeb."),
             _(
                 "Wasserschutzgebiete stellen die öffentliche Wasserversorgung durch die Vermeidung "
                 "schädlicher Eintragungen in die Gewässer (Grundwasser, oberirdische Gewässer, Küstengewässer) sicher.",
             ),
-            layer_id="drinking_water_protection_area",
+            layer_id=f"drinking_water_protection_area{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Fauna-Flora-Habitate"),
             _(
                 "Die Fauna-Flora-Habitat-Richtlinie ist eine Naturschutz-Richtlinie der Europäischen Union (EU), die "
                 "seltene oder bedrohte Arten und Lebensräume schützt. Sie gehört zum Schutzgebietsnetz Natura 2000.",
             ),
-            layer_id="fauna_flora_habitat",
+            layer_id=f"fauna_flora_habitat{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Special Protection Area"),
             _(
                 "Die Vogelschutzrichtlinie der Europäischen Union (EU) dient der Erhaltung der wild lebenden, "
                 "heimischen Vogelarten. Sie regelt den Schutz dieser Vögel, ihrer Eier und Lebensräume wie Brut-, "
                 "Rast- und Überwinterungsgebiete. Die Vogelschutzgebiete gehören zum Schutzgebietsnetz Natura 2000.",
             ),
-            layer_id="special_protection_area",
+            layer_id=f"special_protection_area{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Biosphere Reserve"),
             _(
                 "Biosphärenreservate sind großräumige und für bestimmte Landschaftstypen charakteristische Gebiete "
@@ -247,23 +274,23 @@ LEGEND = {
                 "(Schutzfunktion), eine am Landschaftsschutz orientierte Pflegezone (Forschungs- und Bildungsfunktion)"
                 " und eine sozioökonomisch orientierte Entwicklungszone (Entwicklungsfunktion).",
             ),
-            layer_id="biosphere_reserve",
+            layer_id=f"biosphere_reserve{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Naturparke"),
             _(
                 "text about nature parks.",
             ),
-            layer_id="nature_park",
+            layer_id=f"nature_park{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Biotope"),
             _(
                 "text for biotopes",
             ),
-            layer_id="pv_ground_criteria_biotope",
+            layer_id=f"pv_ground_criteria_biotope{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Waldgebiete"),
             _(
                 "Wald umfasst eine Vielzahl an mit Bäumen und anderer Vegetation bedeckten Fläche "
@@ -271,40 +298,40 @@ LEGEND = {
                 "Nadel-, Laub- und Mischwald sowie anhand der Waldfunktionen (z. B. Schutzwald, Erholungswald) "
                 "unterschieden werden.",
             ),
-            layer_id="forest",
+            layer_id=f"forest{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Gewässer 1. Ordnung"),
             _(
                 "Ein Gewässer ist in der Natur fließendes oder stehendes Wasser. "
                 "Dazu gehören der Wasserkörper, das Gewässerbett und der Grundwasserleiter.",
             ),
-            layer_id="water_first_order",
+            layer_id=f"water_first_order{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Stillgewässer"),
             _(
                 "Ein Gewässer ist in der Natur fließendes oder stehendes Wasser. "
                 "Dazu gehören der Wasserkörper, das Gewässerbett und der Grundwasserleiter.",
             ),
-            layer_id="water_bodies",
+            layer_id=f"water_bodies{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Moor"),
             _(
                 "text for moors",
             ),
-            layer_id="moor",
+            layer_id=f"moor{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Überschwemmungsgeb."),
             _(
                 "Bei Überschwemmungsgebieten handelt es sich um die Flächen, "
                 "die statistisch gesehen mindestens einmal in hundert Jahren überflutet sein können.",
             ),
-            layer_id="floodplain",
+            layer_id=f"floodplain{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Landschaftsschutzgeb."),
             _(
                 "Landschaftsschutzgebiete sind oft großflächiger angelegt und zielen auf den Erhalt des "
@@ -312,18 +339,18 @@ LEGEND = {
                 "Sie haben einen geringeren Schutzstatus als etwa Naturschutzgebiete oder Nationalparke und "
                 "unterliegen daher weniger strengen Nutzungsbeschränkungen.",
             ),
-            layer_id="landscape_protection_area",
+            layer_id=f"landscape_protection_area{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("Freiraumverbund"),
             _(
                 "text for open spaces",
             ),
-            layer_id="pv_ground_criteria_open_spaces",
+            layer_id=f"pv_ground_criteria_open_spaces{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
     ],
     _("Negativkriterien PV"): [
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N01] Siedlungsgebiete"),
             _(
                 "'Siedlungsgebiete sowie Flächen rechtskräftiger Bebauungspläne mit Ausweisungen von Wohn-, "
@@ -332,9 +359,9 @@ LEGEND = {
                 "Innenbereiche, bebaute Flächen im Außenbereich, geplante Baugebiete und Siedlungsflächen nach § 30 "
                 "und § 34 BauGB ist fachrechtlich ausgeschlossen.",
             ),
-            layer_id="pv_ground_criteria_settlements",
+            layer_id=f"pv_ground_criteria_settlements{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N02] Siedlungsgebiete (200m Puffer)"),
             _(
                 "'Abstandszone zu Siedlungsgebieten und sonstigen geschützten Nutzungen' - Negativkriterium [N 02] aus "
@@ -346,9 +373,10 @@ LEGEND = {
                 "Planungshoheit geeignete Flächen auch unterhalb der 200 m für die solare Energie- und Wärmeerzeugung "
                 "auf Freiflächen zur Verfügung stellen.",
             ),
-            layer_id="pv_ground_criteria_settlements_200m",
+            layer_id=f"pv_ground_criteria_settlements_200m"
+            f"{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N03] Überschwemmungsgeb."),
             _(
                 "'100-jährliches Hochwasser HQ100 sowie festgesetzte Überschwemmungsgebiete' - Negativkriterium [N 03] "
@@ -362,9 +390,9 @@ LEGEND = {
                 "Risikogebiete nach § 73 WHG) und Schutzanforderungen (Schutzvorschriften nach § 78 WHG) der "
                 "Sicherheit des Hochwasserschutzes vom Planer als untauglich für die PV-FFA bewertet.",
             ),
-            layer_id="floodplain",
+            layer_id=f"floodplain{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N04] Freiraumverbund"),
             _(
                 "'Vorranggebiet Freiraumverbund Z 6.2 LEP HR' - Negativkriterium [N 04] aus Kriteriengerüst "
@@ -373,9 +401,9 @@ LEGEND = {
                 "besonders hochwertigen Funktionen, die gesichert werden sollen. Gemäß Z 6.2 LEP HR ist die Kulisse "
                 "des Freiraumverbundes nicht vereinbar mit der PV-FFA.",
             ),
-            layer_id="pv_ground_criteria_open_spaces",
+            layer_id=f"pv_ground_criteria_open_spaces{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N05] Naturschutzgebiete"),
             _(
                 "'Naturschutzgebiete' - Negativkriterium [N 05] aus Kriteriengerüst PV-Freiflächenanlagen. Gemäß § 23 "
@@ -384,9 +412,9 @@ LEGEND = {
                 "Photovoltaikanlagen in den Schutzkategorien nach § 23 BNatschG ist durch Zugriffsverbote "
                 "fachrechtlich ausgeschlossen.",
             ),
-            layer_id="nature_conservation_area",
+            layer_id=f"nature_conservation_area{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N06] Fauna-Flora-Habitate"),
             _(
                 "'Fauna-Flora-Habitat-Gebiete' - Negativkriterium [N 06] aus Kriteriengerüst PV-Freiflächenanlagen: "
@@ -395,9 +423,9 @@ LEGEND = {
                 "ist ausgeschlossen, da das Vorhaben in der Regel nicht mit dem Schutzzweck in Einklang steht bzw. in "
                 "Einklang gebracht werden kann.",
             ),
-            layer_id="fauna_flora_habitat",
+            layer_id=f"fauna_flora_habitat{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N07] Biotope"),
             _(
                 "'Gesetzlich geschützte Biotope' - Negativkriterium [N 07] aus Kriteriengerüst PV-Freiflächenanlagen: "
@@ -405,9 +433,9 @@ LEGEND = {
                 "BNatschG ist fachrechtlich ausgeschlossen, da das Vorhaben mit dem Schutzzweck nicht vereinbar ist "
                 "bzw. nicht in Einklang gebracht werden kann.",
             ),
-            layer_id="pv_ground_criteria_biotope",
+            layer_id=f"pv_ground_criteria_biotope{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N08] Moorböden"),
             _(
                 "'Naturnahe Moorböden' - Negativkriterium [N 08] aus Kriteriengerüst PV-Freiflächenanlagen: Eine hohe "
@@ -418,9 +446,9 @@ LEGEND = {
                 "gesetzlichen Auftrag zur Erhaltung oder Wiederherstellung eines günstigen Erhaltungszustandes der "
                 "Moorlebensraumtypen gemäß FFH-Richtlinie.“ (Nationale Moorschutzstrategie, S. 10).",
             ),
-            layer_id="moor",
+            layer_id=f"moor{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N09] Trinkwasserschutzgeb."),
             _(
                 "'Schutzzone I und II der Trinkwasserschutzgebiete' - Negativkriterium [N 09] aus Kriteriengerüst "
@@ -436,9 +464,9 @@ LEGEND = {
                 "und II ein Verbot bzw. eine wesentliche Beschränkung der Errichtung und Erweiterung von baulichen "
                 "Anlagen.",
             ),
-            layer_id="drinking_water_protection_area",
+            layer_id=f"drinking_water_protection_area{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N10] Fließgewässer"),
             _(
                 "'Natürliche oberirdische Gewässer' - Negativkriterium [N 10] aus Kriteriengerüst "
@@ -451,9 +479,9 @@ LEGEND = {
                 "wenn ausgehend von der Linie des Mittelwasserstandes, die Anlage mehr als 15 Prozent der "
                 "Gewässerfläche bedeckt oder der Abstand zum Ufer weniger als 40 m beträgt (GA PV-FFA, S.18).",
             ),
-            layer_id="water_first_order",
+            layer_id=f"water_first_order{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N10] Stillgewässer"),
             _(
                 "'Natürliche oberirdische Gewässer' - Negativkriterium [N 10] aus Kriteriengerüst "
@@ -466,9 +494,9 @@ LEGEND = {
                 "wenn ausgehend von der Linie des Mittelwasserstandes, die Anlage mehr als 15 Prozent der "
                 "Gewässerfläche bedeckt oder der Abstand zum Ufer weniger als 40 m beträgt (GA PV-FFA, S.18).",
             ),
-            layer_id="water_bodies",
+            layer_id=f"water_bodies{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N11] Waldgebiete"),
             _(
                 "'Waldgebiete' - Negativkriterium [N 11] aus Kriteriengerüst PV-Freiflächenanlagen: Gemäß § 1 BWaldG "
@@ -476,9 +504,9 @@ LEGEND = {
                 "nachhaltig zu sichern. Wald im Sinne des § 2 LWaldG ist für die Errichtung von PV-FFA fachrechtlich "
                 "ausgeschlossen. (GA PV-FFA, S.18)",
             ),
-            layer_id="forest",
+            layer_id=f"forest{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N12] Flächennaturdenkmale"),
             _(
                 "'Flächennaturdenkmale' - Negativkriterium [N 12] aus Kriteriengerüst PV-Freiflächenanlagen: "
@@ -489,9 +517,10 @@ LEGEND = {
                 "Naturdenkmalen nach § 1 Abs. 6 Nr. 5 BauGB ist ausgeschlossen, da das Vorhaben dem Schutzzweck nicht "
                 "entspricht oder mit ihm nicht in Einklang gebracht werden kann.",
             ),
-            layer_id="pv_ground_criteria_nature_monuments",
+            layer_id=f"pv_ground_criteria_nature_monuments"
+            f"{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N13] Luftverkehr"),
             _(
                 "'Betriebsflächen von regionalen Flugplätzen' - Negativkriterium [N 13] aus Kriteriengerüst "
@@ -500,9 +529,9 @@ LEGEND = {
                 "Die Flächen der Verkehrs- und Sonderlandeplätze, insbesondere der gewidmeten Landebahnen gemäß § 6 "
                 "LuftVG und Schutzbereiche, sind für die luftverkehrliche Nutzung freizuhalten.",
             ),
-            layer_id="pv_ground_criteria_aviation",
+            layer_id=f"pv_ground_criteria_aviation{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N14] Militärgebiete"),
             _(
                 "'Militärische Bereiche, deren Betreten verboten ist' - Negativkriterium [N 14] aus Kriteriengerüst "
@@ -511,9 +540,9 @@ LEGEND = {
                 "Limsdorf und Schneeberg. Diese Gebiete sind für eine PV-FFA nur in Ausnahmefällen geeignet (§ 3 "
                 "Schutzbereichsgesetz).",
             ),
-            layer_id="military",
+            layer_id=f"military{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N15] Vorzug klimarobustes Ackerland"),
             _(
                 "'Böden mit einem hohen Erfüllungsgrad ihrer Bodenfunktion und besonders klimarobuste Böden' - "
@@ -528,9 +557,9 @@ LEGEND = {
                 "konventionellen PV-FFA auf besonders klimarobusten Böden sollte vermieden werden. (Siehe ZALF-Studie "
                 "auf der Website der RPG)",
             ),
-            layer_id="priority_climate_resistent_agri",
+            layer_id=f"priority_climate_resistent_agri{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N15] Vorzug Dauerkultur"),
             _(
                 "'Böden mit einem hohen Erfüllungsgrad ihrer Bodenfunktion und besonders klimarobuste Böden' - "
@@ -545,9 +574,9 @@ LEGEND = {
                 "konventionellen PV-FFA auf besonders klimarobusten Böden sollte vermieden werden. (Siehe ZALF-Studie "
                 "auf der Website der RPG)",
             ),
-            layer_id="priority_permanent_crops",
+            layer_id=f"priority_permanent_crops{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        legend.LegendLayer(
+        DistillableLegendLayer(
             _("[N15] Vorzug Grünland"),
             _(
                 "'Böden mit einem hohen Erfüllungsgrad ihrer Bodenfunktion und besonders klimarobuste Böden' - "
@@ -562,7 +591,7 @@ LEGEND = {
                 "konventionellen PV-FFA auf besonders klimarobusten Böden sollte vermieden werden. (Siehe ZALF-Studie "
                 "auf der Website der RPG)",
             ),
-            layer_id="priority_grassland",
+            layer_id=f"priority_grassland{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
     ],
 }
