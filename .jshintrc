@@ -37,7 +37,8 @@
     "createChart": false,
     "clearChart": false,
     "hidePotentialLayers": false,
-    "URLSearchParams": false
+    "URLSearchParams": false,
+    "preResultCharts": false
   },
   "strict": "implied"
 }

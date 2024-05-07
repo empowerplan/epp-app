@@ -35,6 +35,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - show potential layers if detail panel is open when revisiting settings menu
 - popups for distilled layers
 - charts for popups
+- disappearing region charts
 
 ## [0.1.0] - 2024-03-19
 ### Added

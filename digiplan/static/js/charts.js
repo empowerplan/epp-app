@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 const preResultCharts = {
   wind_capacity: "wind_capacity_chart",
   wind_areas: "wind_areas_chart",
@@ -6,6 +7,7 @@ const preResultCharts = {
   pv_roof_capacity: "pv_roof_capacity_chart",
   pv_roof_areas: "pv_roof_areas_chart",
 };
+/* jshint ignore:end */
 
 // Onboarding Charts
 const onboarding_wind_div = document.getElementById("onboarding_wind_chart");
@@ -57,7 +59,6 @@ document.addEventListener("show.bs.tab", resizeCharts);
 
 function createChart(div_id, options) {
   const chartElement = document.getElementById(div_id);
-  chartElement.innerHTML = "";
   let chart;
   if (echarts.getInstanceByDom(chartElement)) {
     chart = echarts.getInstanceByDom(chartElement);

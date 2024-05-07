@@ -201,6 +201,13 @@ function showCharts(charts = {}) {
     success: function (chart_options) {
       for (const chart in charts) {
         createChart(charts[chart], chart_options[chart]);
+        // Remove skeleton placeholder if it exists
+        const skeleton = document
+          .getElementById(charts[chart])
+          .querySelector(".skeleton");
+        if (skeleton !== null) {
+          skeleton.remove();
+        }
       }
     },
   });
