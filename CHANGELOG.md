@@ -36,6 +36,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - popups for distilled layers
 - charts for popups
 - disappearing region charts
+- electricity demand base set to year 2022
 
 ## [0.1.0] - 2024-03-19
 ### Added
