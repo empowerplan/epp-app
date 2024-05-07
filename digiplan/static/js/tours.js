@@ -1,6 +1,6 @@
-const intro_start_button = document.getElementById("intro_tour_start");
+//const onbaordingCloseBtn = document.getElementById("close-onboarding");
 
-const tour = new Shepherd.Tour({  // jshint ignore:line
+const intro_tour = new Shepherd.Tour({  // jshint ignore:line
     useModalOverlay: true,
     defaultStepOptions: {
         cancelIcon: {
@@ -12,18 +12,26 @@ const tour = new Shepherd.Tour({  // jshint ignore:line
 });
 
 
-tour.addStep({
+intro_tour.addStep({
     title: 'Navigation',
-    text: 'Schritt für Schritt zu Deinem eigenen Szenario.',
+    text: 'Schritt für Schritt zu Ihrem eigenen Szenario.',
     attachTo: {
-        element: '.wizard__main',
+        element: '.steps',
         on: 'bottom'
     },
     buttons: [
         {
             action() {
-                const menu_next_btn = document.getElementById("menu_next_btn");
-                menu_next_btn.click();
+                return this.cancel();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Tour beenden'
+        },
+        {
+            action() {
+                const statusquoDropdown = document.getElementById("situation_today");
+                statusquoDropdown.value = "capacity_statusquo";
+                PubSub.publish(mapEvent.CHOROPLETH_SELECTED, statusquoDropdown.value);
                 return this.next();
             },
             text: 'Weiter'
@@ -33,9 +41,9 @@ tour.addStep({
     id: 'start'
 });
 
-tour.addStep({
+intro_tour.addStep({
     title: 'Situation heute',
-    text: 'Schaue Dir die Situation heute an. Und wähle eine Kategorie aus.',
+    text: 'Schauen Sie sich die Situation heute an.',
     attachTo: {
         element: '#situation_today',
         on: 'right'
@@ -43,10 +51,13 @@ tour.addStep({
     buttons: [
         {
             action() {
-                // Show choropleth
-                const statusquoDropdown = document.getElementById("situation_today");
-                statusquoDropdown.value = "energy_statusquo";
-                PubSub.publish(mapEvent.CHOROPLETH_SELECTED, statusquoDropdown.value);
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -57,7 +68,7 @@ tour.addStep({
 });
 
 
-tour.addStep({
+intro_tour.addStep({
     title: 'Situation heute',
     text: 'Zu jeder Kategorie gibt es ein Diagramm für die Region.',
     attachTo: {
@@ -67,6 +78,13 @@ tour.addStep({
     buttons: [
         {
             action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
                 // Hide status quo choropleth again
                 const statusquoDropdown = document.getElementById("situation_today");
                 statusquoDropdown.value = "";
@@ -74,8 +92,8 @@ tour.addStep({
                 PubSub.publish(eventTopics.CHOROPLETH_DEACTIVATED);
 
                 // Activate layers
-                document.querySelector(".static-layer #rpg_ols_wind_operating").click();
-                document.querySelector(".static-layer #special_protection_area_distilled").click();
+                document.querySelector(".static-layer #wind").click();
+                document.querySelector(".static-layer #road_default").click();
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -86,24 +104,23 @@ tour.addStep({
 });
 
 
-tour.addStep({
+intro_tour.addStep({
     title: 'Karte',
-    text: 'Lasse Dir heutige Anlagen und Flächen auf der Karte anzeigen.',
+    text: 'Lassen Sie sich die heutigen Anlagen und Flächen auf der Karte anzeigen.',
     attachTo: {
         element: '#js-map-layers-box',
-        on: 'top'
+        on: 'left'
     },
     buttons: [
         {
             action() {
-                // Deactivate layer
-                document.querySelector(".static-layer #special_protection_area_distilled").click();
-                // Fly to wind turbine
-                map.flyTo({
-                  center: [14.195, 52.425],
-                  zoom: 14,
-                  essential: true
-                });
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -114,9 +131,9 @@ tour.addStep({
 });
 
 
-tour.addStep({
+intro_tour.addStep({
     title: 'Karte',
-    text: 'Klicke auf eine einzelne Windkraftanlage, um mehr über diese zu erfahren.',
+    text: 'Klicken Sie auf ein einzelnes Icon, um mehr über diese Anlage zu erfahren.',
     attachTo: {
         element: '.maplibregl-canvas',
         on: 'top'
@@ -124,9 +141,15 @@ tour.addStep({
     buttons: [
         {
             action() {
-                // Deactivate layer
-                document.querySelector(".static-layer #rpg_ols_wind_operating").click();
-                map.zoomTo(8);
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                document.querySelector(".static-layer #wind").click();
+                document.querySelector(".static-layer #road_default").click();
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -137,14 +160,21 @@ tour.addStep({
 });
 
 
-tour.addStep({
+intro_tour.addStep({
     title: 'Nächster Schritt',
-    text: 'Hier gehts weiter zu den Szenarien.',
+    text: 'Hier gehts weiter zu den Einstellungen.',
     attachTo: {
         element: '#menu_next_btn',
         on: 'bottom'
     },
     buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
         {
             action() {
                 document.getElementById("menu_next_btn").click();
@@ -154,39 +184,24 @@ tour.addStep({
             text: 'Weiter'
         }
     ],
-    id: 'menu_next_btn1'
+    id: 'menu_next_btn'
 });
 
-
-tour.addStep({
-    title: 'Szenarien',
-    text: 'Hier siehst Du ausgewählte Zukunftsszenarien. Wähle eines aus, um es zu erkunden.',
-    //Damit werden die Werte in die Einstellungen von Schritt 4 übernommen. Ohne eine Auswahl werden die heutigen Werte eingestellt.
+intro_tour.addStep({
+    title: 'Einstellungen',
+    text: 'Verändern Sie die Einstellungen, um Ihr eigenes Szenario zu erstellen.',
     attachTo: {
-        element: '#panel_3_scenarios',
+        element: '#panel_2_settings',
         on: 'right'
     },
     buttons: [
         {
             action() {
-                return this.next();
+                return this.back();
             },
-            classes: 'shepherd-button-primary',
-            text: 'Weiter'
-        }
-    ],
-    id: 'panel_3_scenarios'
-});
-
-
-tour.addStep({
-    title: 'Szenarien',
-    text: 'Hier siehst Du die Rahmenbedingungen für das ausgewählte Szenario.',
-    attachTo: {
-        element: '#selectedScenario1',
-        on: 'left'
-    },
-    buttons: [
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
         {
             action() {
                 return this.next();
@@ -195,38 +210,105 @@ tour.addStep({
             text: 'Weiter'
         }
     ],
-    id: 'panel_3_scenarios2'
+    id: 'panel_1_today'
 });
 
-
-tour.addStep({
-    title: 'Szenarien',
-    text: 'Bestätige das ausgewählte Szenario hier, um die Einstellungen in den nächsten Schritt zu übernehmen.',
+intro_tour.addStep({
+    title: 'Einstellungen',
+    text: 'Hier können Sie mehr ins Detail gehen.',
     attachTo: {
-        element: '.scenarios__btn',
+        element: '.c-slider__label--more',
         on: 'right'
     },
     buttons: [
         {
             action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
                 return this.next();
             },
             classes: 'shepherd-button-primary',
             text: 'Weiter'
         }
     ],
-    id: 'panel_3_scenarios3'
+    id: 'more_slider'
 });
 
 
-tour.addStep({
+intro_tour.addStep({
+    title: 'Einstellungen',
+    text: 'Schauen Sie, wie sich die Verteilung verändert.',
+    attachTo: {
+        element: '.power-mix__chart',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'power_mix_chart'
+});
+
+
+intro_tour.addStep({
+    title: 'Einstellungen',
+    text: 'Wechseln Sie zu den Einstellungen für Wärme.',
+    attachTo: {
+        element: '#settings_area_tab',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'settings_area_tab'
+});
+
+
+intro_tour.addStep({
     title: 'Nächster Schritt',
-    text: 'Hier gehts weiter zu den Einstellungen.',
+    text: 'Hier gehts weiter zu den Ergebnissen. Im Hintergrund wird dabei automatisch die Simulation Ihres Szenarios gestartet (gelber Kreis rotiert).',
     attachTo: {
         element: '#menu_next_btn',
         on: 'bottom'
     },
     buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
         {
             action() {
                 document.getElementById("menu_next_btn").click();
@@ -239,246 +321,23 @@ tour.addStep({
     id: 'menu_next_btn2'
 });
 
-
-tour.addStep({
-    title: 'Einstellungen',
-    text: 'Verändere die Einstellungen, um Dein eigenes Szenario zu erstellen.',
-    attachTo: {
-        element: '#panel_4_settings',
-        on: 'right'
-    },
-    buttons: [
-        {
-            action() {
-                return this.next();
-            },
-            classes: 'shepherd-button-primary',
-            text: 'Weiter'
-        }
-    ],
-    id: 'panel_4_settings1'
-});
-
-tour.addStep({
-    title: 'Einstellungen',
-    text: 'Hier kannst Du z.B. die Windenergieleistung für Dein Szenario einstellen.<br>Verändere den Hauptregler, um Deine Windleistung anzupassen.',
-    attachTo: {
-        element: '.s_w_1',
-        on: 'right'
-    },
-    buttons: [
-        {
-            action() {
-                return this.next();
-            },
-            classes: 'shepherd-button-primary',
-            text: 'Weiter'
-        }
-    ],
-    id: 'panel_4_settings2'
-});
-
-
-tour.addStep({
-    title: 'Detaileinstellungen',
-    text: 'Für einige Erzeuger gibt es Detaileinstellungen.',
-    attachTo: {
-        element: '.c-slider__label--more',
-        on: 'right'
-    },
-    buttons: [
-        {
-            action() {
-                PubSub.publish(eventTopics.MORE_LABEL_CLICK, document.getElementsByClassName("c-slider s_w_1")[0]);
-                return this.next();
-            },
-            classes: 'shepherd-button-primary',
-            text: 'Weiter'
-        }
-    ],
-    id: 'panel_4_settings3'
-});
-
-
-tour.addStep({
-    title: 'Detaileinstellungen',
-    text: 'Hier bei Wind kann die Nutzung der verfügbaren Flächen eingestellt werden.<br><br>Im ersten Schritt kannst Du auswählen, welche Flächenkulisse für Windenergie verwendet werden soll.',
-    attachTo: {
-        element: '#windTab',
-        on: 'right'
-    },
-    buttons: [
-        {
-            action() {
-                return this.next();
-            },
-            classes: 'shepherd-button-primary',
-            text: 'Weiter'
-        }
-    ],
-    id: 'panel_4_settings4'
-});
-
-
-tour.addStep({
-    title: 'Detaileinstellungen',
-    text: 'Verändere den Regler um zu sehen, wie viel mit Deinen Einstellungen möglich ist.<br><br>Der einstellbare Bereich des linken Hauptreglers passt sich Deinen Einstellungen an.',
-    attachTo: {
-        element: '.sidepanel',
-        on: 'right'
-    },
-    buttons: [
-        {
-            action() {
-                PubSub.publish(eventTopics.MORE_LABEL_CLICK, document.getElementsByClassName("c-slider s_w_1")[0]);
-                return this.next();
-            },
-            classes: 'shepherd-button-primary',
-            text: 'Weiter'
-        }
-    ],
-    id: 'panel_4_settings5'
-});
-
-
-tour.addStep({
-    title: 'Einstellungen',
-    text: 'Den tatsächlichen Wert stellst Du dort anschließend ein.',
-    attachTo: {
-        element: '.s_w_1',
-        on: 'right'
-    },
-    buttons: [
-        {
-            action() {
-                return this.next();
-            },
-            classes: 'shepherd-button-primary',
-            text: 'Weiter'
-        }
-    ],
-    id: 'panel_4_settings6'
-});
-
-
-tour.addStep({
-    title: 'Einstellungen',
-    text: 'Auch bei der Freiflächen-PV kannst Du Dir die Potenziale ansehen.',
-    attachTo: {
-        element: '.s_pv_ff_1',
-        on: 'right'
-    },
-    buttons: [
-        {
-            action() {
-                PubSub.publish(eventTopics.MORE_LABEL_CLICK, document.getElementsByClassName("c-slider s_pv_ff_1")[0]);
-                return this.next();
-            },
-            classes: 'shepherd-button-primary',
-            text: 'Weiter'
-        }
-    ],
-    id: 'panel_4_settings7'
-});
-
-
-tour.addStep({
-    title: 'Detaileinstellungen',
-    text: 'Du kannst für drei PV-Technologien einstellen, wie viel des Potenzials genutzt werden soll.<br><br>Verändere die Regler um zu sehen, wie viel mit Deinen Einstellungen möglich ist.<br><br>Der einstellbare Bereich des linken Hauptreglers passt sich Deinen Einstellungen an.',
-    attachTo: {
-        element: '.sidepanel--pv-outdoor',
-        on: 'right'
-    },
-    buttons: [
-        {
-            action() {
-                PubSub.publish(eventTopics.MORE_LABEL_CLICK, document.getElementsByClassName("c-slider s_pv_ff_1")[0]);
-                return this.next();
-            },
-            classes: 'shepherd-button-primary',
-            text: 'Weiter'
-        }
-    ],
-    id: 'panel_4_settings8'
-});
-
-
-tour.addStep({
-    title: 'Einstellungen',
-    text: 'Wechsel zu den Einstellungen für Wärme.',
-    attachTo: {
-        element: '#settings_area_tab',
-        on: 'right'
-    },
-    buttons: [
-        {
-            action() {
-                document.getElementById("heat-tab").click();
-                return this.next();
-            },
-            classes: 'shepherd-button-primary',
-            text: 'Weiter'
-        }
-    ],
-    id: 'settings_area_tab'
-});
-
-
-tour.addStep({
-    title: 'Einstellungen',
-    text: 'Auch für den Wärmesektor kannst Du eigene Einstellungen vornehmen.',
-    attachTo: {
-        element: '#panel_4_settings',
-        on: 'right'
-    },
-    buttons: [
-        {
-            action() {
-                return this.next();
-            },
-            classes: 'shepherd-button-primary',
-            text: 'Weiter'
-        }
-    ],
-    id: 'panel_4_settings9'
-});
-
-
-tour.addStep({
-    title: 'Nächster Schritt',
-    text: 'Hier gehts weiter zu den Ergebnissen. Im Hintergrund wird dabei automatisch die Simulation Deines Szenarios gestartet.',
-    attachTo: {
-        element: '#menu_next_btn',
-        on: 'bottom'
-    },
-    buttons: [
-        {
-            action() {
-                document.getElementById("wind-tab").click();
-                document.getElementById("menu_next_btn").click();
-                return this.next();
-            },
-            classes: 'shepherd-button-primary',
-            text: 'Weiter'
-        }
-    ],
-    id: 'menu_next_btn3'
-});
-
-tour.addStep({
+intro_tour.addStep({
     title: 'Ergebnisse',
-    text: 'Die Simulation kann einen Moment dauern, anschließend kannst Du die Ergebnisse im Diagramm links und auf der Karte anschauen.<br><br>Derweil kannst Du Dir schon einige Vorergebnisse ansehen.',
+    text: 'Sobald die Simulation abgeschlossen ist, können Sie sich die Ergebnisse im Diagramm links und auf der Karte anschauen. Wählen Sie dazu eine Kategorie aus.',
     attachTo: {
-        element: '#panel_5_results',
+        element: '#panel_3_results',
         on: 'right'
     },
     buttons: [
         {
             action() {
-                // Show choropleth
-                const futureDropdown = document.getElementById("result_views");
-                futureDropdown.value = "energy_2045";
-                PubSub.publish(mapEvent.CHOROPLETH_SELECTED, futureDropdown.value);
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -489,21 +348,23 @@ tour.addStep({
 });
 
 
-tour.addStep({
+intro_tour.addStep({
     title: 'Ergebnisse',
-    text: 'Wähle auf der Karte eine Gemeinde aus und schaue Dir die Details in einem Diagramm an.',
+    text: 'Wählen Sie auf der Karte eine Region aus und schauen Sie sich die detaillierten Informationen in einem Diagramm an.',
     attachTo: {
         element: '.maplibregl-canvas',
-        on: 'left'
+        on: 'top'
     },
     buttons: [
         {
             action() {
-                // Hide status quo choropleth again
-                const futureDropdown = document.getElementById("result_views");
-                futureDropdown.value = "";
-                deactivateChoropleth();
-                PubSub.publish(eventTopics.CHOROPLETH_DEACTIVATED);
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -514,14 +375,21 @@ tour.addStep({
 });
 
 
-tour.addStep({
+intro_tour.addStep({
     title: 'Einstellungen',
-    text: 'Hier kannst Du zwischen der Karten- und der Diagramm-Ansicht wechseln.',
+    text: 'Wechseln Sie zwischen der Karten- und der Diagramm-Ansicht, sobald die Simulation abgeschlossen ist.',
     attachTo: {
         element: '#myTab',
         on: 'bottom'
     },
     buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
         {
             action() {
                 document.getElementById("chart-view-tab").click();
@@ -531,60 +399,27 @@ tour.addStep({
             text: 'Weiter'
         }
     ],
-    id: 'chart_view_tab1'
-});
-
-tour.addStep({
-    title: 'Einstellungen',
-    text: 'Wähle eine Ergebnis-Kategorie',
-    attachTo: {
-        element: '.nav-pills',
-        on: 'right'
-    },
-    buttons: [
-        {
-            action() {
-                return this.next();
-            },
-            classes: 'shepherd-button-primary',
-            text: 'Weiter'
-        }
-    ],
-    id: 'chart_view_tab2'
+    id: 'chart_view_tab'
 });
 
 
-tour.addStep({
-    title: 'Einstellungen',
-    text: 'Wie viel trägt der ausgewählte Energieträger zur Deckung des Strombedarfs bei?',
-    attachTo: {
-        element: '#mainTabContent',
-        on: 'right'
-    },
-    buttons: [
-        {
-            action() {
-                return this.next();
-            },
-            classes: 'shepherd-button-primary',
-            text: 'Weiter'
-        }
-    ],
-    id: 'chart_view_tab3'
-});
-
-
-tour.addStep({
+intro_tour.addStep({
     title: 'Fertig',
-    text: 'Viel Spaß mit dem EmPowerPlan-Tool!',
-    attachTo: null,
+    text: 'Viel Spaß mit dem Digiplan-Anhalt-Tool! :D',
+    attachTo: {
+        element: '#chart_view_tab',
+        on: 'right'
+    },
     buttons: [
         {
             action() {
-                document.getElementById("menu_previous_btn").click();
-                document.getElementById("menu_previous_btn").click();
-                document.getElementById("menu_previous_btn").click();
-                document.getElementById("menu_previous_btn").click();
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
                 return this.complete();
             },
             classes: 'shepherd-button-primary',
@@ -595,6 +430,436 @@ tour.addStep({
 });
 
 
-intro_start_button.addEventListener("click", function() {
-  tour.start();
+//onbaordingCloseBtn.addEventListener("click", function() {
+//  intro_tour.start();
+//});
+
+
+const pv_tour = new Shepherd.Tour({  // jshint ignore:line
+    useModalOverlay: true,
+    defaultStepOptions: {
+        cancelIcon: {
+            enabled: true
+        },
+        classes: 'class-1 class-2',
+        scrollTo: {behavior: 'smooth', block: 'center'}
+    }
+});
+
+const pv_more_greatgrandparent = document.querySelector('.c-slider.s_pv_ff_1');
+const pv_more_grandparent = pv_more_greatgrandparent.querySelector('.c-slider__label');
+const pv_more_parent = pv_more_grandparent.querySelector('.c-slider__label--more');
+const pv_more_button = pv_more_parent.querySelector('.button.button--transparent');
+
+pv_tour.addStep({
+    title: 'Details',
+    text: 'Mehr Details.',
+    attachTo: {
+        element: pv_more_button,
+        on: 'bottom'
+    },
+    buttons: [
+        {
+            action() {
+                return this.cancel();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Tour beenden'
+        },
+        {
+            action() {
+                pv_more_button.click();
+                return this.next();
+            },
+            text: 'Weiter'
+        }
+    ],
+    id: 'pv_ground_start'
+});
+
+pv_tour.addStep({
+    title: 'Slider für Agrarflächen geringer Bodengüte',
+    text: 'Mehr Details.',
+    attachTo: {
+        element: '.c-slider.s_pv_ff_3',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.next();
+            },
+            text: 'Weiter'
+        }
+    ],
+    id: 'pv_gound_detail1'
+});
+
+pv_tour.addStep({
+    title: 'Slider für Agri-PV (vertikal)',
+    text: 'Mehr Details.',
+    attachTo: {
+        element: '.c-slider.s_pv_ff_4',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.next();
+            },
+            text: 'Weiter'
+        }
+    ],
+    id: 'pv_gound_detail2'
+});
+
+pv_tour.addStep({
+    title: 'Slider für Agri-PV (hoch aufgeständert)',
+    text: 'Mehr Details.',
+    attachTo: {
+        element: '.c-slider.s_pv_ff_5',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.next();
+            },
+            text: 'Weiter'
+        }
+    ],
+    id: 'pv_gound_detail3'
+});
+
+pv_tour.addStep({
+    title: 'PV Ergebnisse',
+    text: 'Mehr Details.',
+    attachTo: {
+        element: '#pv_ground_key_results',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.next();
+            },
+            text: 'Weiter'
+        }
+    ],
+    id: 'pv_gound_detail4'
+});
+
+pv_tour.addStep({
+    title: 'PV-Freiflächen Slider',
+    text: 'So funktioniert der Slider',
+    attachTo: {
+        element: '.c-slider.s_pv_ff_1',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.next();
+            },
+            text: 'Weiter'
+        }
+    ],
+    id: 'pv_ground_slider'
+});
+
+pv_tour.addStep({
+    title: 'Negativkriterien PV',
+    text: 'Bestimmte Negativkriterien auf der Karte ein-/ausschalten',
+    attachTo: {
+        element: '.map__layers-heading.map__layers-pv',
+        on: 'bottom'
+    },
+    scrollTo: false,
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.next();
+            },
+            text: 'Weiter'
+        }
+    ],
+    id: 'pv_ground_criteria'
+});
+
+pv_tour.addStep({
+    title: 'Naturschutzgebiete',
+    text: 'Mit Naturschutzgebieten ausprobieren',
+    attachTo: {
+        element: '#pv_ground_criteria_nature_monuments',
+        on: 'top'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.complete();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Fertig'
+        }
+    ],
+    id: 'pv_ground_end'
+});
+
+const pv_intro_button = document.getElementById('pv_intro_button');
+pv_intro_button.addEventListener("click", function() {
+    pv_tour.start();
+});
+
+
+const wind_tour = new Shepherd.Tour({  // jshint ignore:line
+    useModalOverlay: true,
+    defaultStepOptions: {
+        cancelIcon: {
+            enabled: true
+        },
+    classes: 'class-1 class-2',
+    scrollTo: {behavior: 'smooth', block: 'center'}
+}
+});
+
+const wind_more_greatgrandparent = document.querySelector('.c-slider.s_w_1');
+const wind_more_grandparent = wind_more_greatgrandparent.querySelector('.c-slider__label');
+const wind_more_parent = wind_more_grandparent.querySelector('.c-slider__label--more');
+const wind_more_button = wind_more_parent.querySelector('.button.button--transparent');
+
+wind_tour.addStep({
+    title: 'Details',
+    text: 'Mehr Details.',
+    attachTo: {
+        element: wind_more_button,
+        on: 'bottom'
+    },
+    buttons: [
+        {
+            action() {
+                return this.cancel();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Tour beenden'
+        },
+        {
+            action() {
+                wind_more_button.click();
+                document.getElementById('windPastTab').click();
+                return this.next();
+            },
+            text: 'Weiter'
+        }
+    ],
+    id: 'wind_start'
+});
+
+wind_tour.addStep({
+    title: '2018',
+    text: 'Windtab 2018',
+    attachTo: {
+        element: '#windPastTab',
+        on: 'bottom'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                document.getElementById('windPresentTab').click();
+                return this.next();
+            },
+            text: 'Weiter'
+        }
+    ],
+    id: 'wind_past_tab'
+});
+
+wind_tour.addStep({
+    title: '2024',
+    text: 'Windtab 2024',
+    attachTo: {
+        element: '#windPresentTab',
+        on: 'bottom'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.next();
+            },
+            text: 'Weiter'
+        }
+    ],
+    id: 'wind_present_tab'
+});
+
+
+wind_tour.addStep({
+    title: 'Flächennutzung',
+    text: 'Flächennutzung Slider hier',
+    attachTo: {
+        element: '.c-slider.s_w_6',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                document.getElementById('windFutureTab').click();
+                return this.next();
+            },
+            text: 'Weiter'
+        }
+    ],
+    id: 'wind_present_slider'
+});
+
+
+wind_tour.addStep({
+    title: '2027',
+    text: 'Windtab 2027+',
+    attachTo: {
+        element: '#windFutureTab',
+        on: 'bottom'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.next();
+            },
+            text: 'Weiter'
+        }
+    ],
+    id: 'wind_future_tab'
+});
+
+
+wind_tour.addStep({
+    title: '2027 wind key results',
+    text: 'Windtab 2027+',
+    attachTo: {
+        element: '#wind_key_results_2027',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.next();
+            },
+            text: 'Weiter'
+        }
+    ],
+    id: 'wind_key_results'
+});
+
+wind_tour.addStep({
+    title: 'Windernergie Slider',
+    text: 'So funktioniert der Slider',
+    attachTo: {
+        element: '.c-slider.s_w_1',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.complete();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Fertig'
+        }
+    ],
+    id: 'wind_end'
+});
+
+const wind_intro_button = document.getElementById('wind_intro_button');
+wind_intro_button.addEventListener("click", function() {
+    wind_tour.start();
 });
