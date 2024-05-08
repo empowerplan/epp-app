@@ -1,4 +1,4 @@
-const onbaordingCloseBtn = document.getElementById("close-onboarding");
+const intro_start_button = document.getElementById("intro_tour_start");
 
 const tour = new Shepherd.Tour({  // jshint ignore:line
     useModalOverlay: true,
@@ -16,7 +16,7 @@ tour.addStep({
     title: 'Navigation',
     text: 'Schritt für Schritt zu Ihrem eigenen Szenario.',
     attachTo: {
-        element: '.steps',
+        element: '.wizard__main',
         on: 'bottom'
     },
     buttons: [
@@ -29,9 +29,8 @@ tour.addStep({
         },
         {
             action() {
-                const statusquoDropdown = document.getElementById("situation_today");
-                statusquoDropdown.value = "capacity_statusquo";
-                PubSub.publish(mapEvent.CHOROPLETH_SELECTED, statusquoDropdown.value);
+                const menu_next_btn = document.getElementById("menu_next_btn");
+                menu_next_btn.click();
                 return this.next();
             },
             text: 'Weiter'
@@ -43,7 +42,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Situation heute',
-    text: 'Schauen Sie sich die Situation heute an.',
+    text: 'Schauen Sie sich die Situation heute an. Und wählen sie eine Kategorie aus.',
     attachTo: {
         element: '#situation_today',
         on: 'right'
@@ -109,7 +108,7 @@ tour.addStep({
     text: 'Lassen Sie sich die heutigen Anlagen und Flächen auf der Karte anzeigen.',
     attachTo: {
         element: '#js-map-layers-box',
-        on: 'left'
+        on: 'top'
     },
     buttons: [
         {
@@ -162,6 +161,88 @@ tour.addStep({
 
 tour.addStep({
     title: 'Nächster Schritt',
+    text: 'Hier gehts weiter zu den Szenarien.',
+    attachTo: {
+        element: '#menu_next_btn',
+        on: 'bottom'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                document.getElementById("menu_next_btn").click();
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'menu_next_btn1'
+});
+
+
+tour.addStep({
+    title: 'Szenarien',
+    text: 'Wählen Sie ein vorgefertigtes Szenario aus.',
+    attachTo: {
+        element: '#panel_3_scenarios',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'panel_3_scenarios'
+});
+
+
+tour.addStep({
+    title: 'Szenarien',
+    text: 'Bestätigen Sie das ausgewählte Szenario hier, dann werden die Einstellungen davon übernommen.',
+    attachTo: {
+        element: '.scenarios__btn',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'panel_3_scenarios'
+});
+
+
+tour.addStep({
+    title: 'Nächster Schritt',
     text: 'Hier gehts weiter zu den Einstellungen.',
     attachTo: {
         element: '#menu_next_btn',
@@ -184,14 +265,15 @@ tour.addStep({
             text: 'Weiter'
         }
     ],
-    id: 'menu_next_btn'
+    id: 'menu_next_btn2'
 });
+
 
 tour.addStep({
     title: 'Einstellungen',
     text: 'Verändern Sie die Einstellungen, um Ihr eigenes Szenario zu erstellen.',
     attachTo: {
-        element: '#panel_2_settings',
+        element: '#panel_4_settings',
         on: 'right'
     },
     buttons: [
@@ -210,7 +292,7 @@ tour.addStep({
             text: 'Weiter'
         }
     ],
-    id: 'panel_1_today'
+    id: 'panel_4_settings'
 });
 
 tour.addStep({
@@ -318,14 +400,14 @@ tour.addStep({
             text: 'Weiter'
         }
     ],
-    id: 'menu_next_btn2'
+    id: 'menu_next_btn3'
 });
 
 tour.addStep({
     title: 'Ergebnisse',
     text: 'Sobald die Simulation abgeschlossen ist, können Sie sich die Ergebnisse im Diagramm links und auf der Karte anschauen. Wählen Sie dazu eine Kategorie aus.',
     attachTo: {
-        element: '#panel_3_results',
+        element: '#panel_5_results',
         on: 'right'
     },
     buttons: [
@@ -353,7 +435,7 @@ tour.addStep({
     text: 'Wählen Sie auf der Karte eine Region aus und schauen Sie sich die detaillierten Informationen in einem Diagramm an.',
     attachTo: {
         element: '.maplibregl-canvas',
-        on: 'top'
+        on: 'left'
     },
     buttons: [
         {
@@ -405,11 +487,8 @@ tour.addStep({
 
 tour.addStep({
     title: 'Fertig',
-    text: 'Viel Spaß mit dem Digiplan-Anhalt-Tool! :D',
-    attachTo: {
-        element: '#chart_view_tab',
-        on: 'right'
-    },
+    text: 'Viel Spaß mit dem EmPowerPlan-Tool! :D',
+    attachTo: null,
     buttons: [
         {
             action() {
@@ -430,6 +509,6 @@ tour.addStep({
 });
 
 
-onbaordingCloseBtn.addEventListener("click", function() {
+intro_start_button.addEventListener("click", function() {
   tour.start();
 });
