@@ -61,38 +61,38 @@
     <section class="wizard">
       <div class="wizard__wrap">
         <div class="wizard__back">
-          <button type="button" id="menu_previous_btn" hidden>
+          <button type="button" id="menu_previous_btn" aria-label="Zum vorherigen Schritt gehen" hidden>
             <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
               <path d="m10.794 16.748 1.4961-1.4961-6.7832-6.7832 6.7832-6.7832-1.4961-1.4961-8.2793 8.2793z"/>
             </svg>
             <span>Zurück</span>
           </button>
         </div>
-        <div class="wizard__main" role="navigation" aria-label="Schritte">
+        <div class="wizard__main" role="group" aria-label="Schritte">
           <div class="wizard__list" role="list" >
             <div id="step_1_challenges" class="wizard__list-item active" role="listitem" aria-current="step" aria-label="Schritt 1: Start">
-              <span class="wizard__list-number">1</span>
-              <span class="wizard__list-text">Start</span>
+              <span class="wizard__list-number" aria-hidden="true">1</span>
+              <span class="wizard__list-text" aria-hidden="true">Start</span>
             </div>
             <div aria-hidden="true" class="wizard__line"></div>
             <div id="step_2_today" class="wizard__list-item" role="listitem" aria-label="Schritt 2: Region heute">
-              <span class="wizard__list-number">2</span>
-              <span class="wizard__list-text">Region heute</span>
+              <span class="wizard__list-number" aria-hidden="true">2</span>
+              <span class="wizard__list-text" aria-hidden="true">Region heute</span>
             </div>
             <div aria-hidden="true" class="wizard__line"></div>
             <div id="step_3_scenarios" class="wizard__list-item" role="listitem" aria-label="Schritt 3: Szenarien">
-              <span class="wizard__list-number">3</span>
-              <span class="wizard__list-text">Szenarien</span>
+              <span class="wizard__list-number" aria-hidden="true">3</span>
+              <span class="wizard__list-text" aria-hidden="true">Szenarien</span>
             </div>
             <div aria-hidden="true" class="wizard__line"></div>
             <div id="step_4_settings" class="wizard__list-item" role="listitem" aria-label="Schritt 4: Einstellungen">
-              <span class="wizard__list-number">4</span>
-              <span class="wizard__list-text">Einstellungen</span>
+              <span class="wizard__list-number" aria-hidden="true">4</span>
+              <span class="wizard__list-text" aria-hidden="true">Einstellungen</span>
             </div>
             <div aria-hidden="true" class="wizard__line"></div>
             <div id="step_5_results" class="wizard__list-item" role="listitem" aria-label="Schritt 5: Ergebnisse">
-              <span class="wizard__list-number">5</span>
-              <span class="wizard__list-text">Ergebnisse</span>
+              <span class="wizard__list-number" aria-hidden="true">5</span>
+              <span class="wizard__list-text" aria-hidden="true">Ergebnisse</span>
             </div>
           </div>
         </div>
@@ -122,7 +122,7 @@
           </ul>
         </div> -->
         <div class="wizard__next">
-          <button type="button" id="menu_next_btn" class="button button--secondary">
+          <button type="button" id="menu_next_btn" class="button button--secondary" aria-label="Zum nächsten Schritt gehen">
             <span>Weiter</span>
             <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
               <path d="m6.1387 0.1875-1.4961 1.4961 6.7832 6.7832-6.7832 6.7832 1.4961 1.4961 8.2793-8.2793z"/>
