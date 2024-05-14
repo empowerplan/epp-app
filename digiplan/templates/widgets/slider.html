@@ -7,7 +7,7 @@
     }
   </style>
 {% endif %}
-<div class="c-slider {{ field.name }}">
+<div class="c-slider {{ field.name }}" role="group">
   {% if field.label %}
     <div class="c-slider__label">
     <span>{{ field.label | safe }}{% if field.help_text %}
