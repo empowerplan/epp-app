@@ -107,6 +107,7 @@ MIGRATION_MODULES = {"sites": "digiplan.contrib.sites.migrations"}
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "django_mapengine.middleware.MapEngineMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
