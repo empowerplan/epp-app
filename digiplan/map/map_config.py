@@ -44,36 +44,40 @@ LEGEND = {
     _("Renewables"): [
         SymbolLegendLayer(
             _("Windenergie (in Betrieb)"),
-            _("Windenergieanlagen in Betrieb, Punktdaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"),
+            _(
+                "Windenergieanlagen in Betrieb, Punktdaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"
+                "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
+            ),
             layer_id="rpg_ols_wind_operating",
             color="#7a9ce7",
             symbol="circle",
         ),
         SymbolLegendLayer(
             _("Windenergie genehmigt)"),
-            _("Genehmigte Windenergieanlagen, Punktdaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"),
+            _(
+                "Genehmigte Windenergieanlagen, Punktdaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"
+                "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
+            ),
             layer_id="rpg_ols_wind_approved",
             color="#6A89CC",
             symbol="circle",
         ),
         SymbolLegendLayer(
             _("Windenergie (geplant)"),
-            _("Geplante Windenergieanlagen, Punktdaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"),
+            _(
+                "Geplante Windenergieanlagen, Punktdaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"
+                "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
+            ),
             layer_id="rpg_ols_wind_planned",
             color="#526ba2",
             symbol="circle",
         ),
-        # SymbolLegendLayer(
-        #     _(
-        #         "kann dieser Datensatz unvollständig sein.",
-        #     ),
-        #     color="#6A89CC",
-        # ),
         DistillableLegendLayer(
             _("FF-PV (in Betrieb)"),
             _(
                 "Photovoltaik-Freiflächenanlagen in Betrieb, Flächendaten (Daten: RPG Oderland-Spree, Stand: "
-                "31.12.2023)",
+                "31.12.2023)"
+                "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
             ),
             layer_id=f"rpg_ols_pv_ground_operating{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
@@ -81,26 +85,26 @@ LEGEND = {
             _("FF-PV (genehmigt)"),
             _(
                 "Genehmigte Photovoltaik-Freiflächenanlagen, Flächendaten (Daten: RPG Oderland-Spree, Stand: "
-                "31.12.2023)",
+                "31.12.2023)"
+                "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
             ),
             layer_id=f"rpg_ols_pv_ground_approved{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
         DistillableLegendLayer(
             _("FF-PV (geplant)"),
-            _("Geplante Photovoltaik-Freiflächenanlagen, Flächendaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"),
+            _(
+                "Geplante Photovoltaik-Freiflächenanlagen, Flächendaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"
+                "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
+            ),
             layer_id=f"rpg_ols_pv_ground_planned{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
-        # SymbolLegendLayer(
-        #     _(
-        #         "unvollständig sein.",
-        #     ),
-        # ),
         SymbolLegendLayer(
             _("Aufdach-PV"),
             _(
                 "PV-Aufdachanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen(Daten: "
                 "Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung "
-                "kann dieser Datensatz unvollständig sein.",
+                "kann dieser Datensatz unvollständig sein."
+                "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
             ),
             layer_id="pvroof",
             color="#FFD660",
@@ -111,7 +115,8 @@ LEGEND = {
             _(
                 "Wasserkraftanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen (Daten: "
                 "Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung "
-                "kann dieser Datensatz unvollständig sein.",
+                "kann dieser Datensatz unvollständig sein."
+                "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
             ),
             layer_id="hydro",
             color="#A9BDE8",
@@ -122,7 +127,8 @@ LEGEND = {
             _(
                 "Biomasseanlagen - Punktdaten realisierter oder in Betrieb befindlicher Anlagen (Daten: "
                 "Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung "
-                "kann dieser Datensatz unvollständig sein.",
+                "kann dieser Datensatz unvollständig sein."
+                "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
             ),
             layer_id="biomass",
             color="#52C41A",
@@ -133,7 +139,8 @@ LEGEND = {
             _(
                 "Verbrennungskraftwerke - Punktdaten realisierter oder in Betrieb befindlicher Anlagen (Daten: "
                 "Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung "
-                "kann dieser Datensatz unvollständig sein.",
+                "kann dieser Datensatz unvollständig sein."
+                "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
             ),
             layer_id="combustion",
             color="#E6772E",
@@ -144,7 +151,8 @@ LEGEND = {
             _(
                 "Geo- oder Solarthermie-, Grubengas- und Klärschlamm-Anlagen - Punktdaten realisierter oder in "
                 "Betrieb befindlicher Anlagen (Daten: Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund "
-                "der Verzögerung bei der Datenmeldung kann dieser Datensatz unvollständig sein.",
+                "der Verzögerung bei der Datenmeldung kann dieser Datensatz unvollständig sein."
+                "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
             ),
             layer_id="gsgk",
             color="#C27BA0",
@@ -155,7 +163,8 @@ LEGEND = {
             _(
                 "Batteriespeicher - Punktdaten realisierter oder in Betrieb befindlicher Anlagen (Daten: "
                 "Marktstammdatenregister, Stand: 08.01.2024). Achtung: Aufgrund der Verzögerung bei der Datenmeldung "
-                "kann dieser Datensatz unvollständig sein.",
+                "kann dieser Datensatz unvollständig sein."
+                "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
             ),
             layer_id="storage",
             color="#8D2D5F",
@@ -166,26 +175,20 @@ LEGEND = {
         DistillableLegendLayer(
             _("Siedlungsgebiete"),
             _(
-                "Eine Siedlung ist ein Gebiet, welches die menschliche Niederlassung in beliebiger Form der "
-                "gruppierten Behausung beschreibt. Sie beinhaltet überwiegend Wohngebiete.",
+                "Siedlungsgebiete sowie Flächen rechtskräftiger Bebauungspläne mit Ausweisungen von Wohn-, "
+                "Mischgebieten",
             ),
             layer_id=f"pv_ground_criteria_settlements{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
         DistillableLegendLayer(
             _("Siedlungsgebiete (200m Puffer)"),
-            _(
-                "Eine Siedlung ist ein Gebiet, welches die menschliche Niederlassung in beliebiger Form der "
-                "gruppierten Behausung beschreibt. Sie beinhaltet überwiegend Wohngebiete.",
-            ),
+            _("200m-Abstandszone zu Siedlungsgebieten und sonstigen geschützten Nutzungen"),
             layer_id=f"pv_ground_criteria_settlements_200m"
             f"{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
         DistillableLegendLayer(
             _("Industry"),
-            _(
-                "Industrie- und Gewerbegebiete werden ausgewiesen, um störende Einwirkungen von Betrieben wie Lärm, "
-                "Geruch oder Gefahren auf Wohnbebauung zu vermeiden.",
-            ),
+            _("Industrie- und Gewerbegebiete"),
             layer_id=f"industry{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
         DistillableLegendLayer(
@@ -195,10 +198,7 @@ LEGEND = {
         ),
         DistillableLegendLayer(
             _("Railway"),
-            _(
-                "Der Bahnverkehr ist ein wichtiger Bestandteil der Verkehrsinfrastruktur. Berücksichtigt "
-                "werden Fernverkehrsbahnen, Regionalverkehrsbahnen und S-Bahnen.",
-            ),
+            _("Schienenwege"),
             layer_id=f"railway{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
         DistillableLegendLayer(
@@ -222,7 +222,7 @@ LEGEND = {
         DistillableLegendLayer(
             _("Grid"),
             _(
-                "Zum Übertragungsnetz zählen die elektrischen Leitungen sowie die dazugehörigen Einrichtungen "
+                "Zum Stromnetz zählen die elektrischen Leitungen sowie die dazugehörigen Einrichtungen "
                 "wie Schalt- und Umspannwerke der Höchst- und Hochspannungsebenen.",
             ),
             layer_id=f"grid{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
@@ -260,7 +260,7 @@ LEGEND = {
             _(
                 "Die Vogelschutzrichtlinie der Europäischen Union (EU) dient der Erhaltung der wild lebenden, "
                 "heimischen Vogelarten. Sie regelt den Schutz dieser Vögel, ihrer Eier und Lebensräume wie Brut-, "
-                "Rast- und Überwinterungsgebiete. Die Vogelschutzgebiete gehören zum Schutzgebietsnetz Natura 2000.",
+                "Rast- und Überwinterungsgebiete. Vogelschutzgebiete gehören zum Schutzgebietsnetz Natura 2000.",
             ),
             layer_id=f"special_protection_area{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
@@ -278,16 +278,12 @@ LEGEND = {
         ),
         DistillableLegendLayer(
             _("Naturparke"),
-            _(
-                "text about nature parks.",
-            ),
+            _("Naturparke"),
             layer_id=f"nature_park{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
         DistillableLegendLayer(
             _("Biotope"),
-            _(
-                "text for biotopes",
-            ),
+            _("Gesetzlich geschützte Biotope"),
             layer_id=f"pv_ground_criteria_biotope{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
         DistillableLegendLayer(
@@ -301,26 +297,18 @@ LEGEND = {
             layer_id=f"forest{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
         DistillableLegendLayer(
-            _("Gewässer 1. Ordnung"),
-            _(
-                "Ein Gewässer ist in der Natur fließendes oder stehendes Wasser. "
-                "Dazu gehören der Wasserkörper, das Gewässerbett und der Grundwasserleiter.",
-            ),
+            _("Fließgewässer"),
+            _("Natürliche oberirdische Fließgewässer"),
             layer_id=f"water_first_order{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
         DistillableLegendLayer(
             _("Stillgewässer"),
-            _(
-                "Ein Gewässer ist in der Natur fließendes oder stehendes Wasser. "
-                "Dazu gehören der Wasserkörper, das Gewässerbett und der Grundwasserleiter.",
-            ),
+            _("Natürliche oberirdische Stillgewässer"),
             layer_id=f"water_bodies{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
         DistillableLegendLayer(
-            _("Moor"),
-            _(
-                "text for moors",
-            ),
+            _("Moorböden"),
+            _("Naturnahe Moorböden"),
             layer_id=f"moor{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
         DistillableLegendLayer(
@@ -344,7 +332,8 @@ LEGEND = {
         DistillableLegendLayer(
             _("Freiraumverbund"),
             _(
-                "text for open spaces",
+                "Landesplanerisch festgelegter Freiraumverbund - hochwertige Freiräume mit besonders hochwertigen "
+                "Funktionen, die gesichert werden sollen.",
             ),
             layer_id=f"pv_ground_criteria_open_spaces{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
         ),
