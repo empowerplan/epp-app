@@ -1,23 +1,23 @@
 {% load static i18n %}
 
-<section class="panel" id="js-panel-container" hidden>
-  <section class="panel__content">
+<aside class="panel" id="js-panel-container" hidden>
+  <div class="panel__content">
     <div class="tab-content">
-      <div class="tab-pane active" id="panel_1_challenges" role="tabpanel" aria-labelledby="panel_1_today_tab">
+      <section class="tab-pane active" id="panel_1_challenges" role="tabpanel" aria-labelledby="step_1_challenges_label">
         {% include 'components/panel_1_challenges.html' %}
-      </div>
-      <div class="tab-pane" id="panel_2_today" role="tabpanel" aria-labelledby="panel_2_settings_tab">
+      </section>
+      <section class="tab-pane" id="panel_2_today" role="tabpanel" aria-labelledby="step_2_today_label">
         {% include 'components/panel_2_today.html' %}
-      </div>
-      <div class="tab-pane" id="panel_3_scenarios" role="tabpanel" aria-labelledby="panel_3_results_tab">
+      </section>
+      <section class="tab-pane" id="panel_3_scenarios" role="tabpanel" aria-labelledby="step_3_scenarios_label">
         {% include 'components/panel_3_scenarios.html' %}
-      </div>
-      <div class="tab-pane" id="panel_4_settings" role="tabpanel" aria-labelledby="panel_3_results_tab">
+      </section>
+      <section class="tab-pane" id="panel_4_settings" role="tabpanel" aria-labelledby="step_4_settings_label">
         {% include 'components/panel_4_settings.html' %}
-      </div>
-      <div class="tab-pane" id="panel_5_results" role="tabpanel" aria-labelledby="panel_3_results_tab">
+      </section>
+      <section class="tab-pane" id="panel_5_results" role="tabpanel" aria-labelledby="step_5_results_label">
         {% include 'components/panel_5_results.html' %}
-      </div>
+      </section>
     </div>
-  </section>
-</section>
+  </div>
+</aside>
