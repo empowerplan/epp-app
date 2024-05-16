@@ -4,7 +4,10 @@
     "top": "24%"
   },
   "aria": {
-    "enabled": true
+    "enabled": true,
+    "label": {
+      "description": "Diese Grafik zeigt {title.text}."
+    }
   },
   "xAxis": {
     "type": "category",

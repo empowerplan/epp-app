@@ -5,7 +5,10 @@
       "bottom": "28%"
     },
     "aria": {
-      "enabled": true
+      "enabled": true,
+      "label": {
+        "description": "Diese Grafik zeigt {title.text}, bestehend aus {legend.data}."
+      }
     },
     "legend": {
       "data": [
