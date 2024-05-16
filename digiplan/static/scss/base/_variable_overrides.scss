@@ -429,6 +429,9 @@ $navbar-light-toggler-border-color: none;
 // Tooltips
 
 // scss-docs-start tooltip-variables
+$tooltip-max-width: 32rem;
+$tooltip-padding-y: 0.75rem;
+$tooltip-padding-x: 0.75rem;
 // scss-docs-end tooltip-variables
 
 // Form tooltips must come after regular tooltips
