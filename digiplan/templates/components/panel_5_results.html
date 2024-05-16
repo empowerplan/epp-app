@@ -26,7 +26,7 @@
       </div>
     </div>-->
     <div class="panel-item__form">
-      <select id="result_views" class="form-select" aria-label="Default select example">
+      <select id="result_views" class="form-select" aria-label="Eine Option auswählen, um die jeweilige Grafik zu sehen" aria-controls="region_chart_2045">
         <option value="" title="{% translate "Keine Auswahl" %}" selected>{% translate "Keine Auswahl" %}</option>
         <optgroup label="{% translate "Renewable Energies (RE)" %}">
           <option value="energy_share_2045"
@@ -85,7 +85,7 @@
     <div id="result_simnote" class="panel__simnote"></div>
     <div class="panel-item">
       <div class="panel-item__padding">
-        <div id="region_chart_2045" class="panel-item__chart"></div>
+        <div id="region_chart_2045" class="panel-item__chart" aria-live="polite"></div>
       </div>
     </div>
     <div class="panel-item__nav" style="display: none !important;">

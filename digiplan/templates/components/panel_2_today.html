@@ -11,7 +11,7 @@
       {% translate "Situation today" %}
     </h2>
     <div class="panel-item__form">
-      <select class="form-select" aria-label="Default select example" id="situation_today">
+      <select class="form-select" aria-label="Eine Option auswählen, um die jeweilige Grafik zu sehen" aria-controls="region_chart_statusquo" id="situation_today">
         <option value="" title="{% translate "Keine Auswahl" %}" selected>{% translate "Keine Auswahl" %}</option>
         <optgroup label="{% translate "Planning Region" %}">
           <option value="population_statusquo" title="{% translate "EinwohnerInnen - Historische Daten, heute und Zukunftsprognosen" %}">{% translate "Population" %}</option>
@@ -81,7 +81,7 @@
   </div>
   <div class="panel-item">
     <div class="panel-item__padding">
-      <div id="region_chart_statusquo" class="panel-item__chart"></div>
+      <div id="region_chart_statusquo" class="panel-item__chart" aria-live="polite"></div>
     </div>
   </div>
 </div>
