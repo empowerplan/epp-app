@@ -321,6 +321,7 @@ def adapt_renewable_capacities(scenario: str, data: dict, request: HttpRequest) 
     # Remove unnecessary renewable sliders:
     del data["s_pv_ff_3"]
     del data["s_pv_ff_4"]
+    del data["s_pv_ff_5"]
     del data["s_pv_d_3"]
 
     return data
