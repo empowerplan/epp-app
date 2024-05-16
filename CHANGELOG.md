@@ -8,6 +8,9 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Fixed
 - 404 errors for missing MVTs
 
+### Changed
+- improve accessibility
+
 ## [1.0.0] - 2024-05-07
 ### Added
 - light and dark basemaps for data visualization
