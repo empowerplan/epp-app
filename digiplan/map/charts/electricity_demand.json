@@ -4,6 +4,9 @@
       "right": "30%",
       "bottom": "25%"
     },
+    "aria": {
+      "enabled": true
+    },
     "legend": {
       "data": [
         "Haushalte",

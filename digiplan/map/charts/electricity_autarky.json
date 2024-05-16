@@ -2,6 +2,9 @@
   "grid": {
     "bottom": "25%"
   },
+  "aria": {
+    "enabled": true
+  },
   "xAxis": {
     "type": "value",
     "show": true,

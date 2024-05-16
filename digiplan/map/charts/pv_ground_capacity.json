@@ -16,6 +16,9 @@
     "bottom": "14%",
     "containLabel": true
   },
+  "aria": {
+    "enabled": true
+  },
   "xAxis": {
     "type": "category",
     "data": ["2010", "2015", "2020", "2023**", "Dein\nSzenario***"],

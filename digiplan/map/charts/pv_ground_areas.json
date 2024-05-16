@@ -16,6 +16,9 @@
     "bottom": "14%",
     "containLabel": true
   },
+  "aria": {
+    "enabled": true
+  },
   "xAxis": {
     "type": "category",
     "data": ["Klassische PV", "Agri-PV\n(vertikal)", "Agri-PV\n(Dauerkulturen)"]

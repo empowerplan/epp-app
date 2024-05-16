@@ -12,6 +12,9 @@
     }
   },
   "tooltip": {},
+  "aria": {
+    "enabled": true
+  },
   "grid": {
     "top": "10%",
     "left": "3%",

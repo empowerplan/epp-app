@@ -3,6 +3,9 @@
   "grid": {
     "top": "24%"
   },
+  "aria": {
+    "enabled": true
+  },
   "xAxis": {
     "type": "category",
     "boundaryGap": true,

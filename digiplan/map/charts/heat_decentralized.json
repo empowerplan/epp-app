@@ -2,6 +2,9 @@
   "grid": {
     "bottom": "28%"
   },
+  "aria": {
+    "enabled": true
+  },
   "legend": {
     "bottom": "0",
     "itemGap": 15

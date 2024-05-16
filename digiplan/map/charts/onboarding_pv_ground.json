@@ -3,6 +3,9 @@
     "data": ["Installierte Leistung", "Anlagenanzahl"],
     "itemGap": 15
   },
+  "aria": {
+    "enabled": true
+  },
   "xAxis": [
     {
       "type": "category",
