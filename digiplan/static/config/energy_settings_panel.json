@@ -13,36 +13,6 @@
     "type": "slider",
     "sidepanel": true
   },
-  "s_w_3": {
-    "class": "js-sidepanel-switch",
-    "label": "{% trans 'Nur bestehende VR/EG' %}",
-    "tooltip": "{% trans 'Nur die in 2022 rechtskräftig ausgewiesenen Vorrang-/Eignungsgebiete nach Sachlichem Teilplan Wind 2018 verwenden (ca. 0,9 % der Fläche).' %}",
-    "type": "switch"
-  },
-  "s_w_4": {
-    "class": "js-sidepanel-switch",
-    "label": "{% trans 'Planabsicht nach STP Wind 2024' %}",
-    "tooltip": "{% trans 'Planabsicht der Regionalen Planungsgemeinschaft nach Vorentwurf für Sachlichen Teilplan Wind 2024 (ca. 2 % der Fläche).' %}",
-    "type": "switch"
-  },
-    "s_w_4_1": {
-    "class": "js-sidepanel-switch",
-    "label": "{% trans 'Vorranggebiete' %}",
-    "tooltip": "{% trans 'Vorranggebiete: Planabsicht der Regionalen Planungsgemeinschaft nach Ideenkarte für Sachlichen Teilplan Wind 2027 (ca. 2,7 % der Fläche).' %}",
-    "type": "switch"
-  },
-    "s_w_4_2": {
-    "class": "js-sidepanel-switch",
-    "label": "{% trans 'Vorranggebiete Repowering' %}",
-    "tooltip": "{% trans 'Vorranggebiete für Repowering: Planabsicht der Regionalen Planungsgemeinschaft nach Ideenkarte für Sachlichen Teilplan Wind 2027 (ca. 0,3 % der Fläche).' %}",
-    "type": "switch"
-  },
-  "s_w_5": {
-    "class": "js-sidepanel-switch",
-    "label": "{% trans 'Freier Zubau im Suchraum' %}",
-    "tooltip": "{% trans 'Hier kann die Nutzung der von der Regionalen Planungsgemeinschaft ermittelten Suchräume frei eingestellt werden.\nDiese Suchräume können jedoch nur zu einem Teil für die Windenergie genutzt werden.' %}",
-    "type": "switch"
-  },
   "s_w_6": {
     "class": "js-slider js-slider-detail-panel",
     "label": "{% trans 'Flächennutzung (%)' %}",
@@ -62,28 +32,6 @@
     "min": 1.97,
     "start": 0,
     "step": 0.1,
-    "type": "slider",
-    "required": false
-  },
-    "s_w_5_1": {
-    "class": "js-slider js-slider-detail-panel",
-    "label": "{% trans 'Nutzung Suchraum Offenland' %}",
-    "tooltip": "{% trans 'Hier kann die Nutzung des von der Regionalen Planungsgemeinschaft ermittelten Suchraums im Offenland frei eingestellt werden.\nDieser Suchraum kann jedoch nur zu einem Teil für die Windenergie genutzt werden.' %}",
-    "max": 100,
-    "min": 0,
-    "start": 0,
-    "step": 5,
-    "type": "slider",
-    "required": false
-  },
-    "s_w_5_2": {
-    "class": "js-slider js-slider-detail-panel",
-    "label": "{% trans 'Nutzung Suchraum Wald' %}",
-    "tooltip": "{% trans 'Hier kann die Nutzung des von der Regionalen Planungsgemeinschaft ermittelten Suchraums in Wäldern frei eingestellt werden.\nDieser Suchraum kann jedoch nur zu einem Teil für die Windenergie genutzt werden.' %}",
-    "max": 100,
-    "min": 0,
-    "start": 0,
-    "step": 5,
     "type": "slider",
     "required": false
   },
