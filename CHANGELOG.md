@@ -8,6 +8,9 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Added
 - link to changelog in docs panel
 
+### Changed
+- esys panel tooltip texts
+
 ### Fixed
 - 404 errors for missing MVTs
 

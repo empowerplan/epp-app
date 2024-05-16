@@ -9,14 +9,14 @@
     "start": 30,
     "status_quo": 50,
     "step": 5,
-    "tooltip": "{% trans 'Nennleistung der in der Region installierten Windenergieanlagen in Megawatt. Die dargestellten Ziele für 2045 sind abgeleitet aus den im Windenergieflächenbedarfsgesetz festgesetzten Zielen für Brandenburg (2,2 % bis 2032).\n\nHinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität zu Ertragssteigerungen.' %} ",
+    "tooltip": "{% trans 'Nennleistung der in der Region installierten Windenergieanlagen in Megawatt. Die markierten Ziele für 2030 und 2040 sind abgeleitet aus der Energiestrategie Brandenburg (2,2 % bis 2032).<br><br><i>Hinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität zu Ertragssteigerungen.</i>' %} ",
     "type": "slider",
     "sidepanel": true
   },
   "s_w_6": {
     "class": "js-slider js-slider-detail-panel",
     "label": "{% trans 'Flächennutzung (%)' %}",
-    "tooltip": "{% trans '' %}",
+    "tooltip": "{% trans 'Stelle ein, welcher Flächenanteil der Region genutzt werden soll.<br><br>Die Obergrenze entspricht den Vorrangebietsflächen aus dem Teilplan EE 2024 der Regionalen Planungsgemeinschaft (Kartendarstellung).<br>(Kartendaten: RPG Oderland-Spree)' %}",
     "max": 1.97,
     "min": 0,
     "start": 0,
@@ -27,7 +27,7 @@
   "s_w_7": {
     "class": "js-slider js-slider-detail-panel",
     "label": "{% trans 'Flächennutzung (%)' %}",
-    "tooltip": "{% trans '' %}",
+    "tooltip": "{% trans 'Stelle ein, welcher Flächenanteil der Region genutzt werden soll.<br><br>Die Untergrenze entspricht den Vorrangebietsflächen aus dem Teilplan EE 2024 der Regionalen Planungsgemeinschaft (blaue Flächen in Kartendarstellung).' %}",
     "max": 2.2,
     "min": 1.97,
     "start": 0,
@@ -45,18 +45,18 @@
     "start": 30,
     "status_quo": 50,
     "step": 5,
-    "tooltip": "{% trans 'Nennleistung der in der Region installierten Freiflächen-PV-Anlagen in Megawatt (peak). Die dargestellten Ziele für 2045 sind abgeleitet aus den im EEG festgesetzten Zielen und den verfügbaren Potenzialen in der Region.\n\nHinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität zu Ertragssteigerungen.' %}",
+    "tooltip": "{% trans 'Nennleistung der in der Region installierten Freiflächen-PV-Anlagen in Megawatt (peak). Die markierten Ziele für 2030 und 2040 sind abgeleitet aus der Energiestrategie Brandenburg.<br><br><i>Hinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität zu Ertragssteigerungen.</i>' %}",
     "type": "slider",
     "sidepanel": true
   },
   "s_pv_ff_3": {
     "class": "js-slider js-slider-detail-panel",
-    "label": "{% trans 'Klassische auf Agrarflächen geringer Bodengüte (%)' %} ",
+    "label": "{% trans 'Klassische PV auf Agrarflächen geringer Bodengüte (%)' %} ",
     "max": 100,
     "min": 0,
     "start": 0,
     "step": 5,
-    "tooltip": "{% trans 'Welcher Flächenanteil entlang von Autobahnen und Schienenwegen (500 m-Streifen) soll durch PV-Freiflächenanlagen genutzt werden? 100 % ist hierbei das maximal zur Verfügung stehende Potenzial (Kartendarstellung), das jedoch nur zu einem Teil genutzt werden kann. Die Potenzialflächen stammen aus dem PV- und Windflächenrechner des RLI.' %} ",
+    "tooltip": "{% trans 'Welcher Flächenanteil auf Acker- und Grünlandflächen mit geringer Bodengüte (Soil Quality Rating < 50) soll genutzt werden?<br><br>Hier werden die Module in Reihen niedrig aufgeständert (Leistungsdichte: 100 MW/km²). 100 % entspricht dem maximal zur Verfügung stehenden Potenzial (Kartendarstellung). Aufgrund der großen Potenziale wird die einstellbare Obergrenze auf 20 % begrenzt.<br>(Kartendaten: Öko-Institut)' %} ",
     "type": "slider"
   },
   "s_pv_ff_4": {
@@ -66,7 +66,7 @@
     "min": 0,
     "start": 0,
     "step": 5,
-    "tooltip": "{% trans 'Welcher Flächenanteil auf Agrar- und Grünlandflächen mit geringer Bodengüte (SQR<40) soll durch PV-Freiflächenanlagen genutzt werden? 100 % ist hierbei das maximal zur Verfügung stehende Potenzial (Kartendarstellung), das jedoch nur zu einem Teil genutzt werden kann. Die Potenzialflächen stammen aus dem PV- und Windflächenrechner des RLI.' %} ",
+    "tooltip": "{% trans 'Welcher Flächenanteil auf Acker- und Grünlandflächen mit mittlerer Bodengüte (Soil Quality Rating 50-70) sollen parallel mit der Landwirtschaft genutzt werden?<br><br>Hier werden bifaziale, vertikale Module in Reihen aufgeständert (Leistungsdichte: 29 MW/km²). 100 % entspricht dem maximal zur Verfügung stehenden Potenzial (Kartendarstellung). Aufgrund der großen Potenziale wird die einstellbare Obergrenze auf 20 % begrenzt.<br>(Kartendaten: Öko-Institut)' %} ",
     "type": "slider"
   },
   "s_pv_ff_5": {
@@ -76,7 +76,7 @@
     "min": 0,
     "start": 0,
     "step": 5,
-    "tooltip": "{% trans 'Welcher Flächenanteil auf Agrar- und Grünlandflächen mit geringer Bodengüte (SQR<40) soll durch PV-Freiflächenanlagen genutzt werden? 100 % ist hierbei das maximal zur Verfügung stehende Potenzial (Kartendarstellung), das jedoch nur zu einem Teil genutzt werden kann. Die Potenzialflächen stammen aus dem PV- und Windflächenrechner des RLI.' %} ",
+    "tooltip": "{% trans 'Welcher Flächenanteil der Dauerkulturen soll mit Modulen überdacht werden?<br><br>Die Leistungsdichte beträgt hierbei 74 MW/km². 100 % entspricht dem maximal zur Verfügung stehenden Potenzial (Kartendarstellung).<br>(Kartendaten: Öko-Institut)' %} ",
     "type": "slider"
   },
   "s_pv_d_1": {
@@ -89,7 +89,7 @@
     "start": 30,
     "status_quo": 50,
     "step": 5,
-    "tooltip": "{% trans 'Nennleistung der in der Region installierten PV-Aufdachanlagen in Megawatt (peak). Die dargestellten Ziele für 2045 sind abgeleitet aus den im EEG festgesetzten Zielen und den verfügbaren Potenzialen (Dachflächen) in der Region.\n\nHinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität zu Ertragssteigerungen.' %}",
+    "tooltip": "{% trans 'Nennleistung der in der Region installierten PV-Aufdachanlagen in Megawatt (peak). Die markierten Ziele für 2030 und 2040 sind abgeleitet aus der Energiestrategie Brandenburg.<br><br><i>Hinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität zu Ertragssteigerungen.</i>' %}",
     "type": "slider",
     "sidepanel": true
   },
@@ -100,7 +100,7 @@
     "min": 0,
     "start": 0,
     "step": 5,
-    "tooltip": "{% trans 'Anteil genutzter Dächer (%). Das Maximum liegt hierbei bei 50 % aller Dächer von nicht-denkmalgeschützten Gebäuden aller Ausrichtungen inkl. Flachdächer. Die Dachflächenpotenziale wurden auf Basis des Webtools der Regionalen Planungsgemeinschaft berechnet.' %}",
+    "tooltip": "{% trans 'Welcher Anteil von geeigneten Dachflächen soll durch PV genutzt werden?<br><br>(Kartendaten: Solaratlas Brandenburg, nur Dächer mit Eignung >=60 %).' %}",
     "type": "slider"
   },
     "s_pv_d_4": {
