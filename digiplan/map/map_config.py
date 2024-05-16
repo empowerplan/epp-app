@@ -38,8 +38,6 @@ class DistillableLegendLayer(legend.LegendLayer):
         return utils.get_layer_style(layer_id)
 
 
-# TODO(Josi): Add real descriptions for layer info buttons
-# https://github.com/rl-institut-private/digiplan/issues/249
 LEGEND = {
     _("Renewables"): [
         SymbolLegendLayer(

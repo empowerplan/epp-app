@@ -13,6 +13,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ### Fixed
 - 404 errors for missing MVTs
+- truncated tooltips
 
 ## [1.0.0] - 2024-05-07
 ### Added
