@@ -1,4 +1,5 @@
 import { resultsTabs, futureDropdown } from "./elements.js";
+import { terminateSimulation } from "./results.js";
 import { hidePotentialLayers, showPotentialLayers } from "./sliders.js";
 
 const menuNextBtn = document.getElementById("menu_next_btn");
@@ -153,20 +154,6 @@ function setResultsView(msg) {
     futureDropdown.parentElement.setAttribute("style", "");
     regionChart.setAttribute("style", "");
     resultsTabs.parentElement.setAttribute("style", "display: none !important");
-  }
-  return logMessage(msg);
-}
-
-function terminateSimulation(msg) {
-  if (store.cold.task_id != null) {
-    $.ajax({
-      url: "/oemof/terminate",
-      type: "POST",
-      data: { task_id: store.cold.task_id },
-      success: function () {
-        store.cold.task_id = null;
-      },
-    });
   }
   return logMessage(msg);
 }
