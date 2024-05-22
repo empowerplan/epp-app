@@ -63,7 +63,7 @@ pytest-sugar = "^1.0.0"  # https://github.com/Frozenball/pytest-sugar
 # ------------------------------------------------------------------------------
 flake8 = "^7.0.0"  # https://github.com/PyCQA/flake8
 pylint-django = "^2.3.0"  # https://github.com/PyCQA/pylint-django  # downgraded because https://github.com/PyCQA/pylint-django/issues/309
-pre-commit = "^2.13.0"  # https://github.com/pre-commit/pre-commit
+pre-commit = "^3.7.1"  # https://github.com/pre-commit/pre-commit
 darglint = "^1.8.1"
 black = "^21.12b0"
 
