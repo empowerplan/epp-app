@@ -13,15 +13,15 @@ const SIMULATION_CHECK_TIME = 5000;
 const SIMULATION_CHECK_LIMIT = (4 * 60 * 1000) / SIMULATION_CHECK_TIME; // Simulation is canceled after 4min
 
 const SIMULATION_STARTED_DESCRIPTION =
-  "Es werden komplexe Modelle verwendet, um Ihre Daten präzise zu analysieren. Diese tiefgehenden Berechnungen benötigen Zeit, um Ihnen zuverlässige und genaue Ergebnisse zu liefern.";
+  "Das Aufstellen und Optimieren des Energiesystems ist komplex.<br>Es braucht etwas Zeit, um Dir für Dein Szenario zuverlässige und genaue Ergebnisse zu liefern.";
 const SIMULATION_DELAYED_DESCRIPTION =
-  "Wir entschuldigen uns für die Verzögerung. Es scheint, dass der Ladevorgang länger dauert als erwartet oder momentan nicht funktioniert. Bitte gedulden Sie sich noch einen Moment.";
+  "Wir entschuldigen uns für die Verzögerung. Es scheint, dass die Optimierung länger dauert als erwartet. Bitte gedulde Dich noch einen Moment.<br>Derweil kannst Du Dir schon einige Vorergebnisse ansehen.";
 const SIMULATION_INFEASIBLE_DESCRIPTION =
-  "Die Simulation konnte leider keine gültige Lösung finden. Eventuell lassen bestimmte Einstellungen der Komponenten keine Lösung zu? Sie können es gerne noch einmal mit anderen Einstellungen versuchen.";
+  "Das Modell konnte leider keine gültige Lösung finden. Das sollte eigentlich nicht passieren - eventuell lassen bestimmte Einstellungen der Komponenten keine Lösung zu?<br>Du kannst es gerne noch einmal mit anderen Einstellungen versuchen.";
 const SIMULATION_ERROR_DESCRIPTION =
-  "Wir entschuldigen uns für den Fehler. Es kann sein, dass unser Server gerade nicht verfügbar oder überlastet ist. Bitte versuchen Sie es zu einem späteren Zeitpunkt noch einmal.";
+  "Wir entschuldigen uns für den Fehler. Es kann sein, dass unser Server gerade nicht verfügbar oder überlastet ist.<br>Bitte versuche es zu einem späteren Zeitpunkt noch einmal.";
 const SIMULATION_FINISHED_DESCRIPTION =
-  "Die Simulation ist erfolgreich abgeschlossen. Sie können die Ergebnisse jetzt anschauen.";
+  "Die Optimierung wurde erfolgreich abgeschlossen.<br>Du kannst Dir nun alle Ergebnisse anschauen.";
 
 const PRE_RESULTS = [
   "energy_share_2045",
