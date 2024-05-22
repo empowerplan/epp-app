@@ -17,11 +17,7 @@ const scenarioPanels = ["panelCard1", "panelCard2", "panelCard3"];
 for (const scenarioPanel of scenarioPanels) {
   const panelElement = document.getElementById(scenarioPanel);
   panelElement.addEventListener("click", scenarioCardClicked);
-  panelElement.addEventListener("keydown", function (event) {
-    if (event.key === "Enter" || event.key === " ") {
-      scenarioCardClicked(event);
-    }
-  });
+  panelElement.addEventListener("keydown", scenarioCardClicked);
 }
 
 Array.from(document.getElementsByClassName("scenarios__btn")).forEach(
@@ -80,9 +76,11 @@ function selectScenario(msg) {
 }
 
 function scenarioCardClicked(event) {
-  event.preventDefault(); // Prevent default action for keyboard events
-  const scenarioCardNumber = parseInt(event.currentTarget.id.slice(-1));
-  selectScenarioCard(scenarioCardNumber);
+  if (event.key === "Enter" || event.key === " " || event.type === "click") {
+    event.preventDefault(); // Prevent default action for keyboard events
+    const scenarioCardNumber = parseInt(event.currentTarget.id.slice(-1));
+    selectScenarioCard(scenarioCardNumber);
+  }
 }
 
 function selectScenarioCard(scenarioCardNumber) {
