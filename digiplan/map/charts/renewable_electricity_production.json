@@ -4,6 +4,12 @@
     "right": "30%",
     "bottom": "25%"
   },
+  "aria": {
+    "enabled": true,
+    "label": {
+      "description": "Diese Grafik zeigt {title.text}, bestehend aus {legend.data}."
+    }
+  },
   "legend": {
     "data": [
       "Wind",

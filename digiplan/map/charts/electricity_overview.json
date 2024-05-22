@@ -6,6 +6,9 @@
     "bottom": "30%",
     "containLabel": true
   },
+  "aria": {
+    "enabled": true
+  },
   "yAxis": {
     "data": ["Ziel Brandenburg 2040", "Ziel Brandenburg 2030", "Dein Szenario", "2023"],
     "axisLine": { "onZero": true },

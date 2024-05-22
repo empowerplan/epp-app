@@ -106,3 +106,10 @@ document.addEventListener('DOMContentLoaded', function() {
     console.error('The required elements were not found in the DOM.');
   }
 });
+
+// Update aria-checked attribute for switches
+document.querySelectorAll('.layer__switch').forEach(checkbox => {
+  checkbox.addEventListener('change', event => {
+    event.target.setAttribute('aria-checked', event.target.checked.toString());
+  });
+});

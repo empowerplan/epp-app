@@ -16,6 +16,9 @@
     "bottom": "14%",
     "containLabel": true
   },
+  "aria": {
+    "enabled": true
+  },
   "xAxis": {
     "type": "category",
     "data": ["Dein Szenario"]

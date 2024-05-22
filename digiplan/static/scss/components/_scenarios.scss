@@ -28,6 +28,7 @@
   &__name {
     @extend .d-inline-block;
     @extend .fw-bold;
+    @extend .fs-7;
     @extend .pe-2;
   }
 
@@ -150,7 +151,7 @@
     @extend .justify-content-end;
     @extend .fs-8;
     @extend .fw-bold;
-    color: $gray-500;
+    color: $gray-600;
 
     span {
       @extend .d-inline-block;

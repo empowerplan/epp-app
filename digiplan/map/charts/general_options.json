@@ -12,6 +12,9 @@
     "bottom": "18%",
     "containLabel": true
   },
+  "aria": {
+    "enabled": true
+  },
   "textStyle": {
     "fontFamily": "Roboto",
     "fontSize": 14,

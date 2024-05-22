@@ -5,6 +5,9 @@
       "type": "shadow"
     }
   },
+  "aria": {
+    "enabled": true
+  },
   "legend": {
     "data": ["Fläche (ha)", "% der Regionsfläche"],
     "itemGap": 15

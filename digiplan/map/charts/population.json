@@ -3,6 +3,12 @@
   "grid": {
     "top": "24%"
   },
+  "aria": {
+    "enabled": true,
+    "label": {
+      "description": "Diese Grafik zeigt {title.text}."
+    }
+  },
   "xAxis": {
     "type": "time",
     "xAxisLabel":{
