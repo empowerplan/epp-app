@@ -12,11 +12,11 @@ const SIMULATION_CHECK_TIME = 5000;
 const SIMULATION_CHECK_LIMIT = (4 * 60 * 1000) / SIMULATION_CHECK_TIME; // Simulation is canceled after 4min
 
 const SIMULATION_STARTED_DESCRIPTION =
-  "Das Aufstellen und Optimieren des Energiesystems ist komplex.<br>Es braucht etwas Zeit, um Dir für Dein Szenario zuverlässige und genaue Ergebnisse zu liefern.";
+  "Das Aufstellen und Optimieren des Energiesystems ist komplex. Es braucht etwas Zeit, um Dir für Dein Szenario zuverlässige und genaue Ergebnisse zu liefern.<br>Derweil kannst Du Dir schon einige Vorergebnisse ansehen.";
 const SIMULATION_DELAYED_DESCRIPTION =
-  "Wir entschuldigen uns für die Verzögerung. Es scheint, dass die Optimierung länger dauert als erwartet. Bitte gedulde Dich noch einen Moment.<br>Derweil kannst Du Dir schon einige Vorergebnisse ansehen.";
+  "Entschuldige die Verzögerung. Es scheint, dass die Optimierung länger dauert als erwartet. Bitte gedulde Dich noch einen Moment.<br>Derweil kannst Du Dir schon einige Vorergebnisse ansehen.";
 const SIMULATION_INFEASIBLE_DESCRIPTION =
-  "Das Modell konnte leider keine gültige Lösung finden. Das sollte eigentlich nicht passieren - eventuell lassen bestimmte Einstellungen der Komponenten keine Lösung zu?<br>Du kannst es gerne noch einmal mit anderen Einstellungen versuchen.";
+  "Das Modell konnte leider keine gültige Lösung finden. Das sollte eigentlich nicht passieren - eventuell lassen bestimmte Einstellungen der Komponenten keine Lösung zu?<br>Du kannst es gerne noch einmal mit anderen Einstellungen in Schritt 4 versuchen.";
 const SIMULATION_ERROR_DESCRIPTION =
   "Wir entschuldigen uns für den Fehler. Es kann sein, dass unser Server gerade nicht verfügbar oder überlastet ist.<br>Bitte versuche es zu einem späteren Zeitpunkt noch einmal.";
 const SIMULATION_FINISHED_DESCRIPTION =
