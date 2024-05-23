@@ -16,6 +16,8 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - 404 errors for missing MVTs
 - truncated tooltips
 - choropleth is reactivated when revisiting status quo
+- choropleth legend
+- choropleth for RE share
 
 ### Changed
 - improve accessibility
