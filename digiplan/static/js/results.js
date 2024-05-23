@@ -1,7 +1,6 @@
 import { statusquoDropdown, futureDropdown } from "./elements.js";
 
 const imageResults = document.getElementById("info_tooltip_results");
-const resultSimNote = document.getElementById("result_simnote");
 
 const simulationProgressDiv = document.getElementsByClassName(
   "panel-item__calc-alert",
@@ -183,7 +182,6 @@ function checkResults() {
 }
 
 function enableFutureResults(msg) {
-  resultSimNote.innerText = "";
   const options = futureDropdown.querySelectorAll("option");
   for (const option of options) {
     option.disabled = false;
@@ -192,7 +190,6 @@ function enableFutureResults(msg) {
 }
 
 function disableResultButtons(msg) {
-  resultSimNote.innerText = "Berechnung läuft ...";
   futureDropdown.selectedIndex = 0;
   const options = futureDropdown.querySelectorAll("option");
   for (const option of options) {
