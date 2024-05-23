@@ -1005,13 +1005,13 @@ libsass = ">=0.7.0,<1"
 
 [[package]]
 name = "django-mapengine"
-version = "1.7.0"
+version = "1.8.0"
 description = "Map engine for maplibre in django"
 optional = false
 python-versions = "<3.12,>=3.9"
 files = [
-    {file = "django_mapengine-1.7.0-py3-none-any.whl", hash = "sha256:1eed5942c0c32f40423a862a6d3ea11b51877e1d424404b6f718fb330be58cc0"},
-    {file = "django_mapengine-1.7.0.tar.gz", hash = "sha256:7cccd9a9bb4695c6b48c7c72646e2edcef77d53d03b97d47ef6469747a1c8c48"},
+    {file = "django_mapengine-1.8.0-py3-none-any.whl", hash = "sha256:d94eb21cfbc491f8db3283e6030f6e03f1d7f6ae6e22d1de19b16e0fc05ba62a"},
+    {file = "django_mapengine-1.8.0.tar.gz", hash = "sha256:0398631b84b5bfb8212f33040c99a1c97328d8f7dece7cbe684cd41edc5046a1"},
 ]
 
 [package.dependencies]
@@ -3078,4 +3078,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "27cd02a640e7d09575935ca67ffa543a09853d55c5011ecff48eb5fc08255800"
+content-hash = "a82f7d43c718113994f8a2b57e23d58ff7a0f69acd5c3bb6faff8586ea2f874c"

@@ -10,6 +10,7 @@ authors = [
   "Finn Hees <finn.hees@rl-institut.de>",
   "Jonathan Amme <jonathan.amme@rl-institut.de>",
 ]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.12"
@@ -37,7 +38,7 @@ django-geojson = "^3.1.0"
 # Custom apps
 # -----------------------------------------------------------------------------poetry-
 django-oemof = {git="https://github.com/rl-institut/django-oemof.git", tag="v0.18.0"}
-django-mapengine = "1.7.0"
+django-mapengine = "1.8.0"
 geojson = "^3.0.1"
 oemof-network = "0.5.0a5"
 django-template-partials = "^23.4"
