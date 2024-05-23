@@ -336,7 +336,7 @@ function finishSimulationProgress(msg) {
   clearTimeout(simulationTimeout);
   simulationTimeout = setTimeout(function () {
     simulationProgressDiv.hidden = true;
-  }, 2000);
+  }, 5000);
   return logMessage(msg);
 }
 
