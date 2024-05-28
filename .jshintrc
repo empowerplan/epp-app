@@ -26,6 +26,7 @@
     "maplibregl": false,
     "requestAnimationFrame": false,
     "setTimeout": false,
+    "clearTimeout": false,
     "state_filter": true,
     "store": true,
     "store_cold_init": false,
