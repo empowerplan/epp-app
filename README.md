@@ -193,6 +193,30 @@ docker cp digiplan_distill:/app/distill/ ./digiplan/static/mvts/
 docker rm -f epp_distill
 ```
 
+**Attention!**
+If you use externally distilled MVTs (distilling done on other server and MVTs copied to current server),
+feature IDs stored in MVTs might not fit to IDs in current database.
+This leads to wrong popups (if ID points to different existing ID) or errors when creating popups (if ID is not present in DB).
+A workaround for this situation is to change IDs of current database in order to match IDs of external server.
+Therefore, either all IDs have to me mapped, or (the way I did it last time) related models (the ones having popups)
+have to be emptied, PK sequences reset to value matching external starting ID and reloaded.
+
+Pseudo commands from console:
+```
+python manage.py shell
+
+from digiplan.models import Model
+Model.objects.all().delete()
+exit()
+
+python manage.py dbshell
+
+ALTER SEQUENCE <sequence_name> RESTART WITH <next-starting-id>
+
+make load_data
+```
+
+
 # Adding new (static) layers
 
 > **Outdated!** - `django-mapengine` is used to set up map sources and layers instead!

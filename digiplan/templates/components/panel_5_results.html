@@ -10,21 +10,21 @@
       </svg>
       Ergebnisse
     </h2>
-    <!--<div class="panel-item__calc-alert">
+    <div class="panel-item__calc-alert">
       <div class="panel-item__calc-alert-message">{% translate "Detailergebnisse werden berechnet" %}</div>
       <div class="panel-item__calc-alert-explanation">
         <button type="button"
                 class="btn btn-link btn-sm"
                 data-bs-toggle="tooltip"
                 data-bs-placement="right"
-                title="{% translate "Es werden komplexe Modelle verwendet, um Ihre Daten präzise zu analysieren.<br>Diese tiefgehenden Berechnungen benötigen Zeit, um Ihnen zuverlässige und genaue Ergebnisse zu liefern." %}">
+                title="{% translate "Das Aufstellen und Optimieren des Energiesystems ist komplex. Es braucht etwas Zeit, um Dir für Dein Szenario zuverlässige und genaue Ergebnisse zu liefern.<br>Derweil kannst Du Dir schon einige Vorergebnisse ansehen." %}">
                 {% translate "Warum?" %}
         </button>
       </div>
       <div class="progress">
         <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%"></div>
       </div>
-    </div>-->
+    </div>
     <div class="panel-item__form">
       <select id="result_views" class="form-select" aria-label="Eine Option auswählen, um die jeweilige Grafik zu sehen" aria-controls="region_chart_2045">
         <option value="" title="{% translate "Keine Auswahl" %}" selected>{% translate "Keine Auswahl" %}</option>
@@ -82,7 +82,6 @@
       </select>
       <img src="{% static 'images/icons/i_info.svg' %}" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" data-bs-placement="right" id="info_tooltip_results" tabindex="0" title="{% translate "Keine Auswahl" %}">
     </div>
-    <div id="result_simnote" class="panel__simnote"></div>
     <div class="panel-item">
       <div class="panel-item__padding">
         <div id="region_chart_2045" class="panel-item__chart" aria-live="polite"></div>
