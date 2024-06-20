@@ -81,6 +81,10 @@ class EnergyShareChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         return calculations.energy_shares_per_municipality().sum(axis=1).round().to_dict()
 
+    def get_fill_color(self, values: dict[int, float]) -> dict:  # noqa: ARG002
+        """Fix choropleth legend and colors to max value of 100%."""
+        return settings.MAP_ENGINE_CHOROPLETH_STYLES.get_fill_color(self.lookup, [0.0, 99.0])
+
 
 class EnergyShare2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
