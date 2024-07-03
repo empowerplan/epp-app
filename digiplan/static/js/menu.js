@@ -1,4 +1,4 @@
-import { resultsTabs, futureDropdown } from "./elements.js";
+import { resultsTabs, statusquoDropdown, futureDropdown } from "./elements.js";
 import { terminateSimulation } from "./results.js";
 import { hidePotentialLayers, showPotentialLayers } from "./sliders.js";
 
@@ -57,6 +57,7 @@ PubSub.subscribe(
 );
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hidePotentialLayers);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hideEmpowerplanContent);
+PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, reactivateChoropleth);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, deactivateChoropleth);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, terminateSimulation);
@@ -186,5 +187,13 @@ function hideEmpowerplanContent(msg) {
   }
   document.getElementById("mainTabContent").hidden = false;
   map.resize();
+  return logMessage(msg);
+}
+
+function reactivateChoropleth(msg) {
+  const choropleth = statusquoDropdown.value;
+  if (choropleth !== "") {
+    PubSub.publish(mapEvent.CHOROPLETH_SELECTED, statusquoDropdown.value);
+  }
   return logMessage(msg);
 }
