@@ -36,7 +36,7 @@ django-geojson = "^3.1.0"
 # Custom apps
 # -----------------------------------------------------------------------------poetry-
 django-oemof = {git="https://github.com/rl-institut/django-oemof.git", tag="v0.18.1"}
-django-mapengine = "1.7.0"
+django-mapengine = "2.1.0"
 geojson = "^3.0.1"
 oemof-network = "0.5.0a5"
 django-template-partials = "^23.4"

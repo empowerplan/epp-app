@@ -306,8 +306,9 @@ MAP_ENGINE_IMAGES = [
 MAP_ENGINE_API_MVTS = {
     "region": [setup.MVTAPI("region_boundaries", "map", "RegionBoundaries")],
     "municipality": [
-        setup.MVTAPI("municipality", "map", "Municipality"),
-        setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
+        setup.MVTAPI("municipality", "map", "Municipality", style="region-fill"),
+        setup.MVTAPI("municipalityline", "map", "Municipality", style="region-line"),
+        setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles", style="region-label"),
     ],
     "potential": [
         setup.MVTAPI("potentialarea_pv_ground_soil_quality_low", "map", "PotentialareaPVGroundSoilQualityLow"),
@@ -370,12 +371,9 @@ MAP_ENGINE_API_CLUSTERS = [
     setup.ClusterAPI("rpg_ols_wind_planned", "map", "WindTurbine2Planned", properties=["id", "unit_count"]),
 ]
 
-MAP_ENGINE_LAYERS_AT_STARTUP = ["region_boundaries"]
+MAP_ENGINE_LAYERS_AT_STARTUP = ["region", "region_boundaries", "municipality", "municipalityline", "municipalitylabel"]
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
-MAP_ENGINE_ZOOM_LEVELS = {
-    "municipality": setup.Zoom(8, 14),
-}
 
 MAP_ENGINE_CHOROPLETHS = [
     setup.Choropleth("population_statusquo", layers=["municipality"], title=_("EinwohnerInnenzahl"), unit=_("EW")),
@@ -432,6 +430,7 @@ MAP_ENGINE_CHOROPLETHS = [
         layers=["municipality"],
         title=_("Anteil Erneuerbare Energien am Strombedarf"),
         unit="%",
+        labels=["0 - 20", "20 - 40", "40 - 60", "60 - 80", "80 - 100", " > 100"],
     ),
     setup.Choropleth(
         "energy_share_2045",
