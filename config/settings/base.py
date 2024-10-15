@@ -303,6 +303,8 @@ MAP_ENGINE_IMAGES = [
     setup.MapImage("pv_ground_hatch", "images/map_pv_ground_hatch.png"),
 ]
 
+MAP_ENGINE_REGIONS = ["municipality"]
+
 MAP_ENGINE_API_MVTS = {
     "region": [
         setup.MVTAPI("region_boundaries", "map", "RegionBoundaries", style="region_boundaries"),
