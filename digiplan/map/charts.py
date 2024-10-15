@@ -50,7 +50,7 @@ class Chart:
                 self.chart_options["series"][0]["data"] = data
             elif series_length > 1:
                 for i in range(0, series_length):
-                    values = self.chart_data[i]
+                    values = self.chart_data.iloc[i]
                     if not isinstance(values, (list, tuple)):
                         values = [values]
                     self.chart_options["series"][i]["data"] = values
