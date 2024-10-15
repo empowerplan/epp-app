@@ -304,10 +304,13 @@ MAP_ENGINE_IMAGES = [
 ]
 
 MAP_ENGINE_API_MVTS = {
-    "region": [setup.MVTAPI("region_boundaries", "map", "RegionBoundaries")],
+    "region": [
+        setup.MVTAPI("region_boundaries", "map", "RegionBoundaries", style="region_boundaries"),
+    ],
     "municipality": [
-        setup.MVTAPI("municipality", "map", "Municipality"),
-        setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
+        setup.MVTAPI("municipality", "map", "Municipality", style="region-fill"),
+        setup.MVTAPI("municipality-line", "map", "Municipality", style="region-line"),
+        setup.MVTAPI("municipality-label", "map", "Municipality", "label_tiles", style="region-label"),
     ],
     "potential": [
         setup.MVTAPI("potentialarea_pv_ground_soil_quality_low", "map", "PotentialareaPVGroundSoilQualityLow"),
@@ -370,12 +373,9 @@ MAP_ENGINE_API_CLUSTERS = [
     setup.ClusterAPI("rpg_ols_wind_planned", "map", "WindTurbine2Planned", properties=["id", "unit_count"]),
 ]
 
-MAP_ENGINE_LAYERS_AT_STARTUP = ["region_boundaries"]
+MAP_ENGINE_LAYERS_AT_STARTUP = ["region_boundaries", "municipality", "municipality-line", "municipality-label"]
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
-MAP_ENGINE_ZOOM_LEVELS = {
-    "municipality": setup.Zoom(8, 14),
-}
 
 MAP_ENGINE_CHOROPLETHS = [
     setup.Choropleth("population_statusquo", layers=["municipality"], title=_("EinwohnerInnenzahl"), unit=_("EW")),
