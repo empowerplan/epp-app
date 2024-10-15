@@ -889,5 +889,19 @@
       "fill-color": "#2171B5",
       "fill-opacity": 0.8
     }
+  },
+  "bb_flurstuecke": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#000000",
+      "fill-opacity": 0.8
+    }
+  },
+  "bb_ertragspotenzial": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#00a519",
+      "fill-opacity": 0.8
+    }
   }
 }

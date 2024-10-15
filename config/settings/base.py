@@ -273,7 +273,7 @@ OEMOF_SCENARIO = env.str("OEMOF_SCENARIO", "scenario_2045")
 MAP_ENGINE_CENTER_AT_STARTUP = [14.2, 52.45]
 MAP_ENGINE_ZOOM_AT_STARTUP = 8
 MAP_ENGINE_MIN_ZOOM = 8
-MAP_ENGINE_MAX_ZOOM = 13
+MAP_ENGINE_MAX_ZOOM = 16
 MAP_ENGINE_MAX_BOUNDS = [[12.6, 51.8], [16.1, 53.1]]
 
 # distill
@@ -376,6 +376,32 @@ MAP_ENGINE_API_CLUSTERS = [
 MAP_ENGINE_LAYERS_AT_STARTUP = ["region_boundaries", "municipality", "municipality-line", "municipality-label"]
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
+
+MAP_ENGINE_SOURCES = [
+    setup.MapSource(
+        name="bb_flurstuecke",
+        type="raster",
+        tiles=[
+            "https://isk.geobasis-bb.de/ows/alkis_wms"
+            "?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.3.0&request=GetMap&crs=EPSG:3857&"
+            "styles=SW&width=768&height=768&transparent=true&layers=adv_alkis_flurstuecke",
+        ],
+    ),
+    setup.MapSource(
+        name="bb_ertragspotenzial",
+        type="raster",
+        tiles=[
+            "https://inspire.brandenburg.de/services/boertrag_wms"
+            "?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.3.0&request=GetMap&crs=EPSG:3857&"
+            "styles&width=512&height=512&transparent=true&layers=boertrag_lw",
+        ],
+    ),
+]
+
+MAP_ENGINE_LAYERS = [
+    setup.MapLayer(id="bb_ertragspotenzial", source="bb_ertragspotenzial", style={"type": "raster"}),
+    setup.MapLayer(id="bb_flurstuecke", source="bb_flurstuecke", style={"type": "raster"}, minzoom=14),
+]
 
 MAP_ENGINE_CHOROPLETHS = [
     setup.Choropleth("population_statusquo", layers=["municipality"], title=_("EinwohnerInnenzahl"), unit=_("EW")),
