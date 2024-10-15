@@ -482,6 +482,7 @@ MAP_ENGINE_CHOROPLETHS = [
         layers=["municipality"],
         title=_("Anteil Erneuerbare Energien am Strombedarf"),
         unit="%",
+        labels=["0 - 20", "20 - 40", "40 - 60", "60 - 80", "80 - 100", " > 100"],
     ),
     setup.Choropleth(
         "energy_capita_statusquo",
