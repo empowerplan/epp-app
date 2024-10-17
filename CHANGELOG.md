@@ -9,6 +9,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - link to changelog in docs panel
 - progress bar to show simulation state
 - WMS layers flurstuecke and ertragspotenzial
+- layer for combined PV ground negative criteria
 
 ### Changed
 - esys panel tooltip texts
