@@ -635,6 +635,11 @@ class Moor(StaticRegionModel):  # noqa: D101
     layer = "Mooregroessernull"
 
 
+class PVGroundCriteriaMerged(StaticRegionModel):  # noqa: D101
+    data_file = "pv_ground_criteria_merged"
+    layer = "pv_ground_criteria_merged"
+
+
 class PVGroundCriteriaSettlements(StaticRegionModel):  # noqa: D101
     data_file = "pv_ground_criteria_settlements"
     layer = "Wohnbauflaechen"
