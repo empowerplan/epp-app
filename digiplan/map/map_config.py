@@ -338,6 +338,13 @@ LEGEND = {
     ],
     _("Negativkriterien PV"): [
         DistillableLegendLayer(
+            _("Alle kombiniert"),
+            _(
+                "Alle Negativkritieren N01-N15 für PV-Freiflächenanlagen kombiniert",
+            ),
+            layer_id=f"pv_ground_criteria_merged{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
+        ),
+        DistillableLegendLayer(
             _("[N01] Siedlungsgebiete"),
             _(
                 "'Siedlungsgebiete sowie Flächen rechtskräftiger Bebauungspläne mit Ausweisungen von Wohn-, "
