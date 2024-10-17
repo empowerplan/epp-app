@@ -43,6 +43,7 @@ MODELS = [
     models.PriorityClimateResistentAgri,
     models.PriorityGrassland,
     models.PriorityPermanentCrops,
+    models.PVGroundCriteriaMerged,
     models.PVGroundCriteriaAviation,
     models.PVGroundCriteriaSettlements,
     models.PVGroundCriteriaSettlements200m,
