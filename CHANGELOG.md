@@ -8,9 +8,12 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Added
 - link to changelog in docs panel
 - progress bar to show simulation state
+- WMS layers flurstuecke and ertragspotenzial
+- layer for combined PV ground negative criteria
 
 ### Changed
 - esys panel tooltip texts
+- update django-mapengine to v2.0.1
 
 ### Fixed
 - 404 errors for missing MVTs

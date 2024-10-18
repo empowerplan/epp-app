@@ -834,6 +834,13 @@
       "fill-opacity": 0.8
     }
   },
+  "pv_ground_criteria_merged": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#000000",
+      "fill-opacity": 0.3
+    }
+  },
   "pv_ground_criteria_settlements": {
     "type": "fill",
     "paint": {
@@ -887,6 +894,20 @@
     "type": "fill",
     "paint": {
       "fill-color": "#2171B5",
+      "fill-opacity": 0.8
+    }
+  },
+  "bb_flurstuecke": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#000000",
+      "fill-opacity": 0.8
+    }
+  },
+  "bb_ertragspotenzial": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#00a519",
       "fill-opacity": 0.8
     }
   }

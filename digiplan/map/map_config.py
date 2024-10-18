@@ -338,6 +338,13 @@ LEGEND = {
     ],
     _("Negativkriterien PV"): [
         DistillableLegendLayer(
+            _("Alle kombiniert"),
+            _(
+                "Alle Negativkritieren N01-N15 für PV-Freiflächenanlagen kombiniert",
+            ),
+            layer_id=f"pv_ground_criteria_merged{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
+        ),
+        DistillableLegendLayer(
             _("[N01] Siedlungsgebiete"),
             _(
                 "'Siedlungsgebiete sowie Flächen rechtskräftiger Bebauungspläne mit Ausweisungen von Wohn-, "
@@ -579,6 +586,29 @@ LEGEND = {
                 "auf der Website der RPG)",
             ),
             layer_id=f"priority_grassland{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
+        ),
+    ],
+    _("Externe Ebenen"): [
+        legend.LegendLayer(
+            _("Flurstücke (Zoom 14+)"),
+            _(
+                "Flurstücke Brandenburg<br>"
+                "© GeoBasis-DE/LGB, dl-de/by-2-0<br><br>"
+                "<i>Diese Ebene wird erst bei hohen Zoomstufen eingeblendet.</i>",
+            ),
+            layer_id="bb_flurstuecke",
+        ),
+        legend.LegendLayer(
+            _("Landw. Ertragspotenzial"),
+            _(
+                "Landwirtschaftliches Ertragspotenzial<br>"
+                "<img src='https://inspire.brandenburg.de/services/boertrag_wms?"
+                "map=/usr/lib/cgi-bin/map/inspire_lbgr_boertrag.map&language=ger&"
+                "version=1.3.0&service=WMS&request=GetLegendGraphic&sld_version=1.1.0&"
+                "layer=boertrag_lw&format=image/png&STYLE=default'>"
+                "<br>© Landesamt für Bergbau, Geologie und Rohstoffe Brandenburg, dl-de/by-2-0",
+            ),
+            layer_id="bb_ertragspotenzial",
         ),
     ],
 }
