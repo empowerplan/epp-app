@@ -81,10 +81,50 @@ class EnergyShareChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         return calculations.energy_shares_per_municipality().sum(axis=1).round().to_dict()
 
+    def get_fill_color(self, values: dict[int, float]) -> dict:  # noqa: ARG002
+        """Fix choropleth legend and colors to max value of 100%."""
+        return [
+            "interpolate",
+            ["linear"],
+            ["feature-state", "energy_share_statusquo"],
+            0.0,
+            "rgb(255, 255, 204)",
+            20.0,
+            "rgb(199, 233, 180)",
+            40.0,
+            "rgb(127, 205, 187)",
+            60.0,
+            "rgb(65, 182, 196)",
+            80.0,
+            "rgb(44, 127, 184)",
+            100.0,
+            "rgb(37, 52, 148)",
+        ]
+
 
 class EnergyShare2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         return calculations.energy_shares_2045_per_municipality(self.map_state).sum(axis=1).to_dict()
+
+    def get_fill_color(self, values: dict[int, float]) -> dict:  # noqa: ARG002
+        """Fix choropleth legend and colors to max value of 100%."""
+        return [
+            "interpolate",
+            ["linear"],
+            ["feature-state", "energy_share_statusquo"],
+            0.0,
+            "rgb(255, 255, 204)",
+            20.0,
+            "rgb(199, 233, 180)",
+            40.0,
+            "rgb(127, 205, 187)",
+            60.0,
+            "rgb(65, 182, 196)",
+            80.0,
+            "rgb(44, 127, 184)",
+            100.0,
+            "rgb(37, 52, 148)",
+        ]
 
 
 class EnergyChoropleth(Choropleth):  # noqa: D101

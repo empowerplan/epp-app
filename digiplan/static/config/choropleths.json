@@ -19,6 +19,14 @@
     "color_palette": "YlGnBu",
     "num_colors": 6
   },
+  "energy_share_statusquo": {
+    "color_palette": "YlGnBu",
+    "num_colors": 6
+  },
+  "energy_share_2045": {
+    "color_palette": "YlGnBu",
+    "num_colors": 6
+  },
   "re_power_percentage": {
     "color_palette": "GnBu",
     "values": [
