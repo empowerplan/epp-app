@@ -13,3 +13,7 @@ This is a test list:
 | January  | $250    |
 | February | $80     |
 | March    | $420    |
+
+Test image:
+
+![map-wind.png](../images/map-wind.png)
