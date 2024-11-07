@@ -16,4 +16,4 @@ This is a test list:
 
 Test image:
 
-![map-wind.png](../images/map-wind.png)
+![map-wind.png](/static/images/map-wind.png)
