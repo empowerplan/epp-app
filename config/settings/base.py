@@ -91,6 +91,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "django_distill",
     "template_partials",
+    "markdownify.apps.MarkdownifyConfig",
 ]
 
 LOCAL_APPS = ["digiplan.map.apps.MapConfig", "django_oemof", "django_mapengine"]
@@ -265,6 +266,15 @@ if PASSWORD_PROTECTION and PASSWORD is None:
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+MARKDOWNIFY = {
+    "default": {
+        "BLEACH": False,
+        "MARKDOWN_EXTENSIONS": [
+            "markdown.extensions.extra",
+        ],
+    },
+}
 
 OEMOF_SCENARIO = env.str("OEMOF_SCENARIO", "scenario_2045")
 
