@@ -272,6 +272,7 @@ MARKDOWNIFY = {
         "BLEACH": False,
         "MARKDOWN_EXTENSIONS": [
             "markdown.extensions.extra",
+            "markdown.extensions.admonition",
             "md4mathjax",
         ],
     },
