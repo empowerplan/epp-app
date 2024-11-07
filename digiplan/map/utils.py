@@ -8,6 +8,12 @@ from django.template import Template
 from django.template.context import make_context
 
 
+def read_file(filename: str) -> str:
+    """Read file."""
+    with pathlib.Path(filename).open("r", encoding="utf-8") as f:
+        return f.read()
+
+
 def get_translated_json_from_file(json_filename: str, request: HttpRequest = None) -> dict:
     """
     Render JSON using translations.
