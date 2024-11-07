@@ -74,6 +74,7 @@
 .challenges-modal {
   @extend .row;
   @extend .p-2;
+  @extend .fw-light;
 
   &__visual {
     @extend .col-lg-6;
