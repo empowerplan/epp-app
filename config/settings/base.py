@@ -273,8 +273,14 @@ MARKDOWNIFY = {
         "MARKDOWN_EXTENSIONS": [
             "markdown.extensions.extra",
             "markdown.extensions.admonition",
+            "markdown.extensions.toc",
             "md4mathjax",
         ],
+        "MARKDOWN_EXTENSION_CONFIGS": {
+            "markdown.extensions.toc": {
+                "toc_depth": 2
+            }
+        },
     },
 }
 
