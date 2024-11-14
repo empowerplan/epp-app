@@ -101,3 +101,5 @@ WORKDIR /app
 RUN mkdir staticfiles
 
 ENTRYPOINT ["/entrypoint"]
+
+CMD ${STARTUP_COMMAND}
