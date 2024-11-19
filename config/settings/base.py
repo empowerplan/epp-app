@@ -91,6 +91,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "django_distill",
     "template_partials",
+    "markdownify.apps.MarkdownifyConfig",
 ]
 
 LOCAL_APPS = ["digiplan.map.apps.MapConfig", "django_oemof", "django_mapengine"]
@@ -266,6 +267,17 @@ if PASSWORD_PROTECTION and PASSWORD is None:
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+MARKDOWNIFY = {
+    "default": {
+        "BLEACH": False,
+        "MARKDOWN_EXTENSIONS": [
+            "markdown.extensions.extra",
+            "markdown.extensions.admonition",
+            "md4mathjax",
+        ],
+    },
+}
+
 OEMOF_SCENARIO = env.str("OEMOF_SCENARIO", "scenario_2045")
 
 # django-mapengine
@@ -302,6 +314,8 @@ MAP_ENGINE_IMAGES = [
     setup.MapImage("wind_hatch", "images/map_wind_hatch.png"),
     setup.MapImage("pv_ground_hatch", "images/map_pv_ground_hatch.png"),
 ]
+# Legacy for distilling, see https://github.com/rl-institut/django-mapengine/issues/24
+MAP_ENGINE_REGIONS = []
 
 MAP_ENGINE_HOVER_LAYERS = ["municipality", "municipality-label"]
 

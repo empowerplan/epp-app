@@ -51,7 +51,7 @@ LEGEND = {
             symbol="circle",
         ),
         SymbolLegendLayer(
-            _("Windenergie genehmigt)"),
+            _("Windenergie (genehmigt)"),
             _(
                 "Genehmigte Windenergieanlagen, Punktdaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"
                 "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",

@@ -30,7 +30,7 @@ Enter repo folder and set up a conda environment and activate it:
 
 ```
 conda env create -f environment.yml
-conda activate digiplan
+conda activate empowerplan
 ```
 
 Install [poetry](https://python-poetry.org/) (python dependency manager used in this

@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n markdownify %}
 
 {%  include "components/onboarding.html" %}
 
@@ -145,37 +145,39 @@
            <path d="m77.812 44.422h-5.625c-0.85938 0-1.5625 0.70312-1.5625 1.5625s0.70312 1.5625 1.5625 1.5625h5.625c0.85938 0 1.5625-0.70312 1.5625-1.5625s-0.70312-1.5625-1.5625-1.5625z"/>
           </g>
         </svg>
-        <h1 class="modal-title fs-5 fw-bold ps-1" id="appModalLabel">EmPowerPlan-Tool</h1>
+        <h1 class="modal-title fs-5 fw-bold ps-1" id="appModalLabel">Verteilungsgerechtigkeit</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="challenges-modal">
-          <div class="challenges-modal__visual challenges-modal__visual--logos">
-            <div>
-              <img src="{% static 'images/logos/EmPowerPlan-logo-horizontal.png' %}" width="240" height="60" alt="Logo RPG OLD" title="Regionale Planungsgemeinschaft Oderland-Spree">
-            </div>
-            <div>
-              <img src="{% static 'images/logos/rpg_ols_logo.svg' %}" width="238" height="58" alt="Logo RPG OLD" title="Regionale Planungsgemeinschaft Oderland-Spree">
-            </div>
+          {{ markdown.landing_page | markdownify }}
+{#        <img src="{% static 'images/equity/wind/DE_installed_capacity_gw_equalAREA-equalCLOSE2load-equalCLOSE2pop-equalPOP-equalPOTAREA.png' %}" width="100%" alt="Logo RPG OLD" title="Regionale Planungsgemeinschaft Oderland-Spree">#}
+{#        <p>Blabla</p>#}
+{#        <img src="{% static 'images/equity/wind/DE_min-overlay_equalAREA-equalPOP.png' %}" width="100%" alt="Logo RPG OLD" title="Regionale Planungsgemeinschaft Oderland-Spree">#}
           </div>
-          <div class="challenges-modal__text">
-            Hier folgt noch Text zu diesen Punkten:
-            <ul>
-              <li>Projektbeschreibung und Ziel (kurz)</li>
-              <li>Wofür ist dieses Tool und an wen richtet es sich?</li>
-              <li>Energiewende ist komplex und vielschichtig, Tool beleuchtet ausgewählte Aspekte, Beispiele</li>
-              <li>Beispielhafte Fragen aus Präsi:
-                <ul>
-                  <li>Wie viel Energie kann auf den geplanten Windvorranggebieten "geerntet" werden?</li>
-                  <li>Und wie viel mit Aufdach- und Agri-Photovoltaik?</li>
-                  <li>Genügt das, um den zukünftigen Energiebedarf der Region zu decken, auch den der Wärmepumpen und Elektroautos?</li>
-                  <li>Bis zu welchem Grad kann Oderland-Spree energetisch unabhängig werden?</li>
-                  <li>Wie passt das zur Brandenburger Energiestrategie 2040?</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
+
+{#        <div class="challenges-modal">#}
+{#          <div class="challenges-modal__visual challenges-modal__visual--logos">#}
+{##}
+{#          </div>#}
+{#          <div class="challenges-modal__text">#}
+{#            Hier folgt noch Text zu diesen Punkten:#}
+{#            <ul>#}
+{#              <li>Projektbeschreibung und Ziel (kurz)</li>#}
+{#              <li>Wofür ist dieses Tool und an wen richtet es sich?</li>#}
+{#              <li>Energiewende ist komplex und vielschichtig, Tool beleuchtet ausgewählte Aspekte, Beispiele</li>#}
+{#              <li>Beispielhafte Fragen aus Präsi:#}
+{#                <ul>#}
+{#                  <li>Wie viel Energie kann auf den geplanten Windvorranggebieten "geerntet" werden?</li>#}
+{#                  <li>Und wie viel mit Aufdach- und Agri-Photovoltaik?</li>#}
+{#                  <li>Genügt das, um den zukünftigen Energiebedarf der Region zu decken, auch den der Wärmepumpen und Elektroautos?</li>#}
+{#                  <li>Bis zu welchem Grad kann Oderland-Spree energetisch unabhängig werden?</li>#}
+{#                  <li>Wie passt das zur Brandenburger Energiestrategie 2040?</li>#}
+{#                </ul>#}
+{#              </li>#}
+{#            </ul>#}
+{#          </div>#}
+{#        </div>#}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-info" data-bs-dismiss="modal">Schließen</button>
