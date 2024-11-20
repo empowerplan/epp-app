@@ -1015,19 +1015,19 @@ class PVgroundAreasPlannedPopup(PVgroundAreaPopup):
 class WindTurbine2OperatingPopup(WindTurbine2ClusterPopup):
     """Popup for operating wind turbines (dataset by RPG with areas)."""
 
-    description = _("Windenergieanlagen in Betrieb (Daten: RPG Oderland-Spree, Stand: 31.12.2023)")
+    description = _("Windenergieanlagen in Betrieb (Daten: RPG Oderland-Spree, Stand: 08.10.2024)")
 
 
 class WindTurbine2ApprovedPopup(WindTurbine2ClusterPopup):
     """Popup for approved wind turbines (dataset by RPG with areas)."""
 
-    description = _("Genehmigte Windenergieanlagen (Daten: RPG Oderland-Spree, Stand: 31.12.2023)")
+    description = _("Genehmigte Windenergieanlagen (Daten: RPG Oderland-Spree, Stand: 08.10.2024)")
 
 
 class WindTurbine2PlannedPopup(WindTurbine2ClusterPopup):
     """Popup for planned wind turbines (dataset by RPG with areas)."""
 
-    description = _("Geplante Windenergieanlagen (Daten: RPG Oderland-Spree, Stand: 31.12.2023)")
+    description = _("Geplante Windenergieanlagen (Daten: RPG Oderland-Spree, Stand: 08.10.2024)")
 
 
 POPUPS: dict[str, type(popups.Popup)] = {

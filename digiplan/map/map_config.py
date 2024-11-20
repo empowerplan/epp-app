@@ -43,7 +43,7 @@ LEGEND = {
         SymbolLegendLayer(
             _("Windenergie (in Betrieb)"),
             _(
-                "Windenergieanlagen in Betrieb, Punktdaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"
+                "Windenergieanlagen in Betrieb, Punktdaten (Daten: RPG Oderland-Spree, Stand: 08.10.2024)"
                 "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
             ),
             layer_id="rpg_ols_wind_operating",
@@ -53,7 +53,7 @@ LEGEND = {
         SymbolLegendLayer(
             _("Windenergie (genehmigt)"),
             _(
-                "Genehmigte Windenergieanlagen, Punktdaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"
+                "Genehmigte Windenergieanlagen, Punktdaten (Daten: RPG Oderland-Spree, Stand: 08.10.2024)"
                 "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
             ),
             layer_id="rpg_ols_wind_approved",
@@ -63,7 +63,7 @@ LEGEND = {
         SymbolLegendLayer(
             _("Windenergie (geplant)"),
             _(
-                "Geplante Windenergieanlagen, Punktdaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"
+                "Geplante Windenergieanlagen, Punktdaten (Daten: RPG Oderland-Spree, Stand: 08.10.2024)"
                 "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
             ),
             layer_id="rpg_ols_wind_planned",

@@ -229,7 +229,7 @@ class WindGoalResultsBox(ResultsBox):  # noqa: D101
 
 class WindAreaResultsBox(ResultsBox):  # noqa: D101
     category = "wind"
-    text = "der <span>Regionsfläche</span> werden in Deinem Szenario verwendet"
+    text = "der <span>Regionsfläche</span> werden in Deinem Szenario verwendet*"
     unit = "%"
 
     def calculate_value(self, parameters: dict) -> float:  # noqa: D102
