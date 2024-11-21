@@ -630,7 +630,7 @@ MAP_ENGINE_POPUPS = [
         popup_at_default_layer=True,
     ),
     setup.Popup(
-        "municipality",
+        f"municipality{'_distilled' if DISTILL else ''}",
         popup_at_default_layer=False,
         choropleths=[
             "population_statusquo",
