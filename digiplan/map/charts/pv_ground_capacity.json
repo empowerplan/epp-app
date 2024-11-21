@@ -21,7 +21,7 @@
   },
   "xAxis": {
     "type": "category",
-    "data": ["2010", "2015", "2020", "2024**", "Dein\nSzenario***"],
+    "data": ["2010", "2015", "2020", "2024", "Dein\nSzenario**"],
     "axisLabel": {
       "rotate": 45
     }
@@ -29,6 +29,7 @@
   "yAxis": [
     {
       "type": "value",
+      "max": 3000,
       "axisLabel": {
         "formatter": "{value} MW"
       }
@@ -100,45 +101,13 @@
         "rotate": 0,
         "color": "#333"
       },
-      "color": "#f1ce86",
-      "data": [
-        0,
-        0,
-        0,
-        {
-          "value": 645,
-          "itemStyle": {
-            "borderWidth": 2,
-            "borderColor": "#efad25",
-            "borderType": "dotted"
-          },
-          "label": {
-            "show": true,
-            "rotate": 0,
-            "fontSize": 10
-          }
-        },
-        0
-      ],
-      "yAxisIndex": 0
-    },
-    {
-      "name": "Leistung in Planung (2024)**",
-      "type": "bar",
-      "stack": "power",
-      "label": {
-        "show": false,
-        "position": "inside",
-        "rotate": 0,
-        "color": "#333"
-      },
       "color": "#ffffff",
       "data": [
         0,
         0,
         0,
         {
-          "value": 3734,
+          "value": 645,
           "itemStyle": {
             "borderWidth": 2,
             "borderColor": "#efad25",
