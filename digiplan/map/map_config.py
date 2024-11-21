@@ -74,7 +74,7 @@ LEGEND = {
             _("FF-PV (in Betrieb)"),
             _(
                 "Photovoltaik-Freiflächenanlagen in Betrieb, Flächendaten (Daten: RPG Oderland-Spree, Stand: "
-                "31.12.2023)"
+                "Okt 2024)"
                 "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
             ),
             layer_id=f"rpg_ols_pv_ground_operating{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
@@ -83,7 +83,7 @@ LEGEND = {
             _("FF-PV (genehmigt)"),
             _(
                 "Genehmigte Photovoltaik-Freiflächenanlagen, Flächendaten (Daten: RPG Oderland-Spree, Stand: "
-                "31.12.2023)"
+                "Okt 2024)"
                 "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
             ),
             layer_id=f"rpg_ols_pv_ground_approved{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
@@ -91,7 +91,7 @@ LEGEND = {
         DistillableLegendLayer(
             _("FF-PV (geplant)"),
             _(
-                "Geplante Photovoltaik-Freiflächenanlagen, Flächendaten (Daten: RPG Oderland-Spree, Stand: 31.12.2023)"
+                "Geplante Photovoltaik-Freiflächenanlagen, Flächendaten (Daten: RPG Oderland-Spree, Stand: Okt 2024)"
                 "<br><br><i>Klicke auf ein Kartenobjekt, um mehr Informationen zu erhalten.</i>",
             ),
             layer_id=f"rpg_ols_pv_ground_planned{'_distilled' if settings.MAP_ENGINE_USE_DISTILLED_MVTS else ''}",
