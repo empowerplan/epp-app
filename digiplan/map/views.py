@@ -32,7 +32,7 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         "pv_map_control": _("Negativkriterien PV"),
         "store_hot_init": config.STORE_HOT_INIT,
         "oemof_scenario": settings.OEMOF_SCENARIO,
-        "markdown": {"landing_page": config.LANDING_PAGE_MD},
+        "markdown": {"reveal_equity": config.REVEAL_EQUITY_MD},
     }
 
     def get_context_data(self, **kwargs) -> dict:
