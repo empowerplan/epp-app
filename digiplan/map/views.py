@@ -57,7 +57,9 @@ class MapGLView(TemplateView, views.MapEngineMixin):
             0,
             context["mapengine_layers"].pop(
                 next(
-                    i for i, element in enumerate(context["mapengine_layers"]) if element["id"] == "region_boundaries"
+                    i
+                    for i, element in enumerate(context["mapengine_layers"])
+                    if element["id"] == "region_boundaries" or element["id"] == "region_boundaries_distilled"
                 ),
             ),
         )
