@@ -620,10 +620,6 @@ class WaterFirstOrder(StaticRegionModel):  # noqa: D101
     data_file = "pv_ground_criteria_water_first_order"
     layer = "Geweasser_1_Ordnung"
 
-    geom = models.MultiLineStringField(srid=4326)
-
-    mapping = {"geom": "MULTILINESTRING"}
-
 
 class WaterBodies(StaticRegionModel):  # noqa: D101
     data_file = "pv_ground_criteria_water_bodies"
