@@ -293,7 +293,7 @@ MAP_ENGINE_X_AT_MIN_Z = 137
 MAP_ENGINE_Y_AT_MIN_Z = 83
 MAP_ENGINE_X_OFFSET = 1  # Defines how many tiles to the right are added at first level
 MAP_ENGINE_Y_OFFSET = 1  # Defines how many tiles to the bottom are added at first level
-MAP_ENGINE_MAX_DISTILLED_ZOOM = 13
+MAP_ENGINE_MAX_DISTILLED_ZOOM = 16
 DISTILL = env.bool("MAP_ENGINE_USE_DISTILLED_MVTS", False)
 
 MAP_ENGINE_IMAGES = [
