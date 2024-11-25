@@ -4,6 +4,12 @@
     "right": "30%",
     "bottom": "5%"
   },
+  "aria": {
+    "enabled": true,
+    "label": {
+      "description": "Diese Grafik zeigt {title.text}, bestehend aus {legend.data}."
+    }
+  },
   "legend": {
     "data": [
       "Wind",
@@ -12,6 +18,7 @@
       "Wasserkraft",
       "Bioenergie"
     ],
+    "itemGap": 15,
     "orient": "vertical",
     "right": "-5%",
     "bottom": "15%"

@@ -73,4 +73,43 @@ document.addEventListener('DOMContentLoaded', function() {
       svgContainer.style.display = 'block';
     }
   });
+
+  // Adding down arrow as scroll indicator
+  const arrow = document.querySelector('.arrow-container');
+  const resultTab = document.querySelector('#results-pv-tab.nav-link');
+  const mainTabContent = document.querySelector('#mainTabContent');
+  let arrowDisplayed = false;
+
+  if (resultTab && mainTabContent) {
+    const observer = new MutationObserver(function(mutations) { //jshint ignore:line
+      mutations.forEach(mutation => {
+        if (mutation.attributeName === 'class' && !arrowDisplayed) {
+          if (resultTab.classList.contains('active')) {
+            arrow.classList.add('show');
+            arrowDisplayed = true;
+          }
+        }
+      });
+    });
+
+    observer.observe(resultTab, {
+      attributes: true
+    });
+
+    mainTabContent.addEventListener('scroll', function() {
+      let threshold = mainTabContent.scrollHeight - mainTabContent.clientHeight - 300;
+      if (mainTabContent.scrollTop >= threshold && arrowDisplayed) {
+        arrow.classList.remove('show');
+      }
+    });
+  } else {
+    console.error('The required elements were not found in the DOM.');
+  }
+});
+
+// Update aria-checked attribute for switches
+document.querySelectorAll('.layer__switch').forEach(checkbox => {
+  checkbox.addEventListener('change', event => {
+    event.target.setAttribute('aria-checked', event.target.checked.toString());
+  });
 });

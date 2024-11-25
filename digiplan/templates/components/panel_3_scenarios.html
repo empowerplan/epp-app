@@ -3,21 +3,27 @@
 <div class="panel__settings">
   <div class="panel-item">
     <div class="panel-item__padding">
-      <p>Szenario auswählen</p>
+      <h2 class="panel-item__heading panel-item__heading--nopadding">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-right" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0z"/>
+        </svg>
+        Szenarien
+      </h2>
+      <p class="sidepanel__indication">Du kannst ein Szenario wählen und dieses anschließend <b>Übernehmen</b>. Damit werden die Werte in die Einstellungen von Schritt 4 übernommen. Ohne eine Auswahl werden die heutigen Werte eingestellt.</p>
     </div>
     <div class="panel-item__padding">
-      <div id="panelCard1" class="panel-card panel-card--selected">
+      <section id="panelCard1" class="panel-card panel-card--selected" tabindex="0" role="button" aria-label="Mehr Informationen über die Energiestrategie Brandenburg 2030 anzeigen">
         <div class="panel-card__content">
-          <div class="panel-card__name">
+          <header class="panel-card__name">
             <div>
-              Energiestrategie Brandenburg 2030<br>(BB2030)
+              Energiestrategie Brandenburg 2030<br>(BB30)
             </div>
             <div class="scenario-star">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2348C3" class="bi bi-star-fill" viewBox="0 0 16 16">
                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
               </svg>
             </div>
-          </div>
+          </header>
           <div class="panel-card__evaluation">
             <div class="scenario-evaluation">
               <div class="scenario-evaluation__left">
@@ -41,23 +47,23 @@
             </div>
           </div>
         </div>
-        <div class="panel-card__toggle">
+        <div class="panel-card__toggle" aria-hidden="true">
           <div class="arrow-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#2348C3" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
             </svg>
           </div>
         </div>
-      </div>
-      <div id="panelCard2" class="panel-card">
+      </section>
+      <section id="panelCard2" class="panel-card" tabindex="0" role="button" aria-label="Mehr Informationen über die Energiestrategie Brandenburg 2040 anzeigen">
         <div class="panel-card__content">
-          <div class="panel-card__name">
+          <header class="panel-card__name">
             <div>
-              Energiestrategie Brandenburg 2040<br>(BB2040)
+              Energiestrategie Brandenburg 2040<br>(BB40)
             </div>
             <div class="scenario-star">
             </div>
-          </div>
+          </header>
           <div class="panel-card__evaluation">
             <div class="scenario-evaluation">
               <div class="scenario-evaluation__left">
@@ -81,14 +87,14 @@
             </div>
           </div>
         </div>
-        <div class="panel-card__toggle">
+        <div class="panel-card__toggle" aria-hidden="true">
           <div class="arrow-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#2348C3" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
               <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
             </svg>
           </div>
         </div>
-      </div>
+      </section>
 {#      <div id="panelCard3" class="panel-card">#}
 {#        <div class="panel-card__content">#}
 {#          <div class="panel-card__name">#}
@@ -129,15 +135,15 @@
 {#          </div>#}
 {#        </div>#}
 {#      </div>#}
-      <div id="panelCard3" class="panel-card">
+      <section id="panelCard3" class="panel-card" tabindex="0" role="button" aria-label="Mehr Informationen über das Langfristszenario T45 Strom 2045 anzeigen">
         <div class="panel-card__content">
-          <div class="panel-card__name">
+          <header class="panel-card__name">
             <div>
-              Langfristszenario T45 Strom 2045<br>(DE2045)
+              Langfristszenario T45 Strom 2045<br>(T45)
             </div>
             <div class="scenario-star">
             </div>
-          </div>
+          </header>
           <div class="panel-card__evaluation">
             <div class="scenario-evaluation">
               <div class="scenario-evaluation__left">
@@ -161,14 +167,14 @@
             </div>
           </div>
         </div>
-        <div class="panel-card__toggle">
+        <div class="panel-card__toggle" aria-hidden="true">
           <div class="arrow-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#2348C3" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
               <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
             </svg>
           </div>
         </div>
-      </div>
+      </section>
 {#      <div id="panelCard4" class="panel-card">#}
 {#        <div class="panel-card__content">#}
 {#          <div class="panel-card__name">#}

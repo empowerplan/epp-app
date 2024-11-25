@@ -1,0 +1,191 @@
+{
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    }
+  },
+  "legend": {
+    "data": ["Leistung", "Anlagenanzahl"],
+    "itemGap": 15
+  },
+  "grid": {
+    "top": "10%",
+    "left": "3%",
+    "right": "3%",
+    "bottom": "14%",
+    "containLabel": true
+  },
+  "aria": {
+    "enabled": true
+  },
+  "xAxis": {
+    "type": "category",
+    "data": ["2010", "2015", "2020", "2024", "Dein\nSzenario*"],
+    "axisLabel": {
+      "rotate": 45
+    }
+  },
+  "yAxis": [
+    {
+      "type": "value",
+      "max": 3000,
+      "axisLabel": {
+        "formatter": "{value} MW"
+      }
+    },
+    {
+      "type": "value",
+      "max": 600,
+      "name": "Anzahl"
+    }
+  ],
+  "series": [
+    {
+      "name": "Leistung",
+      "type": "bar",
+      "stack": "power",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 0,
+        "color": "#fff"
+      },
+      "color": "#6A89CC",
+      "data": [
+        531,
+        618,
+        766,
+        1150,
+        {
+          "value": 0,
+          "itemStyle": {
+            "color": "#BAE1F6"
+          },
+          "label": {
+            "color": "#333"
+          }
+        }
+      ],
+      "yAxisIndex": 0,
+      "markLine": {
+        "symbol": "none",
+        "lineStyle": {
+          "color": "#495e8a",
+          "type": "dashed",
+          "width": 2
+        },
+        "data": [
+          {
+            "yAxis": 1769,
+            "label": {
+              "formatter": "Leistungsziel Brandenburg 2030",
+              "color": "#495e8a",
+              "position": "insideStartTop"
+            }
+          },
+          {
+            "yAxis": 2308,
+            "label": {
+              "formatter": "Leistungsziel Brandenburg 2040",
+              "color": "#495e8a",
+              "position": "insideStartTop"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Leistung genehmigt (2024)",
+      "type": "bar",
+      "stack": "power",
+      "label": {
+        "show": false,
+        "position": "inside",
+        "rotate": 0,
+        "color": "#333"
+      },
+      "color": "#99b5f1",
+      "data": [
+        0,
+        0,
+        0,
+        {
+          "value": 166,
+          "itemStyle": {
+            "borderWidth": 2,
+            "borderColor": "#6A89CC",
+            "borderType": "dotted"
+          },
+          "label": {
+            "show": true,
+            "rotate": 0,
+            "fontSize": 10
+          }
+        },
+        0
+      ],
+      "yAxisIndex": 0
+    },
+    {
+      "name": "Leistung in Planung (2024)",
+      "type": "bar",
+      "stack": "power",
+      "label": {
+        "show": false,
+        "position": "inside",
+        "rotate": 0,
+        "color": "#333"
+      },
+      "color": "#ffffff",
+      "data": [
+        0,
+        0,
+        0,
+        {
+          "value": 1260,
+          "itemStyle": {
+            "borderWidth": 2,
+            "borderColor": "#6A89CC",
+            "borderType": "dotted"
+          },
+          "label": {
+            "show": true,
+            "rotate": 0,
+            "fontSize": 10
+          }
+        },
+        0
+      ],
+      "yAxisIndex": 0
+    },
+    {
+      "name": "Anlagenanzahl",
+      "type": "bar",
+      "stack": "count",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 0,
+        "color": "#fff"
+      },
+      "color": "#b6caf3",
+      "data": [
+        313,
+        353,
+        398,
+        487,
+        {
+          "value": 0,
+          "itemStyle": {
+            "color": "#BAE1F6"
+          },
+          "label": {
+            "color": "#333"
+          }
+        }
+      ],
+      "yAxisIndex": 1
+    }
+  ]
+}

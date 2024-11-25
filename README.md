@@ -30,7 +30,7 @@ Enter repo folder and set up a conda environment and activate it:
 
 ```
 conda env create -f environment.yml
-conda activate digiplan
+conda activate empowerplan
 ```
 
 Install [poetry](https://python-poetry.org/) (python dependency manager used in this
@@ -39,6 +39,12 @@ project) and dependencies for the project (Note: Installing poetry via pip into 
 ```
 curl -sSL https://install.python-poetry.org | python3 -
 poetry install
+```
+
+Install oemof.tabular manually, as there is currently a problem with poetry:
+
+```
+pip install git+https://github.com/oemof/oemof-tabular@features/add-tsam-to-datapackage
 ```
 
 The project uses [pre-commit](https://pre-commit.com/) in order to check for errors and
@@ -186,6 +192,30 @@ docker cp digiplan_distill:/app/distill/ ./digiplan/static/mvts/
 # commit and push, afterwards remove temp container:
 docker rm -f epp_distill
 ```
+
+**Attention!**
+If you use externally distilled MVTs (distilling done on other server and MVTs copied to current server),
+feature IDs stored in MVTs might not fit to IDs in current database.
+This leads to wrong popups (if ID points to different existing ID) or errors when creating popups (if ID is not present in DB).
+A workaround for this situation is to change IDs of current database in order to match IDs of external server.
+Therefore, either all IDs have to me mapped, or (the way I did it last time) related models (the ones having popups)
+have to be emptied, PK sequences reset to value matching external starting ID and reloaded.
+
+Pseudo commands from console:
+```
+python manage.py shell
+
+from digiplan.models import Model
+Model.objects.all().delete()
+exit()
+
+python manage.py dbshell
+
+ALTER SEQUENCE <sequence_name> RESTART WITH <next-starting-id>
+
+make load_data
+```
+
 
 # Adding new (static) layers
 

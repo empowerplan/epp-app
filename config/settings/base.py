@@ -91,6 +91,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "django_distill",
     "template_partials",
+    "markdownify.apps.MarkdownifyConfig",
 ]
 
 LOCAL_APPS = ["digiplan.map.apps.MapConfig", "django_oemof", "django_mapengine"]
@@ -107,6 +108,7 @@ MIGRATION_MODULES = {"sites": "digiplan.contrib.sites.migrations"}
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "django_mapengine.middleware.MapEngineMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -265,6 +267,19 @@ if PASSWORD_PROTECTION and PASSWORD is None:
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+MARKDOWNIFY = {
+    "default": {
+        "BLEACH": False,
+        "MARKDOWN_EXTENSIONS": [
+            "markdown.extensions.extra",
+            "markdown.extensions.admonition",
+            "markdown.extensions.toc",
+            "md4mathjax",
+        ],
+        "MARKDOWN_EXTENSION_CONFIGS": {"markdown.extensions.toc": {"toc_depth": 2}},
+    },
+}
+
 OEMOF_SCENARIO = env.str("OEMOF_SCENARIO", "scenario_2045")
 
 # django-mapengine
@@ -272,7 +287,7 @@ OEMOF_SCENARIO = env.str("OEMOF_SCENARIO", "scenario_2045")
 MAP_ENGINE_CENTER_AT_STARTUP = [14.2, 52.45]
 MAP_ENGINE_ZOOM_AT_STARTUP = 8
 MAP_ENGINE_MIN_ZOOM = 8
-MAP_ENGINE_MAX_ZOOM = 13
+MAP_ENGINE_MAX_ZOOM = 16
 MAP_ENGINE_MAX_BOUNDS = [[12.6, 51.8], [16.1, 53.1]]
 
 # distill
@@ -280,7 +295,8 @@ MAP_ENGINE_X_AT_MIN_Z = 137
 MAP_ENGINE_Y_AT_MIN_Z = 83
 MAP_ENGINE_X_OFFSET = 1  # Defines how many tiles to the right are added at first level
 MAP_ENGINE_Y_OFFSET = 1  # Defines how many tiles to the bottom are added at first level
-MAP_ENGINE_MAX_DISTILLED_ZOOM = 13
+MAP_ENGINE_MAX_DISTILLED_ZOOM = 16
+DISTILL = env.bool("MAP_ENGINE_USE_DISTILLED_MVTS", False)
 
 MAP_ENGINE_IMAGES = [
     setup.MapImage("wind", "images/icons/map_wind.png"),
@@ -298,13 +314,21 @@ MAP_ENGINE_IMAGES = [
     setup.MapImage("gsgk_plus", "images/icons/map_gsgk_plus.png"),
     setup.MapImage("storage_plus", "images/icons/map_battery_plus.png"),
     setup.MapImage("wind_hatch", "images/map_wind_hatch.png"),
+    setup.MapImage("pv_ground_hatch", "images/map_pv_ground_hatch.png"),
 ]
+# Legacy for distilling, see https://github.com/rl-institut/django-mapengine/issues/24
+MAP_ENGINE_REGIONS = []
+
+MAP_ENGINE_HOVER_LAYERS = ["municipality", "municipality-label"]
 
 MAP_ENGINE_API_MVTS = {
-    "region": [setup.MVTAPI("region_boundaries", "map", "RegionBoundaries")],
+    "region": [
+        setup.MVTAPI("region_boundaries", "map", "RegionBoundaries", style="region_boundaries"),
+    ],
     "municipality": [
-        setup.MVTAPI("municipality", "map", "Municipality"),
-        setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
+        setup.MVTAPI("municipality", "map", "Municipality", style="region-fill"),
+        setup.MVTAPI("municipality-line", "map", "Municipality", style="region-line"),
+        setup.MVTAPI("municipality-label", "map", "Municipality", "label_tiles", style="region-label"),
     ],
     "potential": [
         setup.MVTAPI("potentialarea_pv_ground_soil_quality_low", "map", "PotentialareaPVGroundSoilQualityLow"),
@@ -337,6 +361,7 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("road_default", "map", "Road"),
         setup.MVTAPI("water_bodies", "map", "WaterBodies"),
         setup.MVTAPI("water_first_order", "map", "WaterFirstOrder"),
+        setup.MVTAPI("pv_ground_criteria_merged", "map", "PVGroundCriteriaMerged"),
         setup.MVTAPI("pv_ground_criteria_settlements", "map", "PVGroundCriteriaSettlements"),
         setup.MVTAPI("pv_ground_criteria_settlements_200m", "map", "PVGroundCriteriaSettlements200m"),
         setup.MVTAPI("pv_ground_criteria_aviation", "map", "PVGroundCriteriaAviation"),
@@ -346,6 +371,9 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("priority_climate_resistent_agri", "map", "PriorityClimateResistentAgri"),
         setup.MVTAPI("priority_permanent_crops", "map", "PriorityPermanentCrops"),
         setup.MVTAPI("priority_grassland", "map", "PriorityGrassland"),
+        setup.MVTAPI("rpg_ols_pv_ground_approved", "map", "PVgroundAreasApproved"),
+        setup.MVTAPI("rpg_ols_pv_ground_operating", "map", "PVgroundAreasOperating"),
+        setup.MVTAPI("rpg_ols_pv_ground_planned", "map", "PVgroundAreasPlanned"),
     ],
     "results": [setup.MVTAPI("results", "map", "Municipality")],
 }
@@ -359,14 +387,40 @@ MAP_ENGINE_API_CLUSTERS = [
     setup.ClusterAPI("combustion", "map", "Combustion", properties=["id", "unit_count"]),
     setup.ClusterAPI("gsgk", "map", "GSGK", properties=["id", "unit_count"]),
     setup.ClusterAPI("storage", "map", "Storage", properties=["id", "unit_count"]),
+    setup.ClusterAPI("rpg_ols_wind_approved", "map", "WindTurbine2Approved", properties=["id", "unit_count"]),
+    setup.ClusterAPI("rpg_ols_wind_operating", "map", "WindTurbine2Operating", properties=["id", "unit_count"]),
+    setup.ClusterAPI("rpg_ols_wind_planned", "map", "WindTurbine2Planned", properties=["id", "unit_count"]),
 ]
 
-MAP_ENGINE_LAYERS_AT_STARTUP = ["region_boundaries"]
+MAP_ENGINE_LAYERS_AT_STARTUP = ["region_boundaries", "municipality", "municipality-line", "municipality-label"]
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
-MAP_ENGINE_ZOOM_LEVELS = {
-    "municipality": setup.Zoom(8, 14),
-}
+
+MAP_ENGINE_SOURCES = [
+    setup.MapSource(
+        name="bb_flurstuecke",
+        type="raster",
+        tiles=[
+            "https://isk.geobasis-bb.de/ows/alkis_wms"
+            "?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.3.0&request=GetMap&crs=EPSG:3857&"
+            "styles=SW&width=768&height=768&transparent=true&layers=adv_alkis_flurstuecke",
+        ],
+    ),
+    setup.MapSource(
+        name="bb_ertragspotenzial",
+        type="raster",
+        tiles=[
+            "https://inspire.brandenburg.de/services/boertrag_wms"
+            "?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.3.0&request=GetMap&crs=EPSG:3857&"
+            "styles&width=512&height=512&transparent=true&layers=boertrag_lw",
+        ],
+    ),
+]
+
+MAP_ENGINE_LAYERS = [
+    setup.MapLayer(id="bb_ertragspotenzial", source="bb_ertragspotenzial", style={"type": "raster"}),
+    setup.MapLayer(id="bb_flurstuecke", source="bb_flurstuecke", style={"type": "raster"}, minzoom=14),
+]
 
 MAP_ENGINE_CHOROPLETHS = [
     setup.Choropleth("population_statusquo", layers=["municipality"], title=_("EinwohnerInnenzahl"), unit=_("EW")),
@@ -423,12 +477,14 @@ MAP_ENGINE_CHOROPLETHS = [
         layers=["municipality"],
         title=_("Anteil Erneuerbare Energien am Strombedarf"),
         unit="%",
+        labels=["0 - 20", "20 - 40", "40 - 60", "60 - 80", "80 - 100", " > 100"],
     ),
     setup.Choropleth(
         "energy_share_2045",
         layers=["municipality"],
         title=_("Anteil Erneuerbare Energien am Strombedarf"),
         unit="%",
+        labels=["0 - 20", "20 - 40", "40 - 60", "60 - 80", "80 - 100", " > 100"],
     ),
     setup.Choropleth(
         "energy_capita_statusquo",
@@ -518,7 +574,31 @@ MAP_ENGINE_CHOROPLETHS = [
 
 MAP_ENGINE_POPUPS = [
     setup.Popup(
+        "rpg_ols_wind_approved",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "rpg_ols_wind_operating",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "rpg_ols_wind_planned",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
         "wind",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        f"rpg_ols_pv_ground_operating{'_distilled' if DISTILL else ''}",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        f"rpg_ols_pv_ground_approved{'_distilled' if DISTILL else ''}",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        f"rpg_ols_pv_ground_planned{'_distilled' if DISTILL else ''}",
         popup_at_default_layer=True,
     ),
     setup.Popup(
@@ -550,7 +630,7 @@ MAP_ENGINE_POPUPS = [
         popup_at_default_layer=True,
     ),
     setup.Popup(
-        "municipality",
+        f"municipality{'_distilled' if DISTILL else ''}",
         popup_at_default_layer=False,
         choropleths=[
             "population_statusquo",

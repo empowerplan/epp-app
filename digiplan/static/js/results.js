@@ -1,9 +1,27 @@
 import { statusquoDropdown, futureDropdown } from "./elements.js";
 
 const imageResults = document.getElementById("info_tooltip_results");
-const resultSimNote = document.getElementById("result_simnote");
 
+const simulationProgressDiv = document.getElementsByClassName(
+  "panel-item__calc-alert",
+)[0];
+let simulationTimeout;
+const SIMULATION_DELAYED = 60 * 1000; // Simulation is delayed if it takes longer than 1min
+let timesSimulationChecked;
 const SIMULATION_CHECK_TIME = 5000;
+const SIMULATION_CHECK_LIMIT = (4 * 60 * 1000) / SIMULATION_CHECK_TIME; // Simulation is canceled after 4min
+
+const SIMULATION_STARTED_DESCRIPTION =
+  "Das Aufstellen und Optimieren des Energiesystems ist komplex. Es braucht etwas Zeit, um Dir für Dein Szenario zuverlässige und genaue Ergebnisse zu liefern.<br>Derweil kannst Du Dir schon einige Vorergebnisse ansehen.";
+const SIMULATION_DELAYED_DESCRIPTION =
+  "Entschuldige die Verzögerung. Es scheint, dass die Optimierung länger dauert als erwartet. Bitte gedulde Dich noch einen Moment.<br>Derweil kannst Du Dir schon einige Vorergebnisse ansehen.";
+const SIMULATION_INFEASIBLE_DESCRIPTION =
+  "Das Modell konnte leider keine gültige Lösung finden. Das sollte eigentlich nicht passieren - eventuell lassen bestimmte Einstellungen der Komponenten keine Lösung zu?<br>Du kannst es gerne noch einmal mit anderen Einstellungen in Schritt 4 versuchen.";
+const SIMULATION_ERROR_DESCRIPTION =
+  "Wir entschuldigen uns für den Fehler. Es kann sein, dass unser Server gerade nicht verfügbar oder überlastet ist.<br>Bitte versuche es zu einem späteren Zeitpunkt noch einmal.";
+const SIMULATION_FINISHED_DESCRIPTION =
+  "Die Optimierung wurde erfolgreich abgeschlossen.<br>Du kannst Dir nun alle Ergebnisse anschauen.";
+
 const PRE_RESULTS = [
   "energy_share_2045",
   "energy_2045",
@@ -19,13 +37,18 @@ const PRE_RESULTS = [
   "heat_demand_capita_2045",
 ];
 
-const resultCharts = {
-  electricity_overview: "electricity_overview_chart",
-  electricity_autarky: "electricity_autarky_chart",
-  ghg_reduction: "ghg_reduction_chart",
-  heat_centralized: "heat_centralized_chart",
-  heat_decentralized: "heat_decentralized_chart",
-};
+const resultCharts = {};
+
+const SUMMARY_PRE_RESULTS = [
+  "summary_electricity_wind_pv",
+  "summary_electricity_area",
+  "summary_wind_goal",
+  "summary_wind_area",
+  "summary_wind_demand_share",
+  "summary_pv_goal",
+  "summary_pv_area",
+  "summary_pv_demand_share",
+];
 
 // Setup
 
@@ -54,15 +77,19 @@ futureDropdown.addEventListener("change", function () {
 });
 
 // Subscriptions
-PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showResultSkeletons);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, storePreResults);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showPreResultCharts);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSummaryPreResults);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, disableResultButtons);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideRegionChart);
-PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, resetResultDropdown);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
+PubSub.subscribe(eventTopics.SIMULATION_STARTED, startSimulationProgress);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, enableFutureResults);
-PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultCharts);
+PubSub.subscribe(eventTopics.SIMULATION_FINISHED, finishSimulationProgress);
+PubSub.subscribe(eventTopics.SIMULATION_ERROR, errorAtSimulationProgress);
 PubSub.subscribe(mapEvent.CHOROPLETH_SELECTED, showRegionChart);
 PubSub.subscribe(eventTopics.CHOROPLETH_DEACTIVATED, hideRegionChart);
 
@@ -95,6 +122,20 @@ function simulate(msg) {
   return logMessage(msg);
 }
 
+export function terminateSimulation(msg) {
+  if (store.cold.task_id != null) {
+    $.ajax({
+      url: "/oemof/terminate",
+      type: "POST",
+      data: { task_id: store.cold.task_id },
+      success: function () {
+        store.cold.task_id = null;
+      },
+    });
+  }
+  return logMessage(msg);
+}
+
 function storePreResults(msg) {
   const settings = document.getElementById("settings");
   const formData = new FormData(settings); // jshint ignore:line
@@ -104,6 +145,7 @@ function storePreResults(msg) {
 }
 
 function checkResultsPeriodically(msg) {
+  timesSimulationChecked = 0;
   setTimeout(checkResults, SIMULATION_CHECK_TIME);
   return logMessage(msg);
 }
@@ -115,38 +157,31 @@ function checkResults() {
     data: { task_id: store.cold.task_id },
     success: function (json) {
       if (json.simulation_id == null) {
-        setTimeout(checkResults, SIMULATION_CHECK_TIME);
+        if (timesSimulationChecked === SIMULATION_CHECK_LIMIT) {
+          store.cold.task_id = null;
+          map_store.cold.state.simulation_id = null;
+          PubSub.publish(eventTopics.SIMULATION_ABORTED, terminateSimulation);
+          const error_msg = { status: 500 };
+          PubSub.publish(eventTopics.SIMULATION_ERROR, error_msg);
+        } else {
+          timesSimulationChecked += 1;
+          setTimeout(checkResults, SIMULATION_CHECK_TIME);
+        }
       } else {
         store.cold.task_id = null;
         map_store.cold.state.simulation_id = json.simulation_id;
         PubSub.publish(eventTopics.SIMULATION_FINISHED);
       }
     },
-    error: function (json) {
+    error: function (error_msg) {
       store.cold.task_id = null;
       map_store.cold.state.simulation_id = null;
-      PubSub.publish(eventTopics.SIMULATION_FINISHED);
+      PubSub.publish(eventTopics.SIMULATION_ERROR, error_msg);
     },
   });
-}
-
-function showResults(msg, simulation_id) {
-  $.ajax({
-    url: "/visualization",
-    type: "GET",
-    data: {
-      simulation_ids: simulation_id,
-      visualization: "total_system_costs",
-    },
-    success: function (json) {
-      console.log(json);
-    },
-  });
-  return logMessage(msg);
 }
 
 function enableFutureResults(msg) {
-  resultSimNote.innerText = "";
   const options = futureDropdown.querySelectorAll("option");
   for (const option of options) {
     option.disabled = false;
@@ -155,7 +190,7 @@ function enableFutureResults(msg) {
 }
 
 function disableResultButtons(msg) {
-  resultSimNote.innerText = "Berechnung läuft ...";
+  futureDropdown.selectedIndex = 0;
   const options = futureDropdown.querySelectorAll("option");
   for (const option of options) {
     if (!PRE_RESULTS.includes(option.value)) {
@@ -183,13 +218,18 @@ function hideRegionChart(msg) {
   return logMessage(msg);
 }
 
+function showPreResultCharts(msg) {
+  showCharts(preResultCharts);
+  return logMessage(msg);
+}
+
 function showResultCharts(msg) {
   showCharts(resultCharts);
   return logMessage(msg);
 }
 
-function resetResultDropdown(msg) {
-  futureDropdown.selectedIndex = 0;
+function showSummaryPreResults(msg) {
+  showSummaryResults(SUMMARY_PRE_RESULTS);
   return logMessage(msg);
 }
 
@@ -204,7 +244,120 @@ function showCharts(charts = {}) {
     success: function (chart_options) {
       for (const chart in charts) {
         createChart(charts[chart], chart_options[chart]);
+        // Remove skeleton placeholder if it exists
+        const skeleton = document
+          .getElementById(charts[chart])
+          .querySelector(".skeleton");
+        if (skeleton !== null) {
+          skeleton.remove();
+        }
       }
     },
   });
+}
+
+function showSummaryResults(summaries = []) {
+  $.ajax({
+    url: "/summary_results",
+    type: "GET",
+    data: {
+      summaries: summaries,
+      map_state: JSON.stringify(map_store.cold.state),
+    },
+    success: function (summaryResults) {
+      for (const [div_id, summary] of Object.entries(summaryResults)) {
+        const summaryDiv = document.getElementById(div_id);
+        summaryDiv.innerHTML = summary;
+      }
+    },
+  });
+}
+
+function showResultSkeletons(msg) {
+  const skeleton_template = document.getElementById("result_skeleton");
+  for (const chart_div_id of Object.values(preResultCharts)) {
+    const chart_div = document.getElementById(chart_div_id);
+    const chart = echarts.getInstanceByDom(chart_div);
+    if (chart !== undefined) {
+      chart.dispose();
+    }
+    const skeleton = skeleton_template.content.cloneNode(true);
+    chart_div.appendChild(skeleton);
+  }
+  return logMessage(msg);
+}
+
+function startSimulationProgress(msg) {
+  clearTimeout(simulationTimeout);
+  setSimulationProgress(
+    25,
+    "Detailergebnisse werden berechnet",
+    SIMULATION_STARTED_DESCRIPTION,
+    "start",
+  );
+  simulationTimeout = setTimeout(function () {
+    setSimulationProgress(
+      25,
+      "Die Simulation dauert länger als gewöhnlich",
+      SIMULATION_DELAYED_DESCRIPTION,
+      "delay",
+    );
+  }, SIMULATION_DELAYED);
+  return logMessage(msg);
+}
+
+function errorAtSimulationProgress(msg, error_msg) {
+  clearTimeout(simulationTimeout);
+  if (error_msg.status === 400) {
+    setSimulationProgress(
+      100,
+      "Die Simulation konnte keine Lösung finden.",
+      SIMULATION_INFEASIBLE_DESCRIPTION,
+      "error",
+    );
+  } else {
+    setSimulationProgress(
+      100,
+      "Fehler bei der Berechnung",
+      SIMULATION_ERROR_DESCRIPTION,
+      "error",
+    );
+  }
+  return logMessage(msg);
+}
+
+function finishSimulationProgress(msg) {
+  setSimulationProgress(
+    100,
+    "Simulation ist fertig",
+    SIMULATION_FINISHED_DESCRIPTION,
+    "finish",
+  );
+  clearTimeout(simulationTimeout);
+  simulationTimeout = setTimeout(function () {
+    simulationProgressDiv.hidden = true;
+  }, 5000);
+  return logMessage(msg);
+}
+
+function setSimulationProgress(value, title, description, status) {
+  const progressMessage = document.getElementsByClassName(
+    "panel-item__calc-alert-message",
+  )[0];
+  const progressBar = document.getElementsByClassName("progress-bar")[0];
+  const progressStatus = document.getElementsByClassName("progress")[0];
+  const progressTooltip = document.querySelector(
+    ".panel-item__calc-alert-explanation button",
+  );
+  simulationProgressDiv.hidden = false;
+  progressBar.setAttribute("aria-valuenow", value);
+  progressBar.style.width = `${value}%`;
+  progressMessage.innerHTML = title;
+  progressTooltip.setAttribute("title", description);
+  new bootstrap.Tooltip(progressTooltip, { html: true });
+  if (status === "error") {
+    progressStatus.classList.add("progress--error");
+  } else {
+    progressStatus.classList.remove("progress--error");
+  }
 }

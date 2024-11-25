@@ -12,11 +12,14 @@
     }
   },
   "tooltip": {},
+  "aria": {
+    "enabled": true
+  },
   "grid": {
     "top": "10%",
     "left": "3%",
     "right": "15%",
-    "bottom": "20%",
+    "bottom": "14%",
     "containLabel": true
   },
   "yAxis": {

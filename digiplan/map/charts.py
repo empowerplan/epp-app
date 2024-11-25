@@ -5,9 +5,10 @@ import pathlib
 from typing import Any, Optional, Union
 
 import pandas as pd
+from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
 
-from digiplan.map import calculations, config, models
+from digiplan.map import calculations, config, datapackage, models
 from digiplan.map.utils import merge_dicts
 
 
@@ -49,7 +50,11 @@ class Chart:
                 self.chart_options["series"][0]["data"] = data
             elif series_length > 1:
                 for i in range(0, series_length):
-                    values = self.chart_data[i]
+                    values = (
+                        self.chart_data.iloc[i]
+                        if isinstance(self.chart_data, (pd.DataFrame, pd.Series))
+                        else self.chart_data[i]
+                    )
                     if not isinstance(values, (list, tuple)):
                         values = [values]
                     self.chart_options["series"][i]["data"] = values
@@ -144,24 +149,6 @@ class DetailedOverviewChart(SimulationChart):
     def render(self) -> dict:  # noqa: D102
         for i, item in enumerate(self.chart_options["series"]):
             item["data"][1] = self.chart_data.iloc[i]
-        return self.chart_options
-
-
-class GHGReductionChart(SimulationChart):
-    """GHG Reduction Chart. Shows greenhouse gas emissions."""
-
-    lookup = "ghg_reduction"
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.get_reduction(simulation_id=self.simulation_id)
-
-    def render(self) -> dict:  # noqa: D102
-        # Enter import and energy from renewables
-        for i, item in enumerate(self.chart_options["series"][7:9]):
-            item["data"][1] = self.chart_data[i]
-        # Calculate emission offset
-        summed_emissions_2019 = sum(item["data"][0] for item in self.chart_options["series"][:7])
-        self.chart_options["series"][0]["data"][1] = summed_emissions_2019 - sum(self.chart_data)
         return self.chart_options
 
 
@@ -283,23 +270,6 @@ class HeatStructureDecentralChart(HeatStructureChart):
 
     def get_chart_data(self):  # noqa: D102, ANN201
         return calculations.heat_overview(simulation_id=self.simulation_id, distribution="decentral")
-
-
-class GhgHistoryChart(SimulationChart):
-    """GHG history chart."""
-
-    lookup = "ghg_history"
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        # TODO(Hendrik): Get static data from digipipe datapackage  # noqa: TD003
-        return pd.DataFrame()
-
-    def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
-        return self.chart_options
 
 
 class PopulationRegionChart(Chart):
@@ -658,7 +628,7 @@ class WindTurbinesRegionChart(Chart):
 
     def get_chart_data(self) -> list[int]:
         """Calculate population for whole region."""
-        return [int(models.WindTurbine.quantity_per_municipality().sum())]
+        return [int(models.WindTurbine2Operating.quantity_per_municipality().sum())]
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -674,7 +644,7 @@ class WindTurbines2045RegionChart(PreResultsChart):
 
     def get_chart_data(self) -> list[int]:
         """Calculate population for whole region."""
-        status_quo_data = models.WindTurbine.quantity_per_municipality().sum()
+        status_quo_data = models.WindTurbine2Operating.quantity_per_municipality().sum()
         future_data = calculations.wind_turbines_per_municipality_2045(self.user_settings).sum()
         return [int(status_quo_data), int(future_data)]
 
@@ -696,7 +666,10 @@ class WindTurbinesSquareRegionChart(Chart):
         return [
             float(
                 calculations.calculate_square_for_value(
-                    pd.DataFrame({"turbines": models.WindTurbine.quantity_per_municipality().sum()}, index=[1]),
+                    pd.DataFrame(
+                        {"turbines": models.WindTurbine2Operating.quantity_per_municipality().sum()},
+                        index=[1],
+                    ),
                 )
                 .sum()
                 .round(2),
@@ -720,7 +693,7 @@ class WindTurbinesSquare2045RegionChart(PreResultsChart):
         """Calculate population for whole region."""
         status_quo_data = (
             calculations.calculate_square_for_value(
-                pd.DataFrame({"turbines": models.WindTurbine.quantity_per_municipality().sum()}, index=[1]),
+                pd.DataFrame({"turbines": models.WindTurbine2Operating.quantity_per_municipality().sum()}, index=[1]),
             )
             .sum()
             .round(2)
@@ -974,9 +947,117 @@ class BatteriesCapacityRegionChart(Chart):
         return chart_options
 
 
+class WindCapacityChart(PreResultsChart):
+    """Chart for wind capacity shown on diagram results page."""
+
+    lookup = "wind_capacity"
+
+    def get_chart_data(self) -> dict:
+        """Calculate population for whole region."""
+        return {
+            "capacity": calculations.capacities_per_municipality_2045(self.user_settings)["wind"].sum(),
+            "turbines": calculations.wind_turbines_per_municipality_2045(self.user_settings).sum(),
+        }
+
+    def render(self) -> dict:
+        """Place results from user settings into related chart entries."""
+        self.chart_options["series"][0]["data"][4]["value"] = self.chart_data["capacity"].round()
+        self.chart_options["series"][3]["data"][4]["value"] = self.chart_data["turbines"].round()
+        return self.chart_options
+
+
+class PVGroundCapacityChart(PreResultsChart):
+    """Chart for pv ground capacity shown on diagram results page."""
+
+    lookup = "pv_ground_capacity"
+
+    def get_chart_data(self) -> dict:
+        """Calculate population for whole region."""
+        return calculations.capacities_per_municipality_2045(self.user_settings, aggregate_pv_ground=True)[
+            "pv_ground"
+        ].sum()
+
+    def render(self) -> dict:
+        """Place results from user settings into related chart entries."""
+        self.chart_options["series"][0]["data"][4]["value"] = self.chart_data.round()
+        return self.chart_options
+
+
+class PVRoofCapacityChart(PreResultsChart):
+    """Chart for pv roof capacity shown on diagram results page."""
+
+    lookup = "pv_roof_capacity"
+
+    def get_chart_data(self) -> dict:
+        """Calculate population for whole region."""
+        return calculations.capacities_per_municipality_2045(self.user_settings)["pv_roof"].sum()
+
+    def render(self) -> dict:
+        """Place results from user settings into related chart entries."""
+        self.chart_options["series"][0]["data"][4]["value"] = self.chart_data.round()
+        return self.chart_options
+
+
+class WindAreaChart(PreResultsChart):
+    """Chart for wind capacity shown on diagram results page."""
+
+    lookup = "wind_areas"
+
+    def get_chart_data(self) -> dict:
+        """Calculate population for whole region."""
+        area = calculations.areas_per_municipality_2045(self.user_settings)["wind"].sum()  # in km2
+        region_area = models.Municipality.objects.values("area").aggregate(Sum("area"))["area__sum"]  # in km2
+        area_percentage = area / region_area * 100
+        return {"area": (area * 100).round(), "area_percentage": area_percentage.round(2)}  # in ha
+
+    def render(self) -> dict:
+        """Place results from user settings into related chart entries."""
+        self.chart_options["series"][0]["data"][2]["value"] = self.chart_data["area"]
+        self.chart_options["series"][1]["data"][2]["value"] = self.chart_data["area_percentage"]
+        return self.chart_options
+
+
+class PVGroundAreaChart(PreResultsChart):
+    """Chart for pv ground areas shown on diagram results page."""
+
+    lookup = "pv_ground_areas"
+
+    def get_chart_data(self) -> dict:
+        """Calculate population for whole region."""
+        areas = calculations.areas_per_municipality_2045(self.user_settings, aggregate_pv_ground=False).sum()
+        region_area = models.Municipality.objects.values("area").aggregate(Sum("area"))["area__sum"]
+        areas_percentage = areas / region_area * 100
+        return {"areas": (areas * 100).round(), "areas_percentage": areas_percentage.round(2)}  # in ha
+
+    def render(self) -> dict:
+        """Place results from user settings into related chart entries."""
+        for i, area in enumerate(("pv_soil_quality_low", "pv_soil_quality_medium", "pv_permanent_crops")):
+            self.chart_options["series"][0]["data"][i] = self.chart_data["areas"][area]
+            self.chart_options["series"][1]["data"][i] = self.chart_data["areas_percentage"][area]
+        return self.chart_options
+
+
+class PVRoofAreaChart(PreResultsChart):
+    """Chart for pv roof capacity shown on diagram results page."""
+
+    lookup = "pv_roof_areas"
+
+    def get_chart_data(self) -> dict:
+        """Calculate population for whole region."""
+        area = calculations.areas_per_municipality_2045(self.user_settings, aggregate_pv_ground=False)["pv_roof"].sum()
+        potential_area = datapackage.get_potential_areas("pv_roof").sum()
+        area_percentage = area / potential_area * 100
+        return {"area": (area * 100).round(), "area_percentage": area_percentage.round(2)}  # in ha
+
+    def render(self) -> dict:
+        """Place results from user settings into related chart entries."""
+        self.chart_options["series"][0]["data"][0] = self.chart_data["area"]
+        self.chart_options["series"][1]["data"][0] = self.chart_data["area_percentage"]
+        return self.chart_options
+
+
 CHARTS: dict[str, Union[type[PreResultsChart], type[SimulationChart]]] = {
     "detailed_overview": DetailedOverviewChart,
-    "ghg_reduction": GHGReductionChart,
     "electricity_overview": ElectricityOverviewChart,
     "electricity_autarky": ElectricityAutarkyChart,
     "heat_decentralized": HeatStructureDecentralChart,
@@ -997,6 +1078,12 @@ CHARTS: dict[str, Union[type[PreResultsChart], type[SimulationChart]]] = {
     "energy_capita_2045_region": EnergyCapita2045RegionChart,
     "energy_square_statusquo_region": EnergySquareRegionChart,
     "energy_square_2045_region": EnergySquare2045RegionChart,
+    "wind_areas": WindAreaChart,
+    "wind_capacity": WindCapacityChart,
+    "pv_ground_capacity": PVGroundCapacityChart,
+    "pv_ground_areas": PVGroundAreaChart,
+    "pv_roof_capacity": PVRoofCapacityChart,
+    "pv_roof_areas": PVRoofAreaChart,
     "wind_turbines_statusquo_region": WindTurbinesRegionChart,
     "wind_turbines_2045_region": WindTurbines2045RegionChart,
     "wind_turbines_square_statusquo_region": WindTurbinesSquareRegionChart,

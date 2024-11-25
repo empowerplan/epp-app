@@ -124,6 +124,34 @@
       @extend .px-0;
     }
 
+    &__calc-alert {
+      @extend .p-2;
+      @extend .p-2;
+      @extend .border;
+
+      &-message {
+        @extend .fs-7;
+        padding-bottom: 0.75rem;
+      }
+
+      &-explanation button {
+        @extend .fs-7;
+        @extend .ps-0;
+        @extend .fw-semibold;
+        @extend .text-info;
+        padding-bottom: 0.75rem;
+      }
+    }
+
+    &__calc-alert.panel-item__calc-alert--error {
+      @extend .border-danger;
+      background-color: $red-100;
+
+      .progress {
+        @extend .progress--error;
+      }
+    }
+
     &__tabs {
       .nav-tabs {
         @extend .pt-2;
@@ -215,6 +243,7 @@
       @extend .d-flex;
       @extend .flex-row;
       @extend .align-items-center;
+      @extend .pt-2;
 
       select,
       img {

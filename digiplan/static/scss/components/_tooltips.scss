@@ -1,0 +1,15 @@
+.tooltip {
+  .tooltip-arrow::before {
+    @extend .d-none;
+  }
+  .tooltip-inner {
+    @extend .text-start;
+  }
+}
+
+.tooltip[data-popper-placement^='top'] .tooltip-arrow::before,
+.tooltip[data-popper-placement^='right'] .tooltip-arrow::before,
+.tooltip[data-popper-placement^='bottom'] .tooltip-arrow::before,
+.tooltip[data-popper-placement^='left'] .tooltip-arrow::before {
+  @extend .d-none;
+}

@@ -1,28 +1,5 @@
 {% load static i18n %}
 
-<!--<div class="panel__goal">-->
-<!--&lt;!&ndash;  <div class="panel__goal-header">&ndash;&gt;-->
-<!--&lt;!&ndash;    <span>{% translate "Goals 2045" %}</span>&ndash;&gt;-->
-<!--&lt;!&ndash;  </div>&ndash;&gt;-->
-<!--  <div class="panel__charts">-->
-<!--    <div class="panel__chart">-->
-<!--      <div class="panel__chart-title">-->
-<!--        {% translate "Anteil EE am Stromverbrauch" %} (%)-->
-<!--      </div>-->
-<!--      <div class="panel__chart-content">-->
-<!--        <div id="renewable_share_goal_chart" class="goal-chart"></div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="panel__chart">-->
-<!--      <div class="panel__chart-title">-->
-<!--        {% translate "THG-Reduktion ggü. 2019 (%)" %}-->
-<!--      </div>-->
-<!--      <div class="panel__chart-content">-->
-<!--        <div id="co2_emissions_goal_chart" class="goal-chart"></div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
 <div class="panel__settings panel__settings--padding">
   <div class="panel-item">
     <h2 class="panel-item__heading panel-item__heading--nopadding">
@@ -31,10 +8,10 @@
         <path
           d="m6.2265 0.10542c-3.4031 0-6.1738 2.7707-6.1738 6.1738 1e-8 3.4031 2.7707 6.1738 6.1738 6.1738 1.5629 0 2.9918-0.58449 4.0804-1.5462l5.3868 5.3883 0.74776-0.74828-5.4038-5.4059c0.85078-1.0584 1.3606-2.4017 1.3606-3.8618 0-3.4031-2.7687-6.1738-6.1717-6.1738zm0 1.0589c2.8311 0 5.1154 2.2838 5.1154 5.1149s-2.2843 5.1154-5.1154 5.1154c-2.8311 0-5.1149-2.2843-5.1149-5.1154s2.2838-5.1149 5.1149-5.1149z">
       </svg>
-      {% translate "Situation today" %}
+      {% translate "Region heute" %}
     </h2>
     <div class="panel-item__form">
-      <select class="form-select" aria-label="Default select example" id="situation_today">
+      <select class="form-select" aria-label="Eine Option auswählen, um die jeweilige Grafik zu sehen" aria-controls="region_chart_statusquo" id="situation_today">
         <option value="" title="{% translate "Keine Auswahl" %}" selected>{% translate "Keine Auswahl" %}</option>
         <optgroup label="{% translate "Planning Region" %}">
           <option value="population_statusquo" title="{% translate "EinwohnerInnen - Historische Daten, heute und Zukunftsprognosen" %}">{% translate "Population" %}</option>
@@ -99,12 +76,12 @@
           <option value="batteries_capacity_statusquo" title="{%  translate 'Kapazität Batteriespeicher' %}">{% translate "Kapazität Batteriespeicher" %}</option>
         </optgroup>
       </select>
-      <img src="{% static 'images/icons/i_info.svg' %}" id="info_tooltip" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" title="{% translate "Keine Auswahl" %}">
+      <img src="{% static 'images/icons/i_info.svg' %}" id="info_tooltip" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" data-bs-placement="right" tabindex="0" title="{% translate "Keine Auswahl" %}">
     </div>
   </div>
   <div class="panel-item">
     <div class="panel-item__padding">
-      <div id="region_chart_statusquo" class="panel-item__chart"></div>
+      <div id="region_chart_statusquo" class="panel-item__chart" aria-live="polite"></div>
     </div>
   </div>
 </div>

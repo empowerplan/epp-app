@@ -152,7 +152,7 @@ function adaptDetailSliders(msg, data) {
  * @param {string} msg Publisher message
  * @param {object} data Data from changed ionrangeslider
  */
-function adaptMainSliders(msg, data) {
+export function adaptMainSliders(msg, data) {
   const slider_id = data.input[0].id;
   if (slider_id === "id_s_w_6" || slider_id === "id_s_w_7") {
     calculate_max_wind();
@@ -307,7 +307,7 @@ function createPercentagesOfPowerSources(msg) {
 }
 
 /* when the other forms get Status Quo marks, there needs to be an iteration over the forms! (line 117)*/
-function updateSliderMarks(msg) {
+export function updateSliderMarks(msg) {
   for (let [slider_name, slider_marks] of Object.entries(
     store.cold.slider_marks,
   )) {
@@ -325,7 +325,10 @@ function updateSliderMarks(msg) {
 
 function showPVLayers(msg) {
   hidePotentialLayers();
-  for (const layer of potentialPVLayers) {
+  for (let layer of potentialPVLayers) {
+    if (store.cold.distill) {
+      layer = `${layer}_distilled`;
+    }
     turn_on_layer(layer);
   }
   return logMessage(msg);
@@ -333,7 +336,10 @@ function showPVLayers(msg) {
 
 function showPVRoofLayers(msg) {
   hidePotentialLayers();
-  for (const layer of potentialPVRoofLayers) {
+  for (let layer of potentialPVRoofLayers) {
+    if (store.cold.distill) {
+      layer = `${layer}_distilled`;
+    }
     turn_on_layer(layer);
   }
   return logMessage(msg);
@@ -392,15 +398,22 @@ function showWindLayers(msg) {
   const currentWindTab = document
     .getElementById("windTab")
     .getElementsByClassName("active")[0].id;
+  let layers = [];
   if (currentWindTab === "windPastTab") {
-    turn_on_layer("potentialarea_wind_stp_2018_eg");
+    layers.push("potentialarea_wind_stp_2018_eg");
   } else if (currentWindTab === "windPresentTab") {
-    turn_on_layer("potentialarea_wind_stp_2024_vr");
+    layers.push("potentialarea_wind_stp_2024_vr");
   } else if (currentWindTab === "windFutureTab") {
-    turn_on_layer("potentialarea_wind_stp_2024_vr");
-    turn_on_layer("potentialarea_wind_stp_2027");
+    layers.push("potentialarea_wind_stp_2024_vr");
+    layers.push("potentialarea_wind_stp_2027");
   } else {
     throw Error(`Unknown wind tab '${currentWindTab}' found.`);
+  }
+  for (let layer of layers) {
+    if (store.cold.distill) {
+      layer = `${layer}_distilled`;
+    }
+    turn_on_layer(layer);
   }
   return logMessage(msg);
 }
@@ -422,10 +435,31 @@ function updateWindSelection(msg) {
   return logMessage(msg);
 }
 
+export function showPotentialLayers(msg) {
+  const activeSidepanels = document.getElementsByClassName("active-sidepanel");
+  if (activeSidepanels.length > 0) {
+    const activeSlider =
+      document.getElementsByClassName("active-sidepanel")[0].classList[1];
+    if (activeSlider === "s_w_1") {
+      showWindLayers(msg);
+    }
+    if (activeSlider === "s_pv_ff_1") {
+      showPVLayers(msg);
+    }
+    if (activeSlider === "s_pv_d_1") {
+      showPVRoofLayers(msg);
+    }
+  }
+  return logMessage(msg);
+}
+
 export function hidePotentialLayers(msg) {
-  for (const layer of potentialPVLayers
+  for (let layer of potentialPVLayers
     .concat(potentialPVRoofLayers)
     .concat(potentialWindLayers)) {
+    if (store.cold.distill) {
+      layer = `${layer}_distilled`;
+    }
     turn_off_layer(layer);
   }
   return logMessage(msg);

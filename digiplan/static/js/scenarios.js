@@ -1,5 +1,10 @@
 import { getCurrentMenuTab } from "./menu.js";
-import { detailSliders, panelSliders } from "./sliders.js";
+import {
+  detailSliders,
+  panelSliders,
+  updateSliderMarks,
+  adaptMainSliders,
+} from "./sliders.js";
 
 const scenarioSettings = JSON.parse(
   document.getElementById("scenario_settings").textContent,
@@ -10,9 +15,9 @@ let currentScenario = null;
 const scenarioPanels = ["panelCard1", "panelCard2", "panelCard3"];
 
 for (const scenarioPanel of scenarioPanels) {
-  document
-    .getElementById(scenarioPanel)
-    .addEventListener("click", scenarioCardClicked);
+  const panelElement = document.getElementById(scenarioPanel);
+  panelElement.addEventListener("click", scenarioCardClicked);
+  panelElement.addEventListener("keydown", scenarioCardClicked);
 }
 
 Array.from(document.getElementsByClassName("scenarios__btn")).forEach(
@@ -71,8 +76,11 @@ function selectScenario(msg) {
 }
 
 function scenarioCardClicked(event) {
-  const scenarioCardNumber = parseInt(event.currentTarget.id.slice(-1));
-  selectScenarioCard(scenarioCardNumber);
+  if (event.key === "Enter" || event.key === " " || event.type === "click") {
+    event.preventDefault(); // Prevent default action for keyboard events
+    const scenarioCardNumber = parseInt(event.currentTarget.id.slice(-1));
+    selectScenarioCard(scenarioCardNumber);
+  }
 }
 
 function selectScenarioCard(scenarioCardNumber) {
@@ -137,8 +145,11 @@ function adaptSlidersScenario(msg, scenario) {
       input: [{ id: slider.id }],
       from: sliderValue,
     };
+    // Has to be called manually, as otherwise main slider is not ready for scenario data update
+    adaptMainSliders(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, data);
     PubSub.publish(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, data);
   }
+  console.log("Start adapting main sliders");
   // update main panel Sliders afterwards
   for (const slider of panelSliders) {
     // Check if the slider is defined in scenario settings
@@ -148,6 +159,7 @@ function adaptSlidersScenario(msg, scenario) {
     const sliderValue = scenarioSettings[scenario][slider.id];
     $(`#${slider.id}`).data("ionRangeSlider").update({ from: sliderValue });
   }
+  updateSliderMarks();
   PubSub.publish(eventTopics.POWER_PANEL_SLIDER_CHANGE);
   return logMessage(msg);
 }

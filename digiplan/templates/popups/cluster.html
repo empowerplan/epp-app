@@ -14,7 +14,13 @@
       <tr>
         <td>{{ key }}</td>
         {%  if value != None  %}
-          <td>{{ value }}</td>
+          {%  if value is True  %}
+            <td>Ja</td>
+          {%  elif value is False  %}
+            <td>Nein</td>
+          {% else %}
+            <td>{{ value }}</td>
+          {% endif %}
         {% else %}
           <td> - </td>
         {% endif %}

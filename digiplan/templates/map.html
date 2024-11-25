@@ -27,6 +27,7 @@
         <a class="top-nav__brand navbar-brand" href="#">
           <img src="{% static 'images/logos/EmPowerPlan-logo-horizontal.png' %}" alt="EmPowerPlan Logo">
         </a>
+        <div style="background-color: orange; border-style: dashed; color: black; padding: 0.5em; text-align: center; margin-left: 13em">Die App befindet sich noch in Entwicklung</div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarsExample03" aria-controls="navbarsExample03"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -57,17 +58,46 @@
       </div>
     </nav>
 
-    <section class="wizard">
+    <nav class="wizard" aria-label="Navigation zwischen Schritten bis zu den Ergebnissen">
       <div class="wizard__wrap">
         <div class="wizard__back">
-          <button type="button" id="menu_previous_btn" hidden>
+          <button type="button" id="menu_previous_btn" aria-label="Zum vorherigen Schritt gehen" hidden>
             <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
               <path d="m10.794 16.748 1.4961-1.4961-6.7832-6.7832 6.7832-6.7832-1.4961-1.4961-8.2793 8.2793z"/>
             </svg>
             <span>Zurück</span>
           </button>
         </div>
-        <div class="wizard__main">
+        <div class="wizard__main" role="group" aria-label="Schritte">
+          <div class="wizard__list" role="list" >
+            <div id="step_1_challenges" class="wizard__list-item active" role="listitem" aria-current="step" aria-label="Schritt 1: Start">
+              <span class="wizard__list-number" aria-hidden="true">1</span>
+              <span id="step_1_challenges_label" class="wizard__list-text" aria-hidden="true">Start</span>
+            </div>
+            <div aria-hidden="true" class="wizard__line"></div>
+            <div id="step_2_today" class="wizard__list-item" role="listitem" aria-label="Schritt 2: Region heute">
+              <span class="wizard__list-number" aria-hidden="true">2</span>
+              <span id="step_2_today_label" class="wizard__list-text" aria-hidden="true">Region heute</span>
+            </div>
+            <div aria-hidden="true" class="wizard__line"></div>
+            <div id="step_3_scenarios" class="wizard__list-item" role="listitem" aria-label="Schritt 3: Szenarien">
+              <span class="wizard__list-number" aria-hidden="true">3</span>
+              <span id="step_3_scenarios_label" class="wizard__list-text" aria-hidden="true">Szenarien</span>
+            </div>
+            <div aria-hidden="true" class="wizard__line"></div>
+            <div id="step_4_settings" class="wizard__list-item" role="listitem" aria-label="Schritt 4: Einstellungen">
+              <span class="wizard__list-number" aria-hidden="true">4</span>
+              <span id="step_4_settings_label" class="wizard__list-text" aria-hidden="true">Einstellungen</span>
+            </div>
+            <div aria-hidden="true" class="wizard__line"></div>
+            <div id="step_5_results" class="wizard__list-item" role="listitem" aria-label="Schritt 5: Ergebnisse">
+              <span class="wizard__list-number" aria-hidden="true">5</span>
+              <span id="step_5_results_label" class="wizard__list-text" aria-hidden="true">Ergebnisse</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="wizard__main">
           <ul class="wizard__list nav nav-tabs" role="tablist">
             <li id="step_1_challenges" class="wizard__list-item active" role="presentation">
               <span class="wizard__list-number">1</span>
@@ -90,9 +120,9 @@
               <span class="wizard__list-text">Ergebnisse</span>
             </li>
           </ul>
-        </div>
+        </div> -->
         <div class="wizard__next">
-          <button type="button" id="menu_next_btn" class="button button--secondary">
+          <button type="button" id="menu_next_btn" class="button button--secondary" aria-label="Zum nächsten Schritt gehen">
             <span>Weiter</span>
             <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
               <path d="m6.1387 0.1875-1.4961 1.4961 6.7832 6.7832-6.7832 6.7832 1.4961 1.4961 8.2793-8.2793z"/>
@@ -100,14 +130,14 @@
           </button>
         </div>
       </div>
-    </section>
+    </nav>
 
     <div class="main-layout">
-      <section class="map-content">
+      <main class="map-content">
         {% include 'components/panel.html' %}
         <pre id="info"></pre>
         {% include 'components/map.html' %}
-      </section>
+      </main>
       <footer class="footer">
         <div class="footer__links">
           <ul>
@@ -139,15 +169,20 @@
 
   {{ store_cold_init|json_script:"store_cold_init" }}
   {{ detailed_overview|json_script:"detailed_overview" }}
-  {{ ghg_overview|json_script:"ghg_overview" }}
+
+  {{ wind_capacity|json_script:"wind_capacity" }}
+  {{ wind_areas|json_script:"wind_areas" }}
+  {{ pv_ground_capacity|json_script:"pv_ground_capacity" }}
+  {{ pv_ground_areas|json_script:"pv_ground_areas" }}
+  {{ pv_roof_capacity|json_script:"pv_roof_capacity" }}
+  {{ pv_roof_areas|json_script:"pv_roof_areas" }}
+
   {{ electricity_overview|json_script:"electricity_overview" }}
   {{ electricity_autarky|json_script:"electricity_autarky" }}
 <!--  {{ mobility_overview|json_script:"mobility_overview" }}-->
 <!--  {{ mobility_ghg|json_script:"mobility_ghg" }}-->
   {{ heat_decentralized|json_script:"heat_decentralized" }}
   {{ heat_centralized|json_script:"heat_centralized" }}
-  {{ ghg_history|json_script:"ghg_history" }}
-  {{ ghg_reduction|json_script:"ghg_reduction" }}
   {{ onboarding_wind|json_script:"onboarding_wind" }}
   {{ onboarding_pv_ground|json_script:"onboarding_pv_ground" }}
   {{ onboarding_pv_roof|json_script:"onboarding_pv_roof" }}
@@ -162,14 +197,14 @@
       <script src="{% static 'js/tours.js' %}" type="text/javascript"></script>
     {% endif %}
     <script src="{% static 'js/state.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/layers-box.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/charts.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/layers-box.js' %}"></script>
   {% endcompress %}
     <script src="{% static 'js/results.js' %}" type="module"></script>
     <script src="{% static 'js/sliders.js' %}" type="module"></script>
     <script type="text/javascript">
       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl, {html: true}))
     </script>
 
 {% endblock js_body %}

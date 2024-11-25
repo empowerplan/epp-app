@@ -4,12 +4,19 @@
       "right": "30%",
       "bottom": "28%"
     },
+    "aria": {
+      "enabled": true,
+      "label": {
+        "description": "Diese Grafik zeigt {title.text}, bestehend aus {legend.data}."
+      }
+    },
     "legend": {
       "data": [
         "Haushalte",
         "GHD",
         "Industrie"
       ],
+      "itemGap": 15,
       "orient": "vertical",
       "right": "1%",
       "bottom": "35%"

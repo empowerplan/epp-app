@@ -79,9 +79,11 @@
 .challenges-modal {
   @extend .row;
   @extend .p-2;
+  @extend .fw-light;
 
   &__visual {
-    @extend .col-lg-6;
+    //@extend .col-lg-6;
+    @extend .col-lg-4;
 
     &--logos {
       @extend .d-flex;
@@ -95,7 +97,70 @@
   }
 
   &__text {
-    @extend .col-lg-6;
+    //@extend .col-lg-6;
+    @extend .col-lg-8;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  table {
+    margin-bottom: 2rem;
+    margin-left: calc(var(--bs-gutter-x));
+    margin-right: calc(var(--bs-gutter-x));
+
+    td {
+      vertical-align: top;
+    }
+
+    //th {
+    //  border-bottom: 1px solid #000;
+    //}
+  }
+
+  ul {
+    margin-left: calc(var(--bs-gutter-x));
+  }
+}
+
+.admonition {
+  &.note {
+    background-color: $cyan-100;
+    border-color: $cyan-300;
+    border-width: 1px;
+    border-style: solid;
+    margin-left: calc(var(--bs-gutter-x)* .5);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    //margin-right: calc(var(--bs-gutter-x)* 2);
+    //padding-right: 0;
+    //padding: 0 .6rem;
+    border-radius: .25rem;
+    width: 95%;
+    max-width: 95%;
+  }
+  &.warning {
+    background-color: $yellow-100;
+    border-color: $yellow-300;
+    border-width: 1px;
+    border-style: solid;
+    margin-left: calc(var(--bs-gutter-x)* .5);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    //margin-right: calc(var(--bs-gutter-x)* 2);
+    //padding-right: 0;
+    //padding: 0 .6rem;
+    border-radius: .25rem;
+    width: 95%;
+    max-width: 95%;
+  }
+  &-title {
+    //background-color: $cyan-200;
+    //padding: 0 .6rem;
+    @extend .fw-normal;
+    padding: 1rem 0 1rem 0;
+    margin: 0;
   }
 }
 

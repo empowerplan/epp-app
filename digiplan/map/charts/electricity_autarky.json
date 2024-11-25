@@ -1,10 +1,9 @@
 {
-  "brush": {
-    "toolbox": ["rect", "polygon", "lineX", "lineY", "keep", "clear"],
-    "xAxisIndex": 0
-  },
   "grid": {
     "bottom": "25%"
+  },
+  "aria": {
+    "enabled": true
   },
   "xAxis": {
     "type": "value",
@@ -20,7 +19,7 @@
   },
   "yAxis": {
     "type": "category",
-    "data": ["Dein Szenario", "2022"],
+    "data": ["Dein Szenario", "2023"],
     "axisTick": {
       "show": false
     }

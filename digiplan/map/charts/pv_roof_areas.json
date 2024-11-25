@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    }
+  },
+  "legend": {
+    "data": ["Fläche (ha)", "% des Potenzials"],
+    "itemGap": 15
+  },
+  "grid": {
+    "top": "10%",
+    "left": "3%",
+    "right": "3%",
+    "bottom": "14%",
+    "containLabel": true
+  },
+  "aria": {
+    "enabled": true
+  },
+  "xAxis": {
+    "type": "category",
+    "data": ["Dein Szenario"]
+  },
+  "yAxis": [
+    {
+      "type": "value",
+      "axisLabel": {
+        "formatter": "{value} ha"
+      }
+    },
+    {
+      "type": "value",
+      "axisLabel": {
+        "formatter": "{value} %"
+      }
+    }
+  ],
+  "series": [
+    {
+      "name": "Fläche (ha)",
+      "type": "bar",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 0,
+        "color": "#333"
+      },
+      "color": "#efad25",
+      "data": [
+        1402
+      ],
+      "yAxisIndex": 0
+    },
+    {
+      "name": "% des Potenzials",
+      "type": "bar",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 0,
+        "color": "#333"
+      },
+      "color": "#ffd660",
+      "data": [
+        50
+      ],
+      "yAxisIndex": 1
+    }
+  ]
+}

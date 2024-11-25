@@ -8,6 +8,7 @@ from typing import Optional, Union
 import pandas as pd
 from cache_memoize import cache_memoize
 from django.conf import settings
+from django.db.models import Sum
 from django_oemof.settings import OEMOF_DIR
 
 from config.settings.base import DIGIPIPE_DIR
@@ -30,6 +31,12 @@ def get_data_from_sources(sources: Union[Source, list[Source]]) -> pd.DataFrame:
         source_path = Path(DIGIPIPE_DIR, "scalars", source_file)
         dfs.append(pd.read_csv(source_path, usecols=columns))
     return pd.concat(dfs, axis=1)
+
+
+@cache_memoize(timeout=None)
+def get_region_area() -> float:
+    """Return total region area in ?."""
+    return models.Municipality.objects.values("area").aggregate(Sum("area"))["area__sum"]
 
 
 def get_employment() -> pd.DataFrame:
@@ -164,16 +171,18 @@ def get_thermal_efficiency(component: str) -> float:
 
 
 @cache_memoize(timeout=None)
-def get_potential_values() -> pd.DataFrame:
+def get_potential_capacities() -> pd.DataFrame:
     """
-    Calculate max_values for sliders.
+    Calculate maximum potential capacities in MW.
 
     Returns
     -------
-    dict
-        dictionary with each slider / switch and respective max_value
+    pd.DataFrame
+        holding potential capacities for all technologies in MW
     """
     areas = get_potential_areas()
+    # TODO (Hendrik Huyskens): Could be refactored using datapackage.get_power_density
+    # https://github.com/empowerplan/epp-app/issues/118
     pv_density = {
         "pv_soil_quality_low": "pv_ground",
         "pv_soil_quality_medium": "pv_ground_vertical_bifacial",
@@ -247,10 +256,19 @@ def get_full_load_hours(year: int) -> pd.Series:
 @cache_memoize(timeout=None)
 def get_capacities_from_datapackage() -> pd.DataFrame:
     """Return renewable capacities for given year from datapackage."""
+    # Override MaStR data manually
+    filenames_rpg_data = {
+        "wind": "rpg_ols_wind_stats_muns_operating.csv",
+        "pv_ground": "rpg_ols_pv_ground_stats_muns_operating.csv",
+    }
     capacities = pd.concat(
         [
             pd.read_csv(
-                settings.DIGIPIPE_DIR.path("scalars").path(f"bnetza_mastr_{tech}_stats_muns.csv"),
+                settings.DIGIPIPE_DIR.path("scalars").path(
+                    f"bnetza_mastr_{tech}_stats_muns.csv"
+                    if tech not in ["wind", "pv_ground"]
+                    else filenames_rpg_data.get(tech),
+                ),
                 index_col="municipality_id",
                 usecols=["municipality_id", "capacity_net"],
             ).rename(columns={"capacity_net": tech})
@@ -266,9 +284,9 @@ def get_capacities_from_sliders(year: int) -> pd.Series:
     """Return renewable capacities for given year from slider settings (totals for each technology)."""
     if year == 2022:  # noqa: PLR2004
         lookup = "status_quo"
-        bioenergy_power = 55.7  # Workaround for bioenergy as there's no slider
+        bioenergy_power = 98.476  # Workaround for bioenergy as there's no slider
     elif year == 2045:  # noqa: PLR2004
-        lookup = "future_scenario"
+        lookup = "future_scenario_2040"
         bioenergy_power = 0
     else:
         msg = "Unknown year"
@@ -285,11 +303,22 @@ def get_capacities_from_sliders(year: int) -> pd.Series:
 
 
 @cache_memoize(timeout=None)
-def get_power_density(technology: Optional[str] = None) -> dict:
+def get_power_density() -> dict:
     """Return power density for technology."""
-    if technology:
-        return config.TECHNOLOGY_DATA["power_density"][technology]
-    return config.TECHNOLOGY_DATA["power_density"]
+    technologies = {
+        "pv_soil_quality_low": "pv_ground",
+        "pv_soil_quality_medium": "pv_ground_vertical_bifacial",
+        "pv_permanent_crops": "pv_ground_elevated",
+        "pv_roof": "pv_roof",
+        "wind": "wind",
+        "hydro": "st",
+    }
+    power_density = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "scalars/technology_data.json")))["power_density"]
+    densities = {
+        technology: power_density["wind"] if technology.startswith("wind") else power_density[technologies[technology]]
+        for technology in technologies
+    }
+    return densities
 
 
 def get_profile(technology: str) -> pd.Series:

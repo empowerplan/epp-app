@@ -1,6 +1,9 @@
 {
   "grid": {
-    "bottom": "20%"
+    "bottom": "18%"
+  },
+  "aria": {
+    "enabled": true
   },
   "xAxis": {
     "type": "value",

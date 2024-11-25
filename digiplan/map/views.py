@@ -32,6 +32,7 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         "pv_map_control": _("Negativkriterien PV"),
         "store_hot_init": config.STORE_HOT_INIT,
         "oemof_scenario": settings.OEMOF_SCENARIO,
+        "markdown": {"reveal_equity": config.REVEAL_EQUITY_MD},
     }
 
     def get_context_data(self, **kwargs) -> dict:
@@ -56,7 +57,9 @@ class MapGLView(TemplateView, views.MapEngineMixin):
             0,
             context["mapengine_layers"].pop(
                 next(
-                    i for i, element in enumerate(context["mapengine_layers"]) if element["id"] == "region_boundaries"
+                    i
+                    for i, element in enumerate(context["mapengine_layers"])
+                    if element["id"] == "region_boundaries" or element["id"] == "region_boundaries_distilled"
                 ),
             ),
         )
@@ -86,43 +89,21 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         }
         context["sources"] = categorized_sources
         context["store_cold_init"] = config.STORE_COLD_INIT
+
+        context["wind_capacity"] = charts.Chart("wind_capacity").render()
+        context["wind_areas"] = charts.Chart("wind_areas").render()
+        context["pv_ground_capacity"] = charts.Chart("pv_ground_capacity").render()
+        context["pv_ground_areas"] = charts.Chart("pv_ground_areas").render()
+        context["pv_roof_capacity"] = charts.Chart("pv_roof_capacity").render()
+        context["pv_roof_areas"] = charts.Chart("pv_roof_areas").render()
         context["detailed_overview"] = charts.Chart("detailed_overview").render()
-        context["ghg_overview"] = charts.Chart("ghg_overview").render()
         context["electricity_overview"] = charts.Chart("electricity_overview").render()
         context["electricity_autarky"] = charts.Chart("electricity_autarky").render()
         context["heat_decentralized"] = charts.Chart("heat_decentralized").render()
         context["heat_centralized"] = charts.Chart("heat_centralized").render()
-        context["ghg_history"] = charts.Chart("ghg_history").render()
-        context["ghg_reduction"] = charts.Chart("ghg_reduction").render()
         context["onboarding_wind"] = charts.Chart("onboarding_wind").render()
         context["onboarding_pv_ground"] = charts.Chart("onboarding_pv_ground").render()
         context["onboarding_pv_roof"] = charts.Chart("onboarding_pv_roof").render()
-
-        # TODO(Hendrik Huyskens): Replace result boxes with results after simulation run
-        # https://github.com/empowerplan/epp-app/issues/34
-        context["results_electricity"] = forms.ResultsBox(
-            "82,8 %",
-            "des <span>Stroms</span> aus erneuerbaren Quellen in 2040",
-            category="electricity",
-        )
-        context["results_heat"] = forms.ResultsBox("50,0 %", "...", category="heat")
-        context["results_wind"] = forms.ResultsBox(
-            "42,8 %",
-            "der Landesfläche für die <span>Windenergienutzung</span> in 2040",
-            category="wind",
-        )
-        context["results_pv"] = forms.ResultsBox(
-            "35,8 %",
-            "des <span>Stroms</span> aus erneuerbaren Quellen in 2040",
-            category="pv",
-        )
-        context["results_mobility"] = forms.ResultsBox("22,8 %", "...", category="mobility")
-        context["results_h2"] = forms.ResultsBox("33,8 %", "...", category="h2")
-        context["results_co2"] = forms.ResultsBox(
-            "10,8 %",
-            "Reduktion der <span>Treibhausgasemissionen</span> in 2040",
-            category="co2",
-        )
 
         context["app_version"] = str(__version__)
 
@@ -148,6 +129,7 @@ def get_popup(request: HttpRequest, lookup: str, region: int) -> response.JsonRe
         containing HTML to render popup and chart options to be used in E-Chart.
     """
     map_state = request.GET.dict()
+    lookup = lookup.removesuffix("_distilled")
     popup = popups.POPUPS[lookup](lookup, region, map_state=map_state)
     return popup.render()
 
@@ -194,6 +176,27 @@ def get_charts(request: HttpRequest) -> response.JsonResponse:
     map_state = json.loads(request.GET.get("map_state", "{}"))
     return response.JsonResponse(
         {lookup: charts.CHARTS[lookup](user_settings=map_state).render() for lookup in lookups},
+    )
+
+
+def get_summary_results(request: HttpRequest) -> response.JsonResponse:
+    """
+    Return all summary results as HTMLs with related div ID.
+
+    Parameters
+    ----------
+    request: HttpRequest
+        holding user settings
+
+    Returns
+    -------
+    JsonResponse
+        holding dict containing div IDs as key and summary results as HTML as values
+    """
+    lookups = request.GET.getlist("summaries[]")
+    map_state = json.loads(request.GET.get("map_state", "{}"))
+    return response.JsonResponse(
+        {lookup: forms.SUMMARY_RESULTS[lookup](parameters=map_state).render() for lookup in lookups},
     )
 
 

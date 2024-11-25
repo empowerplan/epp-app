@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n markdownify %}
 
 {%  include "components/onboarding.html" %}
 
@@ -23,14 +23,31 @@
             <div id="onboarding_wind_chart" class="onboarding__chart" style="width: 448px; height: 320px;"></div>
           </div>
           <div class="challenges-modal__text">
-            Hier folgt noch Text zu diesen Punkten:
+            <p>Die Bundesregierung hat sich das Ziel gesetzt, <b>bis 2045 in Deutschland keine Treibhausgase mehr auszustoßen</b> oder den noch verbleibenden Ausstoß auszugleichen (Treibhausgasneutralität). Deshalb muss die Stromversorgung bis 2045 vollständig auf erneuerbare Energieträger umgestellt werden. Bundesweit kamen 2023 erstmals 50 Prozent des gesamten Stroms von erneuerbaren Energieerzeugern. Bis 2030 sollen 80 Prozent erreicht werden.</p>
+            <p>Das Land <b>Brandenburg</b> hat seinen energiepolitischen Kurs in der Energiestrategie 2040 formuliert, der sich an nationalen Zielen orientiert. Bei der Deckung der Stromerzeugung verfolgt Brandenburg sogar ein noch ambitionierteres Ziel und will bis 2030 bereits den gesamten jährlichen Strombedarf bilanziell aus erneuerbaren Energien decken. 2021 ist dies schon zu 89 Prozent gelungen.</p>
+          </div>
+        </div>
+        <div class="challenges-modal">
+          <div class="challenges-modal__visual">
+            <div id="onboarding_pv_ground_chart" class="onboarding__chart" style="width: 448px; height: 320px;"></div>
+          </div>
+          <div class="challenges-modal__text">
+            <p>Heute und in Zukunft kommt der erneuerbare <b>Strom überwiegend von Wind- und PV-Anlagen</b>. Daher ist ihr beschleunigter Ausbau die Grundlage für den Erfolg, auch in der Region Oderland-Spree.</p>
+            <p>Bundesweit setzt das <b>Erneuerbare-Energien-Gesetz</b> das Ziel installierter Windenergieleistung bis 2030 auf 115 GW und bis 2040 auf 160 GW und für PV-Leistung auf 215 GW bis 2030 und 400 GW bis 2040. Brandenburg hat in seiner Energiestrategie anteilige Ziele für die Jahre 2030 und 2040 abgeleitet. Die Regionen in Brandenburg setzen sich in ihren Energiekonzepten eigene Ziele, die sich aus diesen übergeordneten Zielen herleiten.</p>
+          </div>
+        </div>
+        <div class="challenges-modal">
+          <div class="challenges-modal__visual">
+            <div id="onboarding_pv_roof_chart" class="onboarding__chart" style="width: 448px; height: 320px;"></div>
+          </div>
+          <div class="challenges-modal__text">
             <ul>
               <li>Vom Großen ins Kleine</li>
               <li>Klimaziele und EE-Ziele Deutschland</li>
               <li>Energiestrategie Brandenburg und Regionales Energiekonzept OLS</li>
               <li>Stand Ausbau Wind & PV</li>
               <li>Tool beleuchtet ausgewählte Aspekte, Beispiele</li>
-              <li>Beispielhafte Fragen aus Präsi:
+              <li>Beispielhafte Fragen aus Präsi
                 <ul>
                   <li>Wie viel Energie kann auf den geplanten Windvorranggebieten "geerntet" werden?</li>
                   <li>Und wie viel mit Aufdach- und Agri-Photovoltaik?</li>
@@ -40,22 +57,6 @@
                 </ul>
               </li>
             </ul>
-          </div>
-        </div>
-        <div class="challenges-modal">
-          <div class="challenges-modal__visual">
-            <div id="onboarding_pv_ground_chart" class="onboarding__chart" style="width: 448px; height: 320px;"></div>
-          </div>
-          <div class="challenges-modal__text">
-            Text
-          </div>
-        </div>
-        <div class="challenges-modal">
-          <div class="challenges-modal__visual">
-            <div id="onboarding_pv_roof_chart" class="onboarding__chart" style="width: 448px; height: 320px;"></div>
-          </div>
-          <div class="challenges-modal__text">
-            Text
           </div>
         </div>
       </div>
@@ -112,17 +113,20 @@
       <div class="modal-body">
         <div class="challenges-modal">
           <div class="challenges-modal__visual">
-            Images?
+            <img src="{% static 'images/rpg_ols_plan_map.png' %}" alt="Teilregionalplan EE Karte">
           </div>
           <div class="challenges-modal__text">
-            Hier folgt noch Text zu diesen Punkten:
-            <ul>
-              <li>Was macht die Regionalplanung?</li>
-              <li>Übergeordnete Flächenziele Wind & PV-FF Deutschland</li>
-              <li>Flächenkulisse/Flächenverfügbarkeit, Flächenplanung und -ausweisung in OLS</li>
-              <li>Einordnung Regionalplan Oderland-Spree – Sachlicher Teilregionalplan EE</li>
-              <li>Aber was kann die RP nur begrenzt? Die Brücke zum Energiesektor schlagen.</li>
-            </ul>
+            <p>Die <b>Regionalplanung Oderland-Spree</b> ist für die räumliche Entwicklungsplanung in der Region zuständig. Sie ist ein entscheidendes Bindeglied zwischen verschiedenen Verwaltungsebenen, insbesondere zwischen Kommunen und Bundesland. Sie konkretisiert die Vorgaben der Landesplanung und integriert die spezifischen Bedürfnisse und Ziele der Gemeinden in die übergeordnete Raumordnung.</p>
+            <p>Auch im Bereich Erneuerbare Energien hat sie Steuerungsaufgaben, insbesondere die Erstellung eines <b>sachlichen Teilregionalplans Erneuerbare Energien</b>, der die Ausweisung von Vorranggebieten für die Windenergienutzung zum Gegenstand hat. Zudem wird durch die Erstellung eines Kriteriengerüsts die raumverträgliche Entwicklung von Photovoltaik-Freiflächenanlagen unterstützt. Derzeit (November 2024) befindet sich der <a href="https://www.rpg-oderland-spree.de/regionalplaene/sachlicher-teilregionalplan-erneuerbare-energien" target="_blank">sachliche Teilregionalplan EE</a> im Aufstellungsprozess.</p>
+          </div>
+        </div>
+        <div class="challenges-modal">
+          <div class="challenges-modal__visual">
+            <img src="{% static 'images/tool_settings_screenshot1.png' %}" alt="EmPowerPlan-Tool Screenshot">
+          </div>
+          <div class="challenges-modal__text">
+            <p>Hier setzt das <b>EmPowerPlan-Tool</b> an: Es unterstützt sie dabei, auf Basis der Regionalplan-Daten getroffene Maßnahmen und daraus folgende Wirkungen nachzuvollziehen. Unabhängig vom fachlichen Hintergrund ermöglicht das Tool allen Interessensgruppen ohne Modellierungskenntnisse, Fragen wie <i>„Wieviel Energie kann auf den geplanten Windvorrangflächen erzeugt werden?“</i> oder <i>„Welche Flächen sind zur Bebauung mit Freiflächenphotovoltaik geeignet?“</i> zu beantworten. Sie können auch <b>eigene Szenarien</b> zur zukünftigen regionalen Energieversorgung entwickeln. Indem Sie verschiedene Parameter wie Flächen, Technologien oder zum Stromverbrauch auswählen, erarbeiten Sie individuelle Szenarien der zukünftigen Energieversorgung. Im letzten Schritt vergleicht das Tool die Ergebnisse der eigenen Szenarien mit den Zielen der Brandenburger Energiestrategie.</p>
+            <p>Damit geht das EmPowerPlan-Tool weit über eine bilanzielle Betrachtung einzelner Szenariokomponenten, wie bspw. erneuerbare Stromerzeugung hinaus und stellt ein digitales <b>Simulationswerkzeug</b> zur dynamischen Energiemodellierung bereit.</p>
           </div>
         </div>
       </div>
@@ -145,37 +149,39 @@
            <path d="m77.812 44.422h-5.625c-0.85938 0-1.5625 0.70312-1.5625 1.5625s0.70312 1.5625 1.5625 1.5625h5.625c0.85938 0 1.5625-0.70312 1.5625-1.5625s-0.70312-1.5625-1.5625-1.5625z"/>
           </g>
         </svg>
-        <h1 class="modal-title fs-5 fw-bold ps-1" id="appModalLabel">EmPowerPlan-Tool</h1>
+        <h1 class="modal-title fs-5 fw-bold ps-1" id="appModalLabel">Verteilungsgerechtigkeit</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="challenges-modal">
-          <div class="challenges-modal__visual challenges-modal__visual--logos">
-            <div>
-              <img src="{% static 'images/logos/EmPowerPlan-logo-horizontal.png' %}" width="240" height="60" alt="Logo RPG OLD" title="Regionale Planungsgemeinschaft Oderland-Spree">
-            </div>
-            <div>
-              <img src="{% static 'images/logos/rpg_ols_logo.svg' %}" width="238" height="58" alt="Logo RPG OLD" title="Regionale Planungsgemeinschaft Oderland-Spree">
-            </div>
+          {{ markdown.reveal_equity | markdownify }}
+{#        <img src="{% static 'images/equity/wind/DE_installed_capacity_gw_equalAREA-equalCLOSE2load-equalCLOSE2pop-equalPOP-equalPOTAREA.png' %}" width="100%" alt="Logo RPG OLD" title="Regionale Planungsgemeinschaft Oderland-Spree">#}
+{#        <p>Blabla</p>#}
+{#        <img src="{% static 'images/equity/wind/DE_min-overlay_equalAREA-equalPOP.png' %}" width="100%" alt="Logo RPG OLD" title="Regionale Planungsgemeinschaft Oderland-Spree">#}
           </div>
-          <div class="challenges-modal__text">
-            Hier folgt noch Text zu diesen Punkten:
-            <ul>
-              <li>Projektbeschreibung und Ziel (kurz)</li>
-              <li>Wofür ist dieses Tool und an wen richtet es sich?</li>
-              <li>Energiewende ist komplex und vielschichtig, Tool beleuchtet ausgewählte Aspekte, Beispiele</li>
-              <li>Beispielhafte Fragen aus Präsi:
-                <ul>
-                  <li>Wie viel Energie kann auf den geplanten Windvorranggebieten "geerntet" werden?</li>
-                  <li>Und wie viel mit Aufdach- und Agri-Photovoltaik?</li>
-                  <li>Genügt das, um den zukünftigen Energiebedarf der Region zu decken, auch den der Wärmepumpen und Elektroautos?</li>
-                  <li>Bis zu welchem Grad kann Oderland-Spree energetisch unabhängig werden?</li>
-                  <li>Wie passt das zur Brandenburger Energiestrategie 2040?</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
+
+{#        <div class="challenges-modal">#}
+{#          <div class="challenges-modal__visual challenges-modal__visual--logos">#}
+{##}
+{#          </div>#}
+{#          <div class="challenges-modal__text">#}
+{#            Hier folgt noch Text zu diesen Punkten:#}
+{#            <ul>#}
+{#              <li>Projektbeschreibung und Ziel (kurz)</li>#}
+{#              <li>Wofür ist dieses Tool und an wen richtet es sich?</li>#}
+{#              <li>Energiewende ist komplex und vielschichtig, Tool beleuchtet ausgewählte Aspekte, Beispiele</li>#}
+{#              <li>Beispielhafte Fragen aus Präsi:#}
+{#                <ul>#}
+{#                  <li>Wie viel Energie kann auf den geplanten Windvorranggebieten "geerntet" werden?</li>#}
+{#                  <li>Und wie viel mit Aufdach- und Agri-Photovoltaik?</li>#}
+{#                  <li>Genügt das, um den zukünftigen Energiebedarf der Region zu decken, auch den der Wärmepumpen und Elektroautos?</li>#}
+{#                  <li>Bis zu welchem Grad kann Oderland-Spree energetisch unabhängig werden?</li>#}
+{#                  <li>Wie passt das zur Brandenburger Energiestrategie 2040?</li>#}
+{#                </ul>#}
+{#              </li>#}
+{#            </ul>#}
+{#          </div>#}
+{#        </div>#}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-info" data-bs-dismiss="modal">Schließen</button>
@@ -185,12 +191,12 @@
 </div>
 
 <section class="map-wrap">
-  <div class="main-content challenges" id="challenges">
+  <section class="main-content challenges" id="challenges" aria-label="Start: Inhalt">
     <div class="challenges__container">
       <div class="challenges__row">
         <div class="challenges__col">
-          <div class="challenges__box">
-            <div class="challenges__box-header">
+          <article class="challenges__box">
+            <header class="challenges__box-header">
               <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#goalModal">
                 Ziele Brandenburg
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2348C3" viewBox="0 0 16 16">
@@ -207,7 +213,7 @@
                   </g>
                 </svg>
               </span>
-            </div>
+            </header>
             <div class="challenges__box-content">
               <div class="energy-numbers energy-numbers--electricity">
                 <div class="energy-numbers__icon" aria-hidden="true">
@@ -240,39 +246,11 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="challenges__box">
-            <div class="challenges__box-header">
-              <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#esModal">
-                Energiesystem
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2348C3" viewBox="0 0 16 16">
-                  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
-                </svg>
-              </button>
-              <span>
-                <svg width="43" height="43" viewBox="0 0 43 43" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M23.3945 9.31378C21.7585 9.31378 20.4164 10.6575 20.4164 12.2919C20.4164 13.3467 20.9775 14.284 21.8123 14.8131L20.356 19.6119C19.4002 19.6287 18.5285 20.0301 17.902 20.6701L13.9832 17.5811C14.1109 17.2872 14.1865 16.963 14.1865 16.6254C14.1865 15.2883 13.0863 14.1881 11.7493 14.1881C10.4122 14.1881 9.31201 15.2883 9.31201 16.6254C9.31201 17.9624 10.4122 19.0626 11.7493 19.0626C12.1574 19.0626 12.5438 18.9551 12.883 18.7754L17.0554 22.076C16.9512 22.4086 16.8941 22.7596 16.8941 23.1258C16.8941 23.801 17.0856 24.4326 17.4182 24.9701L14.2789 28.1094C13.8489 27.8676 13.3567 27.7281 12.831 27.7281C11.1949 27.7281 9.85287 29.0719 9.85287 30.7062C9.85287 32.3423 11.1966 33.6843 12.831 33.6843C14.467 33.6843 15.8091 32.3406 15.8091 30.7062C15.8091 30.1805 15.6629 29.69 15.4194 29.2583L18.5671 26.1106C19.1063 26.4466 19.7345 26.6431 20.4114 26.6431C20.9892 26.6431 21.5368 26.5037 22.0189 26.2534L23.838 28.4118C23.5558 28.8384 23.3895 29.3457 23.3895 29.8933C23.3895 31.3798 24.6123 32.6009 26.0972 32.6009C27.5837 32.6009 28.8048 31.3781 28.8048 29.8933C28.8048 28.4068 27.582 27.1856 26.0972 27.1856C25.7444 27.1856 25.4085 27.2645 25.0994 27.3888L23.2467 25.1968C23.6751 24.614 23.9321 23.8984 23.9321 23.1241C23.9321 23.02 23.9237 22.9209 23.9153 22.8201L29.9822 20.8649C30.3752 21.258 30.9211 21.4998 31.514 21.4998C32.7016 21.4998 33.6808 20.5206 33.6808 19.333C33.6808 18.1455 32.7016 17.1662 31.514 17.1662C30.3265 17.1662 29.3472 18.1455 29.3472 19.333V19.3666L23.3977 21.2798C23.0467 20.7171 22.5411 20.2602 21.9415 19.9679L23.3709 15.2715H23.3877C25.0237 15.2715 26.3657 13.9277 26.3657 12.2934C26.3657 10.6574 25.022 9.31529 23.3877 9.31529L23.3945 9.31378ZM23.3945 10.938C24.1521 10.938 24.7483 11.5343 24.7483 12.2918C24.7483 13.0494 24.1521 13.6456 23.3945 13.6456C22.637 13.6456 22.0407 13.0494 22.0407 12.2918C22.0407 11.5343 22.637 10.938 23.3945 10.938ZM11.751 15.8125C12.2095 15.8125 12.5639 16.1669 12.5639 16.6255C12.5639 17.084 12.2095 17.4384 11.751 17.4384C11.2924 17.4384 10.938 17.084 10.938 16.6255C10.938 16.1669 11.2924 15.8125 11.751 15.8125ZM31.5194 18.7906C31.8284 18.7906 32.0602 19.0241 32.0602 19.3314C32.0602 19.6405 31.8268 19.8723 31.5194 19.8723C31.2103 19.8723 30.9785 19.6388 30.9785 19.3314C30.9785 19.0224 31.212 18.7906 31.5194 18.7906ZM20.4168 21.2278C21.4733 21.2278 22.3132 22.0677 22.3132 23.1242C22.3132 24.1807 21.4733 25.0206 20.4168 25.0206C19.3602 25.0206 18.5204 24.1808 18.5204 23.1242C18.5204 22.0677 19.3602 21.2278 20.4168 21.2278ZM26.1044 28.81C26.7125 28.81 27.1878 29.2854 27.1878 29.8934C27.1878 30.5015 26.7124 30.9768 26.1044 30.9768C25.4963 30.9768 25.021 30.5014 25.021 29.8934C25.021 29.2853 25.4964 28.81 26.1044 28.81ZM12.835 29.3509C13.5926 29.3509 14.1888 29.9472 14.1888 30.7047C14.1888 31.4622 13.5926 32.0585 12.835 32.0585C12.0775 32.0585 11.4812 31.4622 11.4812 30.7047C11.4812 29.9472 12.0775 29.3509 12.835 29.3509Z" fill="#A2B3BE"/>
-                </svg>
-              </span>
-            </div>
-            <div class="challenges__box-content">
-              <p>Regionale <b>Energieerzeugung und Energiebedarfe</b></p>
-              <p><b>Sektorkopplung und Flexibilitäten</b> - Strom, Wärme, Mobilität</p>
-              <p><b>Optimierung</b> des Energiesystems</p>
-            </div>
-          </div>
-        </div>
-        <div class="challenges__col">
-          <div class="challenges__center">
-            <img class="challenges__img" width="300" height="272" src="{% static 'images/oderland_spree_map_illustration_title.webp' %}" alt="Illustrative Ansicht der Region Oderland-Spree">
-            <button type="button" id="intro_tour_start">{% translate "Neu hier? Tour starten" %}</button>
-          </div>
-        </div>
-        <div class="challenges__col">
-          <div class="challenges__box">
-            <div class="challenges__box-header">
+          </article>
+          <article class="challenges__box">
+            <header class="challenges__box-header">
               <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#areaModal">
-                Flächen und Regionalplanung
+                Regionalplanung und Energie
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2348C3" viewBox="0 0 16 16">
                   <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
                 </svg>
@@ -282,16 +260,31 @@
                   <path d="m91.594 11c-0.67578-0.46875-1.5352-0.57422-2.3008-0.28516l-25.324 9.4961-25.324-9.4961c-0.078125-0.03125-0.16406-0.039063-0.24219-0.058594-0.11328-0.027344-0.22266-0.066406-0.33594-0.082031-0.10156-0.011719-0.19922 0-0.30078 0s-0.19922-0.011719-0.30078 0c-0.11719 0.015625-0.23047 0.054687-0.34375 0.082031-0.078125 0.019531-0.16016 0.027344-0.23438 0.058594l-26.203 9.8242c-0.97656 0.36719-1.6211 1.3008-1.6211 2.3398v63.746c0 0.82031 0.40234 1.5898 1.0742 2.0547 0.42578 0.29297 0.92188 0.44531 1.4258 0.44531 0.29688 0 0.59375-0.054688 0.87891-0.16016l25.324-9.4961 25.324 9.4961c0.03125 0.011718 0.0625 0.015625 0.09375 0.023437 0.039062 0.015625 0.078125 0.019531 0.11719 0.03125 0.21875 0.0625 0.44141 0.10156 0.66797 0.10156 0.22266 0 0.44531-0.039063 0.66797-0.10156 0.039062-0.011719 0.078125-0.019531 0.11719-0.03125 0.03125-0.011719 0.0625-0.015625 0.09375-0.023437l26.203-9.8242c0.97656-0.36719 1.6211-1.3008 1.6211-2.3398v-63.746c0-0.82031-0.40234-1.5898-1.0781-2.0547zm-77.531 13.613 21.203-7.9492v58.406l-21.203 7.9492zm26.203-7.9531 21.203 7.9492v58.406l-21.203-7.9492zm47.406 58.41-21.203 7.9492v-58.406l21.203-7.9492z" fill="#A2B3BE"/>
                 </svg>
               </span>
-            </div>
+            </header>
             <div class="challenges__box-content">
               <p>Übergeordnete <b>Ziele</b> Windenergie & Freiflächen-PV Deutschland</p>
               <p>Regionale Flächenkulisse und <b>Flächenverfügbarkeit</b></p>
               <p><b>Regionalplanung</b> im Kontext der Energiewende</p>
             </div>
+          </article>
+        </div>
+        <div class="challenges__col" aria-hidden="true">
+          <div class="challenges__center">
+            <p style="text-align: center; font-weight: 300; background-color: #F6F9FB; margin-bottom: 1rem; padding: 0.5rem; border-radius: var(--bs-border-radius-xl)">
+              Wähle ein Thema
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2348C3" viewBox="0 0 16 16">
+                  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+                </svg>
+              oder starte<br>das Tool mit "Weiter"
+            </p>
+            <img class="challenges__img" width="300" height="272" src="{% static 'images/oderland_spree_map_illustration_title.webp' %}" alt="Illustrative Ansicht der Region Oderland-Spree">
+	    <button type="button" id="intro_tour_start">{% translate "Neu hier? Tour starten" %}</button>
           </div>
-          <div class="challenges__box">
-            <div class="challenges__box-header">
-              <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#appModal">
+        </div>
+        <div class="challenges__col">
+          <article class="challenges__box">
+            <header class="challenges__box-header">
+              <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#esModal">
                 EmPowerPlan-Tool
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2348C3" viewBox="0 0 16 16">
                   <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
@@ -307,33 +300,392 @@
                   </g>
                 </svg>
               </span>
-            </div>
+            </header>
             <div class="challenges__box-content">
               <p>Ein Tool für die <b>regionale Energiewende</b></p>
               <p>Informieren Sie sich über die <b>aktuelle Situation</b></p>
               <p>Erstellen Sie Ihre eigenen <b>Energieszenarien</b></p>
               <p>Erfahren Sie mehr über das Projekt <b>EmPowerPlan</b></p>
             </div>
-          </div>
+          </article>
+          <article class="challenges__box">
+            <header class="challenges__box-header">
+              <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#appModal">
+                EE-Verteilungsgerechtigkeit
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2348C3" viewBox="0 0 16 16">
+                  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+                </svg>
+              </button>
+              <span>
+                <svg width="30" height="30" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <path d="m8.4667 0.025321v4.2762c-0.89922 0.23858-1.5663 1.0686-1.5663 2.0423 0 0.1682 0.019787 0.33204 0.057361 0.48938l-3.3874 1.956 0.52917 0.91571 3.3548-1.9358c0.26835 0.29432 0.61807 0.51241 1.0123 0.61702v7.4889h-6.35v1.0583h6.35v5.17e-4h1.0589v-5.17e-4h6.3495v-1.0583h-6.3495v-7.4889c0.41594-0.11036 0.7822-0.34745 1.0557-0.66663l3.4422 1.9854 0.52917-0.91571-3.5037-2.0226c3.4e-5 -1.65e-4 -3.4e-5 -3.517e-4 0-5.168e-4 0.027938-0.13666 0.042891-0.27777 0.042891-0.4222 0-0.97361-0.66709-1.8037-1.5663-2.0423v-4.2762h-1.0589zm0.52968 5.2658c0.5765 2e-7 1.0366 0.46232 1.0366 1.0526s-0.46013 1.0526-1.0366 1.0526c-0.5765 0-1.0371-0.46232-1.0371-1.0526-1e-7 -0.59033 0.46065-1.0526 1.0371-1.0526z" color="#0D547C" fill-rule="evenodd" stroke-dashoffset="5.2899"/>
+                </svg>
+
+              </span>
+            </header>
+            <div class="challenges__box-content">
+              <p>Für die <b>Verteilung</b> von Wind- und Solarenergieanlagen haben wir verschiedene <b>Gerechtigkeitsmetriken</b> entwickelt und bundesweite Berechnungen durchgeführt</p>
+              <p>Mit landkreisscharfen Ergebnissen und <b>regionalen Ergebnissen</b> für Oderland-Spree</p>
+            </div>
+          </article>
         </div>
       </div>
     </div>
-  </div>
-  <div class="main-content" id="scenarios" hidden>
+  </section>
+  <section class="main-content" id="scenarios" aria-label="Szenarien: Hauptinhalt" hidden>
     <div style="display: flex; flex-direction: row; justify-content: center;">
       <div id="selectedScenario1" class="scenarios">
-        <div class="scenarios__top">
+        <header class="scenarios__top">
           <div class="scenarios__top--left">
-            <span class="scenarios__name">Energiestrategie Brandenburg 2030</span>
+            <h2 class="scenarios__name">Energiestrategie Brandenburg 2030</h2>
             <button class="scenarios__btn scenarios__btn--active">Übernehmen</button>
           </div>
-          <div class="scenarios__top--right">
+          <!--<div class="scenarios__top--right">
             <span class="scenarios__goal">Vorgaben nach WindBG/EEG geschafft</span>
-          </div>
-        </div>
+          </div>-->
+        </header>
         <div class="row">
           <div class="scenarios__description">
-            <p>In der Energiestrategie 2040 hat sich das Land Brandenburg 2022 ein Leitszenario zur Gestaltung der Energiewende gegeben. In ihr wurden die Ziele in den Bereichen Energieeffizienz, Ausbau Erneuerbarer Energien, Speichertechnologien und Netzausbau festgelegt. <b>Dieses Szenario bildet ausgewählte Kernziele für das Jahr 2030 ab.</b></p>
+            <p>In der Energiestrategie 2040 hat sich das Land Brandenburg 2022 ein Leitszenario zur Gestaltung der Energiewende gegeben. In ihr wurden die Ziele in den Bereichen Energieeffizienz, Ausbau Erneuerbarer Energien, Speichertechnologien und Netzausbau festgelegt. <b>Dieses Szenario bildet ausgewählte Kernziele für das Jahr 2030 für Oderland-Spree ab.</b>Einstellungen, die in der Energiestrategie nicht explizit genannt werden, sind aus den Langfristszenarien des BMWK abgeleitet.</p>
+          </div>
+        </div>
+        <div class="row gx-5">
+          <section class="scenario-feature">
+            <div class="scenario-feature__header">
+              <div class="scenario-feature__header--left">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#002E50" viewBox="0 0 16.933 16.936">
+                    <path d="m8.4667 0.025321v4.2762c-0.89922 0.23858-1.5663 1.0686-1.5663 2.0423 0 0.1682 0.019787 0.33204 0.057361 0.48938l-3.3874 1.956 0.52917 0.91571 3.3548-1.9358c0.26835 0.29432 0.61807 0.51241 1.0123 0.61702v7.4889h-6.35v1.0583h6.35v5.17e-4h1.0589v-5.17e-4h6.3495v-1.0583h-6.3495v-7.4889c0.41594-0.11036 0.7822-0.34745 1.0557-0.66663l3.4422 1.9854 0.52917-0.91571-3.5037-2.0226c3.4e-5 -1.65e-4 -3.4e-5 -3.517e-4 0-5.168e-4 0.027938-0.13666 0.042891-0.27777 0.042891-0.4222 0-0.97361-0.66709-1.8037-1.5663-2.0423v-4.2762h-1.0589zm0.52968 5.2658c0.5765 2e-7 1.0366 0.46232 1.0366 1.0526s-0.46013 1.0526-1.0366 1.0526c-0.5765 0-1.0371-0.46232-1.0371-1.0526-1e-7 -0.59033 0.46065-1.0526 1.0371-1.0526z" color="#000000" fill-rule="evenodd" stroke-dashoffset="5.2899"/>
+                  </svg>
+                </span>
+                <span class="scenario-feature__name">Wind</span>
+                <span class="scenario-feature__value scenario-feature__value--light">+</span>
+              </div>
+              <div class="scenario-feature__header--right">
+                <a href="#" data-bs-toggle="tooltip" tabindex="0" data-bs-placement="left" data-bs-title="Hier folgen noch weitere Hintergrundinformationen">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#002E50" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                Gesamtleistung Brandenburg
+              </div>
+              <div class="scenario-feature__values">
+                11.500 MW
+              </div>
+              <div class="scenario-feature__bars">
+                <div class="row">
+                  <div class="scenarios-bar">
+                    <div class="scenarios-bar__total">
+                      <span>100 %</span>
+                    </div>
+                    <div class="scenarios-bar__chart">
+                      <div class="scenarios-bar__bg"></div>
+                      <div id="statusQuoWindTotal" style="width: 100%" class="scenarios-bar__value scenarios-bar__value--wind"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                Anteil Region Oderland-Spree
+              </div>
+              <div class="scenario-feature__values">
+                1769 MW
+              </div>
+              <div class="scenario-feature__bars">
+                <div class="row">
+                  <div class="scenarios-bar">
+                    <div class="scenarios-bar__total">
+                      <span>15,4 %</span>
+                    </div>
+                    <div class="scenarios-bar__chart">
+                      <div class="scenarios-bar__bg"></div>
+                      <div id="statusQuoWindTotal" style="width: 15.4%" class="scenarios-bar__value scenarios-bar__value--wind"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                Das entspricht
+              </div>
+              <div class="scenario-feature__values">
+                272 Anlagen
+              </div>
+              <div class="scenario-feature__bars">
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+              </div>
+              <div class="scenario-feature__values">
+              </div>
+              <div class="scenario-feature__bars">
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                Regionaler Leistungsbeitrag am EEG
+              </div>
+              <div class="scenario-feature__values">
+                1,5 % von 115 GW
+              </div>
+              <div class="scenario-feature__bars">
+                <div class="row">
+                  <div class="scenarios-bar">
+                    <div class="scenarios-bar__total">
+                      <span>1,5 %</span>
+                    </div>
+                    <div class="scenarios-bar__chart">
+                      <div class="scenarios-bar__bg"></div>
+                      <div id="statusQuoWindTotal" style="width: 1.5%" class="scenarios-bar__value scenarios-bar__value--wind"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="scenario-feature">
+            <div class="scenario-feature__header">
+              <div class="scenario-feature__header--left">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#002E50" viewBox="0 0 16.933 16.936">
+                    <path d="m4.3692 1.0589-3.4923 11.64h0.71107 2.6443v3.176h1.0589v-3.176h6.3516v3.176h1.0563v-3.176h3.3574l-3.4918-11.64h-8.1954zm0.78703 1.0583h2.7812v2.1151h-3.4163l0.6351-2.1151zm3.8401 0h2.7812l0.6351 2.1151h-3.4163v-2.1151zm-4.793 3.174h3.7341v2.1172h-4.3692l0.6351-2.1172zm4.793 0h3.7341l0.6351 2.1172h-4.3692v-2.1172zm-5.7459 3.1755h4.6871v3.176h-5.6405l0.95343-3.176zm5.7459 0h4.6871l0.95343 3.176h-5.6405v-3.176z" color="#000000" fill-rule="evenodd" stroke-dashoffset="5.2899"/>
+                  </svg>
+                </span>
+                <span class="scenario-feature__name">PV</span>
+                <span class="scenario-feature__value scenario-feature__value--light">+</span>
+              </div>
+              <div class="scenario-feature__header--right">
+                <a href="#" data-bs-toggle="tooltip" tabindex="0" data-bs-placement="left" data-bs-title="Hier folgen noch weitere Hintergrundinformationen">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#002E50" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                Gesamtleistung Brandenburg
+              </div>
+              <div class="scenario-feature__values">
+                18.000 MW
+              </div>
+              <div class="scenario-feature__bars">
+                <div class="row">
+                  <div class="scenarios-bar">
+                    <div class="scenarios-bar__total">
+                      <span>100 %</span>
+                    </div>
+                    <div class="scenarios-bar__chart">
+                      <div class="scenarios-bar__bg"></div>
+                      <div id="statusQuoWindTotal" style="width: 100%" class="scenarios-bar__value scenarios-bar__value--pv"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                Anteil Region Oderland-Spree
+              </div>
+              <div class="scenario-feature__values">
+                2770 MW
+              </div>
+              <div class="scenario-feature__bars">
+                <div class="row">
+                  <div class="scenarios-bar">
+                    <div class="scenarios-bar__total">
+                      <span>15,4 %</span>
+                    </div>
+                    <div class="scenarios-bar__chart">
+                      <div class="scenarios-bar__bg"></div>
+                      <div id="statusQuoWindTotal" style="width: 15.4%" class="scenarios-bar__value scenarios-bar__value--pv"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                - davon Freiflächenanlagen
+              </div>
+              <div class="scenario-feature__values">
+                1330 MW
+              </div>
+              <div class="scenario-feature__bars">
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                - davon Aufdachanlagen
+              </div>
+              <div class="scenario-feature__values">
+                1440 MW
+              </div>
+              <div class="scenario-feature__bars">
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                Regionaler Leistungsbeitrag am EEG
+              </div>
+              <div class="scenario-feature__values">
+                1,3 % von 215 GW
+              </div>
+              <div class="scenario-feature__bars">
+                <div class="row">
+                  <div class="scenarios-bar">
+                    <div class="scenarios-bar__total">
+                      <span>1,3 %</span>
+                    </div>
+                    <div class="scenarios-bar__chart">
+                      <div class="scenarios-bar__bg"></div>
+                      <div id="statusQuoWindTotal" style="width: 1.5%" class="scenarios-bar__value scenarios-bar__value--pv"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="scenario-feature">
+            <div class="scenario-feature__header">
+              <div class="scenario-feature__header--left">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#002E50" class="bi bi-map" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.5.5 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103M10 1.91l-4-.8v12.98l4 .8zm1 12.98 4-.8V1.11l-4 .8zm-6-.8V1.11l-4 .8v12.98z"/>
+                  </svg>
+                </span>
+                <span class="scenario-feature__name">Flächenbedarf</span>
+                <span class="scenario-feature__value scenario-feature__value--light">+</span>
+              </div>
+              <div class="scenario-feature__header--right">
+                <a href="#" data-bs-toggle="tooltip" tabindex="0" data-bs-placement="left" data-bs-title="Hier folgen noch weitere Hintergrundinformationen">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#002E50" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                Windenergie
+              </div>
+              <div class="scenario-feature__values">
+                7373 ha
+              </div>
+              <div class="scenario-feature__bars">
+                <div class="row">
+                  <div class="scenarios-bar">
+                    <div class="scenarios-bar__total">
+                      <span>1,62 % der Regionsfläche</span>
+                    </div>
+                    <div class="scenarios-bar__chart">
+                      <div class="scenarios-bar__bg"></div>
+                      <div id="statusQuoWindTotal" style="width: 1.62%" class="scenarios-bar__value scenarios-bar__value--wind"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                Freiflächen-PV
+              </div>
+              <div class="scenario-feature__values">
+                1329 ha
+              </div>
+              <div class="scenario-feature__bars">
+                <div class="row">
+                  <div class="scenarios-bar">
+                    <div class="scenarios-bar__total">
+                      <span>0,29 % der Regionsfläche</span>
+                    </div>
+                    <div class="scenarios-bar__chart">
+                      <div class="scenarios-bar__bg"></div>
+                      <div id="statusQuoWindTotal" style="width: 0.29%" class="scenarios-bar__value scenarios-bar__value--pv"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="scenario-feature">
+            <div class="scenario-feature__header">
+              <div class="scenario-feature__header--left">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#002E50" class="bi bi-lightning-charge" viewBox="0 0 16 16">
+                    <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09zM4.157 8.5H7a.5.5 0 0 1 .478.647L6.11 13.59l5.732-6.09H9a.5.5 0 0 1-.478-.647L9.89 2.41z"/>
+                  </svg>
+                </span>
+                <span class="scenario-feature__name">Anteil Erneuerbarer Energien</span>
+                <span class="scenario-feature__value scenario-feature__value--light">+</span>
+              </div>
+              <div class="scenario-feature__header--right">
+                <a href="#" data-bs-toggle="tooltip" tabindex="0" data-bs-placement="left" data-bs-title="Hier folgen noch weitere Hintergrundinformationen">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#002E50" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                am Stromverbrauch
+              </div>
+              <div class="scenario-feature__values">
+                100 %
+              </div>
+              <div class="scenario-feature__bars">
+                <div class="row">
+                  <div class="scenarios-bar">
+                    <div class="scenarios-bar__total">
+                      <span>100 %</span>
+                    </div>
+                    <div class="scenarios-bar__chart">
+                      <div class="scenarios-bar__bg"></div>
+                      <div id="statusQuoWindTotal" style="width: 100%" class="scenarios-bar__value scenarios-bar__value--ee"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                am Wärmeverbrauch
+              </div>
+              <div class="scenario-feature__values">
+                Keine Zielsetzung
+              </div>
+              <div class="scenario-feature__bars">
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div id="selectedScenario2" class="scenarios" style="display: none;">
+        <header class="scenarios__top">
+          <div class="scenarios__top--left">
+            <h2 class="scenarios__name">Energiestrategie Brandenburg 2040</h2>
+            <button class="scenarios__btn scenarios__btn--active">Übernehmen</button>
+          </div>
+          <!--<div class="scenarios__top--right">
+            <span class="scenarios__goal">Vorgaben nach WindBG/EEG geschafft</span>
+          </div>-->
+        </header>
+        <div class="row">
+          <div class="scenarios__description">
+            <p>In der Energiestrategie 2040 hat sich das Land Brandenburg 2022 ein Leitszenario zur Gestaltung der Energiewende gegeben. In ihr wurden die Ziele in den Bereichen Energieeffizienz, Ausbau Erneuerbarer Energien, Speichertechnologien und Netzausbau festgelegt. <b>Dieses Szenario bildet ausgewählte Kernziele für das Jahr 2040 für Oderland-Spree ab.</b>Einstellungen, die in der Energiestrategie nicht explizit genannt werden, sind aus den Langfristszenarien des BMWK abgeleitet.</p>
           </div>
         </div>
         <div class="row gx-5">
@@ -349,7 +701,7 @@
                 <span class="scenario-feature__value scenario-feature__value--light">+</span>
               </div>
               <div class="scenario-feature__header--right">
-                <a href="#" data-bs-toggle="tooltip" data-bs-title="This is a tooltip text">
+                <a href="#" data-bs-toggle="tooltip" tabindex="0" data-bs-placement="left" data-bs-title="Hier folgen noch weitere Hintergrundinformationen">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#002E50" class="bi bi-info-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                     <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
@@ -359,40 +711,20 @@
             </div>
             <div class="scenario-feature__row">
               <div class="scenario-feature__keys">
-                Gesamtleistung
+                Gesamtleistung Brandenburg
               </div>
               <div class="scenario-feature__values">
-                1780 MW
-              </div>
-              <div class="scenario-feature__bars">
-              </div>
-            </div>
-            <div class="scenario-feature__row">
-              <div class="scenario-feature__keys">
-                Anzahl
-              </div>
-              <div class="scenario-feature__values">
-                345 Anlagen
-              </div>
-              <div class="scenario-feature__bars">
-              </div>
-            </div>
-            <div class="scenario-feature__row">
-              <div class="scenario-feature__keys">
-                Anteil der deutschen Gesamtleistung
-              </div>
-              <div class="scenario-feature__values">
-                2,12 %
+                15.000 MW
               </div>
               <div class="scenario-feature__bars">
                 <div class="row">
                   <div class="scenarios-bar">
                     <div class="scenarios-bar__total">
-                      <span>10 %</span>
+                      <span>100 %</span>
                     </div>
                     <div class="scenarios-bar__chart">
                       <div class="scenarios-bar__bg"></div>
-                      <div id="statusQuoWindTotal" style="width: 21%" class="scenarios-bar__value scenarios-bar__value--wind"></div>
+                      <div id="statusQuoWindTotal" style="width: 100%" class="scenarios-bar__value scenarios-bar__value--wind"></div>
                     </div>
                   </div>
                 </div>
@@ -400,20 +732,51 @@
             </div>
             <div class="scenario-feature__row">
               <div class="scenario-feature__keys">
-                Anteil der deutschen Stromproduktion
+                Anteil Region Oderland-Spree
               </div>
               <div class="scenario-feature__values">
-                0,23 %
+                2308 MW
               </div>
               <div class="scenario-feature__bars">
                 <div class="row">
                   <div class="scenarios-bar">
                     <div class="scenarios-bar__total">
-                      <span>10 %</span>
+                      <span>15,4 %</span>
                     </div>
                     <div class="scenarios-bar__chart">
                       <div class="scenarios-bar__bg"></div>
-                      <div id="statusQuoWindElectricity" style="width: 2%" class="scenarios-bar__value scenarios-bar__value--wind"></div>
+                      <div id="statusQuoWindTotal" style="width: 15.4%" class="scenarios-bar__value scenarios-bar__value--wind"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                Das entspricht
+              </div>
+              <div class="scenario-feature__values">
+                355 Anlagen
+              </div>
+              <div class="scenario-feature__bars">
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                Regionaler Leistungsbeitrag zum EEG
+              </div>
+              <div class="scenario-feature__values">
+                1,4 % von 160 GW
+              </div>
+              <div class="scenario-feature__bars">
+                <div class="row">
+                  <div class="scenarios-bar">
+                    <div class="scenarios-bar__total">
+                      <span>1,4 %</span>
+                    </div>
+                    <div class="scenarios-bar__chart">
+                      <div class="scenarios-bar__bg"></div>
+                      <div id="statusQuoWindTotal" style="width: 1.4%" class="scenarios-bar__value scenarios-bar__value--wind"></div>
                     </div>
                   </div>
                 </div>
@@ -432,7 +795,7 @@
                 <span class="scenario-feature__value scenario-feature__value--light">+</span>
               </div>
               <div class="scenario-feature__header--right">
-                <a href="#" data-bs-toggle="tooltip" data-bs-title="This is a tooltip text">
+                <a href="#" data-bs-toggle="tooltip" tabindex="0" data-bs-placement="left" data-bs-title="Hier folgen noch weitere Hintergrundinformationen">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#002E50" class="bi bi-info-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                     <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
@@ -442,40 +805,20 @@
             </div>
             <div class="scenario-feature__row">
               <div class="scenario-feature__keys">
-                Gesamtleistung
+                Gesamtleistung Brandenburg
               </div>
               <div class="scenario-feature__values">
-                2786 MW
-              </div>
-              <div class="scenario-feature__bars">
-              </div>
-            </div>
-            <div class="scenario-feature__row">
-              <div class="scenario-feature__keys">
-                Anzahl
-              </div>
-              <div class="scenario-feature__values">
-                24 Anlagen
-              </div>
-              <div class="scenario-feature__bars">
-              </div>
-            </div>
-            <div class="scenario-feature__row">
-              <div class="scenario-feature__keys">
-                Anteil der deutschen Gesamtleistung
-              </div>
-              <div class="scenario-feature__values">
-                1,92 %
+                33.000 MW
               </div>
               <div class="scenario-feature__bars">
                 <div class="row">
                   <div class="scenarios-bar">
                     <div class="scenarios-bar__total">
-                      <span>10 %</span>
+                      <span>100 %</span>
                     </div>
                     <div class="scenarios-bar__chart">
                       <div class="scenarios-bar__bg"></div>
-                      <div id="statusQuoWindTotal" style="width: 20%" class="scenarios-bar__value scenarios-bar__value--pv"></div>
+                      <div id="statusQuoWindTotal" style="width: 100%" class="scenarios-bar__value scenarios-bar__value--pv"></div>
                     </div>
                   </div>
                 </div>
@@ -483,20 +826,61 @@
             </div>
             <div class="scenario-feature__row">
               <div class="scenario-feature__keys">
-                Anteil der deutschen Stromproduktion
+                Anteil Region Oderland-Spree
               </div>
               <div class="scenario-feature__values">
-                0,05 %
+                5077 MW
               </div>
               <div class="scenario-feature__bars">
                 <div class="row">
                   <div class="scenarios-bar">
                     <div class="scenarios-bar__total">
-                      <span>10 %</span>
+                      <span>15,4 %</span>
                     </div>
                     <div class="scenarios-bar__chart">
                       <div class="scenarios-bar__bg"></div>
-                      <div id="statusQuoWindElectricity" style="width: 0%" class="scenarios-bar__value scenarios-bar__value--pv"></div>
+                      <div id="statusQuoWindTotal" style="width: 15.4%" class="scenarios-bar__value scenarios-bar__value--pv"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                - davon Freiflächenanlagen
+              </div>
+              <div class="scenario-feature__values">
+                2437 MW
+              </div>
+              <div class="scenario-feature__bars">
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                - davon Aufdachanlagen
+              </div>
+              <div class="scenario-feature__values">
+                2640 MW
+              </div>
+              <div class="scenario-feature__bars">
+              </div>
+            </div>
+            <div class="scenario-feature__row">
+              <div class="scenario-feature__keys">
+                Regionaler Leistungsbeitrag zum EEG
+              </div>
+              <div class="scenario-feature__values">
+                 1,3 % von 400 GW
+              </div>
+              <div class="scenario-feature__bars">
+                <div class="row">
+                  <div class="scenarios-bar">
+                    <div class="scenarios-bar__total">
+                      <span>1,3 %</span>
+                    </div>
+                    <div class="scenarios-bar__chart">
+                      <div class="scenarios-bar__bg"></div>
+                      <div id="statusQuoWindTotal" style="width: 1.5%" class="scenarios-bar__value scenarios-bar__value--pv"></div>
                     </div>
                   </div>
                 </div>
@@ -515,7 +899,7 @@
                 <span class="scenario-feature__value scenario-feature__value--light">+</span>
               </div>
               <div class="scenario-feature__header--right">
-                <a href="#" data-bs-toggle="tooltip" data-bs-title="This is a tooltip text">
+                <a href="#" data-bs-toggle="tooltip" tabindex="0" data-bs-placement="left" data-bs-title="Hier folgen noch weitere Hintergrundinformationen">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#002E50" class="bi bi-info-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                     <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
@@ -528,9 +912,20 @@
                 Windenergie
               </div>
               <div class="scenario-feature__values">
-                8476 ha (1,86 %)
+                9616 ha
               </div>
               <div class="scenario-feature__bars">
+                <div class="row">
+                  <div class="scenarios-bar">
+                    <div class="scenarios-bar__total">
+                      <span>2.11 % der Regionsfläche</span>
+                    </div>
+                    <div class="scenarios-bar__chart">
+                      <div class="scenarios-bar__bg"></div>
+                      <div id="statusQuoWindTotal" style="width: 2.11%" class="scenarios-bar__value scenarios-bar__value--wind"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="scenario-feature__row">
@@ -538,9 +933,20 @@
                 Freiflächen-PV
               </div>
               <div class="scenario-feature__values">
-                2786 ha (0,61 %)
+                2437 ha
               </div>
               <div class="scenario-feature__bars">
+                <div class="row">
+                  <div class="scenarios-bar">
+                    <div class="scenarios-bar__total">
+                      <span>0,53 % der Regionsfläche</span>
+                    </div>
+                    <div class="scenarios-bar__chart">
+                      <div class="scenarios-bar__bg"></div>
+                      <div id="statusQuoWindTotal" style="width: 0.53%" class="scenarios-bar__value scenarios-bar__value--pv"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -552,11 +958,11 @@
                     <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09zM4.157 8.5H7a.5.5 0 0 1 .478.647L6.11 13.59l5.732-6.09H9a.5.5 0 0 1-.478-.647L9.89 2.41z"/>
                   </svg>
                 </span>
-                <span class="scenario-feature__name">Energieeinsparung</span>
+                <span class="scenario-feature__name">Anteil Erneuerbarer Energien</span>
                 <span class="scenario-feature__value scenario-feature__value--light">+</span>
               </div>
               <div class="scenario-feature__header--right">
-                <a href="#" data-bs-toggle="tooltip" data-bs-title="This is a tooltip text">
+                <a href="#" data-bs-toggle="tooltip" tabindex="0" data-bs-placement="left" data-bs-title="Hier folgen noch weitere Hintergrundinformationen">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#002E50" class="bi bi-info-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                     <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
@@ -566,56 +972,65 @@
             </div>
             <div class="scenario-feature__row">
               <div class="scenario-feature__keys">
-                XXXXXXXXX
+                am Stromverbrauch
               </div>
               <div class="scenario-feature__values">
-                0000
+                100 %
               </div>
               <div class="scenario-feature__bars">
+                <div class="row">
+                  <div class="scenarios-bar">
+                    <div class="scenarios-bar__total">
+                      <span>100 %</span>
+                    </div>
+                    <div class="scenarios-bar__chart">
+                      <div class="scenarios-bar__bg"></div>
+                      <div id="statusQuoWindTotal" style="width: 100%" class="scenarios-bar__value scenarios-bar__value--ee"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="scenario-feature__row">
               <div class="scenario-feature__keys">
-                XXXXXXXXX
+                am Wärmeverbrauch
               </div>
               <div class="scenario-feature__values">
-                0000
+                82 %
               </div>
               <div class="scenario-feature__bars">
+                <div class="row">
+                  <div class="scenarios-bar">
+                    <div class="scenarios-bar__total">
+                      <span>82 %</span>
+                    </div>
+                    <div class="scenarios-bar__chart">
+                      <div class="scenarios-bar__bg"></div>
+                      <div id="statusQuoWindTotal" style="width: 82%" class="scenarios-bar__value scenarios-bar__value--ee"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div id="selectedScenario2" class="scenarios" style="display: none;">
-        <div class="scenarios__top">
-          <div class="scenarios__top--left">
-            <span class="scenarios__name">Energiestrategie Brandenburg 2040</span>
-            <button class="scenarios__btn scenarios__btn--active">Übernehmen</button>
-          </div>
-          <div class="scenarios__top--right">
-            <span class="scenarios__goal">Vorgaben nach WindBG/EEG geschafft</span>
-          </div>
-        </div>
-        <p>In der Energiestrategie 2040 hat sich das Land Brandenburg 2022 ein Leitszenario zur Gestaltung der Energiewende gegeben. In ihr wurden die Ziele in den Bereichen Energieeffizienz, Ausbau Erneuerbarer Energien, Speichertechnologien und Netzausbau festgelegt. <b>Dieses Szenario bildet ausgewählte Kernziele für das Jahr 2040 ab.</b></p>
-        <p>Dieses Szenario ist derzeit noch nicht verfügbar.</p>
-      </div>
       <div id="selectedScenario3" class="scenarios" style="display: none;">
-        <div class="scenarios__top">
+        <header class="scenarios__top">
           <div class="scenarios__top--left">
-            <span class="scenarios__name">Langfristszenario T45 Strom 2045</span>
-            <button class="scenarios__btn scenarios__btn--active">Übernehmen</button>
+            <h2 class="scenarios__name">Langfristszenario T45 Strom 2045</h2>
+            <!--<button class="scenarios__btn scenarios__btn--active">Übernehmen</button>-->
           </div>
-          <div class="scenarios__top--right">
+          <!--<div class="scenarios__top--right">
             <span class="scenarios__goal">Vorgaben nach WindBG/EEG geschafft</span>
-          </div>
-        </div>
+          </div>-->
+        </header>
         <p>In den Langfristszenarien des Bundesministeriums für Wirtschaft und Klimaschutz werden langfristige Perspektiven für die Transformation des Energiesystems gegeben. <b>Dieses Szenario bildet ausgewählte Kernziele des Szenarios T45 Strom für das Jahr 2045 ab.</b></p>
         <p>Dieses Szenario ist derzeit noch nicht verfügbar.</p>
       </div>
       <div id="selectedScenario4" class="scenarios" style="display: none;">Test 4</div>
     </div>
-  </div>
+  </section>
   {% include 'components/toggle_view.html' %}
 </section>
 

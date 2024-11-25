@@ -1,5 +1,6 @@
 """Configuration for map app."""
 import json
+import os
 import pathlib
 import sys
 from pathlib import Path
@@ -26,6 +27,9 @@ ADDITIONAL_ENERGY_SETTINGS_FILE = settings.DATA_DIR.path("digipipe/settings/ener
 ADDITIONAL_HEAT_SETTINGS_FILE = settings.DATA_DIR.path("digipipe/settings/heat_settings_panel.json")
 ADDITIONAL_TRAFFIC_SETTINGS_FILE = settings.DATA_DIR.path("digipipe/settings/traffic_settings_panel.json")
 TECHNOLOGY_DATA_FILE = settings.DIGIPIPE_DIR.path("scalars").path("technology_data.json")
+
+# MARKDOWNS
+REVEAL_EQUITY_MD = utils.read_file(settings.APPS_DIR.path("static/markdown/reveal_equity.md"))
 
 # FILTERS
 FILTER_DEFINITION = {}
@@ -81,11 +85,16 @@ def get_slider_marks() -> dict:
                 slider_marks[param_name].append(("Heute", param_data["status_quo"]))
             else:
                 slider_marks[param_name] = [("Heute", param_data["status_quo"])]
-        if "future_scenario" in param_data:
+        if "future_scenario_2030" in param_data:
             if param_name in slider_marks:
-                slider_marks[param_name].append(("BB2040", param_data["future_scenario"]))
+                slider_marks[param_name].append(("BB30", param_data["future_scenario_2030"]))
             else:
-                slider_marks[param_name] = [("BB2040", param_data["future_scenario"])]
+                slider_marks[param_name] = [("BB30", param_data["future_scenario_2030"])]
+        if "future_scenario_2040" in param_data:
+            if param_name in slider_marks:
+                slider_marks[param_name].append(("BB40", param_data["future_scenario_2040"]))
+            else:
+                slider_marks[param_name] = [("BB40", param_data["future_scenario_2040"])]
     return slider_marks
 
 
@@ -116,15 +125,16 @@ def get_slider_per_sector() -> dict:
 
 # STORE
 # Skip initialization in migrate mode
-if "migrate" not in sys.argv:
+if "migrate" not in sys.argv and os.environ.get("MAKE", "False") != "True":
     STORE_COLD_INIT = {
         "version": __version__,
         "slider_marks": get_slider_marks(),
-        "potentials": datapackage.get_potential_values().sum().to_dict(),
+        "potentials": datapackage.get_potential_capacities().sum().to_dict(),
         "slider_per_sector": get_slider_per_sector(),
         "allowedSwitches": ["wind_distance"],
         "detailTab": {"showPotentialLayers": True},
         "staticState": 0,
+        "distill": settings.MAP_ENGINE_USE_DISTILLED_MVTS,
     }
 
 
