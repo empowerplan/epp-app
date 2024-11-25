@@ -21,7 +21,7 @@
   },
   "xAxis": {
     "type": "category",
-    "data": ["2010", "2015", "2020", "2023", "Dein\nSzenario*"],
+    "data": ["2010", "2015", "2020", "2024", "Dein\nSzenario*"],
     "axisLabel": {
       "rotate": 45
     }
@@ -29,12 +29,14 @@
   "yAxis": [
     {
       "type": "value",
+      "max": 3000,
       "axisLabel": {
         "formatter": "{value} MW"
       }
     },
     {
       "type": "value",
+      "max": 600,
       "name": "Anzahl"
     }
   ],
@@ -51,10 +53,10 @@
       },
       "color": "#6A89CC",
       "data": [
-        536,
-        624,
-        773,
-        1155,
+        531,
+        618,
+        766,
+        1150,
         {
           "value": 0,
           "itemStyle": {
@@ -94,7 +96,7 @@
       }
     },
     {
-      "name": "Leistung genehmigt (2023)",
+      "name": "Leistung genehmigt (2024)",
       "type": "bar",
       "stack": "power",
       "label": {
@@ -126,7 +128,7 @@
       "yAxisIndex": 0
     },
     {
-      "name": "Leistung in Planung (2023)",
+      "name": "Leistung in Planung (2024)",
       "type": "bar",
       "stack": "power",
       "label": {
@@ -141,7 +143,7 @@
         0,
         0,
         {
-          "value": 764,
+          "value": 1260,
           "itemStyle": {
             "borderWidth": 2,
             "borderColor": "#6A89CC",
@@ -169,10 +171,10 @@
       },
       "color": "#b6caf3",
       "data": [
-        319,
-        359,
-        405,
-        479,
+        313,
+        353,
+        398,
+        487,
         {
           "value": 0,
           "itemStyle": {
