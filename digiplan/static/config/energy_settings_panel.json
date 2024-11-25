@@ -9,7 +9,7 @@
     "start": 30,
     "status_quo": 50,
     "step": 5,
-    "tooltip": "{% trans 'Nennleistung der in der Region installierten Windenergieanlagen in Megawatt. Die markierten Ziele für 2030 und 2040 sind abgeleitet aus der Energiestrategie Brandenburg (2,2 % bis 2032).<br><br><i>Hinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität zu Ertragssteigerungen.</i>' %} ",
+    "tooltip": "{% trans 'Nennleistung der in der Region installierten Windenergieanlagen in Megawatt. Die markierten Ziele für 2030 (BB30) und 2040 (BB40) sind abgeleitet aus der Energiestrategie Brandenburg (2,2 % bis 2032).<br><br><i>Hinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität zu Ertragssteigerungen.</i>' %} ",
     "type": "slider",
     "sidepanel": true
   },
@@ -45,7 +45,7 @@
     "start": 30,
     "status_quo": 50,
     "step": 5,
-    "tooltip": "{% trans 'Nennleistung der in der Region installierten Freiflächen-PV-Anlagen in Megawatt (peak). Die markierten Ziele für 2030 und 2040 sind abgeleitet aus der Energiestrategie Brandenburg.<br><br><i>Hinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität zu Ertragssteigerungen.</i>' %}",
+    "tooltip": "{% trans 'Nennleistung der in der Region installierten Freiflächen-PV-Anlagen in Megawatt (peak). Die markierten Ziele für 2030 (BB30) und 2040 (BB40) sind abgeleitet aus der Energiestrategie Brandenburg.<br><br><i>Hinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität zu Ertragssteigerungen.</i>' %}",
     "type": "slider",
     "sidepanel": true
   },
@@ -89,7 +89,7 @@
     "start": 30,
     "status_quo": 50,
     "step": 5,
-    "tooltip": "{% trans 'Nennleistung der in der Region installierten PV-Aufdachanlagen in Megawatt (peak). Die markierten Ziele für 2030 und 2040 sind abgeleitet aus der Energiestrategie Brandenburg.<br><br><i>Hinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität zu Ertragssteigerungen.</i>' %}",
+    "tooltip": "{% trans 'Nennleistung der in der Region installierten PV-Aufdachanlagen in Megawatt (peak). Die markierten Ziele für 2030 (BB30) und 2040 (BB40) sind abgeleitet aus der Energiestrategie Brandenburg.<br><br><i>Hinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität zu Ertragssteigerungen.</i>' %}",
     "type": "slider",
     "sidepanel": true
   },

@@ -29,7 +29,7 @@ ADDITIONAL_TRAFFIC_SETTINGS_FILE = settings.DATA_DIR.path("digipipe/settings/tra
 TECHNOLOGY_DATA_FILE = settings.DIGIPIPE_DIR.path("scalars").path("technology_data.json")
 
 # MARKDOWNS
-LANDING_PAGE_MD = utils.read_file(settings.APPS_DIR.path("static/markdown/landing_page.md"))
+REVEAL_EQUITY_MD = utils.read_file(settings.APPS_DIR.path("static/markdown/reveal_equity.md"))
 
 # FILTERS
 FILTER_DEFINITION = {}

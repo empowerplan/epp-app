@@ -21,7 +21,7 @@
   },
   "xAxis": {
     "type": "category",
-    "data": ["2010", "2015", "2020", "2023**", "Dein\nSzenario***"],
+    "data": ["2010", "2015", "2020", "2024", "Dein\nSzenario**"],
     "axisLabel": {
       "rotate": 45
     }
@@ -52,9 +52,9 @@
       "color": "#efad25",
       "data": [
         3,
-        296,
         392,
-        873,
+        588,
+        959,
         {
           "value": 0,
           "itemStyle": {
@@ -91,39 +91,7 @@
       }
     },
     {
-      "name": "Leistung genehmigt (2023)",
-      "type": "bar",
-      "stack": "power",
-      "label": {
-        "show": false,
-        "position": "inside",
-        "rotate": 0,
-        "color": "#333"
-      },
-      "color": "#f1ce86",
-      "data": [
-        0,
-        0,
-        0,
-        {
-          "value": 203,
-          "itemStyle": {
-            "borderWidth": 2,
-            "borderColor": "#efad25",
-            "borderType": "dotted"
-          },
-          "label": {
-            "show": true,
-            "rotate": 0,
-            "fontSize": 10
-          }
-        },
-        0
-      ],
-      "yAxisIndex": 0
-    },
-    {
-      "name": "Leistung in Planung (2023)**",
+      "name": "Leistung genehmigt (2024)",
       "type": "bar",
       "stack": "power",
       "label": {
@@ -138,7 +106,7 @@
         0,
         0,
         {
-          "value": 1049,
+          "value": 645,
           "itemStyle": {
             "borderWidth": 2,
             "borderColor": "#efad25",
@@ -166,10 +134,10 @@
       },
       "color": "#ffd660",
       "data": [
-        5,
-        63,
-        94,
-        95,
+        3,
+        60,
+        90,
+        99,
         {
           "value": 0,
           "itemStyle": {

@@ -273,8 +273,10 @@ MARKDOWNIFY = {
         "MARKDOWN_EXTENSIONS": [
             "markdown.extensions.extra",
             "markdown.extensions.admonition",
+            "markdown.extensions.toc",
             "md4mathjax",
         ],
+        "MARKDOWN_EXTENSION_CONFIGS": {"markdown.extensions.toc": {"toc_depth": 2}},
     },
 }
 
@@ -475,12 +477,14 @@ MAP_ENGINE_CHOROPLETHS = [
         layers=["municipality"],
         title=_("Anteil Erneuerbare Energien am Strombedarf"),
         unit="%",
+        labels=["0 - 20", "20 - 40", "40 - 60", "60 - 80", "80 - 100", " > 100"],
     ),
     setup.Choropleth(
         "energy_share_2045",
         layers=["municipality"],
         title=_("Anteil Erneuerbare Energien am Strombedarf"),
         unit="%",
+        labels=["0 - 20", "20 - 40", "40 - 60", "60 - 80", "80 - 100", " > 100"],
     ),
     setup.Choropleth(
         "energy_capita_statusquo",
@@ -626,7 +630,7 @@ MAP_ENGINE_POPUPS = [
         popup_at_default_layer=True,
     ),
     setup.Popup(
-        "municipality",
+        f"municipality{'_distilled' if DISTILL else ''}",
         popup_at_default_layer=False,
         choropleths=[
             "population_statusquo",

@@ -32,7 +32,7 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         "pv_map_control": _("Negativkriterien PV"),
         "store_hot_init": config.STORE_HOT_INIT,
         "oemof_scenario": settings.OEMOF_SCENARIO,
-        "markdown": {"landing_page": config.LANDING_PAGE_MD},
+        "markdown": {"reveal_equity": config.REVEAL_EQUITY_MD},
     }
 
     def get_context_data(self, **kwargs) -> dict:
@@ -57,7 +57,9 @@ class MapGLView(TemplateView, views.MapEngineMixin):
             0,
             context["mapengine_layers"].pop(
                 next(
-                    i for i, element in enumerate(context["mapengine_layers"]) if element["id"] == "region_boundaries"
+                    i
+                    for i, element in enumerate(context["mapengine_layers"])
+                    if element["id"] == "region_boundaries" or element["id"] == "region_boundaries_distilled"
                 ),
             ),
         )

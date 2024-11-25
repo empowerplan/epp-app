@@ -21,17 +21,19 @@
   },
   "xAxis": {
     "type": "category",
-    "data": ["Regionalplan\n2018", "Entwurf\n2024", "Dein\nSzenario*"]
+    "data": ["Regionalplan\n2018", "1. Entwurf\n2024", "Dein\nSzenario*"]
   },
   "yAxis": [
     {
       "type": "value",
+      "max": 15000,
       "axisLabel": {
         "formatter": "{value} ha"
       }
     },
     {
       "type": "value",
+      "max": 2.5,
       "axisLabel": {
         "formatter": "{value} %"
       }
