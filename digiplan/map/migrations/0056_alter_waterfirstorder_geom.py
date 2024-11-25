@@ -7,13 +7,13 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('map', '0054_pvgroundcriteriamerged'),
+        ('map', '0055_alter_airtraffic_geom_alter_biomass_geom_and_more'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='waterfirstorder',
             name='geom',
-            field=django.contrib.gis.db.models.fields.MultiPolygonField(srid=4326),
+            field=django.contrib.gis.db.models.fields.MultiPolygonField(srid=3857),
         ),
     ]
