@@ -77,7 +77,8 @@
   @extend .fw-light;
 
   &__visual {
-    @extend .col-lg-6;
+    //@extend .col-lg-6;
+    @extend .col-lg-4;
 
     &--logos {
       @extend .d-flex;
@@ -91,7 +92,8 @@
   }
 
   &__text {
-    @extend .col-lg-6;
+    //@extend .col-lg-6;
+    @extend .col-lg-8;
   }
 
   img {
