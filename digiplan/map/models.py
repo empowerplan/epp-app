@@ -32,7 +32,7 @@ class Region(models.Model):
 class Municipality(models.Model):
     """Model for region level municipality."""
 
-    geom = models.MultiPolygonField(srid=4326)
+    geom = models.MultiPolygonField(srid=3857)
     name = models.CharField(max_length=50, unique=True)
     area = models.FloatField()
 
@@ -101,7 +101,7 @@ class Population(models.Model):
 class RegionBoundaries(models.Model):
     """Region Boundaries model."""
 
-    geom = models.MultiPolygonField(srid=4326)
+    geom = models.MultiPolygonField(srid=3857)
 
     objects = models.Manager()
     vector_tiles = StaticMVTManager(columns=[])
@@ -118,7 +118,7 @@ class RegionBoundaries(models.Model):
 class RenewableModel(models.Model):
     """Base class for renewable cluster models."""
 
-    geom = models.PointField(srid=4326)
+    geom = models.PointField(srid=3857)
     name = models.CharField(max_length=255, null=True)
     geometry_approximated = models.BooleanField()
     unit_count = models.BigIntegerField(null=True)
@@ -525,7 +525,7 @@ class Storage(RenewableModel):
 class StaticRegionModel(models.Model):
     """Base class for static region models."""
 
-    geom = models.MultiPolygonField(srid=4326)
+    geom = models.MultiPolygonField(srid=3857)
 
     objects = models.Manager()
     vector_tiles = StaticMVTManager(columns=[])
@@ -620,7 +620,7 @@ class WaterFirstOrder(StaticRegionModel):  # noqa: D101
     data_file = "pv_ground_criteria_water_first_order"
     layer = "Geweasser_1_Ordnung"
 
-    geom = models.MultiLineStringField(srid=4326)
+    geom = models.MultiLineStringField(srid=3857)
 
     mapping = {"geom": "MULTILINESTRING"}
 
@@ -793,7 +793,7 @@ class WindTurbine2(models.Model):
     hub_height = models.FloatField(null=True)
     rotor_diameter = models.FloatField(null=True)
     status = models.CharField(max_length=50, null=True)
-    geom = models.PointField(srid=4326)
+    geom = models.PointField(srid=3857)
 
     mun_id = models.ForeignKey(Municipality, on_delete=models.DO_NOTHING, null=True)
 
