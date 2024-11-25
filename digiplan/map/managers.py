@@ -73,7 +73,7 @@ class MVTManager(models.Manager):
         # Build bbox with same projection as geometry in model
         bbox.srid = 4326
         query = self.annotate(
-            mvt_geom=AsMVTGeom(self.geo_col, Transform(bbox, 3857), 4096, 0, True),  # noqa: FBT003
+            mvt_geom=AsMVTGeom(self.geo_col, Transform(bbox, 3857), 4096, 256, True),  # noqa: FBT003
         )
         intersect = {f"{self.geo_col}__intersects": bbox}
         return query.filter(**intersect)
