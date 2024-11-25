@@ -3,7 +3,6 @@ from typing import Optional
 
 import django.db.models
 from django.contrib.gis.db import models
-from django.contrib.gis.db.models.functions import Transform
 from django.contrib.gis.geos import Polygon
 from django.core.exceptions import FieldError
 from django.db import connection
@@ -70,9 +69,10 @@ class MVTManager(models.Manager):
     def _get_mvt_geom_query(self, x: int, y: int, z: int) -> django.db.models.QuerySet:
         """Intersect bbox from given coordinates and return related MVT."""
         bbox = Polygon.from_bbox(tile_edges(x, y, z))
-        bbox.srid = 4326
+        # Build bbox with same projection as geometry in model
+        bbox.srid = getattr(self.model, self.geo_col).field.srid
         query = self.annotate(
-            mvt_geom=AsMVTGeom(Transform(self.geo_col, 3857), Transform(bbox, 3857), 4096, 0, False),  # noqa: FBT003
+            mvt_geom=AsMVTGeom(self.geo_col, bbox, 4096, 0, True),  # noqa: FBT003
         )
         intersect = {f"{self.geo_col}__intersects": bbox}
         return query.filter(**intersect)
