@@ -31,6 +31,8 @@ tour.addStep({
             action() {
                 const menu_next_btn = document.getElementById("menu_next_btn");
                 menu_next_btn.click();
+                // document.getElementById("menu_next_btn").click();
+                // document.getElementById("menu_next_btn").click();
                 return this.next();
             },
             text: 'Weiter'
@@ -57,6 +59,10 @@ tour.addStep({
         },
         {
             action() {
+                // Show choropleth
+                const statusquoDropdown = document.getElementById("situation_today");
+                statusquoDropdown.value = "energy_statusquo";
+                PubSub.publish(mapEvent.CHOROPLETH_SELECTED, statusquoDropdown.value);
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -91,8 +97,8 @@ tour.addStep({
                 PubSub.publish(eventTopics.CHOROPLETH_DEACTIVATED);
 
                 // Activate layers
-                document.querySelector(".static-layer #wind").click();
-                document.querySelector(".static-layer #road_default").click();
+                document.querySelector(".static-layer #rpg_ols_wind_operating").click();
+                document.querySelector(".static-layer #special_protection_area").click();
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -105,7 +111,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Karte',
-    text: 'Lassen Sie sich die heutigen Anlagen und Flächen auf der Karte anzeigen.',
+    text: 'Lassen Sie sich heutige Anlagen und Flächen auf der Karte anzeigen.',
     attachTo: {
         element: '#js-map-layers-box',
         on: 'top'
@@ -120,6 +126,14 @@ tour.addStep({
         },
         {
             action() {
+                // Deactivate layer
+                document.querySelector(".static-layer #special_protection_area").click();
+                // Fly to wind turbine
+                map.flyTo({
+                  center: [14.195, 52.425],
+                  zoom: 14,
+                  essential: true
+                });
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -132,7 +146,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Karte',
-    text: 'Klicken Sie auf ein einzelnes Icon, um mehr über diese Anlage zu erfahren.',
+    text: 'Klicken Sie auf eine einzelne Windkraftanlage, um mehr über diese zu erfahren.',
     attachTo: {
         element: '.maplibregl-canvas',
         on: 'top'
@@ -147,8 +161,9 @@ tour.addStep({
         },
         {
             action() {
-                document.querySelector(".static-layer #wind").click();
-                document.querySelector(".static-layer #road_default").click();
+                // Deactivate layer
+                document.querySelector(".static-layer #rpg_ols_wind_operating").click();
+                map.zoomTo(8);
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -189,7 +204,8 @@ tour.addStep({
 
 tour.addStep({
     title: 'Szenarien',
-    text: 'Wählen Sie ein vorgefertigtes Szenario aus.',
+    text: 'Hier sehen Sie ausgewählte Zukunftsszenarien. Wählen Sie eines aus, um es zu erkunden.',
+    //Damit werden die Werte in die Einstellungen von Schritt 4 übernommen. Ohne eine Auswahl werden die heutigen Werte eingestellt.
     attachTo: {
         element: '#panel_3_scenarios',
         on: 'right'
@@ -216,7 +232,34 @@ tour.addStep({
 
 tour.addStep({
     title: 'Szenarien',
-    text: 'Bestätigen Sie das ausgewählte Szenario hier, dann werden die Einstellungen davon übernommen.',
+    text: 'Hier sehen Sie die Rahmenbedingungen für das ausgewählte Szenario.',
+    attachTo: {
+        element: '#selectedScenario1',
+        on: 'left'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'panel_3_scenarios2'
+});
+
+
+tour.addStep({
+    title: 'Szenarien',
+    text: 'Bestätigen Sie das ausgewählte Szenario hier, dann werden die Einstellungen in den nächsten Schritt übernommen.',
     attachTo: {
         element: '.scenarios__btn',
         on: 'right'
@@ -237,7 +280,7 @@ tour.addStep({
             text: 'Weiter'
         }
     ],
-    id: 'panel_3_scenarios'
+    id: 'panel_3_scenarios3'
 });
 
 
@@ -292,12 +335,39 @@ tour.addStep({
             text: 'Weiter'
         }
     ],
-    id: 'panel_4_settings'
+    id: 'panel_4_settings1'
 });
 
 tour.addStep({
     title: 'Einstellungen',
-    text: 'Hier können Sie mehr ins Detail gehen.',
+    text: 'Beispiel: Hier können Sie die Windenergieleistung einstellen.',
+    attachTo: {
+        element: '.s_w_1',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'panel_4_settings2'
+});
+
+
+tour.addStep({
+    title: 'Detaileinstellungen',
+    text: 'Für einige Erzeuger gibt es Detaileinstellungen.',
     attachTo: {
         element: '.c-slider__label--more',
         on: 'right'
@@ -312,21 +382,22 @@ tour.addStep({
         },
         {
             action() {
+                PubSub.publish(eventTopics.MORE_LABEL_CLICK, document.getElementsByClassName("c-slider s_w_1")[0]);
                 return this.next();
             },
             classes: 'shepherd-button-primary',
             text: 'Weiter'
         }
     ],
-    id: 'more_slider'
+    id: 'panel_4_settings3'
 });
 
 
 tour.addStep({
-    title: 'Einstellungen',
-    text: 'Schauen Sie, wie sich die Verteilung verändert.',
+    title: 'Detaileinstellungen',
+    text: 'Hier bei Wind können die verfügbaren Flächen eingestellt werden.',
     attachTo: {
-        element: '.power-mix__chart',
+        element: '.sidepanel',
         on: 'right'
     },
     buttons: [
@@ -339,13 +410,14 @@ tour.addStep({
         },
         {
             action() {
+                PubSub.publish(eventTopics.MORE_LABEL_CLICK, document.getElementsByClassName("c-slider s_w_1")[0]);
                 return this.next();
             },
             classes: 'shepherd-button-primary',
             text: 'Weiter'
         }
     ],
-    id: 'power_mix_chart'
+    id: 'panel_4_settings4'
 });
 
 
