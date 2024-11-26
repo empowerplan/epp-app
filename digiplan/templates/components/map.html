@@ -278,6 +278,7 @@
               oder starte<br>das Tool mit "Weiter"
             </p>
             <img class="challenges__img" width="300" height="272" src="{% static 'images/oderland_spree_map_illustration_title.webp' %}" alt="Illustrative Ansicht der Region Oderland-Spree">
+	    <button type="button" id="intro_tour_start">{% translate "Neu hier? Tour starten" %}</button>
           </div>
         </div>
         <div class="challenges__col">
@@ -1032,3 +1033,6 @@
   </section>
   {% include 'components/toggle_view.html' %}
 </section>
+
+<script src="{% static 'vendors/shepherd/shepherd.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/tours.js' %}" type="text/javascript"></script>
