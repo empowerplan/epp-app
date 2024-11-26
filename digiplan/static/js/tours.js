@@ -20,19 +20,10 @@ tour.addStep({
         on: 'bottom'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.cancel();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Tour beenden'
-        // },
         {
             action() {
                 const menu_next_btn = document.getElementById("menu_next_btn");
                 menu_next_btn.click();
-                // document.getElementById("menu_next_btn").click();
-                // document.getElementById("menu_next_btn").click();
                 return this.next();
             },
             text: 'Weiter'
@@ -463,6 +454,7 @@ tour.addStep({
     buttons: [
         {
             action() {
+                document.getElementById("wind-tab").click();
                 document.getElementById("menu_next_btn").click();
                 return this.next();
             },
@@ -475,7 +467,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Ergebnisse',
-    text: 'Sobald die Simulation abgeschlossen ist, kannst Du die Ergebnisse im Diagramm links und auf der Karte anschauen. Wähle dazu eine Kategorie aus.',
+    text: 'Die Simulation kann einen Moment dauern, anschließend kannst Du die Ergebnisse im Diagramm links und auf der Karte anschauen.<br><br>Derweil kannst Du Dir schon einige Vorergebnisse ansehen.',
     attachTo: {
         element: '#panel_5_results',
         on: 'right'
@@ -483,6 +475,10 @@ tour.addStep({
     buttons: [
         {
             action() {
+                // Show choropleth
+                const futureDropdown = document.getElementById("result_views");
+                futureDropdown.value = "energy_2045";
+                PubSub.publish(mapEvent.CHOROPLETH_SELECTED, futureDropdown.value);
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -495,7 +491,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Ergebnisse',
-    text: 'Wähle auf der Karte eine Region aus und schaue Dir die detaillierten Informationen in einem Diagramm an.',
+    text: 'Wähle auf der Karte eine Gemeinde aus und schaue Dir die Details in einem Diagramm an.',
     attachTo: {
         element: '.maplibregl-canvas',
         on: 'left'
@@ -503,6 +499,11 @@ tour.addStep({
     buttons: [
         {
             action() {
+                // Hide status quo choropleth again
+                const futureDropdown = document.getElementById("result_views");
+                futureDropdown.value = "";
+                deactivateChoropleth();
+                PubSub.publish(eventTopics.CHOROPLETH_DEACTIVATED);
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -530,17 +531,60 @@ tour.addStep({
             text: 'Weiter'
         }
     ],
-    id: 'chart_view_tab'
+    id: 'chart_view_tab1'
+});
+
+tour.addStep({
+    title: 'Einstellungen',
+    text: 'Wähle eine Ergebnis-Kategorie',
+    attachTo: {
+        element: '.nav-pills',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'chart_view_tab2'
+});
+
+
+tour.addStep({
+    title: 'Einstellungen',
+    text: 'Wie viel trägt der ausgewählte Energieträger zur Deckung des Strombedarfs bei?',
+    attachTo: {
+        element: '#mainTabContent',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'chart_view_tab3'
 });
 
 
 tour.addStep({
     title: 'Fertig',
-    text: 'Viel Spaß mit dem EmPowerPlan-Tool! :D',
+    text: 'Viel Spaß mit dem EmPowerPlan-Tool!',
     attachTo: null,
     buttons: [
         {
             action() {
+                document.getElementById("menu_previous_btn").click();
+                document.getElementById("menu_previous_btn").click();
+                document.getElementById("menu_previous_btn").click();
+                document.getElementById("menu_previous_btn").click();
                 return this.complete();
             },
             classes: 'shepherd-button-primary',
