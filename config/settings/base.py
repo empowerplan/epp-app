@@ -602,6 +602,14 @@ MAP_ENGINE_POPUPS = [
         popup_at_default_layer=True,
     ),
     setup.Popup(
+        f"potentialarea_wind_stp_2018_eg{'_distilled' if DISTILL else ''}",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        f"potentialarea_wind_stp_2024_vr{'_distilled' if DISTILL else ''}",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
         "pvground",
         popup_at_default_layer=True,
     ),
