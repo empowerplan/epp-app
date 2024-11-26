@@ -50,13 +50,6 @@ tour.addStep({
         on: 'right'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 // Show choropleth
@@ -81,13 +74,6 @@ tour.addStep({
         on: 'right'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 // Hide status quo choropleth again
@@ -117,13 +103,6 @@ tour.addStep({
         on: 'top'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 // Deactivate layer
@@ -152,13 +131,6 @@ tour.addStep({
         on: 'top'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 // Deactivate layer
@@ -182,13 +154,6 @@ tour.addStep({
         on: 'bottom'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 document.getElementById("menu_next_btn").click();
@@ -211,13 +176,6 @@ tour.addStep({
         on: 'right'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 return this.next();
@@ -238,13 +196,6 @@ tour.addStep({
         on: 'left'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 return this.next();
@@ -265,13 +216,6 @@ tour.addStep({
         on: 'right'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 return this.next();
@@ -292,13 +236,6 @@ tour.addStep({
         on: 'bottom'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 document.getElementById("menu_next_btn").click();
@@ -320,13 +257,6 @@ tour.addStep({
         on: 'right'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 return this.next();
@@ -340,19 +270,12 @@ tour.addStep({
 
 tour.addStep({
     title: 'Einstellungen',
-    text: 'Beispiel: Hier kannst Du die Windenergieleistung einstellen.',
+    text: 'Hier kannst Du z.B. die Windenergieleistung für Dein Szenario einstellen.<br>Verändere den Hauptregler, um Deine Windleistung anzupassen.',
     attachTo: {
         element: '.s_w_1',
         on: 'right'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 return this.next();
@@ -373,13 +296,6 @@ tour.addStep({
         on: 'right'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 PubSub.publish(eventTopics.MORE_LABEL_CLICK, document.getElementsByClassName("c-slider s_w_1")[0]);
@@ -395,22 +311,14 @@ tour.addStep({
 
 tour.addStep({
     title: 'Detaileinstellungen',
-    text: 'Hier bei Wind können die verfügbaren Flächen eingestellt werden.',
+    text: 'Hier bei Wind kann die Nutzung der verfügbaren Flächen eingestellt werden.<br><br>Im ersten Schritt kannst Du auswählen, welche Flächenkulisse für Windenergie verwendet werden soll.',
     attachTo: {
-        element: '.sidepanel',
+        element: '#windTab',
         on: 'right'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
-                PubSub.publish(eventTopics.MORE_LABEL_CLICK, document.getElementsByClassName("c-slider s_w_1")[0]);
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -422,6 +330,89 @@ tour.addStep({
 
 
 tour.addStep({
+    title: 'Detaileinstellungen',
+    text: 'Verändere den Regler um zu sehen, wie viel mit Deinen Einstellungen möglich ist.<br><br>Der einstellbare Bereich des linken Hauptreglers passt sich Deinen Einstellungen an.',
+    attachTo: {
+        element: '.sidepanel',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                PubSub.publish(eventTopics.MORE_LABEL_CLICK, document.getElementsByClassName("c-slider s_w_1")[0]);
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'panel_4_settings5'
+});
+
+
+tour.addStep({
+    title: 'Einstellungen',
+    text: 'Den tatsächlichen Wert stellst Du dort anschließend ein.',
+    attachTo: {
+        element: '.s_w_1',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'panel_4_settings6'
+});
+
+
+tour.addStep({
+    title: 'Einstellungen',
+    text: 'Auch bei der Freiflächen-PV kannst Du Dir die Potenziale ansehen.',
+    attachTo: {
+        element: '.s_pv_ff_1',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                PubSub.publish(eventTopics.MORE_LABEL_CLICK, document.getElementsByClassName("c-slider s_pv_ff_1")[0]);
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'panel_4_settings7'
+});
+
+
+tour.addStep({
+    title: 'Detaileinstellungen',
+    text: 'Du kannst für drei PV-Technologien einstellen, wie viel des Potenzials genutzt werden soll.<br><br>Verändere die Regler um zu sehen, wie viel mit Deinen Einstellungen möglich ist.<br><br>Der einstellbare Bereich des linken Hauptreglers passt sich Deinen Einstellungen an.',
+    attachTo: {
+        element: '.sidepanel--pv-outdoor',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                PubSub.publish(eventTopics.MORE_LABEL_CLICK, document.getElementsByClassName("c-slider s_pv_ff_1")[0]);
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'panel_4_settings8'
+});
+
+
+tour.addStep({
     title: 'Einstellungen',
     text: 'Wechsel zu den Einstellungen für Wärme.',
     attachTo: {
@@ -429,15 +420,9 @@ tour.addStep({
         on: 'right'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
+                document.getElementById("heat-tab").click();
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -449,6 +434,26 @@ tour.addStep({
 
 
 tour.addStep({
+    title: 'Einstellungen',
+    text: 'Auch für den Wärmesektor kannst Du eigene Einstellungen vornehmen.',
+    attachTo: {
+        element: '#panel_4_settings',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'panel_4_settings9'
+});
+
+
+tour.addStep({
     title: 'Nächster Schritt',
     text: 'Hier gehts weiter zu den Ergebnissen. Im Hintergrund wird dabei automatisch die Simulation Ihres Szenarios gestartet.',
     attachTo: {
@@ -456,13 +461,6 @@ tour.addStep({
         on: 'bottom'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 document.getElementById("menu_next_btn").click();
@@ -483,13 +481,6 @@ tour.addStep({
         on: 'right'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 return this.next();
@@ -510,13 +501,6 @@ tour.addStep({
         on: 'left'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 return this.next();
@@ -537,13 +521,6 @@ tour.addStep({
         on: 'bottom'
     },
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 document.getElementById("chart-view-tab").click();
@@ -562,13 +539,6 @@ tour.addStep({
     text: 'Viel Spaß mit dem EmPowerPlan-Tool! :D',
     attachTo: null,
     buttons: [
-        // {
-        //     action() {
-        //         return this.back();
-        //     },
-        //     classes: 'shepherd-button-secondary',
-        //     text: 'Zurück'
-        // },
         {
             action() {
                 return this.complete();
