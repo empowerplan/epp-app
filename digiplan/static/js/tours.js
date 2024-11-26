@@ -14,7 +14,7 @@ const tour = new Shepherd.Tour({  // jshint ignore:line
 
 tour.addStep({
     title: 'Navigation',
-    text: 'Schritt für Schritt zu Ihrem eigenen Szenario.',
+    text: 'Schritt für Schritt zu Deinem eigenen Szenario.',
     attachTo: {
         element: '.wizard__main',
         on: 'bottom'
@@ -446,7 +446,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Nächster Schritt',
-    text: 'Hier gehts weiter zu den Ergebnissen. Im Hintergrund wird dabei automatisch die Simulation Ihres Szenarios gestartet.',
+    text: 'Hier gehts weiter zu den Ergebnissen. Im Hintergrund wird dabei automatisch die Simulation Deines Szenarios gestartet.',
     attachTo: {
         element: '#menu_next_btn',
         on: 'bottom'
