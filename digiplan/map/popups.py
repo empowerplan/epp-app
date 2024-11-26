@@ -1030,6 +1030,61 @@ class WindTurbine2PlannedPopup(WindTurbine2ClusterPopup):
     description = _("Geplante Windenergieanlagen (Daten: RPG Oderland-Spree, Stand: 08.10.2024)")
 
 
+class WindAreaPopup(popups.Popup):
+    """Wind area popup."""
+
+    description: str = None
+
+    def __init__(self, lookup: str, selected_id: int, **kwargs) -> None:  # noqa: ARG002
+        """Initialize popup with table template."""
+        self.model_lookup = lookup
+        super().__init__(lookup="base", selected_id=selected_id)
+
+    def get_context_data(self) -> dict:
+        """Return cluster data as context data."""
+        model = {
+            "potentialarea_wind_stp_2018_eg": models.PotentialAreaWindSTP2018EG,
+            "potentialarea_wind_stp_2024_vr": models.PotentialAreaWindSTP2024VR,
+        }[self.model_lookup]
+        default_attributes = {}
+        specific_attributes = {
+            "mun_id": "Gemeinde",
+            "weg_nr": "Nr. Eignungsgebiet",
+            "vr_wen_nr": "Name Vorranggebiet",
+        }
+        instance = model.objects.annotate(mun_name=F("mun_id")).get(pk=self.selected_id)
+        data_dict = {
+            "title": model._meta.verbose_name,  # noqa: SLF001
+            "description": self.description,
+            "data": {name: getattr(instance, key) for key, name in default_attributes.items()},
+        }
+
+        for key, name in specific_attributes.items():
+            if hasattr(instance, key):
+                value = getattr(instance, key)
+                data_dict["data"][name] = value
+
+        return data_dict
+
+
+class PotentialAreaWindSTP2018EG(WindAreaPopup):
+    """Popup for planned wind turbines (dataset by RPG with areas)."""
+
+    description = _(
+        "Windeignungsgebiet aus Sachlichem Teilregionalplan Windenergienutzung 2018. Daten: RPG Oderland-Spree",
+    )
+
+
+class PotentialAreaWindSTP2024VRPopup(WindAreaPopup):
+    """Popup for planned wind turbines (dataset by RPG with areas)."""
+
+    description = _(
+        "Windvorranggebiet aus 1. Entwurf des Sachlichen Teilplans Erneuerbare Energien 2024 der Regionalen "
+        "Planungsgemeinschaft (nicht rechtskräftig). "
+        "Daten: RPG Oderland-Spree, Stand: Januar 2024",
+    )
+
+
 POPUPS: dict[str, type(popups.Popup)] = {
     "wind": ClusterPopup,
     "pvroof": ClusterPopup,
@@ -1075,4 +1130,6 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "rpg_ols_wind_approved": WindTurbine2ApprovedPopup,
     "rpg_ols_wind_operating": WindTurbine2OperatingPopup,
     "rpg_ols_wind_planned": WindTurbine2PlannedPopup,
+    "potentialarea_wind_stp_2018_eg": PotentialAreaWindSTP2018EG,
+    "potentialarea_wind_stp_2024_vr": PotentialAreaWindSTP2024VRPopup,
 }
