@@ -20,13 +20,13 @@ tour.addStep({
         on: 'bottom'
     },
     buttons: [
-        {
-            action() {
-                return this.cancel();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Tour beenden'
-        },
+        // {
+        //     action() {
+        //         return this.cancel();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Tour beenden'
+        // },
         {
             action() {
                 const menu_next_btn = document.getElementById("menu_next_btn");
@@ -44,19 +44,19 @@ tour.addStep({
 
 tour.addStep({
     title: 'Situation heute',
-    text: 'Schauen Sie sich die Situation heute an. Und wählen sie eine Kategorie aus.',
+    text: 'Schaue Dir die Situation heute an. Und wähle eine Kategorie aus.',
     attachTo: {
         element: '#situation_today',
         on: 'right'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 // Show choropleth
@@ -81,13 +81,13 @@ tour.addStep({
         on: 'right'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 // Hide status quo choropleth again
@@ -111,19 +111,19 @@ tour.addStep({
 
 tour.addStep({
     title: 'Karte',
-    text: 'Lassen Sie sich heutige Anlagen und Flächen auf der Karte anzeigen.',
+    text: 'Lasse Dir heutige Anlagen und Flächen auf der Karte anzeigen.',
     attachTo: {
         element: '#js-map-layers-box',
         on: 'top'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 // Deactivate layer
@@ -146,19 +146,19 @@ tour.addStep({
 
 tour.addStep({
     title: 'Karte',
-    text: 'Klicken Sie auf eine einzelne Windkraftanlage, um mehr über diese zu erfahren.',
+    text: 'Klicke auf eine einzelne Windkraftanlage, um mehr über diese zu erfahren.',
     attachTo: {
         element: '.maplibregl-canvas',
         on: 'top'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 // Deactivate layer
@@ -182,13 +182,13 @@ tour.addStep({
         on: 'bottom'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 document.getElementById("menu_next_btn").click();
@@ -204,20 +204,20 @@ tour.addStep({
 
 tour.addStep({
     title: 'Szenarien',
-    text: 'Hier sehen Sie ausgewählte Zukunftsszenarien. Wählen Sie eines aus, um es zu erkunden.',
+    text: 'Hier siehst Du ausgewählte Zukunftsszenarien. Wähle eines aus, um es zu erkunden.',
     //Damit werden die Werte in die Einstellungen von Schritt 4 übernommen. Ohne eine Auswahl werden die heutigen Werte eingestellt.
     attachTo: {
         element: '#panel_3_scenarios',
         on: 'right'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 return this.next();
@@ -232,19 +232,19 @@ tour.addStep({
 
 tour.addStep({
     title: 'Szenarien',
-    text: 'Hier sehen Sie die Rahmenbedingungen für das ausgewählte Szenario.',
+    text: 'Hier siehst Du die Rahmenbedingungen für das ausgewählte Szenario.',
     attachTo: {
         element: '#selectedScenario1',
         on: 'left'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 return this.next();
@@ -259,19 +259,19 @@ tour.addStep({
 
 tour.addStep({
     title: 'Szenarien',
-    text: 'Bestätigen Sie das ausgewählte Szenario hier, dann werden die Einstellungen in den nächsten Schritt übernommen.',
+    text: 'Bestätige das ausgewählte Szenario hier, um die Einstellungen in den nächsten Schritt zu übernehmen.',
     attachTo: {
         element: '.scenarios__btn',
         on: 'right'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 return this.next();
@@ -292,13 +292,13 @@ tour.addStep({
         on: 'bottom'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 document.getElementById("menu_next_btn").click();
@@ -314,19 +314,19 @@ tour.addStep({
 
 tour.addStep({
     title: 'Einstellungen',
-    text: 'Verändern Sie die Einstellungen, um Ihr eigenes Szenario zu erstellen.',
+    text: 'Verändere die Einstellungen, um Dein eigenes Szenario zu erstellen.',
     attachTo: {
         element: '#panel_4_settings',
         on: 'right'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 return this.next();
@@ -340,19 +340,19 @@ tour.addStep({
 
 tour.addStep({
     title: 'Einstellungen',
-    text: 'Beispiel: Hier können Sie die Windenergieleistung einstellen.',
+    text: 'Beispiel: Hier kannst Du die Windenergieleistung einstellen.',
     attachTo: {
         element: '.s_w_1',
         on: 'right'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 return this.next();
@@ -373,13 +373,13 @@ tour.addStep({
         on: 'right'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 PubSub.publish(eventTopics.MORE_LABEL_CLICK, document.getElementsByClassName("c-slider s_w_1")[0]);
@@ -401,13 +401,13 @@ tour.addStep({
         on: 'right'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 PubSub.publish(eventTopics.MORE_LABEL_CLICK, document.getElementsByClassName("c-slider s_w_1")[0]);
@@ -423,19 +423,19 @@ tour.addStep({
 
 tour.addStep({
     title: 'Einstellungen',
-    text: 'Wechseln Sie zu den Einstellungen für Wärme.',
+    text: 'Wechsel zu den Einstellungen für Wärme.',
     attachTo: {
         element: '#settings_area_tab',
         on: 'right'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 return this.next();
@@ -450,19 +450,19 @@ tour.addStep({
 
 tour.addStep({
     title: 'Nächster Schritt',
-    text: 'Hier gehts weiter zu den Ergebnissen. Im Hintergrund wird dabei automatisch die Simulation Ihres Szenarios gestartet (gelber Kreis rotiert).',
+    text: 'Hier gehts weiter zu den Ergebnissen. Im Hintergrund wird dabei automatisch die Simulation Ihres Szenarios gestartet.',
     attachTo: {
         element: '#menu_next_btn',
         on: 'bottom'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 document.getElementById("menu_next_btn").click();
@@ -477,19 +477,19 @@ tour.addStep({
 
 tour.addStep({
     title: 'Ergebnisse',
-    text: 'Sobald die Simulation abgeschlossen ist, können Sie sich die Ergebnisse im Diagramm links und auf der Karte anschauen. Wählen Sie dazu eine Kategorie aus.',
+    text: 'Sobald die Simulation abgeschlossen ist, kannst Du die Ergebnisse im Diagramm links und auf der Karte anschauen. Wähle dazu eine Kategorie aus.',
     attachTo: {
         element: '#panel_5_results',
         on: 'right'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 return this.next();
@@ -504,19 +504,19 @@ tour.addStep({
 
 tour.addStep({
     title: 'Ergebnisse',
-    text: 'Wählen Sie auf der Karte eine Region aus und schauen Sie sich die detaillierten Informationen in einem Diagramm an.',
+    text: 'Wähle auf der Karte eine Region aus und schaue Dir die detaillierten Informationen in einem Diagramm an.',
     attachTo: {
         element: '.maplibregl-canvas',
         on: 'left'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 return this.next();
@@ -531,19 +531,19 @@ tour.addStep({
 
 tour.addStep({
     title: 'Einstellungen',
-    text: 'Wechseln Sie zwischen der Karten- und der Diagramm-Ansicht, sobald die Simulation abgeschlossen ist.',
+    text: 'Hier kannst Du zwischen der Karten- und der Diagramm-Ansicht wechseln.',
     attachTo: {
         element: '#myTab',
         on: 'bottom'
     },
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 document.getElementById("chart-view-tab").click();
@@ -562,13 +562,13 @@ tour.addStep({
     text: 'Viel Spaß mit dem EmPowerPlan-Tool! :D',
     attachTo: null,
     buttons: [
-        {
-            action() {
-                return this.back();
-            },
-            classes: 'shepherd-button-secondary',
-            text: 'Zurück'
-        },
+        // {
+        //     action() {
+        //         return this.back();
+        //     },
+        //     classes: 'shepherd-button-secondary',
+        //     text: 'Zurück'
+        // },
         {
             action() {
                 return this.complete();
