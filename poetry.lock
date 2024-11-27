@@ -998,13 +998,13 @@ libsass = ">=0.7.0,<1"
 
 [[package]]
 name = "django-mapengine"
-version = "2.2.6"
+version = "2.2.7"
 description = "Map engine for maplibre in django"
 optional = false
 python-versions = "<3.12,>=3.9"
 files = [
-    {file = "django_mapengine-2.2.6-py3-none-any.whl", hash = "sha256:78abb564cd666d9f345a655e87ed7a5aaa05214ed447bfcf7448b644e669e787"},
-    {file = "django_mapengine-2.2.6.tar.gz", hash = "sha256:5e3d6e9223d61c2575ef5b9d80110aaa9d4b0bfd837a6e603633d768e12a012f"},
+    {file = "django_mapengine-2.2.7-py3-none-any.whl", hash = "sha256:1e3117d68d28d12bfa870e83d7285a4c6217727c5c097eaba38587e1ad8adeef"},
+    {file = "django_mapengine-2.2.7.tar.gz", hash = "sha256:8a0b4fbbb0011b7b889bc5d1ce9f1526e95dea2bf4518fdfc320a6f0627a44c4"},
 ]
 
 [package.dependencies]
@@ -3142,4 +3142,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "83232c5c44cdb0e0bb4d08fbe6c8d3c573e804c4de209c2b41b76669afc142d5"
+content-hash = "081c7545155e207d67541b7cf66e4644e4d95243718eddf0cabde902af884556"
