@@ -75,7 +75,7 @@ tour.addStep({
 
                 // Activate layers
                 document.querySelector(".static-layer #rpg_ols_wind_operating").click();
-                document.querySelector(".static-layer #special_protection_area").click();
+                document.querySelector(".static-layer #special_protection_area_distilled").click();
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -97,7 +97,7 @@ tour.addStep({
         {
             action() {
                 // Deactivate layer
-                document.querySelector(".static-layer #special_protection_area").click();
+                document.querySelector(".static-layer #special_protection_area_distilled").click();
                 // Fly to wind turbine
                 map.flyTo({
                   center: [14.195, 52.425],
