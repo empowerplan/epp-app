@@ -54,7 +54,7 @@
   &__center {
     @extend .d-flex;
     @extend .flex-column;
-    @extend .justify-content-center;
+    @extend .justify-content-around;
     @extend .align-items-center;
     @extend .h-100;
     @extend .py-2;
@@ -63,6 +63,11 @@
       @extend .pt-2;
       @extend .fs-4;
       color: rgba(15, 71, 255, 0.6);
+    }
+
+    button {
+      @extend .btn;
+      @extend .btn-outline-info;
     }
   }
 

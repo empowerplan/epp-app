@@ -705,10 +705,38 @@ class PotentialAreaWindSTP2018EG(StaticRegionModel):  # noqa: D101
     data_file = "potentialarea_wind_stp_2018_eg"
     layer = "potentialarea_wind_stp_2018_eg"
 
+    weg_nr = models.IntegerField(null=True)
+    weg_name = models.CharField(max_length=255, null=True)
+    mun_id = models.ForeignKey(Municipality, on_delete=models.DO_NOTHING, null=True)
+
+    mapping = {
+        "geom": "MULTIPOLYGON",
+        "weg_nr": "weg_nr",
+        "weg_name": "weg_name",
+        "mun_id": {"id": "municipality_id"},
+    }
+
+    class Meta:  # noqa: D106
+        verbose_name = _("Windeignungsgebiet 2018")
+        verbose_name_plural = _("Windeignungsgebiete 2018")
+
 
 class PotentialAreaWindSTP2024VR(StaticRegionModel):  # noqa: D101
     data_file = "potentialarea_wind_stp_2024_vr"
     layer = "potentialarea_wind_stp_2024_vr"
+
+    vr_wen_nr = models.CharField(max_length=255, null=True)
+    mun_id = models.ForeignKey(Municipality, on_delete=models.DO_NOTHING, null=True)
+
+    mapping = {
+        "geom": "MULTIPOLYGON",
+        "vr_wen_nr": "vr_wen_nr",
+        "mun_id": {"id": "municipality_id"},
+    }
+
+    class Meta:  # noqa: D106
+        verbose_name = _("Windvorranggebiet 1. Entwurf 2024")
+        verbose_name_plural = _("Windvorranggebiete 1. Entwurf 2024")
 
 
 class PVgroundAreas(StaticRegionModel):
