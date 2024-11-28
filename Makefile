@@ -37,7 +37,7 @@ empty_simulations:
 	python manage.py shell --command="from django_oemof.models import Simulation; Simulation.objects.all().delete()"
 
 distill:
-	python manage.py distill-local --force --exclude-staticfiles --parallel-render 16 ./digiplan/static/mvts
+	python manage.py distill-local --force --exclude-staticfiles ./digiplan/static/mvts
 
 check_distill_coordinates:
 	python manage.py shell --command="from digiplan.utils import distill; print(distill.check_distill_coordinates())"
