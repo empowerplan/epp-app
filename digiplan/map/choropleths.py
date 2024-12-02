@@ -111,7 +111,7 @@ class EnergyShare2045Choropleth(Choropleth):  # noqa: D101
         return [
             "interpolate",
             ["linear"],
-            ["feature-state", "energy_share_statusquo"],
+            ["feature-state", "energy_share_2045"],
             0.0,
             "rgb(255, 255, 204)",
             20.0,
