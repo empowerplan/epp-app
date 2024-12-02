@@ -83,7 +83,7 @@ PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showPreResultCharts);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSummaryPreResults);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, disableResultButtons);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideRegionChart);
-PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
+// PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, startSimulationProgress);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, enableFutureResults);
