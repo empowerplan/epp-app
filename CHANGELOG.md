@@ -9,6 +9,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - Intro tour
 
 ### Changed
+- increased gunicorn timeout and workers
 
 ### Fixed
 
