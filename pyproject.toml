@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "empowerplan"
-version = "1.1.1"
+version = "1.1.2"
 description = "EmPowerPlan"
 authors = [
   "Hendrik Huyskens <hendrik.huyskens@rl-institut.de>",
@@ -36,7 +36,7 @@ django-geojson = "^3.1.0"
 # Custom apps
 # -----------------------------------------------------------------------------poetry-
 django-oemof = {git="https://github.com/rl-institut/django-oemof.git", tag="v0.18.1"}
-django-mapengine = "2.2.9"
+django-mapengine = "2.2.10"
 geojson = "^3.0.1"
 oemof-network = "0.5.0a5"
 django-template-partials = "^23.4"
