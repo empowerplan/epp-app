@@ -11,7 +11,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ### Fixed
 
-## [Unreleased]
+## [1.1.1] - 2024-12-09
 ### Added
 - Intro tour
 
