@@ -11,6 +11,10 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ### Fixed
 
+## [1.1.2] - 2024-12-09
+### Fixed
+- mapengine version in v2.2.10
+
 ## [1.1.1] - 2024-12-09
 ### Added
 - Intro tour
