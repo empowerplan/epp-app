@@ -4,14 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.X.X] - YYYY-MM-DD
+## [Unreleased] - YYYY-MM-DD
 ### Added
-- Intro tour
 
 ### Changed
 - increased gunicorn timeout and workers
 
 ### Fixed
+
+## [1.1.2] - 2024-12-09
+### Fixed
+- mapengine version in v2.2.10
+
+## [1.1.1] - 2024-12-09
+### Added
+- Intro tour
+
+### Fixed
+- mapengine version in v2.2.9
 
 ## [1.1.0] - 2024-11-14
 ### Added
