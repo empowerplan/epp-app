@@ -1,0 +1,56 @@
+repo_name: empowerplan/epp-app
+repo_url: https://github.com/empowerplan/epp-app
+site_name: EmPowerPlan Dokumentation
+site_url: http://127.0.0.1:8000/
+docs_dir: docs
+
+nav:
+  - Start: index.md
+
+
+plugins:
+  - search:
+      lang:
+        - en
+        - de
+
+theme:
+  name: material
+  features:
+    - navigation.footer
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.instant
+    - navigation.indexes
+    - navigation.top
+    - content.code.copy
+    - toc.follow
+    - search.highlight
+    - search.suggestions
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+extra_css:
+  - docs/stylesheets/extra.css
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.smartsymbols:
+      arrows: True
+  - toc:
+      permalink: "#"
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
