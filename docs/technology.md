@@ -1,5 +1,15 @@
 # Verwendete Technologien
 
+## Django App "map"
+
+Die Django App "map" bildet das zentrale Bindeglied zwischen der Benutzeroberfläche, den geografischen Daten und dem Energiesystemmodell. 
+Sie ist als eigenständige Django-Anwendung innerhalb des Projekts strukturiert und verwaltet die geografischen Daten über GeoDjango-Modelle, 
+darunter Verwaltungsregionen, erneuerbare Energieanlagen und verschiedene Flächennutzungsbeschränkungen. 
+Die App stellt Ansichten (Views) bereit, die für die Darstellung der Kartenoberfläche und 
+die Bereitstellung von Daten für verschiedene Visualisierungen (Popups, Choropleths, Diagramme) verantwortlich sind. 
+Für die Kartendarstellung nutzt sie die `django-mapengine` Bibliothek (siehe [Kartendarstellung](#kartendarstellung)). 
+Die Verbindung zum Energiesystemmodell erfolgt über `django-oemof` (siehe [Energiesystemoptimierung](#energiesystemoptimierung)).
+
 ## Kartendarstellung
 
 Für die Kartendarstellung wird [Maplibre GL JS](https://maplibre.org/maplibre-gl-js/docs/) im Frontend verwendet.
@@ -10,10 +20,8 @@ Von dort werden die Kartenlayer mithilfe der am RLI entwickelten Bibliothek [`dj
 Im Falle von Polygonen können mehrere Layer gebündelt als Multi-Vector-Tiles (MVTs) unter einer URL bereitgestellt werden (https://maplibre.org/maplibre-gl-js/docs/API/classes/VectorTileSource/).
 Sollen Daten (zum Beispiel Erzeugungsanlagen) auf der Karte je nach Zoomstufe als Punkte oder geclustert dargestellt werden, benötigt maplibre-gl-js diese Daten in Form von GeoJSONs (https://maplibre.org/maplibre-gl-js/docs/API/classes/GeoJSONSource/).
 In diesem Falle stellt `django-mapengine` die benötigten Daten als GeoJSONs per URL-Schnittstelle zur Verfügung.
-
 In der Karte können außerdem [Choropleths](https://de.wikipedia.org/wiki/Choroplethenkarte) oder Popups angezeigt werden.
 `django-mapengine` holt sich die dafür benötigten Daten von einer vordefinierten Schnittstelle (URL) des Programms.
-
 
 ## Energiesystemoptimierung
 
