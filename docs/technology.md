@@ -36,6 +36,10 @@ um die zeitliche Auflösung der Eingangsdaten zu verringern, indem repräsentati
 
 ## Weitere Technologien in der Übersicht
 
+Schaubild der verwendeten Technologien:
+
+![technology_stack.png](img/technology_stack.png)
+
 ### Django-App
 
 Django ist ein leistungsstarkes Python-Webframework, das in diesem Projekt als Grundlage für die Webanwendung dient. 
