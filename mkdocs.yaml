@@ -9,13 +9,41 @@ nav:
     - Setup: setup.md
     - Technologien: technology.md
     - Datenstruktur: data_structure.md
-
+  - API:
+    - App Configuration: api/apps.md
+    - Calculations: api/calculations.md
+    - Charts: api/charts.md
+    - Choropleths: api/choropleths.md
+    - Configuration: api/config.md
+    - Datapackage: api/datapackage.md
+    - Forms: api/forms.md
+    - Hooks: api/hooks.md
+    - Managers: api/managers.md
+    - Map Configuration: api/map_config.md
+    - Menu: api/menu.md
+    - Migrations: api/migrations.md
+    - Models: api/models.md
+    - Popups: api/popups.md
+    - Template Tags: api/templatetags.md
+    - URLs: api/urls.md
+    - Utils: api/utils.md
+    - Views: api/views.md
+    - Widgets: api/widgets.md
 
 plugins:
   - search:
       lang:
         - en
         - de
+  - gen-files:
+      scripts:
+        - docs/api_docs.py
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          options:
+            show_source: false
 
 theme:
   name: material

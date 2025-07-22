@@ -72,6 +72,8 @@ django-extensions = "^3.1.3"  # https://github.com/django-extensions/django-exte
 pytest-django = "^4.3.0"  # https://github.com/pytest-dev/pytest-django
 mkdocs = "^1.6.1"
 mkdocs-material = "^9.6.15"
+mkdocstrings = {extras = ["python"], version = "^0.29.1"}
+mkdocs-gen-files = "^0.5.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
