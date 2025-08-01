@@ -163,7 +163,7 @@ docker-compose -f production.yml restart
 By now, no data is visible, as the geometries have to be loaded into database first by
 the following steps.
 
-### Load data into database
+### Load data into database / distilling
 
 Following steps are necessary to refresh/load data on production server:
 
