@@ -8,9 +8,17 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Added
 
 ### Changed
+
+### Fixed
+
+## [1.1.3] - 2025-08-18
+### Added
+
+### Changed
 - increased gunicorn timeout and workers
 
 ### Fixed
+- debian version in Dockerfile
 
 ## [1.1.2] - 2024-12-09
 ### Fixed
