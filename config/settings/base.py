@@ -1,4 +1,5 @@
 """Base settings to build other settings files upon."""
+
 import logging
 import os
 import sys
@@ -281,6 +282,8 @@ MARKDOWNIFY = {
 }
 
 OEMOF_SCENARIO = env.str("OEMOF_SCENARIO", "scenario_2045")
+OEMOF_ORIGINAL_SCENARIO = "scenario_2045_original"
+OEMOF_TSAM = env.bool("OEMOF_TSAM", True)
 
 # django-mapengine
 # ------------------------------------------------------------------------------

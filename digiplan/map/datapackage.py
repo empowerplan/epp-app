@@ -1,9 +1,10 @@
 """Read functionality for digipipe datapackage."""
+
 import csv
 import json
-from collections import defaultdict, namedtuple
+from collections import defaultdict
 from pathlib import Path
-from typing import Optional, Union
+from typing import NamedTuple, Union
 
 import pandas as pd
 from cache_memoize import cache_memoize
@@ -14,7 +15,12 @@ from django_oemof.settings import OEMOF_DIR
 from config.settings.base import DIGIPIPE_DIR
 from digiplan.map import config, models
 
-Source = namedtuple("Source", ["csv_file", "column"])
+
+class Source(NamedTuple):
+    """Stores information on data sources."""
+
+    csv_file: str
+    column: str
 
 
 def get_data_from_sources(sources: Union[Source, list[Source]]) -> pd.DataFrame:
@@ -51,7 +57,7 @@ def get_batteries() -> pd.DataFrame:
     return pd.read_csv(battery_filename)
 
 
-def get_power_demand(sector: Optional[str] = None) -> dict[str, pd.DataFrame]:
+def get_power_demand(sector: str | None = None) -> dict[str, pd.DataFrame]:
     """Return power demand for given sector or all sectors."""
     sectors = (sector,) if sector else ("hh", "cts", "ind")
     demand = {}
@@ -71,7 +77,7 @@ def get_hourly_electricity_demand(year: int) -> pd.Series:
     return pd.concat(demand, axis=1).sum(axis=1)
 
 
-def get_heat_demand(sector: Optional[str] = None, distribution: Optional[str] = None) -> dict[str, pd.DataFrame]:
+def get_heat_demand(sector: str | None = None, distribution: str | None = None) -> dict[str, pd.DataFrame]:
     """Return heat demand for given sector or all sectors."""
     sectors = (sector,) if sector else ("hh", "cts", "ind")
     distribution_prefix = ("_cen" if distribution == "central" else "_dec") if distribution else ""
@@ -86,9 +92,9 @@ def get_heat_demand(sector: Optional[str] = None, distribution: Optional[str] = 
 
 def get_heat_capacity_shares(
     distribution: str,
-    year: Optional[int] = 2045,
+    year: int | None = 2045,
     *,
-    include_heatpumps: Optional[bool] = False,
+    include_heatpumps: bool | None = False,
 ) -> dict:
     """Return capacity shares of heating structure."""
     shares_filename = settings.DIGIPIPE_DIR.path("scalars").path(f"demand_heat_structure_esys_{distribution}.csv")
@@ -107,8 +113,8 @@ def get_heat_capacity_shares(
 
 
 def get_summed_heat_demand_per_municipality(
-    sector: Optional[str] = None,
-    distribution: Optional[str] = None,
+    sector: str | None = None,
+    distribution: str | None = None,
 ) -> dict[str, dict[str, pd.DataFrame]]:
     """Return heat demand for given sector and distribution."""
     sectors = (sector,) if sector else ("hh", "cts", "ind")
@@ -123,40 +129,68 @@ def get_summed_heat_demand_per_municipality(
     return demand
 
 
+def disaggregate_tsam_sequence(series: pd.Series, day_order: list[int]) -> pd.Series:
+    """Disaggregate series for the whole year according to tsam_order."""
+    # Split the demand sequence into days (24 timesteps per day)
+    days = [series.iloc[i : i + 24] for i in range(0, len(series), 24)]
+
+    # Rebuild the full year according to tsam_order
+    full_year = []
+    for day_idx in day_order:
+        full_year.extend(days[day_idx].values)
+
+    return pd.Series(full_year)
+
+
 def get_heat_demand_profile(
-    sector: Optional[str] = None,
-    distribution: Optional[str] = None,
+    sector: str | None = None,
+    distribution: str | None = None,
+    scenario: str | None = None,
+    *,
+    disaggregate_tsam: bool = False,
 ) -> dict[str, dict[str, pd.DataFrame]]:
     """Return heat demand for given sector and distribution."""
     sectors = (sector,) if sector else ("hh", "cts", "ind")
     distributions = (distribution,) if distribution else ("central", "decentral")
     demand = defaultdict(dict)
+    scenario = scenario or settings.OEMOF_ORIGINAL_SCENARIO
+    if disaggregate_tsam:
+        tsam_config = pd.read_csv(OEMOF_DIR / scenario / "data" / "tsam" / "tsa_parameters.csv", sep=";")
+        day_order_raw = tsam_config.iloc[0]["order"]
+        day_order = list(map(int, day_order_raw.strip("[]").split(",")))
     for sec in sectors:
         for dist in distributions:
-            demand_filename = (
-                OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "sequences" / f"heat_{dist}-demand_{sec}_profile.csv"
-            )
-            demand[sec][dist] = pd.read_csv(demand_filename, sep=";")[f"ABW-heat_{dist}-demand_{sec}-profile"]
+            demand_filename = OEMOF_DIR / scenario / "data" / "sequences" / f"heat_{dist}-demand_{sec}_profile.csv"
+            demand_sequence = pd.read_csv(demand_filename, sep=";")[f"ABW-heat_{dist}-demand_{sec}-profile"]
+            if disaggregate_tsam:
+                demand_sequence = disaggregate_tsam_sequence(demand_sequence, day_order)
+            demand[sec][dist] = demand_sequence
     return demand
 
 
 def get_electricity_demand_profile(
-    sector: Optional[str] = None,
+    sector: str | None = None,
+    scenario: str | None = None,
 ) -> dict[str, pd.DataFrame]:
     """Return heat demand for given sector and distribution."""
     sectors = (sector,) if sector else ("hh", "cts", "ind")
     demand = defaultdict(dict)
+    scenario = scenario or settings.OEMOF_ORIGINAL_SCENARIO
     for sec in sectors:
-        demand_filename = (
-            OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "sequences" / f"electricity-demand_{sec}_profile.csv"
-        )
+        demand_filename = OEMOF_DIR / scenario / "data" / "sequences" / f"electricity-demand_{sec}_profile.csv"
         demand[sec] = pd.read_csv(demand_filename, sep=";")[f"ABW-electricity-demand_{sec}-profile"]
     return demand
 
 
-def get_thermal_efficiency(component: str) -> float:
+def get_thermal_efficiency(
+    component: str,
+    scenario: str | None = None,
+    *,
+    disaggregate_tsam: bool = False,
+) -> Union[float, pd.Series]:
     """Return thermal efficiency from given component from oemof scenario."""
-    component_filename = OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "elements" / f"{component}.csv"
+    scenario = scenario or settings.OEMOF_ORIGINAL_SCENARIO
+    component_filename = OEMOF_DIR / scenario / "data" / "elements" / f"{component}.csv"
     component_df = pd.read_csv(component_filename, sep=";")
     if component_df["type"][0] in ("extraction", "backpressure"):
         return float(pd.read_csv(component_filename, sep=";")["thermal_efficiency"][0])
@@ -166,8 +200,15 @@ def get_thermal_efficiency(component: str) -> float:
 
     if "heatpump" in component:
         component = "efficiency"
-    sequence_filename = OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "sequences" / f"{component}_profile.csv"
-    return pd.read_csv(sequence_filename, sep=";").iloc[:, 1]
+
+    sequence_filename = OEMOF_DIR / scenario / "data" / "sequences" / f"{component}_profile.csv"
+    efficiency_series = pd.read_csv(sequence_filename, sep=";").iloc[:, 1]
+    if disaggregate_tsam:
+        tsam_config = pd.read_csv(OEMOF_DIR / scenario / "data" / "tsam" / "tsa_parameters.csv", sep=";")
+        day_order_raw = tsam_config.iloc[0]["order"]
+        day_order = list(map(int, day_order_raw.strip("[]").split(",")))
+        efficiency_series = disaggregate_tsam_sequence(efficiency_series, day_order)
+    return efficiency_series
 
 
 @cache_memoize(timeout=None)
@@ -179,6 +220,7 @@ def get_potential_capacities() -> pd.DataFrame:
     -------
     pd.DataFrame
         holding potential capacities for all technologies in MW
+
     """
     areas = get_potential_areas()
     # TODO (Hendrik Huyskens): Could be refactored using datapackage.get_power_density
@@ -201,7 +243,7 @@ def get_potential_capacities() -> pd.DataFrame:
 
 
 @cache_memoize(timeout=None)
-def get_potential_areas(technology: Optional[str] = None) -> pd.DataFrame:
+def get_potential_areas(technology: str | None = None) -> pd.DataFrame:
     """
     Return potential areas.
 
@@ -214,6 +256,7 @@ def get_potential_areas(technology: Optional[str] = None) -> pd.DataFrame:
     -------
     dict
         Potential areas of all technologies or specified one (in sqkm)
+
     """
     sources = {
         "wind_2018": Source("potentialarea_wind_area_stats_muns.csv", "stp_2018_eg"),
@@ -265,9 +308,11 @@ def get_capacities_from_datapackage() -> pd.DataFrame:
         [
             pd.read_csv(
                 settings.DIGIPIPE_DIR.path("scalars").path(
-                    f"bnetza_mastr_{tech}_stats_muns.csv"
-                    if tech not in ["wind", "pv_ground"]
-                    else filenames_rpg_data.get(tech),
+                    (
+                        f"bnetza_mastr_{tech}_stats_muns.csv"
+                        if tech not in ["wind", "pv_ground"]
+                        else filenames_rpg_data.get(tech)
+                    ),
                 ),
                 index_col="municipality_id",
                 usecols=["municipality_id", "capacity_net"],
@@ -321,8 +366,9 @@ def get_power_density() -> dict:
     return densities
 
 
-def get_profile(technology: str) -> pd.Series:
+def get_profile(technology: str, scenario: str | None = None) -> pd.Series:
     """Return profile for given technology from oemof datapackage."""
-    profile_filename = OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "sequences" / f"{technology}_profile.csv"
+    scenario = scenario or settings.OEMOF_ORIGINAL_SCENARIO
+    profile_filename = OEMOF_DIR / scenario / "data" / "sequences" / f"{technology}_profile.csv"
     profile = pd.read_csv(profile_filename, sep=";", index_col=0)
     return profile.iloc[:, 0]
