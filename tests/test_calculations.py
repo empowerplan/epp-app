@@ -141,7 +141,7 @@ class HeatShareTestCase(SimpleTestCase):
         "s_pv_ff_4": 11,
         "s_pv_d_3": 5,
         "s_pv_d_4": 13,
-        "t": "v27",
+        "t": "v37",
     }
 
     def setUp(self) -> None:
@@ -208,21 +208,6 @@ class HeatShareTestCase(SimpleTestCase):
 
     def test_heat_share(self):
         """Test heat component shares for central and decentral heat busses."""
-        assert (
-            pytest.approx(
-                self.results[1][("ABW-electricity-heatpump_central", "ABW-heat_central")]["sequences"]["flow"].sum(),
-            )
-            == 158269 * 0.8 * 0.5 + 70127 * 0.7 * 0.5 + 37795 * 0.6 * 0.5
-        )
-        assert (
-            pytest.approx(
-                self.results[1][("ABW-electricity-heatpump_decentral", "ABW-heat_decentral")]["sequences"][
-                    "flow"
-                ].sum(),
-            )
-            == 2105770 * 0.8 * 0.5 + 431145 * 0.7 * 0.45 + 272674 * 0.6 * 0.4
-        )
-
         factor = 0.2306220042
         central_shares = {
             "ABW-ch4-extchp": 0.037485549131388775 / factor,
@@ -230,17 +215,29 @@ class HeatShareTestCase(SimpleTestCase):
             "ABW-biogas-bpchp": 0.008366081174604877 / factor,
             "ABW-solar-thermalcollector": 0.081073249657315 / factor,
             # Boiler exceeds share as it is the backup heat generator
-            # (could be explained by storage losses from storing solar_thermal energy?!)
+            # (could be explained by storage losses from storing solar_thermal energy?!) -> YES, see extra check below
             # "ABW-ch4-boiler": 0.002799132549946667 / factor + 0.005024220543519689 / factor,
             "ABW-electricity-pth": 0.008154535911400959 / factor,
             "ABW-wood-extchp": 0.08659582199360916 / factor,
         }
+        central_heat_demand = 158269 * 0.8 * (1 - 0.5) + 70127 * 0.7 * (1 - 0.5) + 37795 * 0.6 * (1 - 0.5)
         for component, share in central_shares.items():
-            central_heat_demand = 158269 * 0.8 * (1 - 0.5) + 70127 * 0.7 * (1 - 0.5) + 37795 * 0.6 * (1 - 0.5)
             current_value = self.results[1][(f"{component}_central", "ABW-heat_central")]["sequences"]["flow"].sum()
             assert (
                 pytest.approx(current_value, 0.1) == central_heat_demand * share
-            ), f"Expected {central_heat_demand * share}, got {current_value}"
+            ), f"{component}: Expected {central_heat_demand * share}, got {current_value}"
+
+        # Test boiler, as boiler takes care of storage losses
+        boiler_central = self.results[1][("ABW-ch4-boiler_central", "ABW-heat_central")]["sequences"]["flow"].sum()
+        boiler_share = 0.002799132549946667 / factor + 0.005024220543519689 / factor
+        storage_losses = (
+            self.results[1][("ABW-heat_central", "ABW-heat_central-storage")]["sequences"]["flow"].sum()
+            - self.results[1][("ABW-heat_central-storage", "ABW-heat_central")]["sequences"]["flow"].sum()
+        )
+        assert pytest.approx(boiler_central, 0.1) == central_heat_demand * boiler_share + storage_losses, (
+            f"ABW-ch4-boiler_central: "
+            f"Expected {central_heat_demand * boiler_share + storage_losses}, got {boiler_central}"
+        )
 
         factor = 0.112341887624161
         decentral_shares = {
@@ -256,10 +253,41 @@ class HeatShareTestCase(SimpleTestCase):
         for component, share in decentral_shares.items():
             decentral_heat_demand = 2105770 * 0.8 * (1 - 0.5) + 431145 * 0.7 * (1 - 0.45) + 272674 * 0.6 * (1 - 0.4)
             component_name = f"{component}_decentral" if component != "ABW-wood-oven" else "ABW-wood-oven"
+            flow_value = self.results[1][(component_name, "ABW-heat_decentral")]["sequences"]["flow"].sum()
             assert (
-                pytest.approx(self.results[1][(component_name, "ABW-heat_decentral")]["sequences"]["flow"].sum(), 0.1)
-                == decentral_heat_demand * share
-            )
+                pytest.approx(flow_value, 0.1) == decentral_heat_demand * share
+            ), f"Expected {decentral_heat_demand * share}, got {flow_value}"
+
+    def test_heatpumps(self):
+        """Test heat pumps shares."""
+        hp_central = self.results[1][("ABW-electricity-heatpump_central", "ABW-heat_central")]["sequences"][
+            "flow"
+        ].sum()
+        assert (
+            pytest.approx(hp_central) == 158269 * 0.8 * 0.5 + 70127 * 0.7 * 0.5 + 37795 * 0.6 * 0.5
+        ), f"Expected {158269 * 0.8 * 0.5 + 70127 * 0.7 * 0.5 + 37795 * 0.6 * 0.5}, got {hp_central}"
+        hp_decentral = self.results[1][("ABW-electricity-heatpump_decentral", "ABW-heat_decentral")]["sequences"][
+            "flow"
+        ].sum()
+        assert (
+            pytest.approx(hp_decentral) == 2105770 * 0.8 * 0.5 + 431145 * 0.7 * 0.45 + 272674 * 0.6 * 0.4
+        ), f"Expected {2105770 * 0.8 * 0.5 + 431145 * 0.7 * 0.45 + 272674 * 0.6 * 0.4}, got {hp_decentral}"
+
+    def test_heat_import_export(self):
+        """Check if imports and exports are zero for central and decentral heat busses."""
+        decentral_import = self.results[1][("ABW-heat_decentral-import", "ABW-heat_decentral")]["sequences"][
+            "flow"
+        ].sum()
+        central_import = self.results[1][("ABW-heat_central-import", "ABW-heat_central")]["sequences"]["flow"].sum()
+        decentral_export = self.results[1][("ABW-heat_decentral", "ABW-heat_decentral-export")]["sequences"][
+            "flow"
+        ].sum()
+        central_export = self.results[1][("ABW-heat_central", "ABW-heat_central-export")]["sequences"]["flow"].sum()
+        assert pytest.approx(decentral_import) == 0, f"Expected 0, got {decentral_import}"
+        assert pytest.approx(central_import) == 0, f"Expected 0, got {central_import}"
+        assert pytest.approx(decentral_export) == 0, f"Expected 0, got {decentral_export}"
+
+        assert pytest.approx(central_export) == 0, f"Expected 0, got {central_export}"
 
 
 class EnergySharePerMunicipalityTest(SimpleTestCase):

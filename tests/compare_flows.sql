@@ -32,7 +32,7 @@ WITH original as (SELECT django_oemof_simulation.id,
                                 ON dood.id = doods.oemofdata_id
                            JOIN public.django_oemof_oemofsequence doos
                                 ON doods.oemofsequence_id = doos.id
-                  WHERE django_oemof_simulation.id = 25
+                  WHERE django_oemof_simulation.id = 37
     )
 SELECT
     tsam.from_node,
@@ -43,4 +43,3 @@ SELECT
     CASE WHEN original.total_value > 0 THEN (tsam.total_value - original.total_value) / original.total_value * 100 ELSE 0 END AS percentage
 FROM original
 FULL OUTER JOIN tsam ON original.from_node = tsam.from_node AND original.to_node = tsam.to_node
-WHERE tsam.from_node = 'ABW-heat_central'

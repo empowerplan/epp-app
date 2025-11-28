@@ -131,22 +131,14 @@ def adapt_heatpumps(scenario: str, data: dict) -> dict:
     All other heat components settings are derived from heat share.
     """
     hp_sliders = {"hh": "w_d_wp_3", "cts": "w_d_wp_4", "ind": "w_d_wp_5"}
-    # Use "central" hardcoded as efficiency does not differ in central/decentral
-    hp_efficiency = datapackage.get_thermal_efficiency(
-        "electricity-heatpump_central",
-        scenario=scenario,
-        disaggregate_tsam=OEMOF_TSAM,
-    )
-    hp_efficiency.sum()
-
-    heat_demand_profile = datapackage.get_heat_demand_profile()
+    heat_demand_profile = datapackage.get_heat_demand_profile(scenario=scenario, disaggregate_tsam=OEMOF_TSAM)
 
     # Store HP energies for use in upcoming hooks
     data["hp_energy"] = {"central": 0, "decentral": 0}
 
     for distribution in ("central", "decentral"):
         hp_energy = 0
-        hp_capacity = 0
+        hp_load_profile = []
         # Calculate demands per sector
         for sector in ("hh", "cts", "ind"):
             demand = data[f"ABW-heat_{distribution}-demand_{sector}"]["amount"]
@@ -156,7 +148,10 @@ def adapt_heatpumps(scenario: str, data: dict) -> dict:
             # Calculate summed energy from HP
             hp_energy += demand * hp_share
             # Set capacity of HP that it can provide its share at maximum peak demand
-            hp_capacity += heat_demand_profile[sector][distribution].max() * demand * hp_share
+            hp_load_profile.append(heat_demand_profile[sector][distribution] * demand * hp_share)
+
+        # Conversion capacity is set on output instead of input, thus we do not need to take eff into calculation
+        hp_capacity = pd.concat(hp_load_profile, axis=1).sum(axis=1).max()
 
         # Calculate capacity from HP Jahreszahl and energy
         data[f"ABW-electricity-heatpump_{distribution}"] = {
@@ -184,6 +179,20 @@ def adapt_heat_components(scenario: str, data: dict) -> dict:
         heat_shares = datapackage.get_heat_capacity_shares(distribution[:3])
         heat_share_mapped = _map_heat_shares_to_components(distribution, heat_shares)
 
+        # Calculate peak load minus solar thermal energy to define capacities
+        heat_demand_profile_per_sector_and_distribution = datapackage.get_heat_demand_profile(
+            scenario=scenario,
+            disaggregate_tsam=OEMOF_TSAM,
+        )
+        heat_demand_profile = sum(
+            heat_demand_profile_per_sector_and_distribution[sector][distribution]
+            * data[f"ABW-heat_{distribution}-demand_{sector}"]["amount"]
+            for sector in ("hh", "cts", "ind")
+        )
+        peak_load_without_hp = (
+            heat_demand_profile - data[f"ABW-electricity-heatpump_{distribution}"]["capacity"]
+        ).max()
+
         for component, share in heat_share_mapped.items():
             energy_share = remaining_energy * share
             efficiency = datapackage.get_thermal_efficiency(
@@ -193,15 +202,16 @@ def adapt_heat_components(scenario: str, data: dict) -> dict:
             )
             if isinstance(efficiency, pd.Series):
                 efficiency = efficiency.sum()
-            capacity = math.ceil(energy_share / efficiency)
+            capacity_out = peak_load_without_hp * share
+            capacity_in = math.ceil(capacity_out / efficiency)
 
             if "extchp" in component or "bpchp" in component:
                 # Store energy share for turbines, as this has to be set in ENERGYSYSTEM hook
-                data[component] = {"capacity": capacity}
-                data["turbines"][component] = energy_share
+                data[component] = {"capacity": capacity_in}
+                data["turbines"][component] = energy_share, capacity_out
                 continue
 
-            if capacity == 0:
+            if capacity_in == 0:
                 continue
 
             if "boiler" in component:
@@ -211,16 +221,16 @@ def adapt_heat_components(scenario: str, data: dict) -> dict:
 
             if "solar" in component:
                 # Solarthermal collectors do not get full_load_times
-                data[component] = {"capacity": capacity}
+                data[component] = {"capacity": math.ceil(energy_share / efficiency)}
                 continue
 
             data[component] = {
                 # Capacity has to be increased, so that times without energy from solar thermal can be covered by other
                 # components
-                "capacity": capacity,
+                "capacity": capacity_in,
                 "output_parameters": {
-                    "full_load_time_min": energy_share / capacity,
-                    "full_load_time_max": energy_share / capacity,
+                    "full_load_time_min": energy_share / capacity_in,
+                    "full_load_time_max": energy_share / capacity_in,
                 },
             }
 
@@ -352,12 +362,12 @@ def adapt_renewable_capacities(scenario: str, data: dict) -> dict:
 
 def adapt_extraction_turbines(scenario: str, data: dict, energysystem: EnergySystem) -> EnergySystem:  # noqa: ARG001
     """Set full load times for extraction turbines based on energy share."""
-    for component, energy_share in data["turbines"].items():
+    for component, (energy_share, capacity_out) in data["turbines"].items():
         distribution = component.split("_")[1]
         flow = next(
             v for k, v in energysystem.groups[component].outputs.data.items() if k.label == f"ABW-heat_{distribution}"
         )
-        flow.nominal_value = energy_share
-        flow.full_load_time_min = 1
-        flow.full_load_time_max = 1
+        flow.nominal_value = capacity_out
+        flow.full_load_time_min = math.floor(energy_share / capacity_out)
+        flow.full_load_time_max = math.floor(energy_share / capacity_out)
     return energysystem
