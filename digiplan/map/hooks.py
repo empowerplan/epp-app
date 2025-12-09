@@ -5,7 +5,6 @@ import math
 from collections import defaultdict
 
 import pandas as pd
-from django.http import HttpRequest
 from oemof.solph import EnergySystem
 
 from config.settings.base import OEMOF_TSAM
@@ -35,7 +34,7 @@ def _map_heat_shares_to_components(distribution: str, heat_shares: dict) -> dict
     return heat_share_mapped
 
 
-def read_parameters(scenario: str, data: dict, request: HttpRequest) -> dict:  # noqa: ARG001
+def read_parameters(scenario: str, data: dict) -> dict:  # noqa: ARG001
     """
     Read parameters from settings panel.
 
@@ -45,8 +44,6 @@ def read_parameters(scenario: str, data: dict, request: HttpRequest) -> dict:  #
         Used oemof scenario
     data: dict
         Empty dict as parameters are initialized here.
-    request: HttpRequest
-        Original request from settings panel submit
 
     Returns
     -------
@@ -60,15 +57,16 @@ def read_parameters(scenario: str, data: dict, request: HttpRequest) -> dict:  #
 
     """
     panel_forms = [
-        forms.EnergyPanelForm(config.ENERGY_SETTINGS_PANEL, data=request.POST),
-        forms.HeatPanelForm(config.HEAT_SETTINGS_PANEL, data=request.POST),
-        forms.TrafficPanelForm(config.TRAFFIC_SETTINGS_PANEL, data=request.POST),
+        forms.EnergyPanelForm(config.ENERGY_SETTINGS_PANEL, data=data),
+        forms.HeatPanelForm(config.HEAT_SETTINGS_PANEL, data=data),
+        forms.TrafficPanelForm(config.TRAFFIC_SETTINGS_PANEL, data=data),
     ]
+    parameters = {}
     for form in panel_forms:
         if not form.is_valid():
             raise ValueError(f"Invalid settings form.\nErrors: {form.errors}")
-        data.update(**form.cleaned_data)
-    return data
+        parameters.update(**form.cleaned_data)
+    return parameters
 
 
 def adapt_electricity_demand(scenario: str, data: dict) -> dict:  # noqa: ARG001
