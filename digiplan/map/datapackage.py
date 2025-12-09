@@ -286,6 +286,39 @@ def get_potential_areas(technology: str | None = None) -> pd.DataFrame:
     return areas
 
 
+def get_potential_areas_region(region_id: int, technology: str | None = None) -> pd.Series:
+    """
+    Return potential areas for a specific region (municipality).
+
+    Parameters
+    ----------
+    region_id: int
+        Municipality ID to filter for
+    technology: str | None
+        If given, returns a Series with a single value for the requested technology.
+        If None, returns a Series with a single row containing all technologies.
+
+    Returns
+    -------
+    pd.Series
+        Potential areas for the given municipality (in sqkm). Index are technologies if technology is None.
+
+    """
+    areas = get_potential_areas(technology)
+    # areas can be a Series (for a single technology) or a DataFrame (for all)
+    if isinstance(areas, pd.Series):
+        # Index is municipality id
+        if region_id in areas.index:
+            return pd.Series({technology: areas.loc[region_id]})
+        return pd.Series({technology: 0.0})
+
+    # DataFrame case: filter row by region_id and return as Series
+    if region_id in areas.index:
+        return areas.loc[region_id]
+    # Municipality may be missing (e.g., filtered datasets); return zeros with same columns
+    return pd.Series(dict.fromkeys(areas.columns, 0.0))
+
+
 @cache_memoize(timeout=None)
 def get_full_load_hours(year: int) -> pd.Series:
     """Return full load hours for given year."""

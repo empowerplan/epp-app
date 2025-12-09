@@ -3,17 +3,18 @@
 import abc
 from collections import namedtuple
 from collections.abc import Iterable
-from typing import Optional, Union
+from typing import Union
 
 import numpy as np
 import pandas as pd
 from django.db.models import F
 from django.utils.translation import gettext_lazy as _
 from django_mapengine import popups
+from django_mapengine.popups import ChartPopup
 from django_oemof import results
 from oemof.tabular.postprocessing import core
 
-from . import calculations, charts, models
+from . import calculations, charts, datapackage, models
 
 Source = namedtuple("Source", ("name", "url"))
 
@@ -21,18 +22,18 @@ Source = namedtuple("Source", ("name", "url"))
 class RegionPopup(popups.ChartPopup):
     """Popup containing values for municipality and region in header."""
 
-    lookup: Optional[str] = None
+    lookup: str | None = None
     title: str = None
     description: str = None
     unit: str = None
-    sources: Optional[list[Source]] = None
+    sources: list[Source] | None = None
 
     def __init__(
         self,
         lookup: str,
         selected_id: int,
-        map_state: Optional[dict] = None,
-        template: Optional[str] = None,
+        map_state: dict | None = None,
+        template: str | None = None,
     ) -> None:
         """Initialize parent popup class and adds initialization of detailed data."""
         if self.lookup:
@@ -48,6 +49,7 @@ class RegionPopup(popups.ChartPopup):
         -------
         dict
             context dict including region and municipality data
+
         """
         return {
             "id": self.selected_id,
@@ -67,6 +69,7 @@ class RegionPopup(popups.ChartPopup):
         -------
         dict
             chart data ready to use in ECharts in JS
+
         """
         chart_data = self.get_chart_data()
         chart_data = chart_data.replace([np.nan], [None]) if isinstance(chart_data, pd.DataFrame) else chart_data
@@ -84,7 +87,7 @@ class RegionPopup(popups.ChartPopup):
         """Return aggregated data of all municipalities and technologies."""
         return self.detailed_data.sum().sum()
 
-    def get_municipality_value(self) -> Optional[float]:
+    def get_municipality_value(self) -> float | None:
         """Return aggregated data for all technologies for given municipality ID."""
         if self.selected_id not in self.detailed_data.index:
             return 0
@@ -107,8 +110,8 @@ class SimulationPopup(RegionPopup, abc.ABC):
         self,
         lookup: str,
         selected_id: int,
-        map_state: Optional[dict] = None,
-        template: Optional[str] = None,
+        map_state: dict | None = None,
+        template: str | None = None,
     ) -> None:
         """
         Init simulation popup.
@@ -123,10 +126,11 @@ class SimulationPopup(RegionPopup, abc.ABC):
             Current state of map. Includes current simulation ID
         template: Optional[str]
             Template to render popup. If not given template using lookup name is used
+
         """
         super().__init__(lookup, selected_id, map_state, template)
         self.simulation_id = map_state["simulation_id"]
-        self.result = list(results.get_results(self.simulation_id, [self.calculation]).values())[0]
+        self.result = next(iter(results.get_results(self.simulation_id, [self.calculation]).values()))
 
 
 class ClusterPopup(popups.Popup):
@@ -557,7 +561,7 @@ class PopulationPopup(RegionPopup):
         """Return population data."""
         return models.Population.quantity_per_municipality_per_year()
 
-    def get_municipality_value(self) -> Optional[float]:
+    def get_municipality_value(self) -> float | None:
         """Return municipality value for status quo year."""
         return self.detailed_data.loc[self.selected_id][2022]
 
@@ -577,7 +581,7 @@ class PopulationDensityPopup(RegionPopup):
         population = models.Population.quantity_per_municipality_per_year()
         return calculations.calculate_square_for_value(population).round(1)
 
-    def get_municipality_value(self) -> Optional[float]:
+    def get_municipality_value(self) -> float | None:
         """Return municipality value for status quo year."""
         return self.detailed_data.loc[self.selected_id][2022]
 
@@ -672,7 +676,7 @@ class NumberWindturbines2045Popup(RegionPopup):
         """Return aggregated data of all municipalities and technologies."""
         return self.detailed_data.sum()
 
-    def get_municipality_value(self) -> Optional[float]:
+    def get_municipality_value(self) -> float | None:
         """Return aggregated data for all technologies for given municipality ID."""
         if self.selected_id not in self.detailed_data.index:
             return 0
@@ -729,7 +733,7 @@ class NumberWindturbinesSquare2045Popup(RegionPopup):
         """Return aggregated data of all municipalities and technologies."""
         return self.detailed_data.sum()
 
-    def get_municipality_value(self) -> Optional[float]:
+    def get_municipality_value(self) -> float | None:
         """Return aggregated data for all technologies for given municipality ID."""
         if self.selected_id not in self.detailed_data.index:
             return 0
@@ -1085,6 +1089,56 @@ class PotentialAreaWindSTP2024VRPopup(WindAreaPopup):
     )
 
 
+class PotentialPopup(ChartPopup):
+    """Popup for potential data."""
+
+    def get_context_data(self) -> dict:
+        """Get context data for rendering template."""
+        slider_mapping = {
+            "potentials[s_w_6]": "wind_2024",
+            "potentials[s_w_7]": "wind_2027",
+            "potentials[s_pv_ff_3]": "pv_soil_quality_low",
+            "potentials[s_pv_ff_4]": "pv_soil_quality_medium",
+            "potentials[s_pv_ff_5]": "pv_permanent_crops",
+            "potentials[s_pv_d_3]": "pv_roof",
+        }
+        keys_per_category = {
+            "wind_2018": ("wind_2018",),
+            "wind_2024": ("wind_2024",),
+            "wind_2027": ("wind_2027",),
+            "pv_ground": ("pv_soil_quality_low", "pv_soil_quality_medium", "pv_permanent_crops"),
+            "pv_roof": ("pv_roof",),
+        }
+        potential_keys = keys_per_category[self.map_state["current_potential_layer"]]
+        usage_percentages = {transformed_key: self.map_state[key] for key, transformed_key in slider_mapping.items()}
+        usage_percentages["wind_2018"] = 100
+        potentials_ha = datapackage.get_potential_areas_region(self.selected_id) * 100  # sqkm to ha
+        usage_ha = potentials_ha.mul(pd.Series(usage_percentages, dtype=float) / 100)
+
+        context = {f"usage_{k}": v for k, v in usage_ha.to_dict().items() if k in potential_keys} | {
+            f"potential_{k}": v for k, v in potentials_ha.to_dict().items() if k in potential_keys
+        }
+        context["title"] = _("Potenzialflächen")
+        return context
+
+    def get_chart_options(self) -> dict:
+        """
+        Return chart data to build chart from in JS.
+
+        Returns
+        -------
+        dict
+            chart data ready to use in ECharts in JS
+
+        """
+        chart_data = self.get_context_data()
+        if self.map_state["current_potential_layer"].startswith("wind"):
+            chart_name = "potential_wind"
+        else:
+            chart_name = f"potential_{self.map_state['current_potential_layer']}"
+        return charts.create_chart(chart_name, chart_data)
+
+
 POPUPS: dict[str, type(popups.Popup)] = {
     "wind": ClusterPopup,
     "pvroof": ClusterPopup,
@@ -1132,4 +1186,5 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "rpg_ols_wind_planned": WindTurbine2PlannedPopup,
     "potentialarea_wind_stp_2018_eg": PotentialAreaWindSTP2018EG,
     "potentialarea_wind_stp_2024_vr": PotentialAreaWindSTP2024VRPopup,
+    "municipality": PotentialPopup,
 }

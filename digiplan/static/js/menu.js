@@ -1,6 +1,6 @@
 import { resultsTabs, statusquoDropdown, futureDropdown } from "./elements.js";
 import { terminateSimulation } from "./results.js";
-import { hidePotentialLayers, showPotentialLayers } from "./sliders.js";
+import { hidePotentialLayers, showPotentialLayers, deactivatePotentialPopups } from "./sliders.js";
 
 const menuNextBtn = document.getElementById("menu_next_btn");
 const menuPreviousBtn = document.getElementById("menu_previous_btn");
@@ -58,6 +58,7 @@ PubSub.subscribe(
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hidePotentialLayers);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hideEmpowerplanContent);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, reactivateChoropleth);
+PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, deactivatePotentialPopups);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, deactivateChoropleth);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, terminateSimulation);
@@ -66,7 +67,9 @@ PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, showPotentialLayers);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hidePotentialLayers);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideEmpowerplanContent);
+PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, deactivatePotentialPopups);
 PubSub.subscribe(eventTopics.MENU_SCENARIOS_SELECTED, showEmpowerplanContent);
+PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, deactivatePotentialPopups);
 PubSub.subscribe(eventTopics.MAP_VIEW_SELECTED, setResultsView);
 PubSub.subscribe(eventTopics.CHART_VIEW_SELECTED, setResultsView);
 

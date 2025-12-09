@@ -2,11 +2,12 @@
 
 import json
 import pathlib
-from typing import Any, Optional, Union
+from typing import Any, Union
 
 import pandas as pd
 from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
+from django_mapengine import utils
 
 from digiplan.map import calculations, config, datapackage, models
 from digiplan.map.utils import merge_dicts
@@ -19,8 +20,8 @@ class Chart:
 
     def __init__(
         self,
-        lookup: Optional[str] = None,
-        chart_data: Optional[Any] = None,
+        lookup: str | None = None,
+        chart_data: Any = None,
         **kwargs,  # noqa: ARG002
     ) -> None:
         """Initialize chart data and chart options."""
@@ -49,7 +50,7 @@ class Chart:
                     data.append([year_as_string, value])
                 self.chart_options["series"][0]["data"] = data
             elif series_length > 1:
-                for i in range(0, series_length):
+                for i in range(series_length):
                     values = (
                         self.chart_data.iloc[i]
                         if isinstance(self.chart_data, (pd.DataFrame, pd.Series))
@@ -76,6 +77,7 @@ class Chart:
         ------
         LookupError
             if lookup can't be found in LOOKUPS
+
         """
         lookup_path = pathlib.Path(config.CHARTS_DIR.path(f"{self.lookup}.json"))
         if not lookup_path.exists():
@@ -117,6 +119,7 @@ class PreResultsChart(Chart):
         ----------
         user_settings: dict
             User settings coming from map
+
         """
         self.user_settings = user_settings
         super().__init__()
@@ -133,6 +136,7 @@ class SimulationChart(Chart):
         ----------
         user_settings: dict
             User settings coming from map
+
         """
         self.simulation_id = user_settings["simulation_id"]
         super().__init__()
@@ -1056,6 +1060,78 @@ class PVRoofAreaChart(PreResultsChart):
         return self.chart_options
 
 
+class PotentialChart(Chart):
+    """Chart for usage and potential of pv ground, pv roof or wind areas respectively."""
+
+    keys_and_styles = {}
+    labels = {}
+
+    def __init__(self, lookup: str, chart_data: dict) -> None:  # noqa: ARG002
+        """Overwrite default lookup."""
+        super().__init__("potential_chart", chart_data)
+
+    def render(self) -> dict:
+        """Render template."""
+        options = self.chart_options
+        # We will have three series (one per category), each with two values [used, potential]
+        series = []
+        for key, style_key in self.keys_and_styles.items():
+            if f"usage_{key}" not in self.chart_data:
+                continue
+            color = utils.get_color(style_key)
+            series.append(
+                {
+                    "name": self.labels[key],
+                    "type": "bar",
+                    "stack": "total",
+                    "label": {"show": False},
+                    "itemStyle": {"color": color},
+                    "data": [round(self.chart_data[f"usage_{key}"], 2), round(self.chart_data[f"potential_{key}"], 2)],
+                },
+            )
+        options["series"] = series
+        return options
+
+
+class PotentialWindChart(PotentialChart):
+    """Two stacked bars (usage and potential) with three levels from pv ground categories."""
+
+    labels = {
+        "wind_2018": "Wind",
+        "wind_2024": "Wind",
+        "wind_2027": "Wind",
+    }
+    keys_and_styles = {
+        "wind_2018": "potentialarea_wind_stp_2018_eg",
+        "wind_2024": "potentialarea_wind_stp_2024_vr",
+        "wind_2027": "potentialarea_wind_stp_2024_vr",  # Use same color as 2024
+    }
+
+
+class PotentialPVGroundChart(PotentialChart):
+    """Two stacked bars (usage and potential) with three levels from pv ground categories."""
+
+    labels = {
+        "pv_soil_quality_low": "Geringe Bodengüte",
+        "pv_soil_quality_medium": "Mittlere Bodengüte",
+        "pv_permanent_crops": "Dauerkulturen",
+    }
+    keys_and_styles = {
+        "pv_soil_quality_low": "potentialarea_pv_ground_soil_quality_low",
+        "pv_soil_quality_medium": "potentialarea_pv_ground_soil_quality_medium",
+        "pv_permanent_crops": "potentialarea_pv_ground_permanent_crops",
+    }
+
+
+class PotentialPVRoofChart(PotentialChart):
+    """Two stacked bars (usage and potential) with three levels from pv ground categories."""
+
+    labels = {"pv_roof": "Dachfläche"}
+    keys_and_styles = {
+        "pv_roof": "potentialarea_pv_roof",
+    }
+
+
 CHARTS: dict[str, Union[type[PreResultsChart], type[SimulationChart]]] = {
     "detailed_overview": DetailedOverviewChart,
     "electricity_overview": ElectricityOverviewChart,
@@ -1098,6 +1174,11 @@ CHARTS: dict[str, Union[type[PreResultsChart], type[SimulationChart]]] = {
     "heat_demand_capita_2045_region": HeatDemandCapita2045RegionChart,
     "batteries_statusquo_region": BatteriesRegionChart,
     "batteries_capacity_statusquo_region": BatteriesCapacityRegionChart,
+    "municipality": PotentialChart,
+    # New potential area charts
+    "potential_pv_roof": PotentialPVRoofChart,
+    "potential_wind": PotentialWindChart,
+    "potential_pv_ground": PotentialPVGroundChart,
 }
 
 PRE_RESULTS = (
@@ -1108,7 +1189,7 @@ PRE_RESULTS = (
 )
 
 
-def create_chart(lookup: str, chart_data: Optional[Any] = None) -> dict:
+def create_chart(lookup: str, chart_data: Any | None = None) -> dict:
     """
     Return chart for given lookup.
 

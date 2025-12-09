@@ -1,0 +1,21 @@
+{
+  "tooltip": { "trigger": "axis", "axisPointer": { "type": "shadow" } },
+  "legend": {
+    "itemGap": 15,
+    "type": "scroll",
+    "orient": "horizontal",
+    "top": "0%",
+    "left": "center"
+  },
+  "grid": {
+    "top": "18%",
+    "left": "3%",
+    "right": "5%",
+    "bottom": "18%",
+    "containLabel": true
+  },
+  "aria": { "enabled": true },
+  "xAxis": { "type": "category", "data": ["Nutzung", "Potentialfläche"] },
+  "yAxis": { "type": "value", "axisLabel": { "formatter": "{value} ha" } },
+  "series": []
+}

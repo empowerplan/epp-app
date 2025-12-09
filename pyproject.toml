@@ -103,6 +103,7 @@ ignore = [
   "ANN101",  # Missing type annotation for `self` in method
   "ANN102",  # Missing type annotation for `cls` in classmethod
   "ANN003",  # Missing type annotation for `**kwargs`
+  "ANN401",  # Dynamically typed expressions (typing.Any) are disallowed
   "EM102",   # Exception must not use an f-string literal, assign to variable first
   "TRY003",  # Avoid specifying long messages outside the exception class
   "S101",    # Use of `assert` detected
@@ -116,6 +117,7 @@ ignore = [
   "RUF012",  # Mutable class attributes should be annotated with `typing.ClassVar`
   "UP038",   # (non-pep604-isinstance)
   "LOG015",  # Use own logger instead
+  "PYI024",  # Use `typing.NamedTuple` instead of `collections.namedtuple`
 ]
 fix = true
 show-fixes = true

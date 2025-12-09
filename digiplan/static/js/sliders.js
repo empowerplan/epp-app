@@ -108,6 +108,7 @@ PubSub.subscribe(eventTopics.PANEL_SLIDER_CHANGE, hidePotentialLayers);
 PubSub.subscribe(eventTopics.PANEL_SLIDER_CHANGE, adaptDetailSliders);
 PubSub.subscribe(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, adaptMainSliders);
 PubSub.subscribe(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, adaptDetailKeyResults);
+PubSub.subscribe(eventTopics.DETAIL_PANEL_SLIDER_CHANGE, adaptPotentialState);
 PubSub.subscribe(
   eventTopics.MORE_LABEL_CLICK,
   showOrHideSidepanelsOnMoreLabelClick,
@@ -118,9 +119,15 @@ PubSub.subscribe(
 );
 PubSub.subscribe(eventTopics.PV_CONTROL_ACTIVATED, showPVLayers);
 PubSub.subscribe(eventTopics.PV_CONTROL_ACTIVATED, highlightPVMapControls);
+PubSub.subscribe(eventTopics.PV_CONTROL_ACTIVATED, activatePotentialPopups);
+PubSub.subscribe(eventTopics.PV_CONTROL_ACTIVATED, adaptPotentialState);
 PubSub.subscribe(eventTopics.PV_ROOF_CONTROL_ACTIVATED, showPVRoofLayers);
+PubSub.subscribe(eventTopics.PV_ROOF_CONTROL_ACTIVATED, activatePotentialPopups);
+PubSub.subscribe(eventTopics.PV_ROOF_CONTROL_ACTIVATED, adaptPotentialState);
 PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, updateWindSelection);
 PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, showWindLayers);
+PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, activatePotentialPopups);
+PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, adaptPotentialState);
 
 // Subscriber Functions
 /**
@@ -602,6 +609,59 @@ function addMarks(data, marks) {
   }
 
   data.slider.append(html);
+}
+
+function activatePotentialPopups(msg) {
+  const municipalityLayer = Object.keys(map_store.cold.popups).find(key => key.startsWith('municipality'));
+  // Activate the municipality layer to show popups at default
+  map_store.cold.popups[municipalityLayer].atDefaultLayer = true;
+  let currentLayer = null;
+  // Determine current potential layer depending on the activated control
+  if (
+    msg === (typeof eventTopics !== 'undefined' ? eventTopics.WIND_CONTROL_ACTIVATED : 'WIND_CONTROL_ACTIVATED') ||
+    msg === 'WIND_CONTROL_ACTIVATED'
+  ) {
+    // Read from the currently active wind tab
+    const currentWindTab = document
+      .getElementById("windTab")
+      .getElementsByClassName("active")[0].id;
+    if (currentWindTab === "windPastTab") {
+      currentLayer = "wind_2018";
+    } else if (currentWindTab === "windPresentTab") {
+      currentLayer = "wind_2024";
+    } else if (currentWindTab === "windFutureTab") {
+      currentLayer = "wind_2027";
+    } else {
+      throw Error(`Unknown wind tab '${currentWindTab}' found.`);
+    }
+  } else {
+    // PV controls keep fixed layer mapping
+    const potentialLayer = {
+      PV_CONTROL_ACTIVATED: "pv_ground",
+      PV_ROOF_CONTROL_ACTIVATED: "pv_roof",
+    };
+    currentLayer = potentialLayer[msg];
+  }
+
+  map_store.cold.state.current_potential_layer = currentLayer;
+  return logMessage(msg);
+}
+
+export function deactivatePotentialPopups(msg) {
+  const municipalityLayer = Object.keys(map_store.cold.popups).find(key => key.startsWith('municipality'));
+  // Deactivate the municipality layer to show popups at default
+  map_store.cold.popups[municipalityLayer].atDefaultLayer = false;
+  return logMessage(msg);
+}
+
+function adaptPotentialState(msg) {
+  let potentials = {};
+  Array.from(detailSliders).forEach((slider) => {
+    const sliderId = slider.id.replace("id_", "");
+    potentials[sliderId] = $(`#${slider.id}`).data("ionRangeSlider").result.from;
+  });
+  map_store.cold.state.potentials = potentials;
+  return logMessage(msg);
 }
 
 $(document).ready(function () {
