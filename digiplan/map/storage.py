@@ -1,4 +1,5 @@
 """Add staticfile storage to enable JS module compression."""
+
 from whitenoise.storage import CompressedManifestStaticFilesStorage
 
 

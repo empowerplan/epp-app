@@ -2,7 +2,7 @@
 
 import abc
 from collections.abc import Callable
-from typing import Optional, Union
+from typing import Union
 
 import pandas as pd
 from django.conf import settings
@@ -14,7 +14,7 @@ from . import calculations, models
 class Choropleth:
     """Base class for choropleths."""
 
-    def __init__(self, lookup: str, map_state: Optional[dict] = None) -> None:
+    def __init__(self, lookup: str, map_state: dict | None = None) -> None:
         """
         Initialize choropleth.
 
@@ -24,6 +24,7 @@ class Choropleth:
             given lookup name
         map_state : dict
             current state of map (comes from mapengine)
+
         """
         self.lookup = lookup
         self.map_state = map_state
@@ -43,6 +44,7 @@ class Choropleth:
         -------
         dict
             containing paint properties for choropleth layer in maplibre
+
         """
         return {"fill-opacity": 0.75}
 
@@ -59,6 +61,7 @@ class Choropleth:
         -------
         dict
             containing fill-color steps for given values
+
         """
         return settings.MAP_ENGINE_CHOROPLETH_STYLES.get_fill_color(self.lookup, list(values.values()))
 
@@ -70,6 +73,7 @@ class Choropleth:
         -------
         JsonResponse
             containing values and related paint properties to show choropleth on map
+
         """
         values = self.get_values_per_feature()
         paint_properties = self.get_paint_properties()

@@ -3,7 +3,6 @@
 import logging
 import math
 import pathlib
-from typing import Optional
 
 import pandas as pd
 from django.db.models import Model
@@ -71,7 +70,7 @@ MODELS = [
 ]
 
 
-def load_regions(regions: Optional[list[Model]] = None, *, verbose: bool = True) -> None:
+def load_regions(regions: list[Model] | None = None, *, verbose: bool = True) -> None:
     """Load region geopackages into region models."""
     regions = regions or REGIONS
     for region in regions:
@@ -98,7 +97,7 @@ def load_regions(regions: Optional[list[Model]] = None, *, verbose: bool = True)
         instance.save(strict=True, verbose=verbose)
 
 
-def load_data(models: Optional[list[Model]] = None) -> None:
+def load_data(models: list[Model] | None = None) -> None:
     """Load geopackage-based data into models."""
     models = models or MODELS
     for model in models:
@@ -135,20 +134,20 @@ def load_population() -> None:
         for year in years:
             series = dataframe.loc[municipality.id, year]
 
-            value = list(series.values)[0]
+            value = next(iter(series.values))
             if math.isnan(value):
                 continue
 
             entry = models.Population(
                 year=year,
                 value=value,
-                entry_type=list(series.index.values)[0],
+                entry_type=next(iter(series.index.values)),
                 municipality=municipality,
             )
             entry.save()
 
 
-def empty_data(models: Optional[list[Model]] = None) -> None:
+def empty_data(models: list[Model] | None = None) -> None:
     """Delete all data from given models."""
     models = models or MODELS
     for model in models:

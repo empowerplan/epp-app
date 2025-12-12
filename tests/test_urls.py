@@ -1,4 +1,5 @@
 """Base tests to see if django runserver comes up."""
+
 from django.test import TestCase
 
 

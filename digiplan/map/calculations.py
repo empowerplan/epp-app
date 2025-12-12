@@ -1,7 +1,5 @@
 """Module for calculations used for choropleths or charts."""
 
-from typing import Optional
-
 import pandas as pd
 from django.utils.translation import gettext_lazy as _
 from django_oemof.results import get_results
@@ -51,11 +49,12 @@ def calculate_square_for_value(df: pd.DataFrame) -> pd.DataFrame:
     -------
     pd.DataFrame
         Each value is multiplied by related municipality share
+
     """
     is_series = False
     if isinstance(df, pd.Series):
         is_series = True
-        df = pd.DataFrame(df)  # noqa: PD901
+        df = pd.DataFrame(df)
     areas = (
         pd.DataFrame.from_records(models.Municipality.objects.all().values("id", "area")).set_index("id").sort_index()
     )
@@ -89,11 +88,12 @@ def calculate_capita_for_value(df: pd.DataFrame) -> pd.DataFrame:
     -------
     pd.DataFrame
         Each value is multiplied by related municipality population share
+
     """
     is_series = False
     if isinstance(df, pd.Series):
         is_series = True
-        df = pd.DataFrame(df)  # noqa: PD901
+        df = pd.DataFrame(df)
 
     population = (
         pd.DataFrame.from_records(models.Population.objects.filter(year=2022).values("municipality__id", "value"))
@@ -134,6 +134,7 @@ def capacities_per_municipality() -> pd.DataFrame:
     -------
     pd.DataFrame
         Capacity per municipality (index) and technology (column)
+
     """
     return datapackage.get_capacities_from_datapackage()
 
@@ -189,6 +190,7 @@ def energies_per_municipality() -> pd.DataFrame:
     -------
     pd.DataFrame
         Energy per municipality (index) and technology (column)
+
     """
     capacities = capacities_per_municipality()
     full_load_hours = datapackage.get_full_load_hours(year=2022).drop("st").rename({"ror": "hydro"})
@@ -213,6 +215,7 @@ def energy_shares_per_municipality() -> pd.DataFrame:
     -------
     pd.DataFrame
         Energy share per municipality (index) and technology (column)
+
     """
     energies = energies_per_municipality()
     demands = datapackage.get_power_demand()
@@ -232,6 +235,7 @@ def energy_shares_region() -> pd.DataFrame:
     -------
     pd.DataFrame
         Energy share per municipality (index) and technology (column)
+
     """
     energies = energies_per_municipality()
     demands = datapackage.get_power_demand()
@@ -249,6 +253,7 @@ def electricity_demand_per_municipality(year: int = 2022) -> pd.DataFrame:
     -------
     pd.DataFrame
         Electricity demand per municipality (index) and sector (column)
+
     """
     demands_raw = datapackage.get_power_demand()
     demands_per_sector = pd.concat([demand[str(year)] for demand in demands_raw.values()], axis=1)
@@ -268,6 +273,7 @@ def energy_shares_2045_per_municipality(parameters: dict) -> pd.DataFrame:
     -------
     pd.DataFrame
         Energy share per municipality (index) and technology (column)
+
     """
     energies = energies_per_municipality_2045(parameters).mul(1e-3)
     demands = electricity_demand_per_municipality_2045(parameters).sum(axis=1)
@@ -286,6 +292,7 @@ def energy_shares_2045_region(parameters: dict) -> pd.DataFrame:
     -------
     pd.DataFrame
         Energy share per municipality (index) and technology (column)
+
     """
     energies = energies_per_municipality_2045(parameters)
     demands = electricity_demand_per_municipality_2045(parameters).sum(axis=1).mul(1e3)
@@ -303,6 +310,7 @@ def electricity_demand_per_municipality_2045(user_settings: dict) -> pd.DataFram
     -------
     pd.DataFrame
         Electricity demand per municipality (index) and sector (column)
+
     """
     demand = electricity_demand_per_municipality(year=2022)
     shares = [int(user_settings[key]) / 100 for key in ("s_v_3", "s_v_4", "s_v_5")]
@@ -317,6 +325,7 @@ def heat_demand_per_municipality(year: int) -> pd.DataFrame:
     -------
     pd.DataFrame
         Heat demand per municipality (index) and sector (column)
+
     """
     demands_raw = datapackage.get_summed_heat_demand_per_municipality()
     demands_per_sector = pd.concat(
@@ -339,6 +348,7 @@ def heat_demand_per_municipality_2045(user_settings: dict) -> pd.DataFrame:
     -------
     pd.DataFrame
         Heat demand per municipality (index) and sector (column)
+
     """
     demand = heat_demand_per_municipality(year=2022)
     shares = [int(user_settings[key]) / 100 for key in ("w_v_3", "w_v_4", "w_v_5")]
@@ -367,6 +377,7 @@ def electricity_from_from_biomass(simulation_id: int) -> pd.Series:
     -------
     pd.Series
         containing one entry for electric energy powered by biomass
+
     """
     results = get_results(
         simulation_id,
@@ -428,6 +439,7 @@ def electricity_heat_demand(simulation_id: int) -> pd.Series:
     -------
     pd.Series
         containing electricity demand of heating sector
+
     """
     results = get_results(
         simulation_id,
@@ -504,6 +516,7 @@ def electricity_overview(year: int) -> pd.Series:
     -------
     pd.Series
         containing electricity productions and demands (including heat sector demand for electricity)
+
     """
     demand = electricity_demand_per_municipality(year).sum()
     production = datapackage.get_full_load_hours(year) * datapackage.get_capacities_from_sliders(year)
@@ -524,6 +537,7 @@ def electricity_overview_from_user(simulation_id: int) -> pd.Series:
     -------
     pd.Series
         containing electricity productions and demands (including heat sector demand for electricity)
+
     """
     results = get_results(
         simulation_id,
@@ -664,6 +678,7 @@ def heat_overview(simulation_id: int, distribution: str) -> dict:
     -------
     dict
         containing heat demand and production for all sectors (hh, cts, ind) and technologies
+
     """
     data = {}
     for year in (2022, 2045):
@@ -819,8 +834,8 @@ class Flows(core.Calculation):
     def __init__(
         self,
         calculator: core.Calculator,
-        from_nodes: Optional[list[str]] = None,
-        to_nodes: Optional[list[str]] = None,
+        from_nodes: list[str] | None = None,
+        to_nodes: list[str] | None = None,
     ) -> None:
         """Init flows."""
         if not from_nodes and not to_nodes:

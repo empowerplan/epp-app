@@ -1,4 +1,5 @@
 """Module containing django forms."""
+
 from __future__ import annotations
 
 from abc import abstractmethod
@@ -67,9 +68,9 @@ class PanelForm(TemplateForm):  # noqa: D101
             "data-min": parameters["min"],
             "data-max": parameters["max"],
             "data-from": parameters["start"],
-            "data-grid": "true" if "grid" in parameters and parameters["grid"] else "false",
+            "data-grid": "true" if parameters.get("grid") else "false",
             "data-has-sidepanel": "true" if "sidepanel" in parameters else "false",
-            "data-color": parameters["color"] if "color" in parameters else "",
+            "data-color": parameters.get("color", ""),
         }
         if "to" in parameters:
             attrs["data-to"] = parameters["to"]

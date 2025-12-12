@@ -3,6 +3,7 @@ Views for map app.
 
 As map app is SPA, this module contains main view and various API points.
 """
+
 import json
 
 from django.conf import settings
@@ -48,6 +49,7 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         -------
         dict
             context for main view
+
         """
         # Add unique session ID
         context = super().get_context_data(**kwargs)
@@ -127,6 +129,7 @@ def get_popup(request: HttpRequest, lookup: str, region: int) -> response.JsonRe
     -------
     JsonResponse
         containing HTML to render popup and chart options to be used in E-Chart.
+
     """
     map_state = request.GET.dict()
     lookup = lookup.removesuffix("_distilled")
@@ -152,6 +155,7 @@ def get_choropleth(request: HttpRequest, lookup: str, layer_id: str) -> response
     -------
     JsonResponse
         Containing key-value pairs of municipality_ids and values and related color style
+
     """
     map_state = request.GET.dict()
     return choropleths.CHOROPLETHS[lookup](lookup, map_state)
@@ -171,6 +175,7 @@ def get_charts(request: HttpRequest) -> response.JsonResponse:
     JsonResponse
         holding dict with `div_id` as keys and chart options as values.
         `div_id` is used in frontend to detect chart container.
+
     """
     lookups = request.GET.getlist("charts[]")
     map_state = json.loads(request.GET.get("map_state", "{}"))
@@ -192,6 +197,7 @@ def get_summary_results(request: HttpRequest) -> response.JsonResponse:
     -------
     JsonResponse
         holding dict containing div IDs as key and summary results as HTML as values
+
     """
     lookups = request.GET.getlist("summaries[]")
     map_state = json.loads(request.GET.get("map_state", "{}"))
@@ -208,7 +214,5 @@ class DetailKeyResultsView(TemplateView):
     def get_context_data(self, **kwargs) -> dict:  # noqa: ARG002
         """Get detail key results for requested technology."""
         # Cut off leading "id_" from form field id
-        parameters = {
-            key[3:] if key.startswith("id_") else key: value for key, value in self.request.GET.dict().items()
-        }
+        parameters = {key.removeprefix("id_"): value for key, value in self.request.GET.dict().items()}
         return {f"key_result_{key}": value for key, value in menu.detail_key_results(**parameters).items()}

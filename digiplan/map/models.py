@@ -1,6 +1,5 @@
 """Digiplan models."""
 
-
 import pandas as pd
 from django.contrib.gis.db import models
 from django.db.models import Count, Sum
@@ -63,6 +62,7 @@ class Municipality(models.Model):
         -------
         float
             total area of all municipalities
+
         """
         return cls.objects.all().aggregate(Sum("area"))["area__sum"]
 
@@ -88,6 +88,7 @@ class Population(models.Model):
         -------
         pd.DataFrame
             Population per municipality (index) and year (column)
+
         """
         population_per_year = (
             pd.DataFrame.from_records(cls.objects.all().values("municipality__id", "year", "value"))  # noqa: PD010
@@ -208,6 +209,7 @@ class WindTurbine(RenewableModel):
         -------
         dpd.DataFrame
             wind turbines per municipality
+
         """
         queryset = cls.objects.values("mun_id").annotate(units=Sum("unit_count")).values("mun_id", "units")
         wind_turbines = pd.DataFrame.from_records(queryset).set_index("mun_id")
@@ -849,6 +851,7 @@ class WindTurbine2(models.Model):
         -------
         dpd.DataFrame
             wind turbines per municipality
+
         """
         queryset = cls.objects.values("mun_id").annotate(units=Count("name")).values("mun_id", "units")
         wind_turbines = pd.DataFrame.from_records(queryset).set_index("mun_id")

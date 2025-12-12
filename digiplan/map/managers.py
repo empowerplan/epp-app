@@ -1,5 +1,4 @@
 """Module to hold MVT managers."""
-from typing import Optional
 
 import django.db.models
 from django.contrib.gis.db import models
@@ -34,7 +33,7 @@ class MVTManager(models.Manager):
         self,
         *args,  # noqa: ANN002
         geo_col: str = "geom",
-        columns: Optional[list[str]] = None,
+        columns: list[str] | None = None,
         **kwargs,
     ) -> None:
         """Init."""
@@ -42,7 +41,7 @@ class MVTManager(models.Manager):
         self.geo_col = geo_col
         self.columns = columns
 
-    def get_mvt_query(self, x: int, y: int, z: int, filters: Optional[dict] = None) -> tuple:
+    def get_mvt_query(self, x: int, y: int, z: int, filters: dict | None = None) -> tuple:
         """Build MVT query; might be overwritten in child class."""
         filters = filters or {}
         return self._build_mvt_query(x, y, z, filters)
@@ -52,7 +51,7 @@ class MVTManager(models.Manager):
         return self.columns or self._get_non_geom_columns()
 
     # pylint: disable=W0613,R0913
-    def _filter_query(  # noqa: PLR0913
+    def _filter_query(
         self,
         query: django.db.models.QuerySet,
         x: int,  # noqa: ARG002
@@ -104,6 +103,7 @@ class MVTManager(models.Manager):
         ------
         ValidationError
             if sql query cannot be build with given parameters
+
         """
         query = self._get_mvt_geom_query(x, y, z)
         query = self._filter_query(query, x, y, z, filters)
@@ -123,6 +123,7 @@ class MVTManager(models.Manager):
         -------
         list-of-str
             List of column names (excluding geom)
+
         """
         columns = []
         for field in self.model._meta.get_fields():  # noqa: SLF001
@@ -145,7 +146,7 @@ class StaticMVTManager(MVTManager):
     """Manager which does nothing?."""
 
     # pylint: disable=R0913
-    def _filter_query(  # noqa: PLR0913
+    def _filter_query(
         self,
         query: django.db.models.QuerySet,
         x: int,

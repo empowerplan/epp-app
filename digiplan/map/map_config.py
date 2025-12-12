@@ -1,4 +1,5 @@
 """Actual map setup is done here."""
+
 import dataclasses
 
 from django.conf import settings
@@ -33,6 +34,7 @@ class DistillableLegendLayer(legend.LegendLayer):
         -------
         dict
             layer style
+
         """
         layer_id = self.layer_id.removesuffix("_distilled")
         return utils.get_layer_style(layer_id)

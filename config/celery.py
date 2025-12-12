@@ -1,4 +1,5 @@
 """Module to set up celery."""
+
 import os
 
 from celery import Celery

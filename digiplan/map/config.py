@@ -1,4 +1,5 @@
 """Configuration for map app."""
+
 import json
 import os
 import pathlib
@@ -54,6 +55,7 @@ def get_all_settings() -> dict:
     -------
     dict
         one dict with all settings concatenated
+
     """
     all_settings = {}
     for setting_dict in [
@@ -70,12 +72,13 @@ def get_all_settings() -> dict:
 
 def get_slider_marks() -> dict:
     """
-    get all status quo values and future scenario values for all settings.
+    Get all status quo values and future scenario values for all settings.
 
     Returns
     -------
     dict
         one dict with all values in correct format for usage
+
     """
     all_settings = get_all_settings().items()
     slider_marks = {}
@@ -100,12 +103,13 @@ def get_slider_marks() -> dict:
 
 def get_slider_per_sector() -> dict:
     """
-    get demand per sector.
+    Get demand per sector.
 
     Returns
     -------
     dict
         demand per sector for each slider
+
     """
     sector_dict = {
         "s_v_1": {"hh": 0, "ind": 0, "cts": 0},
@@ -146,6 +150,7 @@ def init_hot_store() -> str:
     -------
     str
         Hot store as json literal
+
     """
     # Filter booleans have to be stored as str:
     filter_init = {data["js_event_name"]: "True" if data["initial"] else "False" for data in FILTER_DEFINITION.values()}
@@ -164,6 +169,7 @@ def init_sources() -> dict[str, dict]:
     -------
     dict
         holding metadata of source as value and metadata ID as key.
+
     """
     sources = {}
     metadata_path = pathlib.Path(settings.METADATA_DIR)
