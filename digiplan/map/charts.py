@@ -164,8 +164,9 @@ class ElectricityOverviewChart(SimulationChart):
     def get_chart_data(self):  # noqa: ANN201
         """Get chart data from electricity overview calculation."""
         return {
-            "2022": calculations.electricity_overview(2022),
-            "2045": calculations.electricity_overview(2045),
+            "2023": calculations.electricity_overview(2023),
+            "2030": calculations.electricity_overview(2030),
+            "2040": calculations.electricity_overview(2040),
             "user": calculations.electricity_overview_from_user(simulation_id=self.simulation_id),
         }
 
@@ -185,13 +186,16 @@ class ElectricityOverviewChart(SimulationChart):
         for _i, item in enumerate(self.chart_options["series"]):
             mapped_keys = mapping[item["name"]]
             item["data"][0] = round(
-                self.chart_data["2045"].get(mapped_keys[0], self.chart_data["2045"].get(mapped_keys[1], 0.0)),
+                self.chart_data["2040"].get(mapped_keys[0], self.chart_data["2040"].get(mapped_keys[1], 0.0)),
             )
             item["data"][1] = round(
-                self.chart_data["user"].get(mapped_keys[0], self.chart_data["user"].get(mapped_keys[1], 0.0)),
+                self.chart_data["2030"].get(mapped_keys[0], self.chart_data["2030"].get(mapped_keys[1], 0.0)),
             )
             item["data"][2] = round(
-                self.chart_data["2022"].get(mapped_keys[0], self.chart_data["2022"].get(mapped_keys[1], 0.0)),
+                self.chart_data["user"].get(mapped_keys[0], self.chart_data["user"].get(mapped_keys[1], 0.0)),
+            )
+            item["data"][3] = round(
+                self.chart_data["2023"].get(mapped_keys[0], self.chart_data["2023"].get(mapped_keys[1], 0.0)),
             )
         return self.chart_options
 

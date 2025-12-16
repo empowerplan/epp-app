@@ -14,6 +14,7 @@ from django_oemof.settings import OEMOF_DIR
 
 from config.settings.base import DIGIPIPE_DIR
 from digiplan.map import config, models
+from digiplan.map.utils import interpolate_year_from_dict
 
 
 class Source(NamedTuple):
@@ -323,7 +324,10 @@ def get_potential_areas_region(region_id: int, technology: str | None = None) ->
 def get_full_load_hours(year: int) -> pd.Series:
     """Return full load hours for given year."""
     full_load_hours = pd.Series(
-        data=[technology_data[str(year)] for technology_data in config.TECHNOLOGY_DATA["full_load_hours"].values()],
+        data=[
+            interpolate_year_from_dict(technology_data, year)
+            for technology_data in config.TECHNOLOGY_DATA["full_load_hours"].values()
+        ],
         index=config.TECHNOLOGY_DATA["full_load_hours"].keys(),
     )
     return full_load_hours
@@ -360,23 +364,16 @@ def get_capacities_from_datapackage() -> pd.DataFrame:
 
 def get_capacities_from_sliders(year: int) -> pd.Series:
     """Return renewable capacities for given year from slider settings (totals for each technology)."""
-    if year == 2022:  # noqa: PLR2004
-        lookup = "status_quo"
-        bioenergy_power = 98.476  # Workaround for bioenergy as there's no slider
-    elif year == 2045:  # noqa: PLR2004
-        lookup = "future_scenario_2040"
-        bioenergy_power = 0
-    else:
-        msg = "Unknown year"
-        raise ValueError(msg)
     energy_settings = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "settings/energy_settings_panel.json")))
     technologies = {"wind": "s_w_1", "pv_ground": "s_pv_ff_1", "pv_roof": "s_pv_d_1", "ror": "s_h_1"}
-    slider_settings = pd.Series(
-        data={
-            **{technology: energy_settings[key].get(lookup, 0.0) for technology, key in technologies.items()},
-            "bioenergy": bioenergy_power,
-        },
-    )
+
+    data = {"bioenergy": interpolate_year_from_dict({2022: 98.476, 2040: 0}, year)}
+    for technology, key in technologies.items():
+        data[technology] = interpolate_year_from_dict(
+            {2022: energy_settings[key].get("status_quo", 0.0), 2045: energy_settings[key].get("future_scenario_2040")},
+            year,
+        )
+    slider_settings = pd.Series(data)
     return slider_settings
 
 

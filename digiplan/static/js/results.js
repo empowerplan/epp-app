@@ -1,4 +1,4 @@
-import { statusquoDropdown, futureDropdown } from "./elements.js";
+import {statusquoDropdown, futureDropdown} from "./elements.js";
 
 const imageResults = document.getElementById("info_tooltip_results");
 
@@ -37,7 +37,7 @@ const PRE_RESULTS = [
   "heat_demand_capita_2045",
 ];
 
-const resultCharts = {};
+const resultCharts = {"electricity_overview": "electricity_overview_chart"};
 
 const SUMMARY_PRE_RESULTS = [
   "summary_electricity_wind_pv",
@@ -102,7 +102,7 @@ function simulate(msg) {
     $.ajax({
       url: "/oemof/terminate",
       type: "POST",
-      data: { task_id: store.cold.task_id },
+      data: {task_id: store.cold.task_id},
       success: function () {
         store.cold.task_id = null;
       },
@@ -127,7 +127,7 @@ export function terminateSimulation(msg) {
     $.ajax({
       url: "/oemof/terminate",
       type: "POST",
-      data: { task_id: store.cold.task_id },
+      data: {task_id: store.cold.task_id},
       success: function () {
         store.cold.task_id = null;
       },
@@ -154,14 +154,14 @@ function checkResults() {
   $.ajax({
     url: "/oemof/simulate",
     type: "GET",
-    data: { task_id: store.cold.task_id },
+    data: {task_id: store.cold.task_id},
     success: function (json) {
       if (json.simulation_id == null) {
         if (timesSimulationChecked === SIMULATION_CHECK_LIMIT) {
           store.cold.task_id = null;
           map_store.cold.state.simulation_id = null;
           PubSub.publish(eventTopics.SIMULATION_ABORTED, terminateSimulation);
-          const error_msg = { status: 500 };
+          const error_msg = {status: 500};
           PubSub.publish(eventTopics.SIMULATION_ERROR, error_msg);
         } else {
           timesSimulationChecked += 1;
@@ -354,7 +354,7 @@ function setSimulationProgress(value, title, description, status) {
   progressBar.style.width = `${value}%`;
   progressMessage.innerHTML = title;
   progressTooltip.setAttribute("title", description);
-  new bootstrap.Tooltip(progressTooltip, { html: true });
+  new bootstrap.Tooltip(progressTooltip, {html: true});
   if (status === "error") {
     progressStatus.classList.add("progress--error");
   } else {

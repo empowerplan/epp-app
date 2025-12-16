@@ -1,4 +1,4 @@
-@mixin results-upper-boxes-colors ($results-upper-boxes-bg-color, $results-upper-boxes-color) {
+@mixin results-upper-boxes-colors($results-upper-boxes-bg-color, $results-upper-boxes-color) {
   border-color: $results-upper-boxes-bg-color !important;
 
   .main-results__box-icon {
@@ -158,7 +158,7 @@
   }
 
   &__chart {
-    height: 375px;
+    height: 500px;
     width: 100%;
   }
 

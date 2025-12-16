@@ -6,6 +6,7 @@ from django_oemof.results import get_results
 from oemof.tabular.postprocessing import calculations, core, helper
 
 from digiplan.map import config, datapackage, models
+from digiplan.map.utils import interpolate_year_from_dataframe
 
 PV_GROUND_COLUMNS = ["pv_soil_quality_low", "pv_soil_quality_medium", "pv_permanent_crops"]
 
@@ -256,7 +257,10 @@ def electricity_demand_per_municipality(year: int = 2022) -> pd.DataFrame:
 
     """
     demands_raw = datapackage.get_power_demand()
-    demands_per_sector = pd.concat([demand[str(year)] for demand in demands_raw.values()], axis=1)
+    demands_per_sector = pd.concat(
+        [interpolate_year_from_dataframe(demand, year) for demand in demands_raw.values()],
+        axis=1,
+    )
     demands_per_sector.columns = [
         _("Electricity Household Demand"),
         _("Electricity CTS Demand"),

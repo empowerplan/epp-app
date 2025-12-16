@@ -3,9 +3,12 @@
 import json
 import pathlib
 
+import numpy as np
+import pandas as pd
 from django.http import HttpRequest
 from django.template import Template
 from django.template.context import make_context
+from scipy.interpolate import interp1d
 
 
 def read_file(filename: str) -> str:
@@ -65,3 +68,37 @@ def merge_dicts(dict1: dict, dict2: dict) -> dict:
         else:
             dict1[key] = value
     return dict1
+
+
+def interpolate_year_from_dataframe(df: pd.DataFrame, year: int) -> pd.Series:
+    """
+    Return series from dataframe for given year.
+
+    If the given year is not present in dataframe columns, interpolate the data given available years.
+    """
+    # Keep only columns which can be converted to an integer (=year)
+    no_year_columns = [column for column in df.columns if not isinstance(column, int) and not str.isdigit(column)]
+    df = df.drop(no_year_columns, axis=1)
+
+    years = df.columns.astype(float).to_numpy()
+    values = df.to_numpy()
+
+    f = interp1d(years, values, axis=1, kind="linear", fill_value="extrapolate", assume_sorted=True)
+
+    return pd.Series(f(year), index=df.index, name=year)
+
+
+def interpolate_year_from_dict(data: dict, year: int) -> float:
+    """Extract or interpolate value from dict for given year."""
+    # Sort by year
+    data = {int(y): v for y, v in data.items()}
+    years = np.array(sorted(data.keys()), dtype=float)
+    values = np.array([data[y] for y in years], dtype=float)
+
+    # If exact year exists
+    if year in data:
+        return data[year]
+
+    f = interp1d(years, values, kind="linear", fill_value="extrapolate", assume_sorted=True)
+
+    return float(f(year))
