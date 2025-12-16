@@ -37,10 +37,24 @@ const PRE_RESULTS = [
   "heat_demand_capita_2045",
 ];
 
-const resultCharts = {
+export const resultCharts = {
   "electricity_overview": "electricity_overview_chart",
-  "electricity_autarky": "electricity_autarky_chart"
+  "electricity_autarky": "electricity_autarky_chart",
+  "heat_centralized": "heat_centralized_chart",
+  "heat_decentralized": "heat_decentralized_chart",
 };
+
+/* jshint ignore:start */
+const preResultCharts = {
+  wind_capacity: "wind_capacity_chart",
+  wind_areas: "wind_areas_chart",
+  pv_ground_capacity: "pv_ground_capacity_chart",
+  pv_ground_areas: "pv_ground_areas_chart",
+  pv_roof_capacity: "pv_roof_capacity_chart",
+  pv_roof_areas: "pv_roof_areas_chart",
+};
+/* jshint ignore:end */
+
 
 const SUMMARY_PRE_RESULTS = [
   "summary_electricity_wind_pv",
@@ -79,7 +93,12 @@ futureDropdown.addEventListener("change", function () {
     futureDropdown.options[futureDropdown.selectedIndex].title;
 });
 
+// Resize Charts
+window.addEventListener("resize", resizeCharts);
+document.addEventListener("show.bs.tab", resizeCharts);
+
 // Subscriptions
+PubSub.subscribe(eventTopics.MENU_CHANGED, resizeCharts);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showResultSkeletons);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, storePreResults);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showPreResultCharts);
@@ -363,4 +382,16 @@ function setSimulationProgress(value, title, description, status) {
   } else {
     progressStatus.classList.remove("progress--error");
   }
+}
+
+function resizeCharts() {
+  setTimeout(function () {
+    for (const div of Object.values({...resultCharts, ...preResultCharts})) {
+      const chartDiv = document.getElementById(div);
+      const chart = echarts.getInstanceByDom(chartDiv);
+      if (chart !== undefined) {
+        chart.resize();
+      }
+    }
+  }, 200);
 }
