@@ -14,7 +14,10 @@ from django_oemof.settings import OEMOF_DIR
 
 from config.settings.base import DIGIPIPE_DIR
 from digiplan.map import config, models
-from digiplan.map.utils import interpolate_year_from_dict
+from digiplan.map.utils import (
+    interpolate_year_from_dataframe,
+    interpolate_year_from_dict,
+)
 
 
 class Source(NamedTuple):
@@ -74,7 +77,7 @@ def get_hourly_electricity_demand(year: int) -> pd.Series:
     demand_profile = get_electricity_demand_profile()
     demand = []
     for sector, demand_sector_per_mun in demand_per_sector.items():
-        demand.append(demand_profile[sector] * demand_sector_per_mun[str(year)].sum())
+        demand.append(demand_profile[sector] * interpolate_year_from_dataframe(demand_sector_per_mun, year).sum())
     return pd.concat(demand, axis=1).sum(axis=1)
 
 

@@ -37,7 +37,10 @@ const PRE_RESULTS = [
   "heat_demand_capita_2045",
 ];
 
-const resultCharts = {"electricity_overview": "electricity_overview_chart"};
+const resultCharts = {
+  "electricity_overview": "electricity_overview_chart",
+  "electricity_autarky": "electricity_autarky_chart"
+};
 
 const SUMMARY_PRE_RESULTS = [
   "summary_electricity_wind_pv",

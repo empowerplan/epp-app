@@ -612,9 +612,9 @@ def renewable_electricity_production(simulation_id: int) -> pd.Series:
 def get_regional_independency(simulation_id: int) -> tuple[int, int, int, int]:
     """Return electricity autarky for 2022 and user scenario."""
     # 2022
-    demand = datapackage.get_hourly_electricity_demand(2022)
-    full_load_hours = datapackage.get_full_load_hours(2022)
-    capacities = datapackage.get_capacities_from_sliders(2022)
+    demand = datapackage.get_hourly_electricity_demand(2023)
+    full_load_hours = datapackage.get_full_load_hours(2023)
+    capacities = datapackage.get_capacities_from_sliders(2023)
     technology_mapping = {
         "ABW-wind-onshore": "wind",
         "ABW-solar-pv_ground": "pv_ground",
