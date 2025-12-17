@@ -6,4 +6,4 @@ set -o nounset
 
 
 python manage.py migrate
-python manage.py runserver_plus --keep-meta-shutdown 0.0.0.0:8000
+python manage.py runserver_plus --keep-meta-shutdown --reloader-type=stat 0.0.0.0:8000
