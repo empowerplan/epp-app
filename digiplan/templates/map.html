@@ -9,8 +9,10 @@
 
 {% block css %}
   {% compress css %}
-    <link href="{% static 'vendors/maplibre/css/maplibre-gl.css' %}" rel='stylesheet'/>
-    <link href="{% static 'vendors/shepherd/shepherd.css' %}" rel='stylesheet'/>
+    <link href="{% static 'vendors/maplibre/css/maplibre-gl.css' %}"
+          rel='stylesheet'/>
+    <link href="{% static 'vendors/shepherd/shepherd.css' %}"
+          rel='stylesheet'/>
   {% endcompress %}
   {{ block.super }}
 {% endblock %}
@@ -25,12 +27,18 @@
          aria-label="Navbar mit Links zu den anderen Seiten">
       <div class="container-fluid">
         <a class="top-nav__brand navbar-brand" href="#">
-          <img src="{% static 'images/logos/EmPowerPlan-logo-horizontal.png' %}" alt="EmPowerPlan Logo">
+          <img
+            src="{% static 'images/logos/EmPowerPlan-logo-horizontal.png' %}"
+            alt="EmPowerPlan Logo">
         </a>
-        <div style="background-color: orange; border-style: dashed; color: black; padding: 0.5em; text-align: center; margin-left: 13em">Die App befindet sich noch in Entwicklung</div>
+        <div
+          style="background-color: orange; border-style: dashed; color: black; padding: 0.5em; text-align: center; margin-left: 13em">
+          Die App befindet sich noch in Entwicklung
+        </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarsExample03" aria-controls="navbarsExample03"
-            aria-expanded="false" aria-label="Toggle navigation">
+                data-bs-target="#navbarsExample03"
+                aria-controls="navbarsExample03"
+                aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -45,11 +53,12 @@
                 aria-controls="offcanvasDocumentation">
               <a class="nav-link" href="#">{% translate "Documentation" %}</a>
             </li>
-<!--            <li class="nav-item" data-bs-toggle="offcanvas" href="#offcanvasSources"-->
-<!--                role="button" aria-controls="offcanvasSources">-->
-<!--              <a class="nav-link" href="#">{% translate "Sources" %}</a>-->
-<!--            </li>-->
-            <li class="nav-item" data-bs-toggle="offcanvas" href="#offcanvasContact"
+            <!--            <li class="nav-item" data-bs-toggle="offcanvas" href="#offcanvasSources"-->
+            <!--                role="button" aria-controls="offcanvasSources">-->
+            <!--              <a class="nav-link" href="#">{% translate "Sources" %}</a>-->
+            <!--            </li>-->
+            <li class="nav-item" data-bs-toggle="offcanvas"
+                href="#offcanvasContact"
                 role="button" aria-controls="offcanvasContact">
               <a class="nav-link" href="#">{% translate "Contact" %}</a>
             </li>
@@ -58,41 +67,57 @@
       </div>
     </nav>
 
-    <nav class="wizard" aria-label="Navigation zwischen Schritten bis zu den Ergebnissen">
+    <nav class="wizard"
+         aria-label="Navigation zwischen Schritten bis zu den Ergebnissen">
       <div class="wizard__wrap">
         <div class="wizard__back">
-          <button type="button" id="menu_previous_btn" aria-label="Zum vorherigen Schritt gehen" hidden>
-            <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
-              <path d="m10.794 16.748 1.4961-1.4961-6.7832-6.7832 6.7832-6.7832-1.4961-1.4961-8.2793 8.2793z"/>
+          <button type="button" id="menu_previous_btn"
+                  aria-label="Zum vorherigen Schritt gehen" hidden>
+            <svg width="16" height="16" version="1.1" fill="currentColor"
+                 viewBox="0 0 16.933 16.933"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m10.794 16.748 1.4961-1.4961-6.7832-6.7832 6.7832-6.7832-1.4961-1.4961-8.2793 8.2793z"/>
             </svg>
             <span>Zurück</span>
           </button>
         </div>
         <div class="wizard__main" role="group" aria-label="Schritte">
-          <div class="wizard__list" role="list" >
-            <div id="step_1_challenges" class="wizard__list-item active" role="listitem" aria-current="step" aria-label="Schritt 1: Start">
+          <div class="wizard__list" role="list">
+            <div id="step_1_challenges" class="wizard__list-item active"
+                 role="listitem" aria-current="step"
+                 aria-label="Schritt 1: Start">
               <span class="wizard__list-number" aria-hidden="true">1</span>
-              <span id="step_1_challenges_label" class="wizard__list-text" aria-hidden="true">Start</span>
+              <span id="step_1_challenges_label" class="wizard__list-text"
+                    aria-hidden="true">Start</span>
             </div>
             <div aria-hidden="true" class="wizard__line"></div>
-            <div id="step_2_today" class="wizard__list-item" role="listitem" aria-label="Schritt 2: Region heute">
+            <div id="step_2_today" class="wizard__list-item" role="listitem"
+                 aria-label="Schritt 2: Region heute">
               <span class="wizard__list-number" aria-hidden="true">2</span>
-              <span id="step_2_today_label" class="wizard__list-text" aria-hidden="true">Region heute</span>
+              <span id="step_2_today_label" class="wizard__list-text"
+                    aria-hidden="true">Region heute</span>
             </div>
             <div aria-hidden="true" class="wizard__line"></div>
-            <div id="step_3_scenarios" class="wizard__list-item" role="listitem" aria-label="Schritt 3: Szenarien">
+            <div id="step_3_scenarios" class="wizard__list-item"
+                 role="listitem" aria-label="Schritt 3: Szenarien">
               <span class="wizard__list-number" aria-hidden="true">3</span>
-              <span id="step_3_scenarios_label" class="wizard__list-text" aria-hidden="true">Szenarien</span>
+              <span id="step_3_scenarios_label" class="wizard__list-text"
+                    aria-hidden="true">Szenarien</span>
             </div>
             <div aria-hidden="true" class="wizard__line"></div>
-            <div id="step_4_settings" class="wizard__list-item" role="listitem" aria-label="Schritt 4: Einstellungen">
+            <div id="step_4_settings" class="wizard__list-item" role="listitem"
+                 aria-label="Schritt 4: Einstellungen">
               <span class="wizard__list-number" aria-hidden="true">4</span>
-              <span id="step_4_settings_label" class="wizard__list-text" aria-hidden="true">Einstellungen</span>
+              <span id="step_4_settings_label" class="wizard__list-text"
+                    aria-hidden="true">Einstellungen</span>
             </div>
             <div aria-hidden="true" class="wizard__line"></div>
-            <div id="step_5_results" class="wizard__list-item" role="listitem" aria-label="Schritt 5: Ergebnisse">
+            <div id="step_5_results" class="wizard__list-item" role="listitem"
+                 aria-label="Schritt 5: Ergebnisse">
               <span class="wizard__list-number" aria-hidden="true">5</span>
-              <span id="step_5_results_label" class="wizard__list-text" aria-hidden="true">Ergebnisse</span>
+              <span id="step_5_results_label" class="wizard__list-text"
+                    aria-hidden="true">Ergebnisse</span>
             </div>
           </div>
         </div>
@@ -122,10 +147,15 @@
           </ul>
         </div> -->
         <div class="wizard__next">
-          <button type="button" id="menu_next_btn" class="button button--secondary" aria-label="Zum nächsten Schritt gehen">
+          <button type="button" id="menu_next_btn"
+                  class="button button--secondary"
+                  aria-label="Zum nächsten Schritt gehen">
             <span>Weiter</span>
-            <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
-              <path d="m6.1387 0.1875-1.4961 1.4961 6.7832 6.7832-6.7832 6.7832 1.4961 1.4961 8.2793-8.2793z"/>
+            <svg width="16" height="16" version="1.1" fill="currentColor"
+                 viewBox="0 0 16.933 16.933"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m6.1387 0.1875-1.4961 1.4961 6.7832 6.7832-6.7832 6.7832 1.4961 1.4961 8.2793-8.2793z"/>
             </svg>
           </button>
         </div>
@@ -142,12 +172,14 @@
         <div class="footer__links">
           <ul>
             <li>
-              <button type="button" data-bs-toggle="modal" data-bs-target="#imprintModal">
+              <button type="button" data-bs-toggle="modal"
+                      data-bs-target="#imprintModal">
                 {% translate "Imprint" %}
               </button>
             </li>
             <li>
-              <button type="button" data-bs-toggle="modal" data-bs-target="#privacyModal">
+              <button type="button" data-bs-toggle="modal"
+                      data-bs-target="#privacyModal">
                 {% translate "Data privacy" %}
               </button>
             </li>
@@ -179,8 +211,8 @@
 
   {{ electricity_overview|json_script:"electricity_overview" }}
   {{ electricity_autarky|json_script:"electricity_autarky" }}
-<!--  {{ mobility_overview|json_script:"mobility_overview" }}-->
-<!--  {{ mobility_ghg|json_script:"mobility_ghg" }}-->
+  <!--  {{ mobility_overview|json_script:"mobility_overview" }}-->
+  <!--  {{ mobility_ghg|json_script:"mobility_ghg" }}-->
   {{ heat_decentralized|json_script:"heat_decentralized" }}
   {{ heat_centralized|json_script:"heat_centralized" }}
   {{ onboarding_wind|json_script:"onboarding_wind" }}
@@ -191,20 +223,21 @@
 
   {% compress js %}
     {% include 'django_mapengine/map_js.html' %}
-    <script src="{% static 'django_mapengine/js/basemaps.js' %}" type="text/javascript"></script>
-    {% if not debug %}
-      <script src="{% static 'vendors/shepherd/shepherd.min.js' %}" type="text/javascript"></script>
-      <script src="{% static 'js/tours.js' %}" type="text/javascript"></script>
-    {% endif %}
+    <script src="{% static 'django_mapengine/js/basemaps.js' %}"
+            type="text/javascript"></script>
+    <script src="{% static 'vendors/shepherd/shepherd.min.js' %}"
+            type="text/javascript"></script>
+    <script src="{% static 'js/tours.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/state.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/layers-box.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/layers-box.js' %}"
+            type="text/javascript"></script>
     <script src="{% static 'js/charts.js' %}" type="text/javascript"></script>
   {% endcompress %}
-    <script src="{% static 'js/results.js' %}" type="module"></script>
-    <script src="{% static 'js/sliders.js' %}" type="module"></script>
-    <script type="text/javascript">
-      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl, {html: true}))
-    </script>
+  <script src="{% static 'js/results.js' %}" type="module"></script>
+  <script src="{% static 'js/sliders.js' %}" type="module"></script>
+  <script type="text/javascript">
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl, {html: true}))
+  </script>
 
 {% endblock js_body %}
