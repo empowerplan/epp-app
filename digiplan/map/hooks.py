@@ -128,6 +128,7 @@ def adapt_heatpumps(scenario: str, data: dict) -> dict:
     Heatpumps are the only technology which users can set.
     All other heat components settings are derived from heat share.
     """
+    logging.info(f"TSAM Mode: {OEMOF_TSAM=}")
     hp_sliders = {"hh": "w_d_wp_3", "cts": "w_d_wp_4", "ind": "w_d_wp_5"}
     heat_demand_profile = datapackage.get_heat_demand_profile(scenario=scenario, disaggregate_tsam=OEMOF_TSAM)
 

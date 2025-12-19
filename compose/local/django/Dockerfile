@@ -60,8 +60,11 @@ SHELL ["/bin/bash", "-c"]
 COPY ./pyproject.toml ./poetry.lock ./
 RUN source /venv/bin/activate && python -m pip install --upgrade pip && pip install --no-cache-dir poetry && poetry install --no-root
 
-# Install oemof.tabular manually as there is a problem with poetry
-RUN source /venv/bin/activate && python -m pip install git+https://github.com/oemof/oemof-tabular && python -m pip install git+https://github.com/oemof/oemof-solph@feature/integrate_tsam
+# Order of installation must be as follows, as otherwise there are dependency issues
+RUN source /venv/bin/activate \
+    && python -m pip install git+https://github.com/oemof/oemof-tabular@features/add-tsam-to-datapackage \
+    && python -m pip install git+https://github.com/oemof/oemof-solph@feature/integrate_tsam \
+    && python -m pip install oemof.network==0.5.0a5
 
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
