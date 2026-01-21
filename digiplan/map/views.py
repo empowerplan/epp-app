@@ -65,6 +65,11 @@ class MapGLView(TemplateView, views.MapEngineMixin):
                 ),
             ),
         )
+        # Move wind potential layers to top in order to have higher z-level than municipality
+        # Otherwise wind cluster popups are shadowed by potential wind popup
+        for i, layer in enumerate(context["mapengine_layers"]):
+            if "potentialarea_wind_stp_2018" in layer["id"] or "potentialarea_wind_stp_2024" in layer["id"]:
+                context["mapengine_layers"].insert(0, context["mapengine_layers"].pop(i))
 
         context["panels"] = [
             forms.EnergyPanelForm(
