@@ -54,6 +54,7 @@ class RegionPopup(popups.ChartPopup):
         return {
             "id": self.selected_id,
             "title": self.title,
+            "region": self.get_region_name(),
             "description": self.description,
             "unit": self.unit,
             "region_value": self.get_region_value(),
@@ -82,6 +83,10 @@ class RegionPopup(popups.ChartPopup):
 
         Municipality IDs are stored in index, components/technologies/etc. are stored in columns
         """
+
+    def get_region_name(self) -> str:
+        """Return name of the selected region."""
+        return models.Municipality.objects.get(id=self.selected_id).name
 
     def get_region_value(self) -> float:
         """Return aggregated data of all municipalities and technologies."""
@@ -1119,6 +1124,7 @@ class PotentialPopup(ChartPopup):
             f"potential_{k}": v for k, v in potentials_ha.to_dict().items() if k in potential_keys
         }
         context["title"] = _("Potenzialflächen")
+        context["region"] = models.Municipality.objects.get(id=self.selected_id).name
         return context
 
     def get_chart_options(self) -> dict:

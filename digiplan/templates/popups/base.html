@@ -5,20 +5,22 @@
     <h1 id="js-popup__title" class="popup__title">{{ title }}</h1>
   </div>
 
+  <h2 class="popup__title">{{ region }}</h2>
+
   <table>
     {% for key, value in data.items %}
       <tr>
         <td>{{ key }}</td>
-        {%  if value != None  %}
-          {%  if value is True  %}
+        {% if value != None %}
+          {% if value is True %}
             <td>Ja</td>
-          {%  elif value is False  %}
+          {% elif value is False %}
             <td>Nein</td>
           {% else %}
             <td>{{ value }}</td>
           {% endif %}
         {% else %}
-          <td> - </td>
+          <td> -</td>
         {% endif %}
       </tr>
     {% endfor %}
@@ -26,5 +28,7 @@
 
   {% block chart %}{% endblock chart %}
 
-  {% if description %}<div id="js-popup__description" class="popup__description">{{ description }}</div>{%  endif %}
+  {% if description %}
+    <div id="js-popup__description"
+         class="popup__description">{{ description }}</div>{% endif %}
 </div>
