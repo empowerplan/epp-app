@@ -137,19 +137,19 @@ PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, adaptPotentialState);
  */
 function adaptDetailSliders(msg, data) {
   if (data.input[0].id === "id_s_v_1") {
-    $(`#id_s_v_3`).data("ionRangeSlider").update({ from: data.from });
-    $(`#id_s_v_4`).data("ionRangeSlider").update({ from: data.from });
-    $(`#id_s_v_5`).data("ionRangeSlider").update({ from: data.from });
+    $(`#id_s_v_3`).data("ionRangeSlider").update({from: data.from});
+    $(`#id_s_v_4`).data("ionRangeSlider").update({from: data.from});
+    $(`#id_s_v_5`).data("ionRangeSlider").update({from: data.from});
   }
   if (data.input[0].id === "id_w_d_wp_1") {
-    $(`#id_w_d_wp_3`).data("ionRangeSlider").update({ from: data.from });
-    $(`#id_w_d_wp_4`).data("ionRangeSlider").update({ from: data.from });
-    $(`#id_w_d_wp_5`).data("ionRangeSlider").update({ from: data.from });
+    $(`#id_w_d_wp_3`).data("ionRangeSlider").update({from: data.from});
+    $(`#id_w_d_wp_4`).data("ionRangeSlider").update({from: data.from});
+    $(`#id_w_d_wp_5`).data("ionRangeSlider").update({from: data.from});
   }
   if (data.input[0].id === "id_w_v_1") {
-    $(`#id_w_v_3`).data("ionRangeSlider").update({ from: data.from });
-    $(`#id_w_v_4`).data("ionRangeSlider").update({ from: data.from });
-    $(`#id_w_v_5`).data("ionRangeSlider").update({ from: data.from });
+    $(`#id_w_v_3`).data("ionRangeSlider").update({from: data.from});
+    $(`#id_w_v_4`).data("ionRangeSlider").update({from: data.from});
+    $(`#id_w_v_5`).data("ionRangeSlider").update({from: data.from});
   }
   return logMessage(msg);
 }
@@ -190,7 +190,7 @@ export function adaptMainSliders(msg, data) {
         factor_ind * demand_ind +
         factor_cts * demand_cts) /
       (demand_hh + demand_ind + demand_cts);
-    $(`#id_s_v_1`).data("ionRangeSlider").update({ from: new_val });
+    $(`#id_s_v_1`).data("ionRangeSlider").update({from: new_val});
   }
   if (
     slider_id === "id_w_d_wp_3" ||
@@ -208,7 +208,7 @@ export function adaptMainSliders(msg, data) {
         factor_ind * demand_ind +
         factor_cts * demand_cts) /
       (demand_hh + demand_ind + demand_cts);
-    $(`#id_w_d_wp_1`).data("ionRangeSlider").update({ from: new_val });
+    $(`#id_w_d_wp_1`).data("ionRangeSlider").update({from: new_val});
   }
   if (
     slider_id === "id_w_v_3" ||
@@ -226,7 +226,7 @@ export function adaptMainSliders(msg, data) {
         factor_ind * demand_ind +
         factor_cts * demand_cts) /
       (demand_hh + demand_ind + demand_cts);
-    $(`#id_w_v_1`).data("ionRangeSlider").update({ from: new_val });
+    $(`#id_w_v_1`).data("ionRangeSlider").update({from: new_val});
   }
   return logMessage(msg);
 }
@@ -371,7 +371,7 @@ function calculate_max_wind() {
   }
   $(`#id_s_w_1`)
     .data("ionRangeSlider")
-    .update({ max: Math.round(newWindMax) });
+    .update({max: Math.round(newWindMax)});
 }
 
 function calculate_max_pv_ff() {
@@ -383,21 +383,21 @@ function calculate_max_pv_ff() {
     $("#id_s_pv_ff_5").data("ionRangeSlider").result.from / 100;
   const newPVMax =
     slider_soil_quality_low *
-      Math.round(store.cold.potentials.pv_soil_quality_low) +
+    Math.round(store.cold.potentials.pv_soil_quality_low) +
     slider_soil_quality_medium *
-      Math.round(store.cold.potentials.pv_soil_quality_medium) +
+    Math.round(store.cold.potentials.pv_soil_quality_medium) +
     slider_permanent_crops *
-      Math.round(store.cold.potentials.pv_permanent_crops);
+    Math.round(store.cold.potentials.pv_permanent_crops);
   $(`#id_s_pv_ff_1`)
     .data("ionRangeSlider")
-    .update({ max: Math.round(newPVMax) });
+    .update({max: Math.round(newPVMax)});
 }
 
 function calculate_max_pv_d() {
   const slider_value =
     $("#id_s_pv_d_3").data("ionRangeSlider").result.from / 100;
   const newPVMax = Math.round(slider_value * store.cold.potentials.pv_roof);
-  $(`#id_s_pv_d_1`).data("ionRangeSlider").update({ max: newPVMax });
+  $(`#id_s_pv_d_1`).data("ionRangeSlider").update({max: newPVMax});
 }
 
 function showWindLayers(msg) {
@@ -611,16 +611,18 @@ function addMarks(data, marks) {
   data.slider.append(html);
 }
 
-function activatePotentialPopups(msg) {
+export function activatePotentialPopups(msg) {
+  const activeSidepanels = document.getElementsByClassName("active-sidepanel");
+  if (activeSidepanels.length === 0) {
+    return logMessage(msg);
+  }
   const municipalityLayer = Object.keys(map_store.cold.popups).find(key => key.startsWith('municipality'));
   // Activate the municipality layer to show popups at default
   map_store.cold.popups[municipalityLayer].atDefaultLayer = true;
   let currentLayer = null;
   // Determine current potential layer depending on the activated control
-  if (
-    msg === (typeof eventTopics !== 'undefined' ? eventTopics.WIND_CONTROL_ACTIVATED : 'WIND_CONTROL_ACTIVATED') ||
-    msg === 'WIND_CONTROL_ACTIVATED'
-  ) {
+  const activeSlider = document.getElementsByClassName("active-sidepanel")[0].classList[1];
+  if (activeSlider === "s_w_1") {
     // Read from the currently active wind tab
     const currentWindTab = document
       .getElementById("windTab")
@@ -665,7 +667,7 @@ function adaptPotentialState(msg) {
 }
 
 $(document).ready(function () {
-  $(`#id_s_h_1`).data("ionRangeSlider").update({ block: true });
+  $(`#id_s_h_1`).data("ionRangeSlider").update({block: true});
   calculate_max_pv_ff();
   calculate_max_pv_d();
 });
