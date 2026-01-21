@@ -208,6 +208,34 @@ class ElectricityAreaResultsBox(ResultsBox):  # noqa: D101
         return (wind_pv_area / region_area * 100).round(1)
 
 
+class ElectricityGoalResultsBox(ResultsBox):  # noqa: D101
+    category = "electricity"
+    text = "Die Energieerzeugung durch erneuerbare Energien entspricht oder übersteigt die Ziele der Region."
+    unit = ""
+
+    def calculate_value(self, parameters: dict) -> str:  # noqa: D102
+        renewable_energies = calculations.renewable_electricity_production(parameters["simulation_id"])
+        # Remove biomass and hydro
+        renewable_energies = renewable_energies.drop(["ABW-biomass", "ABW-hydro-ror"])
+        renewable_energies_sum = renewable_energies.sum() * 1e-3
+
+        energies = calculations.electricity_overview(2045)
+        renewable_energies_goal = energies.drop(
+            [i for i in energies.index if i not in ("pv_ground", "pv_roof", "wind")],
+        )
+        if renewable_energies_sum >= renewable_energies_goal.sum():
+            return "Ziel 2045 erreicht!"
+        energies = calculations.electricity_overview(2030)
+        renewable_energies_goal = energies.drop(
+            [i for i in energies.index if i not in ("pv_ground", "pv_roof", "wind")],
+        )
+        if renewable_energies_sum >= renewable_energies_goal.sum():
+            return "Ziel 2030 erreicht!"
+        # Adapt text as goal cannot be reached
+        self.text = "Die Energieerzeugung durch erneuerbare Energien ist geringer als die Ziele der Region."
+        return "Kein Ziel erreicht!"
+
+
 class HeatResultsBox(ResultsBox):  # noqa: D101
     category = "heat"
     text = "..."
@@ -317,6 +345,7 @@ class CO2ResultsBox(ResultsBox):  # noqa: D101
 SUMMARY_RESULTS = {
     "summary_electricity_wind_pv": ElectricityWindPVResultsBox,
     "summary_electricity_area": ElectricityAreaResultsBox,
+    "summary_electricity_goal": ElectricityGoalResultsBox,
     "summary_wind_goal": WindGoalResultsBox,
     "summary_wind_area": WindAreaResultsBox,
     "summary_wind_demand_share": WindDemandShareResultsBox,

@@ -67,6 +67,10 @@ const SUMMARY_PRE_RESULTS = [
   "summary_pv_demand_share",
 ];
 
+const SUMMARY_RESULTS = [
+  "summary_electricity_goal",
+];
+
 // Setup
 
 // Disable settings form submit
@@ -108,9 +112,10 @@ PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideRegionChart);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, startSimulationProgress);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
+PubSub.subscribe(eventTopics.SIMULATION_FINISHED, finishSimulationProgress);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, enableFutureResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultCharts);
-PubSub.subscribe(eventTopics.SIMULATION_FINISHED, finishSimulationProgress);
+PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showSummaryResults);
 PubSub.subscribe(eventTopics.SIMULATION_ERROR, errorAtSimulationProgress);
 PubSub.subscribe(mapEvent.CHOROPLETH_SELECTED, showRegionChart);
 PubSub.subscribe(eventTopics.CHOROPLETH_DEACTIVATED, hideRegionChart);
@@ -251,7 +256,12 @@ function showResultCharts(msg) {
 }
 
 function showSummaryPreResults(msg) {
-  showSummaryResults(SUMMARY_PRE_RESULTS);
+  renderSummaryResults(SUMMARY_PRE_RESULTS);
+  return logMessage(msg);
+}
+
+function showSummaryResults(msg) {
+  renderSummaryResults(SUMMARY_RESULTS);
   return logMessage(msg);
 }
 
@@ -278,7 +288,7 @@ function showCharts(charts = {}) {
   });
 }
 
-function showSummaryResults(summaries = []) {
+function renderSummaryResults(summaries = []) {
   $.ajax({
     url: "/summary_results",
     type: "GET",
