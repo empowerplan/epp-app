@@ -307,8 +307,9 @@ function renderSummaryResults(summaries = []) {
 
 function showResultSkeletons(msg) {
   const skeleton_template = document.getElementById("result_skeleton");
-  for (const chart_div_id of Object.values(preResultCharts)) {
+  for (const chart_div_id of Object.values({...preResultCharts, ...resultCharts})) {
     const chart_div = document.getElementById(chart_div_id);
+    chart_div.textContent = "";
     const chart = echarts.getInstanceByDom(chart_div);
     if (chart !== undefined) {
       chart.dispose();
