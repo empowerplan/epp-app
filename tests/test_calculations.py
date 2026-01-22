@@ -519,3 +519,11 @@ class CapacityTest(SimulationTest):
         """Test capacity reading from oemof results."""
         results = oemof_results.get_results(self.simulation_id, {"capacities": calculations.Capacities})
         assert results["capacities"].loc["ABW-wind-onshore", "None"] == 1000.0
+
+
+class BatteryEnergyChartTest(SimulationTest):
+    """Test reading capacities from oemof parameters."""
+
+    def test_battery_energy_chart(self):  # noqa: D102
+        chart = charts.BatteryEnergyChart({"simulation_id": self.simulation_id})
+        chart.render()

@@ -174,28 +174,26 @@
   <div class="tab-pane fade" id="results-battery" role="tabpanel" aria-labelledby="results-battery-tab">
     <div class="main-results">
       <div class="main-results__row">
-        <div id="summary_wind_goal" class="main-results__col d-flex flex-column"></div>
-        <div id="summary_wind_area" class="main-results__col d-flex flex-column"></div>
-        <div id="summary_wind_demand_share" class="main-results__col d-flex flex-column"></div>
+        {# Add battery summery results in boxes #}
       </div>
     </div>
     <div class="results__container">
       <header class="results__header">
-        <h2>{% translate "Windenergie" %}</h2>
+        <h2>{% translate "Batteriespeicher" %}</h2>
       </header>
       <div class="results__row">
         <article class="results__item">
-          <header class="results__item-title">{% translate "Installierte Leistung und Anlagenanzahl" %}</header>
-          <div id="wind_capacity_chart" class="results__chart" role="img" aria-label="Grafik über die installierte Leistung und die Anlagenanzahl"></div>
+          <header class="results__item-title">{% translate "Gespeicherte Energie und Volllastzyklen der Batteriespeicher" %}</header>
+          <div id="battery_energy_chart" class="results__chart" role="img" aria-label="Grafik über die gespeicherte Energie und Volllastzyklen der Batteriespeicher"></div>
           <div class="results__text">
-            {% translate "Installierte Windleistung und Anlagen bisher und in Deinem Szenario. Die Ziellinien gelten für die Leistung und sind flächengewichtet abgeleitet aus der <a href=\"https://energieportal-brandenburg.de/cms/inhalte/energiestrategie-2040/\" target=\"_blank\">Energiestrategie Brandenburg 2040</a>: 15,4 % von 11.500 MW (2030) bzw 15.000 MW (2040).<br><br>(*) Für die Berechnung der Anzahl wird eine Leistung von 6,5 MW je Windenergieanlage angenommen."  noop %}
+            {% translate "Text über gespeicherte Energie und Volllastzyklen der Batteriespeicher"  noop %}
           </div>
         </article>
         <article class="results__item">
-          <header class="results__item-title">{% translate "Flächenbedarf" %}</header>
-          <div id="wind_areas_chart" class="results__chart" role="img" aria-label="Grafik über den Flächenbedarf"></div>
+          <header class="results__item-title">{% translate "Kapazität und Leistung der Batteriespeicher" %}</header>
+          <div id="battery_capacity_chart" class="results__chart" role="img" aria-label="Grafik über die Kapazität und Leistung der Batteriespeicher"></div>
           <div class="results__text">
-            {% translate "Flächenbedarf in Hektar und % der Regionsfläche. Daten aus Regionalplan 2018, dem 1. Entwurf des Teilregionalplans EE 2024 und in Deinem Szenario: Die Ziellinien beschrieben die gesetzlich verankerten Ziele im <a href=\"https://www.gesetze-im-internet.de/windbg/\" target=\"_blank\">Windenergieflächenbedarfsgesetz</a>.<br><br>(*) Für die Berechnung der benötigten Fläche wird ein Flächenbedarf von 4,2 ha/MW bzw. eine Leistungsdichte von 24 MW/km² angenommen." noop %}
+            {% translate "Text über Kapazität und Leistung der Batteriespeicher" noop %}
           </div>
         </article>
       </div>

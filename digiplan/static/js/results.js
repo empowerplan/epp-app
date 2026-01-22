@@ -42,6 +42,7 @@ export const resultCharts = {
   "electricity_autarky": "electricity_autarky_chart",
   "heat_centralized": "heat_centralized_chart",
   "heat_decentralized": "heat_decentralized_chart",
+  "battery_energy": "battery_energy_chart",
 };
 
 /* jshint ignore:start */

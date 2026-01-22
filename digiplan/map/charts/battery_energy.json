@@ -1,0 +1,80 @@
+{
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    }
+  },
+  "legend": {
+    "data": [
+      "Energie [kWh]",
+      "Volllastzyklen"
+    ],
+    "itemGap": 15
+  },
+  "grid": {
+    "top": "10%",
+    "left": "3%",
+    "right": "3%",
+    "bottom": "14%",
+    "containLabel": true
+  },
+  "aria": {
+    "enabled": true
+  },
+  "xAxis": {
+    "type": "category",
+    "data": [
+      "Hausspeicher",
+      "Großbatterien"
+    ]
+  },
+  "yAxis": [
+    {
+      "type": "value",
+      "axisLabel": {
+        "formatter": "{value} kWh"
+      }
+    },
+    {
+      "type": "value",
+      "axisLabel": {
+        "formatter": "{value}"
+      }
+    }
+  ],
+  "series": [
+    {
+      "name": "Energie [kWh]",
+      "type": "bar",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 0,
+        "color": "#333"
+      },
+      "color": "#897BD9",
+      "data": [
+        2084,
+        2603
+      ],
+      "yAxisIndex": 0
+    },
+    {
+      "name": "Volllastzyklen",
+      "type": "bar",
+      "label": {
+        "show": true,
+        "position": "inside",
+        "rotate": 0,
+        "color": "#333"
+      },
+      "color": "#B5ADE0",
+      "data": [
+        0.5,
+        0.6
+      ],
+      "yAxisIndex": 1
+    }
+  ]
+}

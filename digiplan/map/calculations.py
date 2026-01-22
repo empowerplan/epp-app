@@ -654,6 +654,19 @@ def get_heat_production(distribution: str, year: int) -> dict:
     return {tech: demand * share for tech, share in heat_shares.items()}
 
 
+def battery_charge_discharge(simulation_id: int) -> dict:
+    """Calculate battery charge and discharge of small and large scale batteries for given simulation_id."""
+    return get_results(
+        simulation_id,
+        {"battery_charge": battery_charge, "battery_discharge": battery_discharge},
+    )
+
+
+def battery_capacity(simulation_id: int) -> dict:
+    """Calculate storage capacities from simulation_id."""
+    return get_results(simulation_id, {"storage_capacities": StorageCapacities})
+
+
 def get_reduction(simulation_id: int) -> tuple[int, int]:
     """Return electricity reduction from renewables and imports."""
     results = get_results(
@@ -830,6 +843,20 @@ class Capacities(core.Calculation):
             return pd.Series(dtype="object")
 
 
+class StorageCapacities(core.Calculation):
+    """Oemof postprocessing calculation to read storage capacities."""
+
+    name = "storage_capacities"
+
+    def calculate_result(self) -> pd.Series:
+        """Read attribute "storage_capacity" from parameters."""
+        capacities = helper.filter_by_var_name(self.scalar_params, "storage_capacity")
+        try:
+            return capacities.unstack(2)["storage_capacity"]  # noqa: PD010
+        except KeyError:
+            return pd.Series(dtype="object")
+
+
 class Flows(core.Calculation):
     """Oemof postprocessing calculation to read flows."""
 
@@ -878,5 +905,19 @@ demand_flows = core.ParametrizedCalculation(
             "ABW-electricity-demand_cts",
             "ABW-electricity-demand_ind",
         ],
+    },
+)
+
+battery_charge = core.ParametrizedCalculation(
+    Flows,
+    {
+        "to_nodes": ["ABW-electricity-small_scale_battery", "ABW-electricity-large_scale_battery"],
+    },
+)
+
+battery_discharge = core.ParametrizedCalculation(
+    Flows,
+    {
+        "from_nodes": ["ABW-electricity-small_scale_battery", "ABW-electricity-large_scale_battery"],
     },
 )

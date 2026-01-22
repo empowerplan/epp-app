@@ -1064,6 +1064,32 @@ class PVRoofAreaChart(PreResultsChart):
         return self.chart_options
 
 
+class BatteryEnergyChart(SimulationChart):
+    """Chart to show charged/discharged energies and full load cycles of the batteries."""
+
+    lookup = "battery_energy"
+
+    def get_chart_data(self):  # noqa: ANN201
+        """Get chart data from electricity overview calculation."""
+        energies = calculations.battery_charge_discharge(self.simulation_id)
+        capacities = calculations.battery_capacity(self.simulation_id)
+        data = {}
+        for storage in ("ABW-electricity-large_scale_battery", "ABW-electricity-small_scale_battery"):
+            capacity = capacities["storage_capacities"][(storage, "None")]
+            energy = energies["battery_charge"].sum()[storage]
+            data[storage] = {"full_load_cycles": energy / capacity if capacity > 0 else None, "energy": energy}
+        return data
+
+    def render(self) -> dict:  # noqa: D102
+        for item, storage in zip(
+            self.chart_options["series"],
+            ("ABW-electricity-small_scale_battery", "ABW-electricity-large_scale_battery"),
+        ):
+            item["data"][0] = round(self.chart_data[storage]["energy"], 0)
+            item["data"][1] = round(self.chart_data[storage]["full_load_cycles"], 0)
+        return self.chart_options
+
+
 class PotentialChart(Chart):
     """Chart for usage and potential of pv ground, pv roof or wind areas respectively."""
 
@@ -1164,6 +1190,7 @@ CHARTS: dict[str, Union[type[PreResultsChart], type[SimulationChart]]] = {
     "pv_ground_areas": PVGroundAreaChart,
     "pv_roof_capacity": PVRoofCapacityChart,
     "pv_roof_areas": PVRoofAreaChart,
+    "battery_energy": BatteryEnergyChart,
     "wind_turbines_statusquo_region": WindTurbinesRegionChart,
     "wind_turbines_2045_region": WindTurbines2045RegionChart,
     "wind_turbines_square_statusquo_region": WindTurbinesSquareRegionChart,
