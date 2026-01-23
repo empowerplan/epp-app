@@ -662,9 +662,14 @@ def battery_charge_discharge(simulation_id: int) -> dict:
     )
 
 
-def battery_capacity(simulation_id: int) -> dict:
+def battery_capacities(simulation_id: int) -> dict:
     """Calculate storage capacities from simulation_id."""
     return get_results(simulation_id, {"storage_capacities": StorageCapacities})
+
+
+def capacities(simulation_id: int) -> dict:
+    """Calculate capacities from simulation_id."""
+    return get_results(simulation_id, {"capacities": Capacities})
 
 
 def get_reduction(simulation_id: int) -> tuple[int, int]:

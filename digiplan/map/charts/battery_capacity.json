@@ -7,8 +7,8 @@
   },
   "legend": {
     "data": [
-      "Energie [GWh/a]",
-      "Volllastzyklen"
+      "Kapazität [MWh]",
+      "Leistung [MW]"
     ],
     "itemGap": 15
   },
@@ -31,12 +31,11 @@
   },
   "yAxis": [
     {
-      "type": "value",
-      "axisLabel": {
-        "formatter": "{value} GWh/a"
-      }
-    },
-    {
+      "name": "Kapazität [MWh] / Leistung [MW]",
+      "nameGap": 20,
+      "nameTextStyle": {
+        "align": "left"
+      },
       "type": "value",
       "axisLabel": {
         "formatter": "{value}"
@@ -45,7 +44,7 @@
   ],
   "series": [
     {
-      "name": "Energie [GWh/a]",
+      "name": "Kapazität [MWh]",
       "type": "bar",
       "label": {
         "show": true,
@@ -55,13 +54,12 @@
       },
       "color": "#897BD9",
       "data": [
-        2084,
-        2603
-      ],
-      "yAxisIndex": 0
+        10,
+        26
+      ]
     },
     {
-      "name": "Volllastzyklen",
+      "name": "Leistung [MW]",
       "type": "bar",
       "label": {
         "show": true,
@@ -71,10 +69,9 @@
       },
       "color": "#B5ADE0",
       "data": [
-        0.5,
-        0.6
-      ],
-      "yAxisIndex": 1
+        5,
+        6
+      ]
     }
   ]
 }

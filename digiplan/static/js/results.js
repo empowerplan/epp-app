@@ -43,6 +43,7 @@ export const resultCharts = {
   "heat_centralized": "heat_centralized_chart",
   "heat_decentralized": "heat_decentralized_chart",
   "battery_energy": "battery_energy_chart",
+  "battery_capacity": "battery_capacity_chart",
 };
 
 /* jshint ignore:start */

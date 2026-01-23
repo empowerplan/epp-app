@@ -55,7 +55,7 @@ class SimulationTest(SimpleTestCase):
 
     def setUp(self) -> None:
         """Starts/loads oemof simulation for given parameters."""
-        self.simulation_id = simulation.simulate_scenario("scenario_2045_original", self.parameters)
+        self.simulation_id = simulation.simulate_scenario("tsam_40_24_1_cost_0", self.parameters)
         if os.environ.get("TEST_SHOW_SIMULATION_RESULTS", "False") == "True":
             self.results = models.Simulation.objects.get(pk=self.simulation_id).dataset.restore_results()
 
@@ -525,5 +525,5 @@ class BatteryEnergyChartTest(SimulationTest):
     """Test reading capacities from oemof parameters."""
 
     def test_battery_energy_chart(self):  # noqa: D102
-        chart = charts.BatteryEnergyChart({"simulation_id": self.simulation_id})
+        chart = charts.BatteryCapacityChart({"simulation_id": self.simulation_id})
         chart.render()

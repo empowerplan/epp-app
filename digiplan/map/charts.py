@@ -1072,21 +1072,58 @@ class BatteryEnergyChart(SimulationChart):
     def get_chart_data(self):  # noqa: ANN201
         """Get chart data from electricity overview calculation."""
         energies = calculations.battery_charge_discharge(self.simulation_id)
-        capacities = calculations.battery_capacity(self.simulation_id)
+        storage_capacities = calculations.battery_capacities(self.simulation_id)
         data = {}
         for storage in ("ABW-electricity-large_scale_battery", "ABW-electricity-small_scale_battery"):
-            capacity = capacities["storage_capacities"][(storage, "None")]
+            storage_capacity = storage_capacities["storage_capacities"][(storage, "None")]
             energy = energies["battery_charge"].sum()[storage]
-            data[storage] = {"full_load_cycles": energy / capacity if capacity > 0 else None, "energy": energy}
+            data[storage] = {
+                "full_load_cycles": energy / storage_capacity if storage_capacity > 0 else None,
+                "energy": energy,
+            }
         return data
 
     def render(self) -> dict:  # noqa: D102
-        for item, storage in zip(
-            self.chart_options["series"],
-            ("ABW-electricity-small_scale_battery", "ABW-electricity-large_scale_battery"),
-        ):
-            item["data"][0] = round(self.chart_data[storage]["energy"], 0)
-            item["data"][1] = round(self.chart_data[storage]["full_load_cycles"], 0)
+        for item, attribute in zip(self.chart_options["series"], ("energy", "full_load_cycles")):
+            item["data"][0] = round(
+                (
+                    self.chart_data["ABW-electricity-small_scale_battery"][attribute] * 1e-3
+                    if attribute == "energy"
+                    else self.chart_data["ABW-electricity-small_scale_battery"][attribute]
+                ),
+                0,
+            )
+            item["data"][1] = round(
+                (
+                    self.chart_data["ABW-electricity-large_scale_battery"][attribute] * 1e-3
+                    if attribute == "energy"
+                    else self.chart_data["ABW-electricity-large_scale_battery"][attribute]
+                ),
+                0,
+            )
+        return self.chart_options
+
+
+class BatteryCapacityChart(SimulationChart):
+    """Chart to show charging capacity and storage capacity of the batteries."""
+
+    lookup = "battery_capacity"
+
+    def get_chart_data(self):  # noqa: ANN201
+        """Get chart data from electricity overview calculation."""
+        storage_capacities = calculations.battery_capacities(self.simulation_id)
+        capacities = calculations.capacities(self.simulation_id)
+        data = {}
+        for storage in ("ABW-electricity-large_scale_battery", "ABW-electricity-small_scale_battery"):
+            storage_capacity = storage_capacities["storage_capacities"][(storage, "None")]
+            capacity = capacities["capacities"][(storage, "None")]
+            data[storage] = {"storage_capacity": storage_capacity, "capacity": capacity}
+        return data
+
+    def render(self) -> dict:  # noqa: D102
+        for item, attribute in zip(self.chart_options["series"], ("storage_capacity", "capacity")):
+            item["data"][0] = round(self.chart_data["ABW-electricity-small_scale_battery"][attribute], 0)
+            item["data"][1] = round(self.chart_data["ABW-electricity-large_scale_battery"][attribute], 0)
         return self.chart_options
 
 
@@ -1191,6 +1228,7 @@ CHARTS: dict[str, Union[type[PreResultsChart], type[SimulationChart]]] = {
     "pv_roof_capacity": PVRoofCapacityChart,
     "pv_roof_areas": PVRoofAreaChart,
     "battery_energy": BatteryEnergyChart,
+    "battery_capacity": BatteryCapacityChart,
     "wind_turbines_statusquo_region": WindTurbinesRegionChart,
     "wind_turbines_2045_region": WindTurbines2045RegionChart,
     "wind_turbines_square_statusquo_region": WindTurbinesSquareRegionChart,
