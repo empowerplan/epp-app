@@ -654,15 +654,15 @@ def get_heat_production(distribution: str, year: int) -> dict:
     return {tech: demand * share for tech, share in heat_shares.items()}
 
 
-def battery_charge_discharge(simulation_id: int) -> dict:
+def storage_charge_discharge(simulation_id: int) -> dict:
     """Calculate battery charge and discharge of small and large scale batteries for given simulation_id."""
     return get_results(
         simulation_id,
-        {"battery_charge": battery_charge, "battery_discharge": battery_discharge},
+        {"storage_charge": storage_charge, "storage_discharge": storage_discharge},
     )
 
 
-def battery_capacities(simulation_id: int) -> dict:
+def storage_capacities(simulation_id: int) -> dict:
     """Calculate storage capacities from simulation_id."""
     return get_results(simulation_id, {"storage_capacities": StorageCapacities})
 
@@ -913,16 +913,26 @@ demand_flows = core.ParametrizedCalculation(
     },
 )
 
-battery_charge = core.ParametrizedCalculation(
+storage_charge = core.ParametrizedCalculation(
     Flows,
     {
-        "to_nodes": ["ABW-electricity-small_scale_battery", "ABW-electricity-large_scale_battery"],
+        "to_nodes": [
+            "ABW-electricity-small_scale_battery",
+            "ABW-electricity-large_scale_battery",
+            "ABW-heat_central-storage",
+            "ABW-heat_decentral-storage",
+        ],
     },
 )
 
-battery_discharge = core.ParametrizedCalculation(
+storage_discharge = core.ParametrizedCalculation(
     Flows,
     {
-        "from_nodes": ["ABW-electricity-small_scale_battery", "ABW-electricity-large_scale_battery"],
+        "from_nodes": [
+            "ABW-electricity-small_scale_battery",
+            "ABW-electricity-large_scale_battery",
+            "ABW-heat_central-storage",
+            "ABW-heat_decentral-storage",
+        ],
     },
 )
