@@ -75,7 +75,7 @@ RUN source /venv/bin/activate && python -m pip install --upgrade pip && pip inst
 RUN source /venv/bin/activate \
     && python -m pip install git+https://github.com/oemof/oemof-tabular@features/add-tsam-to-datapackage \
     && python -m pip install git+https://github.com/oemof/oemof-solph@feature/integrate_tsam \
-    && python -m pip install oemof.network==0.5.0a5
+    && python -m pip install oemof.network==0.5.0a5 chardet==5.2.0
 
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
