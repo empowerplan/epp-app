@@ -66,6 +66,8 @@ RUN source /venv/bin/activate \
     && python -m pip install git+https://github.com/oemof/oemof-solph@feature/integrate_tsam \
     && python -m pip install oemof.network==0.5.0a5
 
+RUN source /venv/bin/activate && python -m pip install "setuptools<81"
+
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
 RUN chmod +x /entrypoint
