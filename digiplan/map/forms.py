@@ -224,7 +224,7 @@ class ElectricityGoalResultsBox(ResultsBox):  # noqa: D101
             [i for i in energies.index if i not in ("pv_ground", "pv_roof", "wind")],
         )
         if renewable_energies_sum >= renewable_energies_goal.sum():
-            return "Ziel 2045 erreicht!"
+            return "Ziel 2040 erreicht!"
         energies = calculations.electricity_overview(2030)
         renewable_energies_goal = energies.drop(
             [i for i in energies.index if i not in ("pv_ground", "pv_roof", "wind")],
