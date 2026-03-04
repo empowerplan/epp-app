@@ -19,6 +19,10 @@
       letter-spacing: $letter-spacing-large;
     }
 
+    &__subtitle {
+      padding-left: 20px;
+    }
+
     &__municipality {
       @extend .ps-1;
     }
@@ -105,10 +109,10 @@
   }
 
   .maplibregl-popup-close-button,
-    .mapboxgl-popup-close-button {
-      @extend .fs-3;
-      @extend .fw-light;
-      @extend .px-2;
-      @extend .py-1;
-    }
+  .mapboxgl-popup-close-button {
+    @extend .fs-3;
+    @extend .fw-light;
+    @extend .px-2;
+    @extend .py-1;
+  }
 }
