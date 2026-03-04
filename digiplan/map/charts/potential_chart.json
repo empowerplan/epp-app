@@ -1,5 +1,10 @@
 {
-  "tooltip": { "trigger": "axis", "axisPointer": { "type": "shadow" } },
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    }
+  },
   "legend": {
     "itemGap": 15,
     "type": "scroll",
@@ -14,8 +19,21 @@
     "bottom": "18%",
     "containLabel": true
   },
-  "aria": { "enabled": true },
-  "xAxis": { "type": "category", "data": ["Nutzung", "Potentialfläche"] },
-  "yAxis": { "type": "value", "axisLabel": { "formatter": "{value} ha" } },
+  "aria": {
+    "enabled": true
+  },
+  "xAxis": {
+    "type": "category",
+    "data": [
+      "Nutzung\n durch deine\n Einstellungen",
+      "Potentialfläche"
+    ]
+  },
+  "yAxis": {
+    "type": "value",
+    "axisLabel": {
+      "formatter": "{value} ha"
+    }
+  },
   "series": []
 }
