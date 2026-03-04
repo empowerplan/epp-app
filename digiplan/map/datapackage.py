@@ -133,8 +133,12 @@ def get_summed_heat_demand_per_municipality(
     return demand
 
 
-def disaggregate_tsam_sequence(series: pd.Series, day_order: list[int]) -> pd.Series:
+def disaggregate_tsam_sequence(series: pd.Series, scenario: str) -> pd.Series:
     """Disaggregate series for the whole year according to tsam_order."""
+    tsam_config = pd.read_csv(OEMOF_DIR / scenario / "data" / "tsam" / "tsa_parameters.csv", sep=";")
+    day_order_raw = tsam_config.iloc[0]["order"]
+    day_order = list(map(int, day_order_raw.strip("[]").split(",")))
+
     # Split the demand sequence into days (24 timesteps per day)
     days = [series.iloc[i : i + 24] for i in range(0, len(series), 24)]
 
@@ -158,16 +162,12 @@ def get_heat_demand_profile(
     distributions = (distribution,) if distribution else ("central", "decentral")
     demand = defaultdict(dict)
     scenario = scenario or settings.OEMOF_ORIGINAL_SCENARIO
-    if disaggregate_tsam:
-        tsam_config = pd.read_csv(OEMOF_DIR / scenario / "data" / "tsam" / "tsa_parameters.csv", sep=";")
-        day_order_raw = tsam_config.iloc[0]["order"]
-        day_order = list(map(int, day_order_raw.strip("[]").split(",")))
     for sec in sectors:
         for dist in distributions:
             demand_filename = OEMOF_DIR / scenario / "data" / "sequences" / f"heat_{dist}-demand_{sec}_profile.csv"
             demand_sequence = pd.read_csv(demand_filename, sep=";")[f"ABW-heat_{dist}-demand_{sec}-profile"]
             if disaggregate_tsam:
-                demand_sequence = disaggregate_tsam_sequence(demand_sequence, day_order)
+                demand_sequence = disaggregate_tsam_sequence(demand_sequence, scenario)
             demand[sec][dist] = demand_sequence
     return demand
 
@@ -208,10 +208,7 @@ def get_thermal_efficiency(
     sequence_filename = OEMOF_DIR / scenario / "data" / "sequences" / f"{component}_profile.csv"
     efficiency_series = pd.read_csv(sequence_filename, sep=";").iloc[:, 1]
     if disaggregate_tsam:
-        tsam_config = pd.read_csv(OEMOF_DIR / scenario / "data" / "tsam" / "tsa_parameters.csv", sep=";")
-        day_order_raw = tsam_config.iloc[0]["order"]
-        day_order = list(map(int, day_order_raw.strip("[]").split(",")))
-        efficiency_series = disaggregate_tsam_sequence(efficiency_series, day_order)
+        efficiency_series = disaggregate_tsam_sequence(efficiency_series, scenario)
     return efficiency_series
 
 

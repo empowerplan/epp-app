@@ -9,6 +9,7 @@ from oemof.solph import EnergySystem
 
 from config.settings.base import OEMOF_TSAM
 from digiplan.map import config, datapackage, forms
+from digiplan.map.datapackage import disaggregate_tsam_sequence
 
 
 def _map_heat_shares_to_components(distribution: str, heat_shares: dict) -> dict:
@@ -325,8 +326,10 @@ def adapt_renewable_capacities(scenario: str, data: dict) -> dict:
     # Large scale
     wind_pv_ground_energy_daily = (
         float(
-            data["ABW-wind-onshore"]["capacity"] * data["ABW-wind-onshore"]["profile"].sum()
-            + data["ABW-solar-pv_ground"]["capacity"] * data["ABW-solar-pv_ground"]["profile"].sum(),
+            data["ABW-wind-onshore"]["capacity"]
+            * disaggregate_tsam_sequence(data["ABW-wind-onshore"]["profile"], scenario).sum()
+            + data["ABW-solar-pv_ground"]["capacity"]
+            * disaggregate_tsam_sequence(data["ABW-solar-pv_ground"]["profile"], scenario).sum(),
         )
         / 365
     )
