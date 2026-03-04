@@ -1,4 +1,4 @@
-//const onbaordingCloseBtn = document.getElementById("close-onboarding");
+const onbaordingStartBtn = document.getElementById("intro_tour_start");
 
 const intro_tour = new Shepherd.Tour({  // jshint ignore:line
   useModalOverlay: true,
@@ -16,7 +16,7 @@ intro_tour.addStep({
   title: 'Navigation',
   text: 'Schritt für Schritt zu Ihrem eigenen Szenario.',
   attachTo: {
-    element: '.steps',
+    element: '.wizard__list',
     on: 'bottom'
   },
   buttons: [
@@ -92,7 +92,7 @@ intro_tour.addStep({
         PubSub.publish(eventTopics.CHOROPLETH_DEACTIVATED);
 
         // Activate layers
-        document.querySelector(".static-layer #wind").click();
+        document.querySelector(".static-layer #rpg_ols_wind_operating").click();
         document.querySelector(".static-layer #road_default").click();
         return this.next();
       },
@@ -148,7 +148,7 @@ intro_tour.addStep({
     },
     {
       action() {
-        document.querySelector(".static-layer #wind").click();
+        document.querySelector(".static-layer #rpg_ols_wind_operating").click();
         document.querySelector(".static-layer #road_default").click();
         return this.next();
       },
@@ -159,6 +159,85 @@ intro_tour.addStep({
   id: 'cluster_popup'
 });
 
+intro_tour.addStep({
+  title: 'Nächster Schritt',
+  text: 'Hier geht es weiter zu voreingestellten Szenarien.',
+  attachTo: {
+    element: '#menu_next_btn',
+    on: 'bottom'
+  },
+  buttons: [
+    {
+      action() {
+        return this.back();
+      },
+      classes: 'shepherd-button-secondary',
+      text: 'Zurück'
+    },
+    {
+      action() {
+        document.getElementById("menu_next_btn").click();
+        return this.next();
+      },
+      classes: 'shepherd-button-primary',
+      text: 'Weiter'
+    }
+  ],
+  id: 'to_scenarios'
+});
+
+intro_tour.addStep({
+  title: 'Szenarien',
+  text: 'Klicken Sie auf ein Szenario um sich Details dazu anzeigen zu lassen.',
+  attachTo: {
+    element: '#panelCard2',
+    on: 'right'
+  },
+  buttons: [
+    {
+      action() {
+        return this.back();
+      },
+      classes: 'shepherd-button-secondary',
+      text: 'Zurück'
+    },
+    {
+      action() {
+        document.getElementById("panelCard2").click();
+        return this.next();
+      },
+      classes: 'shepherd-button-primary',
+      text: 'Weiter'
+    }
+  ],
+  id: 'select_scenario'
+});
+
+intro_tour.addStep({
+  title: 'Szenarien',
+  text: 'Detailansicht des Szenarios. Wenn Sie das Szenario bearbeiten wollen, klicken Sie auf "Übernehmen".',
+  attachTo: {
+    element: '#selectedScenario2',
+    on: 'right'
+  },
+  buttons: [
+    {
+      action() {
+        return this.back();
+      },
+      classes: 'shepherd-button-secondary',
+      text: 'Zurück'
+    },
+    {
+      action() {
+        return this.next();
+      },
+      classes: 'shepherd-button-primary',
+      text: 'Weiter'
+    }
+  ],
+  id: 'details_scenario'
+});
 
 intro_tour.addStep({
   title: 'Nächster Schritt',
@@ -430,9 +509,10 @@ intro_tour.addStep({
 });
 
 
-//onbaordingCloseBtn.addEventListener("click", function() {
-//  intro_tour.start();
-//});
+onbaordingStartBtn.addEventListener("click", function () {
+  document.getElementById("menu_next_btn").click();
+  intro_tour.start();
+});
 
 
 const pv_tour = new Shepherd.Tour({  // jshint ignore:line
