@@ -1041,13 +1041,13 @@ markdown = "*"
 
 [[package]]
 name = "django-oemof"
-version = "2.2.1"
+version = "2.2.2"
 description = "Django application to run oemof"
 optional = false
 python-versions = "<4.0,>=3.9"
 files = [
-    {file = "django_oemof-2.2.1-py3-none-any.whl", hash = "sha256:84e2be0805b2e6899c04a4706b23dc6d11f74216133b874414d7115b4e039770"},
-    {file = "django_oemof-2.2.1.tar.gz", hash = "sha256:3b84f76fb8387d9eba3a68d749acb2b0f930f94575982bbca1a21e48fa3294d9"},
+    {file = "django_oemof-2.2.2-py3-none-any.whl", hash = "sha256:2c5f6bead04582f1b324e1db0fa4123690e7a7adb07d8968d67f8a8c34090a9e"},
+    {file = "django_oemof-2.2.2.tar.gz", hash = "sha256:96c0c837437cb95ed549cc790a5bf3c03df1c8b8845a81c8c4466214088a8a2a"},
 ]
 
 [package.dependencies]
@@ -3172,4 +3172,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.12"
-content-hash = "91c3ccc9cf5901c7b603c8c50481844fcb6157d1859f59dd32dd54058db09311"
+content-hash = "125973c525380e99bb791e012d5f67144d11fa5875b810f2e04d4d7799e69fce"
