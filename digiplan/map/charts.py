@@ -173,7 +173,7 @@ class ElectricityOverviewChart(SimulationChart):
     def render(self) -> dict:  # noqa: D102
         mapping = {
             "Aufdach-PV": ("ABW-solar-pv_rooftop", "pv_roof"),
-            "Bioenergie": ("ABW-biomass", "bioenergy"),
+            "Bioenergie*": ("ABW-biomass", "bioenergy"),
             "Export*": ("ABW-electricity-export", ""),
             "Freiflächen-PV": ("ABW-solar-pv_ground", "pv_ground"),
             "Import*": ("ABW-electricity-import", ""),

@@ -97,7 +97,7 @@
       ]
     },
     {
-      "name": "Bioenergie",
+      "name": "Bioenergie*",
       "type": "bar",
       "stack": "production",
       "color": "#52C41A",
