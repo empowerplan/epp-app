@@ -1091,22 +1091,18 @@ class StorageEnergyChart(SimulationChart):
         self.chart_options["series"][0]["color"] = self.colors[0]
         self.chart_options["series"][1]["color"] = self.colors[1]
         for item, attribute in zip(self.chart_options["series"], ("energy", "full_load_cycles")):
-            item["data"][0] = round(
-                (
-                    self.chart_data[self.storages[0]][attribute] * 1e-3
-                    if attribute == "energy"
-                    else self.chart_data[self.storages[0]][attribute]
-                ),
-                0,
+            value = (
+                self.chart_data[self.storages[0]][attribute] * 1e-3
+                if attribute == "energy"
+                else self.chart_data[self.storages[0]][attribute]
             )
-            item["data"][1] = round(
-                (
-                    self.chart_data[self.storages[1]][attribute] * 1e-3
-                    if attribute == "energy"
-                    else self.chart_data[self.storages[1]][attribute]
-                ),
-                0,
+            item["data"][0] = round(value, 0) if value else 0
+            value = (
+                self.chart_data[self.storages[1]][attribute] * 1e-3
+                if attribute == "energy"
+                else self.chart_data[self.storages[1]][attribute]
             )
+            item["data"][1] = round(value, 0) if value else 0
         return self.chart_options
 
 
