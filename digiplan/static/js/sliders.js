@@ -637,12 +637,11 @@ export function activatePotentialPopups(msg) {
       throw Error(`Unknown wind tab '${currentWindTab}' found.`);
     }
   } else {
-    // PV controls keep fixed layer mapping
-    const potentialLayer = {
-      PV_CONTROL_ACTIVATED: "pv_ground",
-      PV_ROOF_CONTROL_ACTIVATED: "pv_roof",
-    };
-    currentLayer = potentialLayer[msg];
+    if (document.getElementsByClassName("active-sidepanel")[0].classList.contains("s_pv_ff_1")) {
+      currentLayer = "pv_ground";
+    } else {
+      currentLayer = "pv_roof";
+    }
   }
 
   map_store.cold.state.current_potential_layer = currentLayer;
