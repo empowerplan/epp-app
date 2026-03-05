@@ -19,7 +19,11 @@
   },
   "yAxis": {
     "type": "category",
-    "data": ["Ziel 2045", "Dein Szenario", "2022"],
+    "data": [
+      "Ziel 2045",
+      "Dein Szenario",
+      "2022"
+    ],
     "axisTick": {
       "show": false
     }
@@ -37,7 +41,14 @@
       "emphasis": {
         "focus": "series"
       },
-      "data": [200, 300, 320]
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        200,
+        300,
+        320
+      ]
     },
     {
       "name": "Haushalte",
@@ -50,7 +61,14 @@
       "emphasis": {
         "focus": "series"
       },
-      "data": [260, 300, 310]
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        260,
+        300,
+        310
+      ]
     },
     {
       "name": "Industrie",
@@ -63,7 +81,14 @@
       "emphasis": {
         "focus": "series"
       },
-      "data": [200, 250, 350]
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        200,
+        250,
+        350
+      ]
     }
   ]
 }

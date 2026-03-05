@@ -7,8 +7,8 @@
   },
   "legend": {
     "data": [
-      "Kapazität [MWh]",
-      "Leistung [MW]"
+      "Kapazität",
+      "Leistung"
     ],
     "itemGap": 15
   },
@@ -31,7 +31,7 @@
   },
   "yAxis": [
     {
-      "name": "Kapazität [MWh] / Leistung [MW]",
+      "name": "Kapazität / Leistung",
       "nameGap": 20,
       "nameTextStyle": {
         "align": "left"
@@ -44,7 +44,7 @@
   ],
   "series": [
     {
-      "name": "Kapazität [MWh]",
+      "name": "Kapazität",
       "type": "bar",
       "label": {
         "show": true,
@@ -53,13 +53,16 @@
         "color": "#333"
       },
       "color": "#897BD9",
+      "tooltip": {
+        "unit": "MWh"
+      },
       "data": [
         10,
         26
       ]
     },
     {
-      "name": "Leistung [MW]",
+      "name": "Leistung",
       "type": "bar",
       "label": {
         "show": true,
@@ -68,6 +71,9 @@
         "color": "#333"
       },
       "color": "#B5ADE0",
+      "tooltip": {
+        "unit": "MW"
+      },
       "data": [
         5,
         6

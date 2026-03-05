@@ -45,6 +45,9 @@
       "stack": "production",
       "color": "#6A89CC",
       "barWidth": "20%",
+      "tooltip": {
+        "unit": "GWh"
+      },
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -70,6 +73,9 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
+      "tooltip": {
+        "unit": "GWh"
+      },
       "data": [
         0,
         0,
@@ -88,6 +94,9 @@
           "shadowBlur": 10,
           "shadowColor": "rgba(0,0,0,0.3)"
         }
+      },
+      "tooltip": {
+        "unit": "GWh"
       },
       "data": [
         0,
@@ -108,6 +117,9 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
+      "tooltip": {
+        "unit": "GWh"
+      },
       "data": [
         0,
         0,
@@ -126,6 +138,9 @@
           "shadowBlur": 10,
           "shadowColor": "rgba(0,0,0,0.3)"
         }
+      },
+      "tooltip": {
+        "unit": "GWh"
       },
       "data": [
         0,
@@ -146,6 +161,9 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
+      "tooltip": {
+        "unit": "GWh"
+      },
       "data": [
         0,
         0,
@@ -164,6 +182,9 @@
           "shadowBlur": 10,
           "shadowColor": "rgba(0,0,0,0.3)"
         }
+      },
+      "tooltip": {
+        "unit": "GWh"
       },
       "data": [
         0,
@@ -184,6 +205,9 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
+      "tooltip": {
+        "unit": "GWh"
+      },
       "data": [
         0,
         0,
@@ -203,6 +227,9 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
+      "tooltip": {
+        "unit": "GWh"
+      },
       "data": [
         0,
         0,
@@ -221,6 +248,9 @@
           "shadowBlur": 10,
           "shadowColor": "rgba(0,0,0,0.3)"
         }
+      },
+      "tooltip": {
+        "unit": "GWh"
       },
       "data": [
         0,

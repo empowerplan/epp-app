@@ -40,6 +40,9 @@
       "emphasis": {
         "focus": "series"
       },
+      "tooltip": {
+        "unit": "%"
+      },
       "data": [
         0,
         0
@@ -56,6 +59,9 @@
       },
       "emphasis": {
         "focus": "series"
+      },
+      "tooltip": {
+        "unit": "%"
       },
       "data": [
         0,

@@ -1,63 +1,87 @@
 {
-    "grid": {
-      "top": "24%",
-      "right": "30%",
-      "bottom": "25%"
-    },
-    "aria": {
-      "enabled": true,
-      "label": {
-        "description": "Diese Grafik zeigt {title.text}, bestehend aus {legend.data}."
-      }
-    },
-    "legend": {
-      "data": [
-        "Haushalte",
-        "GHD",
-        "Industrie"
-      ],
-      "orient": "vertical",
-      "right": "1%",
-      "bottom": "35%"
-    },
-    "color": ["#6F9BB2", "#98C1D7", "#376984"],
-    "xAxis": {
-      "type": "category",
-      "boundaryGap": true,
-      "data": ["Status Quo"],
-      "axisTick": "alignWithLabel"
-    },
-    "yAxis": {
-      "type": "value",
-      "show": true,
-      "name": "GWh",
-      "nameLocation": "end",
-      "nameTextStyle": "Roboto"
-    },
-    "series": [
-        {
-          "type": "bar",
-          "stack": "five",
-          "data": [36, 10],
-          "name": "Haushalte"
-        },
-        {
-          "type": "bar",
-          "stack": "five",
-          "data": [36, 10],
-          "name": "GHD"
-        },
-        {
-          "type": "bar",
-          "stack": "five",
-          "data": [10, 10],
-          "name": "Industrie"
-        }
+  "grid": {
+    "top": "24%",
+    "right": "30%",
+    "bottom": "25%"
+  },
+  "aria": {
+    "enabled": true,
+    "label": {
+      "description": "Diese Grafik zeigt {title.text}, bestehend aus {legend.data}."
+    }
+  },
+  "legend": {
+    "data": [
+      "Haushalte",
+      "GHD",
+      "Industrie"
     ],
-    "title": {
-      "text": "Electricity Demand",
-      "textStyle": {
-        "fontSize": 14
-      }
+    "orient": "vertical",
+    "right": "1%",
+    "bottom": "35%"
+  },
+  "color": [
+    "#6F9BB2",
+    "#98C1D7",
+    "#376984"
+  ],
+  "xAxis": {
+    "type": "category",
+    "boundaryGap": true,
+    "data": [
+      "Status Quo"
+    ],
+    "axisTick": "alignWithLabel"
+  },
+  "yAxis": {
+    "type": "value",
+    "show": true,
+    "name": "GWh",
+    "nameLocation": "end",
+    "nameTextStyle": "Roboto"
+  },
+  "series": [
+    {
+      "type": "bar",
+      "stack": "five",
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        36,
+        10
+      ],
+      "name": "Haushalte"
+    },
+    {
+      "type": "bar",
+      "stack": "five",
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        36,
+        10
+      ],
+      "name": "GHD"
+    },
+    {
+      "type": "bar",
+      "stack": "five",
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        10,
+        10
+      ],
+      "name": "Industrie"
+    }
+  ],
+  "title": {
+    "text": "Electricity Demand",
+    "textStyle": {
+      "fontSize": 14
     }
   }
+}

@@ -6,7 +6,10 @@
     }
   },
   "legend": {
-    "data": ["Leistung", "Anlagenanzahl"],
+    "data": [
+      "Leistung",
+      "Anlagenanzahl"
+    ],
     "itemGap": 15
   },
   "grid": {
@@ -21,7 +24,13 @@
   },
   "xAxis": {
     "type": "category",
-    "data": ["2010", "2015", "2020", "2023", "Dein\nSzenario**"],
+    "data": [
+      "2010",
+      "2015",
+      "2020",
+      "2023",
+      "Dein\nSzenario**"
+    ],
     "axisLabel": {
       "rotate": 45
     }
@@ -49,6 +58,9 @@
         "color": "#333"
       },
       "color": "#efad25",
+      "tooltip": {
+        "unit": "MW"
+      },
       "data": [
         43,
         126,

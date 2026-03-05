@@ -10,22 +10,41 @@
     "itemGap": 15
   },
   "brush": {
-    "toolbox": ["rect", "polygon", "lineX", "lineY", "keep", "clear"],
+    "toolbox": [
+      "rect",
+      "polygon",
+      "lineX",
+      "lineY",
+      "keep",
+      "clear"
+    ],
     "xAxisIndex": 0
   },
   "toolbox": {
     "feature": {
       "magicType": {
-        "type": ["stack"]
+        "type": [
+          "stack"
+        ]
       },
       "dataView": {}
     }
   },
   "yAxis": {
-    "data": ["Ziel 2045", "Dein Szenario", "2022"],
-    "axisLine": { "onZero": true },
-    "splitLine": { "show": false },
-    "splitArea": { "show": false }
+    "data": [
+      "Ziel 2045",
+      "Dein Szenario",
+      "2022"
+    ],
+    "axisLine": {
+      "onZero": true
+    },
+    "splitLine": {
+      "show": false
+    },
+    "splitArea": {
+      "show": false
+    }
   },
   "xAxis": {
     "type": "value",
@@ -52,7 +71,14 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [132, 334, 700]
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        132,
+        334,
+        700
+      ]
     },
     {
       "name": "Heizöl",
@@ -65,7 +91,14 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [102, 234, 280]
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        102,
+        234,
+        280
+      ]
     },
     {
       "name": "Holz",
@@ -78,7 +111,14 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [282, 234, 100]
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        282,
+        234,
+        100
+      ]
     },
     {
       "name": "Wärmepumpe",
@@ -91,7 +131,14 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [136, 134, 130]
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        136,
+        134,
+        130
+      ]
     },
     {
       "name": "El. Direktheizung",
@@ -104,7 +151,14 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [412, 254, 100]
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        412,
+        254,
+        100
+      ]
     },
     {
       "name": "Biogas",
@@ -117,7 +171,14 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [412, 254, 100]
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        412,
+        254,
+        100
+      ]
     },
     {
       "name": "Solarthermie",
@@ -130,7 +191,14 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [412, 254, 100]
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        412,
+        254,
+        100
+      ]
     },
     {
       "name": "Sonstige",
@@ -143,7 +211,14 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [412, 254, 100]
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        412,
+        254,
+        100
+      ]
     },
     {
       "name": "Verbrauch Haushalte",
@@ -157,7 +232,14 @@
       "emphasis": {
         "focus": "series"
       },
-      "data": [300, 400, 420]
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        300,
+        400,
+        420
+      ]
     },
     {
       "name": "Verbrauch GHD",
@@ -170,7 +252,14 @@
       "emphasis": {
         "focus": "series"
       },
-      "data": [360, 400, 410]
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        360,
+        400,
+        410
+      ]
     },
     {
       "name": "Verbrauch Industrie",
@@ -183,7 +272,14 @@
       "emphasis": {
         "focus": "series"
       },
-      "data": [300, 350, 450]
+      "tooltip": {
+        "unit": "GWh"
+      },
+      "data": [
+        300,
+        350,
+        450
+      ]
     }
   ]
 }

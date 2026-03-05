@@ -456,6 +456,7 @@ class EnergyRegionChart(Chart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("GWh")
+        chart_options = set_unit(chart_options, "GWh")
         return chart_options
 
 
@@ -476,6 +477,7 @@ class Energy2045RegionChart(PreResultsChart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("GWh")
+        chart_options = set_unit(chart_options, "GWh")
         chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
@@ -494,6 +496,7 @@ class EnergyShareRegionChart(Chart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("%")
+        chart_options = set_unit(chart_options, "%")
         return chart_options
 
 
@@ -513,6 +516,7 @@ class EnergyShare2045RegionChart(PreResultsChart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("%")
+        chart_options = set_unit(chart_options, "%")
         chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
@@ -536,6 +540,7 @@ class EnergyCapitaRegionChart(Chart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("MWh")
+        chart_options = set_unit(chart_options, "MWh")
         return chart_options
 
 
@@ -569,6 +574,7 @@ class EnergyCapita2045RegionChart(PreResultsChart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("MWh")
+        chart_options = set_unit(chart_options, "MWh")
         chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
@@ -592,6 +598,7 @@ class EnergySquareRegionChart(Chart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("MWh")
+        chart_options = set_unit(chart_options, "MWh")
         return chart_options
 
 
@@ -625,6 +632,7 @@ class EnergySquare2045RegionChart(PreResultsChart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("MWh")
+        chart_options = set_unit(chart_options, "MWh")
         chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
@@ -741,6 +749,7 @@ class ElectricityDemandRegionChart(Chart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("GWh")
+        chart_options = set_unit(chart_options, "GWh")
         return chart_options
 
 
@@ -762,6 +771,7 @@ class ElectricityDemand2045RegionChart(PreResultsChart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("GWh")
+        chart_options = set_unit(chart_options, "GWh")
         chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
@@ -785,6 +795,7 @@ class ElectricityDemandCapitaRegionChart(Chart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("kWh")
+        chart_options = set_unit(chart_options, "kWh")
         return chart_options
 
 
@@ -820,6 +831,7 @@ class ElectricityDemandCapita2045RegionChart(PreResultsChart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("kWh")
+        chart_options = set_unit(chart_options, "kWh")
         chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
@@ -838,6 +850,7 @@ class HeatDemandRegionChart(Chart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("GWh")
+        chart_options = set_unit(chart_options, "GWh")
         return chart_options
 
 
@@ -857,6 +870,7 @@ class HeatDemand2045RegionChart(PreResultsChart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("GWh")
+        chart_options = set_unit(chart_options, "GWh")
         chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
@@ -880,6 +894,7 @@ class HeatDemandCapitaRegionChart(Chart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("kWh")
+        chart_options = set_unit(chart_options, "kWh")
         return chart_options
 
 
@@ -915,6 +930,7 @@ class HeatDemandCapita2045RegionChart(PreResultsChart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("kWh")
+        chart_options = set_unit(chart_options, "kWh")
         chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
@@ -951,6 +967,7 @@ class BatteriesCapacityRegionChart(Chart):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region OLS"
         chart_options["yAxis"]["name"] = _("MWh")
+        chart_options = set_unit(chart_options, "MWh")
         del chart_options["series"][0]["name"]
         return chart_options
 
@@ -1307,3 +1324,28 @@ def create_chart(lookup: str, chart_data: Any | None = None) -> dict:
     if lookup in CHARTS:
         return CHARTS[lookup](lookup, chart_data).render()
     return Chart(lookup, chart_data).render()
+
+
+def set_unit(options: dict[str, Any], unit: str) -> dict[str, Any]:
+    """
+    Set unit in tooltip of each series in ECharts options.
+
+    Parameters
+    ----------
+    options: dict
+        ECharts options dictionary.
+    unit: str
+        Unit to be set in tooltip when hovering chart.
+
+    Returns
+    -------
+    dict:
+        Options with key-value pair "unit" in tooltip.
+
+    """
+    for series in options["series"]:
+        if "tooltip" not in series:
+            series["tooltip"] = {"unit": unit}
+        else:
+            series["tooltip"]["unit"] = unit
+    return options

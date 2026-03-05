@@ -23,11 +23,19 @@
     "right": "-5%",
     "bottom": "15%"
   },
-  "color": ["#6A89CC","#FFD660","#EFAD25","#A9BDE8","#52C41A"],
+  "color": [
+    "#6A89CC",
+    "#FFD660",
+    "#EFAD25",
+    "#A9BDE8",
+    "#52C41A"
+  ],
   "xAxis": {
     "type": "category",
     "boundaryGap": true,
-    "data": ["Status Quo"],
+    "data": [
+      "Status Quo"
+    ],
     "axisTick": "alignWithLabel"
   },
   "yAxis": {
@@ -41,31 +49,56 @@
     {
       "type": "bar",
       "stack": "five",
-      "data": [36],
+      "tooltip": {
+        "unit": "MW"
+      },
+      "data": [
+        36
+      ],
       "name": "Wind"
     },
     {
       "type": "bar",
       "stack": "five",
-      "data": [10],
+      "tooltip": {
+        "unit": "MW"
+      },
+      "data": [
+        10
+      ],
       "name": "Aufdach-PV"
     },
     {
       "type": "bar",
       "stack": "five",
-      "data": [36],
+      "tooltip": {
+        "unit": "MW"
+      },
+      "data": [
+        36
+      ],
       "name": "Freiflächen-PV"
     },
     {
       "type": "bar",
       "stack": "five",
-      "data": [10],
+      "tooltip": {
+        "unit": "MW"
+      },
+      "data": [
+        10
+      ],
       "name": "Wasserkraft"
     },
     {
       "type": "bar",
       "stack": "five",
-      "data": [10],
+      "tooltip": {
+        "unit": "MW"
+      },
+      "data": [
+        10
+      ],
       "name": "Bioenergie"
     }
   ],

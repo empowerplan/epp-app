@@ -7,7 +7,7 @@
   },
   "legend": {
     "data": [
-      "Energie [GWh/a]",
+      "Energie",
       "Volllastzyklen"
     ],
     "itemGap": 15
@@ -45,7 +45,7 @@
   ],
   "series": [
     {
-      "name": "Energie [GWh/a]",
+      "name": "Energie",
       "type": "bar",
       "label": {
         "show": true,
@@ -54,6 +54,9 @@
         "color": "#333"
       },
       "color": "#897BD9",
+      "tooltip": {
+        "unit": "GWh"
+      },
       "data": [
         2084,
         2603
