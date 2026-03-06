@@ -16,7 +16,7 @@ intro_tour.addStep({
   title: 'Navigation',
   text: 'Schritt für Schritt zu Ihrem eigenen Szenario.',
   attachTo: {
-    element: '.wizard__list',
+    element: '.wizard__main',
     on: 'bottom'
   },
   buttons: [
@@ -93,7 +93,7 @@ intro_tour.addStep({
 
         // Activate layers
         document.querySelector(".static-layer #rpg_ols_wind_operating").click();
-        document.querySelector(".static-layer #road_default").click();
+        document.querySelector(".static-layer #grid_distilled").click();
         return this.next();
       },
       classes: 'shepherd-button-primary',
@@ -149,7 +149,7 @@ intro_tour.addStep({
     {
       action() {
         document.querySelector(".static-layer #rpg_ols_wind_operating").click();
-        document.querySelector(".static-layer #road_default").click();
+        document.querySelector(".static-layer #grid_distilled").click();
         return this.next();
       },
       classes: 'shepherd-button-primary',
@@ -375,7 +375,7 @@ intro_tour.addStep({
 
 intro_tour.addStep({
   title: 'Nächster Schritt',
-  text: 'Hier gehts weiter zu den Ergebnissen. Im Hintergrund wird dabei automatisch die Simulation Ihres Szenarios gestartet (gelber Kreis rotiert).',
+  text: 'Hier gehts weiter zu den Ergebnissen. Im Hintergrund wird dabei automatisch die Simulation Ihres Szenarios gestartet (grüner Balken).',
   attachTo: {
     element: '#menu_next_btn',
     on: 'bottom'
@@ -484,7 +484,7 @@ intro_tour.addStep({
 
 intro_tour.addStep({
   title: 'Fertig',
-  text: 'Viel Spaß mit dem Digiplan-Anhalt-Tool! :D',
+  text: 'Viel Spaß beim Ausprobieren!',
   attachTo: {
     element: '#chart_view_tab',
     on: 'right'
