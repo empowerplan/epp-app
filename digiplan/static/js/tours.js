@@ -625,13 +625,6 @@ pv_tour.addStep({
   buttons: [
     {
       action() {
-        return this.cancel();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Tour beenden'
-    },
-    {
-      action() {
         pv_more_button.click();
         return this.next();
       },
@@ -649,13 +642,6 @@ pv_tour.addStep({
     on: 'right'
   },
   buttons: [
-    {
-      action() {
-        return this.back();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Zurück'
-    },
     {
       action() {
         return this.next();
@@ -676,13 +662,6 @@ pv_tour.addStep({
   buttons: [
     {
       action() {
-        return this.back();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Zurück'
-    },
-    {
-      action() {
         return this.next();
       },
       text: 'Weiter'
@@ -701,13 +680,6 @@ pv_tour.addStep({
   buttons: [
     {
       action() {
-        return this.back();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Zurück'
-    },
-    {
-      action() {
         return this.next();
       },
       text: 'Weiter'
@@ -724,13 +696,6 @@ pv_tour.addStep({
     on: 'right'
   },
   buttons: [
-    {
-      action() {
-        return this.back();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Zurück'
-    },
     {
       action() {
         return this.next();
@@ -752,13 +717,6 @@ pv_tour.addStep({
   buttons: [
     {
       action() {
-        return this.back();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Zurück'
-    },
-    {
-      action() {
         return this.next();
       },
       classes: 'shepherd-button-primary',
@@ -776,13 +734,6 @@ pv_tour.addStep({
     on: 'right'
   },
   buttons: [
-    {
-      action() {
-        return this.back();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Zurück'
-    },
     {
       action() {
         return this.next();
@@ -804,13 +755,6 @@ pv_tour.addStep({
   buttons: [
     {
       action() {
-        return this.back();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Zurück'
-    },
-    {
-      action() {
         return this.next();
       },
       text: 'Weiter'
@@ -828,13 +772,6 @@ pv_tour.addStep({
   },
   canClickTarget: true,
   buttons: [
-    {
-      action() {
-        return this.back();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Zurück'
-    },
     {
       action() {
         return this.complete();
@@ -878,13 +815,6 @@ wind_tour.addStep({
   buttons: [
     {
       action() {
-        return this.cancel();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Tour beenden'
-    },
-    {
-      action() {
         wind_more_button.click();
         document.getElementById('windPastTab').click();
         return this.next();
@@ -903,13 +833,6 @@ wind_tour.addStep({
     on: 'bottom'
   },
   buttons: [
-    {
-      action() {
-        return this.back();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Zurück'
-    },
     {
       action() {
         document.getElementById('windPresentTab').click();
@@ -931,13 +854,6 @@ wind_tour.addStep({
   buttons: [
     {
       action() {
-        return this.back();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Zurück'
-    },
-    {
-      action() {
         return this.next();
       },
       text: 'Weiter'
@@ -955,13 +871,6 @@ wind_tour.addStep({
     on: 'right'
   },
   buttons: [
-    {
-      action() {
-        return this.back();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Zurück'
-    },
     {
       action() {
         document.getElementById('windFutureTab').click();
@@ -984,13 +893,6 @@ wind_tour.addStep({
   buttons: [
     {
       action() {
-        return this.back();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Zurück'
-    },
-    {
-      action() {
         return this.next();
       },
       text: 'Weiter'
@@ -1008,13 +910,6 @@ wind_tour.addStep({
     on: 'right'
   },
   buttons: [
-    {
-      action() {
-        return this.back();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Zurück'
-    },
     {
       action() {
         return this.next();
@@ -1036,13 +931,6 @@ wind_tour.addStep({
   buttons: [
     {
       action() {
-        return this.back();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Zurück'
-    },
-    {
-      action() {
         return this.next();
       },
       classes: 'shepherd-button-primary',
@@ -1060,13 +948,6 @@ wind_tour.addStep({
     on: 'right'
   },
   buttons: [
-    {
-      action() {
-        return this.back();
-      },
-      classes: 'shepherd-button-secondary',
-      text: 'Zurück'
-    },
     {
       action() {
         return this.complete();
