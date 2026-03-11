@@ -655,7 +655,9 @@ pv_tour.addStep({
       '<br><br><b>Unten</b> siehst Du, wie viel Fläche benötigt und Energie ' +
       'erzeugt wird.' +
       '<br><b>Links</b> siehst Du, wie sich die installierbare Leistung ' +
-      'verändert.',
+      'verändert. Die Markierungen <b>BB30</b> und <b>BB40</b> zeigen die ' +
+      'Zielwerte für 2030 und 2040, abgeleitet aus der Energiestrategie ' +
+      'Brandenburg für die Region.',
   attachTo: {
     element: '.sidepanel.sidepanel--pv-outdoor',
     on: 'right'
@@ -919,10 +921,10 @@ wind_tour.addStep({
 
 
 wind_tour.addStep({
-  title: 'Suchraum 2027+',
+  title: 'Flächennutzung 2027+',
   text:
       'Über die Vorranggebiete 2024 hinaus gibt es weitere potenzielle ' +
-      'Flächen für Windenergie nach 2027.' +
+      'Flächen für Windenergie nach 2027 (schraffiert).' +
       '<br><br>' +
       'Grundlage ist das Windenergieflächenbedarfsgesetz (WindBG), das ' +
       'Brandenburg verpflichtet, bis 2032 mindestens 2,2 % der Landesfläche ' +
@@ -1003,7 +1005,11 @@ wind_tour.addStep({
       '<br><br>' +
       'Der einstellbare Bereich passt sich automatisch an Deine ' +
       'Flächeneinstellungen an - auf mehr Fläche kannst Du mehr Leistung ' +
-      'installieren.',
+      'installieren.' +
+      '<br><br>' +
+      'Die Markierungen <b>BB30</b> und <b>BB40</b> zeigen die Zielwerte ' +
+      'für 2030 und 2040, abgeleitet aus der Energiestrategie Brandenburg ' +
+      'für die Region.',
   attachTo: {
     element: '.c-slider.s_w_1',
     on: 'right'
