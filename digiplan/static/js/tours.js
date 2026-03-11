@@ -716,7 +716,7 @@ pv_tour.addStep({
       '<br><br>' +
       'Es gibt sog. Negativkriterien. Dazu zählen etwa sensible Natur- oder ' +
       'Schutzräume (z.B. Naturschutzgebiete), in denen PV‑Freiflächenanlagen ' +
-      'voraussichtlich nicht genehmigungsfähig sind.' +
+      'nicht genehmigungsfähig sind.' +
       '<br><br>' +
       '<b>Hier kannst Du Negativkriterien auf der Karte ein-/ausschalten ' +
       'und prüfen, welche Potenzialflächen tatsächlich infrage kommen.</b>',
@@ -728,8 +728,11 @@ pv_tour.addStep({
   buttons: [
     {
       action() {
+        // Activate layer
+        document.querySelector(".static-layer #priority_climate_resistent_agri_distilled").click();
+        // Fly and zoom
         map.flyTo({
-            center: [13.8, 52.73],
+            center: [13.84, 52.73],
             zoom: 11,
             essential: true
         });
@@ -754,6 +757,10 @@ pv_tour.addStep({
   buttons: [
     {
       action() {
+        // Deactivate layer
+        document.querySelector(".static-layer #priority_climate_resistent_agri_distilled").click();
+        // Reset zoom
+        map.zoomTo(8);
         return this.complete();
       },
       classes: 'shepherd-button-primary',
