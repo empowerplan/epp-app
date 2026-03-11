@@ -793,8 +793,11 @@ const wind_more_parent = wind_more_grandparent.querySelector('.c-slider__label--
 const wind_more_button = wind_more_parent.querySelector('.button.button--transparent');
 
 wind_tour.addStep({
-  title: 'Details',
-  text: 'Mehr Details.',
+  title: 'Windflächen erkunden',
+  text:
+      'Erfahre mehr über verfügbare Flächen für Windenergie in der Region und ' +
+      'lege fest, wie viel davon genutzt werden sollen.' +
+      '<br><b>Klappe dafür das Detailmenü auf.</b>',
   attachTo: {
     element: wind_more_button,
     on: 'bottom'
@@ -813,8 +816,16 @@ wind_tour.addStep({
 });
 
 wind_tour.addStep({
-  title: '2018',
-  text: 'Windtab 2018',
+  title: 'Regionalplan 2018',
+  text:
+      'Der <b>Sachliche Teilregionalplan Windenergie 2018</b> hat ' +
+      'Vorranggebiete für Windenergie in der Region Oderland-Spree festgelegt.' +
+      '<br><br>' +
+      'Diese Flächen waren die Grundlage für Genehmigungsverfahren bis zur ' +
+      'Ablösung durch den neuen Regionalplan.' +
+      '<br><br>' +
+      '<b>Unten</b> siehst Du, wie viel Fläche, wie viele Anlagen und wie viel ' +
+      'Energie auf diesen Flächen möglich wären.',
   attachTo: {
     element: '#windPastTab',
     on: 'bottom'
@@ -832,8 +843,14 @@ wind_tour.addStep({
 });
 
 wind_tour.addStep({
-  title: '2024',
-  text: 'Windtab 2024',
+  title: 'Regionalplan 2024',
+  text:
+      'Der Sachliche Teilregionalplan Erneuerbare Energien 2024 legt einen ' +
+      'Entwurf neuer Vorranggebiete für Windenergie fest.' +
+      '<br><br>' +
+      'Grundlage ist das Windenergieflächenbedarfsgesetz (WindBG), das ' +
+      'Brandenburg verpflichtet, bis 2027 mindestens 1,8 % der Landesfläche ' +
+      'für Windenergie auszuweisen.',
   attachTo: {
     element: '#windPresentTab',
     on: 'bottom'
@@ -851,8 +868,14 @@ wind_tour.addStep({
 
 
 wind_tour.addStep({
-  title: 'Flächennutzung',
-  text: 'Flächennutzung Slider hier',
+  title: 'Flächennutzung 2024',
+  text:
+      'Mit diesem <b>Regler</b> stellst Du ein, welcher Anteil der dargestellten ' +
+      'Vorranggebiete 2024 für Windenergie genutzt werden sollen.' +
+      '<br><br>' +
+      '<b>Unten</b> siehst Du, wie viel Fläche, wie viele Anlagen und wie viel ' +
+      'Energie damit möglich sind.' +
+      '<br><b>Links</b> siehst Du, wie sich die installierbare Leistung verändert.',
   attachTo: {
     element: '.c-slider.s_w_6',
     on: 'right'
@@ -871,11 +894,23 @@ wind_tour.addStep({
 
 
 wind_tour.addStep({
-  title: '2027',
-  text: 'Windtab 2027+',
+  title: 'Suchraum 2027+',
+  text:
+      'Über die Vorranggebiete 2024 hinaus gibt es weitere potenzielle ' +
+      'Flächen für Windenergie nach 2027.' +
+      '<br><br>' +
+      'Grundlage ist das Windenergieflächenbedarfsgesetz (WindBG), das ' +
+      'Brandenburg verpflichtet, bis 2032 mindestens 2,2 % der Landesfläche ' +
+      'für Windenergie auszuweisen.' +
+      '<br>Dies können insbesondere kommunale Planungen außerhalb der ' +
+      'Vorranggebiete sein, die einen Beitrag zur Flächenzielerreichung ' +
+      'leisten.' +
+      '<br><br>' +
+      '<b>Verschiebe den Regler</b>, um den Anteil der Gebiete festzulegen, ' +
+      'der in Deinem Szenario erschlossen werden soll.',
   attachTo: {
     element: '#windFutureTab',
-    on: 'bottom'
+    on: 'right'
   },
   buttons: [
     {
@@ -890,8 +925,16 @@ wind_tour.addStep({
 
 
 wind_tour.addStep({
-  title: '2027 wind key results',
-  text: 'Windtab 2027+',
+  title: 'Potenzial 2027+',
+  text:
+      'Hier siehst Du das Ergebnis Deiner Einstellungen für die Suchräume 2027+:' +
+      '<br><ul>' +
+      '<li>Wie viel <b>Fläche</b> genutzt werden könnte</li>' +
+      '<li>Wie viele <b>Anlagen</b> errichtet werden könnten</li>' +
+      '<li>Wie viel <b>Energie</b> erzeugt werden könnte</li>' +
+      '</ul>' +
+      'Die Werte für alle drei Flächenkulissen zusammen bestimmen den ' +
+      'maximalen Rahmen für den Hauptregler links.',
   attachTo: {
     element: '#wind_key_results_2027',
     on: 'right'
@@ -909,7 +952,7 @@ wind_tour.addStep({
 
 wind_tour.addStep({
   title: 'Regionale Potenzialflächen',
-  text: 'Klicken Sie auf eine Gemeinde, um deren Wind-Potentialflächen zu erkunden.',
+  text: 'Klicke auf eine Gemeinde, um deren Windpotenzialflächen auf der Karte zu erkunden.',
   attachTo: {
     element: '#map',
     on: 'top'
@@ -928,8 +971,14 @@ wind_tour.addStep({
 });
 
 wind_tour.addStep({
-  title: 'Windernergie Slider',
-  text: 'So funktioniert der Slider',
+  title: 'Leistung einstellen',
+  text:
+      'Den tatsächlichen Wert der <b>installierten Windleistung</b> stellst ' +
+      'Du mit diesem Hauptregler ein.' +
+      '<br><br>' +
+      'Der einstellbare Bereich passt sich automatisch an Deine ' +
+      'Flächeneinstellungen an - auf mehr Fläche kannst Du mehr Leistung ' +
+      'installieren.',
   attachTo: {
     element: '.c-slider.s_w_1',
     on: 'right'
