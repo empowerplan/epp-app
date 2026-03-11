@@ -761,13 +761,38 @@ pv_tour.addStep({
         document.querySelector(".static-layer #priority_climate_resistent_agri_distilled").click();
         // Reset zoom
         map.zoomTo(8);
-        return this.complete();
+        return this.next();
       },
       classes: 'shepherd-button-primary',
-      text: 'Fertig'
+      text: 'Weiter'
     }
   ],
   id: 'pv_ground_layer'
+});
+
+pv_tour.addStep({
+  title: 'Selbst ausprobieren',
+  text:
+      'Du kennst jetzt die wichtigsten Funktionen für Freiflächen-PV.' +
+      '<br><br>' +
+      'Stelle die Regler nach Deinen Vorstellungen ein: Welche Flächen sollen ' +
+      'genutzt werden – und wie viel Leistung ist damit installierbar?' +
+      '<br><br>' +
+      'Die Ergebnisse siehst Du direkt in den Zahlen und auf der Karte.',
+  attachTo: {
+    element: '.sidepanel.sidepanel--pv-outdoor',
+    on: 'right'
+  },
+  buttons: [
+    {
+      action() {
+        return this.complete();
+      },
+      classes: 'shepherd-button-primary',
+      text: 'Los geht\'s'
+    }
+  ],
+  id: 'pv_ground_cta'
 });
 
 const pv_intro_button = document.getElementById('pv_intro_button');
@@ -986,13 +1011,38 @@ wind_tour.addStep({
   buttons: [
     {
       action() {
-        return this.complete();
+        return this.next();
       },
       classes: 'shepherd-button-primary',
-      text: 'Fertig'
+      text: 'Weiter'
     }
   ],
   id: 'wind_end'
+});
+
+wind_tour.addStep({
+  title: 'Selbst ausprobieren',
+  text:
+      'Du kennst jetzt die wichtigsten Funktionen für Windenergie.' +
+      '<br><br>' +
+      'Stelle die Regler nach Deinen Vorstellungen ein: Welche Flächenkulisse ' +
+      'soll genutzt werden – und wie viel Leistung ist damit installierbar?' +
+      '<br><br>' +
+      'Die Ergebnisse siehst Du direkt in den Zahlen und auf der Karte.',
+  attachTo: {
+    element: '.sidepanel.sidepanel--wind',
+    on: 'right'
+  },
+  buttons: [
+    {
+      action() {
+        return this.complete();
+      },
+      classes: 'shepherd-button-primary',
+      text: 'Los geht\'s'
+    }
+  ],
+  id: 'wind_cta'
 });
 
 const wind_intro_button = document.getElementById('wind_intro_button');
