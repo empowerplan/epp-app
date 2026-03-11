@@ -616,8 +616,11 @@ const pv_more_parent = pv_more_grandparent.querySelector('.c-slider__label--more
 const pv_more_button = pv_more_parent.querySelector('.button.button--transparent');
 
 pv_tour.addStep({
-  title: 'Details',
-  text: 'Mehr Details.',
+  title: 'Freiflächen-Photovoltaik',
+  text:
+      'Erfahre mehr über verfügbare Flächen für PV in der Region und lege ' +
+      'fest, wie viel davon genutzt werden sollen.' +
+      '<br><b>Klappe dafür das Detailmenü auf.</b>',
   attachTo: {
     element: pv_more_button,
     on: 'bottom'
@@ -635,10 +638,26 @@ pv_tour.addStep({
 });
 
 pv_tour.addStep({
-  title: 'Slider für Agrarflächen geringer Bodengüte',
-  text: 'Mehr Details.',
+  title: 'Freiflächen-PV',
+  text:
+      'Es stehen mehrere PV-Arten zur Verfügung:' +
+      '<br><ul>' +
+      '<li><b>"Klassische" Freiflächen-PV:</b> Hier werden die Module in ' +
+      'Reihen niedrig aufgeständert.</li>' +
+      '<li><b>Agri-PV auf Agrarflächen:</b> Hier werden Flächen gemeinsam ' +
+      'mit der Landwirtschaft genutzt und vertikale Module in Reihen ' +
+      'aufgeständert.</li>' +
+      '<li><b>Agri-PV über Dauerkulturen:</b> Hier werden z.B. Obstplantagen ' +
+      'teilweise mit Modulen überdacht.</li>' +
+      '</ul>' +
+      '<b>Verschiebe die Regler, um den zu nutzenden Flächenanteil ' +
+      'festzulegen.</b>' +
+      '<br><br><b>Unten</b> siehst Du, wie viel Fläche benötigt und Energie ' +
+      'erzeugt wird.' +
+      '<br><b>Links</b> siehst Du, wie sich die installierbare Leistung ' +
+      'verändert.',
   attachTo: {
-    element: '.c-slider.s_pv_ff_3',
+    element: '.sidepanel.sidepanel--pv-outdoor',
     on: 'right'
   },
   buttons: [
@@ -653,62 +672,8 @@ pv_tour.addStep({
 });
 
 pv_tour.addStep({
-  title: 'Slider für Agri-PV (vertikal)',
-  text: 'Mehr Details.',
-  attachTo: {
-    element: '.c-slider.s_pv_ff_4',
-    on: 'right'
-  },
-  buttons: [
-    {
-      action() {
-        return this.next();
-      },
-      text: 'Weiter'
-    }
-  ],
-  id: 'pv_gound_detail2'
-});
-
-pv_tour.addStep({
-  title: 'Slider für Agri-PV (hoch aufgeständert)',
-  text: 'Mehr Details.',
-  attachTo: {
-    element: '.c-slider.s_pv_ff_5',
-    on: 'right'
-  },
-  buttons: [
-    {
-      action() {
-        return this.next();
-      },
-      text: 'Weiter'
-    }
-  ],
-  id: 'pv_gound_detail3'
-});
-
-pv_tour.addStep({
-  title: 'PV Ergebnisse',
-  text: 'Mehr Details.',
-  attachTo: {
-    element: '#pv_ground_key_results',
-    on: 'right'
-  },
-  buttons: [
-    {
-      action() {
-        return this.next();
-      },
-      text: 'Weiter'
-    }
-  ],
-  id: 'pv_gound_detail4'
-});
-
-pv_tour.addStep({
   title: 'Regionale Potenzialflächen',
-  text: 'Klicken Sie auf eine Gemeinde, um deren PV-Potentialflächen zu erkunden.',
+  text: 'Klicke auf eine Gemeinde, um deren PV-Potentialflächen zu erkunden.',
   attachTo: {
     element: '#map',
     on: 'top'
@@ -726,27 +691,35 @@ pv_tour.addStep({
   id: 'pv_ground_region'
 });
 
-pv_tour.addStep({
-  title: 'PV-Freiflächen Slider',
-  text: 'So funktioniert der Slider',
-  attachTo: {
-    element: '.c-slider.s_pv_ff_1',
-    on: 'right'
-  },
-  buttons: [
-    {
-      action() {
-        return this.next();
-      },
-      text: 'Weiter'
-    }
-  ],
-  id: 'pv_ground_slider'
-});
+// pv_tour.addStep({
+//   title: 'PV-Freiflächen Slider',
+//   text: 'Hier kannst Du nun einstellen, wie viel Leistung installiert werden soll.',
+//   attachTo: {
+//     element: '.c-slider.s_pv_ff_1',
+//     on: 'right'
+//   },
+//   buttons: [
+//     {
+//       action() {
+//         return this.next();
+//       },
+//       text: 'Weiter'
+//     }
+//   ],
+//   id: 'pv_ground_slider'
+// });
 
 pv_tour.addStep({
   title: 'Negativkriterien PV',
-  text: 'Bestimmte Negativkriterien auf der Karte ein-/ausschalten',
+  text:
+      'Aber nicht alle Flächen stehen auch zur Verfügung:' +
+      '<br><br>' +
+      'Es gibt sog. Negativkriterien. Dazu zählen etwa sensible Natur- oder ' +
+      'Schutzräume (z.B. Naturschutzgebiete), in denen PV‑Freiflächenanlagen ' +
+      'voraussichtlich nicht genehmigungsfähig sind.' +
+      '<br><br>' +
+      '<b>Hier kannst Du Negativkriterien auf der Karte ein-/ausschalten ' +
+      'und prüfen, welche Potenzialflächen tatsächlich infrage kommen.</b>',
   attachTo: {
     element: '.map__layers-heading.map__layers-pv',
     on: 'bottom'
@@ -755,6 +728,11 @@ pv_tour.addStep({
   buttons: [
     {
       action() {
+        map.flyTo({
+            center: [13.8, 52.73],
+            zoom: 11,
+            essential: true
+        });
         return this.next();
       },
       text: 'Weiter'
@@ -765,9 +743,11 @@ pv_tour.addStep({
 
 pv_tour.addStep({
   title: 'Naturschutzgebiete',
-  text: 'Mit Naturschutzgebieten ausprobieren',
+  text:
+      'In dieser Gemeinde gibt es z.B. Vorzugsgebiete für klimarobustes ' +
+      'Ackerland, die für Freiflächen-PV nicht zur Verfügung stehen.',
   attachTo: {
-    element: '#pv_ground_criteria_nature_monuments,#pv_ground_criteria_nature_monuments_distilled',
+    element: '#priority_climate_resistent_agri,#priority_climate_resistent_agri_distilled',
     on: 'top-end'
   },
   canClickTarget: true,
@@ -780,7 +760,7 @@ pv_tour.addStep({
       text: 'Fertig'
     }
   ],
-  id: 'pv_ground_end'
+  id: 'pv_ground_layer'
 });
 
 const pv_intro_button = document.getElementById('pv_intro_button');
