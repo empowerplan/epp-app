@@ -1,8 +1,109 @@
 """Test hooks."""
 
 import pandas as pd
+import pytest
 
 from digiplan.map import hooks
+
+
+def test_adapt_heatpumps():
+    """Test adaptation of heatpumps."""
+    data = {
+        "w_d_wp_3": 10.0,
+        "w_d_wp_4": 11.0,
+        "w_d_wp_5": 12.0,
+        "w_z_wp_1": 13.0,
+        "ABW-heat_decentral-demand_hh": {"amount": 100},
+        "ABW-heat_decentral-demand_cts": {"amount": 120},
+        "ABW-heat_decentral-demand_ind": {"amount": 130},
+        "ABW-heat_central-demand_hh": {"amount": 140},
+        "ABW-heat_central-demand_cts": {"amount": 150},
+        "ABW-heat_central-demand_ind": {"amount": 160},
+    }
+    out = hooks.adapt_heatpumps("tsam_40_24_1_cost_0", data)
+
+    # Energies from heatpumps
+    assert out["hp_energy"]["decentral"] == 100 * 0.10 + 120 * 0.11 + 130 * 0.12
+    assert out["hp_energy"]["central"] == (140 + 150 + 160) * 0.13
+
+    data = {
+        "w_d_wp_3": 50.0,
+        "w_d_wp_4": 50.0,
+        "w_d_wp_5": 50.0,
+        "w_z_wp_1": 50.0,
+        "ABW-heat_decentral-demand_hh": {"amount": 100},
+        "ABW-heat_decentral-demand_cts": {"amount": 120},
+        "ABW-heat_decentral-demand_ind": {"amount": 130},
+        "ABW-heat_central-demand_hh": {"amount": 140},
+        "ABW-heat_central-demand_cts": {"amount": 150},
+        "ABW-heat_central-demand_ind": {"amount": 160},
+    }
+    out = hooks.adapt_heatpumps("tsam_40_24_1_cost_0", data)
+
+    # Energies from heatpumps
+    assert out["hp_energy"]["decentral"] == 100 * 0.50 + 120 * 0.50 + 130 * 0.50
+    assert out["hp_energy"]["central"] == (140 + 150 + 160) * 0.50
+
+
+def test_adapt_heat_components():
+    """Test adaptation of heat components."""
+    data = {
+        "w_d_wp_3": 10.0,
+        "w_d_wp_4": 11.0,
+        "w_d_wp_5": 12.0,
+        "w_z_wp_1": 13.0,
+        "ABW-heat_decentral-demand_hh": {"amount": 100},
+        "ABW-heat_decentral-demand_cts": {"amount": 120},
+        "ABW-heat_decentral-demand_ind": {"amount": 130},
+        "hp_energy": {"decentral": 100 * 0.10 + 120 * 0.11 + 130 * 0.12, "central": (140 + 150 + 160) * 0.13},
+        "ABW-heat_central-demand_hh": {"amount": 140},
+        "ABW-heat_central-demand_cts": {"amount": 150},
+        "ABW-heat_central-demand_ind": {"amount": 160},
+        "ABW-electricity-heatpump_central": {
+            "capacity": 0.01799216699276035,
+        },
+        "ABW-electricity-heatpump_decentral": {
+            "capacity": 0.011535782344309641,
+        },
+    }
+    out = hooks.adapt_heat_components("tsam_40_24_1_cost_0", data)
+
+    hp_dec_share = 0.8876581123758391
+    boiler_dec_share = 0.056497203680542236 / (1 - hp_dec_share)
+    ch4ext_dec_share = 0.009995754184134148 / (1 - hp_dec_share)
+    remaining_demand_dec = 100 + 120 + 130 - data["hp_energy"]["decentral"]
+
+    assert out["ABW-electricity-pth_decentral"]["output_parameters"]["full_load_time_max"] == pytest.approx(
+        remaining_demand_dec * boiler_dec_share,
+    )
+    assert out["turbines"]["ABW-ch4-extchp_decentral"][0] == pytest.approx(remaining_demand_dec * ch4ext_dec_share)
+
+    data = {
+        "w_d_wp_3": 50.0,
+        "w_d_wp_4": 50.0,
+        "w_d_wp_5": 50.0,
+        "w_z_wp_1": 13.0,
+        "ABW-heat_decentral-demand_hh": {"amount": 100},
+        "ABW-heat_decentral-demand_cts": {"amount": 120},
+        "ABW-heat_decentral-demand_ind": {"amount": 130},
+        "hp_energy": {"decentral": 100 * 0.50 + 120 * 0.50 + 130 * 0.50, "central": (140 + 150 + 160) * 0.13},
+        "ABW-heat_central-demand_hh": {"amount": 140},
+        "ABW-heat_central-demand_cts": {"amount": 150},
+        "ABW-heat_central-demand_ind": {"amount": 160},
+        "ABW-electricity-heatpump_central": {"capacity": 0.0692006422798475},
+        "ABW-electricity-heatpump_decentral": {"capacity": 0.05333784493663601},
+    }
+    out = hooks.adapt_heat_components("tsam_40_24_1_cost_0", data)
+
+    hp_dec_share = 0.8876581123758391
+    boiler_dec_share = 0.056497203680542236 / (1 - hp_dec_share)
+    ch4ext_dec_share = 0.009995754184134148 / (1 - hp_dec_share)
+    remaining_demand_dec = 100 + 120 + 130 - data["hp_energy"]["decentral"]
+
+    assert out["ABW-electricity-pth_decentral"]["output_parameters"]["full_load_time_max"] == pytest.approx(
+        remaining_demand_dec * boiler_dec_share,
+    )
+    assert out["turbines"]["ABW-ch4-extchp_decentral"][0] == pytest.approx(remaining_demand_dec * ch4ext_dec_share)
 
 
 def test_adapt_electricity_demand(monkeypatch):  # noqa: ANN001

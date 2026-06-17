@@ -527,3 +527,11 @@ class BatteryEnergyChartTest(SimulationTest):
     def test_battery_energy_chart(self):  # noqa: D102
         chart = charts.BatteryCapacityChart({"simulation_id": self.simulation_id})
         chart.render()
+
+
+class HeatStorageEnergyChartTest(SimulationTest):
+    """Test reading capacities from oemof parameters."""
+
+    def test_battery_energy_chart(self):  # noqa: D102
+        chart = charts.HeatstorageEnergyChart({"simulation_id": self.simulation_id})
+        chart.render()
