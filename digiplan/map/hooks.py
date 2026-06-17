@@ -214,11 +214,6 @@ def adapt_heat_components(scenario: str, data: dict) -> dict:
             if capacity_in == 0:
                 continue
 
-            if "boiler" in component:
-                # Make boiler nearly inf
-                data[component] = {"capacity": 99999999999}
-                continue
-
             if "solar" in component:
                 # Solarthermal collectors do not get full_load_times
                 data[component] = {"capacity": math.ceil(energy_share / efficiency)}
