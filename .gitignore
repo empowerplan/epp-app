@@ -338,3 +338,4 @@ dump.rdb
 
 distill/
 /dump.rdb
+.mcp.json
