@@ -37,6 +37,10 @@ section.offcanvas {
     @extend .flex-row;
     @extend .justify-content-between;
     @extend .pt-4;
+
+    &--centered {
+      justify-content: center !important;
+    }
   }
 
   .offcanvas-view__logo {
@@ -62,8 +66,12 @@ section.offcanvas {
       width: 12.5rem;
     }
 
-    &--bmwk img {
+    &--rls img {
       width: 10rem;
+    }
+
+    &--bmwe img {
+      width: 14rem;
     }
   }
 
