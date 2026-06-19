@@ -30,6 +30,10 @@ section.offcanvas {
 
   .offcanvas-view__body {
     @extend .py-3;
+
+    ul li {
+      margin-bottom: 0.75rem;
+    }
   }
 
   .offcanvas-view__logos {
