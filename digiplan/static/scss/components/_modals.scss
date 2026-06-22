@@ -185,3 +185,36 @@
     opacity: 1 !important;
   }
 }
+
+.challenges-modal {
+  h2 {
+    background-color: $gray-200;
+    padding: 0.4rem 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1.25rem;
+  }
+
+  details {
+    margin-bottom: 1rem;
+
+    summary {
+      cursor: pointer;
+      padding: 0.1rem 0;
+    }
+
+    &[open] {
+      background-color: $epp-bg-color-blue;
+      border-left: 3px solid $epp-color-blue;
+      border-radius: 0 4px 4px 0;
+      margin-left: 0.5rem;
+      padding: 0.5rem 0.75rem;
+
+      > summary {
+        background-color: white;
+        margin: -0.5rem -0.75rem 0.5rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0 4px 0 0;
+      }
+    }
+  }
+}
