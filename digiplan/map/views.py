@@ -33,7 +33,6 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         "pv_map_control": _("Negativkriterien PV"),
         "store_hot_init": config.STORE_HOT_INIT,
         "oemof_scenario": settings.OEMOF_SCENARIO,
-        "markdown": {"reveal_equity": config.REVEAL_EQUITY_MD},
     }
 
     def get_context_data(self, **kwargs) -> dict:
@@ -113,6 +112,7 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         context["onboarding_pv_roof"] = charts.Chart("onboarding_pv_roof").render()
 
         context["app_version"] = str(__version__)
+        context["markdown"] = {"reveal_equity": utils.read_file(config.REVEAL_EQUITY_MD_FILE)}
 
         return context
 
