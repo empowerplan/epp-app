@@ -3,230 +3,128 @@
 [TOC]
 
 ---
-Die Verteilung von **Windenergie und Freiflächen-Photovoltaik** in
-Deutschland ist ein viel diskutiertes Thema, da der Ausbau erneuerbarer
-Energien für die Energiewende und das Erreichen der Klimaziele unverzichtbar ist.
-Dabei stellt sich die Frage, wie gerecht die Lasten und Vorteile verteilt sind.
 
-Während einige Regionen und Kommunen stark vom Ausbau profitieren, etwa durch
-Arbeitsplätze und Gewerbesteuereinnahmen, tragen andere primär die ökologischen
-und sozialen Lasten, etwa durch Landschaftsveränderungen und erhöhte Immissionen.
-Diese ungleiche Verteilung führt zu Spannungen, insbesondere zwischen ländlichen
-Regionen, die oft für Wind- oder Solarparks genutzt werden, und städtischen
-Ballungsräumen, die den größten Energiebedarf haben. Die Frage, wie eine
-**gerechte Verteilung** von Nutzen und Lasten erreicht werden kann, ist daher
-zentral in der Debatte um die Akzeptanz der erneuerbaren Energien in Deutschland.
+## Gerechte Verteilung von Wind- und Solarenergieanlagen: Was bedeutet das?
 
-Diese Frage ist ein Untersuchungsschwerpunkt von **EmPowerPlan**.
-Anhand von verschiedenen **Gerechtigkeitsmetriken** haben wir die bundesweiten
-Ausbauziele für Windenergie an Land und Freiflächen-Photovoltaik verteilt und
-je **Gemeinde** berechnet. Die Ergebnisse werden im Folgenden deutschlandweit
-sowie für die Region **Oderland-Spree** dargelegt.
+Der Ausbau erneuerbarer Energien wie **Windkraft und Freiflächen-Photovoltaik** (Solarparks) ist entscheidend, um die Klimaziele Deutschlands zu erreichen. Doch dieser Ausbau wirft auch die Frage auf: **Wie können die Lasten und Vorteile gerecht verteilt werden?**
 
-## Der Algorithmus - Wie funktioniert die Verteilung?
+Während einige Regionen von den erneuerbaren Energien profitieren – zum Beispiel durch Bürgerenergiegesellschaften, Pachteinnahmen für Gemeindeflächen oder Gewerbesteuereinnahmen – sehen sich andere vor allem mit Nachteilen konfrontiert, etwa durch Eingriffe in die Landschaft oder potenzielle Belastungen wie Lärm und Schattenwurf. Diese Ungleichheit führt oft zu Spannungen, insbesondere zwischen ländlichen Regionen, in denen die Anlagen gebaut werden, und städtischen Gebieten, die den Großteil der Energie verbrauchen.
 
-!!! note "Zusammenfassung"
-    Der Algorithmus verteilt Wind- und PV-Anlagen so in Gitterzellen, dass
-    eine gerechte Verteilung nach definierten Gerechtigkeitsmetriken erreicht
-    wird. Die Flächenverteilung basiert auf Gemeinde- und Bundeslandzielen und
-    berücksichtigt die Potenzialflächen, Energiebedarf, Bevölkerungsanzahl und
-    spezifischen Flächenverbrauch pro Technologie.
-
-Das Ziel des Algorithmus besteht darin, Wind- und PV-Anlagen so zu verteilen,
-dass in allen Gitterzellen eine definierte Gerechtigkeitsmetrik möglichst gleich
-groß ist. Das Thema Gerechtigkeit wird hierbei aus der Sicht der Verteilung
-betrachtet.
-Die Verteilung soll eine Gleichheit unter allen Beteiligten herstellen.
-Die unterschiedlichen Gerechtigkeitsmetriken definieren bezüglich welchem
-**Kriterium** diese Gleichheit hergestellt werden soll.
-
-Wir verteilen Wind- und PV-Anlagen auf **10x10km große Gitterzellen**.
-Zur Darstellung auf Gemeindeebene werden die Ergebnisse der Verteilung von den
-10x10km Gitterzellen anhand der verfügbaren Potenzialfläche je Gemeinde verteilt.
-Die Gesamtfläche der Gitterzellen ist für alle Gitterzellen 10000 ha mit
-Ausnahme der an der Grenze von Deutschland gelegenen Gitterzellen.
-
-Für jede Gitterzelle ist zudem die verfügbare Fläche je Technologie
-($Potenzialfläche$), der durschnittliche Energiebedarf pro Jahr in MWh ($Last$)
-sowie die Bevölkerungsanzahl bekannt.
-Die Potentialfläche wird auf Basis von 100x100m Gitterzellen ermittelt und dann
-auf 10x10km Auflösung aggregiert. Alle Einschränkungen bezüglich der
-Potentialfläche beziehen sich somit auf 100x100m Auflösung.
-Für jede Technologie treffen wir Annahmen zum Flächenverbrauch pro kW
-installierter Leistung, woraus die benutzte Fläche abgeleitet wird.
-
-Wenn Bundeslandflächenziele vorgegeben werden, wird der oben beschriebene
-Verteilalgorithmus zuerst innerhalb der Bundesländer angewendet, bis die
-Flächenziele erreicht sind.
-Wenn in allen Bundesländern das Flächenziel erreicht ist, wird der
-Verteilalgorithmus auf das gesamte Bundesgebiet angewendet.
+Das Forschungsprojekt EmPowerPlan hat sich zum Ziel gesetzt, Vorschläge für eine gerechtere Verteilung von Wind- und Solarenergieanlagen zu entwickeln. Im Mittelpunkt steht die Frage: Wie können alle Regionen gerecht behandelt werden?
 
 ---
 
-## Gerechtigkeit - Wie haben wir gemessen?
+## Der Algorithmus - Wie funktioniert die Verteilung?
 
-!!! note "Zusammenfassung"
-    Wir benutzen verschiedene Gerechtigkeitsmetriken als Zielfunktionen der
-    Gleichverteilung. All diese Gerechtigkeitsmetriken vertreten ein anderes
-    Verständnis von gerechter Verteilung.
+Um die Anlagen möglichst gerecht zu verteilen, haben wir unterschiedliche Vorstellungen von Gerechtigkeit untersucht und diese in einem Algorithmus zusammengeführt. Dabei wurden folgende Punkte berücksichtigt:
 
-### Gleiche Belastung: Lastnah
+- **Regionale Unterschiede**: Jede Gemeinde in Deutschland wurde analysiert, um ihre Eignung für Wind- oder Solarenergie zu prüfen.
+- **Mehrere Gerechtigkeitskriterien**: Verschiedene Kriterien wie Bevölkerungszahl, Energieverbrauch und verfügbare Flächen wurden einbezogen.
+- **Gemeinsame Lösungen**: Flächen, die mehrere Kriterien erfüllen, bieten den größten Spielraum für Entscheidungen.
 
-Die Gerechtigkeitsmetrik "Gleiche Belastung: Lastnah" hat das Ziel, die
-Bevölkerung abhängig vom Stromverbrauch gleich zu belasten.
+Die Verteilung erfolgt auf 10 x 10 km große Gitterzellen. Der Algorithmus verteilt Wind- und PV-Anlagen so in Gitterzellen, dass eine gerechte Verteilung nach definierten Gerechtigkeitsmetriken erreicht wird. Die Flächenverteilung basiert auf Gemeinde- und Bundeslandzielen und berücksichtigt die Potenzialflächen, Energiebedarf, Bevölkerungsanzahl und spezifischen Flächenverbrauch pro Technologie.
+
+---
+
+## Welche Kriterien für Gerechtigkeit wurden genutzt?
+
+Wir haben fünf verschiedene Ansätze für gerechte Verteilungen von EE-Anlagen untersucht (Klick auf den Ansatz zeigt die mathematische Formulierung):
+
+<details markdown="1">
+<summary><strong>1. Energieverbrauch vor Ort</strong>: Anlagen sollten dort gebaut werden, wo die Energie benötigt wird. Das spart Kosten und reduziert Energieverluste.</summary>
+
+Die Gerechtigkeitsmetrik "Gleiche Belastung: Lastnah" hat das Ziel, die Bevölkerung abhängig vom Stromverbrauch gleich zu belasten.
+
 Sie ist wie folgt definiert:
 
 $$f_{gerecht} = {benutzteFläche \over Gesamtfläche^2 * Last}$$
 
-Dabei soll Strom möglichst an den Orten erzeugt werden, an denen er benutzt wird.
-Dies birgt zusätzliche Synergieeffekte durch mögliche Kosteneinsparungen beim
-Netzausbau und geringere Netzverluste.
+Dabei soll Strom möglichst an den Orten erzeugt werden, an denen er benutzt wird. Dies birgt zusätzliche Synergieeffekte durch mögliche Kosteneinsparungen beim Netzausbau und geringere Netzverluste.
 
-### Gleiche Belastung: Bevölkerungsnah
+</details>
 
-Die Gerechtigkeitsmetrik "Gleiche Belastung: Bevölkerungsnah" hat das Ziel,
-wenig besiedelte Gebiete gleich zu belasten und von erneuerbare Energieanlagen
-freizuhalten.
+<details markdown="1">
+<summary><strong>2. Bevölkerungsnah</strong>: Um der Bevölkerung genug Erholungsfläche zur Verfügung zu stellen, werden Regionen mit mehr Einwohnern stärker ausgebaut.</summary>
+
+Die Gerechtigkeitsmetrik "Gleiche Belastung: Bevölkerungsnah" hat das Ziel, wenig besiedelte Gebiete gleich zu belasten und von erneuerbare Energieanlagen freizuhalten.
+
 Sie ist wie folgt definiert:
 
 $$f_{gerecht} = {benutzteFläche \over Gesamtfläche^2 * Bevölkerungsanzahl}$$
 
-Anhand der Verhältnisses an genutzter Fläche zur Gesamtfläche und der
-Arealitätsziffer (die Fläche die jedem Einwohner durchschnittlich zur Verfügung
-steht) werden alle Regionen gleich belastet.
-Das bedeutet, dass vor allem Regionen mit hoher Bevölkerungsdichte bebaut werden.
+Anhand des Verhältnisses an genutzter Fläche zur Gesamtfläche und der Arealitätsziffer (die Fläche die jedem Einwohner durchschnittlich zur Verfügung steht) werden alle Regionen gleich belastet. Das bedeutet, dass vor allem Regionen mit hoher Bevölkerungsdichte bebaut werden.
 
-### Gleiche Belastung: Bevölkerungsfern
+</details>
 
-Die Gerechtigkeitsmetrik "Gleiche Belastung: Bevölkerungsfern" hat das Ziel, die
-Bevölkerung gleich zu Belasten.
+<details markdown="1">
+<summary><strong>3. Bevölkerungsfern</strong>: Anlagen könnten in Gebieten mit weniger Einwohnern konzentriert werden, um die Mehrheit der Bevölkerung zu entlasten.</summary>
+
+Die Gerechtigkeitsmetrik "Gleiche Belastung: Bevölkerungsfern" hat das Ziel, die Bevölkerung gleich zu Belasten.
+
 Sie ist wie folgt definiert:
 
 $$f_{gerecht} = {benutzteFläche * Bevölkerungsanzahl \over Gesamtfläche^2}$$
 
-Dabei sollen möglichst wenige Menschen durch erneuerbare Energieanlagen
-beeinträchtigt werden. Das bedeutet, dass vor allem Regionen mit geringer
-Bevölkerungsdichte bebaut werden.
+Dabei sollen möglichst wenige Menschen durch erneuerbare Energieanlagen beeinträchtigt werden. Das bedeutet, dass vor allem Regionen mit geringer Bevölkerungsdichte bebaut werden.
 
-### Gleicher Anteil an Gesamtfläche
+</details>
 
-Die Gerechtigkeitsmetrik "Gleicher Anteil an Gesamtfläche" hat das Ziel, überall
-denselben Anteil an Gesamtfläche der Gitterzelle zu Nutzen.
+<details markdown="1">
+<summary><strong>4. Gleicher Flächenanteil</strong>: Jede Region trägt den gleichen Anteil ihrer Fläche für erneuerbare Energien bei.</summary>
+
+Die Gerechtigkeitsmetrik "Gleicher Anteil an Gesamtfläche" hat das Ziel, überall denselben Anteil an Gesamtfläche der Gitterzelle zu Nutzen.
+
 Sie ist wie folgt definiert:
 
 $$f_{gerecht} = {benutzteFläche \over Gesamtfläche}$$
 
-Angelehnt an die Methodik des 2 % Flächenziels für Windenergie nutzt jede Region
-den gleichen Anteil an Fläche zur Gesamtfläche für den EE-Ausbau.
+Angelehnt an die Methodik des 2 % Flächenziels für Windenergie nutzt jede Region den gleichen Anteil an Fläche zur Gesamtfläche für den EE-Ausbau.
 
-### Gleicher Anteil an Potentialfläche
+</details>
 
-Die Gerechtigkeitsmetrik "Gleicher Anteil an Potentialfläche" hat das Ziel,
-überall denselben Anteil an Potentialfläche zu nutzen.
+<details markdown="1">
+<summary><strong>5. Optimale Nutzung von Potenzialflächen</strong>: Regionen mit großen geeigneten Flächen werden stärker für den Ausbau genutzt.</summary>
+
+Die Gerechtigkeitsmetrik "Gleicher Anteil an Potentialfläche" hat das Ziel, überall denselben Anteil an Potentialfläche zu nutzen.
+
 Sie ist wie folgt definiert:
 
 $$f_{gerecht} = {benutzteFläche \over Potentialfläche}$$
 
-Dabei werden vor allem Regionen mit hoher verfügbarer Potenzialfläche bebaut.
-Die Definition der Potenzialfläche spielt eine entscheidende Rolle.
+Dabei werden vor allem Regionen mit hoher verfügbarer Potenzialfläche bebaut. Die Definition der Potenzialfläche spielt eine entscheidende Rolle.
+
+</details>
 
 ---
 
-## Szenarien - Welche Annahmen haben wir zugrunde gelegt?
+## Wie wurde das Zielszenario definiert?
 
-!!! note "Zusammenfassung"
-    - **Windenergie:** Es werden 160 GW Leistung verteilt unter Berücksichtigung
-      der Bundesländerziele nach
-      [WindBG](https://www.gesetze-im-internet.de/windbg/).
-    - **Freiflächen-PV:** Es werden 207 GW Leistung verteilt, die Ziele für die
-      Bundesländer werden aus dem
-      [Netzentwicklungsplan]((https://www.netzentwicklungsplan.de/sites/default/files/2024-07/Szenariorahmenentwurf_NEP2037_2025_1.pdf))
-      abgeleitet. Hierbei werden sowohl "klassische", niedrig aufgeständerte
-      Anlagen als auch Agri-PV berücksichtigt.
+Für unsere Analyse haben wir Szenarien für Windenergie und Freiflächen-Photovoltaik erstellt. Dabei wurden verschiedene Annahmen zugrunde gelegt:
 
-### Wind-Szenario <img src="/static/images/icons/wind_outlined.svg" width="25" alt="">
+### Windenergie <img src="/static/images/icons/wind_outlined.svg" width="25" alt="">
 
-Das Wind-Szenario hat ein Gesamtausbauziel von 160 GW installierter Leistung.
-Dabei handelt es sich um die nach
-[Langfristszenario](https://langfristszenarien.de/enertile-explorer-de/szenario-explorer/)
-notwendige Gesamtleistung für Deutschland für das Jahr 2045.
-Es wird ein Flächenverbrauch von 42 m<sup>2</sup>/kW angenommen.
-Die Potentialfläche ist beschränkt auf Gitterzellen mit einer durchschnittliche
-Windgeschwindigkeit von mindestens 7,17 m/s auf 160 m Höhe.
-Der Abstand zu Siedlungen muss mindestens 400 m betragen.
-Landschaftsschutzgebiete und Waldgebiete sind in der Potentialfläche enthalten.
-Es werden die folgenden Bundeslandflächenziele nach
-[WindBG](https://www.gesetze-im-internet.de/windbg/) vorgegeben:
+Insgesamt sollen **160 Gigawatt Leistung bis 2045** installiert werden [[1](#referenzen)]. Nur Gebiete mit ausreichend Windgeschwindigkeit (von mindestens 7,17 m/s auf 160 m Höhe) wurden berücksichtigt. Die Potenzialfläche []2](#referenzen)] beinhaltet alle rechtlichen und naturschutzbezogenen Ausschlussgebiete sowie Abstände zu Wohngebieten (mindestens 400 m). Als Flächenverbrauch für Windenergieanlagen wurde 42 m<sup>2</sup>/kW angenommen. Die Ausbauziele der Bundesländer [[3](#referenzen)] wurden berücksichtigt.
 
-| Bundesland             | Flächenziel (%) |
-| ---------------------- | --------------- |
-| Schleswig-Holstein     | 2,0             |
-| Hamburg                | 0,5             |
-| Niedersachsen          | 2,2             |
-| Bremen                 | 0,5             |
-| Nordrhein-Westfalen    | 1,8             |
-| Hessen                 | 2,2             |
-| Rheinland-Pfalz        | 2,2             |
-| Baden-Württemberg      | 1,8             |
-| Bayern                 | 1,8             |
-| Saarland               | 1,8             |
-| Berlin                 | 0,5             |
-| Brandenburg            | 2,2             |
-| Mecklenburg-Vorpommern | 2,1             |
-| Sachsen                | 2,0             |
-| Sachsen-Anhalt         | 2,2             |
-| Thüringen              | 2,2             |
+### Freiflächen-Photovoltaik <img src="/static/images/icons/pv_low_outlined.svg" width="25" alt="">
 
-### PV-Szenario <img src="/static/images/icons/pv_low_outlined.svg" width="25" alt="">
-
-Für das Freiflächen-PV Szenario, werden drei Technologien nacheinander verteilt.
-Das Ergebnis der Verteilung von ("klassischer") **niedrig aufgeständerter PV**
-ist die Ausgangslage von **bifazialer Agri-PV**, das addierte Ergebnis der
-Verteilungen dieser beiden ist die Ausgangslage für die
-**hochaufgeständerte Agri-PV**. Die benutzte Fläche für die Berechnung der
-Gerechtigkeitsmetrik und zur Bestimmung der Bundeslandziele ist die Summe der
-benutzten Fläche von aller drei Technologien. Die Abbildungen zeigen die Summe
-der verteilten Kapazität über alle drei Technologien.
-
-Es werden die folgenden Bundeslandflächenziele abgeleitet vom Szenariorahmen
-des Netzentwicklungsplans
-[NEP C2045](https://www.netzentwicklungsplan.de/sites/default/files/2024-07/Szenariorahmenentwurf_NEP2037_2025_1.pdf)
-vorgegeben:
-
-| Bundesland             | Flächenziel (%) |
-| ---------------------- | --------------- |
-| Schleswig-Holstein     | 0,9             |
-| Hamburg                | 0,0             |
-| Niedersachsen          | 0,6             |
-| Bremen                 | 0,0             |
-| Nordrhein-Westfalen    | 0,3             |
-| Hessen                 | 0,4             |
-| Rheinland-Pfalz        | 0,5             |
-| Baden-Württemberg      | 0,5             |
-| Bayern                 | 0,7             |
-| Saarland               | 0,6             |
-| Berlin                 | 0,0             |
-| Brandenburg            | 1,0             |
-| Mecklenburg-Vorpommern | 1,0             |
-| Sachsen                | 0,9             |
-| Sachsen-Anhalt         | 0,8             |
-| Thüringen              | 0,6             |
-
-Für die Potentialflächen der 3 Technologien benutzen wir Daten aus Kohler &
-Wingenbach (2024).
-
-| Technologie                | Ausbauziel | Flächenverbrauch       | Potentialfläche nach [Kohler & Wingenbach (2024)](#referenzen) |
-|----------------------------|------------|------------------------|----------------------------------------------------------------|
-| Freiflächen-PV             | 190,04 GW  | 10,0 m<sup>2</sup>/kW  | Agri-PV-Potenziale Gesamt abzüglich                            |
-| (niedrig aufgeständert)    |            |                        | Agri-PV-Potenziale geringe Nutzungskonkurrenz sowie            |
-|                            |            |                        | abzüglich Agri-PV-Potenziale Dauerkulturen                     |
-| Bifaziale Agri-PV          | 8,64 GW    | 34,48 m<sup>2</sup>/kW | Agri-PV-Potenziale geringe Nutzungskonkurrenz                  |
-|                            |            |                        | abzüglich Agri-PV-Potenziale Dauerkulturen                     |
-| Hochaufgeständerte Agri-PV | 8,64 GW    | 13,51 m<sup>2</sup>/kW | Agri-PV-Potenziale Dauerkulturen                               |
+Ziel ist es, **207 Gigawatt Leistung bis 2045** zu installieren [[1](#referenzen)]. Hierbei wurden verschiedene Technologien wie klassische Freiflächen-PV (Flächenverbrauch 10,0 m<sup>2</sup>/kW) und Agri-Photovoltaik-Technologien (hochaufgeständert und bifazial) berücksichtigt. Hochaufgeständerte PV-Anlagen werden nach eigener Potenzialanalyse [[4](#referenzen)] vor allem auf Dauerkulturen installiert (Flächenverbrauch 13,51 m<sup>2</sup>/kW). Bifaziale PV-Anlagen werden auf Flächen mit niedriger und mittlerer Bodengüte genutzt (Flächenverbrauch 34,48 m<sup>2</sup>/kW). Ausbauziele für die Bundesländer wurden auf Basis des Netzentwicklungsplans [[5](#referenzen)] abgeleitet und berücksichtigt.
 
 ---
 
-## Ergebnisse Deutschland
+## Was sind Konsensflächen?
+
+Da unterschiedliche **Gerechtigkeitsvorstellungen** nebeneinander bestehen, müssen wir lernen, konstruktiv mit dieser Vielfalt umzugehen. Hierbei hilft die Idee der Konsensflächen:
+
+- **Gleichwertigkeit der Vorstellungen**: Alle Gerechtigkeitskriterien werden gleichberechtigt behandelt und übereinandergelegt.
+- **Flächenüberschneidung**: Flächen, die nach allen Gerechtigkeitsvorstellungen für den Ausbau geeignet sind, gelten als Konsensflächen.
+- **Verhandlungsbasis**: Diese Flächen bieten die größte Überschneidung an unterschiedlichen Gerechtigkeitsvorstellungen und sind bevorzugt für den weiteren Ausbau erneuerbarer Energien zu betrachten.
+- **Keine festen Standorte**: Es werden Empfehlungen gegeben, keine verpflichtenden Ausbauorte.
+
+Der Ansatz ermöglicht es, trotz unterschiedlicher Vorstellungen zu gemeinsamen Handlungsempfehlungen zu kommen. Das Minimum aus den verschiedenen Gerechtigkeitsvorstellungen stellt dabei die Übereinstimmung dar – eine Fläche, die als fair angesehen werden kann.
+
+---
+
+## Ergebnisse: Wie sieht die Verteilung aus für Deutschland?
 
 !!! warning "Disclaimer"
     Die dargestellten Ergebnisse basieren auf zahlreichen Annahmen und
@@ -238,55 +136,49 @@ Wingenbach (2024).
 
 <a href="/static/images/equity/wind/DE_installed_capacity_gw_equalAREA-equalCLOSE2load-equalCLOSE2pop-equalPOP-equalPOTAREA.png" target="_blank"><img src="/static/images/equity/wind/DE_installed_capacity_gw_equalAREA-equalCLOSE2load-equalCLOSE2pop-equalPOP-equalPOTAREA_40p.png" width="100%" alt=""></a>
 
-Verteilung der Windenergieleistung nach den einzelnen Gerechtigkeitsmetriken in
-Gigawatt (GW) je Gemeinde.
+_Verteilung der Windenergieleistung nach den einzelnen Gerechtigkeitsmetriken in Gigawatt (GW) je Gemeinde._
 
-<img src="/static/images/equity/wind/DE_min-overlay_equalAREA-equalPOP_40p.png" width="75%" alt="">
+Die Verteilung der Gesamtleistung von 160 GW unterscheidet sich je nach zugrundeliegender Gerechtigkeitsmetrik. Nach der Gerechtigkeitsvorstellung „Bevölkerungsfern" werden beispielsweise einzelne Gemeinden mit hohem Anteil an Potenzialfläche und geringer Bevölkerungsdichte stärker bebaut als in den Vergleichsszenarien.
 
-Konsensnutzung über die Gerechtigkeitsmetriken _Gleiche Belastung: Bevölkerungsfern_ und _Gleicher Anteil an Gesamtfläche_.
-Die linke Abbildung zeigt die kleinstmögliche verteilte Kapazität in [GW] pro Gemeinde über die beiden Gerechtigkeitsmetriken.
-Die rechte Abbildung zeigt die Gerechtigkeitsmetrik, welche zur kleinsten Verteilmenge innerhalb der jeweiligen Gemeinde führt.
+Werden alle EE-Gleichverteilungen übereinander gelegt, so besteht eine nennenswerte Übereinstimmung über die zu nutzenden Flächen. Dieses kann als **„Konsens-Zubau-Potential"** bezeichnet werden. Hier im Beispiel können mit 77 GW etwa 48 % des Windzubaus nach diesem Ansatz konfliktfrei in die Fläche gebracht werden. Die Verteilung, die den „kleinsten gemeinsamen Nenner" bestimmt, wird am häufigsten durch die Verteilung nach „Potentialfläche" definiert.
 
 <img src="/static/images/equity/wind/DE_min-overlay_equalAREA-equalPOP-equalCLOSE2pop-equalCLOSE2load_40p.png" width="75%" alt="">
 
-Konsensnutzung über die Gerechtigkeitsmetriken _Gleiche Belastung: Bevölkerungsfern_, _Gleiche Belastung: Bevölkerungsnah_, _Gleiche Belastung: Verbrauchsnah_ und _Gleicher Anteil an Gesamtfläche_.
-Die linke Abbildung zeigt die kleinstmögliche verteilte Kapazität in [GW] pro Gemeinde über die vier Gerechtigkeitsmetriken.
-Die rechte Abbildung zeigt die Gerechtigkeitsmetrik, welche zur kleinsten Verteilmenge innerhalb der jeweiligen Gemeinde führt.
+Bei einer Überlagerung von vier Gerechtigkeitsvorstellungen wie hier im Beispiel „Bevölkerungsfern", „Bevölkerungsnah", „Verbrauchsnah" und „Anteil an Gesamtfläche" können insgesamt rund 90 GW an Windleistung realisiert werden. Die rechte Grafik zeigt für jede Gemeinde an, welche der Gerechtigkeitsvorstellungen den kleinsten gemeinsamen Nenner definiert. In der linken Grafik wird nur die installierbare Leistung dargestellt, die bei allen Verteilungen realisierbar ist (kleinstmögliche verteilte Kapazität in GW pro Gemeinde über alle Gerechtigkeitsmetriken).
+
+<img src="/static/images/equity/wind/DE_min-overlay_equalAREA-equalPOP_40p.png" width="75%" alt="">
+
+Bei einer Überlagerung von nur zwei Gerechtigkeitsvorstellungen wie hier im Beispiel „Bevölkerungsfern" und „Anteil an Gesamtfläche" können insgesamt rund 127 GW an Windleistung realisiert werden. Die rechte Grafik zeigt für jede Gemeinde an, welche der beiden Gerechtigkeitsvorstellungen den kleinsten gemeinsamen Nenner definiert. In der linken Grafik wird nur die installierbare Leistung dargestellt, die bei beiden Verteilungen realisierbar ist (kleinstmögliche verteilte Kapazität in GW pro Gemeinde über beide Gerechtigkeitsmetriken).
 
 <img src="/static/images/equity/wind/DE_min-overlay_equalCLOSE2pop-equalCLOSE2load_40p.png" width="75%" alt="">
 
-Konsensnutzung über die Gerechtigkeitsmetriken _Gleiche Belastung: Bevölkerungsnah_ und _Gleiche Belastung: Verbrauchsnah_.
-Die linke Abbildung zeigt die kleinstmögliche verteilte Kapazität in [GW] pro Gemeinde über die beiden Gerechtigkeitsmetriken.
-Die rechte Abbildung zeigt die Gerechtigkeitsmetrik, welche zur kleinsten Verteilmenge innerhalb der jeweiligen Gemeinde führt.
+Bei einer Überlagerung von nur zwei Gerechtigkeitsvorstellungen wie hier im Beispiel „Bevölkerungsnah" und „Verbrauchsnah" können insgesamt rund 154 GW an Windleistung realisiert werden. Mit 96 % der Gesamtleistung stellt die Überlagerung dieser beiden Gerechtigkeitsvorstellungen die größte Schnittmenge an verfügbaren Flächen dar. Die rechte Grafik zeigt für jede Gemeinde an, welche der beiden Gerechtigkeitsvorstellungen den kleinsten gemeinsamen Nenner definiert. In der linken Grafik wird nur die installierbare Leistung dargestellt, die bei beiden Verteilungen realisierbar ist (kleinstmögliche verteilte Kapazität in GW pro Gemeinde über beide Gerechtigkeitsmetriken).
 
 ### Freiflächen-Photovoltaik <img src="/static/images/icons/pv_low_outlined.svg" width="25" alt="">
 
 <a href="/static/images/equity/pv/DE_installed_capacity_gw_equalAREA-equalCLOSE2load-equalCLOSE2pop-equalPOP-equalPOTAREA.png" target="_blank"><img src="/static/images/equity/pv/DE_installed_capacity_gw_equalAREA-equalCLOSE2load-equalCLOSE2pop-equalPOP-equalPOTAREA_40p.png" width="100%" alt=""></a>
 
-Verteilung der Windenergieleistung nach den einzelnen Gerechtigkeitsmetriken in
-Gigawatt (GW) je Gemeinde.
+_Verteilung der Freiflächen-PV-Leistung (klassische FF-PV plus Agri-PV) nach den einzelnen Gerechtigkeitsmetriken in Gigawatt (GW) je Gemeinde._
 
-<img src="/static/images/equity/pv/DE_min-overlay_equalAREA-equalPOP_40p.png" width="75%" alt="">
+Die Verteilung der Gesamtleistung von 207 GW unterscheidet sich je nach zugrundeliegender Gerechtigkeitsmetrik. Nach der Gerechtigkeitsvorstellung „Bevölkerungsfern" werden beispielsweise einzelne Gemeinden mit hohem Anteil an Potenzialfläche und geringer Bevölkerungsdichte stärker bebaut als in den Vergleichsszenarien.
 
-Konsensnutzung über die Gerechtigkeitsmetriken _Gleiche Belastung: Bevölkerungsfern_ und _Gleicher Anteil an Gesamtfläche_.
-Die linke Abbildung zeigt die kleinstmögliche verteilte Kapazität in [GW] pro Gemeinde über die beiden Gerechtigkeitsmetriken.
-Die rechte Abbildung zeigt die Gerechtigkeitsmetrik, welche zur kleinsten Verteilmenge innerhalb der jeweiligen Gemeinde führt.
+Werden alle EE-Gleichverteilungen übereinander gelegt, so besteht eine nennenswerte Übereinstimmung über zu nutzende Flächen. Dieses kann als „Konsens-Zubau-Potential" bezeichnet werden. Hier im Beispiel können mit 82 GW etwa 40 % des PV-Freiflächenzubaus nach diesem Ansatz konfliktfrei in die Fläche gebracht werden.
 
 <img src="/static/images/equity/pv/DE_min-overlay_equalAREA-equalPOP-equalCLOSE2pop-equalCLOSE2load_40p.png" width="75%" alt="">
 
-Konsensnutzung über die Gerechtigkeitsmetriken _Gleiche Belastung: Bevölkerungsfern_, _Gleiche Belastung: Bevölkerungsnah_, _Gleiche Belastung: Verbrauchsnah_ und _Gleicher Anteil an Gesamtfläche_.
-Die linke Abbildung zeigt die kleinstmögliche verteilte Kapazität in [GW] pro Gemeinde über die vier Gerechtigkeitsmetriken.
-Die rechte Abbildung zeigt die Gerechtigkeitsmetrik, welche zur kleinsten Verteilmenge innerhalb der jeweiligen Gemeinde führt.
+Bei einer Überlagerung von vier Gerechtigkeitsvorstellungen wie hier im Beispiel „Bevölkerungsfern", „Bevölkerungsnah", „Verbrauchsnah" und „Anteil an Gesamtfläche" können insgesamt rund 88 GW an PV-Freiflächen-Leistung realisiert werden. Die rechte Grafik zeigt für jede Gemeinde an, welche der Gerechtigkeitsvorstellungen den kleinsten gemeinsamen Nenner definiert. In der linken Grafik wird nur die installierbare Leistung dargestellt, die bei allen Verteilungen realisierbar ist (kleinstmögliche verteilte Kapazität in GW pro Gemeinde über alle Gerechtigkeitsmetriken).
+
+<img src="/static/images/equity/pv/DE_min-overlay_equalAREA-equalPOP_40p.png" width="75%" alt="">
+
+Bei einer Überlagerung von nur zwei Gerechtigkeitsvorstellungen wie hier im Beispiel „Bevölkerungsfern" und „Anteil an Gesamtfläche" können insgesamt rund 155 GW an PV-Freiflächen-Leistung realisiert werden. Die rechte Grafik zeigt für jede Gemeinde an, welche der beiden Gerechtigkeitsvorstellungen den kleinsten gemeinsamen Nenner definiert. In der linken Grafik wird nur die installierbare Leistung dargestellt, die bei beiden Verteilungen realisierbar ist (kleinstmögliche verteilte Kapazität in GW pro Gemeinde über beide Gerechtigkeitsmetriken).
 
 <img src="/static/images/equity/pv/DE_min-overlay_equalCLOSE2pop-equalCLOSE2load_40p.png" width="75%" alt="">
 
-Konsensnutzung über die Gerechtigkeitsmetriken _Gleiche Belastung: Bevölkerungsnah_ und _Gleiche Belastung: Verbrauchsnah_.
-Die linke Abbildung zeigt die kleinstmögliche verteilte Kapazität in [GW] pro Gemeinde über die beiden Gerechtigkeitsmetriken.
-Die rechte Abbildung zeigt die Gerechtigkeitsmetrik, welche zur kleinsten Verteilmenge innerhalb der jeweiligen Gemeinde führt.
+Bei einer Überlagerung von nur zwei Gerechtigkeitsvorstellungen wie hier im Beispiel „Bevölkerungsnah" und „Verbrauchsnah" können insgesamt rund 192 GW an PV-Freiflächen-Leistung realisiert werden. Mit 93 % der Gesamtleistung stellt die Überlagerung dieser beiden Gerechtigkeitsvorstellungen die größte Schnittmenge an verfügbaren Flächen dar. Die rechte Grafik zeigt für jede Gemeinde an, welche der beiden Gerechtigkeitsvorstellungen den kleinsten gemeinsamen Nenner definiert. In der linken Grafik wird nur die installierbare Leistung dargestellt, die bei beiden Verteilungen realisierbar ist (kleinstmögliche verteilte Kapazität in GW pro Gemeinde über beide Gerechtigkeitsmetriken).
 
 ---
 
-## Ergebnisse Oderland-Spree
+## Ergebnisse: Wie sieht die Verteilung aus für Oderland-Spree?
 
 !!! warning "Disclaimer"
     Die dargestellten Ergebnisse basieren auf zahlreichen Annahmen und
@@ -298,54 +190,70 @@ Die rechte Abbildung zeigt die Gerechtigkeitsmetrik, welche zur kleinsten Vertei
 
 <a href="/static/images/equity/wind/oder_spree_installed_capacity_gw_equalAREA-equalCLOSE2load-equalCLOSE2pop-equalPOP-equalPOTAREA.png" target="_blank"><img src="/static/images/equity/wind/oder_spree_installed_capacity_gw_equalAREA-equalCLOSE2load-equalCLOSE2pop-equalPOP-equalPOTAREA_40p.png" width="100%" alt=""></a>
 
-Verteilung der Windenergieleistung nach den einzelnen Gerechtigkeitsmetriken in
-Gigawatt (GW) je Gemeinde.
+_Verteilung der Windenergieleistung nach den einzelnen Gerechtigkeitsmetriken in Gigawatt (GW) für alle Gemeinden der Planungsregion „Oderland-Spree"._
 
-<img src="/static/images/equity/wind/oder_spree_min-overlay_equalAREA-equalPOP_40p.png" width="75%" alt="">
-
-Konsensnutzung über die Gerechtigkeitsmetriken _Gleiche Belastung: Bevölkerungsfern_ und _Gleicher Anteil an Gesamtfläche_.
-Die linke Abbildung zeigt die kleinstmögliche verteilte Kapazität in [GW] pro Gemeinde über die beiden Gerechtigkeitsmetriken.
-Die rechte Abbildung zeigt die Gerechtigkeitsmetrik, welche zur kleinsten Verteilmenge innerhalb der jeweiligen Gemeinde führt.
+Je nach zugrundeliegender Gerechtigkeitsmetrik werden von der deutschlandweiten Gesamtleistung von 160 GW unterschiedlich hohe Ausbaumengen in die Region Oderland-Spree verteilt. Die Verteilung nach der Gerechtigkeitsvorstellung „Bevölkerungsfern" führt für die Planungsregion Oderland-Spree zu dem vergleichsweise geringsten Zubauziel von 1,9 GW Windenergie. Die höchste Windleistung kommt mit 2,5 GW durch die Verteilung nach „Anteil an Potenzialfläche" zustande.
 
 <img src="/static/images/equity/wind/oder_spree_min-overlay_equalAREA-equalPOP-equalCLOSE2pop-equalCLOSE2load_40p.png" width="75%" alt="">
 
-Konsensnutzung über die Gerechtigkeitsmetriken _Gleiche Belastung: Bevölkerungsfern_, _Gleiche Belastung: Bevölkerungsnah_, _Gleiche Belastung: Verbrauchsnah_ und _Gleicher Anteil an Gesamtfläche_.
-Die linke Abbildung zeigt die kleinstmögliche verteilte Kapazität in [GW] pro Gemeinde über die vier Gerechtigkeitsmetriken.
-Die rechte Abbildung zeigt die Gerechtigkeitsmetrik, welche zur kleinsten Verteilmenge innerhalb der jeweiligen Gemeinde führt.
+Werden alle EE-Gleichverteilungen übereinander gelegt, so besteht eine nennenswerte Übereinstimmung über die zu nutzenden Flächen. Dieses kann als **„Konsens-Zubau-Potential"** bezeichnet werden. Bei einer Überlagerung von vier Gerechtigkeitsvorstellungen wie hier im Beispiel „Bevölkerungsfern", „Bevölkerungsnah", „Verbrauchsnah" und „Anteil an Gesamtfläche" können insgesamt rund 1,3 GW an Windleistung in der Planungsregion Oderland-Spree realisiert werden. Die rechte Grafik zeigt für jede Gemeinde an, welche der Gerechtigkeitsvorstellungen den kleinsten gemeinsamen Nenner definiert. In der linken Grafik wird nur die installierbare Leistung dargestellt, die bei allen Verteilungen realisierbar ist (kleinstmögliche verteilte Kapazität in GW pro Gemeinde über alle Gerechtigkeitsmetriken).
+
+<img src="/static/images/equity/wind/oder_spree_min-overlay_equalAREA-equalPOP_40p.png" width="75%" alt="">
+
+Bei einer Überlagerung von nur zwei Gerechtigkeitsvorstellungen wie hier im Beispiel „Bevölkerungsfern" und „Anteil an Gesamtfläche" können insgesamt 1,7 GW an Windleistung in der Region Oderland-Spree realisiert werden. Die rechte Grafik zeigt für jede Gemeinde an, welche der beiden Gerechtigkeitsvorstellungen den kleinsten gemeinsamen Nenner definiert. In der linken Grafik wird nur die installierbare Leistung dargestellt, die bei beiden Verteilungen realisierbar ist (kleinstmögliche verteilte Kapazität in GW pro Gemeinde über beide Gerechtigkeitsmetriken).
 
 <img src="/static/images/equity/wind/oder_spree_min-overlay_equalCLOSE2pop-equalCLOSE2load_40p.png" width="75%" alt="">
 
-Konsensnutzung über die Gerechtigkeitsmetriken _Gleiche Belastung: Bevölkerungsnah_ und _Gleiche Belastung: Verbrauchsnah_.
-Die linke Abbildung zeigt die kleinstmögliche verteilte Kapazität in [GW] pro Gemeinde über die beiden Gerechtigkeitsmetriken.
-Die rechte Abbildung zeigt die Gerechtigkeitsmetrik, welche zur kleinsten Verteilmenge innerhalb der jeweiligen Gemeinde führt.
+Bei einer Überlagerung von nur zwei Gerechtigkeitsvorstellungen wie hier im Beispiel „Bevölkerungsnah" und „Verbrauchsnah" können insgesamt 2,1 GW an Windleistung in der Planungsregion Oderland-Spree realisiert werden. Die rechte Grafik zeigt für jede Gemeinde an, welche der beiden Gerechtigkeitsvorstellungen den kleinsten gemeinsamen Nenner definiert. In der linken Grafik wird nur die installierbare Leistung dargestellt, die bei beiden Verteilungen realisierbar ist (kleinstmögliche verteilte Kapazität in GW pro Gemeinde über beide Gerechtigkeitsmetriken).
 
 ### Freiflächen-Photovoltaik
 
 <a href="/static/images/equity/pv/oder_spree_installed_capacity_gw_equalAREA-equalCLOSE2load-equalCLOSE2pop-equalPOP-equalPOTAREA.png" target="_blank"><img src="/static/images/equity/pv/oder_spree_installed_capacity_gw_equalAREA-equalCLOSE2load-equalCLOSE2pop-equalPOP-equalPOTAREA_40p.png" width="100%" alt=""></a>
 
-Verteilung der Windenergieleistung nach den einzelnen Gerechtigkeitsmetriken in
-Gigawatt (GW) je Gemeinde.
+_Verteilung der Freiflächen-PV (klassische Freiflächen-PV plus Agri-PV) nach den einzelnen Gerechtigkeitsmetriken in Gigawatt (GW) für alle Gemeinden der Planungsregion „Oderland-Spree"._
 
-<img src="/static/images/equity/pv/oder_spree_min-overlay_equalAREA-equalPOP_40p.png" width="75%" alt="">
-
-Konsensnutzung über die Gerechtigkeitsmetriken _Gleiche Belastung: Bevölkerungsfern_ und _Gleicher Anteil an Gesamtfläche_.
-Die linke Abbildung zeigt die kleinstmögliche verteilte Kapazität in [GW] pro Gemeinde über die beiden Gerechtigkeitsmetriken.
-Die rechte Abbildung zeigt die Gerechtigkeitsmetrik, welche zur kleinsten Verteilmenge innerhalb der jeweiligen Gemeinde führt.
+Je nach zugrundeliegender Gerechtigkeitsmetrik werden von der deutschlandweiten Gesamtleistung von 207 GW unterschiedlich hohe Ausbaumengen in die Region Oderland-Spree verteilt. Die Verteilung nach der Gerechtigkeitsvorstellung „Bevölkerungsfern" führt für die Planungsregion Oderland-Spree zu dem vergleichsweise geringsten Zubauziel von 3,6 GW Freiflächen-PV. Die höchste Freiflächen-PV-Leistung kommt mit 5,1 GW durch die Verteilung nach „Anteil an Potenzialfläche" zustande.
 
 <img src="/static/images/equity/pv/oder_spree_min-overlay_equalAREA-equalPOP-equalCLOSE2pop-equalCLOSE2load_40p.png" width="75%" alt="">
 
-Konsensnutzung über die Gerechtigkeitsmetriken _Gleiche Belastung: Bevölkerungsfern_, _Gleiche Belastung: Bevölkerungsnah_, _Gleiche Belastung: Verbrauchsnah_ und _Gleicher Anteil an Gesamtfläche_.
-Die linke Abbildung zeigt die kleinstmögliche verteilte Kapazität in [GW] pro Gemeinde über die vier Gerechtigkeitsmetriken.
-Die rechte Abbildung zeigt die Gerechtigkeitsmetrik, welche zur kleinsten Verteilmenge innerhalb der jeweiligen Gemeinde führt.
+Werden alle EE-Gleichverteilungen übereinander gelegt, so besteht eine nennenswerte Übereinstimmung über zu nutzende Flächen. Dieses kann als „Konsens-Zubau-Potential" bezeichnet werden. Bei einer Überlagerung von vier Gerechtigkeitsvorstellungen wie hier im Beispiel „Bevölkerungsfern", „Bevölkerungsnah", „Verbrauchsnah" und „Anteil an Gesamtfläche" können insgesamt 1,6 GW an PV-Freiflächen-Leistung in der Planungsregion Oderland-Spree realisiert werden. Die rechte Grafik zeigt für jede Gemeinde an, welche der Gerechtigkeitsvorstellungen den kleinsten gemeinsamen Nenner definiert. In der linken Grafik wird nur die installierbare Leistung dargestellt, die bei allen Verteilungen realisierbar ist (kleinstmögliche verteilte Kapazität in GW pro Gemeinde über alle Gerechtigkeitsmetriken).
+
+<img src="/static/images/equity/pv/oder_spree_min-overlay_equalAREA-equalPOP_40p.png" width="75%" alt="">
+
+Bei einer Überlagerung von nur zwei Gerechtigkeitsvorstellungen wie hier im Beispiel „Bevölkerungsfern" und „Anteil an Gesamtfläche" können insgesamt 3,1 GW an PV-Freiflächen-Leistung in der Planungsregion Oderland-Spree realisiert werden. Die rechte Grafik zeigt für jede Gemeinde an, welche der beiden Gerechtigkeitsvorstellungen den kleinsten gemeinsamen Nenner definiert. In der linken Grafik wird nur die installierbare Leistung dargestellt, die bei beiden Verteilungen realisierbar ist (kleinstmögliche verteilte Kapazität in GW pro Gemeinde über beide Gerechtigkeitsmetriken).
 
 <img src="/static/images/equity/pv/oder_spree_min-overlay_equalCLOSE2pop-equalCLOSE2load_40p.png" width="75%" alt="">
 
-Konsensnutzung über die Gerechtigkeitsmetriken _Gleiche Belastung: Bevölkerungsnah_ und _Gleiche Belastung: Verbrauchsnah_.
-Die linke Abbildung zeigt die kleinstmögliche verteilte Kapazität in [GW] pro Gemeinde über die beiden Gerechtigkeitsmetriken.
-Die rechte Abbildung zeigt die Gerechtigkeitsmetrik, welche zur kleinsten Verteilmenge innerhalb der jeweiligen Gemeinde führt.
+Bei einer Überlagerung von nur zwei Gerechtigkeitsvorstellungen wie hier im Beispiel „Bevölkerungsnah" und „Verbrauchsnah" können insgesamt 3,7 GW an PV-Freiflächen-Leistung in der Planungsregion Oderland-Spree realisiert werden. Die rechte Grafik zeigt für jede Gemeinde an, welche der beiden Gerechtigkeitsvorstellungen den kleinsten gemeinsamen Nenner definiert. In der linken Grafik wird nur die installierbare Leistung dargestellt, die bei beiden Verteilungen realisierbar ist (kleinstmögliche verteilte Kapazität in GW pro Gemeinde über beide Gerechtigkeitsmetriken).
+
+---
+
+## Wo finde ich weitere Informationen?
+
+Die in EmPowerPlan entwickelten Methoden und Ergebnisse sind in den folgenden
+Publikationen dokumentiert:
+
+- Degel, M. et al. (2025). EmPowerPlan – Regionale Planung der Energiewende – Partizipation und Gerechtigkeit vor Ort und das große Ganze im Blick, Abschlussbericht. [https://doi.org/10.34657/21079](https://doi.org/10.34657/21079)
+- Wingenbach, M. Flachsbarth, F., Aschauer, J. & Winger, C. (2025). Gerechtigkeit im EE-Ausbau: Erneuerbare gerecht in die Fläche bringen. Verteilungslogiken, algorithmische Ansätze und Konsensräume. [https://www.oeko.de/fileadmin/oekodoc/Gerechtigkeit-im-EE-Ausbau-Fl%C3%A4che.pdf](https://www.oeko.de/fileadmin/oekodoc/Gerechtigkeit-im-EE-Ausbau-Fl%C3%A4che.pdf)
+- Flachsbarth, F., Wingenbach, M., & Winger, C. (2025). Gerechtigkeit im EE-Ausbau: Systemische Wirkung gerechter EE-Verteilungen. Kosten, Emissionen und Strommarktimplikationen. [https://www.oeko.de/fileadmin/oekodoc/Gerechtigkeit-im-EE-Ausbau-Systemische-Wirkung.pdf](https://www.oeko.de/fileadmin/oekodoc/Gerechtigkeit-im-EE-Ausbau-Systemische-Wirkung.pdf)
+- Wingenbach, M., Flachsbarth, F., Aschauer, J., & Winger, C. (2025). EmPowerPlan EE-Regionalisierungsszenarien [Data set]. Zenodo. [https://doi.org/10.5281/zenodo.15188220](https://doi.org/10.5281/zenodo.15188220)
+
+---
+
+## Und wie geht es weiter?
+
+Die in EmPowerPlan entwickelten Methoden zur gerechten Verteilung von Erneuerbaren Energien werden im Folgeprojekt **EEquityMap** auf ganz Deutschland ausgeweitet. Ziel ist eine interaktive, deutschlandweite Online-Karte, mit der Nutzer:innen verschiedene Gerechtigkeitsmetriken kombinieren und Ausbauszenarien für Wind- und Freiflächen-PV in Echtzeit erkunden können.
 
 ---
 
 ## Referenzen
 
-Kohler, M., & Wingenbach, M. (2024). Potenzialflächen für Agri-Photovoltaik [Data set]. Zenodo. [https://doi.org/10.5281/zenodo.10878761](https://doi.org/10.5281/zenodo.10878761)
+[1] Fraunhofer ISI (2024). Langfristszenarien 2. [https://langfristszenarien.de/enertile-explorer-de/szenario-explorer/](https://langfristszenarien.de/enertile-explorer-de/szenario-explorer/)
+
+[2] Amme, J. (2022). Der Photovoltaik- und Windflächenrechner - Geodaten Potenzialflächen (v1.0) [Data set]. Zenodo. [https://doi.org/10.5281/zenodo.6728382](https://doi.org/10.5281/zenodo.6728382)
+
+[3] Gesetz zur Festlegung von Flächenbedarfen und zur Genehmigungserleichterung für Windenergieanlagen an Land und für Anlagen zur Speicherung vom Strom oder Wärme aus erneuerbaren Energien in bestimmten Gebieten (Windenergieflächenbedarfsgesetz - WindBG). [https://www.gesetze-im-internet.de/windbg/](https://www.gesetze-im-internet.de/windbg/)
+
+[4] Kohler, M., & Wingenbach, M. (2024). Potenzialflächen für Agri-Photovoltaik [Data set]. Zenodo. [https://doi.org/10.5281/zenodo.10878761](https://doi.org/10.5281/zenodo.10878761)
+
+[5] Szenariorahmen zum  Netzentwicklungsplan Strom 2037/2045, Version 2025 - Entwurf der Übertragungsnetzbetreiber (2024). [https://www.netzentwicklungsplan.de/sites/default/files/2024-07/Szenariorahmenentwurf_NEP2037_2025_1.pdf](https://www.netzentwicklungsplan.de/sites/default/files/2024-07/Szenariorahmenentwurf_NEP2037_2025_1.pdf)
