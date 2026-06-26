@@ -221,13 +221,11 @@ Publikationen dokumentiert:
 - Flachsbarth, F., Wingenbach, M., & Winger, C. (2025). Gerechtigkeit im EE-Ausbau: Systemische Wirkung gerechter EE-Verteilungen. Kosten, Emissionen und Strommarktimplikationen. [https://www.oeko.de/fileadmin/oekodoc/Gerechtigkeit-im-EE-Ausbau-Systemische-Wirkung.pdf](https://www.oeko.de/fileadmin/oekodoc/Gerechtigkeit-im-EE-Ausbau-Systemische-Wirkung.pdf)
 - Wingenbach, M., Flachsbarth, F., Aschauer, J., & Winger, C. (2025). EmPowerPlan EE-Regionalisierungsszenarien [Data set]. Zenodo. [https://doi.org/10.5281/zenodo.15188220](https://doi.org/10.5281/zenodo.15188220)
 
----
-
 ## Und wie geht es weiter?
 
 Die in EmPowerPlan entwickelten Methoden zur gerechten Verteilung von Erneuerbaren Energien werden im Folgeprojekt **EEquityMap** auf ganz Deutschland ausgeweitet. Ziel ist eine interaktive, deutschlandweite Online-Karte, mit der Nutzer:innen verschiedene Gerechtigkeitsmetriken kombinieren und Ausbauszenarien für Wind- und Freiflächen-PV in Echtzeit erkunden können.
 
----
+[Hier geht's zur Projektseite](https://reiner-lemoine-institut.de/projekt/eequitymap-interaktive-deutschlandweite-online-karte-zur-gerechten-verteilung-von-erneuerbaren-energien/)
 
 ## Referenzen
 
