@@ -1117,6 +1117,8 @@ class PotentialPopup(ChartPopup):
         potential_keys = keys_per_category[self.map_state["current_potential_layer"]]
         usage_percentages = {transformed_key: self.map_state[key] for key, transformed_key in slider_mapping.items()}
         usage_percentages["wind_2018"] = 100
+        usage_percentages["wind_2024"] = float(usage_percentages["wind_2024"]) * 100 / 1.97
+        usage_percentages["wind_2027"] = float(usage_percentages["wind_2027"]) * 100 / 2.20
         potentials_ha = datapackage.get_potential_areas_region(self.selected_id) * 100  # sqkm to ha
         usage_ha = potentials_ha.mul(pd.Series(usage_percentages, dtype=float) / 100)
 
